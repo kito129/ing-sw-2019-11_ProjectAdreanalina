@@ -8,8 +8,8 @@
     <artifactId>ing-sw-2019-11</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- pom di default per il progetto -->
-    <!-- da aggiungere per creare il server locale sonarQube -->
+
+    <!-- default POM for the project -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.language>java</sonar.language>
@@ -83,5 +83,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
