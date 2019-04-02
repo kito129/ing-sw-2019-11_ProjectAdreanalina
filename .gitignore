@@ -2,7 +2,7 @@
 #maven ignore
 pom.xml.tag
 pom.xml.releaseBackup
-pom.xml.versionBackip
+pom.xml.versionBackup
 pom.xml.next
 release.proprieties
 dependency-reduce-pom.xml
