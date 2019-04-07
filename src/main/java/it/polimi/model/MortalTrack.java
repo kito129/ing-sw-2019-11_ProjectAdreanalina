@@ -19,4 +19,8 @@ public class MortalTrack {
 
     }
 
+    public ArrayList<ColorCard> getTrack() {
+        return track;
+    }
+
 }
