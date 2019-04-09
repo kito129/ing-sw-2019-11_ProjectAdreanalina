@@ -2,6 +2,6 @@ package it.polimi.model;
 
 public enum EnumColorSquare {
 
-    RED,YELLOW,WHITE,PURPLE,BLU;
+    R,Y,W,P,B;
 }
 

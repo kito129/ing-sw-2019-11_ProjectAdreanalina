@@ -18,6 +18,17 @@ public class AmmoCard {
     public int getAmmoR() {
         return ammoR;
     }
+    public void setAmmoB(int ammoB) {
+        this.ammoB = ammoB;
+    }
+
+    public void setAmmoR(int ammoR) {
+        this.ammoR = ammoR;
+    }
+
+    public void setAmmoY(int ammoY) {
+        this.ammoY = ammoY;
+    }
 
     public PowerUpCard getPowerUpCard() {
         return powerUpCard;

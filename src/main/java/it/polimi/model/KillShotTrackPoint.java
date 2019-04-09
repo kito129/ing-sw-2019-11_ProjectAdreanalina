@@ -17,4 +17,16 @@ public class KillShotTrackPoint {
     public boolean isSkull() {
         return skull;
     }
+
+    public void setMark1(EnumColorPlayer mark1) {
+        this.mark1 = mark1;
+    }
+
+    public void setMark2(EnumColorPlayer mark2) {
+        this.mark2 = mark2;
+    }
+
+    public void setSkull(boolean skull) {
+        this.skull = skull;
+    }
 }
