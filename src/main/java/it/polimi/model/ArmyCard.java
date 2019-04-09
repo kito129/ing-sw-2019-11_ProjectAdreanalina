@@ -1,4 +1,4 @@
 package it.polimi.model;
 
-public class ArmyCard {
+public class ArmyCard extends  Card{
 }
