@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class KillShotTrack{
 
-    private ArrayList<KillShotTrackPoint> track;
+    private KillShotTrackPoint[] track;
 
-    public ArrayList<KillShotTrackPoint> getTrack() {
+    public KillShotTrackPoint[] getTrack() {
         return track;
     }
 }

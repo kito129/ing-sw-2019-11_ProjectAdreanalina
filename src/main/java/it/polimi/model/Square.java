@@ -11,7 +11,7 @@ public class Square{
     protected Square linkS;
     protected Square linkW;
     protected Square linkE;
-    private ArrayList<Player> players;
+    protected ArrayList<Player> players;
 
     public int getPosY() {
         return posY;
