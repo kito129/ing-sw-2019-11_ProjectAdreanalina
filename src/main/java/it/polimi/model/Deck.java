@@ -1,4 +1,4 @@
 package it.polimi.model;
 
-public class Player{
+public class Deck {
 }
