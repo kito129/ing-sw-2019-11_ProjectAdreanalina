@@ -6,8 +6,7 @@ public class KillShotTrack{
 
     private ArrayList<KillShotTrackPoint> track;
 
-
-
-
-
+    public ArrayList<KillShotTrackPoint> getTrack() {
+        return track;
+    }
 }

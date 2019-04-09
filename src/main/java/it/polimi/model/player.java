@@ -6,7 +6,26 @@ public class Player{
     private EnumColorPlayer color;
     private PlayerBoard playerBoard;
     private int score;
-    private Square position;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public PlayerBoard getPlayerBoard() {
+        return playerBoard;
+    }
+
+    public EnumColorPlayer getColor() {
+        return color;
+    }
+
+    public int getScore() {
+        return score;
+    }
 
 
 }

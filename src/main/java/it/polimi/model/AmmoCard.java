@@ -6,4 +6,20 @@ public class AmmoCard {
     private int ammoB;
     private PowerUpCard powerUpCard;
 
+
+    public int getAmmoY() {
+        return ammoY;
+    }
+
+    public int getAmmoB() {
+        return ammoB;
+    }
+
+    public int getAmmoR() {
+        return ammoR;
+    }
+
+    public PowerUpCard getPowerUpCard() {
+        return powerUpCard;
+    }
 }

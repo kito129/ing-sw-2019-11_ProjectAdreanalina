@@ -10,4 +10,27 @@ public class GameBoard {
     private ArrayList<Player> players;
     private Square [][] squares;
 
+    public AmmoDeck getAmmoDeck() {
+        return ammoDeck;
+    }
+
+    public ArmyDeck getArmyDeck() {
+        return armyDeck;
+    }
+
+    public KillShotTrack getKillShotTrack() {
+        return killShotTrack;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public PowerUpDeck getPowerUpDeck() {
+        return powerUpDeck;
+    }
+
+    public Square[][] getSquares() {
+        return squares;
+    }
 }
