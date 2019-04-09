@@ -3,199 +3,234 @@
   <ID>JAVA</ID>
   <OriginalElement>it.polimi.model</OriginalElement>
   <nodes>
-    <node x="1266.0977832512315" y="33.0">it.polimi.model.TypeArmy</node>
-    <node x="1151.2738095238099" y="325.0">it.polimi.model.Army</node>
-    <node x="822.0080721003135" y="578.0">it.polimi.model.Player</node>
-    <node x="1155.2083333333337" y="1235.0">it.polimi.model.GameBoard</node>
-    <node x="321.6189505896406" y="1301.0">it.polimi.model.ExpansionDeck</node>
-    <node x="613.3278063890134" y="347.0">it.polimi.model.Expansion</node>
-    <node x="0.0" y="1301.0">it.polimi.model.AmmoDeck</node>
-    <node x="594.1189505896405" y="765.5">it.polimi.model.Deck</node>
-    <node x="302.3278063890134" y="269.0">it.polimi.model.PlayerBoard</node>
-    <node x="993.8567118226601" y="0.0">it.polimi.model.ColorCard</node>
-    <node x="1631.119047619048" y="721.5">it.polimi.model.Square</node>
-    <node x="821.8333333333336" y="1289.5">it.polimi.model.NormalSquare</node>
-    <node x="1378.0085945663532" y="1289.5">it.polimi.model.GenerationSquare</node>
-    <node x="298.7278063890135" y="22.0">it.polimi.model.ColorAmmo</node>
-    <node x="609.8333333333336" y="1301.0">it.polimi.model.ArmyDeck</node>
-    <node x="1451.994047619048" y="324.0">it.polimi.model.MortalTrack</node>
+    <node x="532.4732142857144" y="33.0">it.polimi.model.TypeArmy</node>
+    <node x="559.1468707482994" y="269.0">it.polimi.model.Army</node>
+    <node x="1350.8373469387755" y="1594.5">it.polimi.model.GameBoard</node>
+    <node x="1109.7748469387757" y="775.0">it.polimi.model.Player</node>
+    <node x="1065.8373469387755" y="1484.0">it.polimi.model.Turn</node>
+    <node x="536.968299319728" y="1660.5">it.polimi.model.ExpansionDeck</node>
+    <node x="0.0" y="1660.5">it.polimi.model.AmmoDeck</node>
+    <node x="1321.8998469387757" y="390.0">it.polimi.model.Expansion</node>
+    <node x="382.1250000000001" y="973.5"U>it.polimi.model.Deck</node>
+    <node x="998.8998469387757" y="334.5">it.polimi.model.PlayerBoard</node>
+    <node x="1337.0329591836737" y="0.0">it.polimi.model.ColorCard</node>
+    <node x="2032.3210544217688" y="1029.0">it.polimi.model.Ammo</node>
+    <node x="1770.029387755102" y="874.5">it.polimi.model.Square</node>
+    <node x="801.968299319728" y="1649.0">it.polimi.model.GenerationSquare</node>
+    <node x="1939.654387755102" y="1649.0">it.polimi.model.NormalSquare</node>
+    <node x="257.0000000000001" y="1660.5">it.polimi.model.ArmyDeck</node>
+    <node x="653.4732142857144" y="22.0">it.polimi.model.ColorAmmo</node>
+    <node x="1072.3373469387755" y="1938.0">it.polimi.model.Game</node>
+    <node x="1617.529387755102" y="422.5">it.polimi.model.MortalTrack</node>
   </nodes>
   <notes />
   <edges>
     <edge source="it.polimi.model.Expansion" target="it.polimi.model.ColorCard">
-      <point x="0.0" y="-36.5" />
-      <point x="689.3278063890134" y="249.0" />
-      <point x="1025.9930754590237" y="249.0" />
-      <point x="-18.363636363636374" y="69.5" />
-    </edge>
-    <edge source="it.polimi.model.Player" target="it.polimi.model.Army">
-      <point x="93.125" y="-268.5" />
-      <point x="1064.1330721003135" y="538.0" />
-      <point x="1170.3452380952383" y="538.0" />
-      <point x="-114.42857142857156" y="58.5" />
-    </edge>
-    <edge source="it.polimi.model.Army" target="it.polimi.model.ColorAmmo">
-      <point x="-89.0" y="-58.5" />
-      <point x="1195.7738095238099" y="209.0" />
-      <point x="396.7278063890135" y="209.0" />
-      <point x="42.0" y="47.5" />
-    </edge>
-    <edge source="it.polimi.model.Army" target="it.polimi.model.ColorCard">
-      <point x="0.0" y="-58.5" />
-      <point x="1284.7738095238099" y="199.0" />
-      <point x="1053.5385300044782" y="199.0" />
-      <point x="9.181818181818187" y="69.5" />
-    </edge>
-    <edge source="it.polimi.model.GenerationSquare" target="it.polimi.model.Army">
-      <point x="-79.0" y="-37.0" />
-      <point x="1417.5085945663532" y="1175.0" />
-      <point x="1369.0977832512315" y="1175.0" />
-      <point x="1369.0977832512315" y="548.0" />
-      <point x="1361.059523809524" y="548.0" />
-      <point x="76.28571428571422" y="58.5" />
-    </edge>
-    <edge source="it.polimi.model.GameBoard" target="it.polimi.model.Square">
-      <point x="84.85714285714289" y="-91.5" />
-      <point x="1339.0654761904766" y="1205.0" />
-      <point x="1733.619047619048" y="1205.0" />
-      <point x="0.0" y="125.0" />
-    </edge>
-    <edge source="it.polimi.model.NormalSquare" target="it.polimi.model.Square">
-      <point x="81.0" y="-37.0" />
-      <point x="1024.3333333333335" y="1195.0" />
-      <point x="1665.2857142857147" y="1195.0" />
-      <point x="-68.33333333333331" y="125.0" />
-    </edge>
-    <edge source="it.polimi.model.ExpansionDeck" target="it.polimi.model.Expansion">
-      <point x="-61.25" y="-25.5" />
-      <point x="382.8689505896406" y="558.0" />
-      <point x="638.6611397223469" y="558.0" />
-      <point x="-50.66666666666663" y="36.5" />
-    </edge>
-    <edge source="it.polimi.model.Player" target="it.polimi.model.PlayerBoard">
-      <point x="-130.375" y="-268.5" />
-      <point x="840.6330721003135" y="548.0" />
-      <point x="375.0778063890134" y="548.0" />
-      <point x="-72.75" y="114.5" />
-    </edge>
-    <edge source="it.polimi.model.ExpansionDeck" target="it.polimi.model.Deck">
-      <point x="61.25" y="-25.5" />
-      <point x="505.3689505896406" y="1215.0" />
-      <point x="635.8689505896405" y="1215.0" />
-      <point x="-41.75" y="81.0" />
-    </edge>
-    <edge source="it.polimi.model.Army" target="it.polimi.model.TypeArmy">
-      <point x="89.0" y="-58.5" />
-      <point x="1373.7738095238099" y="249.0" />
-      <point x="1316.5977832512315" y="249.0" />
-      <point x="0.0" y="36.5" />
-    </edge>
-    <edge source="it.polimi.model.AmmoDeck" target="it.polimi.model.Deck">
-      <point x="59.25000000000023" y="-25.5" />
-      <point x="177.75000000000023" y="1205.0" />
-      <point x="608.0356172563072" y="1205.0" />
-      <point x="-69.58333333333326" y="81.0" />
-    </edge>
-    <edge source="it.polimi.model.ArmyDeck" target="it.polimi.model.Deck">
-      <point x="-48.0" y="-25.5" />
-      <point x="657.8333333333336" y="1215.0" />
-      <point x="663.7022839229737" y="1215.0" />
-      <point x="-13.916666666666742" y="81.0" />
-    </edge>
-    <edge source="it.polimi.model.Player" target="it.polimi.model.ColorCard">
-      <point x="55.875" y="-268.5" />
-      <point x="1026.8830721003135" y="528.0" />
-      <point x="1128.7648809523812" y="528.0" />
-      <point x="1128.7648809523812" y="239.0" />
-      <point x="1044.3567118226601" y="239.0" />
+      <point x="-50.0" y="-92.0" />
+      <point x="1371.8998469387757" y="249.0" />
+      <point x="1387.5329591836737" y="249.0" />
       <point x="0.0" y="69.5" />
     </edge>
-    <edge source="it.polimi.model.NormalSquare" target="it.polimi.model.Deck">
+    <edge source="it.polimi.model.Player" target="it.polimi.model.Army">
+      <point x="-130.3749999999999" y="-279.5" />
+      <point x="1128.3998469387757" y="735.0" />
+      <point x="776.0040136054423" y="735.0" />
+      <point x="78.85714285714289" y="213.0" />
+    </edge>
+    <edge source="it.polimi.model.Army" target="it.polimi.model.ColorAmmo">
+      <point x="-23.0" y="-213.0" />
+      <point x="674.1468707482994" y="249.0" />
+      <point x="687.0732142857144" y="249.0" />
+      <point x="-22.40000000000009" y="47.5" />
+    </edge>
+    <edge source="it.polimi.model.Army" target="it.polimi.model.ColorCard">
+      <point x="69.0" y="-213.0" />
+      <point x="766.1468707482994" y="179.0" />
+      <point x="1340.3996258503403" y="179.0" />
+      <point x="-47.133333333333326" y="69.5" />
+    </edge>
+    <edge source="it.polimi.model.GenerationSquare" target="it.polimi.model.Army">
       <point x="0.0" y="-37.0" />
-      <point x="943.3333333333336" y="1165.0" />
-      <point x="719.3689505896405" y="1165.0" />
-      <point x="41.75" y="81.0" />
+      <point x="920.468299319728" y="1404.0" />
+      <point x="689.6875000000001" y="1404.0" />
+      <point x="689.6875000000001" y="755.0" />
+      <point x="657.7182993197281" y="755.0" />
+      <point x="-39.42857142857133" y="213.0" />
+    </edge>
+    <edge source="it.polimi.model.GameBoard" target="it.polimi.model.Square">
+      <point x="86.625" y="-91.5" />
+      <point x="1536.4623469387755" y="1464.0" />
+      <point x="1914.404387755102" y="1464.0" />
+      <point x="28.875" y="180.0" />
+    </edge>
+    <edge source="it.polimi.model.NormalSquare" target="it.polimi.model.Square">
+      <point x="-84.33333333333331" y="-37.0" />
+      <point x="1981.8210544217688" y="1464.0" />
+      <point x="1972.154387755102" y="1464.0" />
+      <point x="86.625" y="180.0" />
+    </edge>
+    <edge source="it.polimi.model.ExpansionDeck" target="it.polimi.model.Expansion">
+      <point x="61.25" y="-25.5" />
+      <point x="720.718299319728" y="1424.0" />
+      <point x="1487.601785714286" y="1424.0" />
+      <point x="66.66666666666674" y="92.0" />
+    </edge>
+    <edge source="it.polimi.model.Game" target="it.polimi.model.Player">
+      <point x="-84.0" y="-58.5" />
+      <point x="1114.3373469387755" y="1913.0" />
+      <point x="1055.3373469387757" y="1913.0" />
+      <point x="1055.3373469387757" y="1404.0" />
+      <point x="1134.608180272109" y="1404.0" />
+      <point x="-124.16666666666663" y="279.5" />
+    </edge>
+    <edge source="it.polimi.model.Player" target="it.polimi.model.PlayerBoard">
+      <point x="-18.624999999999886" y="-279.5" />
+      <point x="1240.1498469387757" y="755.0" />
+      <point x="1217.1498469387757" y="755.0" />
+      <point x="72.75" y="147.5" />
+    </edge>
+    <edge source="it.polimi.model.ExpansionDeck" target="it.polimi.model.Deck">
+      <point x="-61.25" y="-25.5" />
+      <point x="598.218299319728" y="1464.0" />
+      <point x="486.5000000000001" y="1464.0" />
+      <point x="20.875" y="81.0" />
+    </edge>
+    <edge source="it.polimi.model.Army" target="it.polimi.model.TypeArmy">
+      <point x="-69.0" y="-213.0" />
+      <point x="628.1468707482994" y="239.0" />
+      <point x="608.2232142857144" y="239.0" />
+      <point x="25.25" y="36.5" />
+    </edge>
+    <edge source="it.polimi.model.AmmoDeck" target="it.polimi.model.Deck">
+      <point x="59.25" y="-25.5" />
+      <point x="177.75" y="1454.0" />
+      <point x="403.0000000000001" y="1454.0" />
+      <point x="-62.625" y="81.0" />
+    </edge>
+    <edge source="it.polimi.model.ArmyDeck" target="it.polimi.model.Deck">
+      <point x="48.0" y="-25.5" />
+      <point x="401.0000000000001" y="1464.0" />
+      <point x="444.7500000000001" y="1464.0" />
+      <point x="-20.875" y="81.0" />
+    </edge>
+    <edge source="it.polimi.model.Player" target="it.polimi.model.ColorCard">
+      <point x="18.625000000000114" y="-279.5" />
+      <point x="1277.3998469387757" y="755.0" />
+      <point x="1300.3998469387757" y="755.0" />
+      <point x="1300.3998469387757" y="229.0" />
+      <point x="1374.066292517007" y="229.0" />
+      <point x="-13.466666666666697" y="69.5" />
     </edge>
     <edge source="it.polimi.model.GameBoard" target="it.polimi.model.Army">
-      <point x="0.0" y="-91.5" />
-      <point x="1254.2083333333337" y="558.0" />
-      <point x="1284.7738095238099" y="558.0" />
-      <point x="0.0" y="58.5" />
+      <point x="-61.875" y="-91.5" />
+      <point x="1387.9623469387755" y="1384.0" />
+      <point x="931.468299319728" y="1384.0" />
+      <point x="931.468299319728" y="755.0" />
+      <point x="697.1468707482994" y="755.0" />
+      <point x="0.0" y="213.0" />
     </edge>
     <edge source="it.polimi.model.GenerationSquare" target="it.polimi.model.Square">
       <point x="79.0" y="-37.0" />
-      <point x="1575.5085945663532" y="1215.0" />
-      <point x="1801.9523809523812" y="1215.0" />
-      <point x="68.33333333333331" y="125.0" />
+      <point x="999.468299319728" y="1444.0" />
+      <point x="1798.904387755102" y="1444.0" />
+      <point x="-86.625" y="180.0" />
     </edge>
     <edge source="it.polimi.model.Square" target="it.polimi.model.ColorCard">
-      <point x="-51.25" y="-125.0" />
-      <point x="1682.369047619048" y="558.0" />
-      <point x="1728.119047619048" y="558.0" />
-      <point x="1728.119047619048" y="169.0" />
-      <point x="1081.083984549933" y="169.0" />
-      <point x="36.72727272727275" y="69.5" />
+      <point x="-77.0" y="-180.0" />
+      <point x="1808.529387755102" y="745.0" />
+      <point x="1907.529387755102" y="745.0" />
+      <point x="1907.529387755102" y="219.0" />
+      <point x="1414.466292517007" y="219.0" />
+      <point x="26.933333333333394" y="69.5" />
     </edge>
     <edge source="it.polimi.model.PlayerBoard" target="it.polimi.model.ColorCard">
-      <point x="58.200000000000045" y="-114.5" />
-      <point x="506.02780638901345" y="229.0" />
-      <point x="1007.6294390953874" y="229.0" />
-      <point x="-36.72727272727275" y="69.5" />
+      <point x="116.40000000000009" y="-147.5" />
+      <point x="1260.7998469387758" y="219.0" />
+      <point x="1367.3329591836737" y="219.0" />
+      <point x="-20.200000000000045" y="69.5" />
     </edge>
     <edge source="it.polimi.model.AmmoDeck" target="it.polimi.model.ColorAmmo">
-      <point x="-59.24999999999977" y="-25.5" />
-      <point x="59.25000000000034" y="249.0" />
-      <point x="312.7278063890135" y="249.0" />
-      <point x="-42.0" y="47.5" />
+      <point x="-59.25" y="-25.5" />
+      <point x="59.25" y="249.0" />
+      <point x="664.6732142857145" y="249.0" />
+      <point x="-44.799999999999955" y="47.5" />
     </edge>
     <edge source="it.polimi.model.PlayerBoard" target="it.polimi.model.ColorAmmo">
-      <point x="-116.39999999999998" y="-114.5" />
-      <point x="331.4278063890134" y="249.0" />
-      <point x="340.7278063890135" y="249.0" />
-      <point x="-14.0" y="47.5" />
+      <point x="-116.39999999999998" y="-147.5" />
+      <point x="1027.9998469387758" y="169.0" />
+      <point x="731.8732142857145" y="169.0" />
+      <point x="22.40000000000009" y="47.5" />
     </edge>
     <edge source="it.polimi.model.ArmyDeck" target="it.polimi.model.Army">
-      <point x="48.0" y="-25.5" />
-      <point x="753.8333333333336" y="1185.0" />
-      <point x="1130.5080721003135" y="1185.0" />
-      <point x="1130.5080721003135" y="558.0" />
-      <point x="1246.6309523809527" y="558.0" />
-      <point x="-38.14285714285711" y="58.5" />
+      <point x="-48.0" y="-25.5" />
+      <point x="305.0000000000001" y="1444.0" />
+      <point x="316.4375000000001" y="1444.0" />
+      <point x="316.4375000000001" y="755.0" />
+      <point x="578.8611564625852" y="755.0" />
+      <point x="-118.28571428571422" y="213.0" />
     </edge>
     <edge source="it.polimi.model.GameBoard" target="it.polimi.model.Deck">
-      <point x="-84.85714285714289" y="-91.5" />
-      <point x="1169.3511904761908" y="1155.0" />
-      <point x="747.2022839229737" y="1155.0" />
-      <point x="69.58333333333326" y="81.0" />
+      <point x="-86.625" y="-91.5" />
+      <point x="1363.2123469387755" y="1394.0" />
+      <point x="528.2500000000001" y="1394.0" />
+      <point x="62.625" y="81.0" />
+    </edge>
+    <edge source="it.polimi.model.Game" target="it.polimi.model.Turn">
+      <point x="0.0" y="-58.5" />
+      <point x="0.0" y="202.0" />
     </edge>
     <edge source="it.polimi.model.Player" target="it.polimi.model.Expansion">
-      <point x="-18.625" y="-268.5" />
-      <point x="952.3830721003135" y="518.0" />
-      <point x="739.9944730556801" y="518.0" />
-      <point x="50.66666666666663" y="36.5" />
+      <point x="93.12500000000011" y="-279.5" />
+      <point x="1351.8998469387757" y="755.0" />
+      <point x="1355.2331802721092" y="755.0" />
+      <point x="-66.66666666666663" y="92.0" />
+    </edge>
+    <edge source="it.polimi.model.Game" target="it.polimi.model.GameBoard">
+      <point x="84.0" y="-58.5" />
+      <point x="1282.3373469387755" y="1913.0" />
+      <point x="1449.8373469387755" y="1913.0" />
+      <point x="0.0" y="91.5" />
+    </edge>
+    <edge source="it.polimi.model.NormalSquare" target="it.polimi.model.Ammo">
+      <point x="84.33333333333331" y="-37.0" />
+      <point x="2150.4877210884356" y="1464.0" />
+      <point x="2146.321054421769" y="1464.0" />
+      <point x="38.0" y="25.5" />
     </edge>
     <edge source="it.polimi.model.GameBoard" target="it.polimi.model.Player">
-      <point x="-56.571428571428555" y="-91.5" />
-      <point x="1197.636904761905" y="1145.0" />
-      <point x="896.5080721003135" y="1145.0" />
-      <point x="-74.5" y="268.5" />
+      <point x="-12.375" y="-91.5" />
+      <point x="1437.4623469387755" y="1364.0" />
+      <point x="1333.2748469387755" y="1364.0" />
+      <point x="74.49999999999989" y="279.5" />
     </edge>
     <edge source="it.polimi.model.MortalTrack" target="it.polimi.model.ColorCard">
       <point x="-64.75" y="-59.5" />
-      <point x="1516.744047619048" y="189.0" />
-      <point x="1062.7203481862964" y="189.0" />
-      <point x="18.363636363636374" y="69.5" />
+      <point x="1682.279387755102" y="239.0" />
+      <point x="1400.9996258503404" y="239.0" />
+      <point x="13.466666666666697" y="69.5" />
     </edge>
     <edge source="it.polimi.model.GameBoard" target="it.polimi.model.MortalTrack">
-      <point x="56.571428571428555" y="-91.5" />
-      <point x="1310.7797619047622" y="1185.0" />
-      <point x="1581.494047619048" y="1185.0" />
+      <point x="37.125" y="-91.5" />
+      <point x="1486.9623469387755" y="1434.0" />
+      <point x="1747.029387755102" y="1434.0" />
       <point x="0.0" y="59.5" />
     </edge>
+    <edge source="it.polimi.model.Turn" target="it.polimi.model.Player">
+      <point x="88.33333333333337" y="-202.0" />
+      <point x="1286.670680272109" y="1414.0" />
+      <point x="1283.608180272109" y="1414.0" />
+      <point x="24.83333333333337" y="279.5" />
+    </edge>
+    <edge source="it.polimi.model.Ammo" target="it.polimi.model.ColorCard">
+      <point x="0.0" y="-25.5" />
+      <point x="2108.321054421769" y="189.0" />
+      <point x="1434.666292517007" y="189.0" />
+      <point x="47.133333333333326" y="69.5" />
+    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.5800845467355566" x="1275.6371350803224" y="1076.8046111970966" />
+  <settings layout="Hierarchic Group" zoom="0.8608247422680412" x="1506.5928143712576" y="969.2574850299402" />
   <SelectedNodes>
-    <node>it.polimi.model.PlayerBoard</node>
+    <node>it.polimi.model.MortalTrack</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
