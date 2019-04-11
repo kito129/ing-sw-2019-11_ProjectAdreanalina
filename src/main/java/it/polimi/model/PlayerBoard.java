@@ -10,14 +10,12 @@ public class PlayerBoard {
     private int ammoB;
     private ArrayList<EnumColorPlayer> damage;
     private ArrayList<EnumColorPlayer> mark;
-    private int boardPoint;
+    private int boardValue;
     private boolean firstPlayer;
 
     public PlayerBoard(){
         //TODO
     }
-
-
 
     public EnumColorPlayer getColor() {
         return color;
@@ -43,8 +41,53 @@ public class PlayerBoard {
         return mark;
     }
 
-    public int getBoardPoint() {
-        return boardPoint;
+    public int getBoardValue() {
+        return boardValue;
     }
+
+    public void increaseAmmo(AmmoCard ammoCard){
+
+        //TODO fare metodo incrementa ammo
+
+    }
+
+    public void decreaseAmmo(AmmoCard ammoCard){
+
+        //TODO fare metodo diminunisci ammo
+
+    }
+
+    public void increaseDamage(ArrayList<EnumColorPlayer> damage){
+
+        // TODO
+    }
+
+    public void resetDamage(){
+
+        // TODO
+    }
+
+    public void increaseMark(ArrayList<EnumColorPlayer> mark){
+
+        // TODO
+    }
+
+    public void decreseMark(ArrayList<EnumColorPlayer> mark){
+
+        // TODO
+    }
+
+    public void decreaseBoardValue(){
+
+        // TODO
+    }
+
+    public void PlayerBoardScored(){
+
+        //TODO occhio al valore di ritorno
+    }
+
+    
+
 
 }

@@ -1,12 +1,14 @@
 package it.polimi.model;
 
+import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 public class KillShotTrack{
 
-    private KillShotTrackPoint[] track;
+    private ArrayList<KillShotTrackPoint> track;
 
-    public KillShotTrackPoint[] getTrack() {
+    public ArrayList<KillShotTrackPoint> getTrack() {
         return track;
     }
 }
