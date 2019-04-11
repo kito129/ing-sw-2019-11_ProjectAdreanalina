@@ -6,6 +6,7 @@ public class Player {
     private  String name;
     private EnumColorPlayer color;
     private PlayerBoard playerBoard;
+    private Square square;
     private int score;
 
     public String getName() {
@@ -28,6 +29,11 @@ public class Player {
         return score;
     }
 
+    public Square getSquare() {
+
+        return square;
+    }
+
     public void setColor(EnumColorPlayer color) {
         this.color = color;
     }
@@ -39,4 +45,11 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setSquare(Square square) {
+
+        this.square = square;
+    }
+
+
 }

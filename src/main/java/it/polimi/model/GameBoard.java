@@ -9,7 +9,7 @@ public class GameBoard {
     private PowerUpDeck powerUpDeck;
     private ArmyDeck armyDeck;
     private ArrayList<Player> players;
-    private Square [][] squares;
+    private Map map;
 
     public AmmoDeck getAmmoDeck() {
         return ammoDeck;
@@ -31,7 +31,8 @@ public class GameBoard {
         return powerUpDeck;
     }
 
-    public Square[][] getSquares() {
-        return squares;
+    public Map getMap() {
+
+        return map;
     }
 }

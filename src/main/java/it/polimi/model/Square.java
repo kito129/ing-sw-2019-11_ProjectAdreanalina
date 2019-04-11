@@ -5,20 +5,20 @@ import java.util.ArrayList;
 public class Square{
 
     protected EnumColorSquare color;
-    protected int posX;
-    protected int posY;
+    protected int row;
+    protected int column;
     protected Square linkN;
     protected Square linkS;
     protected Square linkW;
     protected Square linkE;
     protected ArrayList<Player> players;
 
-    public int getPosY() {
-        return posY;
+    public int getColumn() {
+        return column;
     }
 
-    public int getPosX() {
-        return posX;
+    public int getRow() {
+        return row;
     }
 
     public EnumColorSquare getColor() {
@@ -41,35 +41,16 @@ public class Square{
         return linkW;
     }
 
-    public void setColor(EnumColorSquare color) {
-        this.color = color;
+    public void addPlayer(Player player){
+
+        // TODO
+    }
+    public void removePlayer(Player player){
+
+
+        // TODO
     }
 
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
 
-    public void setPosY(int posY) {
-        this.posY = posY;
-    }
 
-    public void setLinkE(Square linkE) {
-        this.linkE = linkE;
-    }
-
-    public void setLinkN(Square linkN) {
-        this.linkN = linkN;
-    }
-
-    public void setLinkS(Square linkS) {
-        this.linkS = linkS;
-    }
-
-    public void setLinkW(Square linkW) {
-        this.linkW = linkW;
-    }
-
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
-    }
 }

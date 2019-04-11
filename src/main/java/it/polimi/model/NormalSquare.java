@@ -7,4 +7,16 @@ public class NormalSquare extends Square {
     public AmmoCard getAmmoCard() {
         return ammoCard;
     }
+
+    public void setAmmoCard(AmmoCard ammoCard) {
+
+        this.ammoCard = ammoCard;
+    }
+
+    public void removeAmmoCard(){
+
+        // TODO
+    }
+
+
 }

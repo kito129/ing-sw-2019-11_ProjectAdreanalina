@@ -4,9 +4,19 @@ import java.util.ArrayList;
 
 public class GenerationSquare extends Square{
 
-    private ArmyCard[] armyList;
+    private ArrayList<ArmyCard> armyList;
 
-    public ArmyCard[] getArmyList() {
+    public ArrayList<ArmyCard> getArmyList() {
         return armyList;
+    }
+
+    public void addArmyCard(ArmyCard armyCard){
+
+        //TODO
+    }
+
+    public void removeArmyCard(ArmyCard armyCard){
+
+        //TODO
     }
 }
