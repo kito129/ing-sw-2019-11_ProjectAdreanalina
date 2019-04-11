@@ -1,6 +1,6 @@
 package it.polimi.model;
 
-public class Player{
+public class Player {
     private int id;
     private  String name;
     private EnumColorPlayer color;
