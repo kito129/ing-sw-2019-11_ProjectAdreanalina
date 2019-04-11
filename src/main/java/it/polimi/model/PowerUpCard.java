@@ -1,4 +1,4 @@
 package it.polimi.model;
 
-public class PowerUpCard extends Card {
+public class PowerUpCard {
 }
