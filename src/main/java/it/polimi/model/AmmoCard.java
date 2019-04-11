@@ -18,7 +18,7 @@ public class AmmoCard {
     public int getAmmoR() {
         return ammoR;
     }
-    
+
     public void setAmmoB(int ammoB) {
         this.ammoB = ammoB;
     }
