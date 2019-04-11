@@ -18,6 +18,10 @@ public class AmmoCard {
     public int getAmmoR() {
         return ammoR;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 589a5ea673c7e69a0eb2dc304a99ad2463d423bf
     public void setAmmoB(int ammoB) {
         this.ammoB = ammoB;
     }
