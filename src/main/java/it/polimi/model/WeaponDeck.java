@@ -2,7 +2,7 @@ package it.polimi.model;
 
 import java.util.ArrayList;
 
-public class ArmyDeck extends Deck {
+public class WeaponDeck extends Deck {
 
     private ArrayList<AmmoCard> armyDeck;
 

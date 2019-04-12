@@ -1,21 +1,19 @@
 package it.polimi.model;
 
-import java.util.ArrayList;
-
 public class GameBoard {
 
     private KillShotTrack killShotTrack;
     private AmmoDeck ammoDeck;
     private PowerUpDeck powerUpDeck;
-    private ArmyDeck armyDeck;
+    private WeaponDeck weaponDeck;
     private Map map;
 
     public AmmoDeck getAmmoDeck() {
         return ammoDeck;
     }
 
-    public ArmyDeck getArmyDeck() {
-        return armyDeck;
+    public WeaponDeck getWeaponDeck() {
+        return weaponDeck;
     }
 
     public KillShotTrack getKillShotTrack() {

@@ -11,7 +11,8 @@ public class PlayerBoard {
     private ArrayList<EnumColorPlayer> damage;
     private ArrayList<EnumColorPlayer> mark;
     private int boardValue;
-
+    private ArrayList<WeaponCard> playerWeapon;
+    private ArrayList<PowerUpCard> playerPowerUp;
 
     public PlayerBoard(){
         //TODO
