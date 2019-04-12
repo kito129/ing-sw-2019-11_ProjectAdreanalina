@@ -8,7 +8,6 @@ public class GameBoard {
     private AmmoDeck ammoDeck;
     private PowerUpDeck powerUpDeck;
     private ArmyDeck armyDeck;
-    private ArrayList<Player> players;
     private Map map;
 
     public AmmoDeck getAmmoDeck() {
@@ -21,10 +20,6 @@ public class GameBoard {
 
     public KillShotTrack getKillShotTrack() {
         return killShotTrack;
-    }
-
-    public ArrayList<Player> getPlayers() {
-        return players;
     }
 
     public PowerUpDeck getPowerUpDeck() {

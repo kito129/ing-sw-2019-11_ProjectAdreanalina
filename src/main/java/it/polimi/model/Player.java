@@ -8,6 +8,7 @@ public class Player {
     private PlayerBoard playerBoard;
     private Square square;
     private int score;
+    private boolean alive;
 
     public String getName() {
         return name;
@@ -34,6 +35,11 @@ public class Player {
         return square;
     }
 
+    public boolean isAlive() {
+
+        return alive;
+    }
+
     public void setColor(EnumColorPlayer color) {
         this.color = color;
     }
@@ -51,5 +57,8 @@ public class Player {
         this.square = square;
     }
 
+    public void setAlive(boolean alive) {
 
+        this.alive = alive;
+    }
 }
