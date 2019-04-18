@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 public class GenerationSquare extends Square{
 
-    private ArrayList<WeaponCard> armyList;
+    private ArrayList<WeaponCard> weaponList;
 
-    public ArrayList<WeaponCard> getArmyList() {
-        return armyList;
+    public ArrayList<WeaponCard> getWeaponList() {
+        return weaponList;
     }
 
-    public void addArmyCard(WeaponCard weaponCard){
+    public void addWeaponCard(WeaponCard weaponCard){
 
         //TODO
     }
 
-    public void removeArmyCard(WeaponCard weaponCard){
+    public void removeWeaponCard(WeaponCard weaponCard){
 
         //TODO
     }
