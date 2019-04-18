@@ -5,7 +5,6 @@ public class KillShotTrackPoint {
     private boolean skull;
     private EnumColorPlayer mark1;
     private EnumColorPlayer mark2;
-    private EnumColorPlayer doubleKill;
 
     public EnumColorPlayer getMark1() {
         return mark1;

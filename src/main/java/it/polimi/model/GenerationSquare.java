@@ -19,4 +19,10 @@ public class GenerationSquare extends Square{
 
         //TODO
     }
+
+    public void catchWeapon(){
+
+    }
+
+
 }

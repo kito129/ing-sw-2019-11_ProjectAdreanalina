@@ -32,7 +32,19 @@ public class WeaponCard {
         return colorCard;
     }
 
+    public void getCostCharge(){
+
+    }
+
+    public void getCost(){
+
+    }
+
     public boolean isCharge() {
         return charge;
+    }
+
+    public void setCharge(boolean charge) {
+        this.charge = charge;
     }
 }

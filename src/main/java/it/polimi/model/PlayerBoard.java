@@ -58,6 +58,21 @@ public class PlayerBoard {
 
     }
 
+    public void addPowerUp(){
+    }
+
+    public void removePowerUp(){
+
+    }
+
+    public void addWeapon(){
+
+    }
+
+    public void removeWeapon(){
+
+    }
+
     public void increaseDamage(ArrayList<EnumColorPlayer> damage){
 
         // TODO
@@ -83,7 +98,7 @@ public class PlayerBoard {
         // TODO
     }
 
-    public void PlayerBoardScored(){
+    public void playerBoardScored(){
 
         //TODO occhio al valore di ritorno
     }

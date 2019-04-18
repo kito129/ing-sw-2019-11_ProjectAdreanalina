@@ -40,6 +40,14 @@ public class Player {
         return alive;
     }
 
+    public void increaseScore(){
+
+    }
+
+    public void checkDeath(){
+
+    }
+
     public void setColor(EnumColorPlayer color) {
         this.color = color;
     }
@@ -61,4 +69,6 @@ public class Player {
 
         this.alive = alive;
     }
+
+
 }

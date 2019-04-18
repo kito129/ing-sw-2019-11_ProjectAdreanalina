@@ -39,7 +39,20 @@ public class Map {
         // TODO funziona che ritorna arrey list di player su una certa square
     }
 
+    public void spawnPlayer(){
 
+    }
 
+    public void movePlayer(){
+
+    }
+
+    public void addPlayerOnSquare(){
+
+    }
+
+    public void removePlayerFromSquare(){
+
+    }
 
 }

@@ -11,4 +11,24 @@ public class KillShotTrack{
     public ArrayList<KillShotTrackPoint> getTrack() {
         return track;
     }
+
+    private EnumColorPlayer doubleKill;
+
+    public void decreaseKillShotTrack(){
+
+    }
+
+    public void insertKillShotTrackPoint(){
+
+    }
+
+    public void finalScore(){
+
+    }
+
+    public void createKillShotTrackPoint(){
+
+    }
+
+
 }
