@@ -2,8 +2,8 @@ package it.polimi.model;
 
 public class AmmoCard {
 
-    private int ammoR;
     private int ammoY;
+    private int ammoR;
     private int ammoB;
     private PowerUpCard powerUpCard;
 
@@ -12,20 +12,21 @@ public class AmmoCard {
         /*  TODO
         guardate factory
          */
-
-
     }
 
     public int getAmmoY() {
-        return ammoY;
-    }
 
-    public int getAmmoB() {
-        return ammoB;
+        return this.ammoY;
     }
 
     public int getAmmoR() {
-        return ammoR;
+
+        return this.ammoR;
+    }
+
+    public int getAmmoB() {
+
+        return this.ammoB;
     }
 
     public PowerUpCard getPowerUpCard() {
