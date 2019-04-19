@@ -7,11 +7,29 @@ public class Square{
     protected EnumColorSquare color;
     protected int row;
     protected int column;
-    protected Square linkN;
-    protected Square linkS;
-    protected Square linkW;
-    protected Square linkE;
+    protected ArrayList<Square> link;
     protected ArrayList<Player> players;
+    protected boolean visited;
+
+    public Square(EnumColorSquare color, int r, int c, Square n, Square s, Square e, Square w) {
+        this.color=color;
+        this.row=r;
+        this.column=c;
+        link=new ArrayList<>();
+        link.add(n);
+        link.add(e);
+        link.add(s);
+        link.add(w);
+        this.players=new ArrayList<Player>();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==this){
+            return true;
+        }
+        return false;
+    }
 
     public int getColumn() {
         return column;
@@ -26,31 +44,32 @@ public class Square{
     }
 
     public Square getLinkE() {
-        return linkE;
+        return link.get(1);
     }
 
     public Square getLinkN() {
-        return linkN;
+        return link.get(0);
     }
 
     public Square getLinkS() {
-        return linkS;
+        return link.get(2);
     }
 
     public Square getLinkW() {
-        return linkW;
+        return link.get(3);
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
 
-        // TODO
+        players.add(player);
     }
-    public void removePlayer(Player player){
+    public void removePlayer (Player player) {
 
-
-        // TODO
+        this.players.remove(player);
     }
+    public ArrayList playerOnSquare() {
 
-
+        return this.players;
+    }
 
 }
