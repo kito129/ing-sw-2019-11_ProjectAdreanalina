@@ -29,4 +29,7 @@ public class KillShotTrackPoint {
     public void setSkull(boolean skull) {
         this.skull = skull;
     }
+
+
+
 }
