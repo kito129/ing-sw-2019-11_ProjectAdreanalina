@@ -11,21 +11,27 @@ public class Square{
     protected ArrayList<Player> players;
     protected boolean visited;
 
-    public Square(EnumColorSquare color, int r, int c, Square n, Square s, Square e, Square w) {
-        this.color=color;
+    public Square(int r, int c, ArrayList<Square> link) {
         this.row=r;
         this.column=c;
         link=new ArrayList<>();
-        link.add(n);
-        link.add(e);
-        link.add(s);
-        link.add(w);
-        this.players=new ArrayList<Player>();
+        setLink(link);
+    }
+    public void setLink(ArrayList<Square>link) {
+        ArrayList<Square> temp = new ArrayList<>();
+        if (link != null) {
+            for (Square l : link) {
+                if (l != null)
+                    temp.add(l);
+            }
+            this.link=temp;
+        }
     }
 
     @Override
     public boolean equals(Object obj) {
         if(obj==this){
+            //TODO vedere eqauls
             return true;
         }
         return false;
@@ -43,20 +49,8 @@ public class Square{
         return color;
     }
 
-    public Square getLinkE() {
-        return link.get(1);
-    }
-
-    public Square getLinkN() {
-        return link.get(0);
-    }
-
-    public Square getLinkS() {
-        return link.get(2);
-    }
-
-    public Square getLinkW() {
-        return link.get(3);
+    public ArrayList<Square> getLink(){
+        return link;
     }
 
     public void addPlayer(Player player) {
@@ -70,6 +64,11 @@ public class Square{
     public ArrayList playerOnSquare() {
 
         return this.players;
+    }
+
+    @Override
+    public String toString() {
+        return ("("+getRow() +"," +getColumn()+")");
     }
 
 }

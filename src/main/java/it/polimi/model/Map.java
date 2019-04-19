@@ -44,10 +44,7 @@ public class Map {
                     distance++;
                     return distance;
                 } else {
-                    distance(sourceSquare.getLinkE().row,sourceSquare.getLinkE().column,r1,c1);
-                    distance(sourceSquare.getLinkN().row,sourceSquare.getLinkN().column,r1,c1);
-                    distance(sourceSquare.getLinkS().row,sourceSquare.getLinkS().column,r1,c1);
-                    distance(sourceSquare.getLinkW().row,sourceSquare.getLinkW().column,r1,c1);
+                    //vedere che cazzo fare
                 }
             }
         return 0;
