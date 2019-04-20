@@ -9,60 +9,60 @@ public class PlayerBoard {
     private int ammoR;
     private int ammoB;
     private int boardValue;
-    private ArrayList<EnumColorPlayer> damage;
-    private ArrayList<EnumColorPlayer> mark;
-    private ArrayList<WeaponCard> playerWeapon;
-    private ArrayList<PowerUpCard> playerPowerUp;
+    private int numberOfDeaths;
+    private ArrayList<EnumColorPlayer> damages;
+    private ArrayList<EnumColorPlayer> marks;
+    private ArrayList<WeaponCard> playerWeapons;
+    private ArrayList<PowerUpCard> playerPowerUps;
 
     public PlayerBoard(EnumColorPlayer color) {
 
         this.color=color;
-        this.ammoY=1;
-        this.ammoR=1;
-        this.ammoB=1;
-        this.boardValue=8;
-        this.damage=new ArrayList<EnumColorPlayer>();
-        this.mark=new ArrayList<EnumColorPlayer>();
-        this.playerWeapon=new ArrayList<WeaponCard>();
-        this.playerPowerUp=new ArrayList<PowerUpCard>();
+        ammoY=1;
+        ammoR=1;
+        ammoB=1;
+        boardValue=8;
+        numberOfDeaths=0;
+        damages =new ArrayList<EnumColorPlayer>();
+        marks =new ArrayList<EnumColorPlayer>();
+        playerWeapons =new ArrayList<WeaponCard>();
+        playerPowerUps =new ArrayList<PowerUpCard>();
     }
 
     public EnumColorPlayer getColor() {
 
-        return this.color;
+        return color;
     }
 
     public int getAmmoY() {
 
-        return this.ammoY;
+        return ammoY;
     }
 
     public int getAmmoR() {
 
-        return this.ammoR;
+        return ammoR;
     }
 
     public int getAmmoB() {
 
-        return this.ammoB;
+        return ammoB;
     }
 
     public int getBoardValue() {
 
-        return this.boardValue;
+        return boardValue;
     }
 
-    public ArrayList<EnumColorPlayer> getDamage() {
+    public ArrayList<EnumColorPlayer> getDamages() {
 
-        return this.damage;
+        return damages;
     }
 
-    public ArrayList<EnumColorPlayer> getMark() {
+    public ArrayList<EnumColorPlayer> getMarks() {
 
-        return this.mark;
+        return marks;
     }
-
-    // TODO getter weapon card e power up card.
 
     public void increaseAmmo(AmmoCard ammoCard){
 
@@ -96,44 +96,69 @@ public class PlayerBoard {
         this.ammoB-=this.ammoB-ammoB;
     }
 
-    public void addPowerUp(){
+    public void increaseNumberOfDeaths(){
+
+        numberOfDeaths+=1;
     }
 
-    public void removePowerUp(){
+    public void addPowerUp(PowerUpCard powerUpCard){
 
+        playerPowerUps.add(powerUpCard);
     }
 
-    public void addWeapon(){
+    public void removePowerUp(PowerUpCard powerUpCard){
 
+        playerPowerUps.remove(powerUpCard);
     }
 
-    public void removeWeapon(){
+    public void addWeapon(WeaponCard weaponCard){
 
+        playerWeapons.add(weaponCard);
     }
 
-    public void increaseDamage(ArrayList<EnumColorPlayer> damage){
+    public void removeWeapon(WeaponCard weaponCard){
 
-        // TODO
+        playerWeapons.remove(weaponCard);
+    }
+
+    public void increaseDamage(ArrayList<EnumColorPlayer> damages){
+
+        this.damages.addAll(damages);
     }
 
     public void resetDamage(){
 
-        // TODO
+        damages.clear();
     }
 
-    public void increaseMark(ArrayList<EnumColorPlayer> mark){
+    public void increaseMark(ArrayList<EnumColorPlayer> marks){
 
-        // TODO
+        this.marks.addAll(marks);
     }
 
-    public void decreseMark(ArrayList<EnumColorPlayer> mark){
+    public void removeMarkOfColor(EnumColorPlayer colorOfMark){
 
-        // TODO
+        marks.removeIf(mark-> mark==colorOfMark);
     }
 
     public void decreaseBoardValue(){
 
-        // TODO
+        if(numberOfDeaths==0){
+
+            boardValue=8;
+        }else if(numberOfDeaths==1){
+
+            boardValue=6;
+        }else if(numberOfDeaths==2){
+
+            boardValue=4;
+        }else if(numberOfDeaths==3){
+
+            boardValue=2;
+        }else if(numberOfDeaths==4){
+
+            boardValue=1;
+        }
     }
 
     public void playerBoardScored(){
