@@ -34,10 +34,8 @@ public class Map {
 
     public int distance(int r0, int c0, int rd, int cd, int dist) {
         int distance = dist;
-        int currR = r0;
-        int curC = c0;
 
-        Square curSquare = searchSquare(currR, curC);
+        Square curSquare = searchSquare(r0, c0);
         ArrayList<Square> link = curSquare.getLink();
         for (Square v : link) {
             System.out.println("link: " + v.toString());
