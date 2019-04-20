@@ -32,23 +32,34 @@ public class Map {
     }
 
 
-    public int distance(int r0, int c0,int r1, int c1) {
+    public int distance(int r0, int c0, int rd, int cd, int dist) {
+        int distance = dist;
+        int currR = r0;
+        int curC = c0;
 
-        int distance=0;
-        Square sourceSquare=this.searchSquare(r0,c0);
-        Square targetSquare=this.searchSquare(r1,c1);
-
-        for (Square s:squares)
-            for(Square b :sourceSquare.link){
-                if (b.equals(targetSquare)){
-                    distance++;
-                    return distance;
-                } else {
-                    //vedere che cazzo fare
-                }
-            }
-        return 0;
+        Square curSquare = searchSquare(currR, curC);
+        ArrayList<Square> link = curSquare.getLink();
+        for (Square v : link) {
+            System.out.println("link: " + v.toString());
         }
+
+        for (Square a : link) {
+            if(a!=null && a.getColumn()== cd && a.getRow()==rd){
+                System.out.println("trovato");
+                return distance;
+            }
+        }
+        curSquare.setVisited(true); //è stat visitata
+        for (Square b:link){
+            if(b!=null && !b.isVisited()){
+                System.out.println("iter su: " +b.toString());
+                int tempDist=distance+1;
+                return distance(b.getRow(),b.getColumn(),rd,cd,tempDist);
+            }
+
+        }
+        return distance;
+    }
 
 
 
@@ -63,7 +74,7 @@ public class Map {
     }
 
     public void movePlayer(Player player, Square square) {
-        if(this.distance(this.findPlayer(player).row,this.findPlayer(player).column,square.row,square.column)<=3){
+        if(this.distance(this.findPlayer(player).row,this.findPlayer(player).column,square.row,square.column,1)<=3){
             findPlayer(player).removePlayer(player);
             square.addPlayer(player);
             //TODO

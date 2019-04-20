@@ -17,25 +17,6 @@ public class Square{
         link=new ArrayList<>();
         setLink(link);
     }
-    public void setLink(ArrayList<Square>link) {
-        ArrayList<Square> temp = new ArrayList<>();
-        if (link != null) {
-            for (Square l : link) {
-                if (l != null)
-                    temp.add(l);
-            }
-            this.link=temp;
-        }
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj==this){
-            //TODO vedere eqauls
-            return true;
-        }
-        return false;
-    }
 
     public int getColumn() {
         return column;
@@ -50,7 +31,27 @@ public class Square{
     }
 
     public ArrayList<Square> getLink(){
+
         return link;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setLink(ArrayList<Square>link) {
+        ArrayList<Square> temp = new ArrayList<>();
+        if (link != null) {
+            for (Square l : link) {
+                if (l != null)
+                    temp.add(l);
+            }
+            this.link=temp;
+        }
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     public void addPlayer(Player player) {
@@ -64,6 +65,15 @@ public class Square{
     public ArrayList playerOnSquare() {
 
         return this.players;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==this){
+            //TODO vedere eqauls
+            return true;
+        }
+        return false;
     }
 
     @Override
