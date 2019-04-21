@@ -11,11 +11,13 @@ public class Square{
     protected ArrayList<Player> players;
     protected boolean visited;
 
-    public Square(int r, int c, ArrayList<Square> link) {
+    public Square(int r, int c, EnumColorSquare color,ArrayList<Square> link) {
         this.row=r;
         this.column=c;
+        this.color=color;
         link=new ArrayList<>();
         setLink(link);
+        this.visited=false;
     }
 
     public int getColumn() {

@@ -34,40 +34,65 @@ public class Map {
 
     public int distance(int r0, int c0, int rd, int cd, int dist) {
         int distance = dist;
+        int currR = r0;
+        int curC = c0;
+        ArrayList<Integer> path =new ArrayList<>();
+        int minPath =100;
+        int tempPath;
 
-        Square curSquare = searchSquare(r0, c0);
+        Square curSquare = searchSquare(currR, curC);
+        System.out.println("square curr: " + curSquare.toString());
+
+        Square destSquare = searchSquare(rd, cd);
+        System.out.println("square search: " + destSquare.toString());
         ArrayList<Square> link = curSquare.getLink();
+
         for (Square v : link) {
             System.out.println("link: " + v.toString());
         }
 
         for (Square a : link) {
             if(a!=null && a.getColumn()== cd && a.getRow()==rd){
-                System.out.println("trovato");
-                return distance;
+                System.out.println("trovato, distanza: " +distance);
+                path.add(distance);
+                return calculateMinPath(path);
             }
         }
-        curSquare.setVisited(true); //è stat visitata
-        for (Square b:link){
-            if(b!=null && !b.isVisited()){
-                System.out.println("iter su: " +b.toString());
-                int tempDist=distance+1;
-                return distance(b.getRow(),b.getColumn(),rd,cd,tempDist);
-            }
+        curSquare.setVisited(true);
 
+        for (Square b : link) {
+            if (b != null && !b.isVisited()) {
+                System.out.println("iter su: " + b.toString());
+                int tempDist = distance + 1;
+                tempPath = distance(b.getRow(), b.getColumn(), rd, cd, tempDist);
+                path.add(tempPath);
+            }
         }
-        return distance;
+        System.out.println("non trovato, distanza: " +minPath);
+        return calculateMinPath(path);
     }
 
+    private int calculateMinPath(ArrayList<Integer> path){
+        int min=100;
+        for (Integer a:path){
+            if (a.intValue()<min){
+                min=a.intValue();
+            }
+        }
+        return min;
+    }
 
+    public boolean isVisible(int r0, int c0,int r1, int c1) {
+        Square currSquare=searchSquare(r0,c0);
+        Square destSquare=searchSquare(r1,c1);
 
-
-
-    public boolean isVisible(int row, int column) {
-
-        return true;
-
-        //  TODO funzione di visibiltà
+        if(currSquare.getColor()==destSquare.getColor()){
+            return true;
+        }else if(distance(r0,c0,r1,c1,1)==1 && destSquare.getLink().contains(currSquare)){
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
