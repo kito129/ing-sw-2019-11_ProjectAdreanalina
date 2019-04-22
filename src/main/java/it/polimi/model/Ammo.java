@@ -16,6 +16,9 @@ public class Ammo {
         this.blu=ammo.blu;
         this.red=ammo.red;
     }
+    public Ammo getAmmo() throws CloneNotSupportedException {
+        return (Ammo) this.clone();
+    }
 
     public void increseAmmo(Ammo ammo){
         if(ammo.red+this.red>=3){

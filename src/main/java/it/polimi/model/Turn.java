@@ -13,6 +13,7 @@ public class Turn {
 
 
     public Player getCurrentPlayer() {
+
         return currentPlayer;
     }
 
@@ -30,6 +31,7 @@ public class Turn {
     }
 
     public void setTurnState(TurnState turnState) {
+
         this.turnState = turnState;
     }
 

@@ -19,6 +19,8 @@ public class Square{
         this.row=r;
         this.column=c;
         this.color=color;
+        this.link=new ArrayList<Square>();
+        this.players=new ArrayList<Player>();
         this.setLink(linkSquare);
         this.visited=false;
     }
@@ -63,10 +65,12 @@ public class Square{
 
         players.add(player);
     }
+
     public void removePlayer (Player player) {
 
         this.players.remove(player);
     }
+
     public ArrayList playerOnSquare() {
 
         return this.players;
@@ -74,11 +78,7 @@ public class Square{
 
     @Override
     public boolean equals(Object obj) {
-        if(obj==this){
-            //TODO vedere eqauls
-            return true;
-        }
-        return false;
+        return obj == this;
     }
 
     @Override

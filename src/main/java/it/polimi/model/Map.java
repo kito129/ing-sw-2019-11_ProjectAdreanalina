@@ -88,8 +88,6 @@ public class Map {
         if(this.distance(this.findPlayer(player).row,this.findPlayer(player).column,square.row,square.column,1)<=3){
             findPlayer(player).removePlayer(player);
             square.addPlayer(player);
-            //TODO
-            // vedere bene come fa le eccezioni
         }
     }
 

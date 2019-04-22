@@ -13,7 +13,7 @@ public class NormalSquare extends Square {
         link=new ArrayList<>();
         setLink(link);
         this.visited=false;
-        this.ammoCard=null;
+        this.ammoCard= new AmmoCard(null,null);
     }
 
     public AmmoCard getAmmoCard() {
@@ -27,7 +27,7 @@ public class NormalSquare extends Square {
 
     public void removeAmmoCard(){
 
-        // TODO
+        this.ammoCard=null;
     }
 
 

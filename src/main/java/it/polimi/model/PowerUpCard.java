@@ -1,14 +1,9 @@
 package it.polimi.model;
 
-public abstract class PowerUpCard {
+public class   PowerUpCard {
 
-    protected EnumColorYBR colorCard;
-    protected String nameCard;
-
-    public PowerUpCard(EnumColorYBR colorCard, String nameCard){
-        this.colorCard=colorCard;
-        this.nameCard=nameCard;
-    }
+    protected EnumColorYBR colorCard = null;
+    protected  String nameCard = null;
 
     public EnumColorYBR getColorCard() {
         return colorCard;
@@ -19,7 +14,6 @@ public abstract class PowerUpCard {
     }
 
     public void effect(){
-
 
     }
 }

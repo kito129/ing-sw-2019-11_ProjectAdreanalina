@@ -6,9 +6,7 @@ public class WeaponCard {
 
     protected EnumColorYBR colorCard;
     protected String nameCard;
-    protected int costYellow;
-    protected int costBlu;
-    protected int costRed;
+    protected int costR;
     protected boolean charge;
 
 
@@ -16,24 +14,16 @@ public class WeaponCard {
         return nameCard;
     }
 
-    public int getCostBlu() {
-        return costBlu;
-    }
-
-    public int getCostRed() {
-        return costRed;
-    }
-
-    public int getCostYellow() {
-        return costYellow;
-    }
-
     public EnumColorYBR getColorCard() {
+
         return colorCard;
     }
 
     public void getCostCharge(){
-
+        //TODO
+    }
+    public void  getInitialCost() {
+        //TODO
     }
 
     public void getCost(){

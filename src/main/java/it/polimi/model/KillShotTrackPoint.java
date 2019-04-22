@@ -6,6 +6,13 @@ public class KillShotTrackPoint {
     private EnumColorPlayer mark1;
     private EnumColorPlayer mark2;
 
+    public KillShotTrackPoint(boolean skull, EnumColorPlayer mark1, EnumColorPlayer mark2){
+        if(!skull){
+            this.mark1=mark1;
+            this.mark2=mark2;
+        }
+    }
+
     public EnumColorPlayer getMark1() {
         return mark1;
     }

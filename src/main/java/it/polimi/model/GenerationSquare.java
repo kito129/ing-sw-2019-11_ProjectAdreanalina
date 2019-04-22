@@ -19,6 +19,7 @@ public class GenerationSquare extends Square{
 
 
     public ArrayList<WeaponCard> getWeaponList() {
+
         return weaponList;
     }
 
@@ -28,8 +29,10 @@ public class GenerationSquare extends Square{
         }
     }
 
-    public void catchWeapon(){
-       //TODO
+    public WeaponCard catchWeapon(int pos){
+      WeaponCard temp=this.weaponList.get(pos);
+      this.weaponList.remove(pos);
+      return temp;
     }
 
 

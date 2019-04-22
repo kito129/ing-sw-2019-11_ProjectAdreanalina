@@ -4,65 +4,54 @@ import java.util.ArrayList;
 
 public class KillShotTrack{
 
-    private int finalScore;
-    private int numberColorPlayer;
-    private int max;
-
     private EnumColorPlayer doubleKill;
-
     private ArrayList<KillShotTrackPoint> track;
 
+    public KillShotTrack(int initSkull){
+        if(5<initSkull && initSkull<8) {
+            this.track = new ArrayList<KillShotTrackPoint>();
+            for (int i = 0; i < initSkull; i++) {
+                track.add(new KillShotTrackPoint(true, null, null));
+            }
+        }
+        this.doubleKill=null;
+    }
+
     public ArrayList<KillShotTrackPoint> getTrack() {
+
         return track;
     }
 
-
-
-    public void decreaseKillShotTrack(){
-
-        track.remove(0);
-
-    }
-
-    public void insertKillShotTrackPoint(KillShotTrackPoint killShotTrackPoint){
-
-        track.add(new ArrayList<KillShotTrackPoint>);
-
-    }
-
-    public int numberColorKSTP(EnumColorPlayer colorPlayer, KillShotTrackPoint KSTP){
-
-        for (i = 0; i < track.size; i++){
-
-            if(colorPlayer.equals(KSTP.getMark1())){
-                numberColorPlayer++;
-            }
-
-            if(colorPlayer.equals(KSTP.getMark2())){
-                numberColorPlayer++;
-            }
-
+    public int skullNumber(){
+        int i = 0;
+        for (KillShotTrackPoint a :track){
+            if(a.isSkull()) i++;
         }
-
-        return numberColorPlayer;
-
+        return i;
     }
 
-        return numberColorPlayer;
-
+    public void updateTrack(EnumColorPlayer color1,EnumColorPlayer color2){
+        if(this.skullNumber()>0) {
+            for (KillShotTrackPoint a : track) {
+                if (a.isSkull()) {
+                    a.setSkull(false);
+                    a.setMark1(color1);
+                    a.setMark2(color2);
+                }
+            }
+        }
     }
 
-    public int finalScore(Player player){
-
-        player.getColor();
-
-
-
-
-
-        return finalScore;
-
+    public void setDoubleKill(EnumColorPlayer doubleKill) {
+        this.doubleKill = doubleKill;
     }
 
-
+    public int getColorOccurance(EnumColorPlayer colorPlayer){
+        int i=0;
+        for (KillShotTrackPoint a : track){
+            if(a.getMark1()==colorPlayer) i++;
+            if(a.getMark2()==colorPlayer) i++;
+        }
+        return i;
+    }
 }
