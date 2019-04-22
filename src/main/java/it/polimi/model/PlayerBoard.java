@@ -5,9 +5,7 @@ import java.util.ArrayList;
 public class PlayerBoard {
 
     private EnumColorPlayer color;
-    private int ammoY;
-    private int ammoR;
-    private int ammoB;
+    private Ammo playerAmmo;
     private int boardValue;
     private int numberOfDeaths;
     private ArrayList<EnumColorPlayer> damages;
@@ -18,9 +16,7 @@ public class PlayerBoard {
     public PlayerBoard(EnumColorPlayer color) {
 
         this.color=color;
-        ammoY=1;
-        ammoR=1;
-        ammoB=1;
+        playerAmmo=new Ammo(1,1,1);
         boardValue=8;
         numberOfDeaths=0;
         damages =new ArrayList<EnumColorPlayer>();
@@ -34,19 +30,8 @@ public class PlayerBoard {
         return color;
     }
 
-    public int getAmmoY() {
-
-        return ammoY;
-    }
-
-    public int getAmmoR() {
-
-        return ammoR;
-    }
-
-    public int getAmmoB() {
-
-        return ammoB;
+    public Ammo getPlayerAmmo() {
+        return playerAmmo;
     }
 
     public int getBoardValue() {
@@ -62,38 +47,6 @@ public class PlayerBoard {
     public ArrayList<EnumColorPlayer> getMarks() {
 
         return marks;
-    }
-
-    public void increaseAmmo(AmmoCard ammoCard){
-
-        if(this.ammoY+ammoCard.getAmmoY()>3){
-
-            this.ammoY=3;
-        }else {
-
-            this.ammoY+=ammoCard.getAmmoY();
-        }
-        if(this.ammoR+ammoCard.getAmmoY()>3){
-
-            this.ammoR=3;
-        }else {
-
-            this.ammoR+=ammoCard.getAmmoR();
-        }
-        if(this.ammoB+ammoCard.getAmmoB()>3){
-
-            this.ammoB=3;
-        }else{
-
-            this.ammoB+=ammoCard.getAmmoB();
-        }
-    }
-
-    public void decreaseAmmo(int ammoY,int ammoR, int ammoB){
-
-        this.ammoY-=this.ammoY-ammoY;
-        this.ammoR-=this.ammoR-ammoR;
-        this.ammoB-=this.ammoB-ammoB;
     }
 
     public void increaseNumberOfDeaths(){

@@ -1,33 +1,21 @@
 package it.polimi.model;
 
-public class AmmoCard {
+public class AmmoCard extends Ammo {
 
-    private int ammoY;
-    private int ammoR;
-    private int ammoB;
+    private Ammo ammo;
     private PowerUpCard powerUpCard;
 
-    public AmmoCard(int ammoR, int ammoY, int ammoB, PowerUpCard powerUpCard){
 
-        /*  TODO
-        guardate factory
-         */
+    public AmmoCard(Ammo ammo, PowerUpCard powerUpCard){
+        super(ammo);
+        this.powerUpCard=powerUpCard;
     }
 
-    public int getAmmoY() {
+    public Ammo getAmmo() {
 
-        return this.ammoY;
+        return this.ammo;
     }
 
-    public int getAmmoR() {
-
-        return this.ammoR;
-    }
-
-    public int getAmmoB() {
-
-        return this.ammoB;
-    }
 
     public PowerUpCard getPowerUpCard() {
         return powerUpCard;

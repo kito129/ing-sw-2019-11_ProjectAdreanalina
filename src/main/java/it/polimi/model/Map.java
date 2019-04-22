@@ -7,6 +7,7 @@ public class Map {
     private ArrayList<Square> squares;
 
     public Square searchSquare (int row, int colomn) {
+
         for (Square s : squares) {
             if ((s.row == row) && (s.column == colomn)) {
                 return s;
@@ -14,16 +15,18 @@ public class Map {
         }
         return null;
     }
+
     public Square findPlayer(Player player) {
+
         for (Square s : squares) {
             if (s.players.contains(player)) {
                 return s;
             }
         }
         return null;
-
     }
     public ArrayList playersOnSquare(Square s) {
+
         for (Square a:squares){
             a.equals(s);
             return s.players;
@@ -32,68 +35,53 @@ public class Map {
     }
 
 
-    public int distance(int r0, int c0, int rd, int cd, int dist) {
+    public int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
+
         int distance = dist;
-        int currR = r0;
-        int curC = c0;
+        int currR = rInit;
+        int curC = cInit;
+        int tempPath=0;
         ArrayList<Integer> path =new ArrayList<>();
-        int minPath =100;
-        int tempPath;
 
         Square curSquare = searchSquare(currR, curC);
-        System.out.println("square curr: " + curSquare.toString());
-
-        Square destSquare = searchSquare(rd, cd);
-        System.out.println("square search: " + destSquare.toString());
+        Square destSquare = searchSquare(rDest, cDest);
         ArrayList<Square> link = curSquare.getLink();
 
-        for (Square v : link) {
-            System.out.println("link: " + v.toString());
-        }
-
         for (Square a : link) {
-            if(a!=null && a.getColumn()== cd && a.getRow()==rd){
-                System.out.println("trovato, distanza: " +distance);
+            if(a!=null && a.getColumn()== cDest && a.getRow()==rDest){
                 path.add(distance);
                 return calculateMinPath(path);
             }
         }
         curSquare.setVisited(true);
-
         for (Square b : link) {
             if (b != null && !b.isVisited()) {
-                System.out.println("iter su: " + b.toString());
                 int tempDist = distance + 1;
-                tempPath = distance(b.getRow(), b.getColumn(), rd, cd, tempDist);
+                tempPath = distance(b.getRow(), b.getColumn(), rDest, cDest, tempDist);
                 path.add(tempPath);
             }
         }
-        System.out.println("non trovato, distanza: " +minPath);
         return calculateMinPath(path);
     }
 
     private int calculateMinPath(ArrayList<Integer> path){
+
         int min=100;
         for (Integer a:path){
-            if (a.intValue()<min){
-                min=a.intValue();
+            if (a <min){
+                min= a;
             }
         }
         return min;
     }
 
     public boolean isVisible(int r0, int c0,int r1, int c1) {
+
         Square currSquare=searchSquare(r0,c0);
         Square destSquare=searchSquare(r1,c1);
-
         if(currSquare.getColor()==destSquare.getColor()){
             return true;
-        }else if(distance(r0,c0,r1,c1,1)==1 && destSquare.getLink().contains(currSquare)){
-            return true;
-        } else {
-            return false;
-        }
-
+        }else return destSquare.getLink().contains(currSquare);
     }
 
     public void movePlayer(Player player, Square square) {
