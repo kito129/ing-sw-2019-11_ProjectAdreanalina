@@ -15,6 +15,13 @@ public class Square{
 
     }
 
+    public Square(Square square){
+        this.row=square.getRow();
+        this.column=square.getColumn();
+        this.color=square.getColor();
+        this.setLink(square.getLink());
+    }
+
     public Square(int r, int c, EnumColorSquare color,ArrayList<Square> linkSquare) {
         this.row=r;
         this.column=c;
