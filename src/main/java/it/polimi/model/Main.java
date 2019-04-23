@@ -8,7 +8,7 @@ public class Main {
 
         AmmoCard ammo1=new AmmoCard(1,1,1,null);
 
-        PlayerBoard playerBoard1=new PlayerBoard(EnumColorPlayer.YELLOW);
+        PlayerBoard playerBoard1=new PlayerBoard(EnumColorPlayer.GREEN);
 
         ArrayList<EnumColorPlayer> damagesToPlayer1 =new ArrayList<EnumColorPlayer>();
         ArrayList<EnumColorPlayer> marksToPlayer1 =new ArrayList<EnumColorPlayer>();
@@ -17,8 +17,8 @@ public class Main {
         damagesToPlayer1.add(EnumColorPlayer.BLU);
         damagesToPlayer1.add(EnumColorPlayer.BLU);
         damagesToPlayer1.add(EnumColorPlayer.PINK);
-        marksToPlayer1.add(EnumColorPlayer.BLU);
-        marksToPlayer1.add(EnumColorPlayer.BLU);
+        marksToPlayer1.add(EnumColorPlayer.GREY);
+        marksToPlayer1.add(EnumColorPlayer.GREEN);
         marksToPlayer1.add(EnumColorPlayer.BLU);
         marksToPlayer1.add(EnumColorPlayer.BLU);
 
@@ -82,7 +82,7 @@ public class Main {
 
         System.out.println("myMarks: "+playerBoard1.getMarks());
 
-        playerBoard1.removeMarkOfColor(EnumColorPlayer.BLU);
+        playerBoard1.removeMarkOfColor(EnumColorPlayer.GREEN);
 
         System.out.println("myMarks: "+playerBoard1.getMarks());
 
