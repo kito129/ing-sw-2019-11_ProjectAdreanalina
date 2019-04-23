@@ -10,23 +10,40 @@ public class Player {
     private int score;
     private boolean alive;
 
-    public String getName() {
-        return name;
+    public Player(int id,String name,EnumColorPlayer color){
+
+        this.id=id;
+        this.name=name;
+        this.color=color;
+        score=0;
+        alive=true;
+        playerBoard=new PlayerBoard(color);
+        // TODO vedere come gestire  questo attributo square in fase di inizializzazione
+
     }
 
     public int getId() {
+
         return id;
     }
 
-    public PlayerBoard getPlayerBoard() {
-        return playerBoard;
+    public String getName() {
+
+        return name;
     }
 
     public EnumColorPlayer getColor() {
+
         return color;
     }
 
+    public PlayerBoard getPlayerBoard() {
+
+        return playerBoard;
+    }
+
     public int getScore() {
+
         return score;
     }
 
@@ -40,24 +57,16 @@ public class Player {
         return alive;
     }
 
-    public void increaseScore(){
+    public void increaseScore(int scoreToAdd){
+
+        this.score+=scoreToAdd;
 
     }
 
     public void checkDeath(){
 
-    }
+        //TODO vedere come gestire la morte del giocatore, mettere questo metodo insieme all'attributo vita di un giocatore?
 
-    public void setColor(EnumColorPlayer color) {
-        this.color = color;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setSquare(Square square) {
