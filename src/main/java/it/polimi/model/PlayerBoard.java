@@ -54,6 +54,11 @@ public class PlayerBoard {
         return boardValue;
     }
 
+    public int getNumberOfDeaths() {
+
+        return numberOfDeaths;
+    }
+
     public ArrayList<EnumColorPlayer> getDamages() {
 
         return damages;
@@ -62,6 +67,16 @@ public class PlayerBoard {
     public ArrayList<EnumColorPlayer> getMarks() {
 
         return marks;
+    }
+
+    public ArrayList<WeaponCard> getPlayerWeapons() {
+
+        return playerWeapons;
+    }
+
+    public ArrayList<PowerUpCard> getPlayerPowerUps() {
+
+        return playerPowerUps;
     }
 
     public void increaseAmmo(AmmoCard ammoCard){
@@ -73,7 +88,7 @@ public class PlayerBoard {
 
             this.ammoY+=ammoCard.getAmmoY();
         }
-        if(this.ammoR+ammoCard.getAmmoY()>3){
+        if(this.ammoR+ammoCard.getAmmoR()>3){
 
             this.ammoR=3;
         }else {
@@ -91,14 +106,35 @@ public class PlayerBoard {
 
     public void decreaseAmmo(int ammoY,int ammoR, int ammoB){
 
-        this.ammoY-=this.ammoY-ammoY;
-        this.ammoR-=this.ammoR-ammoR;
-        this.ammoB-=this.ammoB-ammoB;
+        this.ammoY-=ammoY;
+        this.ammoR-=ammoR;
+        this.ammoB-=ammoB;
+        //TODO vedere se inserire qui il controllo per il decremento, il decremento è possibile? senno solleva eccezione
     }
 
     public void increaseNumberOfDeaths(){
 
         numberOfDeaths+=1;
+    }
+
+    public void decreaseBoardValue(){
+
+        if(numberOfDeaths==0){
+
+            boardValue=8;
+        }else if(numberOfDeaths==1){
+
+            boardValue=6;
+        }else if(numberOfDeaths==2){
+
+            boardValue=4;
+        }else if(numberOfDeaths==3){
+
+            boardValue=2;
+        }else if(numberOfDeaths==4){
+
+            boardValue=1;
+        }
     }
 
     public void addPowerUp(PowerUpCard powerUpCard){
@@ -138,35 +174,26 @@ public class PlayerBoard {
 
     public void removeMarkOfColor(EnumColorPlayer colorOfMark){
 
-        marks.removeIf(mark-> mark==colorOfMark);
+        for(EnumColorPlayer color: marks){
+
+            if(color==colorOfMark){
+                
+
+            }
+        }
     }
 
-    public void decreaseBoardValue(){
+    public void avaibleAmmo(){
 
-        if(numberOfDeaths==0){
+        System.out.println(ammoY + " Yellow Ammo");
+        System.out.println(ammoR + " Red Ammo");
+        System.out.println(ammoB + " Blu Ammo ");
 
-            boardValue=8;
-        }else if(numberOfDeaths==1){
-
-            boardValue=6;
-        }else if(numberOfDeaths==2){
-
-            boardValue=4;
-        }else if(numberOfDeaths==3){
-
-            boardValue=2;
-        }else if(numberOfDeaths==4){
-
-            boardValue=1;
-        }
     }
 
     public void playerBoardScored(){
 
         //TODO occhio al valore di ritorno
     }
-
-
-
 
 }

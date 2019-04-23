@@ -9,9 +9,10 @@ public class AmmoCard {
 
     public AmmoCard(int ammoR, int ammoY, int ammoB, PowerUpCard powerUpCard){
 
-        /*  TODO
-        guardate factory
-         */
+        this.ammoY=ammoY;
+        this.ammoR=ammoR;
+        this.ammoB=ammoB;
+        this.powerUpCard=powerUpCard;
     }
 
     public int getAmmoY() {
@@ -29,7 +30,10 @@ public class AmmoCard {
         return this.ammoB;
     }
 
-    public PowerUpCard getPowerUpCard() {
+    public PowerUpCard getPowerUpCard(){
+
         return powerUpCard;
     }
+
+
 }

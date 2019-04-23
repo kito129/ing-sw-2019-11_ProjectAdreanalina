@@ -13,7 +13,7 @@ public class NormalSquare extends Square {
         link=new ArrayList<>();
         setLink(link);
         this.visited=false;
-        this.ammoCard= new AmmoCard(null,null);
+       // this.ammoCard= new AmmoCard(null,null);
     }
 
     public AmmoCard getAmmoCard() {
