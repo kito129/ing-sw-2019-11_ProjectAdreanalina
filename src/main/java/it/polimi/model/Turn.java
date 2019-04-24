@@ -7,7 +7,7 @@ public class Turn {
 
 
     private Player currentPlayer;
-    private TurnState turnState;
+
     private ArrayList<Player> deadPlayers;
 
 
@@ -17,9 +17,8 @@ public class Turn {
         return currentPlayer;
     }
 
-    public TurnState getTurnState() {
-        return turnState;
-    }
+
+
 
     public ArrayList<Player> getDeadPlayers() {
         return deadPlayers;
@@ -30,10 +29,7 @@ public class Turn {
         this.currentPlayer = currentPlayer;
     }
 
-    public void setTurnState(TurnState turnState) {
 
-        this.turnState = turnState;
-    }
 
     public void addDeadPlayer(Player player){
 

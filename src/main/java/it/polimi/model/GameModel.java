@@ -1,6 +1,6 @@
 package it.polimi.model;
 
-public class GameBoard {
+public class GameModel {
 
     private KillShotTrack killShotTrack;
     private AmmoDeck ammoDeck;

@@ -3,9 +3,15 @@ import it.polimi.model.*;
 
 public class TargetingScope extends PowerUpCard {
 
+    public TargetingScope(EnumColorCard colorCard) {
+
+        super("TARGETING SCOPE", colorCard);
+
+    }
+
     public void effect(){
 
-        //TODO
+        //TODO VEDERE ARMI
     }
 
 }

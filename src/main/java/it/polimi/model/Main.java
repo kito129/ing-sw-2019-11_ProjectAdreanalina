@@ -49,7 +49,7 @@ public class Main {
 
         playerBoard1.decreaseAmmo(2, 1, 1);
 
-        
+
 
         System.out.println("number of death: " + playerBoard1.getNumberOfDeaths());
 

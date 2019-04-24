@@ -1,17 +1,30 @@
 package it.polimi.model;
 
-public class   PowerUpCard {
+public class PowerUpCard {
 
+    protected String namePowerUpCard;
+    protected EnumColorCard colorCard;
 
-    protected  String nameCard = null;
+    public PowerUpCard(String namePowerUpCard, EnumColorCard colorCard) {
 
+        this.namePowerUpCard = namePowerUpCard;
+        this.colorCard = colorCard;
+    }
 
 
     public String getNameCard() {
-        return nameCard;
+
+        return namePowerUpCard;
     }
 
-    public void effect(){
+    public EnumColorCard getColorCard() {
 
+        return colorCard;
     }
+
+    public void useAsAmmo(){
+
+        //todo andrea
+    }
+
 }

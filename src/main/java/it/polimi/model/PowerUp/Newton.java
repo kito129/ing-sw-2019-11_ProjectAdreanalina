@@ -3,10 +3,16 @@ import it.polimi.model.*;
 
 public class Newton extends PowerUpCard {
 
-    public void effect(){
+    public Newton(EnumColorCard colorCard) {
 
-        //TODO
+        super("NEWTON", colorCard);
+
+    }
+
+    public void effect() {
+
+        //TODO MArco
+
     }
 
 }
-
