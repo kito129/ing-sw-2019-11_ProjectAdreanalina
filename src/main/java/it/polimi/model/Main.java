@@ -87,16 +87,10 @@ public class Main {
 
 
 
-           /*
-           MAIN CHITO
 
-           for (int i=0;i<4;i++){
-               System.out.println("\n");
-           }
-=======
-       /*
-       MAIN CHITO
-        */
+           // MAIN CHITO
+        
+
        for (int i=0;i<4;i++){
            System.out.println("\n");
        }
@@ -196,6 +190,6 @@ public class Main {
     }
 
 
-*/
 
-    }}
+
+    }
