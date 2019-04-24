@@ -88,12 +88,12 @@ public class Main {
 
 
 
-           /*
-           MAIN CHITO
-            */
-           for (int i=0;i<4;i++){
-               System.out.println("\n");
-           }
+       /*
+       MAIN CHITO
+        */
+       for (int i=0;i<4;i++){
+           System.out.println("\n");
+       }
 
         Square s1 = new Square(0, 0, EnumColorSquare.BLU, null);
         Square s2 = new Square(0, 1, EnumColorSquare.BLU, null);

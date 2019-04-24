@@ -16,8 +16,6 @@ public class GenerationSquare extends Square{
         this.weaponList=null;
     }
 
-
-
     public ArrayList<WeaponCard> getWeaponList() {
 
         return weaponList;

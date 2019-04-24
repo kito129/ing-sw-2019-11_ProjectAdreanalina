@@ -190,7 +190,6 @@ public class PlayerBoard {
         for (EnumColorPlayer color:marks) {
 
             if (color==colorOfMark) {
-
                 marks.remove(colorOfMark);
             }
         }
