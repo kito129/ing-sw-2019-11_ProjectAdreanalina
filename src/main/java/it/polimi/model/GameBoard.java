@@ -9,18 +9,22 @@ public class GameBoard {
     private Map map;
 
     public AmmoDeck getAmmoDeck() {
+
         return ammoDeck;
     }
 
     public WeaponDeck getWeaponDeck() {
+
         return weaponDeck;
     }
 
     public KillShotTrack getKillShotTrack() {
+
         return killShotTrack;
     }
 
     public PowerUpDeck getPowerUpDeck() {
+
         return powerUpDeck;
     }
 

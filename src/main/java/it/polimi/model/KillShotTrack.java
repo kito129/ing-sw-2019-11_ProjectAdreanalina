@@ -43,6 +43,7 @@ public class KillShotTrack{
     }
 
     public void setDoubleKill(EnumColorPlayer doubleKill) {
+
         this.doubleKill = doubleKill;
     }
 

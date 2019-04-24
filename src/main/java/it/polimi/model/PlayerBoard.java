@@ -188,7 +188,11 @@ public class PlayerBoard {
 
             if (color==colorOfMark) {
 
+
                 marks.remove(color);
+
+                marks.remove(colorOfMark);
+
             }
         }
     }
