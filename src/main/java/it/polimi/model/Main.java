@@ -26,7 +26,6 @@ public class Main {
 
         System.out.println("mark to Player1: " + marksToPlayer1);
 
-        playerBoard1.avaibleAmmo();
 
         System.out.println("myDamages: " + playerBoard1.getDamages());
 
@@ -38,19 +37,19 @@ public class Main {
 
         playerBoard1.increaseAmmo(ammo1);
 
-        playerBoard1.avaibleAmmo();
+
 
         playerBoard1.increaseAmmo(ammo1);
 
-        playerBoard1.avaibleAmmo();
+
 
         playerBoard1.increaseAmmo(ammo1);
 
-        playerBoard1.avaibleAmmo();
+
 
         playerBoard1.decreaseAmmo(2, 1, 1);
 
-        playerBoard1.avaibleAmmo();
+        
 
         System.out.println("number of death: " + playerBoard1.getNumberOfDeaths());
 

@@ -199,14 +199,7 @@ public class PlayerBoard {
 
     */
 
-    public void avaibleAmmo() {
-
-        System.out.println(ammoY + " Yellow Ammo");
-        System.out.println(ammoR + " Red Ammo");
-        System.out.println(ammoB + " Blu Ammo ");
-    }
-
-    public int playerBoardScored(EnumColorPlayer colorPlayer) {
+   public int playerBoardScored(EnumColorPlayer colorPlayer) {
 
         int count = 0;
         for (EnumColorPlayer color : damages) {
