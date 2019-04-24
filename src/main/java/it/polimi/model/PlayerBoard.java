@@ -167,7 +167,7 @@ public class PlayerBoard {
 
     public ArrayList<EnumColorPlayer> removeMarkOfColor(EnumColorPlayer colorOfMark) {
 
-        ArrayList<EnumColorPlayer> markToAdd=new ArrayList<EnumColorPlayer>();
+        ArrayList<EnumColorPlayer> markToAdd = new ArrayList<EnumColorPlayer>();
 
         for (int i = 0; i < marks.size(); i++) {
 
@@ -178,7 +178,7 @@ public class PlayerBoard {
                 i--;
             }
         }
-        return markToAdd; 
+        return markToAdd;
     }
 
 
@@ -199,16 +199,28 @@ public class PlayerBoard {
 
     */
 
-    public void avaibleAmmo(){
+    public void avaibleAmmo() {
 
         System.out.println(ammoY + " Yellow Ammo");
         System.out.println(ammoR + " Red Ammo");
         System.out.println(ammoB + " Blu Ammo ");
     }
 
-    public void playerBoardScored(){
+    public int playerBoardScored(EnumColorPlayer colorPlayer) {
 
-        //TODO occhio al valore di ritorno
+        int count = 0;
+        for (EnumColorPlayer color : damages) {
+
+            if (color == colorPlayer) {
+
+                count++;
+            }
+        }
+        if(damages.get(0)==colorPlayer){
+
+            count ++;
+        }
+
+        return count;
     }
-
 }

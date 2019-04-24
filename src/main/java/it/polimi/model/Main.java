@@ -84,6 +84,5 @@ public class Main {
 
         System.out.println("myMarks: " + playerBoard1.getMarks());
 
-
     }
 }
