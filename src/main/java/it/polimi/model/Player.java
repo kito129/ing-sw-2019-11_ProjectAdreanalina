@@ -17,7 +17,7 @@ public class Player {
         this.color=color;
         score=0;
         alive=true;
-        playerBoard=new PlayerBoard(color);
+        playerBoard=new PlayerBoard();
         // TODO vedere come gestire  questo attributo square in fase di inizializzazione
 
     }

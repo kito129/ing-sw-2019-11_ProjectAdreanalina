@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class PlayerBoard {
 
-    private EnumColorPlayer color;
     private int ammoY;
     private int ammoR;
     private int ammoB;
@@ -15,9 +14,8 @@ public class PlayerBoard {
     private ArrayList<WeaponCard> playerWeapons;
     private ArrayList<PowerUpCard> playerPowerUps;
 
-    public PlayerBoard(EnumColorPlayer color) {
+    public PlayerBoard() {
 
-        this.color = color;
         ammoY = 1;
         ammoR = 1;
         ammoB = 1;
@@ -27,11 +25,6 @@ public class PlayerBoard {
         marks = new ArrayList<EnumColorPlayer>();
         playerWeapons = new ArrayList<WeaponCard>();
         playerPowerUps = new ArrayList<PowerUpCard>();
-    }
-
-    public EnumColorPlayer getColor() {
-
-        return color;
     }
 
     public int getAmmoY() {
@@ -172,36 +165,41 @@ public class PlayerBoard {
         this.marks.addAll(marks);
     }
 
-    public void removeMarkOfColor(EnumColorPlayer colorOfMark) {
+    public ArrayList<EnumColorPlayer> removeMarkOfColor(EnumColorPlayer colorOfMark) {
+
+        ArrayList<EnumColorPlayer> markToAdd=new ArrayList<EnumColorPlayer>();
 
         for (int i = 0; i < marks.size(); i++) {
 
             if (marks.get(i) == colorOfMark) {
 
+                markToAdd.add(marks.get(i));
                 marks.remove(i);
                 i--;
             }
         }
+        return markToAdd; 
     }
 
-    /*
-    public void removeMarkOfColor1(EnumColorPlayer colorOfMark) {
+
+   /*  public void removeMarkOfColor1(EnumColorPlayer colorOfMark) {
 
         for (EnumColorPlayer color:marks) {
 
             if (color==colorOfMark) {
 
-                marks.remove(colorOfMark);
+                marks.remove(color);
             }
         }
-    }*/
+    }
+
+    */
 
     public void avaibleAmmo(){
 
         System.out.println(ammoY + " Yellow Ammo");
         System.out.println(ammoR + " Red Ammo");
         System.out.println(ammoB + " Blu Ammo ");
-
     }
 
     public void playerBoardScored(){

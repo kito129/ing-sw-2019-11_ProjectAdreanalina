@@ -8,7 +8,7 @@ public class Main {
 
         AmmoCard ammo1 = new AmmoCard(1, 1, 1, null);
 
-        PlayerBoard playerBoard1 = new PlayerBoard(EnumColorPlayer.GREEN);
+        PlayerBoard playerBoard1 = new PlayerBoard();
 
         ArrayList<EnumColorPlayer> damagesToPlayer1 = new ArrayList<EnumColorPlayer>();
         ArrayList<EnumColorPlayer> marksToPlayer1 = new ArrayList<EnumColorPlayer>();
@@ -25,8 +25,6 @@ public class Main {
         System.out.println("damage to Player1: " + damagesToPlayer1);
 
         System.out.println("mark to Player1: " + marksToPlayer1);
-
-        System.out.println("colore: " + playerBoard1.getColor());
 
         playerBoard1.avaibleAmmo();
 
@@ -90,7 +88,7 @@ public class Main {
 
            /*
            MAIN CHITO
-            */
+
            for (int i=0;i<4;i++){
                System.out.println("\n");
            }
@@ -190,6 +188,6 @@ public class Main {
     }
 
 
+*/
 
-
-}
+    }}
