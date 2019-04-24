@@ -1,26 +1,34 @@
 package it.polimi.model;
 
+import java.util.ArrayList;
+
 public class GameModel {
 
-    private KillShotTrack killShotTrack;
+    private Map map;
+    private KillShotTrackPoint killShotTrackPoint;
+    private ArrayList<Player> players;
     private AmmoDeck ammoDeck;
     private PowerUpDeck powerUpDeck;
     private WeaponDeck weaponDeck;
-    private Map map;
+
+    public Map getMap() {
+
+        return map;
+    }
+
+    public KillShotTrackPoint getKillShotTrackPoint() {
+
+        return killShotTrackPoint;
+    }
+
+    public ArrayList<Player> getPlayers() {
+
+        return players;
+    }
 
     public AmmoDeck getAmmoDeck() {
 
         return ammoDeck;
-    }
-
-    public WeaponDeck getWeaponDeck() {
-
-        return weaponDeck;
-    }
-
-    public KillShotTrack getKillShotTrack() {
-
-        return killShotTrack;
     }
 
     public PowerUpDeck getPowerUpDeck() {
@@ -28,8 +36,8 @@ public class GameModel {
         return powerUpDeck;
     }
 
-    public Map getMap() {
+    public WeaponDeck getWeaponDeck() {
 
-        return map;
+        return weaponDeck;
     }
 }
