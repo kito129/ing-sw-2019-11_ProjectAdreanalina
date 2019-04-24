@@ -20,6 +20,7 @@ public class GenerationSquare extends Square{
     public void addWeaponCard(WeaponCard weaponCard){
 
         if(weaponList.size()<=3){
+
             this.weaponList.add(weaponCard);
         }
     }

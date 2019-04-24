@@ -56,6 +56,7 @@ public class Square{
     public void setLink(ArrayList<Square>link) {
         ArrayList<Square> temp = new ArrayList<>();
         if (link != null) {
+
             for (Square l : link) {
                 if (l != null)
                     temp.add(l);

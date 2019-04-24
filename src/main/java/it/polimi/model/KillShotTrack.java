@@ -7,12 +7,10 @@ public class KillShotTrack{
     private EnumColorPlayer doubleKill;
     private ArrayList<KillShotTrackPoint> track;
 
-    public KillShotTrack(int initSkull){
-        if(5<initSkull && initSkull<8) {
-            this.track = new ArrayList<KillShotTrackPoint>();
-            for (int i = 0; i < initSkull; i++) {
-                track.add(new KillShotTrackPoint(true, null, null));
-            }
+    public KillShotTrack(){
+        this.track = new ArrayList<KillShotTrackPoint>();
+        for (int i = 0; i < 8; i++) {
+            track.add(new KillShotTrackPoint(true, null, null));
         }
         this.doubleKill=null;
     }
@@ -53,6 +51,7 @@ public class KillShotTrack{
             if(a.getMark1()==colorPlayer) i++;
             if(a.getMark2()==colorPlayer) i++;
         }
+        if(doubleKill==colorPlayer) i++;
         return i;
     }
 }

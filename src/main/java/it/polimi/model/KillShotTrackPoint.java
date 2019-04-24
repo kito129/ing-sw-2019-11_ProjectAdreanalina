@@ -37,6 +37,4 @@ public class KillShotTrackPoint {
         this.skull = skull;
     }
 
-
-
 }
