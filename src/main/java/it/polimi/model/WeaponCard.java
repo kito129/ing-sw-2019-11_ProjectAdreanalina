@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class WeaponCard {
 
-    protected EnumColorYBR colorCard;
     protected String nameCard;
     protected int costR;
     protected boolean charge;
@@ -12,11 +11,6 @@ public class WeaponCard {
 
     public String getNameCard() {
         return nameCard;
-    }
-
-    public EnumColorYBR getColorCard() {
-
-        return colorCard;
     }
 
     public void getCostCharge(){
