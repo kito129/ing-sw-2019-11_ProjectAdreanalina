@@ -7,12 +7,8 @@ public class NormalSquare extends Square {
     private AmmoCard ammoCard;
 
     public NormalSquare(int r, int c, EnumColorSquare color, ArrayList<Square> link) {
-        this.row=r;
-        this.column=c;
-        this.color=color;
-        link=new ArrayList<>();
-        setLink(link);
-        this.visited=false;
+
+       super(r,c,color,link);
        this.ammoCard= new AmmoCard(0,0,0,null);
     }
 
