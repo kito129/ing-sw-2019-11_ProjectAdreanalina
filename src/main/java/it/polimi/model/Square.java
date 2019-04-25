@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Square{
 
-    protected EnumColorSquare color;
+    private EnumColorSquare color;
     private int row;
     private int column;
     protected ArrayList<Square> link;

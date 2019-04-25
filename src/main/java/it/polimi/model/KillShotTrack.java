@@ -28,6 +28,7 @@ public class KillShotTrack{
         return i;
     }
 
+    //PRENDO UN ARRAY CON 2 COLORI, SE C'E IL SECONDO PRENDO ANCHE QUELLO
     public void updateTrack(EnumColorPlayer color1,EnumColorPlayer color2){
         if(this.skullNumber()>0) {
             for (KillShotTrackPoint a : track) {
