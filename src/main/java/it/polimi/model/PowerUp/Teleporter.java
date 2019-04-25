@@ -10,10 +10,15 @@ public class Teleporter extends PowerUpCard {
     }
 
     public void effect(GameModel gameModel, int rd, int cd) {
+
         Square destSquare = gameModel.getMap().searchSquare(rd,cd);
         gameModel.getMap().movePlayer(gameModel.getActualPlayer(),destSquare);
         }
 
+    public void effect(GameModel gameModel, Square destSquare) {
+
+        gameModel.getMap().movePlayer(gameModel.getActualPlayer(),destSquare);
+    }
 
 }
 

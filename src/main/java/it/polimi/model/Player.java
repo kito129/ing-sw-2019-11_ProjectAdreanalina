@@ -49,10 +49,12 @@ public class Player {
     }
 
     public int getColumn() {
+
         return column;
     }
 
     public int getRow() {
+
         return row;
     }
 
@@ -74,14 +76,17 @@ public class Player {
     }
 
     private void setColumn(int column) {
+
         this.column = column;
     }
 
     private void setRow(int row) {
+
         this.row = row;
     }
 
     public void setPosition(int r, int c) {
+
         this.setRow(r);
         this.setColumn(c);
     }

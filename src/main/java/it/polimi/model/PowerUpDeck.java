@@ -7,6 +7,7 @@ public class PowerUpDeck extends Deck {
     private ArrayList<PowerUpCard> powerUpDeck;
 
     public ArrayList<PowerUpCard> getPowerUpDeck() {
+
         return powerUpDeck;
     }
 }
