@@ -72,13 +72,13 @@ public class PlayerBoard {
         return playerPowerUps;
     }
 
-    public void catchAmmoCard(AmmoCard ammoCard){
+    public void catchAmmoCard(AmmoCard ammoCard) {
 
         increaseAmmo(ammoCard.getAmmoY(), ammoCard.getAmmoR(), ammoCard.getAmmoB());
         addPowerUp(ammoCard.getPowerUpCard());
     }
 
-    private void increaseAmmo(int yellowAmmo,int redAmmo,int bluAmmo) {
+    private void increaseAmmo(int yellowAmmo, int redAmmo, int bluAmmo) {
 
         if (this.ammoY + yellowAmmo > 3) {
 
@@ -156,7 +156,7 @@ public class PlayerBoard {
         playerWeapons.remove(weaponCard);
     }
 
-    public void increaseDamage(EnumColorPlayer damage){
+    public void increaseDamage(EnumColorPlayer damage) {
 
         this.damages.add(damage);
     }
@@ -222,7 +222,7 @@ public class PlayerBoard {
 
     */
 
-   public int colorOccurence(EnumColorPlayer colorPlayer) {
+    public int colorOccurenceInDamages(EnumColorPlayer colorPlayer) {
 
         int count = 0;
         for (EnumColorPlayer color : damages) {
@@ -232,11 +232,27 @@ public class PlayerBoard {
                 count++;
             }
         }
-        if(damages.get(0)==colorPlayer){
+        if (damages.get(0) == colorPlayer) {      // todo questo pezza non va messo qui...va messo quando si calcolano i punti dela plancia, qui si contano solo le occorrenze
 
-            count ++;
+            count++;
         }
-
         return count;
     }
+
+    public int colorOccurenceInMarks(EnumColorPlayer colorPlayer) {
+
+        int count = 0;
+        for (EnumColorPlayer color : marks) {
+
+            if (color == colorPlayer) {
+
+                count++;
+            }
+        }
+        return count;
+    }
+
+
 }
+
+
