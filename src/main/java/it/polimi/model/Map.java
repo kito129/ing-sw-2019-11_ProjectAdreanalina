@@ -133,9 +133,7 @@ public class Map {
     }
 
     public boolean sameDirection(Square a, Square b){
-        if(a.getRow()==b.getRow() || a.getColumn()==b.getColumn()){
-            return true;
-        } else return false;
+        return a.getRow() == b.getRow() || a.getColumn() == b.getColumn();
     }
 
 }
