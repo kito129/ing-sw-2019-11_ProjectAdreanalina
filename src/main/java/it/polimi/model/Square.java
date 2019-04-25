@@ -11,9 +11,6 @@ public class Square{
     protected ArrayList<Player> players;
     protected boolean visited;
 
-    public Square(){
-
-    }
 
     public Square(Square square){
         this.row=square.getRow();
@@ -21,7 +18,14 @@ public class Square{
         this.color=square.getColor();
         this.setLink(square.getLink());
     }
-
+    /**
+     * DESCRIZIONE DEL METODO
+     * @param r //descrivo qui che parametro mi serve
+     * @param c
+     * @param color
+     * @param linkSquare
+     * @return // metto cosa mi ritorna
+     */
     public Square(int r, int c, EnumColorSquare color,ArrayList<Square> linkSquare) {
         this.row=r;
         this.column=c;
