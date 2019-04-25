@@ -72,28 +72,34 @@ public class PlayerBoard {
         return playerPowerUps;
     }
 
-    public void increaseAmmo(AmmoCard ammoCard) {
+    public void catchAmmoCard(AmmoCard ammoCard){
 
-        if (this.ammoY + ammoCard.getAmmoY() > 3) {
+        increaseAmmo(ammoCard.getAmmoY(), ammoCard.getAmmoR(), ammoCard.getAmmoB());
+        addPowerUp(ammoCard.getPowerUpCard());
+    }
+
+    private void increaseAmmo(int yellowAmmo,int redAmmo,int bluAmmo) {
+
+        if (this.ammoY + yellowAmmo > 3) {
 
             this.ammoY = 3;
         } else {
 
-            this.ammoY += ammoCard.getAmmoY();
+            this.ammoY += yellowAmmo;
         }
-        if (this.ammoR + ammoCard.getAmmoR() > 3) {
+        if (this.ammoR + redAmmo > 3) {
 
             this.ammoR = 3;
         } else {
 
-            this.ammoR += ammoCard.getAmmoR();
+            this.ammoR += redAmmo;
         }
-        if (this.ammoB + ammoCard.getAmmoB() > 3) {
+        if (this.ammoB + bluAmmo > 3) {
 
             this.ammoB = 3;
         } else {
 
-            this.ammoB += ammoCard.getAmmoB();
+            this.ammoB += bluAmmo;
         }
     }
 
@@ -130,7 +136,7 @@ public class PlayerBoard {
         }
     }
 
-    public void addPowerUp(PowerUpCard powerUpCard) {
+    private void addPowerUp(PowerUpCard powerUpCard) {
 
         playerPowerUps.add(powerUpCard);
     }
@@ -165,7 +171,7 @@ public class PlayerBoard {
         this.marks.addAll(marks);
     }
 
-    public ArrayList<EnumColorPlayer> removeMarkOfColor(EnumColorPlayer colorOfMark) {
+    public ArrayList<EnumColorPlayer> updateMarkOfColor(EnumColorPlayer colorOfMark) {
 
         ArrayList<EnumColorPlayer> markToAdd = new ArrayList<EnumColorPlayer>();
 
@@ -179,6 +185,18 @@ public class PlayerBoard {
             }
         }
         return markToAdd;
+    }
+
+    public boolean isColorInMarks(EnumColorPlayer color) {
+
+        for (EnumColorPlayer c : damages) {
+
+            if (c == color) {
+
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -199,7 +217,7 @@ public class PlayerBoard {
 
     */
 
-   public int playerBoardScored(EnumColorPlayer colorPlayer) {
+   public int colorOccurence(EnumColorPlayer colorPlayer) {
 
         int count = 0;
         for (EnumColorPlayer color : damages) {

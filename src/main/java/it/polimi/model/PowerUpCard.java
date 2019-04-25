@@ -11,7 +11,6 @@ public class PowerUpCard {
         this.colorCard = colorCard;
     }
 
-
     public String getNameCard() {
 
         return namePowerUpCard;
@@ -22,9 +21,5 @@ public class PowerUpCard {
         return colorCard;
     }
 
-    public void useAsAmmo(){
-
-        //todo andrea
-    }
 
 }

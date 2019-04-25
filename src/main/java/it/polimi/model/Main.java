@@ -1,12 +1,14 @@
 package it.polimi.model;
-
+/*
 import java.util.ArrayList;
 
 public class Main {
 
+
+
     public static void main(String args[]) {
 
-        AmmoCard ammo1 = new AmmoCard(1, 1, 1, null);
+       AmmoCard ammo1 = new AmmoCard(1, 1, 1, null);
 
         PlayerBoard playerBoard1 = new PlayerBoard();
 
@@ -79,9 +81,10 @@ public class Main {
 
         System.out.println("myMarks: " + playerBoard1.getMarks());
 
-        playerBoard1.removeMarkOfColor(EnumColorPlayer.GREEN);
+        playerBoard1.updateMarkOfColor(EnumColorPlayer.GREEN);
 
         System.out.println("myMarks: " + playerBoard1.getMarks());
 
     }
 }
+*/
