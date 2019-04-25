@@ -7,9 +7,9 @@ public class Square{
     private EnumColorSquare color;
     private int row;
     private int column;
-    protected ArrayList<Square> link;
-    protected ArrayList<Player> players;
-    protected boolean visited;
+    private ArrayList<Square> link;
+    private ArrayList<Player> players;
+    private boolean visited;
 
     /**
      * construct a Square
@@ -70,6 +70,13 @@ public class Square{
     public ArrayList<Square> getLink(){
 
         return link;
+    }
+    /**
+     * get the player on this square
+     * @return all the player on the square
+     */
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
     /**

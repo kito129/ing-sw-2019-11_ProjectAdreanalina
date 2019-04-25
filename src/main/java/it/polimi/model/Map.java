@@ -14,7 +14,6 @@ public class Map {
             for (Square l : squares) {
 
                 if (l != null)
-
                     temp.add(l);
                 System.out.println("aggiungo "+ l.toString());
             }
@@ -39,7 +38,7 @@ public class Map {
 
         for (Square s : squares) {
 
-            if (s.players.contains(player)) {
+            if (s.getPlayers().contains(player)) {
 
                 return s;
             }
@@ -51,7 +50,7 @@ public class Map {
         for (Square a:squares){
 
             a.equals(s);
-            return s.players;
+            return s.getPlayers();
         }
         return null;
     }
@@ -101,7 +100,7 @@ public class Map {
 
         for (Square a:squares){
 
-            a.visited=false;
+            a.setVisited(false);
         }
     }
 
@@ -117,7 +116,23 @@ public class Map {
         return min;
     }
 
-    
+    public boolean isVisibleSquare(Player player, EnumColorSquare colorSquare) {
+
+        if(this.findPlayer(player).getColor()==colorSquare){
+
+            return true;
+        } else {
+
+            for (Square a:this.findPlayer(player).getLink()){
+
+                if(a.getColor()==colorSquare){
+
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public boolean isVisible(Square a, Square b) {
 
@@ -168,6 +183,7 @@ public class Map {
     }
 
     public boolean isInMySquare(Player actualPlayer,Player otherPlayer){
+
         return this.playersOnSquare(this.searchSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
     }
 
@@ -177,6 +193,30 @@ public class Map {
         for (Square a: this.squares){
 
             if(a.getColor()==colorSquare){
+
+                tempPlayer.addAll(a.playerOnSquare());
+            }
+        } return tempPlayer;
+    }
+
+    public ArrayList<Player> playerOnMyRow(Player player){
+
+        ArrayList<Player> tempPlayer =new ArrayList<>();
+        for (Square a: this.squares){
+
+            if(a.getRow()==player.getRow()){
+
+                tempPlayer.addAll(a.playerOnSquare());
+            }
+        } return tempPlayer;
+    }
+
+    public ArrayList<Player> playerOnMyColunm(Player player){
+
+        ArrayList<Player> tempPlayer =new ArrayList<>();
+        for (Square a: this.squares){
+
+            if(a.getColumn()==player.getColumn()){
 
                 tempPlayer.addAll(a.playerOnSquare());
             }
