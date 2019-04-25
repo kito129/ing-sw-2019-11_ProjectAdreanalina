@@ -6,7 +6,8 @@ public class Player {
     private String name;
     private EnumColorPlayer color;
     private PlayerBoard playerBoard;
-    private Square square;
+    private int row;
+    private int column;
     private int score;
     private boolean alive;
 
@@ -47,9 +48,12 @@ public class Player {
         return score;
     }
 
-    public Square getSquare() {
+    public int getColumn() {
+        return column;
+    }
 
-        return square;
+    public int getRow() {
+        return row;
     }
 
     public boolean isAlive() {
@@ -69,9 +73,17 @@ public class Player {
 
     }
 
-    public void setSquare(Square square) {
+    private void setColumn(int column) {
+        this.column = column;
+    }
 
-        this.square = square;
+    private void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setPosition(int r, int c) {
+        this.setRow(r);
+        this.setColumn(c);
     }
 
     public void setAlive(boolean alive) {

@@ -9,10 +9,11 @@ public class Teleporter extends PowerUpCard {
 
     }
 
-    public void effect(){
+    public void effect(GameModel gameModel, int rd, int cd) {
+        Square destSquare = gameModel.getMap().searchSquare(rd,cd);
+        gameModel.getMap().movePlayer(gameModel.getActualPlayer(),destSquare);
+        }
 
-        //TODO MARCO
-    }
 
 }
 

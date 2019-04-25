@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Square{
 
     protected EnumColorSquare color;
-    protected int row;
-    protected int column;
+    private int row;
+    private int column;
     protected ArrayList<Square> link;
     protected ArrayList<Player> players;
     protected boolean visited;

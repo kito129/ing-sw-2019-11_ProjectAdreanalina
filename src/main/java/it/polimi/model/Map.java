@@ -24,7 +24,7 @@ public class Map {
     public Square searchSquare (int row, int colomn) {
 
         for (Square s : squares) {
-            if ((s.row == row) && (s.column == colomn)) {
+            if ((s.getRow() == row) && (s.getColumn() == colomn)) {
                 return s;
             }
         }
@@ -47,6 +47,10 @@ public class Map {
             return s.players;
         }
         return null;
+    }
+
+    public int distance(Square a, Square b){
+        return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),1);
     }
 
     public int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
@@ -113,18 +117,25 @@ public class Map {
     }
 
     public void movePlayer(Player player, Square square) {
-        if(this.distance(this.findPlayer(player).row,this.findPlayer(player).column,square.row,square.column,1)<=3){
+        if(this.distance(this.findPlayer(player).getRow(),this.findPlayer(player).getColumn(),square.getRow(),square.getColumn(),1)<=3){
             findPlayer(player).removePlayer(player);
             square.addPlayer(player);
+            player.setPosition(square.getRow(),square.getColumn());
         }
     }
 
     public void addPlayerOnSquare(Square square, Player player) {
-        searchSquare(square.row,square.column).addPlayer(player);
+        searchSquare(square.getRow(),square.getColumn()).addPlayer(player);
     }
 
     public void removePlayerFromSquare(Square square, Player player) {
-        searchSquare(square.row,square.column).removePlayer(player);
+        searchSquare(square.getRow(),square.getColumn()).removePlayer(player);
+    }
+
+    public boolean sameDirection(Square a, Square b){
+        if(a.getRow()==b.getRow() || a.getColumn()==b.getColumn()){
+            return true;
+        } else return false;
     }
 
 }

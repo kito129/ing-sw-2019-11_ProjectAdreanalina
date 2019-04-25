@@ -10,6 +10,15 @@ public class GameModel {
     private AmmoDeck ammoDeck;
     private PowerUpDeck powerUpDeck;
     private WeaponDeck weaponDeck;
+    private Player actualPlayer;
+
+    public void setActualPlayer(Player actualPlayer) {
+        this.actualPlayer = actualPlayer;
+    }
+
+    public Player getActualPlayer() {
+        return actualPlayer;
+    }
 
     public Map getMap() {
 

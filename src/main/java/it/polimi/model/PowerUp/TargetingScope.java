@@ -11,7 +11,8 @@ public class TargetingScope extends PowerUpCard {
 
     public void effect(){
 
-        //TODO VEDERE ARMI
+        //TODO ANDRE
+        // VEDERE ARMI
     }
 
 }
