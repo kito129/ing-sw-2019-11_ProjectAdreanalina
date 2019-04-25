@@ -13,10 +13,12 @@ public class GameModel {
     private Player actualPlayer;
 
     public void setActualPlayer(Player actualPlayer) {
+
         this.actualPlayer = actualPlayer;
     }
 
     public Player getActualPlayer() {
+
         return actualPlayer;
     }
 

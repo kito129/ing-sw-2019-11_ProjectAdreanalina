@@ -13,7 +13,8 @@ public class NormalSquare extends Square {
 
     }
 
-    public AmmoCard getAmmoCard() {
+    public AmmoCard getAmmoCard(){
+
         return ammoCard;
     }
 

@@ -1,6 +1,8 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
 
+import java.util.ArrayList;
+
 public class TargetingScope extends PowerUpCard {
 
     public TargetingScope(EnumColorCard colorCard) {
@@ -9,10 +11,10 @@ public class TargetingScope extends PowerUpCard {
 
     }
 
-    public void effect(){
+    public void effect(GameModel gameModel, Player target){
 
-        //TODO ANDRE
-        // VEDERE ARMI
+        EnumColorPlayer damage = gameModel.getActualPlayer().getColor();
+        target.getPlayerBoard().increaseDamage(damage);
     }
 
 }

@@ -17,7 +17,7 @@ public class GenerationSquare extends Square{
         return weaponList;
     }
 
-    public void addWeaponCard(WeaponCard weaponCard){
+    public void addWeaponCard(WeaponCard weaponCard) {
 
         if(weaponList.size()<=3){
 
@@ -25,7 +25,8 @@ public class GenerationSquare extends Square{
         }
     }
 
-    public WeaponCard catchWeapon(int pos){
+    public WeaponCard catchWeapon(int pos) {
+
         WeaponCard temp=this.weaponList.get(pos);
         this.weaponList.remove(pos);
         return temp;

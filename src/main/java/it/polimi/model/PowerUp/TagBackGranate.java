@@ -1,5 +1,6 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
+import java.util.ArrayList;
 
 public class TagBackGranate extends PowerUpCard {
 
@@ -9,9 +10,17 @@ public class TagBackGranate extends PowerUpCard {
 
     }
 
-    public void effect(){
+    public void effect(GameModel gameModel,Player damagedPlayer){
 
-        //TODO andrea
+        if(gameModel.getMap().isVisible(gameModel.getActualPlayer().getRow(),gameModel.getActualPlayer().getColumn(),damagedPlayer.getRow(),damagedPlayer.getColumn())){
+
+            EnumColorPlayer colorOfDamagedPlayer = damagedPlayer.getColor();
+            Player actualPlayer=gameModel.getActualPlayer();
+            actualPlayer.getPlayerBoard().increaseDamage(colorOfDamagedPlayer);
+        }else{
+
+            //TOdo vedere come gestire il fatto che, non lo vedo.
+        }
     }
 
 }

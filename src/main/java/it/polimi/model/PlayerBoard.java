@@ -156,6 +156,11 @@ public class PlayerBoard {
         playerWeapons.remove(weaponCard);
     }
 
+    public void increaseDamage(EnumColorPlayer damage){
+
+        this.damages.add(damage);
+    }
+
     public void increaseDamage(ArrayList<EnumColorPlayer> damages) {
 
         this.damages.addAll(damages);

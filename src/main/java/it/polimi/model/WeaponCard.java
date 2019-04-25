@@ -10,6 +10,7 @@ public class WeaponCard {
 
 
     public String getNameCard() {
+
         return nameCard;
     }
 
@@ -25,10 +26,12 @@ public class WeaponCard {
     }
 
     public boolean isCharge() {
+
         return charge;
     }
 
     public void setCharge(boolean charge) {
+
         this.charge = charge;
     }
 }

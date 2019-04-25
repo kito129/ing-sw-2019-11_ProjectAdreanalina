@@ -17,10 +17,8 @@ public class Turn {
         return currentPlayer;
     }
 
-
-
-
     public ArrayList<Player> getDeadPlayers() {
+
         return deadPlayers;
     }
 
