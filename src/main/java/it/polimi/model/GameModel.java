@@ -2,6 +2,9 @@ package it.polimi.model;
 
 import java.util.ArrayList;
 
+/**
+ * The type Game model.
+ */
 public class GameModel {
 
     private Map map;
@@ -11,42 +14,82 @@ public class GameModel {
     private PowerUpDeck powerUpDeck;
     private WeaponDeck weaponDeck;
     private Player actualPlayer;
-
+    
+    /**
+     * Sets actual player.
+     *
+     * @param actualPlayer the actual player
+     */
     public void setActualPlayer(Player actualPlayer) {
 
         this.actualPlayer = actualPlayer;
     }
-
+    
+    /**
+     * Gets actual player.
+     *
+     * @return the actual player
+     */
     public Player getActualPlayer() {
 
         return actualPlayer;
     }
-
+    
+    /**
+     * Gets map.
+     *
+     * @return the map
+     */
     public Map getMap() {
 
         return map;
     }
-
+    
+    /**
+     * Gets kill shot track point.
+     *
+     * @return the kill shot track point
+     */
     public KillShotTrackPoint getKillShotTrackPoint() {
 
         return killShotTrackPoint;
     }
-
+    
+    /**
+     * Gets players.
+     *
+     * @return the players
+     */
     public ArrayList<Player> getPlayers() {
 
         return players;
     }
-
+    
+    /**
+     * Gets ammo deck.
+     *
+     * @return the ammo deck
+     */
     public AmmoDeck getAmmoDeck() {
 
         return ammoDeck;
     }
-
+    
+    /**
+     * Gets power up deck.
+     *
+     * @return the power up deck
+     */
     public PowerUpDeck getPowerUpDeck() {
 
         return powerUpDeck;
     }
-
+    
+    /**
+     * Gets weapon deck.
+     *
+     * @return the weapon deck
+     */
     public WeaponDeck getWeaponDeck() {
 
         return weaponDeck;

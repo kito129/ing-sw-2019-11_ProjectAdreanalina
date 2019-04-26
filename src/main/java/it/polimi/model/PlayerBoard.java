@@ -2,6 +2,9 @@ package it.polimi.model;
 
 import java.util.ArrayList;
 
+/**
+ * The type Player board.
+ */
 public class PlayerBoard {
 
     private int ammoY;
@@ -13,7 +16,10 @@ public class PlayerBoard {
     private ArrayList<EnumColorPlayer> marks;
     private ArrayList<WeaponCard> playerWeapons;
     private ArrayList<PowerUpCard> playerPowerUps;
-
+    
+    /**
+     * Instantiates a new Player board.
+     */
     public PlayerBoard() {
 
         ammoY = 1;
@@ -26,52 +32,102 @@ public class PlayerBoard {
         playerWeapons = new ArrayList<WeaponCard>();
         playerPowerUps = new ArrayList<PowerUpCard>();
     }
-
+    
+    /**
+     * Gets ammo y.
+     *
+     * @return the ammo y
+     */
     public int getAmmoY() {
 
         return ammoY;
     }
-
+    
+    /**
+     * Gets ammo r.
+     *
+     * @return the ammo r
+     */
     public int getAmmoR() {
 
         return ammoR;
     }
-
+    
+    /**
+     * Gets ammo b.
+     *
+     * @return the ammo b
+     */
     public int getAmmoB() {
 
         return ammoB;
     }
-
+    
+    /**
+     * Gets board value.
+     *
+     * @return the board value
+     */
     public int getBoardValue() {
 
         return boardValue;
     }
-
+    
+    /**
+     * Gets number of deaths.
+     *
+     * @return the number of deaths
+     */
     public int getNumberOfDeaths() {
 
         return numberOfDeaths;
     }
-
+    
+    /**
+     * Gets damages.
+     *
+     * @return the damages
+     */
     public ArrayList<EnumColorPlayer> getDamages() {
 
         return damages;
     }
-
+    
+    /**
+     * Gets marks.
+     *
+     * @return the marks
+     */
     public ArrayList<EnumColorPlayer> getMarks() {
 
         return marks;
     }
-
+    
+    /**
+     * Gets player weapons.
+     *
+     * @return the player weapons
+     */
     public ArrayList<WeaponCard> getPlayerWeapons() {
 
         return playerWeapons;
     }
-
+    
+    /**
+     * Gets player power ups.
+     *
+     * @return the player power ups
+     */
     public ArrayList<PowerUpCard> getPlayerPowerUps() {
 
         return playerPowerUps;
     }
-
+    
+    /**
+     * Catch ammo card.
+     *
+     * @param ammoCard the ammo card
+     */
     public void catchAmmoCard(AmmoCard ammoCard) {
 
         increaseAmmo(ammoCard.getAmmoY(), ammoCard.getAmmoR(), ammoCard.getAmmoB());
@@ -102,7 +158,14 @@ public class PlayerBoard {
             this.ammoB += bluAmmo;
         }
     }
-
+    
+    /**
+     * Decrease ammo.
+     *
+     * @param ammoY the ammo y
+     * @param ammoR the ammo r
+     * @param ammoB the ammo b
+     */
     public void decreaseAmmo(int ammoY, int ammoR, int ammoB) {
 
         this.ammoY -= ammoY;
@@ -110,12 +173,18 @@ public class PlayerBoard {
         this.ammoB -= ammoB;
         //TODO vedere se inserire qui il controllo per il decremento, il decremento è possibile? senno solleva eccezione
     }
-
+    
+    /**
+     * Increase number of deaths.
+     */
     public void increaseNumberOfDeaths() {
 
         numberOfDeaths += 1;
     }
-
+    
+    /**
+     * Decrease board value.
+     */
     public void decreaseBoardValue() {
 
         if (numberOfDeaths == 0) {
@@ -140,42 +209,81 @@ public class PlayerBoard {
 
         playerPowerUps.add(powerUpCard);
     }
-
+    
+    /**
+     * Remove power up.
+     *
+     * @param powerUpCard the power up card
+     */
     public void removePowerUp(PowerUpCard powerUpCard) {
 
         playerPowerUps.remove(powerUpCard);
     }
-
+    
+    /**
+     * Add weapon.
+     *
+     * @param weaponCard the weapon card
+     */
     public void addWeapon(WeaponCard weaponCard) {
 
         playerWeapons.add(weaponCard);
     }
-
+    
+    /**
+     * Remove weapon.
+     *
+     * @param weaponCard the weapon card
+     */
     public void removeWeapon(WeaponCard weaponCard) {
 
         playerWeapons.remove(weaponCard);
     }
-
+    
+    /**
+     * Increase damage.
+     *
+     * @param damage the damage
+     */
     public void increaseDamage(EnumColorPlayer damage) {
 
         this.damages.add(damage);
     }
-
+    
+    /**
+     * Increase damage.
+     *
+     * @param damages the damages
+     */
     public void increaseDamage(ArrayList<EnumColorPlayer> damages) {
 
         this.damages.addAll(damages);
     }
-
+    
+    /**
+     * Reset damage.
+     */
     public void resetDamage() {
 
         damages.clear();
     }
-
+    
+    /**
+     * Increase mark.
+     *
+     * @param marks the marks
+     */
     public void increaseMark(ArrayList<EnumColorPlayer> marks) {
 
         this.marks.addAll(marks);
     }
-
+    
+    /**
+     * Update mark of color array list.
+     *
+     * @param colorOfMark the color of mark
+     * @return the array list
+     */
     public ArrayList<EnumColorPlayer> updateMarkOfColor(EnumColorPlayer colorOfMark) {
 
         ArrayList<EnumColorPlayer> markToAdd = new ArrayList<EnumColorPlayer>();
@@ -191,7 +299,13 @@ public class PlayerBoard {
         }
         return markToAdd;
     }
-
+    
+    /**
+     * Is color in marks boolean.
+     *
+     * @param color the color
+     * @return the boolean
+     */
     public boolean isColorInMarks(EnumColorPlayer color) {
 
         for (EnumColorPlayer c : damages) {
@@ -221,7 +335,13 @@ public class PlayerBoard {
     }
 
     */
-
+    
+    /**
+     * Color occurence in damages int.
+     *
+     * @param colorPlayer the color player
+     * @return the int
+     */
     public int colorOccurenceInDamages(EnumColorPlayer colorPlayer) {
 
         int count = 0;
@@ -238,7 +358,13 @@ public class PlayerBoard {
         }
         return count;
     }
-
+    
+    /**
+     * Color occurence in marks int.
+     *
+     * @param colorPlayer the color player
+     * @return the int
+     */
     public int colorOccurenceInMarks(EnumColorPlayer colorPlayer) {
 
         int count = 0;

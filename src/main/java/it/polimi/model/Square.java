@@ -2,6 +2,9 @@ package it.polimi.model;
 
 import java.util.ArrayList;
 
+/**
+ * The type Square.
+ */
 public class Square{
 
     private EnumColorSquare color;
@@ -10,10 +13,11 @@ public class Square{
     private ArrayList<Square> link;
     private ArrayList<Player> players;
     private boolean visited;
-
+    
     /**
-     * construct a Square
-     * @param square a square where copy the information
+     * Instantiates a new Square.
+     *
+     * @param square the square
      */
     public Square(Square square){
         this.row=square.getRow();
@@ -21,13 +25,14 @@ public class Square{
         this.color=square.getColor();
         this.setLink(square.getLink());
     }
-
+    
     /**
-     * construct a Square
-     * @param r  row of the Square
-     * @param c columns of the Square
-     * @param color color od the Sqaure
-     * @param linkSquare Square linked to this square
+     * Instantiates a new Square.
+     *
+     * @param r          the r
+     * @param c          the c
+     * @param color      the color
+     * @param linkSquare the link square
      */
     public Square(int r, int c, EnumColorSquare color,ArrayList<Square> linkSquare) {
         this.row=r;
@@ -38,58 +43,66 @@ public class Square{
         this.setLink(linkSquare);
         this.visited=false;
     }
-
+    
     /**
-     * get the column of the Square
-     * @return column of the square
+     * Gets column.
+     *
+     * @return the column
      */
     public int getColumn() {
         return column;
     }
-
+    
     /**
-     * get the row of the Square
-     * @return row of the square
+     * Gets row.
+     *
+     * @return the row
      */
     public int getRow() {
         return row;
     }
-
+    
     /**
-     * get the color of the Square
-     * @return color of the square
+     * Gets color.
+     *
+     * @return the color
      */
     public EnumColorSquare getColor() {
         return color;
     }
-
+    
     /**
-     * get the link of the Square
-     * @return link of the square
+     * Get link array list.
+     *
+     * @return the array list
      */
     public ArrayList<Square> getLink(){
 
         return link;
     }
+    
     /**
-     * get the player on this square
-     * @return all the player on the square
+     * Gets players.
+     *
+     * @return the players
      */
     public ArrayList<Player> getPlayers() {
         return players;
     }
-
+    
     /**
-     * get if the square it was visited by distance algorithm
-     * @return true if attribute visited is flagged
+     * Is visited boolean.
+     *
+     * @return the boolean
      */
     public boolean isVisited() {
         return visited;
     }
-
+    
     /**
-     * set the link to new square
-     * @param link link to set to the Square
+     * Sets link.
+     *
+     * @param link the link
      */
     public void setLink(ArrayList<Square>link) {
 
@@ -103,56 +116,51 @@ public class Square{
             this.link=temp;
         }
     }
-
+    
     /**
-     * set if the square is visited by the distance algorithm
-     * @param visited
-     * @return true if attribute visited is flagged
+     * Sets visited.
+     *
+     * @param visited the visited
      */
     public void setVisited(boolean visited) {
         this.visited = visited;
     }
-
+    
     /**
-     * add the player on the square
-     * @param player player to add in this square
+     * Add player.
+     *
+     * @param player the player
      */
     public void addPlayer(Player player) {
 
         players.add(player);
     }
-
+    
     /**
-     * remove the player on the square
-     * @param player player to remove in this square
+     * Remove player.
+     *
+     * @param player the player
      */
     public void removePlayer (Player player) {
 
         this.players.remove(player);
     }
-
+    
     /**
-     * return  the player on the square
-     * @return the player positioned on this square
+     * Player on square array list.
+     *
+     * @return the array list
      */
     public ArrayList<Player> playerOnSquare() {
 
         return this.players;
     }
 
-    /**
-     * overriding the equals method
-     * @return true if obj equals to this
-     */
     @Override
     public boolean equals(Object obj) {
         return obj == this;
     }
 
-    /**
-     * overriding the equals toString
-     * @return a string with info about Square
-     */
     @Override
     public String toString() {
         return ("("+getRow() +"," +getColumn()+")");
