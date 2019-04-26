@@ -158,12 +158,13 @@ public class Square{
 
     @Override
     public boolean equals(Object obj) {
+        
         return obj == this;
     }
 
     @Override
     public String toString() {
-        return ("("+getRow() +"," +getColumn()+")");
+        return ("("+getRow() +"," +getColumn()+ ","+ isVisited() +")");
     }
 
 }

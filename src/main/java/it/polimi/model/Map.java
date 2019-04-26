@@ -108,37 +108,51 @@ public class Map {
      */
     public int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
         
-                int distance = dist;
-                int currR = rInit;
-                int curC = cInit;
-                int tempPath=0;
-                ArrayList<Integer> path =new ArrayList<>();
+        int distance = dist;
+        int currR = rInit;
+        int curC = cInit;
+        int tempPath=0;
+        ArrayList<Integer> path =new ArrayList<>();
+
+        Square curSquare = searchSquare(currR, curC);
+       // System.out.println("curr square : " + curSquare.toString());
+        Square destSquare = searchSquare(rDest, cDest);
+        //System.out.println("search square : " + destSquare.toString());
+        ArrayList<Square> link = curSquare.getLink();
         
-                Square curSquare = searchSquare(currR, curC);
-                System.out.println("curr square : " + curSquare.toString());
-                Square destSquare = searchSquare(rDest, cDest);
-                System.out.println("search square : " + destSquare.toString());
-                ArrayList<Square> link = curSquare.getLink();
-                for (Square a : link) {
-            
-                    if(a!=null && a.getColumn()== cDest && a.getRow()==rDest){
-                path.add(distance);
-                System.out.println("trovato, dist: "+distance);
-                return calculateMinPath(path);
+        for (Square a : link) {
+    
+            if(a!=null) {
+                if (a.getColumn() == cDest && a.getRow() == rDest) {
+    
+                    path.add(distance);
+                    //System.out.println("trovato, dist: " + distance);
+                    curSquare.setVisited(false);
+                    return calculateMinPath(path);
+                }
+                
             }
         }
-        curSquare.setVisited(true);
+        
+        
         for (Square b : link) {
+           // System.out.println("chiama: "+curSquare.toString());
 
             if (b != null && !b.isVisited()) {
 
-                System.out.println("iter su: " + b.toString());
+                //System.out.println("iter su: " + b.toString());
+                b.setVisited(true);
                 int tempDist = distance + 1;
                 tempPath = distance(b.getRow(), b.getColumn(), rDest, cDest, tempDist);
                 path.add(tempPath);
+                b.setVisited(false);
+               // System.out.println("calculated: " + tempPath);
+                
             }
         }
+        //curSquare.setVisited(false);
         return calculateMinPath(path);
+        
     }
     
     /**
@@ -343,5 +357,5 @@ public class Map {
             }
         } return tempPlayer;
     }
-
+    
 }

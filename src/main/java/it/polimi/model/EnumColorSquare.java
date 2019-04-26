@@ -24,6 +24,7 @@ public enum EnumColorSquare {
     /**
      * White enum color square.
      */
+    GREEN,
     WHITE;
 }
 

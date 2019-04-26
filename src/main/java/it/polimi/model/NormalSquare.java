@@ -12,6 +12,19 @@ public class NormalSquare extends Square {
     /**
      * Instantiates a new Normal square.
      *
+     * @param row    the row
+     * @param column the column
+     * @param color  the color
+     */
+    public NormalSquare(int row, int column,EnumColorSquare color) {
+    
+        super(row,column,color,null);
+    
+    }
+    
+    /**
+     * Instantiates a new Normal square.
+     *
      * @param r     the r
      * @param c     the c
      * @param color the color
