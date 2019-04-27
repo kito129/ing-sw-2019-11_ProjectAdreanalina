@@ -3,18 +3,16 @@ package it.polimi.model;
 import java.util.ArrayList;
 
 /**
- * The type Map.
+ * Map of the game, contain an ArrayList of type Square, that represent the gameboard.
  */
 public class Map {
     
-    public int count;
-
     private ArrayList<Square> squares;
     
     /**
      * Instantiates a new Map.
      *
-     * @param squares the squares
+     * @param squares list of square to insert in the map
      */
     public Map(ArrayList<Square> squares) {
 
@@ -33,13 +31,13 @@ public class Map {
     }
     
     /**
-     * Search square square.
+     * Search square passed row and column, they \represent the grid.
      *
-     * @param row    the row
-     * @param colomn the colomn
+     * @param row    row to search
+     * @param colomn column to search
      * @return the square
      */
-    public Square searchSquare (int row, int colomn) {
+    public Square getSquare (int row, int colomn) {
 
         for (Square s : squares) {
 
@@ -52,10 +50,10 @@ public class Map {
     }
     
     /**
-     * Find player square.
+     * Find player in the square, return the square where is located the player.
      *
      * @param player the player
-     * @return the square
+     * @return square where are positioned the player
      */
     public Square findPlayer(Player player) {
 
@@ -70,54 +68,73 @@ public class Map {
     }
     
     /**
-     * Players on square array list.
+     * Search and return all player positioned on a square.
      *
-     * @param s the s
-     * @return the array list
+     * @param s square where search player
+     * @return a list of player in a square
      */
-    public ArrayList playersOnSquare(Square s) {
+    public ArrayList<Player> playersOnSquare(Square s) {
 
         for (Square a:squares){
 
-            a.equals(s);
-            return s.getPlayers();
+            if(a.equals(s)) {
+                return s.getPlayers();
+            }
         }
         return null;
     }
     
     /**
-     * Distance int.
+     * Calculate the minimum distance from A to B.
      *
-     * @param a the a
-     * @param b the b
-     * @return the int
+     * @param playerA    Current Player
+     * @param playerB    PLayer to search distance
+ 
+     * @return minimum distance between A and B
      */
-    public int distance(Square a, Square b,int dist){
-    
-    
-                return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),dist);
-            }
+    public int distancePlayer(Player playerA,Player playerB){
+        if(playerA.getRow()==playerB.getRow() && playerA.getColumn()==playerB.getColumn()) {
+            return 0;
+        }
+        
+        return distance(playerA.getRow(),playerA.getColumn(),playerB.getRow(),playerB.getColumn(),1);
+    }
     
     /**
-     * Distance int.
+     * Calculate the minimum distance from A to B.
      *
-     * @param rInit the r init
-     * @param cInit the c init
-     * @param rDest the r dest
-     * @param cDest the c dest
-     * @param dist  the dist
-     * @return the int
+     * @param a    Current Square
+     * @param b    Sqaure to search
+     * @return minimum distance between A and B
+     */
+    public int distance(Square a, Square b, int dist){
+        if(a.getRow()==b.getRow() && a.getColumn()==b.getColumn()) {
+            return 0;
+        }else
+            return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),dist);
+        }
+
+    /**
+     * Calculate the minimum distance from A(rInit,cInit) to B(rDest,cDest).
+     *
+     * @param rInit row of current square
+     * @param cInit column of current square
+     * @param rDest row of search sqaure
+     * @param cDest column of search square
+     * @param dist  the distance at the iteration
+     * @return minimum distance from A(rInit,cInit) to B(rDest,cDest)
      */
     public int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
+        
         int distance = dist;
         int currR = rInit;
         int curC = cInit;
         int tempPath=0;
         ArrayList<Integer> path =new ArrayList<>();
 
-        Square curSquare = searchSquare(currR, curC);
+        Square curSquare = getSquare(currR, curC);
        // System.out.println("curr square : " + curSquare.toString());
-        Square destSquare = searchSquare(rDest, cDest);
+        Square destSquare = getSquare(rDest, cDest);
         //System.out.println("search square : " + destSquare.toString());
         ArrayList<Square> link = curSquare.getLink();
         
@@ -153,7 +170,7 @@ public class Map {
     }
     
     /**
-     * Refresh map.
+     * Refresh map, set all visited attribute to false.
      */
     public void refreshMap(){
 
@@ -162,7 +179,12 @@ public class Map {
             a.setVisited(false);
         }
     }
-
+    /**
+     * Calculate the min Integer in the Path Array.
+     *
+     * @param path array contain the distances.
+     * @return the min in the array
+     */
     private int calculateMinPath(ArrayList<Integer> path){
 
         int min=100;
@@ -176,13 +198,13 @@ public class Map {
     }
     
     /**
-     * Is visible square boolean.
+     * Return true if Player passed can see the Square passed.
      *
-     * @param player      the player
-     * @param colorSquare the color square
-     * @return the boolean
+     * @param player    player to search
+     * @param colorSquare the color of the Romm to search
+     * @return true if player can see room of the color passed
      */
-    public boolean isVisibleSquare(Player player, EnumColorSquare colorSquare) {
+    public boolean isVisibleRoom(Player player, EnumColorSquare colorSquare) {
 
         if(this.findPlayer(player).getColor()==colorSquare){
 
@@ -201,11 +223,11 @@ public class Map {
     }
     
     /**
-     * Is visible boolean.
+     * Calculate if A see B.
      *
-     * @param a the a
-     * @param b the b
-     * @return the boolean
+     * @param a current square
+     * @param b search square
+     * @return true if A see B
      */
     public boolean isVisible(Square a, Square b) {
 
@@ -214,18 +236,18 @@ public class Map {
     
     
     /**
-     * Is visible boolean.
+     * Calculate if  A(c0,r0) see B(c1,r1).
      *
-     * @param r0 the r 0
-     * @param c0 the c 0
-     * @param r1 the r 1
-     * @param c1 the c 1
-     * @return the boolean
+     * @param r0 row of current square
+     * @param c0 column of current square
+     * @param r1 row of search square
+     * @param c1 column of search square
+     * @return true if A(c0,r0) see B(c1,r1)
      */
     public boolean isVisible(int r0, int c0,int r1, int c1) {
 
-        Square currSquare=searchSquare(r0,c0);
-        Square destSquare=searchSquare(r1,c1);
+        Square currSquare= getSquare(r0,c0);
+        Square destSquare= getSquare(r1,c1);
         if(currSquare.getColor()==destSquare.getColor()){
 
             return true;
@@ -240,49 +262,45 @@ public class Map {
     }
     
     /**
-     * Move player.
+     * Move player to Square.
      *
-     * @param player the player
-     * @param square the square
+     * @param player the player to move
+     * @param square the square where to move
      */
     public void movePlayer(Player player, Square square) {
-
-        if(this.distance(this.findPlayer(player).getRow(),this.findPlayer(player).getColumn(),square.getRow(),square.getColumn(),1)<=3){
-
-            findPlayer(player).removePlayer(player);
-            square.addPlayer(player);
-            player.setPosition(square.getRow(),square.getColumn());
-        }
-    }
+  
+    this.findPlayer(player).getPlayers().remove(player);
+    square.addPlayer(player);
+}
     
     /**
      * Add player on square.
      *
-     * @param square the square
-     * @param player the player
+     * @param square the square where add
+     * @param player the player to add
      */
     public void addPlayerOnSquare(Square square, Player player) {
 
-        searchSquare(square.getRow(),square.getColumn()).addPlayer(player);
+        getSquare(square.getRow(),square.getColumn()).addPlayer(player);
     }
     
     /**
      * Remove player from square.
      *
-     * @param square the square
-     * @param player the player
+     * @param square the square where remove
+     * @param player the player to remove
      */
     public void removePlayerFromSquare(Square square, Player player) {
 
-        searchSquare(square.getRow(),square.getColumn()).removePlayer(player);
+        getSquare(square.getRow(),square.getColumn()).removePlayer(player);
     }
     
     /**
-     * Same direction boolean.
+     * Calculate if A is in the same cardinal direction of B.
      *
-     * @param a the a
-     * @param b the b
-     * @return the boolean
+     * @param a Square A
+     * @param b Suare B
+     * @return true if A is in the same cardinal direction of B
      */
     public boolean sameDirection(Square a, Square b){
 
@@ -290,22 +308,22 @@ public class Map {
     }
     
     /**
-     * Is in my square boolean.
+     * Calculate if Player A is in the same Square of the Player B.
      *
      * @param actualPlayer the actual player
      * @param otherPlayer  the other player
-     * @return the boolean
+     * @return tru if if Player A is in the same Square of the Player B
      */
     public boolean isInMySquare(Player actualPlayer,Player otherPlayer){
 
-        return this.playersOnSquare(this.searchSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
+        return this.playersOnSquare(this.getSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
     }
     
     /**
-     * Player in room array list.
+     * calculate the player in one room.
      *
-     * @param colorSquare the color square
-     * @return the array list
+     * @param colorSquare the color square of the Room
+     * @return list of the player in the Room
      */
     public ArrayList<Player> playerInRoom(EnumColorSquare colorSquare){
 
@@ -314,7 +332,7 @@ public class Map {
 
             if(a.getColor()==colorSquare){
 
-                tempPlayer.addAll(a.playerOnSquare());
+                tempPlayer.addAll(a.getPlayers());
             }
         } return tempPlayer;
     }
@@ -332,7 +350,7 @@ public class Map {
 
             if(a.getRow()==player.getRow()){
 
-                tempPlayer.addAll(a.playerOnSquare());
+                tempPlayer.addAll(a.getPlayers());
             }
         } return tempPlayer;
     }
@@ -350,7 +368,7 @@ public class Map {
 
             if(a.getColumn()==player.getColumn()){
 
-                tempPlayer.addAll(a.playerOnSquare());
+                tempPlayer.addAll(a.getPlayers());
             }
         } return tempPlayer;
     }

@@ -55,19 +55,15 @@ public class KillShotTrack{
      * @param color the color
      */
     public void updateTrack(ArrayList<EnumColorPlayer> color){
-        if(this.skullNumber()>0) {
+        for (KillShotTrackPoint a : track) {
 
-            for (KillShotTrackPoint a : track) {
-
-                if (a.isSkull()) {
+            if (a.isSkull()) {
+                
+                a.setSkull(false);
+                a.setMark1(color.get(0));
+                if(color.get(1)!=null){
                     
-                    a.setSkull(false);
-                    a.setMark1(color.get(0));
-                    if(color.get(1)!=null){
-                        
-                        a.setMark2((color.get(1)));
-                    }
-                    
+                    a.setMark2((color.get(1)));
                 }
             }
         }

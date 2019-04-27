@@ -2,21 +2,29 @@ package it.polimi.model;
 
 import java.util.ArrayList;
 
+/**
+ * The type Map creator.
+ */
 public class MapCreator {
     
+    /**
+     * Create a array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Square> createA() {
     
-        Square s1 = new Square(0, 0, EnumColorSquare.BLU, null);
-        Square s2 = new Square(0, 1, EnumColorSquare.BLU, null);
-        Square s3 = new Square(0, 2, EnumColorSquare.BLU, null);
-        Square s4 = new Square(0, 3, EnumColorSquare.GREEN, null);
-        Square s5 = new Square(1, 0, EnumColorSquare.RED, null);
-        Square s6 = new Square(1, 1, EnumColorSquare.RED, null);
-        Square s7 = new Square(1, 2, EnumColorSquare.YELLOW, null);
-        Square s8 = new Square(1, 3, EnumColorSquare.YELLOW, null);
-        Square s9 = new Square(2, 1, EnumColorSquare.WHITE, null);
-        Square s10 = new Square(2, 2, EnumColorSquare.YELLOW, null);
-        Square s11 = new Square(2, 3, EnumColorSquare.YELLOW, null);
+        NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.BLU);
+        NormalSquare s2 = new NormalSquare(0, 1, EnumColorSquare.BLU);
+        GenerationSquare s3 = new GenerationSquare(0, 2, EnumColorSquare.BLU);
+        NormalSquare s4 = new NormalSquare(0, 3, EnumColorSquare.GREEN);
+        GenerationSquare s5 = new GenerationSquare(1, 0, EnumColorSquare.RED);
+        NormalSquare s6 = new NormalSquare(1, 1, EnumColorSquare.RED);
+        NormalSquare s7 = new NormalSquare(1, 2, EnumColorSquare.YELLOW);
+        NormalSquare s8 = new NormalSquare(1, 3, EnumColorSquare.YELLOW);
+        NormalSquare s9 = new NormalSquare(2, 1, EnumColorSquare.WHITE);
+        NormalSquare s10 = new NormalSquare(2, 2, EnumColorSquare.YELLOW);
+        GenerationSquare s11 = new GenerationSquare(2, 3, EnumColorSquare.YELLOW);
     
     
         ArrayList<Square> linkS1 = new ArrayList<>();
@@ -84,19 +92,24 @@ public class MapCreator {
        return temMap;
     }
     
+    /**
+     * Create b array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Square> createB() {
-        
-        Square s1 = new Square(0, 0, EnumColorSquare.RED, null);
-        Square s2 = new Square(0, 1, EnumColorSquare.BLU, null);
-        Square s3 = new Square(0, 2, EnumColorSquare.BLU, null);
-        Square s4 = new Square(1, 0, EnumColorSquare.RED, null);
-        Square s5 = new Square(1, 1, EnumColorSquare.PINK, null);
-        Square s6 = new Square(1, 2, EnumColorSquare.PINK, null);
-        Square s7 = new Square(1, 3, EnumColorSquare.YELLOW, null);
-        Square s8 = new Square(2, 0, EnumColorSquare.WHITE, null);
-        Square s9 = new Square(2, 1, EnumColorSquare.WHITE, null);
-        Square s10 = new Square(2, 2, EnumColorSquare.WHITE, null);
-        Square s11 = new Square(2, 3, EnumColorSquare.YELLOW, null);
+    
+        NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.RED);
+        NormalSquare s2 = new NormalSquare(0, 1, EnumColorSquare.BLU);
+        GenerationSquare s3 = new GenerationSquare(0, 2, EnumColorSquare.BLU);
+        GenerationSquare s4 = new GenerationSquare(1, 0, EnumColorSquare.RED);
+        NormalSquare s5 = new NormalSquare(1, 1, EnumColorSquare.PINK);
+        NormalSquare s6 = new NormalSquare(1, 2, EnumColorSquare.PINK);
+        NormalSquare s7 = new NormalSquare(1, 3, EnumColorSquare.YELLOW);
+        NormalSquare s8 = new NormalSquare(2, 0, EnumColorSquare.WHITE);
+        NormalSquare s9 = new NormalSquare(2, 1, EnumColorSquare.WHITE);
+        NormalSquare s10 = new NormalSquare(2, 2, EnumColorSquare.WHITE);
+        GenerationSquare s11 = new GenerationSquare(2, 3, EnumColorSquare.YELLOW);
         
         
         ArrayList<Square> linkS1 = new ArrayList<>();
@@ -164,18 +177,23 @@ public class MapCreator {
         return temMap;
     }
     
+    /**
+     * Create c array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Square> createC() {
         
-        Square s1 = new Square(0, 0, EnumColorSquare.BLU, null);
-        Square s2 = new Square(0, 1, EnumColorSquare.BLU, null);
-        Square s3 = new Square(0, 2, EnumColorSquare.BLU, null);
-        Square s4 = new Square(1, 0, EnumColorSquare.RED, null);
-        Square s5 = new Square(1, 1, EnumColorSquare.RED, null);
-        Square s6 = new Square(1, 2, EnumColorSquare.RED, null);
-        Square s7 = new Square(1, 3, EnumColorSquare.YELLOW, null);
-        Square s8 = new Square(2, 1, EnumColorSquare.WHITE, null);
-        Square s9 = new Square(2, 2, EnumColorSquare.WHITE, null);
-        Square s10 = new Square(2, 3, EnumColorSquare.YELLOW, null);
+        NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.BLU);
+        NormalSquare s2 = new NormalSquare(0, 1, EnumColorSquare.BLU);
+        GenerationSquare s3 = new GenerationSquare(0, 2, EnumColorSquare.BLU);
+        GenerationSquare s4 = new GenerationSquare(1, 0, EnumColorSquare.RED);
+        NormalSquare s5 = new NormalSquare(1, 1, EnumColorSquare.RED);
+        NormalSquare s6 = new NormalSquare(1, 2, EnumColorSquare.RED);
+        NormalSquare s7 = new NormalSquare(1, 3, EnumColorSquare.YELLOW);
+        NormalSquare s8 = new NormalSquare(2, 1, EnumColorSquare.WHITE);
+        NormalSquare s9 = new NormalSquare(2, 2, EnumColorSquare.WHITE);
+        GenerationSquare s10 = new GenerationSquare(2, 3, EnumColorSquare.YELLOW);
  
         
         ArrayList<Square> linkS1 = new ArrayList<>();
@@ -237,20 +255,25 @@ public class MapCreator {
         return temMap;
     }
     
+    /**
+     * Create d array list.
+     *
+     * @return the array list
+     */
     public ArrayList<Square> createD() {
         
-        Square s1 = new Square(0, 0, EnumColorSquare.RED, null);
-        Square s2 = new Square(0, 1, EnumColorSquare.BLU, null);
-        Square s3 = new Square(0, 2, EnumColorSquare.BLU, null);
-        Square s4 = new Square(0, 3, EnumColorSquare.GREEN, null);
-        Square s5 = new Square(1, 0, EnumColorSquare.RED, null);
-        Square s6 = new Square(1, 1, EnumColorSquare.PINK, null);
-        Square s7 = new Square(1, 2, EnumColorSquare.YELLOW, null);
-        Square s8 = new Square(1, 3, EnumColorSquare.YELLOW, null);
-        Square s9 = new Square(2, 0, EnumColorSquare.WHITE, null);
-        Square s10 = new Square(2, 1, EnumColorSquare.WHITE, null);
-        Square s11 = new Square(2, 2, EnumColorSquare.YELLOW, null);
-        Square s12 = new Square(2, 3, EnumColorSquare.YELLOW, null);
+        NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.RED);
+        NormalSquare s2 = new NormalSquare(0, 1, EnumColorSquare.BLU);
+        GenerationSquare s3 = new GenerationSquare(0, 2, EnumColorSquare.BLU);
+        NormalSquare s4 = new NormalSquare(0, 3, EnumColorSquare.GREEN);
+        GenerationSquare s5 = new GenerationSquare(1, 0, EnumColorSquare.RED);
+        NormalSquare s6 = new NormalSquare(1, 1, EnumColorSquare.PINK);
+        NormalSquare s7 = new NormalSquare(1, 2, EnumColorSquare.YELLOW);
+        NormalSquare s8 = new NormalSquare(1, 3, EnumColorSquare.YELLOW);
+        NormalSquare s9 = new NormalSquare(2, 0, EnumColorSquare.WHITE);
+        NormalSquare s10 = new NormalSquare(2, 1, EnumColorSquare.WHITE);
+        NormalSquare s11 = new NormalSquare(2, 2, EnumColorSquare.YELLOW);
+        GenerationSquare s12 = new GenerationSquare(2, 3, EnumColorSquare.YELLOW);
         
         
         ArrayList<Square> linkS1 = new ArrayList<>();

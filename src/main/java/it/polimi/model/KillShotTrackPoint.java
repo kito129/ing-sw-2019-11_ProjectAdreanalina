@@ -22,6 +22,10 @@ public class KillShotTrackPoint {
 
             this.mark1=mark1;
             this.mark2=mark2;
+        } else {
+            this.skull=true;
+            this.mark1=null;
+            this.mark2=null;
         }
     }
     

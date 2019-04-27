@@ -10,16 +10,15 @@ public class GenerationSquare extends Square{
     private ArrayList<WeaponCard> weaponList;
     
     /**
-     * Instantiates a new Generation square.
+     * Instantiates a new Generation Square.
      *
-     * @param r     the r
-     * @param c     the c
-     * @param color the color
-     * @param link  the link
+     * @param r          the row
+     * @param c          the ccolumn
+     * @param color      the color
      */
-    public GenerationSquare(int r, int c, EnumColorSquare color, ArrayList<Square> link) {
+    public GenerationSquare(int r, int c, EnumColorSquare color) {
 
-        super(r,c,color,link);
+        super(r,c,color);
         this.weaponList=null;
     }
     
@@ -47,10 +46,10 @@ public class GenerationSquare extends Square{
     }
     
     /**
-     * Catch weapon weapon card.
+     * Get weapon weapon card, adn remove from Generation square.
      *
-     * @param pos the pos
-     * @return the weapon card
+     * @param pos the pos of the Weapon
+     * @return the weapon card and remove from Generation square
      */
     public WeaponCard catchWeapon(int pos) {
 

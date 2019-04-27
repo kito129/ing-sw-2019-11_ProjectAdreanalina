@@ -4,7 +4,7 @@ package it.polimi.model;
  * The type Player.
  */
 public class Player {
-
+    
     private int id;
     private String name;
     private EnumColorPlayer color;
@@ -21,16 +21,16 @@ public class Player {
      * @param name  the name
      * @param color the color
      */
-    public Player(int id,String name,EnumColorPlayer color){
-
-        this.id=id;
-        this.name=name;
-        this.color=color;
-        score=0;
-        alive=true;
-        playerBoard=new PlayerBoard();
+    public Player (int id, String name, EnumColorPlayer color) {
+    
+        this.id = id;
+        this.name = name;
+        this.color = color;
+        score = 0;
+        alive = true;
+        playerBoard = new PlayerBoard();
         // TODO vedere come gestire  questo attributo square in fase di inizializzazione
-
+    
     }
     
     /**
@@ -38,8 +38,8 @@ public class Player {
      *
      * @return the id
      */
-    public int getId() {
-
+    public int getId () {
+    
         return id;
     }
     
@@ -48,8 +48,8 @@ public class Player {
      *
      * @return the name
      */
-    public String getName() {
-
+    public String getName () {
+    
         return name;
     }
     
@@ -58,8 +58,8 @@ public class Player {
      *
      * @return the color
      */
-    public EnumColorPlayer getColor() {
-
+    public EnumColorPlayer getColor () {
+    
         return color;
     }
     
@@ -68,8 +68,8 @@ public class Player {
      *
      * @return the player board
      */
-    public PlayerBoard getPlayerBoard() {
-
+    public PlayerBoard getPlayerBoard () {
+    
         return playerBoard;
     }
     
@@ -78,8 +78,8 @@ public class Player {
      *
      * @return the score
      */
-    public int getScore() {
-
+    public int getScore () {
+    
         return score;
     }
     
@@ -88,8 +88,8 @@ public class Player {
      *
      * @return the column
      */
-    public int getColumn() {
-
+    public int getColumn () {
+    
         return column;
     }
     
@@ -98,8 +98,8 @@ public class Player {
      *
      * @return the row
      */
-    public int getRow() {
-
+    public int getRow () {
+    
         return row;
     }
     
@@ -108,8 +108,8 @@ public class Player {
      *
      * @return the boolean
      */
-    public boolean isAlive() {
-
+    public boolean isAlive () {
+    
         return alive;
     }
     
@@ -118,20 +118,20 @@ public class Player {
      *
      * @param scoreToAdd the score to add
      */
-    public void increaseScore(int scoreToAdd){
-
-        this.score+=scoreToAdd;
-
+    public void increaseScore (int scoreToAdd) {
+    
+        this.score += scoreToAdd;
+    
     }
-
-
-    private void setColumn(int column) {
-
+    
+    
+    private void setColumn (int column) {
+        
         this.column = column;
     }
-
-    private void setRow(int row) {
-
+    
+    private void setRow (int row) {
+        
         this.row = row;
     }
     
@@ -141,8 +141,8 @@ public class Player {
      * @param r the r
      * @param c the c
      */
-    public void setPosition(int r, int c) {
-
+    public void setPosition (int r, int c) {
+    
         this.setRow(r);
         this.setColumn(c);
     }
@@ -152,10 +152,14 @@ public class Player {
      *
      * @param alive the alive
      */
-    public void setAlive(boolean alive) {
-
+    public void setAlive (boolean alive) {
+    
         this.alive = alive;
     }
-
-
+    
+    @Override
+    public String toString () {
+        
+        return "Player: " + this.id + "name: " + this.name + "r: " + this.row + "c: " + this.column;
+    }
 }

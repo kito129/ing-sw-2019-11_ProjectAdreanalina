@@ -3,7 +3,7 @@ package it.polimi.model;
 import java.util.ArrayList;
 
 /**
- * The type Square.
+ * The type Square, contains, color row and column and a list contain where the square is linked
  */
 public class Square{
 
@@ -17,30 +17,16 @@ public class Square{
     /**
      * Instantiates a new Square.
      *
-     * @param square the square
-     */
-    public Square(Square square){
-        this.row=square.getRow();
-        this.column=square.getColumn();
-        this.color=square.getColor();
-        this.setLink(square.getLink());
-    }
-    
-    /**
-     * Instantiates a new Square.
-     *
-     * @param r          the r
-     * @param c          the c
+     * @param r          the row
+     * @param c          the ccolumn
      * @param color      the color
-     * @param linkSquare the link square
      */
-    public Square(int r, int c, EnumColorSquare color,ArrayList<Square> linkSquare) {
+    public Square(int r, int c, EnumColorSquare color) {
         this.row=r;
         this.column=c;
         this.color=color;
         this.link= new ArrayList<>();
         this.players= new ArrayList<>();
-        this.setLink(linkSquare);
         this.visited=false;
     }
     
@@ -50,6 +36,7 @@ public class Square{
      * @return the column
      */
     public int getColumn() {
+        
         return column;
     }
     
@@ -59,6 +46,7 @@ public class Square{
      * @return the row
      */
     public int getRow() {
+        
         return row;
     }
     
@@ -68,6 +56,7 @@ public class Square{
      * @return the color
      */
     public EnumColorSquare getColor() {
+        
         return color;
     }
     
@@ -87,6 +76,7 @@ public class Square{
      * @return the players
      */
     public ArrayList<Player> getPlayers() {
+        
         return players;
     }
     
@@ -96,6 +86,7 @@ public class Square{
      * @return the boolean
      */
     public boolean isVisited() {
+        
         return visited;
     }
     
@@ -123,43 +114,43 @@ public class Square{
      * @param visited the visited
      */
     public void setVisited(boolean visited) {
+        
         this.visited = visited;
     }
     
     /**
-     * Add player.
+     * Add player
      *
-     * @param player the player
+     * @param player the player to add
      */
     public void addPlayer(Player player) {
-
+        
+        player.setPosition(this.row,this.column);
         players.add(player);
     }
     
     /**
-     * Remove player.
+     * Remove player from the square.
      *
-     * @param player the player
+     * @param player the player to remove
      */
     public void removePlayer (Player player) {
-
+        
+        player.setPosition(-1,-1);
         this.players.remove(player);
     }
     
-    /**
-     * Player on square array list.
-     *
-     * @return the array list
-     */
-    public ArrayList<Player> playerOnSquare() {
-
-        return this.players;
-    }
 
     @Override
-    public boolean equals(Object obj) {
-        
-        return obj == this;
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Square)) {
+            return false;
+        }
+        Square sq = (Square) o;
+        return sq.row == this.row && sq.column==this.column;
     }
 
     @Override
