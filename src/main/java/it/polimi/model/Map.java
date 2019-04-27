@@ -6,6 +6,8 @@ import java.util.ArrayList;
  * The type Map.
  */
 public class Map {
+    
+    public int count;
 
     private ArrayList<Square> squares;
     
@@ -90,10 +92,10 @@ public class Map {
      * @param b the b
      * @return the int
      */
-    public int distance(Square a, Square b){
+    public int distance(Square a, Square b,int dist){
     
     
-                return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),1);
+                return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),dist);
             }
     
     /**
@@ -107,7 +109,6 @@ public class Map {
      * @return the int
      */
     public int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
-        
         int distance = dist;
         int currR = rInit;
         int curC = cInit;
@@ -130,11 +131,8 @@ public class Map {
                     curSquare.setVisited(false);
                     return calculateMinPath(path);
                 }
-                
             }
         }
-        
-        
         for (Square b : link) {
            // System.out.println("chiama: "+curSquare.toString());
 
@@ -143,11 +141,10 @@ public class Map {
                 //System.out.println("iter su: " + b.toString());
                 b.setVisited(true);
                 int tempDist = distance + 1;
-                tempPath = distance(b.getRow(), b.getColumn(), rDest, cDest, tempDist);
+                tempPath = distance(b,destSquare, tempDist);
                 path.add(tempPath);
                 b.setVisited(false);
                // System.out.println("calculated: " + tempPath);
-                
             }
         }
         //curSquare.setVisited(false);
