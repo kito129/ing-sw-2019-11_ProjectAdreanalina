@@ -160,6 +160,6 @@ public class Player {
     @Override
     public String toString () {
         
-        return "Player: " + this.id + "name: " + this.name + "r: " + this.row + "c: " + this.column;
+        return "Player: " + this.id + " name: " + this.name + " r: " + this.row + " c: " + this.column;
     }
 }

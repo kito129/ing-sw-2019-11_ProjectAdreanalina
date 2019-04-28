@@ -126,7 +126,7 @@ public class MainChito {
         
         //cerco funzioni
         a=0;
-        b=1;
+        b=2;
         c=2;
         d=2;
         
@@ -152,8 +152,19 @@ public class MainChito {
         
         System.out.println(mappa.distancePlayer(playerA,playerB));
     
-        mappa.movePlayer(playerA,mappa.getSquare(0,0));
+        mappa.movePlayer(playerA,mappa.getSquare(2,1));
+        System.out.println(playerA.toString());
+        System.out.println(playerB.toString());
+        
         System.out.println(mappa.distancePlayer(playerA,playerB));
+        System.out.println(mappa.isInMySquare(playerA,playerB));
+        System.out.println(mappa.sameDirection(playerA,playerB));
+        System.out.println(mappa.playerOnMyRow(playerA).get(0).toString());
+        mappa.movePlayer(playerB,mappa.getSquare(2,2));
+      
+        System.out.println(mappa.playerInRoom(EnumColorSquare.WHITE));
+    
+        System.out.println(mappa.isVisibleRoom(playerA,EnumColorSquare.BLU));
     
     
     }

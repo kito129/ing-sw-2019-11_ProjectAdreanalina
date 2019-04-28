@@ -23,11 +23,11 @@ public class Map {
 
                 if (l != null)
                     temp.add(l);
-                System.out.println("aggiungo "+ l.toString());
+                //System.out.println("aggiungo "+ l.toString());
             }
             this.squares=temp;
         }
-        System.out.println("\ncreo la mappa\n");
+        //System.out.println("\ncreo la mappa\n");
     }
     
     /**
@@ -223,7 +223,18 @@ public class Map {
     }
     
     /**
-     * Calculate if A see B.
+     * Calculate if PLayerA see PlayerB.
+     *
+     * @param a current player
+     * @param b search PLayer
+     * @return true if PlayerA see PlayerB
+     */
+    public boolean isVisible(Player a, Player b) {
+        
+        return isVisible(getSquare(a.getRow(),a.getColumn()), getSquare(b.getColumn(),b.getRow()));
+    }
+    /**
+     * Calculate if SquareA see SquareB.
      *
      * @param a current square
      * @param b search square
@@ -287,19 +298,30 @@ public class Map {
     /**
      * Remove player from square.
      *
-     * @param square the square where remove
      * @param player the player to remove
      */
-    public void removePlayerFromSquare(Square square, Player player) {
+    public void removePlayerFromSquare(Player player) {
 
-        getSquare(square.getRow(),square.getColumn()).removePlayer(player);
+        getSquare(findPlayer(player).getRow(),findPlayer(player).getColumn()).removePlayer(player);
     }
     
+    
     /**
-     * Calculate if A is in the same cardinal direction of B.
+     * Calculate if PlayerA is in the same cardinal direction of PlayerB.
+     *
+     * @param a PlayerA
+     * @param b PlayerB
+     * @return true if PlayerA is in the same cardinal direction of PlayerB
+     */
+    public boolean sameDirection(Player a, Player b){
+        
+        return sameDirection(getSquare(a.getRow(),a.getColumn()), getSquare(b.getColumn(),b.getRow()));
+    }
+    /**
+     * Calculate if SquareA is in the same cardinal direction of SquareB.
      *
      * @param a Square A
-     * @param b Suare B
+     * @param b Square B
      * @return true if A is in the same cardinal direction of B
      */
     public boolean sameDirection(Square a, Square b){
@@ -352,7 +374,9 @@ public class Map {
 
                 tempPlayer.addAll(a.getPlayers());
             }
-        } return tempPlayer;
+        }
+        tempPlayer.remove(player);
+        return tempPlayer;
     }
     
     /**
@@ -370,7 +394,9 @@ public class Map {
 
                 tempPlayer.addAll(a.getPlayers());
             }
-        } return tempPlayer;
+        }
+        tempPlayer.remove(player);
+        return tempPlayer;
     }
     
 }

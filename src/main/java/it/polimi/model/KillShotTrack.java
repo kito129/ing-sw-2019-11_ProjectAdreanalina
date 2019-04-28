@@ -3,7 +3,7 @@ package it.polimi.model;
 import java.util.ArrayList;
 
 /**
- * The type Kill shot track.
+ * The type Kill shot track, array list of killShotTrackPoint, with function to count color and skull.
  */
 public class KillShotTrack{
 
@@ -11,7 +11,7 @@ public class KillShotTrack{
     private ArrayList<KillShotTrackPoint> track;
     
     /**
-     * Instantiates a new Kill shot track.
+     * Instantiates a new Kill shot track, with 8 skull in the array.
      */
     public KillShotTrack(){
 
@@ -34,10 +34,9 @@ public class KillShotTrack{
     }
     
     /**
-     * Skull number int.
+     * Calcualte the Skull number .
      *
-     * @return the int
-     */
+     * @return skull number     */
     public int skullNumber(){
 
         int i = 0;
@@ -50,9 +49,9 @@ public class KillShotTrack{
     
     
     /**
-     * Update track.
+     * Update track, with color gat from playerBoard.
      *
-     * @param color the color
+     * @param color the color to add, an array if there are to colo to add
      */
     public void updateTrack(ArrayList<EnumColorPlayer> color){
         for (KillShotTrackPoint a : track) {
@@ -72,7 +71,7 @@ public class KillShotTrack{
     /**
      * Sets double kill.
      *
-     * @param doubleKill the double kill
+     * @param doubleKill color of player do the double kill
      */
     public void setDoubleKill(EnumColorPlayer doubleKill) {
 
@@ -80,12 +79,12 @@ public class KillShotTrack{
     }
     
     /**
-     * Gets color occurance.
+     * Gets color occurrence.
      *
      * @param colorPlayer the color player
      * @return the color occurance
      */
-    public int getColorOccurance(EnumColorPlayer colorPlayer) {
+    public int getColorOccurence (EnumColorPlayer colorPlayer) {
     
         int i = 0;
         for (KillShotTrackPoint a : track) {

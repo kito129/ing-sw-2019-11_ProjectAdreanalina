@@ -152,7 +152,13 @@ public class Square{
         Square sq = (Square) o;
         return sq.row == this.row && sq.column==this.column;
     }
-
+    
+    @Override
+    public int hashCode () {
+        
+        return super.hashCode();
+    }
+    
     @Override
     public String toString() {
         return ("("+getRow() +"," +getColumn()+ ","+ isVisited() +")");
