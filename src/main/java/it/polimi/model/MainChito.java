@@ -165,6 +165,10 @@ public class MainChito {
         System.out.println(mappa.playerInRoom(EnumColorSquare.WHITE));
     
         System.out.println(mappa.isVisibleRoom(playerA,EnumColorSquare.BLU));
+        
+        //MAIN ARMI
+        
+        
     
     
     }
