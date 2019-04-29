@@ -1,6 +1,5 @@
 package it.polimi.model.Weapon;
 
-import com.sun.jdi.event.ExceptionEvent;
 import it.polimi.model.*;
 
 import java.util.ArrayList;

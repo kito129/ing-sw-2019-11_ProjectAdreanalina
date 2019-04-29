@@ -12,7 +12,7 @@ public class MapCreator {
      *
      * @return the array list
      */
-    public ArrayList<Square> createA() {
+    public static ArrayList<Square> createA() {
     
         NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.BLU);
         NormalSquare s2 = new NormalSquare(0, 1, EnumColorSquare.BLU);
@@ -97,7 +97,7 @@ public class MapCreator {
      *
      * @return the array list
      */
-    public ArrayList<Square> createB() {
+    public static ArrayList<Square> createB() {
     
         NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.RED);
         NormalSquare s2 = new NormalSquare(0, 1, EnumColorSquare.BLU);
@@ -182,7 +182,7 @@ public class MapCreator {
      *
      * @return the array list
      */
-    public ArrayList<Square> createC() {
+    public static ArrayList<Square> createC() {
         
         NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.BLU);
         NormalSquare s2 = new NormalSquare(0, 1, EnumColorSquare.BLU);
@@ -260,7 +260,7 @@ public class MapCreator {
      *
      * @return the array list
      */
-    public ArrayList<Square> createD() {
+    public static ArrayList<Square> createD() {
         
         NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.RED);
         NormalSquare s2 = new NormalSquare(0, 1, EnumColorSquare.BLU);

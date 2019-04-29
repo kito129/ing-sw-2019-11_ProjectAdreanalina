@@ -3,8 +3,8 @@ package it.polimi.model;
 public class MainChito {
     public static void main(String[] args){
         
-        MapCreator mapCreator =new MapCreator();
-        Map mappa = new Map(mapCreator.createC());
+        
+        Map mappa = new Map(MapCreator.createC());
         
         int a,b,c,d=0;
         
