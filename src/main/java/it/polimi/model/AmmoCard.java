@@ -13,10 +13,10 @@ public class AmmoCard {
     /**
      * Instantiates a new Ammo card.
      *
-     * @param ammoR       the ammo r
-     * @param ammoY       the ammo y
-     * @param ammoB       the ammo b
-     * @param powerUpCard the power up card
+     * @param ammoR       the number of red ammo.
+     * @param ammoY       the number of yellow ammo.
+     * @param ammoB       the number of blu ammo.
+     * @param powerUpCard the power up card contained in ammo card.
      */
     public AmmoCard(int ammoR, int ammoY, int ammoB, PowerUpCard powerUpCard){
 
@@ -65,6 +65,8 @@ public class AmmoCard {
 
         return powerUpCard;
     }
+
+
 
 
 }

@@ -18,7 +18,9 @@ public class PlayerBoard {
     private ArrayList<PowerUpCard> playerPowerUps;
     
     /**
-     * Instantiates a new Player board.
+     * Instantiates a new Player board, setting ammo, board value and number of deaths to the start value.
+     * Instantiates two ArrayList of Color player for the damages and marks, an ArrayList of weapon card
+     * and an ArrayList of power up card.
      */
     public PlayerBoard() {
 
@@ -124,15 +126,27 @@ public class PlayerBoard {
     }
     
     /**
-     * Catch ammo card.
+     * Calls the methods increaseAmmo to modify the value of ammo and, if the drawn card has a power up,
+     * calls addPowerUp to add a new power up card in the player power up.
      *
-     * @param ammoCard the ammo card
+     * @param ammoCard the ammo card drawn by the player
      */
     public void catchAmmoCard(AmmoCard ammoCard) {
 
         increaseAmmo(ammoCard.getAmmoY(), ammoCard.getAmmoR(), ammoCard.getAmmoB());
-        addPowerUp(ammoCard.getPowerUpCard());
+        if(ammoCard.getPowerUpCard()!=null) {
+
+            addPowerUp(ammoCard.getPowerUpCard());
+        }
     }
+
+    /**
+     * Increase the value of ammo in the player board up to maximum of three for each field.
+     *
+     * @param yellowAmmo the number of yellow ammo to add.
+     * @param redAmmo the number of red ammo to add.
+     * @param bluAmmo the number of blu ammo to add.
+     */
 
     private void increaseAmmo(int yellowAmmo, int redAmmo, int bluAmmo) {
 
@@ -160,11 +174,11 @@ public class PlayerBoard {
     }
     
     /**
-     * Decrease ammo.
+     * Decrease the value of ammo in the player board.
      *
-     * @param ammoY the ammo y
-     * @param ammoR the ammo r
-     * @param ammoB the ammo b
+     * @param ammoY the number of yellow ammo to remove.
+     * @param ammoR the number of red ammo to remove.
+     * @param ammoB the number of blu ammo to remove.
      */
     public void decreaseAmmo(int ammoY, int ammoR, int ammoB) {
 
@@ -175,7 +189,7 @@ public class PlayerBoard {
     }
     
     /**
-     * Increase number of deaths.
+     * Increase by one the number of deaths.
      */
     public void increaseNumberOfDeaths() {
 
@@ -183,8 +197,9 @@ public class PlayerBoard {
     }
     
     /**
-     * Decrease board value.
+     * Decrease the value of board depending on the number of deaths of the player.
      */
+
     public void decreaseBoardValue() {
 
         if (numberOfDeaths == 0) {
@@ -205,25 +220,32 @@ public class PlayerBoard {
         }
     }
 
+    /**
+     * Add a new power up card in player power up.
+     *
+     * @param powerUpCard the power up card to add in player power up.
+     */
+
     private void addPowerUp(PowerUpCard powerUpCard) {
 
         playerPowerUps.add(powerUpCard);
     }
     
     /**
-     * Remove power up.
+     * Remove power up card from player power up.
      *
-     * @param powerUpCard the power up card
+     * @param powerUpCard the power up card to delete from player power up.
      */
+
     public void removePowerUp(PowerUpCard powerUpCard) {
 
         playerPowerUps.remove(powerUpCard);
     }
     
     /**
-     * Add weapon.
+     * Add a new weapon card in player weapons.
      *
-     * @param weaponCard the weapon card
+     * @param weaponCard the weapon card to add in player weapons.
      */
     public void addWeapon(WeaponCard weaponCard) {
 
@@ -231,9 +253,9 @@ public class PlayerBoard {
     }
     
     /**
-     * Remove weapon.
+     * Remove weapon card from player weapons.
      *
-     * @param weaponCard the weapon card
+     * @param weaponCard the weapon card to delete from player power up.
      */
     public void removeWeapon(WeaponCard weaponCard) {
 
@@ -241,9 +263,9 @@ public class PlayerBoard {
     }
     
     /**
-     * Increase damage.
+     * Increase damages adding a single damage .
      *
-     * @param damage the damage
+     * @param damage color of the player who did the damage.
      */
     public void increaseDamage(EnumColorPlayer damage) {
 
@@ -251,9 +273,9 @@ public class PlayerBoard {
     }
     
     /**
-     * Increase damage.
+     * Increase damages adding multiple damage.
      *
-     * @param damages the damages
+     * @param damages list of color of the player who did the damage.
      */
     public void increaseDamage(ArrayList<EnumColorPlayer> damages) {
 
@@ -269,22 +291,35 @@ public class PlayerBoard {
     }
     
     /**
-     * Increase mark.
+     * Increase mark adding a single mark.
      *
-     * @param marks the marks
+     * @param mark color of the player who made a mark.
      */
+
+    public void increaseMark(EnumColorPlayer mark){
+
+        this.marks.add(mark);
+    }
+
+    /**
+     * Increase marks adding multiple marks.
+     *
+     * @param marks list of color of the player who made the marks
+     */
+
     public void increaseMark(ArrayList<EnumColorPlayer> marks) {
 
         this.marks.addAll(marks);
     }
-    
+
     /**
-     * Update mark of color array list.
+     * Remove from marks all the occurrences of a color.
      *
-     * @param colorOfMark the color of mark
-     * @return the array list
+     * @param colorOfMark the color we want to delete the occurrences.
+     * @return List of color of all occurrences deleted.
      */
-    public ArrayList<EnumColorPlayer> updateMarkOfColor(EnumColorPlayer colorOfMark) {
+
+    private ArrayList<EnumColorPlayer> removeMarkOfColor(EnumColorPlayer colorOfMark) {
 
         ArrayList<EnumColorPlayer> markToAdd = new ArrayList<EnumColorPlayer>();
 
@@ -299,6 +334,18 @@ public class PlayerBoard {
         }
         return markToAdd;
     }
+
+    /**
+     * Calls
+     * @param colorOfMark
+     */
+
+    public void shiftMarks(EnumColorPlayer colorOfMark){
+
+        increaseDamage(removeMarkOfColor(colorOfMark));
+    }
+
+
     
     /**
      * Is color in marks boolean.
@@ -377,6 +424,8 @@ public class PlayerBoard {
         }
         return count;
     }
+
+
 
 
 }

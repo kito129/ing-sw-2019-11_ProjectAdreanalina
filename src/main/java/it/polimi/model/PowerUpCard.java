@@ -46,5 +46,14 @@ public class PowerUpCard {
         return colorCard;
     }
 
+    public String toString(){
+
+        return namePowerUpCard;
+    }
+
+
+
+
+
 
 }
