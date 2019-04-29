@@ -336,8 +336,10 @@ public class PlayerBoard {
     }
 
     /**
-     * Calls
-     * @param colorOfMark
+     * Uses the function increase damage and remove mark of color to remove marks from the list of marks
+     * and add these in the list of damages.
+     *
+     * @param colorOfMark color of mark to shift from the list of mark to the list of damages
      */
 
     public void shiftMarks(EnumColorPlayer colorOfMark){
@@ -345,17 +347,16 @@ public class PlayerBoard {
         increaseDamage(removeMarkOfColor(colorOfMark));
     }
 
-
-    
     /**
-     * Is color in marks boolean.
+     * Verify if a color is present in the list of marks.
      *
-     * @param color the color
-     * @return the boolean
+     * @param color color we want to know if is present.
+     * @return true if the color is present, false otherwise.
      */
+
     public boolean isColorInMarks(EnumColorPlayer color) {
 
-        for (EnumColorPlayer c : damages) {
+        for (EnumColorPlayer c : marks) {
 
             if (c == color) {
 
@@ -365,8 +366,7 @@ public class PlayerBoard {
         return false;
     }
 
-
-   /*  public void removeMarkOfColor1(EnumColorPlayer colorOfMark) {
+    /*  public void removeMarkOfColor1(EnumColorPlayer colorOfMark) {
 
         for (EnumColorPlayer color:marks) {
 
@@ -384,11 +384,12 @@ public class PlayerBoard {
     */
     
     /**
-     * Color occurence in damages int.
+     * Count the number of occurrences of a color in the list of damages.
      *
-     * @param colorPlayer the color player
-     * @return the int
+     * @param colorPlayer color we want to know the number of occurrences.
+     * @return the number of occurrences of the given color.
      */
+
     public int colorOccurenceInDamages(EnumColorPlayer colorPlayer) {
 
         int count = 0;
@@ -407,11 +408,12 @@ public class PlayerBoard {
     }
     
     /**
-     * Color occurence in marks int.
+     * Count the number of occurrences of a color in the list of marks.
      *
-     * @param colorPlayer the color player
-     * @return the int
+     * @param colorPlayer color we want to know the number of occurrences.
+     * @return the number of occurrences of the given color.
      */
+
     public int colorOccurenceInMarks(EnumColorPlayer colorPlayer) {
 
         int count = 0;

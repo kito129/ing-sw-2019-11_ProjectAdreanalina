@@ -64,6 +64,10 @@ public class Main {
         System.out.println("powerup "+a.getPlayerPowerUps());
         System.out.println();
 
+        System.out.println(a.isColorInMarks(EnumColorPlayer.YELLOW));
+        System.out.println(a.colorOccurenceInMarks(EnumColorPlayer.BLU));
+        System.out.println(a.colorOccurenceInDamages(EnumColorPlayer.YELLOW));
+
 
 
 
