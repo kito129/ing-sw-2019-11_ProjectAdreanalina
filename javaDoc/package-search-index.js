@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"it.polimi.model"},{"l":"it.polimi.model.PowerUp"},{"l":"it.polimi.model.Weapon"}]
