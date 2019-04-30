@@ -57,7 +57,7 @@ public class AmmoCard {
     }
     
     /**
-     * Get power up card power up card.
+     * Gets power up card.
      *
      * @return the power up card
      */

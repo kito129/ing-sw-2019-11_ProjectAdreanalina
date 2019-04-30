@@ -5,14 +5,14 @@ import java.util.ArrayList;
 /**
  * The type Tag back granate.
  */
-public class TagBackGranate extends PowerUpCard {
+public class TagBackGrenade extends PowerUpCard {
     
     /**
      * Instantiates a new Tag back granate.
      *
      * @param colorCard the color card
      */
-    public TagBackGranate(EnumColorCard colorCard) {
+    public TagBackGrenade(EnumColorCard colorCard) {
 
         super("TAGBACK GRANATE", colorCard);
 

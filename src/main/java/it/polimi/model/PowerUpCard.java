@@ -46,6 +46,7 @@ public class PowerUpCard {
         return colorCard;
     }
 
+    @Override
     public String toString(){
 
         return namePowerUpCard;

@@ -15,11 +15,12 @@ public class Player {
     private boolean alive;
     
     /**
-     * Instantiates a new Player.
+     * Instantiates a new Player setting the id, name and color with the given parameters.
+     * It creates a new player board for the player and settings score and the field alive to the start value.
      *
-     * @param id    the id
-     * @param name  the name
-     * @param color the color
+     * @param id    the id of the player
+     * @param name  the name of the player
+     * @param color the color of the player
      */
     public Player (int id, String name, EnumColorPlayer color) {
     
@@ -29,7 +30,7 @@ public class Player {
         score = 0;
         alive = true;
         playerBoard = new PlayerBoard();
-        // TODO vedere come gestire  questo attributo square in fase di inizializzazione
+        // TODO vedere come gestire posizione in fase di inizializzazione.io inizialmente le metterei a  null quando vengono istanziati
     
     }
     
@@ -114,9 +115,9 @@ public class Player {
     }
     
     /**
-     * Increase score.
+     * Increase score of the player.
      *
-     * @param scoreToAdd the score to add
+     * @param scoreToAdd points to add at player score.
      */
     public void increaseScore (int scoreToAdd) {
     
@@ -138,8 +139,8 @@ public class Player {
     /**
      * Sets position.
      *
-     * @param r the r
-     * @param c the c
+     * @param r the row
+     * @param c the column
      */
     public void setPosition (int r, int c) {
     
