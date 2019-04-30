@@ -8,8 +8,7 @@ public enum EnumColorCard {
     /**
      * Yellow enum color card.
      */
-    YELLOW,
-    /**
+    YELLOW,    /**
      * Blu enum color card.
      */
     BLU,
