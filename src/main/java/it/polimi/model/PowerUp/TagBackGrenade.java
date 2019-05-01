@@ -1,6 +1,5 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
-import java.util.ArrayList;
 
 /**
  * The type Tag back granate.
@@ -30,7 +29,7 @@ public class TagBackGrenade extends PowerUpCard {
 
             EnumColorPlayer colorOfDamagedPlayer = damagedPlayer.getColor();
             Player actualPlayer=gameModel.getActualPlayer();
-            actualPlayer.getPlayerBoard().increaseDamage(colorOfDamagedPlayer);
+            actualPlayer.getPlayerBoard().increaseDamages(colorOfDamagedPlayer);
         }else{
 
             //TOdo vedere come gestire il fatto che, non lo vedo.

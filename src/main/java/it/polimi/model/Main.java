@@ -22,22 +22,6 @@ public class Main {
         ArrayList<EnumColorPlayer> markToAdd=new ArrayList<>();
 
 
-        System.out.println("ammo gialle "+a.getAmmoY());
-        System.out.println("ammo blu "+a.getAmmoB());
-        System.out.println("ammo rosse "+a.getAmmoR());
-        System.out.println("board value "+a.getBoardValue());
-        System.out.println("number of deaths "+a.getNumberOfDeaths());
-        System.out.println("damages "+a.getDamages());
-        System.out.println("marks "+a.getMarks());
-        System.out.println("weapons "+a.getPlayerWeapons());
-        System.out.println("powerup "+a.getPlayerPowerUps());
-        System.out.println();
-
-        a.increaseDamage(singleDamage);
-        a.increaseDamage(multipleDamages);
-        a.catchAmmoCard(ammoCard);
-        a.increaseMark(singleMark);
-        a.increaseMark(multipleMarks);
 
         System.out.println("ammo gialle "+a.getAmmoY());
         System.out.println("ammo blu "+a.getAmmoB());
@@ -50,8 +34,11 @@ public class Main {
         System.out.println("powerup "+a.getPlayerPowerUps());
         System.out.println();
 
+        a.increaseDamages(singleDamage);
+        a.increaseDamages(multipleDamages);
 
-        a.shiftMarks(EnumColorPlayer.GREEN);
+        a.increaseMarks(singleMark);
+        a.increaseMarks(multipleMarks);
 
         System.out.println("ammo gialle "+a.getAmmoY());
         System.out.println("ammo blu "+a.getAmmoB());
@@ -64,9 +51,21 @@ public class Main {
         System.out.println("powerup "+a.getPlayerPowerUps());
         System.out.println();
 
-        System.out.println(a.isColorInMarks(EnumColorPlayer.YELLOW));
-        System.out.println(a.colorOccurenceInMarks(EnumColorPlayer.BLU));
-        System.out.println(a.colorOccurenceInDamages(EnumColorPlayer.YELLOW));
+        markToAdd=a.removeMarkOfColor(EnumColorPlayer.GREEN);
+
+        System.out.println(markToAdd);
+
+        System.out.println("ammo gialle "+a.getAmmoY());
+        System.out.println("ammo blu "+a.getAmmoB());
+        System.out.println("ammo rosse "+a.getAmmoR());
+        System.out.println("board value "+a.getBoardValue());
+        System.out.println("number of deaths "+a.getNumberOfDeaths());
+        System.out.println("damages "+a.getDamages());
+        System.out.println("marks "+a.getMarks());
+        System.out.println("weapons "+a.getPlayerWeapons());
+        System.out.println("powerup "+a.getPlayerPowerUps());
+        System.out.println();
+
 
 
 

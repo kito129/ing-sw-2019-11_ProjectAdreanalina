@@ -1,8 +1,6 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
 
-import java.util.ArrayList;
-
 /**
  * The type Targeting scope.
  */
@@ -28,7 +26,7 @@ public class TargetingScope extends PowerUpCard {
     public void effect(GameModel gameModel, Player target){
 
         EnumColorPlayer damage = gameModel.getActualPlayer().getColor();
-        target.getPlayerBoard().increaseDamage(damage);
+        target.getPlayerBoard().increaseDamages(damage);
     }
 
 }

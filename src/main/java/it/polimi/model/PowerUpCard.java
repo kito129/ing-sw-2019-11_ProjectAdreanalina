@@ -4,14 +4,8 @@ package it.polimi.model;
  * The type Power up card.
  */
 public class PowerUpCard {
-    
-    /**
-     * The Name power up card.
-     */
+
     protected String namePowerUpCard;
-    /**
-     * The Color card.
-     */
     protected EnumColorCard colorCard;
     
     /**

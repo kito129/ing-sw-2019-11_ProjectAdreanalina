@@ -1,5 +1,9 @@
 package it.polimi.model;
 
+import it.polimi.model.Exception.AlreadyThreePowerUps;
+
+import java.util.ArrayList;
+
 /**
  * The type Player.
  */
@@ -33,7 +37,7 @@ public class Player {
         // TODO vedere come gestire posizione in fase di inizializzazione.io inizialmente le metterei a  null quando vengono istanziati
     
     }
-    
+
     /**
      * Gets id.
      *
@@ -105,9 +109,9 @@ public class Player {
     }
     
     /**
-     * Is alive boolean.
+     * Gets the value of the field alive
      *
-     * @return the boolean
+     * @return true if the player is alive, false otherwise.
      */
     public boolean isAlive () {
     
@@ -115,29 +119,27 @@ public class Player {
     }
     
     /**
-     * Increase score of the player.
+     * Sets the column
      *
-     * @param scoreToAdd points to add at player score.
+     * @param column the column we want to set to the player
      */
-    public void increaseScore (int scoreToAdd) {
-    
-        this.score += scoreToAdd;
-    
-    }
-    
-    
     private void setColumn (int column) {
         
         this.column = column;
     }
-    
+
+    /**
+     * Sets the row
+     *
+     * @param row the row we want to set to the player
+     */
     private void setRow (int row) {
         
         this.row = row;
     }
     
     /**
-     * Sets position.
+     * Sets position of player assigning a row and a column.
      *
      * @param r the row
      * @param c the column
@@ -149,18 +151,42 @@ public class Player {
     }
     
     /**
-     * Sets alive.
+     * Sets the field alive.
      *
-     * @param alive the alive
+     * @param alive player status
      */
     public void setAlive (boolean alive) {
     
         this.alive = alive;
+    }
+
+    /**
+     * Increase score of the player.
+     *
+     * @param scoreToAdd points to add at player score.
+     */
+    public void increaseScore (int scoreToAdd) {
+
+        this.score += scoreToAdd;
+
     }
     
     @Override
     public String toString () {
         
         return "Player: " + this.id + " name: " + this.name + " r: " + this.row + " c: " + this.column;
+    }
+
+    public void catchAmmoCard(AmmoCard ammoCard) throws AlreadyThreePowerUps {
+
+        this.playerBoard.manageAmmoCard(ammoCard);
+    }
+
+    public void recivedDamege(ArrayList<EnumColorPlayer> damages,ArrayList<EnumColorPlayer> marks,EnumColorPlayer colorDamage){
+
+        this.playerBoard.increaseDamages(damages);
+        this.playerBoard.shiftMarks(colorDamage);
+        this.playerBoard.increaseMarks(marks);
+
     }
 }

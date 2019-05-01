@@ -2,7 +2,7 @@ package it.polimi.model.PowerUp;
 import it.polimi.model.*;
 
 /**
- * Teh power Up newton
+ * The type Newton.
  */
 public class Newton extends PowerUpCard {
     
@@ -14,7 +14,6 @@ public class Newton extends PowerUpCard {
     public Newton(EnumColorCard colorCard) {
 
         super("NEWTON", colorCard);
-
     }
     
     /**
