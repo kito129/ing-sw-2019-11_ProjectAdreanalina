@@ -21,7 +21,7 @@ public class LockFire extends WeaponCard {
             //setta danni e marchi a target se vedi
             if(gameModel.getMap().isVisible(gameModel.getActualPlayer(),target)){
                 target.getPlayerBoard().increaseDamages(damage);
-                target.getPlayerBoard().increaseMarks(mark);
+                //target.getPlayerBoard().increaseMarks(mark);
             }
         }
         catch (Exception e){
@@ -47,7 +47,7 @@ public class LockFire extends WeaponCard {
         try{
             //setta danni e marchi a target se vedi
             if(gameModel.getMap().isVisible(gameModel.getActualPlayer(),target2)){
-                target2.getPlayerBoard().increaseMarks(mark);
+                //target2.getPlayerBoard().increaseMarks(mark);
             }
         }
         catch (Exception e){

@@ -189,4 +189,5 @@ public class Player {
         this.playerBoard.increaseMarks(marks);
 
     }
+    //todo fare molto funzione recived damage oveloaded per gestire piu situazioni, danno singolo marchio singolo ....
 }

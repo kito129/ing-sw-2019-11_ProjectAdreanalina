@@ -268,7 +268,7 @@ public class PlayerBoard {
 
         if(playerWeapons.size()==3){
 
-            new AlreadyThreeWeapons();
+            throw new AlreadyThreeWeapons();
         }else {
 
             playerWeapons.add(weaponCard);
@@ -318,15 +318,20 @@ public class PlayerBoard {
 
         damages.clear();
     }
+
+    //Todo commentare le due increase mark
     
     /**
      * Increase marks adding a single mark.
      *
-     * @param mark color of the player who made a mark.
+     * @param colorOfMark color of the player who made a mark.
      */
-    public void increaseMarks(EnumColorPlayer mark, EnumColorPlayer colorOfMark){
+    public void increaseMarks(EnumColorPlayer colorOfMark){
 
-        this.marks.add(mark);
+        if(colorOccurenceInMarks(colorOfMark)<3) {
+
+            this.marks.add(colorOfMark);
+        }
     }
 
     /**
@@ -334,10 +339,19 @@ public class PlayerBoard {
      *
      * @param marks list of color of the player who made the marks
      */
-    public void increaseMarks(ArrayList<EnumColorPlayer> marks, EnumColorPlayer colorOfMarks) {
+    public void increaseMarks(ArrayList<EnumColorPlayer> marks) {
 
+        if(colorOccurenceInMarks(marks.get(0))+marks.size()>3){
 
-        this.marks.addAll(marks);
+            while(colorOccurenceInMarks(marks.get(0))<3) {
+
+                this.marks.add(marks.get(0));
+                marks.remove(0);
+            }
+        }else {
+
+            this.marks.addAll(marks);
+        }
     }
 
     /**

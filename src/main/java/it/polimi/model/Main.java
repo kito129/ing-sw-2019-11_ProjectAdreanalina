@@ -8,65 +8,32 @@ public class Main {
 
     public static void main(String args[]) {
 
-        PlayerBoard a = new PlayerBoard();
-        PowerUpCard powerUpCard = new Newton(EnumColorCard.RED);
-        AmmoCard ammoCard = new AmmoCard(1, 1, 1, powerUpCard);
-        EnumColorPlayer singleDamage=EnumColorPlayer.YELLOW;
-        ArrayList<EnumColorPlayer> multipleDamages= new ArrayList<>();
-        multipleDamages.add(EnumColorPlayer.YELLOW);
-        multipleDamages.add(EnumColorPlayer.BLU);
-        EnumColorPlayer singleMark=EnumColorPlayer.BLU;
-        ArrayList<EnumColorPlayer> multipleMarks=new ArrayList<>();
-        multipleMarks.add(EnumColorPlayer.GREEN);
-        multipleMarks.add(EnumColorPlayer.GREEN);
+        PlayerBoard playerBoard= new PlayerBoard();
         ArrayList<EnumColorPlayer> markToAdd=new ArrayList<>();
 
 
 
-        System.out.println("ammo gialle "+a.getAmmoY());
-        System.out.println("ammo blu "+a.getAmmoB());
-        System.out.println("ammo rosse "+a.getAmmoR());
-        System.out.println("board value "+a.getBoardValue());
-        System.out.println("number of deaths "+a.getNumberOfDeaths());
-        System.out.println("damages "+a.getDamages());
-        System.out.println("marks "+a.getMarks());
-        System.out.println("weapons "+a.getPlayerWeapons());
-        System.out.println("powerup "+a.getPlayerPowerUps());
-        System.out.println();
+        markToAdd.add(EnumColorPlayer.YELLOW);
+        markToAdd.add(EnumColorPlayer.YELLOW);
 
-        a.increaseDamages(singleDamage);
-        a.increaseDamages(multipleDamages);
+        System.out.println("marchi del giocatore iniziali "+playerBoard.getMarks());
+
+        System.out.println("marchi da aggiungere "+markToAdd);
+
+        playerBoard.increaseMarks(markToAdd);
+
+        System.out.println("marchi del giocatore finale "+playerBoard.getMarks());
 
 
-        System.out.println("ammo gialle "+a.getAmmoY());
-        System.out.println("ammo blu "+a.getAmmoB());
-        System.out.println("ammo rosse "+a.getAmmoR());
-        System.out.println("board value "+a.getBoardValue());
-        System.out.println("number of deaths "+a.getNumberOfDeaths());
-        System.out.println("damages "+a.getDamages());
-        System.out.println("marks "+a.getMarks());
-        System.out.println("weapons "+a.getPlayerWeapons());
-        System.out.println("powerup "+a.getPlayerPowerUps());
-        System.out.println();
 
-        markToAdd=a.removeMarkOfColor(EnumColorPlayer.GREEN);
 
-        System.out.println(markToAdd);
 
-        System.out.println("ammo gialle "+a.getAmmoY());
-        System.out.println("ammo blu "+a.getAmmoB());
-        System.out.println("ammo rosse "+a.getAmmoR());
-        System.out.println("board value "+a.getBoardValue());
-        System.out.println("number of deaths "+a.getNumberOfDeaths());
-        System.out.println("damages "+a.getDamages());
-        System.out.println("marks "+a.getMarks());
-        System.out.println("weapons "+a.getPlayerWeapons());
-        System.out.println("powerup "+a.getPlayerPowerUps());
-        System.out.println();
+
 
 
 
 
 
     }
+
 }
