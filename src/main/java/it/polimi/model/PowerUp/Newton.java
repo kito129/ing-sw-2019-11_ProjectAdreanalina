@@ -39,12 +39,15 @@ public class Newton extends PowerUpCard {
      * @param destSquare the dest square
      * @param target     the target
      */
-    public void effect(GameModel gameModel, Square destSquare, Player target){
+    public void effect(GameModel gameModel, Square destSquare, Player target) {
 
-        Square actualSquare = gameModel.getMap().getSquare(target.getRow(),target.getColumn());
-        if((gameModel.getMap().sameDirection(destSquare,actualSquare)) && (3>gameModel.getMap().distance(destSquare,actualSquare,1))){
+        Square actualSquare = gameModel.getMap().getSquare(target.getRow(), target.getColumn());
+        if ((gameModel.getMap().sameDirection(destSquare, actualSquare)) && (3 > gameModel.getMap().distance(destSquare, actualSquare, 1))) {
 
-            gameModel.getMap().movePlayer(target,destSquare);
+            gameModel.getMap().movePlayer(target, destSquare);
         }
+
     }
+
+
 }

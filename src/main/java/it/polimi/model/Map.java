@@ -3,7 +3,7 @@ package it.polimi.model;
 import java.util.ArrayList;
 
 /**
- * Map of the game, contain an ArrayList of type Square, that represent the gameboard.
+ * Map of the game, contain an ArrayList of type Square, that represent the game board.
  */
 public class Map {
     
@@ -50,7 +50,7 @@ public class Map {
     }
     
     /**
-     * Find player in the square, return the square where is located the player.
+     * Find player in the squares, return the square where is located the player.
      *
      * @param player the player
      * @return square where are positioned the player

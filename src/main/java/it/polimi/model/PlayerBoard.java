@@ -324,7 +324,7 @@ public class PlayerBoard {
      *
      * @param mark color of the player who made a mark.
      */
-    public void increaseMarks(EnumColorPlayer mark){
+    public void increaseMarks(EnumColorPlayer mark, EnumColorPlayer colorOfMark){
 
         this.marks.add(mark);
     }
@@ -334,7 +334,8 @@ public class PlayerBoard {
      *
      * @param marks list of color of the player who made the marks
      */
-    public void increaseMarks(ArrayList<EnumColorPlayer> marks) {
+    public void increaseMarks(ArrayList<EnumColorPlayer> marks, EnumColorPlayer colorOfMarks) {
+
 
         this.marks.addAll(marks);
     }

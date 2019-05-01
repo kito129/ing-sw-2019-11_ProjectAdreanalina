@@ -37,8 +37,6 @@ public class Main {
         a.increaseDamages(singleDamage);
         a.increaseDamages(multipleDamages);
 
-        a.increaseMarks(singleMark);
-        a.increaseMarks(multipleMarks);
 
         System.out.println("ammo gialle "+a.getAmmoY());
         System.out.println("ammo blu "+a.getAmmoB());

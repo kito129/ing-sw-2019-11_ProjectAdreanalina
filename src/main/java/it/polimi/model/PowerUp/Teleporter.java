@@ -14,7 +14,6 @@ public class Teleporter extends PowerUpCard {
     public Teleporter(EnumColorCard colorCard) {
 
         super("TELOPORTER", colorCard);
-
     }
     
     /**
@@ -39,6 +38,11 @@ public class Teleporter extends PowerUpCard {
     public void effect(GameModel gameModel, Square destSquare) {
 
         gameModel.getMap().movePlayer(gameModel.getActualPlayer(),destSquare);
+    }
+
+    public void effect(Player currentPlayer, Map map, Square destSquare){
+
+        map.movePlayer(currentPlayer,destSquare);
     }
 
 }
