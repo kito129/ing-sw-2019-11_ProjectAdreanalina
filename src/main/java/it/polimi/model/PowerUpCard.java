@@ -6,8 +6,8 @@ package it.polimi.model;
 public class PowerUpCard {
 
     protected String namePowerUpCard;
-    protected EnumColorCard colorCard;
-    
+    protected EnumColorCard colorPowerUpCard;
+
     /**
      * Instantiates a new Power up card.
      *
@@ -17,7 +17,7 @@ public class PowerUpCard {
     public PowerUpCard(String namePowerUpCard, EnumColorCard colorCard) {
 
         this.namePowerUpCard = namePowerUpCard;
-        this.colorCard = colorCard;
+        this.colorPowerUpCard = colorCard;
     }
     
     /**
@@ -35,9 +35,9 @@ public class PowerUpCard {
      *
      * @return the color card
      */
-    public EnumColorCard getColorCard() {
+    public EnumColorCard getColorPowerUpCard() {
 
-        return colorCard;
+        return colorPowerUpCard;
     }
 
     @Override

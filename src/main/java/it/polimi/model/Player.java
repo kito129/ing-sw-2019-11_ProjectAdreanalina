@@ -182,12 +182,17 @@ public class Player {
         this.playerBoard.manageAmmoCard(ammoCard);
     }
 
-    public void recivedDamege(ArrayList<EnumColorPlayer> damages,ArrayList<EnumColorPlayer> marks,EnumColorPlayer colorDamage){
+    public void receiveSingleMark(EnumColorPlayer colorOfMark){
 
-        this.playerBoard.increaseDamages(damages);
-        this.playerBoard.shiftMarks(colorDamage);
-        this.playerBoard.increaseMarks(marks);
+        this.playerBoard.increaseMarks(colorOfMark);
 
     }
+
+    public void receiveSingledamage(EnumColorPlayer colorOfDamage){
+
+        this.playerBoard.increaseDamages(colorOfDamage);
+    }
+
+
     //todo fare molto funzione recived damage oveloaded per gestire piu situazioni, danno singolo marchio singolo ....
 }

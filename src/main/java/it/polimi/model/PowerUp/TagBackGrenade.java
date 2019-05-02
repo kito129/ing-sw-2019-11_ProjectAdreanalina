@@ -1,5 +1,6 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
+import it.polimi.model.Exception.InvalidActionForThisCard;
 
 /**
  * The type Tag back granate.
@@ -14,15 +15,28 @@ public class TagBackGrenade extends PowerUpCard {
     public TagBackGrenade(EnumColorCard colorCard) {
 
         super("TAGBACK GRANATE", colorCard);
-
     }
-    
+
+    public void effect(Map map, Player currentPlayer, Player damagedPlayer) throws InvalidActionForThisCard {
+
+        if(map.isVisible(currentPlayer,damagedPlayer)){
+
+            currentPlayer.receiveSingledamage(damagedPlayer.getColor());
+        }else {
+
+            throw new InvalidActionForThisCard();
+        }
+    }
+
+
+
+    /*
     /**
      * Effect.
      *
      * @param gameModel     the game model
      * @param damagedPlayer the damaged player
-     */
+
     public void effect(GameModel gameModel,Player damagedPlayer){
 
         if(gameModel.getMap().isVisible(gameModel.getActualPlayer().getRow(),gameModel.getActualPlayer().getColumn(),damagedPlayer.getRow(),damagedPlayer.getColumn())){
@@ -32,9 +46,11 @@ public class TagBackGrenade extends PowerUpCard {
             actualPlayer.getPlayerBoard().increaseDamages(colorOfDamagedPlayer);
         }else{
 
-            //TOdo vedere come gestire il fatto che, non lo vedo.
+
         }
     }
+
+     */
 
 }
 

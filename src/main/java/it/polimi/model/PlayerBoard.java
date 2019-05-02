@@ -319,10 +319,9 @@ public class PlayerBoard {
         damages.clear();
     }
 
-    //Todo commentare le due increase mark
-    
     /**
      * Increase marks adding a single mark.
+     * It increase marks only if the number of marks of the specified color is less then three.
      *
      * @param colorOfMark color of the player who made a mark.
      */
@@ -336,6 +335,7 @@ public class PlayerBoard {
 
     /**
      * Increase marks adding multiple marks.
+     * It increase marks up to a maximum of three marks of the color of the marks to add.
      *
      * @param marks list of color of the player who made the marks
      */

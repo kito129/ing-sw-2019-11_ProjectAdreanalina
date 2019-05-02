@@ -6,21 +6,26 @@ import java.util.ArrayList;
  * The type Weapon card.
  */
 public class WeaponCard {
-    
-    /**
-     * The Name card.
-     */
+
     protected String nameCard;
+    protected ArrayList<EnumColorCard> rechargeCost;
+    protected EnumColorCard colorCard;
+    protected boolean isCharge;
+
     /**
-     * The Cost r.
+     * Instantiates a new weapon card.
+     * Sets the field is charge to true.
+     *
+     * @param nameCard the name of card.
+     * @param colorCard the color of card
      */
-    protected int costR;
-    /**
-     * The Charge.
-     */
-    protected boolean charge;
-    
-    
+    public WeaponCard(String nameCard,EnumColorCard colorCard){
+
+        this.nameCard=nameCard;
+        this.colorCard=colorCard;
+        this.isCharge=true;
+    }
+
     /**
      * Gets name card.
      *
@@ -30,45 +35,45 @@ public class WeaponCard {
 
         return nameCard;
     }
-    
-    /**
-     * Get cost charge.
-     */
-    public void getCostCharge(){
-        //TODO
-    }
-    
-    /**
-     * Gets initial cost.
-     */
-    public void  getInitialCost() {
-        //TODO
-    }
-    
-    /**
-     * Get cost.
-     */
-    public void getCost(){
 
-    }
-    
     /**
-     * Is charge boolean.
+     * Gets recharge cost.
      *
-     * @return the boolean
+     * @return the recharge cost.
+     */
+    public ArrayList<EnumColorCard> getRechargeCost() {
+
+        return rechargeCost;
+    }
+
+    /**
+     * Gets color Card.
+     *
+     * @return the color card.
+     */
+    public EnumColorCard getColorCard() {
+
+        return colorCard;
+    }
+
+    /**
+     * Gets the value of field is charge.
+     *
+     * @return true is the weapon is charge, false otherwise.
      */
     public boolean isCharge() {
 
-        return charge;
+        return isCharge;
     }
-    
+
     /**
-     * Sets charge.
+     * Sets the value of field is charge.
      *
-     * @param charge the charge
+     * @param charge true if we want to set the weapon is charge, false otherwise.
      */
     public void setCharge(boolean charge) {
 
-        this.charge = charge;
+        isCharge = charge;
     }
 }
+    

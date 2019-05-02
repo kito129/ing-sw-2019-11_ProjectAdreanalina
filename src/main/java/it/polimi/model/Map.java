@@ -104,7 +104,7 @@ public class Map {
      * Calculate the minimum distance from A to B.
      *
      * @param a    Current Square
-     * @param b    Sqaure to search
+     * @param b    Square to search
      * @return minimum distance between A and B
      */
     public int distance(Square a, Square b, int dist){
@@ -119,7 +119,7 @@ public class Map {
      *
      * @param rInit row of current square
      * @param cInit column of current square
-     * @param rDest row of search sqaure
+     * @param rDest row of search square
      * @param cDest column of search square
      * @param dist  the distance at the iteration
      * @return minimum distance from A(rInit,cInit) to B(rDest,cDest)
