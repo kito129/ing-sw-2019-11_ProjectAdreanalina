@@ -25,7 +25,7 @@ public class TargetingScope extends PowerUpCard {
      */
     public void effect(Player currentPlayer, Player target){
 
-        target.receiveSingledamage(currentPlayer.getColor());
+        target.SingleDamage(currentPlayer.getColor());
     }
 
     //TOdo da eliminare funzione sotto

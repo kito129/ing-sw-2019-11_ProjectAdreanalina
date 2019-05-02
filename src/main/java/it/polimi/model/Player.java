@@ -182,17 +182,31 @@ public class Player {
         this.playerBoard.manageAmmoCard(ammoCard);
     }
 
-    public void receiveSingleMark(EnumColorPlayer colorOfMark){
+    public void SingleMark(EnumColorPlayer colorOfMark){
 
         this.playerBoard.increaseMarks(colorOfMark);
 
     }
 
-    public void receiveSingledamage(EnumColorPlayer colorOfDamage){
+    public void SingleDamage(EnumColorPlayer colorOfDamage){
 
         this.playerBoard.increaseDamages(colorOfDamage);
+        this.playerBoard.shiftMarks(colorOfDamage);
+    }
+
+    public void MultipleDamagesSingleMark(ArrayList<EnumColorPlayer> damages,EnumColorPlayer mark){
+
+        this.playerBoard.increaseDamages(damages);
+        this.playerBoard.shiftMarks(mark);
+        this.playerBoard.increaseMarks(mark);
+    }
+
+    public void SingleDamageMultipleMarks(EnumColorPlayer damage, ArrayList<EnumColorPlayer> marks) {
+
+        this.playerBoard.increaseDamages(damage);
+        this.playerBoard.shiftMarks(damage);
+        this.playerBoard.increaseMarks(marks);
     }
 
 
-    //todo fare molto funzione recived damage oveloaded per gestire piu situazioni, danno singolo marchio singolo ....
 }

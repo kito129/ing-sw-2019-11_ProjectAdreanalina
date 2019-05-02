@@ -21,7 +21,7 @@ public class TagBackGrenade extends PowerUpCard {
 
         if(map.isVisible(currentPlayer,damagedPlayer)){
 
-            currentPlayer.receiveSingledamage(damagedPlayer.getColor());
+            currentPlayer.SingleMark(damagedPlayer.getColor());
         }else {
 
             throw new InvalidActionForThisCard();
