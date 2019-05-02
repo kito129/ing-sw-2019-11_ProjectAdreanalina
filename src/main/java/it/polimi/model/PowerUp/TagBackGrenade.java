@@ -12,7 +12,7 @@ public class TagBackGrenade extends PowerUpCard {
      *
      * @param colorCard the color card
      */
-    public TagBackGrenade(EnumColorCard colorCard) {
+    public TagBackGrenade(EnumColorCardAndAmmo colorCard) {
 
         super("TAGBACK GRANATE", colorCard);
     }
@@ -21,7 +21,7 @@ public class TagBackGrenade extends PowerUpCard {
 
         if(map.isVisible(currentPlayer,damagedPlayer)){
 
-            currentPlayer.SingleMark(damagedPlayer.getColor());
+            currentPlayer.singleMark(damagedPlayer.getColor());
         }else {
 
             throw new InvalidActionForThisCard();

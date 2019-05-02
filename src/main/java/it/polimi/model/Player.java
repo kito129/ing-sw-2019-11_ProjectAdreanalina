@@ -182,26 +182,26 @@ public class Player {
         this.playerBoard.manageAmmoCard(ammoCard);
     }
 
-    public void SingleMark(EnumColorPlayer colorOfMark){
+    public void singleMark(EnumColorPlayer colorOfMark){
 
         this.playerBoard.increaseMarks(colorOfMark);
 
     }
 
-    public void SingleDamage(EnumColorPlayer colorOfDamage){
+    public void singleDamage(EnumColorPlayer colorOfDamage){
 
         this.playerBoard.increaseDamages(colorOfDamage);
         this.playerBoard.shiftMarks(colorOfDamage);
     }
 
-    public void MultipleDamagesSingleMark(ArrayList<EnumColorPlayer> damages,EnumColorPlayer mark){
+    public void multipleDamagesSingleMark(ArrayList<EnumColorPlayer> damages, EnumColorPlayer mark){
 
         this.playerBoard.increaseDamages(damages);
         this.playerBoard.shiftMarks(mark);
         this.playerBoard.increaseMarks(mark);
     }
 
-    public void SingleDamageMultipleMarks(EnumColorPlayer damage, ArrayList<EnumColorPlayer> marks) {
+    public void singleDamageMultipleMarks(EnumColorPlayer damage, ArrayList<EnumColorPlayer> marks) {
 
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);

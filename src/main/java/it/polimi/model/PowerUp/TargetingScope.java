@@ -11,7 +11,7 @@ public class TargetingScope extends PowerUpCard {
      *
      * @param colorCard the color card
      */
-    public TargetingScope(EnumColorCard colorCard) {
+    public TargetingScope(EnumColorCardAndAmmo colorCard) {
 
         super("TARGETING SCOPE", colorCard);
 
@@ -25,7 +25,7 @@ public class TargetingScope extends PowerUpCard {
      */
     public void effect(Player currentPlayer, Player target){
 
-        target.SingleDamage(currentPlayer.getColor());
+        target.singleDamage(currentPlayer.getColor());
     }
 
     //TOdo da eliminare funzione sotto

@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String args[]) {
 
-        LockRifle lockRifle= new LockRifle(EnumColorCard.BLU);
+        LockRifle lockRifle= new LockRifle(EnumColorCardAndAmmo.BLU);
 
 
 

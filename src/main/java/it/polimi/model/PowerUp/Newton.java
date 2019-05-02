@@ -12,7 +12,7 @@ public class Newton extends PowerUpCard {
      *
      * @param colorCard the color of the card
      */
-    public Newton(EnumColorCard colorCard) {
+    public Newton(EnumColorCardAndAmmo colorCard) {
 
         super("NEWTON", colorCard);
     }

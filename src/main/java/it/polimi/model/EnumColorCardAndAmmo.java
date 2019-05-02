@@ -3,7 +3,7 @@ package it.polimi.model;
 /**
  * The enum Enum color card.
  */
-public enum EnumColorCard {
+public enum EnumColorCardAndAmmo {
     
     /**
      * Yellow enum color card.

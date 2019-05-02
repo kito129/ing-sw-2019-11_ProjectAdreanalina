@@ -11,7 +11,7 @@ public class Teleporter extends PowerUpCard {
      *
      * @param colorCard the color card
      */
-    public Teleporter(EnumColorCard colorCard) {
+    public Teleporter(EnumColorCardAndAmmo colorCard) {
 
         super("TELOPORTER", colorCard);
     }
