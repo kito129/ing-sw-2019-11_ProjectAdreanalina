@@ -13,7 +13,7 @@ public class LockRifle extends WeaponCard {
      * Instantiates a new Lock Rifle card.
      * Creates the list of recharge cost settings its value to BLU,BLU.
      * Sets the field color to BLU.
-     * Creates the list of second lock cost(cost of optional effect) settings it to RED.
+     * Creates the list of second lock cost(cost of optional effect 1) settings it to RED.
      */
     public LockRifle(){
 
@@ -55,9 +55,9 @@ public class LockRifle extends WeaponCard {
         }
     }
 
-    public void effect(Map map,Player currentPlayer,Player baseTarget,Player optionalTarget,boolean useOptionalEffect)throws InvalidActionForThisCard{
+    public void effect(Map map,Player currentPlayer,Player baseTarget,Player optionalTarget,boolean useSecondLock)throws InvalidActionForThisCard{
 
-        if(useOptionalEffect){
+        if(useSecondLock){
 
             if(baseTarget!=optionalTarget){
 

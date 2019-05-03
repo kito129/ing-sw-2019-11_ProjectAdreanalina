@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Electroscythe extends WeaponCard {
 
-    private ArrayList<EnumColorCardAndAmmo> reaperModecost;
+    private ArrayList<EnumColorCardAndAmmo> reaperModeCost;
 
     /**
      * Instantiates a new Lock Electoscythe card.
@@ -20,12 +20,17 @@ public class Electroscythe extends WeaponCard {
         super("ELECTOSCYTHE", EnumColorCardAndAmmo.BLU);
         rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
-        reaperModecost= new ArrayList<EnumColorCardAndAmmo>();
-        reaperModecost.add(EnumColorCardAndAmmo.BLU);
-        reaperModecost.add(EnumColorCardAndAmmo.RED);
+        reaperModeCost= new ArrayList<EnumColorCardAndAmmo>();
+        reaperModeCost.add(EnumColorCardAndAmmo.BLU);
+        reaperModeCost.add(EnumColorCardAndAmmo.RED);
     }
 
-    public void basicMode(Map map,Player currentPlayer) throws InvalidActionForThisCard {
+    public ArrayList<EnumColorCardAndAmmo> getReaperModecost() {
+
+        return reaperModeCost;
+    }
+
+    public void basicMode(Map map, Player currentPlayer) throws InvalidActionForThisCard {
 
         ArrayList<Player> allInCurrentSquare=new ArrayList<>();
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
