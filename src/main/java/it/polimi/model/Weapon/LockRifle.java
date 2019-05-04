@@ -12,7 +12,7 @@ public class LockRifle extends WeaponCard {
     /**
      * Instantiates a new Lock Rifle card.
      * Creates the list of recharge cost settings its value to BLU,BLU.
-     * Sets the field color to BLU.
+     * Sets the field color to BLU calling the constructor of weapon card (the super class).
      * Creates the list of second lock cost(cost of optional effect 1) settings it to RED.
      */
     public LockRifle(){

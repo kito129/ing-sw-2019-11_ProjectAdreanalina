@@ -12,7 +12,7 @@ public class Electroscythe extends WeaponCard {
     /**
      * Instantiates a new Lock Electoscythe card.
      * Creates the list of recharge cost setting its value to BLU.
-     * Sets the field color to BLU.
+     * Sets the field color to BLU calling the constructor of weapon card (the super class).
      * Creates the list of reaper mode cost (cost of alternative fire mode) settings it to BLU,RED.
      */
     public Electroscythe() {

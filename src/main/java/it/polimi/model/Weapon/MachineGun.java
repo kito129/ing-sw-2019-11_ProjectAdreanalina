@@ -16,7 +16,7 @@ public class MachineGun extends WeaponCard {
     /**
      * Instantiates a new Machine Gun card.
      * Creates the list of recharge cost settings its value to BLU,RED.
-     * Sets the field color to BLU.
+     * Sets the field color to BLU calling the constructor of weapon card (the super class).
      * Creates the list of focus shot cost(cost of optional effect1) settings it to yellow.
      * Creates the list of turret tripod cost(cost of optional effect2) settings it to yellow.
      */

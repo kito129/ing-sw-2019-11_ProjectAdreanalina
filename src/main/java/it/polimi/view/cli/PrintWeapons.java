@@ -13,7 +13,7 @@ public class PrintWeapons implements Serializable {
      */
     public static void print(ArrayList<WeaponCard> weaponList){
         for(int i=0; i<weaponList.size(); i++){
-            WeaponCard wc = weaponList.get();
+            WeaponCard wc = weaponList.get(i);
             System.out.println("NAME: " +wc.getNameCard());
             System.out.println("COLOR: " +wc.getColorCard());
             System.out.println("RECHARGE COST: " +wc.getRechargeCost());
