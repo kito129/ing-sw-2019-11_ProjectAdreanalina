@@ -16,6 +16,7 @@ public class PrintMenu implements Serializable {
         System.out.println("3) VIEW YOUR POWERUP"); //printPowerUp
         System.out.println("2) VIEW YOUR AMMO"); //printAmmo
         System.out.println("4) VIEW OTHER PLAYER'S ATTRIBUTE"); //name, position, damages and marks
-        System.out.println("5) MAKE A MOVE"); //printSelectMove
-        }
+        System.out.println("5) VIEW OTHER WEAPONS ON THE MAP"); //printWeaponsMap
+        System.out.println("6) MAKE A MOVE"); //printSelectMove
+    }
 }

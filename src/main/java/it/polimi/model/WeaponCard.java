@@ -30,8 +30,9 @@ public class WeaponCard {
      * Gets name card.
      *
      * @return the name card
+     * @param i
      */
-    public String getNameCard() {
+    public String getNameCard(int i) {
 
         return nameCard;
     }

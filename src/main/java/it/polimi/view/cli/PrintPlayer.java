@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 public class PrintPlayer implements Serializable {
 
-    int id;
-    String name;
-    int row;
-    int column;
-    int score;
-    boolean alive;
+    private int id;
+    private String name;
+    private int row;
+    private int column;
+    private int score;
+    private boolean alive;
 
     /**
      * Print Player's attributes.
