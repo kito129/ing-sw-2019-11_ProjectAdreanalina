@@ -128,20 +128,22 @@ public class PlayerBoard {
     }
     
     /**
-     * Calls the methods increaseAmmo to modify the value of ammo and calls addPowerUp to add
-     * the drawn card to player power up
+     * Manages the draft of ammo card, increasing the fields of ammo and adding to the list of power up, if is present,
+     * the power up shown in the ammo card drawn
      *
      * @param ammoCard the ammo card drawn by the player.
-     * @throws AlreadyThreePowerUps if player has already three power up and the drawn card has a power up.
      */
-    public void manageAmmoCard(AmmoCard ammoCard) throws AlreadyThreePowerUps {
+    public void manageAmmoCard(AmmoCard ammoCard){
 
-        addPowerUp(ammoCard.getPowerUpCard());
+        if(ammoCard.getPowerUpCard()!=null){
+
+            addPowerUp(ammoCard.getPowerUpCard());
+        }
         increaseAmmo(ammoCard.getAmmoY(),ammoCard.getAmmoR(),ammoCard.getAmmoB());
     }
 
     /**
-     * Increase the value of ammo in the player board up to maximum of three for each field.
+     * Increases the value of ammo in the player board up to maximum of three for each field.
      *
      * @param yellowAmmo the number of yellow ammo to add.
      * @param redAmmo the number of red ammo to add.
@@ -173,157 +175,123 @@ public class PlayerBoard {
     }
     
     /**
-     * Decrease the value of ammo in the player board.
+     * Decreases the value of ammo in the player board.
      *
      * @param ammoY the number of yellow ammo to remove.
      * @param ammoR the number of red ammo to remove.
      * @param ammoB the number of blu ammo to remove.
-     * @throws NotEnoughAmmo if the player has not enough ammo to use.
      */
-    public void decreaseAmmo(int ammoY, int ammoR, int ammoB) throws NotEnoughAmmo {
+    public void decreaseAmmo(int ammoY, int ammoR, int ammoB){
 
-        if ((this.ammoY-ammoY<0) || (this.ammoR-ammoR<0) || (this.ammoB-ammoB<0)){
-
-            throw new NotEnoughAmmo();
-        }else {
-
-            this.ammoY -= ammoY;
-            this.ammoR -= ammoR;
-            this.ammoB -= ammoB;
-        }
+        this.ammoY -= ammoY;
+        this.ammoR -= ammoR;
+        this.ammoB -= ammoB;
     }
 
     /**
-     * Add a new power up card in player power up.
+     * Adds a new power up card in player power up.
      *
      * @param powerUpCard the power up card to add in player power up.
-     * @throws AlreadyThreePowerUps if player has already three power up and the drawn card has a power up.
      */
-    private void addPowerUp(PowerUpCard powerUpCard) throws AlreadyThreePowerUps {
+    private void addPowerUp(PowerUpCard powerUpCard) {
 
-        if(playerPowerUps.size()==3 && powerUpCard!=null){
-
-            throw new AlreadyThreePowerUps();
-        }else{
-
-            playerPowerUps.add(powerUpCard);
-        }
+        this.playerPowerUps.add(powerUpCard);
     }
 
     /**
-     * Remove power up card from player power up.
+     * Removes a power up card from player power up.
      *
      * @param powerUpCard the power up card to delete from player power up.
-     * @throws NoPowerUpCard if the list of power up is empty.
      */
-    public void removePowerUp(PowerUpCard powerUpCard) throws NoPowerUpCard {
+    public void removePowerUp(PowerUpCard powerUpCard){
 
-        if(playerPowerUps.size()==0){
-
-            throw new NoPowerUpCard();
-        }else {
-
-            playerPowerUps.remove(powerUpCard);
-        }
+        this.playerPowerUps.remove(powerUpCard);
     }
     
     /**
-     * Increase by one the number of deaths.
+     * Increases by one the number of deaths of the player.
      */
     public void increaseNumberOfDeaths() {
 
-        numberOfDeaths += 1;
+        this.numberOfDeaths += 1;
     }
     
     /**
-     * Decrease the value of board depending on the number of deaths of the player.
+     * Decreases the value of board depending of the number of deaths of the player.
      */
     public void decreaseBoardValue() {
 
         if (numberOfDeaths == 0) {
 
-            boardValue = 8;
+            this.boardValue = 8;
         } else if (numberOfDeaths == 1) {
 
-            boardValue = 6;
+            this.boardValue = 6;
         } else if (numberOfDeaths == 2) {
 
-            boardValue = 4;
+            this.boardValue = 4;
         } else if (numberOfDeaths == 3) {
 
-            boardValue = 2;
+            this.boardValue = 2;
         } else if (numberOfDeaths == 4) {
 
-            boardValue = 1;
+            this.boardValue = 1;
         }
     }
 
     /**
-     * Add a new weapon card in player weapons.
+     * Adds a new weapon card in player weapons.
      *
      * @param weaponCard the weapon card to add in player weapons.
-     * @throws AlreadyThreeWeapons if the player has already three weapons.
      */
-    public void addWeapon(WeaponCard weaponCard) throws AlreadyThreeWeapons {
+    public void addWeapon(WeaponCard weaponCard) {
 
-        if(playerWeapons.size()==3){
-
-            throw new AlreadyThreeWeapons();
-        }else {
-
-            playerWeapons.add(weaponCard);
-        }
+        this.playerWeapons.add(weaponCard);
     }
     
     /**
-     * Remove weapon card from player weapons.
+     * Removes weapon card from player weapons.
      *
      * @param weaponCard the weapon card to delete from player power up.
      */
-    public void removeWeapon(WeaponCard weaponCard) throws NoWeaponsCard {
+    public void removeWeapon(WeaponCard weaponCard) {
 
-        if(playerWeapons.size()==0){
-
-            throw new NoWeaponsCard();
-        }else {
-
-            playerWeapons.remove(weaponCard);
-        }
+        this.playerWeapons.remove(weaponCard);
     }
     
     /**
-     * Increase damages adding a single damage .
+     * Increases damages of the damaged player, adding a single damage of the player's color who did the damage.
      *
-     * @param damage color of the player who did the damage.
+     * @param colorOfDamage damage of the player's color who did the damage.
      */
-    public void increaseDamages(EnumColorPlayer damage) {
+    public void increaseDamages(EnumColorPlayer colorOfDamage) {
 
-        this.damages.add(damage);
+        this.damages.add(colorOfDamage);
     }
     
     /**
-     * Increase damages adding multiple damage.
+     * Increases damages of the damaged player, adding multiple damages of the player's color who did the damages.
      *
-     * @param damages list of color of the player who did the damage.
+     * @param colorOfDamages list of damages of the player's color who did the damage.
      */
-    public void increaseDamages(ArrayList<EnumColorPlayer> damages) {
+    public void increaseDamages(ArrayList<EnumColorPlayer> colorOfDamages) {
 
-        this.damages.addAll(damages);
+        this.damages.addAll(colorOfDamages);
     }
     
     /**
-     * Reset damage.
+     * Resets damage in the player board.
      */
     public void resetDamage() {
 
-        damages.clear();
+        this.damages.clear();
     }
 
     /**
-     * Increase marks adding a single mark.
-     * It increase marks only if the number of marks of the specified color is less then three.
+     * Increases marks of the marked player, adding a single mark of the player's color who made the mark.
+     * Increases marks of the marked player only if, the number of marks of the specified color(the parameter's color), is less then three.
      *
-     * @param colorOfMark color of the player who made a mark.
+     * @param colorOfMark mark of the player's color who made a mark.
      */
     public void increaseMarks(EnumColorPlayer colorOfMark){
 
@@ -334,25 +302,26 @@ public class PlayerBoard {
     }
 
     /**
-     * Increase marks adding multiple marks.
-     * It increase marks up to a maximum of three marks of the color of the marks to add.
+     * Increases marks of the marked player, adding multiple marks of the player's color who made the marks.
+     * The marks of the marked player can be increased until reaching the maximum value of three for each color.e
      *
-     * @param marks list of color of the player who made the marks
+     * @param colorOfMarks list of marks of the player's color who made the marks.
      */
-    public void increaseMarks(ArrayList<EnumColorPlayer> marks) {
+    public void increaseMarks(ArrayList<EnumColorPlayer> colorOfMarks) {
 
-        if(colorOccurenceInMarks(marks.get(0))+marks.size()>3){
+        if(colorOccurenceInMarks(colorOfMarks.get(0))+colorOfMarks.size()>3){
 
-            while(colorOccurenceInMarks(marks.get(0))<3) {
+            while(colorOccurenceInMarks(colorOfMarks.get(0))<3) {
 
-                this.marks.add(marks.get(0));
-                marks.remove(0);
+                this.marks.add(colorOfMarks.get(0));
             }
         }else {
 
-            this.marks.addAll(marks);
+            this.marks.addAll(colorOfMarks);
         }
     }
+
+    //todo ripartire da qui 
 
     /**
      * Remove from marks all the occurrences of a color.
