@@ -321,7 +321,7 @@ public class PlayerBoard {
         }
     }
 
-    //todo ripartire da qui 
+    //todo ripartire da qui
 
     /**
      * Remove from marks all the occurrences of a color.
