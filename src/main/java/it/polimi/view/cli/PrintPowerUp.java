@@ -1,6 +1,5 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.Player;
 import it.polimi.model.PowerUpCard;
 
 import java.io.Serializable;
