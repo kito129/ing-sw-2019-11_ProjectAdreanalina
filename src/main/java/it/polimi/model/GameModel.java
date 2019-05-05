@@ -14,6 +14,7 @@ public class GameModel {
     private PowerUpDeck powerUpDeck;
     private WeaponDeck weaponDeck;
     private Player actualPlayer;
+    RoundActionModel roundActionModel;
     
     /**
      * Sets actual player.
@@ -93,5 +94,10 @@ public class GameModel {
     public WeaponDeck getWeaponDeck() {
 
         return weaponDeck;
+    }
+    
+    public RoundActionModel getRoundActionModel () {
+        
+        return roundActionModel;
     }
 }

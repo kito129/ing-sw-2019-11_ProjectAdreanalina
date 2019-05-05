@@ -1,5 +1,7 @@
 package it.polimi.model;
 
+import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
+
 import java.util.ArrayList;
 
 /**
@@ -92,7 +94,7 @@ public class Map {
  
      * @return minimum distance between A and B
      */
-    public int distancePlayer(Player playerA,Player playerB){
+    public int distance (Player playerA, Player playerB){
         if(playerA.getRow()==playerB.getRow() && playerA.getColumn()==playerB.getColumn()) {
             return 0;
         }
@@ -107,11 +109,11 @@ public class Map {
      * @param b    Square to search
      * @return minimum distance between A and B
      */
-    public int distance(Square a, Square b, int dist){
+    public int distance(Square a, Square b){
         if(a.getRow()==b.getRow() && a.getColumn()==b.getColumn()) {
             return 0;
         }else
-            return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),dist);
+            return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),1);
         }
 
     /**
@@ -360,43 +362,100 @@ public class Map {
     }
     
     /**
-     * Player on my row array list.
+     * Player on my North Cardinal direction array list.
      *
-     * @param player the player
-     * @return the array list
+     * @param player PLayer in Input
+     * @return ArrayList contain Player in my North Cardinal Direction
      */
-    public ArrayList<Player> playerOnMyRow(Player player){
+    public ArrayList<Player> playerOnMyNorth(Player player){
 
         ArrayList<Player> tempPlayer =new ArrayList<>();
         for (Square a: this.squares){
 
-            if(a.getRow()==player.getRow()){
+            if(a.getColumn()==player.getColumn() && a.getRow()<player.getRow()){
 
                 tempPlayer.addAll(a.getPlayers());
             }
         }
-        tempPlayer.remove(player);
         return tempPlayer;
     }
     
     /**
-     * Player on my colunm array list.
+     * Player on my Est Cardinal direction array list.
      *
-     * @param player the player
-     * @return the array list
+     * @param player PLayer in Input
+     * @return ArrayList contain Player in my Est Cardinal Direction
      */
-    public ArrayList<Player> playerOnMyColunm(Player player){
-
+    public ArrayList<Player> playerOnMyEst(Player player){
+        
         ArrayList<Player> tempPlayer =new ArrayList<>();
         for (Square a: this.squares){
-
-            if(a.getColumn()==player.getColumn()){
-
+    
+            if(a.getRow()==player.getRow() && a.getColumn()>player.getColumn()){
+                
                 tempPlayer.addAll(a.getPlayers());
             }
         }
-        tempPlayer.remove(player);
         return tempPlayer;
+    }
+    
+    /**
+     * Player on my West Cardinal direction array list.
+     *
+     * @param player PLayer in Input
+     * @return ArrayList contain Player in my West Direction
+     */
+    public ArrayList<Player> playerOnMyWest(Player player){
+        
+        ArrayList<Player> tempPlayer =new ArrayList<>();
+        for (Square a: this.squares){
+    
+            if(a.getRow()==player.getRow() && a.getColumn()<player.getColumn()){
+                
+                tempPlayer.addAll(a.getPlayers());
+            }
+        }
+        return tempPlayer;
+    }
+    
+    /**
+     * Player on South Cardinal direction array list.
+     *
+     * @param player PLayer in Input
+     * @return ArrayList contain Player in my South Cardinal Direction
+     */
+    public ArrayList<Player> playerOnMySouth(Player player){
+        
+        ArrayList<Player> tempPlayer =new ArrayList<>();
+        for (Square a: this.squares){
+    
+            if(a.getColumn()==player.getColumn() && a.getRow()>player.getRow()){
+                
+                tempPlayer.addAll(a.getPlayers());
+            }
+        }
+        return tempPlayer;
+    }
+    
+    public void existInMap(Square square) throws SquareNotExistException {
+        
+        boolean found=false;
+        
+        for (Square a:squares) {
+            if (a.getRow() == square.getRow() && a.getColumn() == square.getColumn()) {
+                
+                found = true;
+            }
+        }
+        if(!found){
+            
+            throw new SquareNotExistException();
+        }
+    }
+    
+    public boolean isGenerationSquare(Square square){
+    
+        return square.getClass().equals(GenerationSquare.class);
     }
     
 }

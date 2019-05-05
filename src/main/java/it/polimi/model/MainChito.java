@@ -150,13 +150,13 @@ public class MainChito {
         System.out.println(mappa.findPlayer(playerB));
         System.out.println(mappa.isInMySquare(playerA,playerB));
         
-        System.out.println(mappa.distancePlayer(playerA,playerB));
+        System.out.println(mappa.distance(playerA,playerB));
     
         mappa.movePlayer(playerA,mappa.getSquare(2,1));
         System.out.println(playerA.toString());
         System.out.println(playerB.toString());
         
-        System.out.println(mappa.distancePlayer(playerA,playerB));
+        System.out.println(mappa.distance(playerA,playerB));
         System.out.println(mappa.isInMySquare(playerA,playerB));
         System.out.println(mappa.sameDirection(playerA,playerB));
         System.out.println(mappa.playerOnMyRow(playerA).get(0).toString());
