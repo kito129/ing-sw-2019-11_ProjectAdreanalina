@@ -19,7 +19,7 @@ public class RoundActionModel {
         }
     }
     
-    public void cathActionModel(Map map, Player actualPlayer, Square tagetSquare, int weaponIndex) throws CatchActionMaxDistException, CatchActionFullObjException {
+    public void catchActionModel (Map map, Player actualPlayer, Square tagetSquare, int weaponIndex) throws CatchActionMaxDistException, CatchActionFullObjException {
         
         //adrenalinic distance
         int maxDist;

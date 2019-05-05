@@ -60,7 +60,7 @@ public class RoundActionController {
         //effective catch gia con l'index giusto se è una Generation Square
         try {
             
-            gameModel.getRoundActionModel().cathActionModel(gameModel.getMap(),gameModel.getActualPlayer(),inputSquare,indexWeapon);
+            gameModel.getRoundActionModel().catchActionModel(gameModel.getMap(),gameModel.getActualPlayer(),inputSquare,indexWeapon);
         } catch (CatchActionMaxDistException catchActionMaxDistExpetion) {
         
         } catch (CatchActionFullObjException e) {
