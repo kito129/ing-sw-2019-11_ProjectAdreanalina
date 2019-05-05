@@ -1,14 +1,14 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
-import it.polimi.model.Exception.InvalidActionForThisCard;
+import it.polimi.model.Exception.NotVisibleTarget;
 
 /**
- * The type Tag back granate.
+ * The type Tag back grenade.
  */
 public class TagBackGrenade extends PowerUpCard {
-    
+
     /**
-     * Instantiates a new Tag back granate.
+     * Instantiates a new Tag back grenade.
      *
      * @param colorCard the color card
      */
@@ -17,40 +17,24 @@ public class TagBackGrenade extends PowerUpCard {
         super("TAGBACK GRANATE", colorCard);
     }
 
-    public void effect(Map map, Player currentPlayer, Player damagedPlayer) throws InvalidActionForThisCard {
+    /**
+     * Gives to the current player who did damage, one mark of the damaged player's color.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the player who did damage.
+     * @param damagedPlayer the player who made the mark.
+     * @throws NotVisibleTarget if the damaged player can't see the current player who did the damage
+     */
+    public void effect(Map map, Player currentPlayer, Player damagedPlayer) throws NotVisibleTarget {
 
-        if(map.isVisible(currentPlayer,damagedPlayer)){
+        if (map.isVisible(currentPlayer, damagedPlayer)) {
 
             currentPlayer.singleMark(damagedPlayer.getColor());
-        }else {
+        } else {
 
-            throw new InvalidActionForThisCard();
+            throw new NotVisibleTarget();
         }
     }
 
-
-
-    /*
-    /**
-     * Effect.
-     *
-     * @param gameModel     the game model
-     * @param damagedPlayer the damaged player
-
-    public void effect(GameModel gameModel,Player damagedPlayer){
-
-        if(gameModel.getMap().isVisible(gameModel.getActualPlayer().getRow(),gameModel.getActualPlayer().getColumn(),damagedPlayer.getRow(),damagedPlayer.getColumn())){
-
-            EnumColorPlayer colorOfDamagedPlayer = damagedPlayer.getColor();
-            Player actualPlayer=gameModel.getActualPlayer();
-            actualPlayer.getPlayerBoard().increaseDamages(colorOfDamagedPlayer);
-        }else{
-
-
-        }
-    }
-
-     */
 
 }
-

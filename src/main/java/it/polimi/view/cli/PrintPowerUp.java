@@ -13,7 +13,7 @@ public class PrintPowerUp implements Serializable {
      */
     public static void print(ArrayList<PowerUpCard> powerUpCards){
         for(int i=0; i<powerUpCards.size(); i++){
-            PowerUpCard puc = powerUpCards.get();
+            PowerUpCard puc = powerUpCards.get(i);
             System.out.println("NAME: " +puc.getNameCard());
             System.out.println("COLOR: " +puc.getColorPowerUpCard());
         }

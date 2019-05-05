@@ -1,71 +1,44 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
-import it.polimi.model.Exception.InvalidActionForThisCard;
+import it.polimi.model.Exception.NotInSameDirection;
+import it.polimi.model.Exception.NotValidDistance;
 
 /**
  * The type Newton.
  */
 public class Newton extends PowerUpCard {
-    
+
     /**
      * Instantiates a new Newton.
      *
      * @param colorCard the color of the card
      */
-    public Newton(EnumColorCardAndAmmo colorCard) {
+    public Newton(EnumColorCardAndAmmo colorCard){
 
         super("NEWTON", colorCard);
     }
 
-    public void effect(Map map, Square destSquare, Player target) throws InvalidActionForThisCard {
-
-        if((map.sameDirection(destSquare,map.findPlayer(target))) && (map.distance(destSquare,map.findPlayer(target),1)<3)){
-
-            map.movePlayer(target,destSquare);
-        }else{
-
-            throw new InvalidActionForThisCard();
-        }
-
-
-    }
-
-    // TOdo da eliminare funzioni qua sotto.
-    /*
     /**
-     * Effect.
+     * Moves the target by one or two square in the same direction.
      *
-     * @param gameModel the game model
-     * @param rd        the row destination
-     * @param cd        the column designation
-     * @param target    the target
-
-    public void effect(GameModel gameModel, int rd, int cd, Player target){
-
-        if((gameModel.getMap().sameDirection(gameModel.getMap().findPlayer(target),gameModel.getMap().getSquare(rd,cd))) && (3>gameModel.getMap().distance(target.getRow(),target.getColumn(),rd,cd,1))){
-
-            gameModel.getMap().movePlayer(target,gameModel.getMap().getSquare(rd,cd));
-        }
-    }
-    
-    /**
-     * Effect.
-     *
-     * @param gameModel  the game model
-     * @param destSquare the dest square
-     * @param target     the target
-
-    public void effect(GameModel gameModel, Square destSquare, Player target) {
-
-        Square actualSquare = gameModel.getMap().getSquare(target.getRow(), target.getColumn());
-        if ((gameModel.getMap().sameDirection(destSquare, actualSquare)) && (3 > gameModel.getMap().distance(destSquare, actualSquare, 1))) {
-
-            gameModel.getMap().movePlayer(target, destSquare);
-        }
-
-    }
-
+     * @param map the map of the game.
+     * @param destSquare the destination square of the target.
+     * @param target player you want to move.
+     * @throws NotInSameDirection if the destination square in not in the same direction with the actual target's square.
+     * @throws NotValidDistance if the destination square is more than two squares away from the actual target's square.
      */
+    public void effect(Map map, Square destSquare, Player target) throws NotInSameDirection,NotValidDistance{
 
+        if ((map.sameDirection(destSquare, map.findPlayer(target))) && (map.distance(destSquare, map.findPlayer(target), 1) < 3)) {
+
+            map.movePlayer(target, destSquare);
+        }else if ((map.sameDirection(destSquare, map.findPlayer(target))) == false) {
+
+            throw new NotInSameDirection();
+        }else if (map.distance(destSquare, map.findPlayer(target), 1) < 3){
+
+            throw new NotValidDistance();
+        }
+    }
 
 }

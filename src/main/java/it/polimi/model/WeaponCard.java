@@ -7,22 +7,22 @@ import java.util.ArrayList;
  */
 public class WeaponCard {
 
-    protected String nameCard;
+    protected String nameWeaponCard;
     protected ArrayList<EnumColorCardAndAmmo> rechargeCost;
-    protected EnumColorCardAndAmmo colorCard;
+    protected EnumColorCardAndAmmo colorWeaponCard;
     protected boolean isCharge;
 
     /**
      * Instantiates a new weapon card.
-     * Sets the field is charge to true.
+     * Sets the field is charge true.
      *
      * @param nameCard the name of card.
      * @param colorCard the color of card
      */
     public WeaponCard(String nameCard, EnumColorCardAndAmmo colorCard){
 
-        this.nameCard=nameCard;
-        this.colorCard=colorCard;
+        this.nameWeaponCard =nameCard;
+        this.colorWeaponCard =colorCard;
         this.isCharge=true;
     }
 
@@ -31,9 +31,9 @@ public class WeaponCard {
      *
      * @return the name card
      */
-    public String getNameCard() {
+    public String getNameWeaponCard() {
 
-        return nameCard;
+        return nameWeaponCard;
     }
 
     /**
@@ -51,9 +51,9 @@ public class WeaponCard {
      *
      * @return the color card.
      */
-    public EnumColorCardAndAmmo getColorCard() {
+    public EnumColorCardAndAmmo getColorWeaponCard() {
 
-        return colorCard;
+        return colorWeaponCard;
     }
 
     /**

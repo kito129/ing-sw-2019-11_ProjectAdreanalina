@@ -2,7 +2,9 @@ package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
 import it.polimi.model.Exception.InvalidActionForThisCard;
+import it.polimi.model.Exception.NoTargetInSquare;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 public class Electroscythe extends WeaponCard {
@@ -11,8 +13,8 @@ public class Electroscythe extends WeaponCard {
 
     /**
      * Instantiates a new Lock Electoscythe card.
-     * Creates the list of recharge cost setting its value to BLU.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
+     * Creates the list of recharge cost setting its value to BLU.
      * Creates the list of reaper mode cost (cost of alternative fire mode) settings it to BLU,RED.
      */
     public Electroscythe() {
@@ -30,49 +32,44 @@ public class Electroscythe extends WeaponCard {
         return reaperModeCost;
     }
 
-    public void basicMode(Map map, Player currentPlayer) throws InvalidActionForThisCard {
+    public void baseMode(Map map, Player currentPlayer) throws NoTargetInSquare {
 
-        ArrayList<Player> allInCurrentSquare=new ArrayList<>();
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
-        allInCurrentSquare=map.playersOnSquare(squareOfCurrentPlayer);
-        if(allInCurrentSquare.size()>1){
+        ArrayList<Player> playersOnSquare = map.playersOnSquare(squareOfCurrentPlayer);
+        playersOnSquare.remove(currentPlayer);
+        if(playersOnSquare.size()>0){
 
-            for(Player p:allInCurrentSquare){
+            for(Player p:playersOnSquare) {
 
-                if(p!=currentPlayer){
-
-                    p.singleDamage(currentPlayer.getColor());
-                }
+                p.singleDamage(currentPlayer.getColor());
             }
         }else {
 
-            throw new InvalidActionForThisCard();
+            throw new NoTargetInSquare();
         }
     }
 
-    public void reaperMode(Map map,Player currentPlayer) throws InvalidActionForThisCard {
+    public void reaperMode(Map map,Player currentPlayer) throws NoTargetInSquare {
 
-        ArrayList<Player> allInCurrentSquare=new ArrayList<>();
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
-        allInCurrentSquare=map.playersOnSquare(squareOfCurrentPlayer);
-        if(allInCurrentSquare.size()>1){
+        ArrayList<Player> playersOnSquare = map.playersOnSquare(squareOfCurrentPlayer);
+        playersOnSquare.remove(currentPlayer);
+        if(playersOnSquare.size()>0){
 
-            for(Player p:allInCurrentSquare){
+            for(Player p:playersOnSquare) {
 
-                if(p!=currentPlayer){
-
-                    p.singleDamage(currentPlayer.getColor());
-                    p.singleDamage(currentPlayer.getColor());
-                }
+                p.singleDamage(currentPlayer.getColor());
+                p.singleDamage(currentPlayer.getColor());
             }
         }else {
 
-            throw new InvalidActionForThisCard();
+            throw new NoTargetInSquare();
         }
     }
-
-
-
-
-
 }
+
+
+
+
+
+

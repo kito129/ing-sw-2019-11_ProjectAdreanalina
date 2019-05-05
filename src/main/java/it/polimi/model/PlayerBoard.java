@@ -18,7 +18,7 @@ public class PlayerBoard {
     private ArrayList<EnumColorPlayer> marks;
     private ArrayList<WeaponCard> playerWeapons;
     private ArrayList<PowerUpCard> playerPowerUps;
-    
+
     /**
      * Instantiates a new Player board, setting ammo, board value and number of deaths to the start value.
      * Instantiates two ArrayList of Color player for the damages and marks, an ArrayList of weapon card
@@ -36,7 +36,7 @@ public class PlayerBoard {
         playerWeapons = new ArrayList<WeaponCard>();
         playerPowerUps = new ArrayList<PowerUpCard>();
     }
-    
+
     /**
      * Gets ammo y.
      *
@@ -46,7 +46,7 @@ public class PlayerBoard {
 
         return ammoY;
     }
-    
+
     /**
      * Gets ammo r.
      *
@@ -56,7 +56,7 @@ public class PlayerBoard {
 
         return ammoR;
     }
-    
+
     /**
      * Gets ammo b.
      *
@@ -66,7 +66,7 @@ public class PlayerBoard {
 
         return ammoB;
     }
-    
+
     /**
      * Gets board value.
      *
@@ -76,7 +76,7 @@ public class PlayerBoard {
 
         return boardValue;
     }
-    
+
     /**
      * Gets number of deaths.
      *
@@ -86,7 +86,7 @@ public class PlayerBoard {
 
         return numberOfDeaths;
     }
-    
+
     /**
      * Gets damages.
      *
@@ -96,7 +96,7 @@ public class PlayerBoard {
 
         return damages;
     }
-    
+
     /**
      * Gets marks.
      *
@@ -106,7 +106,7 @@ public class PlayerBoard {
 
         return marks;
     }
-    
+
     /**
      * Gets player weapons.
      *
@@ -116,7 +116,7 @@ public class PlayerBoard {
 
         return playerWeapons;
     }
-    
+
     /**
      * Gets player power ups.
      *
@@ -126,30 +126,30 @@ public class PlayerBoard {
 
         return playerPowerUps;
     }
-    
+
     /**
      * Manages the draft of ammo card, increasing the fields of ammo and adding to the list of power up, if is present,
      * the power up shown in the ammo card drawn
      *
      * @param ammoCard the ammo card drawn by the player.
      */
-    public void manageAmmoCard(AmmoCard ammoCard){
+    public void manageAmmoCard(AmmoCard ammoCard) {
 
-        if(ammoCard.getPowerUpCard()!=null){
+        if (ammoCard.getPowerUpCard() != null) {
 
             addPowerUp(ammoCard.getPowerUpCard());
         }
-        increaseAmmo(ammoCard.getAmmoY(),ammoCard.getAmmoR(),ammoCard.getAmmoB());
+        increaseAmmo(ammoCard.getAmmoY(), ammoCard.getAmmoR(), ammoCard.getAmmoB());
     }
 
     /**
      * Increases the value of ammo in the player board up to maximum of three for each field.
      *
      * @param yellowAmmo the number of yellow ammo to add.
-     * @param redAmmo the number of red ammo to add.
-     * @param bluAmmo the number of blu ammo to add.
+     * @param redAmmo    the number of red ammo to add.
+     * @param bluAmmo    the number of blu ammo to add.
      */
-    private void increaseAmmo(int yellowAmmo, int redAmmo, int bluAmmo) {
+    public void increaseAmmo(int yellowAmmo, int redAmmo, int bluAmmo) {
 
         if (this.ammoY + yellowAmmo > 3) {
 
@@ -173,7 +173,7 @@ public class PlayerBoard {
             this.ammoB += bluAmmo;
         }
     }
-    
+
     /**
      * Decreases the value of ammo in the player board.
      *
@@ -181,7 +181,7 @@ public class PlayerBoard {
      * @param ammoR the number of red ammo to remove.
      * @param ammoB the number of blu ammo to remove.
      */
-    public void decreaseAmmo(int ammoY, int ammoR, int ammoB){
+    public void decreaseAmmo(int ammoY, int ammoR, int ammoB) {
 
         this.ammoY -= ammoY;
         this.ammoR -= ammoR;
@@ -193,7 +193,7 @@ public class PlayerBoard {
      *
      * @param powerUpCard the power up card to add in player power up.
      */
-    private void addPowerUp(PowerUpCard powerUpCard) {
+    public void addPowerUp(PowerUpCard powerUpCard) {
 
         this.playerPowerUps.add(powerUpCard);
     }
@@ -203,11 +203,11 @@ public class PlayerBoard {
      *
      * @param powerUpCard the power up card to delete from player power up.
      */
-    public void removePowerUp(PowerUpCard powerUpCard){
+    public void removePowerUp(PowerUpCard powerUpCard) {
 
         this.playerPowerUps.remove(powerUpCard);
     }
-    
+
     /**
      * Increases by one the number of deaths of the player.
      */
@@ -215,7 +215,7 @@ public class PlayerBoard {
 
         this.numberOfDeaths += 1;
     }
-    
+
     /**
      * Decreases the value of board depending of the number of deaths of the player.
      */
@@ -248,7 +248,7 @@ public class PlayerBoard {
 
         this.playerWeapons.add(weaponCard);
     }
-    
+
     /**
      * Removes weapon card from player weapons.
      *
@@ -258,7 +258,7 @@ public class PlayerBoard {
 
         this.playerWeapons.remove(weaponCard);
     }
-    
+
     /**
      * Increases damages of the damaged player, adding a single damage of the player's color who did the damage.
      *
@@ -268,7 +268,7 @@ public class PlayerBoard {
 
         this.damages.add(colorOfDamage);
     }
-    
+
     /**
      * Increases damages of the damaged player, adding multiple damages of the player's color who did the damages.
      *
@@ -278,7 +278,7 @@ public class PlayerBoard {
 
         this.damages.addAll(colorOfDamages);
     }
-    
+
     /**
      * Resets damage in the player board.
      */
@@ -293,9 +293,9 @@ public class PlayerBoard {
      *
      * @param colorOfMark mark of the player's color who made a mark.
      */
-    public void increaseMarks(EnumColorPlayer colorOfMark){
+    public void increaseMarks(EnumColorPlayer colorOfMark) {
 
-        if(colorOccurenceInMarks(colorOfMark)<3) {
+        if (colorOccurenceInMarks(colorOfMark) < 3) {
 
             this.marks.add(colorOfMark);
         }
@@ -303,63 +303,73 @@ public class PlayerBoard {
 
     /**
      * Increases marks of the marked player, adding multiple marks of the player's color who made the marks.
-     * The marks of the marked player can be increased until reaching the maximum value of three for each color.e
+     * The marks of the marked player can be increased until reaching the maximum value of three for each colors.
      *
      * @param colorOfMarks list of marks of the player's color who made the marks.
      */
     public void increaseMarks(ArrayList<EnumColorPlayer> colorOfMarks) {
 
-        if(colorOccurenceInMarks(colorOfMarks.get(0))+colorOfMarks.size()>3){
+        if (colorOccurenceInMarks(colorOfMarks.get(0)) + colorOfMarks.size() > 3) {
 
-            while(colorOccurenceInMarks(colorOfMarks.get(0))<3) {
+            while (colorOccurenceInMarks(colorOfMarks.get(0)) < 3) {
 
                 this.marks.add(colorOfMarks.get(0));
             }
-        }else {
+        } else {
 
             this.marks.addAll(colorOfMarks);
         }
     }
 
-    //todo ripartire da qui
-
     /**
-     * Remove from marks all the occurrences of a color.
+     * Removes from the player's marks all the occurrences of one color.
      *
      * @param colorOfMark the color we want to delete the occurrences.
-     * @return List of color of all occurrences deleted.
+     * @return List of all marks deleted.
      */
-
     public ArrayList<EnumColorPlayer> removeMarkOfColor(EnumColorPlayer colorOfMark) {
 
-        ArrayList<EnumColorPlayer> markToAdd = new ArrayList<EnumColorPlayer>();
-
+        ArrayList<EnumColorPlayer> marksRemoved = new ArrayList<EnumColorPlayer>();
         for (int i = 0; i < marks.size(); i++) {
 
             if (marks.get(i) == colorOfMark) {
 
-                markToAdd.add(marks.get(i));
+                marksRemoved.add(marks.get(i));
                 marks.remove(i);
                 i--;
             }
         }
-        return markToAdd;
+        return marksRemoved;
+    }
+
+    // todo chiede al prof perche non va.
+    public ArrayList<EnumColorPlayer> removeMarkOfColor1(EnumColorPlayer colorOfMark) {
+
+        ArrayList<EnumColorPlayer> marksRemoved = new ArrayList<EnumColorPlayer>();
+        for (EnumColorPlayer color : marks) {
+
+            if (color == colorOfMark) {
+
+                marksRemoved.add(color);
+                marks.remove(color);
+            }
+        }
+        return marksRemoved;
     }
 
     /**
-     * Uses the function increase damage and remove mark of color to remove marks from the list of marks
-     * and add these in the list of damages.
+     * Shifts all the occurrences of one color from the list of marks, to the list of damages.
      *
-     * @param colorOfMark color of mark to shift from the list of mark to the list of damages
+     * @param colorOfMark color of marks to shift from the list of marks to the list of damages.
      */
 
-    public void shiftMarks(EnumColorPlayer colorOfMark){
+    public void shiftMarks(EnumColorPlayer colorOfMark) {
 
         increaseDamages(removeMarkOfColor(colorOfMark));
     }
 
     /**
-     * Verify if a color is present in the list of marks.
+     * Verifies if one color is present in the list of marks.
      *
      * @param color color we want to know if is present.
      * @return true if the color is present, false otherwise.
@@ -377,30 +387,12 @@ public class PlayerBoard {
         return false;
     }
 
-    /*  public void removeMarkOfColor1(EnumColorPlayer colorOfMark) {
-
-        for (EnumColorPlayer color:marks) {
-
-            if (color==colorOfMark) {
-
-
-                marks.remove(color);
-
-                marks.remove(colorOfMark);
-
-            }
-        }
-    }
-
-    */
-    
     /**
-     * Count the number of occurrences of a color in the list of damages.
+     * Counts the number of occurrences of one color in the list of damages.
      *
      * @param colorPlayer color we want to know the number of occurrences.
      * @return the number of occurrences of the given color.
      */
-
     public int colorOccurenceInDamages(EnumColorPlayer colorPlayer) {
 
         int count = 0;
@@ -411,20 +403,15 @@ public class PlayerBoard {
                 count++;
             }
         }
-        if (damages.get(0) == colorPlayer) {      // todo questo pezza non va messo qui...va messo quando si calcolano i punti dela plancia, qui si contano solo le occorrenze
-
-            count++;
-        }
         return count;
     }
-    
+
     /**
      * Count the number of occurrences of a color in the list of marks.
      *
      * @param colorPlayer color we want to know the number of occurrences.
      * @return the number of occurrences of the given color.
      */
-
     public int colorOccurenceInMarks(EnumColorPlayer colorPlayer) {
 
         int count = 0;
@@ -437,8 +424,6 @@ public class PlayerBoard {
         }
         return count;
     }
-
-
 
 
 }

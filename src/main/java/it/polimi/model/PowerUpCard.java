@@ -11,8 +11,8 @@ public class PowerUpCard {
     /**
      * Instantiates a new Power up card.
      *
-     * @param namePowerUpCard the name power up card
-     * @param colorCard       the color card
+     * @param namePowerUpCard the name of power up card.
+     * @param colorCard       the card's color.
      */
     public PowerUpCard(String namePowerUpCard, EnumColorCardAndAmmo colorCard) {
 

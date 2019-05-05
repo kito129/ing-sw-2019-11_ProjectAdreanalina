@@ -1,7 +1,5 @@
 package it.polimi.model;
 
-import it.polimi.model.Exception.AlreadyThreePowerUps;
-
 import java.util.ArrayList;
 
 /**
@@ -34,6 +32,7 @@ public class Player {
         score = 0;
         alive = true;
         playerBoard = new PlayerBoard();
+
         // TODO vedere come gestire posizione in fase di inizializzazione.io inizialmente le metterei a  null quando vengono istanziati
     
     }
@@ -109,7 +108,7 @@ public class Player {
     }
     
     /**
-     * Gets the value of the field alive
+     * Gets the value of the field alive.
      *
      * @return true if the player is alive, false otherwise.
      */
@@ -121,7 +120,7 @@ public class Player {
     /**
      * Sets the column
      *
-     * @param column the column we want to set to the player
+     * @param column the column we want to set to the player.
      */
     private void setColumn (int column) {
         
@@ -131,7 +130,7 @@ public class Player {
     /**
      * Sets the row
      *
-     * @param row the row we want to set to the player
+     * @param row the row we want to set to the player.
      */
     private void setRow (int row) {
         
@@ -141,8 +140,8 @@ public class Player {
     /**
      * Sets position of player assigning a row and a column.
      *
-     * @param r the row
-     * @param c the column
+     * @param r the row.
+     * @param c the column.
      */
     public void setPosition (int r, int c) {
     
@@ -168,16 +167,9 @@ public class Player {
     public void increaseScore (int scoreToAdd) {
 
         this.score += scoreToAdd;
-
     }
     
-    @Override
-    public String toString () {
-        
-        return "Player: " + this.id + " name: " + this.name + " r: " + this.row + " c: " + this.column;
-    }
-
-    public void catchAmmoCard(AmmoCard ammoCard) throws AlreadyThreePowerUps {
+    public void catchAmmoCard(AmmoCard ammoCard){
 
         this.playerBoard.manageAmmoCard(ammoCard);
     }
@@ -206,6 +198,12 @@ public class Player {
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);
         this.playerBoard.increaseMarks(marks);
+    }
+
+    @Override
+    public String toString () {
+
+        return "Player: " + this.id + " name: " + this.name + " r: " + this.row + " c: " + this.column;
     }
 
 

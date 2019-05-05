@@ -2,6 +2,7 @@ package it.polimi.model.Weapon;
 
 import it.polimi.model.EnumColorCardAndAmmo;
 import it.polimi.model.Exception.InvalidActionForThisCard;
+import it.polimi.model.Exception.NotVisibleTarget;
 import it.polimi.model.Map;
 import it.polimi.model.Player;
 import it.polimi.model.WeaponCard;
@@ -15,10 +16,10 @@ public class MachineGun extends WeaponCard {
 
     /**
      * Instantiates a new Machine Gun card.
-     * Creates the list of recharge cost settings its value to BLU,RED.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
+     * Creates the list of recharge cost settings its value to BLU,RED.
      * Creates the list of focus shot cost(cost of optional effect1) settings it to yellow.
-     * Creates the list of turret tripod cost(cost of optional effect2) settings it to yellow.
+     * Creates the list of turret tripod cost(cost of optional effect2) settings it to blu.
      */
     public MachineGun(){
 
@@ -42,44 +43,58 @@ public class MachineGun extends WeaponCard {
         return turretTripodCost;
     }
 
-    private void baseEffect(Map map,Player currentPlayer,Player baseTarget1,Player baseTarget2)throws InvalidActionForThisCard {
 
-        if (baseTarget2 == null) {
+    //todo assicurarsi che i due target in input siano diversi
 
-            if (map.isVisible(currentPlayer, baseTarget1)) {
+    public void baseEffect(Map map,Player currentPlayer,Player target1,Player target2) throws NotVisibleTarget {
 
-                baseTarget1.singleDamage(currentPlayer.getColor());
-            } else {
+        if ((map.isVisible(currentPlayer, target1)) && (map.isVisible(currentPlayer, target2))) {
 
-                throw new InvalidActionForThisCard();
-            }
-        } else {
+            target1.singleDamage(currentPlayer.getColor());
+            target2.singleDamage(currentPlayer.getColor());
+        }else {
 
-            if ((map.isVisible(currentPlayer, baseTarget1)) && (map.isVisible(currentPlayer, baseTarget2)) && (baseTarget1 != baseTarget2)) {
-
-                baseTarget1.singleDamage(currentPlayer.getColor());
-                baseTarget2.singleDamage(currentPlayer.getColor());
-            } else {
-
-                throw new InvalidActionForThisCard();
-            }
+            throw new NotVisibleTarget();
         }
     }
 
-    private void focusShot(Player currentPlayer,Player targetOfFocus){
 
-        targetOfFocus.singleDamage(currentPlayer.getColor());
+    public void baseEffect(Map map,Player currentPlayer, Player target1)throws NotVisibleTarget {
+
+        if (map.isVisible(currentPlayer, target1)) {
+
+            target1.singleDamage(currentPlayer.getColor());
+        } else {
+
+            throw new NotVisibleTarget();
+        }
     }
 
-    private void turretTripod(Player currentPlayer,Player targetOfTurret1,Player targetofTurret2){
+    //todo assicurarsi che il bersagli del focus a cui dai danno aggiuntivo sia lo stesso di uno dei due bersagli su cui hai usato effetto base.
 
+    public void focusShotEffect(Player currentPlayer,Player target1or2){
+
+        target1or2.singleDamage(currentPlayer.getColor());
     }
 
-    // todo capire dove mettere questa macro funzione , messa qui ha bisogno di troppi parametri, stesso discorso per la lockrifle.
-    public void effect(Map map,Player currentPlayer,Player baseTarget1,Player baseTarget2,boolean useFocusShot,boolean useTurretTripod){
+    // todo danno aggiuntivo del tripod all'altro dei due bersagli ( quello su cui non hai usato focus).assicurarsi che siano quindi diversi
 
+    public void turretTripodEffect(Player currentPlayer,Player target1or2){
 
-
-
+        target1or2.singleDamage(currentPlayer.getColor());
     }
+
+    //todo target 3 deve essere diverso da 1 e 2
+    public void turretTripodEffect(Map map,Player currentPlayer,Player target3) throws NotVisibleTarget {
+
+        if (map.isVisible(currentPlayer, target3)) {
+
+            target3.singleDamage(currentPlayer.getColor());
+        }else{
+
+            throw new NotVisibleTarget();
+        }
+    }
+
+
 }

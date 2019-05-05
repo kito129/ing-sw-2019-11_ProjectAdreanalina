@@ -20,29 +20,13 @@ public class TargetingScope extends PowerUpCard {
     /**
      * Gives to the target one damage of the color of current player.
      *
-     * @param currentPlayer the player who gives the damage
-     * @param target the player who gets the damage
+     * @param currentPlayer the player who gives the damage and uses this power up.
+     * @param target the player who gets one damage.
      */
     public void effect(Player currentPlayer, Player target){
 
         target.singleDamage(currentPlayer.getColor());
     }
-
-    //TOdo da eliminare funzione sotto
-    /*
-    /**
-     * Effect.
-     *
-     * @param gameModel the game model
-     * @param target    the target
-
-    public void effect(GameModel gameModel, Player target){
-
-        EnumColorPlayer damage = gameModel.getActualPlayer().getColor();
-        target.getPlayerBoard().increaseDamages(damage);
-    }
-
-     */
 
 
 }

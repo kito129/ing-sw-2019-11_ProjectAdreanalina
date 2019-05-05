@@ -2,6 +2,7 @@ package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
 import it.polimi.model.Exception.InvalidActionForThisCard;
+import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
 
@@ -11,8 +12,8 @@ public class LockRifle extends WeaponCard {
 
     /**
      * Instantiates a new Lock Rifle card.
-     * Creates the list of recharge cost settings its value to BLU,BLU.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
+     * Creates the list of recharge cost settings its value to BLU,BLU.
      * Creates the list of second lock cost(cost of optional effect 1) settings it to RED.
      */
     public LockRifle(){
@@ -30,51 +31,32 @@ public class LockRifle extends WeaponCard {
         return secondLockCost;
     }
 
-    private void baseEffect(Map map, Player currentPlayer, Player target) throws InvalidActionForThisCard {
+    public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
 
-        if(map.isVisible(currentPlayer,target)){
+        if(map.isVisible(currentPlayer,target1)){
 
             ArrayList<EnumColorPlayer> lockRifleDamages= new ArrayList<EnumColorPlayer>();
             lockRifleDamages.add(currentPlayer.getColor());
             lockRifleDamages.add(currentPlayer.getColor());
-            target.multipleDamagesSingleMark(lockRifleDamages,currentPlayer.getColor());
+            target1.multipleDamagesSingleMark(lockRifleDamages,currentPlayer.getColor());
         }else{
 
-            throw new InvalidActionForThisCard();
-        }
-    }
-
-    private void secondLock(Map map, Player currentPlayer, Player target)throws InvalidActionForThisCard {
-
-        if (map.isVisible(currentPlayer, target)){
-
-            target.singleMark(currentPlayer.getColor());
-        }else{
-
-            throw new InvalidActionForThisCard();
-        }
-    }
-
-    public void effect(Map map,Player currentPlayer,Player baseTarget,Player optionalTarget,boolean useSecondLock)throws InvalidActionForThisCard{
-
-        if(useSecondLock){
-
-            if(baseTarget!=optionalTarget){
-
-                baseEffect(map, currentPlayer, baseTarget);
-                secondLock(map, currentPlayer, optionalTarget);
-            }else{
-
-                throw new InvalidActionForThisCard();
-            }
-        }else{
-
-            baseEffect(map,currentPlayer,baseTarget);
+            throw new NotVisibleTarget();
         }
     }
 
 
+    //todo gestire il fatto che target 2 deve essere diverso da target 1
 
+    public void secondLockEffect(Map map, Player currentPlayer, Player target2)throws NotVisibleTarget {
 
+        if (map.isVisible(currentPlayer, target2)){
+
+            target2.singleMark(currentPlayer.getColor());
+        }else{
+
+            throw new NotVisibleTarget();
+        }
+    }
 
 }
