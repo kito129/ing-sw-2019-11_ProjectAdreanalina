@@ -11,7 +11,7 @@ public class PrintMenu implements Serializable {
      */
     public static void print(){
         System.out.println("WHAT MOVE DO YOU WANT TO MAKE? (PRESS -1 TO ABORT)");
-        System.out.println("1) VIEW YOUR ATTRIBUTE"); //printPlayer
+        System.out.println("1) VIEW YOUR ATTRIBUTE"); //name, posizione, score (printPlayer)
         System.out.println("2) VIEW YOUR WEAPONS"); //printWeapons
         System.out.println("3) VIEW YOUR POWERUP"); //printPowerUp
         System.out.println("2) VIEW YOUR AMMO"); //printAmmo
