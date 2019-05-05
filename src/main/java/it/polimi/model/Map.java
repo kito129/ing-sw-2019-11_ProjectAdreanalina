@@ -33,17 +33,17 @@ public class Map {
     }
     
     /**
-     * Search square passed row and column, they \represent the grid.
+     * Search square passed row and column, they represent the grid.
      *
      * @param row    row to search
-     * @param colomn column to search
-     * @return the square
+     * @param column column to search
+     * @return the square with passe coordinates
      */
-    public Square getSquare (int row, int colomn) {
+    public Square getSquare (int row, int column) {
 
         for (Square s : squares) {
 
-            if ((s.getRow() == row) && (s.getColumn() == colomn)) {
+            if ((s.getRow() == row) && (s.getColumn() == column)) {
 
                 return s;
             }
@@ -89,9 +89,8 @@ public class Map {
     /**
      * Calculate the minimum distance from A to B.
      *
-     * @param playerA    Current Player
-     * @param playerB    PLayer to search distance
- 
+     * @param playerA Current Player
+     * @param playerB PLayer to search distance
      * @return minimum distance between A and B
      */
     public int distance (Player playerA, Player playerB){
@@ -105,8 +104,8 @@ public class Map {
     /**
      * Calculate the minimum distance from A to B.
      *
-     * @param a    Current Square
-     * @param b    Square to search
+     * @param a Current Square
+     * @param b Square to search
      * @return minimum distance between A and B
      */
     public int distance(Square a, Square b){
@@ -115,18 +114,33 @@ public class Map {
         }else
             return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),1);
         }
+    
+    /**
+     * Only for Private use. Calculate the minimum distance from A to B.
+     *
+     * @param a    Current Square
+     * @param b    Square to search
+     * @param dist recursive dist in this pass of algorithm
+     * @return minimum distance between A and B
+     */
+    private int distance(Square a, Square b, int dist){
+        if(a.getRow()==b.getRow() && a.getColumn()==b.getColumn()) {
+            return 0;
+        }else
+            return distance(a.getRow(),a.getColumn(),b.getRow(),b.getColumn(),dist);
+    }
 
     /**
-     * Calculate the minimum distance from A(rInit,cInit) to B(rDest,cDest).
+     * Private recursive method, called by public method. Calculate the minimum distance from A(rInit,cInit) to B(rDest,cDest).
      *
      * @param rInit row of current square
      * @param cInit column of current square
      * @param rDest row of search square
      * @param cDest column of search square
-     * @param dist  the distance at the iteration
+     * @param dist recursive dist in this pass of algorithm
      * @return minimum distance from A(rInit,cInit) to B(rDest,cDest)
      */
-    public int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
+    private int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
         
         int distance = dist;
         int currR = rInit;
@@ -202,8 +216,8 @@ public class Map {
     /**
      * Return true if Player passed can see the Square passed.
      *
-     * @param player    player to search
-     * @param colorSquare the color of the Romm to search
+     * @param player      player to search
+     * @param colorSquare the color of the Room to search
      * @return true if player can see room of the color passed
      */
     public boolean isVisibleRoom(Player player, EnumColorSquare colorSquare) {
@@ -225,7 +239,7 @@ public class Map {
     }
     
     /**
-     * Calculate if PLayerA see PlayerB.
+     * Public interface to private is visible. Calculate if PLayerA see PlayerB.
      *
      * @param a current player
      * @param b search PLayer
@@ -235,8 +249,9 @@ public class Map {
         
         return isVisible(getSquare(a.getRow(),a.getColumn()), getSquare(b.getColumn(),b.getRow()));
     }
+    
     /**
-     * Calculate if SquareA see SquareB.
+     * Public interface to private is visible. Calculate if SquareA see SquareB.
      *
      * @param a current square
      * @param b search square
@@ -249,7 +264,7 @@ public class Map {
     
     
     /**
-     * Calculate if  A(c0,r0) see B(c1,r1).
+     * Private call to Calculate if  A(c0,r0) see B(c1,r1).
      *
      * @param r0 row of current square
      * @param c0 column of current square
@@ -257,7 +272,7 @@ public class Map {
      * @param c1 column of search square
      * @return true if A(c0,r0) see B(c1,r1)
      */
-    public boolean isVisible(int r0, int c0,int r1, int c1) {
+    private boolean isVisible(int r0, int c0,int r1, int c1) {
 
         Square currSquare= getSquare(r0,c0);
         Square destSquare= getSquare(r1,c1);
@@ -282,8 +297,8 @@ public class Map {
      */
     public void movePlayer(Player player, Square square) {
   
-    this.findPlayer(player).getPlayers().remove(player);
-    square.addPlayer(player);
+    removePlayerFromSquare(player);
+    addPlayerOnSquare(square,player);
 }
     
     /**
@@ -319,6 +334,7 @@ public class Map {
         
         return sameDirection(getSquare(a.getRow(),a.getColumn()), getSquare(b.getColumn(),b.getRow()));
     }
+    
     /**
      * Calculate if SquareA is in the same cardinal direction of SquareB.
      *
@@ -437,6 +453,12 @@ public class Map {
         return tempPlayer;
     }
     
+    /**
+     * Exist in map.
+     *
+     * @param square the square
+     * @throws SquareNotExistException the square not exist exception
+     */
     public void existInMap(Square square) throws SquareNotExistException {
         
         boolean found=false;
@@ -453,6 +475,13 @@ public class Map {
         }
     }
     
+    
+    /**
+     * Is generation square boolean.
+     *
+     * @param square the square to serch
+     * @return true if this square is Generation Square
+     */
     public boolean isGenerationSquare(Square square){
     
         return square.getClass().equals(GenerationSquare.class);

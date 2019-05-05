@@ -3,7 +3,7 @@ package it.polimi.controller;
 import it.polimi.model.*;
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
-import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistExpetion;
+import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistException;
 import it.polimi.model.Exception.ModelException.RoundModelException.MoveActionNotValidException;
 
 
@@ -47,20 +47,21 @@ public class RoundActionController {
             //da gestire es square non esiste
         }
         
-        //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , alrimenti passo a null
+        //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
         if(gameModel.getMap().isGenerationSquare(inputSquare)){
             
             //chiedi alla view l'index dellarma
+            //solo prova
             indexWeapon= 1;
         } else {
             indexWeapon=null;
         }
         
-        //effective move
+        //effective catch gia con l'index giusto se è una Generation Square
         try {
             
             gameModel.getRoundActionModel().cathActionModel(gameModel.getMap(),gameModel.getActualPlayer(),inputSquare,indexWeapon);
-        } catch (CatchActionMaxDistExpetion catchActionMaxDistExpetion) {
+        } catch (CatchActionMaxDistException catchActionMaxDistExpetion) {
         
         } catch (CatchActionFullObjException e) {
         

@@ -9,7 +9,7 @@ public class MainChito {
         int a,b,c,d=0;
         
 
-
+/*
         //cerco disatnza
         a=1;
         b=1;
@@ -123,7 +123,7 @@ public class MainChito {
         } else System.out.println("\n NON VISIBILE\n");
         
         mappa.refreshMap();
-        
+        */
         //cerco funzioni
         a=0;
         b=2;
@@ -156,16 +156,26 @@ public class MainChito {
         System.out.println(playerA.toString());
         System.out.println(playerB.toString());
         
-        System.out.println(mappa.distance(playerA,playerB));
-        System.out.println(mappa.isInMySquare(playerA,playerB));
-        System.out.println(mappa.sameDirection(playerA,playerB));
-        System.out.println(mappa.playerOnMyRow(playerA).get(0).toString());
+        System.out.println("distance: " + mappa.distance(playerA,playerB));
+        System.out.println("my square: " + mappa.isInMySquare(playerA,playerB));
+        System.out.println("same direction: " + mappa.sameDirection(playerA,playerB));
+        System.out.println("south: " + mappa.playerOnMySouth(playerA));
+        System.out.println("north: " + mappa.playerOnMyNorth(playerA));
+        System.out.println("est: " + mappa.playerOnMyEst(playerA));
+        System.out.println("west: " + mappa.playerOnMyWest(playerA));
         mappa.movePlayer(playerB,mappa.getSquare(2,2));
       
-        System.out.println(mappa.playerInRoom(EnumColorSquare.WHITE));
+        System.out.println("my room: " + mappa.playerInRoom(EnumColorSquare.WHITE));
     
-        System.out.println(mappa.isVisibleRoom(playerA,EnumColorSquare.BLU));
-        
+        System.out.println("is visible room: " + mappa.isVisibleRoom(playerA,EnumColorSquare.BLU));
+        System.out.println("is visible room: " + mappa.isVisible(playerA,playerB));
+    
+        System.out.println("is generation player A: " + mappa.isGenerationSquare(mappa.findPlayer(playerA)));
+        System.out.println("is generation player B: " + mappa.isGenerationSquare(mappa.findPlayer(playerB)));
+    
+        mappa.movePlayer(playerA,mappa.getSquare(2,3));
+    
+        System.out.println("is generation player A: " + mappa.isGenerationSquare(mappa.findPlayer(playerA)));
         //MAIN ARMI
         
         

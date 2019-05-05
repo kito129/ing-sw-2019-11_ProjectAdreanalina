@@ -29,13 +29,13 @@ public class Newton extends PowerUpCard {
      */
     public void effect(Map map, Square destSquare, Player target) throws NotInSameDirection,NotValidDistance{
 
-        if ((map.sameDirection(destSquare, map.findPlayer(target))) && (map.distance(destSquare, map.findPlayer(target), 1) < 3)) {
+        if ((map.sameDirection(destSquare, map.findPlayer(target))) && (map.distance(destSquare, map.findPlayer(target)) < 3)) {
 
             map.movePlayer(target, destSquare);
         }else if ((map.sameDirection(destSquare, map.findPlayer(target))) == false) {
 
             throw new NotInSameDirection();
-        }else if (map.distance(destSquare, map.findPlayer(target), 1) < 3){
+        }else if (map.distance(destSquare, map.findPlayer(target)) < 3){
 
             throw new NotValidDistance();
         }

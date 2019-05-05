@@ -17,9 +17,9 @@ public class Square{
     /**
      * Instantiates a new Square.
      *
-     * @param r          the row
-     * @param c          the ccolumn
-     * @param color      the color
+     * @param r     the row of the square
+     * @param c     the column of the square
+     * @param color the color of the square
      */
     public Square(int r, int c, EnumColorSquare color) {
         this.row=r;
@@ -31,9 +31,9 @@ public class Square{
     }
     
     /**
-     * Gets column.
+     * Gets column of the square.
      *
-     * @return the column
+     * @return the column of the square
      */
     public int getColumn() {
         
@@ -41,9 +41,9 @@ public class Square{
     }
     
     /**
-     * Gets row.
+     * Gets row of the square.
      *
-     * @return the row
+     * @return the row of the square
      */
     public int getRow() {
         
@@ -51,9 +51,9 @@ public class Square{
     }
     
     /**
-     * Gets color.
+     * Gets color of the square.
      *
-     * @return the color
+     * @return the color of th square
      */
     public EnumColorSquare getColor() {
         
@@ -61,9 +61,9 @@ public class Square{
     }
     
     /**
-     * Get link array list.
+     * Get link of the square in array list.
      *
-     * @return the array list
+     * @return the array list contain linked square
      */
     public ArrayList<Square> getLink(){
 
@@ -71,7 +71,7 @@ public class Square{
     }
     
     /**
-     * Gets players.
+     * Gets players on this sqaure.
      *
      * @return the players
      */
@@ -81,9 +81,9 @@ public class Square{
     }
     
     /**
-     * Is visited boolean.
+     * Is visited for distance mehtod .
      *
-     * @return the boolean
+     * @return return true if visited
      */
     public boolean isVisited() {
         
@@ -91,9 +91,9 @@ public class Square{
     }
     
     /**
-     * Sets link.
+     * Sets link of the square.
      *
-     * @param link the link
+     * @param link link of th square in ArrayList
      */
     public void setLink(ArrayList<Square>link) {
 
@@ -109,9 +109,9 @@ public class Square{
     }
     
     /**
-     * Sets visited.
+     * Sets visited for distance method.
      *
-     * @param visited the visited
+     * @param visited  visited param
      */
     public void setVisited(boolean visited) {
         
@@ -119,7 +119,7 @@ public class Square{
     }
     
     /**
-     * Add player
+     * Add player on the square
      *
      * @param player the player to add
      */
