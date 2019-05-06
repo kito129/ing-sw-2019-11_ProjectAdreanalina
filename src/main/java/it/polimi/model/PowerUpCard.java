@@ -3,7 +3,7 @@ package it.polimi.model;
 /**
  * The type Power up card.
  */
-public class PowerUpCard {
+public  class PowerUpCard {
 
     protected String namePowerUpCard;
     protected EnumColorCardAndAmmo colorPowerUpCard;
@@ -39,6 +39,7 @@ public class PowerUpCard {
 
         return colorPowerUpCard;
     }
+    
 
     @Override
     public String toString(){

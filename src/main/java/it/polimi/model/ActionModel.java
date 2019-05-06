@@ -3,6 +3,14 @@ package it.polimi.model;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistException;
 import it.polimi.model.Exception.ModelException.RoundModelException.MoveActionNotValidException;
+import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvaible;
+import it.polimi.model.Exception.NotInSameDirection;
+import it.polimi.model.Exception.NotValidDistance;
+import it.polimi.model.Exception.NotVisibleTarget;
+import it.polimi.model.PowerUp.Newton;
+import it.polimi.model.PowerUp.TagBackGrenade;
+import it.polimi.model.PowerUp.TargetingScope;
+import it.polimi.model.PowerUp.Teleporter;
 
 public class ActionModel {
     
@@ -85,8 +93,49 @@ public class ActionModel {
         }
     }
     
-    public void usePowerUpActionModel(){
     
+    private PowerUpCard getPowerUp(PowerUpCard powerUp) throws NoPowerUpAvaible {
+        
+        for(PowerUpCard a:gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps()){
+            if(a.equals(powerUp)){
+                return a;
+            } else {
+                throw new NoPowerUpAvaible();
+            }
+        }
+        return null;
+    }
+    
+    public void usePowerUpNewton(Newton newton,Player targetPlayer, Square targetSquare) throws NoPowerUpAvaible, NotInSameDirection, NotValidDistance {
+        
+        gameModel.setState(State.POWERUP);
+        Newton newton1=(Newton)getPowerUp(newton);
+        newton1.effect(gameModel.getMap(),targetSquare,targetPlayer);
+        
+    }
+    
+    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvaible {
+    
+        gameModel.setState(State.POWERUP);
+        Teleporter teleporter1=(Teleporter) getPowerUp(teleporter);
+        teleporter1.effect(gameModel.getActualPlayer(),gameModel.getMap(),targetSquare);
+        
+    }
+    
+    public void usePowerUpTargetingScope(TargetingScope tagertingScope,Player targetPlayer) throws NoPowerUpAvaible {
+    
+        gameModel.setState(State.POWERUP);
+        TargetingScope tagertingScope1=(TargetingScope) getPowerUp(tagertingScope);
+        tagertingScope1.effect(gameModel.getActualPlayer(),targetPlayer);
+        
+    }
+    
+    public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NoPowerUpAvaible, NotVisibleTarget {
+        
+        gameModel.setState(State.POWERUP);
+        TagBackGrenade tagBackGrenade1=(TagBackGrenade) getPowerUp(tagBackGrenade);
+        tagBackGrenade1.effect(gameModel.getMap(),gameModel.getActualPlayer(),targetPlayer);
+        
     }
     
 }

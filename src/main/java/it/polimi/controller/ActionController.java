@@ -5,10 +5,16 @@ import it.polimi.model.Exception.ControllerException.RoudControllerException.Squ
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistException;
 import it.polimi.model.Exception.ModelException.RoundModelException.MoveActionNotValidException;
+import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvaible;
+import it.polimi.model.Exception.NotInSameDirection;
+import it.polimi.model.Exception.NotValidDistance;
+import it.polimi.model.Exception.NotVisibleTarget;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
+
+import javax.print.DocFlavor;
 
 
 public class ActionController {
@@ -75,18 +81,66 @@ public class ActionController {
         }
     }
     
-    public void usePowerUpActionController(PowerUpCard powerUpCard){
-        
-        if(powerUpCard.getClass().equals(Newton.class)){
-            //do newton
-            //chiedi i parametri di newton
+    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard){
+    
+        //NEWTON
+        if (powerUpCard.getClass().equals(Newton.class)) {
             
-        } else  if (powerUpCard.getClass().equals(TagBackGrenade.class)){
-            //do tag back
-        } else if (powerUpCard.getClass().equals(Teleporter.class)){
-            //do teleport
-        } else if (powerUpCard.getClass().equals(TargetingScope.class)){
-            //Do targeting scope
+            //chiedi i parametri di newton
+            Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
+            Square targetSquare = new Square(1,1,EnumColorSquare.RED);
+            try {
+                
+                actionModel.usePowerUpNewton((Newton)powerUpCard,targetPlayer, targetSquare);
+            } catch (NotInSameDirection notInSameDirection) {
+                
+                //TODO
+            } catch (NoPowerUpAvaible noPowerUpAvaible) {
+                
+                //TODO
+            } catch (NotValidDistance notValidDistance) {
+                
+                //TODO
+            }
+        //TAGBACK GRANATE
+        } else if (powerUpCard.getClass().equals(TagBackGrenade.class)) {
+            
+            //chiedi i parametri di teleporter
+            Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
+            try {
+        
+                actionModel.usePowerUpTagBackGrenade((TagBackGrenade) powerUpCard,targetPlayer );
+            } catch (NoPowerUpAvaible noPowerUpAvaible) {
+        
+                //TODO
+            } catch (NotVisibleTarget notVisibleTarget) {
+                notVisibleTarget.printStackTrace();
+            }
+    
+        //TELEPORTER
+        } else if (powerUpCard.getClass().equals(Teleporter.class)) {
+            
+            //chiedi i parametri di teleporter
+            Square targetSquare = new Square(1,1,EnumColorSquare.RED);
+            try {
+        
+                actionModel.usePowerUpTeleporter((Teleporter) powerUpCard, targetSquare);
+            } catch (NoPowerUpAvaible noPowerUpAvaible) {
+        
+                //TODO
+            }
+        //TARGETING SCOPE
+        } else if (powerUpCard.getClass().equals(TargetingScope.class)) {
+            
+            //chiedi i parametri di TargetingScope
+            Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
+            try {
+        
+                actionModel.usePowerUpTargetingScope((TargetingScope) powerUpCard, targetPlayer);
+            } catch (NoPowerUpAvaible noPowerUpAvaible) {
+        
+                //TODO
+            }
         }
     
     }
