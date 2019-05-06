@@ -1,9 +1,9 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.Player;
-import it.polimi.model.PlayerBoard;
+import it.polimi.model.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class PrintPlayerBoard implements Serializable {
 
@@ -14,8 +14,6 @@ public class PrintPlayerBoard implements Serializable {
     private int numberOfDeaths;
     private ArrayList<EnumColorPlayer> damages;
     private ArrayList<EnumColorPlayer> marks;
-    private ArrayList<WeaponCard> playerWeapons;
-    private ArrayList<PowerUpCard> playerPowerUps;
 
     /**
      * Print attributes of PlayerBoard.
@@ -33,6 +31,7 @@ public class PrintPlayerBoard implements Serializable {
         System.out.println("AMMO YELLOW: " +ammoY);
         System.out.println("BOARD VALUE: " +boardValue);
         System.out.println("N. DEATHS: " +numberOfDeaths;
+
 
     }
 }
