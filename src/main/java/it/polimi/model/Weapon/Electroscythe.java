@@ -1,10 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.InvalidActionForThisCard;
 import it.polimi.model.Exception.NoTargetInSquare;
-
-import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 public class Electroscythe extends WeaponCard {
@@ -27,7 +24,7 @@ public class Electroscythe extends WeaponCard {
         reaperModeCost.add(EnumColorCardAndAmmo.RED);
     }
 
-    public ArrayList<EnumColorCardAndAmmo> getReaperModecost() {
+    public ArrayList<EnumColorCardAndAmmo> getReaperModeCost() {
 
         return reaperModeCost;
     }

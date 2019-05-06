@@ -1,7 +1,6 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.InvalidActionForThisCard;
 import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;

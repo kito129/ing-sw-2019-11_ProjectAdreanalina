@@ -186,6 +186,11 @@ public class Player {
         this.playerBoard.shiftMarks(colorOfDamage);
     }
 
+    public void multipleDamage(ArrayList<EnumColorPlayer> damages){
+
+        this.playerBoard.increaseDamages(damages);
+    }
+
     public void multipleDamagesSingleMark(ArrayList<EnumColorPlayer> damages, EnumColorPlayer mark){
 
         this.playerBoard.increaseDamages(damages);

@@ -1,11 +1,7 @@
 package it.polimi.model.Weapon;
 
-import it.polimi.model.EnumColorCardAndAmmo;
-import it.polimi.model.Exception.InvalidActionForThisCard;
 import it.polimi.model.Exception.NotVisibleTarget;
-import it.polimi.model.Map;
-import it.polimi.model.Player;
-import it.polimi.model.WeaponCard;
+import it.polimi.model.*;
 
 import java.util.ArrayList;
 
