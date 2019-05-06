@@ -30,8 +30,7 @@ public class PrintPlayerBoard implements Serializable {
         System.out.println("AMMO RED: " +ammoR);
         System.out.println("AMMO YELLOW: " +ammoY);
         System.out.println("BOARD VALUE: " +boardValue);
-        System.out.println("N. DEATHS: " +numberOfDeaths;
-
-
+        System.out.println("N. DEATHS: " +numberOfDeaths);
+        
     }
 }
