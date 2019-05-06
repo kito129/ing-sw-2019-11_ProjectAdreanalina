@@ -12,10 +12,7 @@ public class PrintPlayerBoard implements Serializable {
     private int ammoY;
     private int boardValue;
     private int numberOfDeaths;
-    private ArrayList<EnumColorPlayer> damages;
-    private ArrayList<EnumColorPlayer> marks;
-    private ArrayList<WeaponCard> playerWeapons;
-    private ArrayList<PowerUpCard> playerPowerUps;
+    
 
     /**
      * Print attributes of PlayerBoard.
@@ -32,7 +29,7 @@ public class PrintPlayerBoard implements Serializable {
         System.out.println("AMMO RED: " +ammoR);
         System.out.println("AMMO YELLOW: " +ammoY);
         System.out.println("BOARD VALUE: " +boardValue);
-        System.out.println("N. DEATHS: " +numberOfDeaths;
+        System.out.println("N. DEATHS: " +numberOfDeaths);
 
     }
 }
