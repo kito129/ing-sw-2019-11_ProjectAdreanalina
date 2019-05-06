@@ -1,8 +1,8 @@
 package it.polimi.model;
 
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
-import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistException;
-import it.polimi.model.Exception.ModelException.RoundModelException.MoveActionNotValidException;
+import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
+import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvaible;
 import it.polimi.model.Exception.NotInSameDirection;
 import it.polimi.model.Exception.NotValidDistance;
@@ -12,11 +12,15 @@ import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class ActionModel {
     
     private GameModel gameModel;
-    
     private int action=0;
+    Map map=gameModel.getMap();
+    Player actualPlayer=gameModel.getActualPlayer();
     
     public int getAction () {
         
@@ -28,10 +32,7 @@ public class ActionModel {
         return gameModel;
     }
     
-    public void runActionModel (Square targetSquare) throws MoveActionNotValidException{
-        
-        Map map=gameModel.getMap();
-        Player actualPlayer=gameModel.getActualPlayer();
+    public void runActionModel (Square targetSquare) throws RunActionMaxDistLimitException {
         
         if(map.distance(map.findPlayer(actualPlayer),targetSquare)<4){
             
@@ -39,14 +40,12 @@ public class ActionModel {
             action++;
         } else {
             
-            throw new MoveActionNotValidException();
+            //run action not valid
+            throw new RunActionMaxDistLimitException();
         }
     }
     
-    public void grabActionModel (Square targetSquare, int weaponIndex) throws CatchActionMaxDistException, CatchActionFullObjException {
-        
-        Map map=gameModel.getMap();
-        Player actualPlayer=gameModel.getActualPlayer();
+    public void grabActionModel (Square targetSquare, int weaponIndex) throws CatchActionMaxDistLimitException, CatchActionFullObjException {
         
         //adrenalinic distance
         int maxDist;
@@ -75,16 +74,18 @@ public class ActionModel {
             }
         } else {
         
-            throw new CatchActionMaxDistException();
+            throw new CatchActionMaxDistLimitException();
         }
     }
     
     public boolean checkTurn(){
         if(action==1){
+            
             gameModel.setState(State.ACTION1);
             return true;
         }
         else if (action==2){
+            
             gameModel.setState(State.ACTION2);
             return true;
         }
@@ -97,9 +98,12 @@ public class ActionModel {
     private PowerUpCard getPowerUp(PowerUpCard powerUp) throws NoPowerUpAvaible {
         
         for(PowerUpCard a:gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps()){
+            
             if(a.equals(powerUp)){
+                
                 return a;
             } else {
+                
                 throw new NoPowerUpAvaible();
             }
         }
@@ -138,4 +142,36 @@ public class ActionModel {
         
     }
     
-}
+    public void rechargeWeapon(WeaponCard weapon,Player player, ArrayList<PowerUpCard> powerUpCardsToAmmo){
+        
+        }
+        
+    public void respawnPlayer(Player player, Square generationSquare, PowerUpCard powerUpCard){
+        
+        player.setAlive(true);
+        gameModel.getMap().addPlayerOnSquare(generationSquare,player);
+        player.getPlayerBoard().addPowerUp(powerUpCard);
+    }
+    
+    public HashMap<EnumColorPlayer,Integer> scoringPlayerBoard(Player player){
+        
+        
+        PlayerBoard playerBoard = player.getPlayerBoard();
+        HashMap<EnumColorPlayer,Integer> colorDamageHashMap = new HashMap<>();
+        
+        for (Player a: gameModel.getPlayers()){
+            colorDamageHashMap.put(a.getColor(),player.getPlayerBoard().colorOccurenceInDamages(a.getColor()));
+            }
+            //TODO AVANTI DA QUI 6/05
+        //first blood
+        playerBoard.getDamages()
+        
+        }
+        
+        
+       
+    
+    }
+        
+
+

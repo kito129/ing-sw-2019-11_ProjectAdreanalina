@@ -105,4 +105,14 @@ public class GameModel {
         
         this.state = state;
     }
+    
+    public ArrayList<Player> getDeadPlayers(){
+        ArrayList<Player> tempPLayers = new ArrayList<>();
+        for (Player a:players){
+            if(!a.isAlive()){
+                tempPLayers.add(a);
+            }
+        }
+        return tempPLayers;
+    }
 }

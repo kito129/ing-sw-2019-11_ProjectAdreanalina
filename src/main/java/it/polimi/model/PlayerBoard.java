@@ -424,6 +424,20 @@ public class PlayerBoard {
         }
         return count;
     }
+    
+    
+    
+    // METODO DI MARCO
+    
+    public ArrayList<WeaponCard> getWeaponToCharge(){
+        ArrayList<WeaponCard> tempWeapon = new ArrayList<>();
+        for (WeaponCard a:playerWeapons){
+            if(!a.isCharge){
+                tempWeapon.add(a);
+            }
+        }
+        return tempWeapon;
+    }
 
 
 }

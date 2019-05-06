@@ -1,5 +1,4 @@
 package it.polimi.model.Exception.ModelException.RoundModelException;
 
-public class CatchActionMaxDistException extends Exception{
-
+public class RunActionMaxDistLimitException extends Exception {
 }

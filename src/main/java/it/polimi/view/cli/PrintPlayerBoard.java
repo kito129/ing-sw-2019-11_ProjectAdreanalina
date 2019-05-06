@@ -6,11 +6,6 @@ import java.io.Serializable;
 
 public class PrintPlayerBoard implements Serializable {
 
-<<<<<<< HEAD
-    
-=======
->>>>>>> origin/master
-
     /**
      * Print attributes of PlayerBoard.
      */
@@ -23,12 +18,6 @@ public class PrintPlayerBoard implements Serializable {
         System.out.println("N. DEATHS: " +player.getPlayerBoard().getNumberOfDeaths());
         System.out.println("DAMAGES: " +player.getPlayerBoard().getDamages().toString());
         System.out.println("MARKS: " +player.getPlayerBoard().getMarks().toString());
-
-
-<<<<<<< HEAD
-
-=======
         
->>>>>>> origin/master
     }
 }
