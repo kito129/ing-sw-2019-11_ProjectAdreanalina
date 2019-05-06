@@ -1,7 +1,5 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.Player;
-
 import java.io.Serializable;
 
 public class PrintMenu implements Serializable {

@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class PrintPowerUp implements Serializable {
 
-    public static ArrayList<PowerUpCard> powerUpCards;
-
     /**
      * Print Client's powerup.
      * @param powerUpCards         list of player's poweUp.
