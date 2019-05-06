@@ -6,31 +6,18 @@ import java.io.Serializable;
 
 public class PrintPlayer implements Serializable {
 
-    private int id;
-    private String name;
-    private int row;
-    private int column;
-    private int score;
-    private boolean alive;
-
     /**
      * Print Player's attributes.
+     * @param player   the player to print
      */
     public void print(Player player){
 
-        id = player.getId();
-        name = player.getName();
-        row = player.getRow();
-        column = player.getColumn();
-        score = player.getScore();
-        alive = player.isAlive();
-
-        System.out.println("ID: " +id);
-        System.out.println("NAME: " +name);
-        System.out.println("ROW: " +row);
-        System.out.println("COLUMN: " +column);
-        System.out.println("SCORE: " +score);
-        System.out.println("ALIVE: " +alive);
+        System.out.println("ID: " +player.getId());
+        System.out.println("NAME: " +player.getName());
+        System.out.println("ROW: " +player.getRow());
+        System.out.println("COLUMN: " +player.getColumn());
+        System.out.println("SCORE: " +player.getScore());
+        System.out.println("ALIVE: " +player.isAlive());
 
     }
 }

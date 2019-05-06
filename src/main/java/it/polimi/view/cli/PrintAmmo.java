@@ -1,30 +1,22 @@
 package it.polimi.view.cli;
 
 import it.polimi.model.Player;
-import it.polimi.model.PlayerBoard;
 
 import java.io.Serializable;
 
 public class PrintAmmo implements Serializable {
 
-    private int ammoB;
-    private int ammoR;
-    private int ammoY;
-
     /**
      * Print Client's ammo.
+     * @param player   the player who has those ammo
      */
 <<<<<<< HEAD
 =======
-    public void print(PlayerBoard playerBoard) {
+    public void print(Player player) {
 
-        ammoB = playerBoard.getAmmoB();
-        ammoR = playerBoard.getAmmoR();
-        ammoY = playerBoard.getAmmoY();
-
-        System.out.println("AMMO BLUE: " +ammoB);
-        System.out.println("AMMO RED: " +ammoR);
-        System.out.println("AMMO YELLOW: " +ammoY);
+        System.out.println("AMMO BLUE: " +player.getPlayerBoard().getAmmoB());
+        System.out.println("AMMO RED: " +player.getPlayerBoard().getAmmoR());
+        System.out.println("AMMO YELLOW: " +player.getPlayerBoard().getAmmoY());
     }
 >>>>>>> origin/master
 }

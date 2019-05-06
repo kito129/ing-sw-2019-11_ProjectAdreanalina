@@ -1,6 +1,5 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.PlayerBoard;
 import it.polimi.model.WeaponCard;
 
 import java.io.Serializable;
@@ -10,11 +9,11 @@ public class PrintWeapon implements Serializable {
 
     /**
      * Print Client's weapons.
+     * @param weaponList       list of player's weapon.
      */
     public static void print(ArrayList<WeaponCard> weaponList){
 
-        for(int i=0; i<weaponList.size(); i++){
-            WeaponCard wc = weaponList.get(i);
+        for(WeaponCard wc : weaponList) {
             System.out.println("NAME: " +wc.getNameWeaponCard());
             System.out.println("COLOR: " +wc.getColorWeaponCard());
             System.out.println("RECHARGE COST: " +wc.getRechargeCost());

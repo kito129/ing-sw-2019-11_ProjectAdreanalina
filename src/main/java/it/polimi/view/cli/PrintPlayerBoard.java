@@ -3,38 +3,28 @@ package it.polimi.view.cli;
 import it.polimi.model.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class PrintPlayerBoard implements Serializable {
 
-    private int ammoB;
-    private int ammoR;
-    private int ammoY;
-    private int boardValue;
-    private int numberOfDeaths;
 <<<<<<< HEAD
     
 =======
-    private ArrayList<EnumColorPlayer> damages;
-    private ArrayList<EnumColorPlayer> marks;
 >>>>>>> origin/master
 
     /**
      * Print attributes of PlayerBoard.
      */
-    public void print(Player player, PlayerBoard playerBoard){
+    public void print(Player player){
 
-        ammoB = playerBoard.getAmmoB();
-        ammoR = playerBoard.getAmmoR();
-        ammoY = playerBoard.getAmmoY();
-        boardValue = playerBoard.getBoardValue();
-        numberOfDeaths = playerBoard.getNumberOfDeaths();
+        System.out.println("AMMO BLUE: " +player.getPlayerBoard().getAmmoB());
+        System.out.println("AMMO RED: " +player.getPlayerBoard().getAmmoR());
+        System.out.println("AMMO YELLOW: " +player.getPlayerBoard().getAmmoY());
+        System.out.println("BOARD VALUE: " +player.getPlayerBoard().getBoardValue());
+        System.out.println("N. DEATHS: " +player.getPlayerBoard().getNumberOfDeaths());
+        System.out.println("DAMAGES: " +player.getPlayerBoard().getDamages().toString());
+        System.out.println("MARKS: " +player.getPlayerBoard().getMarks().toString());
 
-        System.out.println("AMMO BLUE: " +ammoB);
-        System.out.println("AMMO RED: " +ammoR);
-        System.out.println("AMMO YELLOW: " +ammoY);
-        System.out.println("BOARD VALUE: " +boardValue);
-        System.out.println("N. DEATHS: " +numberOfDeaths);
+
 <<<<<<< HEAD
 
 =======
