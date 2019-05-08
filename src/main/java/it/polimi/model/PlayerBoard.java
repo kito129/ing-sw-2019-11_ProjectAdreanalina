@@ -9,9 +9,7 @@ import java.util.ArrayList;
  */
 public class PlayerBoard {
 
-    private int ammoY;
-    private int ammoR;
-    private int ammoB;
+    private ArrayList<EnumColorCardAndAmmo> ammo;
     private int boardValue;
     private int numberOfDeaths;
     private ArrayList<EnumColorPlayer> damages;
@@ -26,9 +24,10 @@ public class PlayerBoard {
      */
     public PlayerBoard() {
 
-        ammoY = 1;
-        ammoR = 1;
-        ammoB = 1;
+        ammo = new ArrayList<EnumColorCardAndAmmo>();
+        ammo.add(EnumColorCardAndAmmo.YELLOW);
+        ammo.add(EnumColorCardAndAmmo.RED);
+        ammo.add(EnumColorCardAndAmmo.BLU);
         boardValue = 8;
         numberOfDeaths = 0;
         damages = new ArrayList<EnumColorPlayer>();
@@ -37,14 +36,27 @@ public class PlayerBoard {
         playerPowerUps = new ArrayList<PowerUpCard>();
     }
 
+    public ArrayList<EnumColorCardAndAmmo> getAmmo() {
+
+        return ammo;
+    }
+
     /**
      * Gets ammo y.
      *
      * @return the ammo y
      */
-    public int getAmmoY() {
+    public ArrayList<EnumColorCardAndAmmo> getAmmoY() {
 
-        return ammoY;
+        ArrayList<EnumColorCardAndAmmo> yellowAmmo=new ArrayList<>();
+        for(EnumColorCardAndAmmo ammo: this.ammo){
+
+            if(ammo==EnumColorCardAndAmmo.YELLOW){
+
+                yellowAmmo.add(EnumColorCardAndAmmo.YELLOW);
+            }
+        }
+        return yellowAmmo;
     }
 
     /**
@@ -52,9 +64,17 @@ public class PlayerBoard {
      *
      * @return the ammo r
      */
-    public int getAmmoR() {
+    public ArrayList<EnumColorCardAndAmmo> getAmmoR() {
 
-        return ammoR;
+        ArrayList<EnumColorCardAndAmmo> redAmmo=new ArrayList<>();
+        for(EnumColorCardAndAmmo ammo: this.ammo){
+
+            if(ammo==EnumColorCardAndAmmo.RED){
+
+                redAmmo.add(EnumColorCardAndAmmo.RED);
+            }
+        }
+        return redAmmo;
     }
 
     /**
@@ -62,9 +82,17 @@ public class PlayerBoard {
      *
      * @return the ammo b
      */
-    public int getAmmoB() {
+    public ArrayList<EnumColorCardAndAmmo> getAmmoB() {
 
-        return ammoB;
+        ArrayList<EnumColorCardAndAmmo> bluAmmo=new ArrayList<>();
+        for(EnumColorCardAndAmmo ammo: this.ammo){
+
+            if(ammo==EnumColorCardAndAmmo.BLU){
+
+                bluAmmo.add(EnumColorCardAndAmmo.BLU);
+            }
+        }
+        return bluAmmo;
     }
 
     /**
@@ -139,53 +167,7 @@ public class PlayerBoard {
 
             addPowerUp(ammoCard.getPowerUpCard());
         }
-        increaseAmmo(ammoCard.getAmmoY(), ammoCard.getAmmoR(), ammoCard.getAmmoB());
-    }
-
-    /**
-     * Increases the value of ammo in the player board up to maximum of three for each field.
-     *
-     * @param yellowAmmo the number of yellow ammo to add.
-     * @param redAmmo    the number of red ammo to add.
-     * @param bluAmmo    the number of blu ammo to add.
-     */
-    public void increaseAmmo(int yellowAmmo, int redAmmo, int bluAmmo) {
-
-        if (this.ammoY + yellowAmmo > 3) {
-
-            this.ammoY = 3;
-        } else {
-
-            this.ammoY += yellowAmmo;
-        }
-        if (this.ammoR + redAmmo > 3) {
-
-            this.ammoR = 3;
-        } else {
-
-            this.ammoR += redAmmo;
-        }
-        if (this.ammoB + bluAmmo > 3) {
-
-            this.ammoB = 3;
-        } else {
-
-            this.ammoB += bluAmmo;
-        }
-    }
-
-    /**
-     * Decreases the value of ammo in the player board.
-     *
-     * @param ammoY the number of yellow ammo to remove.
-     * @param ammoR the number of red ammo to remove.
-     * @param ammoB the number of blu ammo to remove.
-     */
-    public void decreaseAmmo(int ammoY, int ammoR, int ammoB) {
-
-        this.ammoY -= ammoY;
-        this.ammoR -= ammoR;
-        this.ammoB -= ammoB;
+        increaseAmmo(ammoCard.getAmmo());
     }
 
     /**
@@ -206,6 +188,54 @@ public class PlayerBoard {
     public void removePowerUp(PowerUpCard powerUpCard) {
 
         this.playerPowerUps.remove(powerUpCard);
+    }
+
+    /**
+     * Increases the value of ammo in the player board up to maximum of three for each field.
+     *
+     * @param ammoToAdd list of colored ammo will be add.
+     */
+    private void increaseAmmo(ArrayList<EnumColorCardAndAmmo> ammoToAdd) {
+
+        for(EnumColorCardAndAmmo ammo:ammoToAdd){
+
+            if(ammo==EnumColorCardAndAmmo.YELLOW && getAmmoY().size()<3){
+
+                this.ammo.add(EnumColorCardAndAmmo.YELLOW);
+            }
+            if(ammo==EnumColorCardAndAmmo.RED && getAmmoR().size()<3){
+
+                this.ammo.add(EnumColorCardAndAmmo.RED);
+            }
+            if(ammo==EnumColorCardAndAmmo.BLU && getAmmoB().size()<3){
+
+                this.ammo.add(EnumColorCardAndAmmo.BLU);
+            }
+        }
+    }
+
+    /**
+     * Decreases the value of ammo in the player board.
+     *
+     * @param ammoToDecrease list of colored ammo will be removed.
+     */
+    public void decreaseAmmo(ArrayList<EnumColorCardAndAmmo> ammoToDecrease){
+
+        for (EnumColorCardAndAmmo ammo:ammoToDecrease) {
+
+            if (ammo == EnumColorCardAndAmmo.YELLOW) {
+
+                this.ammo.remove(EnumColorCardAndAmmo.YELLOW);
+            }
+            if (ammo == EnumColorCardAndAmmo.RED) {
+
+                this.ammo.remove(EnumColorCardAndAmmo.RED);
+            }
+            if(ammo==EnumColorCardAndAmmo.BLU){
+
+                this.ammo.remove(EnumColorCardAndAmmo.BLU);
+            }
+        }
     }
 
     /**
@@ -295,7 +325,7 @@ public class PlayerBoard {
      */
     public void increaseMarks(EnumColorPlayer colorOfMark) {
 
-        if (colorOccurenceInMarks(colorOfMark) < 3) {
+        if (colorOccurrenceInMarks(colorOfMark) < 3) {
 
             this.marks.add(colorOfMark);
         }
@@ -309,9 +339,9 @@ public class PlayerBoard {
      */
     public void increaseMarks(ArrayList<EnumColorPlayer> colorOfMarks) {
 
-        if (colorOccurenceInMarks(colorOfMarks.get(0)) + colorOfMarks.size() > 3) {
+        if (colorOccurrenceInMarks(colorOfMarks.get(0)) + colorOfMarks.size() > 3) {
 
-            while (colorOccurenceInMarks(colorOfMarks.get(0)) < 3) {
+            while (colorOccurrenceInMarks(colorOfMarks.get(0)) < 3) {
 
                 this.marks.add(colorOfMarks.get(0));
             }
@@ -322,12 +352,31 @@ public class PlayerBoard {
     }
 
     /**
+     * Count the number of occurrences of a color in the list of marks.
+     *
+     * @param colorPlayer color we want to know the number of occurrences.
+     * @return the number of occurrences of the given color.
+     */
+    private int colorOccurrenceInMarks(EnumColorPlayer colorPlayer) {
+
+        int count = 0;
+        for (EnumColorPlayer color : marks) {
+
+            if (color == colorPlayer) {
+
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
      * Removes from the player's marks all the occurrences of one color.
      *
      * @param colorOfMark the color we want to delete the occurrences.
      * @return List of all marks deleted.
      */
-    public ArrayList<EnumColorPlayer> removeMarkOfColor(EnumColorPlayer colorOfMark) {
+    private ArrayList<EnumColorPlayer> removeMarkOfColor(EnumColorPlayer colorOfMark) {
 
         ArrayList<EnumColorPlayer> marksRemoved = new ArrayList<EnumColorPlayer>();
         for (int i = 0; i < marks.size(); i++) {
@@ -342,21 +391,6 @@ public class PlayerBoard {
         return marksRemoved;
     }
 
-    // todo chiede al prof perche non va.
-    public ArrayList<EnumColorPlayer> removeMarkOfColor1(EnumColorPlayer colorOfMark) {
-
-        ArrayList<EnumColorPlayer> marksRemoved = new ArrayList<EnumColorPlayer>();
-        for (EnumColorPlayer color : marks) {
-
-            if (color == colorOfMark) {
-
-                marksRemoved.add(color);
-                marks.remove(color);
-            }
-        }
-        return marksRemoved;
-    }
-
     /**
      * Shifts all the occurrences of one color from the list of marks, to the list of damages.
      *
@@ -366,6 +400,49 @@ public class PlayerBoard {
     public void shiftMarks(EnumColorPlayer colorOfMark) {
 
         increaseDamages(removeMarkOfColor(colorOfMark));
+    }
+
+
+    
+    public ArrayList<WeaponCard> getWeaponToCharge(){
+
+        ArrayList<WeaponCard> tempWeapon = new ArrayList<>();
+        for (WeaponCard a:playerWeapons){
+
+            if(!a.isCharge){
+
+                tempWeapon.add(a);
+            }
+        }
+        return tempWeapon;
+    }
+
+
+
+
+   //todo da qua metodi che forse non servono
+
+
+
+
+
+    /**
+     * Counts the number of occurrences of one color in the list of damages.
+     *
+     * @param colorPlayer color we want to know the number of occurrences.
+     * @return the number of occurrences of the given color.
+     */
+    public int colorOccurrenceInDamages(EnumColorPlayer colorPlayer) {
+
+        int count = 0;
+        for (EnumColorPlayer color : damages) {
+
+            if (color == colorPlayer) {
+
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -387,56 +464,19 @@ public class PlayerBoard {
         return false;
     }
 
-    /**
-     * Counts the number of occurrences of one color in the list of damages.
-     *
-     * @param colorPlayer color we want to know the number of occurrences.
-     * @return the number of occurrences of the given color.
-     */
-    public int colorOccurenceInDamages(EnumColorPlayer colorPlayer) {
+    // todo chiede al prof perche non va.
+    public ArrayList<EnumColorPlayer> removeMarkOfColor1(EnumColorPlayer colorOfMark) {
 
-        int count = 0;
-        for (EnumColorPlayer color : damages) {
-
-            if (color == colorPlayer) {
-
-                count++;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * Count the number of occurrences of a color in the list of marks.
-     *
-     * @param colorPlayer color we want to know the number of occurrences.
-     * @return the number of occurrences of the given color.
-     */
-    public int colorOccurenceInMarks(EnumColorPlayer colorPlayer) {
-
-        int count = 0;
+        ArrayList<EnumColorPlayer> marksRemoved = new ArrayList<EnumColorPlayer>();
         for (EnumColorPlayer color : marks) {
 
-            if (color == colorPlayer) {
+            if (color == colorOfMark) {
 
-                count++;
+                marksRemoved.add(color);
+                marks.remove(color);
             }
         }
-        return count;
-    }
-    
-    
-    
-    // METODO DI MARCO
-    
-    public ArrayList<WeaponCard> getWeaponToCharge(){
-        ArrayList<WeaponCard> tempWeapon = new ArrayList<>();
-        for (WeaponCard a:playerWeapons){
-            if(!a.isCharge){
-                tempWeapon.add(a);
-            }
-        }
-        return tempWeapon;
+        return marksRemoved;
     }
 
 

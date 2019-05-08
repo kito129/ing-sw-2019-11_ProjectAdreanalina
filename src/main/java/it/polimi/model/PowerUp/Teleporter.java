@@ -14,6 +14,7 @@ public class Teleporter extends PowerUpCard {
     public Teleporter(EnumColorCardAndAmmo colorCard) {
 
         super("TELOPORTER", colorCard);
+        this.description="";
     }
 
     /**

@@ -16,6 +16,7 @@ public class Newton extends PowerUpCard {
     public Newton(EnumColorCardAndAmmo colorCard){
 
         super("NEWTON", colorCard);
+        this.description="";
     }
 
     /**

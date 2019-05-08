@@ -7,6 +7,8 @@ public  class PowerUpCard {
 
     protected String namePowerUpCard;
     protected EnumColorCardAndAmmo colorPowerUpCard;
+    protected String description;
+
 
     /**
      * Instantiates a new Power up card.
@@ -18,8 +20,20 @@ public  class PowerUpCard {
 
         this.namePowerUpCard = namePowerUpCard;
         this.colorPowerUpCard = colorCard;
+
     }
-    
+
+    /**
+     * Gets description card.
+     *
+     * @return the description card.
+     */
+
+    public String getDescription() {
+
+        return description;
+    }
+
     /**
      * Gets name card.
      *

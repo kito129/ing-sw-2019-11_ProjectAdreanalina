@@ -1,13 +1,13 @@
 package it.polimi.model;
 
+import java.util.ArrayList;
+
 /**
  * The type Ammo card.
  */
 public class AmmoCard {
 
-    private int ammoY;
-    private int ammoR;
-    private int ammoB;
+    private ArrayList<EnumColorCardAndAmmo> ammo;
     private PowerUpCard powerUpCard;
     
     /**
@@ -20,42 +20,32 @@ public class AmmoCard {
      */
     public AmmoCard(int ammoR, int ammoY, int ammoB, PowerUpCard powerUpCard){
 
-        this.ammoY=ammoY;
-        this.ammoR=ammoR;
-        this.ammoB=ammoB;
+        for(int i=0; i<ammoR;i++){
+
+            this.ammo.add(EnumColorCardAndAmmo.RED);
+        }
+        for(int i=0; i<ammoY;i++){
+
+            this.ammo.add(EnumColorCardAndAmmo.YELLOW);
+        }
+        for(int i=0; i<ammoB;i++){
+
+            this.ammo.add(EnumColorCardAndAmmo.BLU);
+        }
         this.powerUpCard=powerUpCard;
     }
-    
-    /**
-     * Gets ammo y.
-     *
-     * @return the ammo y
-     */
-    public int getAmmoY() {
 
-        return this.ammoY;
-    }
-    
     /**
-     * Gets ammo r.
+     * Gets ammo.
      *
-     * @return the ammo r
+     * @return the ammo.
      */
-    public int getAmmoR() {
 
-        return this.ammoR;
-    }
-    
-    /**
-     * Gets ammo b.
-     *
-     * @return the ammo b
-     */
-    public int getAmmoB() {
+    public ArrayList<EnumColorCardAndAmmo> getAmmo() {
 
-        return this.ammoB;
+        return ammo;
     }
-    
+
     /**
      * Gets power up card.
      *

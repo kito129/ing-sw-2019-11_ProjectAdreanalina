@@ -14,6 +14,7 @@ public class TargetingScope extends PowerUpCard {
     public TargetingScope(EnumColorCardAndAmmo colorCard) {
 
         super("TARGETING SCOPE", colorCard);
+        this.description="";
 
     }
 
