@@ -45,7 +45,7 @@ public class VortexCannon extends WeaponCard {
                 ArrayList<EnumColorPlayer> vortexCannonDamages= new ArrayList<>();
                 vortexCannonDamages.add(currentPlayer.getColor());
                 vortexCannonDamages.add(currentPlayer.getColor());
-                target1.multipleDamage(vortexCannonDamages);
+                target1.multipleDamages(vortexCannonDamages);
 
             }
             if(map.distance(vortexSquare,targetSquare)==1) {
@@ -54,7 +54,7 @@ public class VortexCannon extends WeaponCard {
                 ArrayList<EnumColorPlayer> vortexCannonDamages = new ArrayList<>();
                 vortexCannonDamages.add(currentPlayer.getColor());
                 vortexCannonDamages.add(currentPlayer.getColor());
-                target1.multipleDamage(vortexCannonDamages);
+                target1.multipleDamages(vortexCannonDamages);
             }else{
 
                 throw new NotValidDistance();

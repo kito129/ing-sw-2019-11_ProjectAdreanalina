@@ -48,7 +48,7 @@ public class PlasmaGun extends WeaponCard {
             ArrayList<EnumColorPlayer> plasmaGunDamages=new ArrayList<>();
             plasmaGunDamages.add(currentPlayer.getColor());
             plasmaGunDamages.add(currentPlayer.getColor());
-            target1.multipleDamage(plasmaGunDamages);
+            target1.multipleDamages(plasmaGunDamages);
         }else{
 
             throw new NotVisibleTarget();

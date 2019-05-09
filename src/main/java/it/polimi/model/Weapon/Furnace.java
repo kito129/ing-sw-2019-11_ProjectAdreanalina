@@ -1,8 +1,7 @@
 package it.polimi.model.Weapon;
 
-import com.sun.org.apache.xerces.internal.impl.dv.dtd.NOTATIONDatatypeValidator;
+
 import it.polimi.model.*;
-import it.polimi.model.Exception.NoTargetInSquare;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotVisibleTarget;
 
@@ -16,7 +15,7 @@ public class Furnace extends WeaponCard {
      * Instantiates a new Furnace card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to RED,BLU.
-     * Creates the list of cozy dire mode cost (cost of alternative fire mode) settings it to null.
+     * Creates the list of cozy fire mode cost (cost of alternative fire mode) settings it to null.
      */
     public Furnace() {
 
@@ -54,14 +53,23 @@ public class Furnace extends WeaponCard {
         }
     }
 
+    public void cozyFireMode(Map map,Player currentPlayer,Square targetSquare) throws NotValidDistance {
 
-    //todo ripartire da qui
+        Square currentPlayerSquare = map.findPlayer(currentPlayer);
+        ArrayList<Player> playersInTargetSquare=new ArrayList<>();
+        playersInTargetSquare=map.playersOnSquare(targetSquare);
 
+        if(map.distance(currentPlayerSquare,targetSquare)==1){
 
+            for(Player p:playersInTargetSquare){
 
-    public void cozyFireMode(Map map,Player currentPlayer) throws NoTargetInSquare {
+                p.singleDamage(currentPlayer.getColor());
+                p.singleMark(currentPlayer.getColor());
+            }
+        }else{
 
-
+            throw new NotValidDistance();
+        }
     }
 
 
