@@ -60,7 +60,7 @@ public class PrintMap implements Serializable {
         /* print map */
         for(int i=0; i<maxR; i++) {
             for (int j = 0; j < maxC; j++) {
-                System.out.print(map[i][j] + " ");
+                System.out.print(map[i][j] + ANSI_BLACK_BACKGROUND + " ");
             }
             System.out.println();
         }
