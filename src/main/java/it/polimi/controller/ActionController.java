@@ -210,8 +210,6 @@ public class ActionController {
                 
                 }
                 
-                
-            
             case "second Lock Effect":
                 //gestione per costo extra
                 
