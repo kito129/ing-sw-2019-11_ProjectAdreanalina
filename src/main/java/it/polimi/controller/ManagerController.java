@@ -54,7 +54,26 @@ public class ManagerController {
                         //TODO
                     }
                 case "SHOOT":
-                    //todo
+                    //prendo le armi che ho, le mostro alla vieee che decide cosa usare
+                    
+                    //es
+                    String string="Lock Rifle ";
+                    
+                    // se tutto va bene
+                    gameModel.setState(SHOOT);
+                    
+                    switch (string){
+                        case "Lock Rifle":
+                            // passo a action controller e eseguo li
+                            
+                            
+                            
+                        case "Furnace":
+                            // passo a action controller e eseguo li
+
+
+                            
+                    }
     
                 case "END ACTION":
                     gameModel.setState(State.ENDACTION);

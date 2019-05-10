@@ -47,7 +47,7 @@ public class Thor extends WeaponCard {
             ArrayList<EnumColorPlayer> thorDamages=new ArrayList<>();
             thorDamages.add(currentPlayer.getColor());
             thorDamages.add(currentPlayer.getColor());
-            target1.multipleDamage(thorDamages);
+            target1.multipleDamages(thorDamages);
         }else {
 
             throw new NotVisibleTarget();
@@ -66,7 +66,7 @@ public class Thor extends WeaponCard {
         ArrayList<EnumColorPlayer> highVoltageDamages=new ArrayList<>();
         highVoltageDamages.add(currentPlayer.getColor());
         highVoltageDamages.add(currentPlayer.getColor());
-        target3.multipleDamage(highVoltageDamages);
+        target3.multipleDamages(highVoltageDamages);
     }
 
 }

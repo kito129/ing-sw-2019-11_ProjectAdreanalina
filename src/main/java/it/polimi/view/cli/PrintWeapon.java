@@ -1,11 +1,17 @@
 package it.polimi.view.cli;
 
+import it.polimi.model.EnumColorCardAndAmmo;
 import it.polimi.model.WeaponCard;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class PrintWeapon implements Serializable {
+
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
 
     /**
      * Print Client's weapons.
@@ -15,8 +21,16 @@ public class PrintWeapon implements Serializable {
 
         for(WeaponCard wc : weaponList) {
             System.out.println("NAME: " +wc.getNameWeaponCard());
-            System.out.println("COLOR: " +wc.getColorWeaponCard());
-            System.out.println("RECHARGE COST: " +wc.getRechargeCost());
+            if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)){
+                    System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+            }
+            if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.RED)){
+                System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+            }
+            if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)){
+                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+            }
+            System.out.println("RECHARGE COST: " +wc.getRechargeCost().toString());
             System.out.println("LOADED WEAPON: " +wc.isCharge());
         }
     }

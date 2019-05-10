@@ -144,6 +144,33 @@ public class ActionController {
     
     }
     
+    public void LockRifleWeapon(){
+        //chiedo alla view che effeto vuole usare
+        
+        // come stringa
+        
+        switch (effect){
+            case "Base Effect":
+                //chiedo alla view i parametri che mi servono per questo spefico effetto
+                //gestisco le eccezioni sugli imputi qui
+                //
+                
+                //public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
+                
+                //gestisco anche eccezioni di basso livello NotVisibleTarget
+                
+            case "Second lock effect":
+                //chiedo alla view i parametri che mi servono per questo spefico effetto
+                
+                //gestisco le eccezioni sugli imputi qui
+                // gestire il fatto che target 2 deve essere diverso da target 1
+            
+                //public void secondLockEffect(Map map, Player currentPlayer, Player target2)throws NotVisibleTarget {
+                
+                //gestisco anche eccezioni di basso livello NotVisibleTarget
+
+        }
+    
     
     
 }

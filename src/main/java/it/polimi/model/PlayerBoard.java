@@ -292,21 +292,21 @@ public class PlayerBoard {
     /**
      * Increases damages of the damaged player, adding a single damage of the player's color who did the damage.
      *
-     * @param colorOfDamage damage of the player's color who did the damage.
+     * @param damage damage of the player's color who did the damage.
      */
-    public void increaseDamages(EnumColorPlayer colorOfDamage) {
+    public void increaseDamages(EnumColorPlayer damage) {
 
-        this.damages.add(colorOfDamage);
+        this.damages.add(damage);
     }
 
     /**
      * Increases damages of the damaged player, adding multiple damages of the player's color who did the damages.
      *
-     * @param colorOfDamages list of damages of the player's color who did the damage.
+     * @param damages list of damages of the player's color who did the damage.
      */
-    public void increaseDamages(ArrayList<EnumColorPlayer> colorOfDamages) {
+    public void increaseDamages(ArrayList<EnumColorPlayer> damages) {
 
-        this.damages.addAll(colorOfDamages);
+        this.damages.addAll(damages);
     }
 
     /**
@@ -321,13 +321,13 @@ public class PlayerBoard {
      * Increases marks of the marked player, adding a single mark of the player's color who made the mark.
      * Increases marks of the marked player only if, the number of marks of the specified color(the parameter's color), is less then three.
      *
-     * @param colorOfMark mark of the player's color who made a mark.
+     * @param mark mark of the player's color who made a mark.
      */
-    public void increaseMarks(EnumColorPlayer colorOfMark) {
+    public void increaseMarks(EnumColorPlayer mark) {
 
-        if (colorOccurrenceInMarks(colorOfMark) < 3) {
+        if (colorOccurrenceInMarks(mark) < 3) {
 
-            this.marks.add(colorOfMark);
+            this.marks.add(mark);
         }
     }
 
@@ -335,19 +335,19 @@ public class PlayerBoard {
      * Increases marks of the marked player, adding multiple marks of the player's color who made the marks.
      * The marks of the marked player can be increased until reaching the maximum value of three for each colors.
      *
-     * @param colorOfMarks list of marks of the player's color who made the marks.
+     * @param marks list of marks of the player's color who made the marks.
      */
-    public void increaseMarks(ArrayList<EnumColorPlayer> colorOfMarks) {
+    public void increaseMarks(ArrayList<EnumColorPlayer> marks) {
 
-        if (colorOccurrenceInMarks(colorOfMarks.get(0)) + colorOfMarks.size() > 3) {
+        if (colorOccurrenceInMarks(marks.get(0)) + marks.size() > 3) {
 
-            while (colorOccurrenceInMarks(colorOfMarks.get(0)) < 3) {
+            while (colorOccurrenceInMarks(marks.get(0)) < 3) {
 
-                this.marks.add(colorOfMarks.get(0));
+                this.marks.add(marks.get(0));
             }
         } else {
 
-            this.marks.addAll(colorOfMarks);
+            this.marks.addAll(marks);
         }
     }
 

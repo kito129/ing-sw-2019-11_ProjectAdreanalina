@@ -59,7 +59,7 @@ public class TractorBeam extends WeaponCard {
             tractorBeamDamages.add(currentPlayer.getColor());
             tractorBeamDamages.add(currentPlayer.getColor());
             tractorBeamDamages.add(currentPlayer.getColor());
-            target1.multipleDamage(tractorBeamDamages);
+            target1.multipleDamages(tractorBeamDamages);
         }else {
 
             throw new NotValidDistance();
