@@ -3,6 +3,9 @@ package it.polimi.controller;
 import it.polimi.model.*;
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvaible;
+import it.polimi.model.Exception.NoWeaponAvaibleExeception;
+import it.polimi.model.Weapon.Electroscythe;
+import it.polimi.model.Weapon.LockRifle;
 
 import java.util.ArrayList;
 
@@ -59,19 +62,17 @@ public class ManagerController {
                     //es
                     String string="Lock Rifle ";
                     
-                    // se tutto va bene
-                    gameModel.setState(SHOOT);
                     
                     switch (string){
-                        case "Lock Rifle":
-                            // passo a action controller e eseguo li
+                        case "ELECTOSCYTHE":
+                            Electroscythe electroscythe = (Electroscythe) getWeaponPlayer(gameModel.getActualPlayer(),string);
+                            actionController.ElectroscytheWeapon(gameModel,electroscythe);
                             
                             
                             
-                        case "Furnace":
-                            // passo a action controller e eseguo li
-
-
+                        case "LOCKRIFLE":
+                            LockRifle lockRifle = (LockRifle) getWeaponPlayer(gameModel.getActualPlayer(),string);
+                            actionController.LockRifleweapon(gameModel,lockRifle);
                             
                     }
     
@@ -113,8 +114,17 @@ public class ManagerController {
             
         }
         
-        
-        
+    }
+    
+    private WeaponCard getWeaponPlayer(Player player, String weaponString){
+        for (WeaponCard a: player.getPlayerBoard().getPlayerWeapons()){
+            if(a.getNameWeaponCard().equals(weaponString)){
+                return a;
+            } else {
+             new NoWeaponAvaibleExeception();
+            }
+        }
+        return null;
     }
     
 }

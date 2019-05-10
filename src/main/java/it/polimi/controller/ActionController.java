@@ -7,6 +7,7 @@ import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionF
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvaible;
+import it.polimi.model.Exception.NoTargetInSquare;
 import it.polimi.model.Exception.NotInSameDirection;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotVisibleTarget;
@@ -14,6 +15,9 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
+import it.polimi.model.Weapon.Electroscythe;
+import it.polimi.model.Weapon.LockRifle;
+import it.polimi.view.cli.Game;
 
 import java.util.ArrayList;
 
@@ -144,33 +148,91 @@ public class ActionController {
     
     }
     
-    public void LockRifleWeapon(){
-        //chiedo alla view che effeto vuole usare
+    
+    //GESTIONE DELLE ARMI
+    
+    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon){
         
-        // come stringa
+        //chiedi quale dei due effetti vuoi usare
+        String message = new String("base mode");
         
-        switch (effect){
-            case "Base Effect":
-                //chiedo alla view i parametri che mi servono per questo spefico effetto
-                //gestisco le eccezioni sugli imputi qui
-                //
+        //questi verrano settati dalla view
+        Map map = new Map(MapCreator.createA());
+        Player currentPlayer = new Player(1,"marco",EnumColorPlayer.BLU);
+        
+        switch (message){
+            case "base mode":
+                //gestione per costo base
                 
-                //public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
+                //public void baseMode(Map map, Player currentPlayer) throws NoTargetInSquare {
+                try {
+                    
+                    weapon.baseMode(map,currentPlayer);
+                    weapon.setCharge(false);
+                } catch (NoTargetInSquare noTargetInSquare) {
                 
-                //gestisco anche eccezioni di basso livello NotVisibleTarget
-                
-            case "Second lock effect":
-                //chiedo alla view i parametri che mi servono per questo spefico effetto
-                
-                //gestisco le eccezioni sugli imputi qui
-                // gestire il fatto che target 2 deve essere diverso da target 1
+                }
             
-                //public void secondLockEffect(Map map, Player currentPlayer, Player target2)throws NotVisibleTarget {
+            case "reaper mode":
+                //gestione per costo extra
                 
-                //gestisco anche eccezioni di basso livello NotVisibleTarget
-
+                //public void reaperMode(Map map,Player currentPlayer) throws NoTargetInSquare {
+                try {
+                    
+                    weapon.reaperMode(map,currentPlayer);
+                    weapon.setCharge(false);
+                } catch (NoTargetInSquare noTargetInSquare) {
+                
+                }
         }
+    }
     
+    public void LockRifleweapon(GameModel gameModel, LockRifle weapon){
+        
+        //chiedi quale dei due effetti vuoi usare
+        String message = new String("base mode");
+        
+        //questi verrano settati dalla view
+        Map map = new Map(MapCreator.createA());
+        Player currentPlayer = new Player(1,"marco",EnumColorPlayer.BLU);
+        Player target1 =new Player(2,"andre",EnumColorPlayer.GREEN);
+        Player target2 =new Player(3,"simo",EnumColorPlayer.PINK);
+        
+        switch (message){
+            case "base effect":
+                //gestione per costo base
     
-    
+                //public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
+                try {
+                    weapon.baseEffect(map,currentPlayer,target1);
+                    weapon.setCharge(false);
+                } catch (NotVisibleTarget notVisibleTarget) {
+                
+                }
+                
+                
+            
+            case "second Lock Effect":
+                //gestione per costo extra
+                
+                
+                // gestire il fatto che target 2 deve essere diverso da target 1
+                if(!target1.equals(target1)) {
+                    //public void secondLockEffect(Map map, Player currentPlayer, Player target2)throws NotVisibleTarget {
+                    try {
+        
+                        weapon.secondLockEffect(map, currentPlayer, target2);
+                        weapon.setCharge(false);
+                    } catch (NotVisibleTarget notVisibleTarget) {
+        
+                        notVisibleTarget.printStackTrace();
+                    }
+                }
+               
+                
+        }
+    }
+        
 }
+    
+

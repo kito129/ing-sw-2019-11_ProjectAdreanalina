@@ -155,13 +155,13 @@ public class ActionModel {
         player.getPlayerBoard().addPowerUp(powerUpCard);
     }
     
-    public HashMap<EnumColorPlayer,Integer> scoringPlayerBoard(Player player) {
+    public void scoringPlayerBoard(Player player) {
     
         PlayerBoard playerBoard = player.getPlayerBoard();
         HashMap<EnumColorPlayer, Integer> colorDamageHashMap = new HashMap<>();
     
         for (Player a : gameModel.getPlayers()) {
-            colorDamageHashMap.put(a.getColor(), player.getPlayerBoard().colorOccurenceInDamages(a.getColor()));
+            colorDamageHashMap.put(a.getColor(), player.getPlayerBoard().colorOccurrenceInDamages(a.getColor()));
         }
         //TODO AVANTI DA QUI 6/05
         //first blood
@@ -169,10 +169,7 @@ public class ActionModel {
         }
     }
         
-        
-       
     
-    }
         
 
 
