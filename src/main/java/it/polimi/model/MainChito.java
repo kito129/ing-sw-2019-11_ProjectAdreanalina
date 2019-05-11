@@ -135,6 +135,7 @@ public class MainChito {
         
         Player playerA=new Player(1,"marco",EnumColorPlayer.GREEN);
         Player playerB=new Player(2,"andre",EnumColorPlayer.BLU);
+        Player playerC=new Player(2,"simo",EnumColorPlayer.BLU);
         
         mappa.addPlayerOnSquare(mappa.getSquare(a,b),playerA);
         mappa.getSquare(c,d).addPlayer(playerB);
@@ -158,7 +159,9 @@ public class MainChito {
         
         System.out.println("distance: " + mappa.distance(playerA,playerB));
         System.out.println("my square: " + mappa.isInMySquare(playerA,playerB));
-        System.out.println("same direction: " + mappa.sameDirection(playerA,playerB));
+        
+        System.out.println("same direction: " + mappa.sameDirection(playerA,playerB,playerC));
+        
         System.out.println("south: " + mappa.playerOnMySouth(playerA));
         System.out.println("north: " + mappa.playerOnMyNorth(playerA));
         System.out.println("est: " + mappa.playerOnMyEst(playerA));
