@@ -3,6 +3,7 @@ package it.polimi.controller;
 import com.sun.org.apache.bcel.internal.generic.PUSH;
 import it.polimi.model.*;
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
+import it.polimi.model.Exception.ModelException.NotValidAmmoException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
@@ -18,7 +19,9 @@ import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.Electroscythe;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.cli.Game;
+import jdk.dynalink.NamedOperation;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 
@@ -118,14 +121,104 @@ public class ActionController {
         }
     }
     
-    public void rechargeController(ArrayList<WeaponCard> weapon){
+    public void rechargeController(Player player, ArrayList<WeaponCard> weapon){
+    
+        //creo var temporanee
+        WeaponCard weaponToCharge = new WeaponCard();
+        ArrayList<EnumColorCardAndAmmo> avaiableAmmo = player.getPlayerBoard().getAmmo();
         
-        for (WeaponCard a: weapon){
-            //provo a ricaricare in caso non abbia munizioni, lancia eccezione e  chideo aslttrinetin pagomi chiede se voglio pagare con PoweUp
+    
+        //fino a che ho armi disponibili
+        while (weapon.size()>0) {
+            
+            // faccio scegliere al player quali armi sono scariche,
+            // mi tornerà un index, che setto qui sotto
+            int viewSelection = 1;
+            
+            //seleziono l'arma e vedo il costo
+            for (WeaponCard a : weapon) {
+                
+                weaponToCharge = weapon.get(viewSelection);
+                //prendo il costo di ricarica
+                ArrayList<EnumColorCardAndAmmo> rechargeCost = weaponToCharge.getRechargeCost();
+                rechargeCost.add(weaponToCharge.getColorWeaponCard());
+                
+                try {
+                    payAmmo(player,rechargeCost);
+                    weaponToCharge.setCharge(true);
+                    
+                } catch (NotValidAmmoException e) {
+                
+                } catch (NoPowerUpAvaible noPowerUpAvaible) {
+                
+                }
+            }
+        }
+    }
             
             
+    
+    
+    public void payAmmo(Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay) throws NotValidAmmoException, NoPowerUpAvaible {
+        
+        //prendo playerboard
+        PlayerBoard playerBoard = player.getPlayerBoard();
+        
+        //var temporanee
+        ArrayList<EnumColorCardAndAmmo> avaibleAmmo = new ArrayList<>(playerBoard.getAmmo());
+        ArrayList<EnumColorCardAndAmmo> avaiblePowerUpAsAmmo = new ArrayList<>();
+        
+        for (PowerUpCard a : playerBoard.getPlayerPowerUps()) {
             
-            //se si se, le mie muni +  i powe up selti possono ricaraicare , ricrico,
+            avaiblePowerUpAsAmmo.add(a.getColorPowerUpCard());
+        }
+        if (avaiblePowerUpAsAmmo.size()==0){
+            throw  new NoPowerUpAvaible();
+        }
+    
+        if (avaibleAmmo.containsAll(ammoToPay)) {
+            //pago e rendo carica l'arma
+        
+            playerBoard.decreaseAmmos(ammoToPay);
+        
+        } else {
+        
+            // avviso la view che con solo le ammo non può pagare
+            //verifico allora se usando i power up può pagare,
+        
+            ArrayList<EnumColorCardAndAmmo> tempAvaible = new ArrayList<>();
+            tempAvaible.addAll(avaibleAmmo);
+            tempAvaible.addAll(avaiblePowerUpAsAmmo);
+        
+            if (tempAvaible.containsAll(ammoToPay)) {
+            
+                // posso pagare usando ammo e power up
+            
+                // chiedo alla view se lo vuole fare
+                Boolean viewAnswer = true;
+            
+                if (viewAnswer) {
+                
+                    for (EnumColorCardAndAmmo a : ammoToPay) {
+                        
+                        if (avaibleAmmo.contains(a)) {
+                            
+                            playerBoard.decreaseAmmo(a);
+                        } else if (avaiblePowerUpAsAmmo.contains(a)) {
+                            
+                            for (PowerUpCard b : playerBoard.getPlayerPowerUps()) {
+                                
+                                if (b.getColorPowerUpCard().equals(a)) {
+                                    
+                                    playerBoard.removePowerUp(b);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                throw new NotValidAmmoException();
+            }
         }
     }
     
@@ -215,7 +308,7 @@ public class ActionController {
                 
                 
                 // gestire il fatto che target 2 deve essere diverso da target 1
-                if(!target1.equals(target1)) {
+                if(!target1.equals(target2)) {
                     //public void secondLockEffect(Map map, Player currentPlayer, Player target2)throws NotVisibleTarget {
                     try {
         

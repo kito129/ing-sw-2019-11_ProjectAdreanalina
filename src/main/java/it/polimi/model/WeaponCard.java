@@ -11,6 +11,10 @@ public class WeaponCard {
     protected ArrayList<EnumColorCardAndAmmo> rechargeCost;
     protected EnumColorCardAndAmmo colorWeaponCard;
     protected boolean isCharge;
+    
+    public WeaponCard(){
+    
+    }
 
     /**
      * Instantiates a new weapon card.

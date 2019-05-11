@@ -93,9 +93,10 @@ public class ManagerController {
                 Boolean risposta=true;
                 gameModel.setState(State.RECHARGE);
                 // se si chiama metodo che verfica se puoi ricarcaire, lui ricaciehraà
+                
                 if(risposta){
                     
-                    actionController.rechargeController(actualPlayerBoard.getWeaponToCharge());
+                    actionController.rechargeController(actualPlayer,actualPlayerBoard.getWeaponToCharge());
                 }
                 gameModel.setState(State.PASSTURN);
             }
@@ -118,7 +119,9 @@ public class ManagerController {
     
     private WeaponCard getWeaponPlayer(Player player, String weaponString){
         for (WeaponCard a: player.getPlayerBoard().getPlayerWeapons()){
+            
             if(a.getNameWeaponCard().equals(weaponString)){
+                
                 return a;
             } else {
              new NoWeaponAvaibleExeception();

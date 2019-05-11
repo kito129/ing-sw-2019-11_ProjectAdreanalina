@@ -1,6 +1,6 @@
 package it.polimi.model;
 
-import it.polimi.model.Exception.*;
+import it.polimi.model.Exception.ModelException.NotValidAmmoException;
 
 import java.util.ArrayList;
 
@@ -213,13 +213,32 @@ public class PlayerBoard {
             }
         }
     }
+    
+    //MARCO
+    
+    /**
+     * Decreases the value of ammo in the player board.
+     *
+     * @param ammoToDecrease color ammo that ammo will be removed.
+     */
+    public void decreaseAmmo(EnumColorCardAndAmmo ammoToDecrease){
+        
+        for (EnumColorCardAndAmmo ammo:this.ammo) {
+            
+            if(ammo.equals(ammoToDecrease)){
+                this.ammo.remove(ammo);
+            } else {
+                new NotValidAmmoException();
+            }
+        }
+    }
 
     /**
      * Decreases the value of ammo in the player board.
      *
      * @param ammoToDecrease list of colored ammo will be removed.
      */
-    public void decreaseAmmo(ArrayList<EnumColorCardAndAmmo> ammoToDecrease){
+    public void decreaseAmmos(ArrayList<EnumColorCardAndAmmo> ammoToDecrease){
 
         for (EnumColorCardAndAmmo ammo:ammoToDecrease) {
 
