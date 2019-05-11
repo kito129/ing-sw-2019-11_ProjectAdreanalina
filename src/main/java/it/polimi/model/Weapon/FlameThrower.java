@@ -36,6 +36,8 @@ public class FlameThrower extends WeaponCard {
 
     //TODO da rifare
 
+    /*
+
     public void baseMode(Map map, Player currentPlayer,Player target1,Player target2) throws NotValidDistance, NotInSameDirection {
 
         if ((map.distance(currentPlayer, target1) == 1) && (map.sameDirection(currentPlayer, target1))
@@ -74,5 +76,9 @@ public class FlameThrower extends WeaponCard {
 
     }
 
+
+     */
 }
+
+
 

@@ -437,14 +437,6 @@ public class PlayerBoard {
     }
 
 
-
-
-   //todo da qua metodi che forse non servono
-
-
-
-
-
     /**
      * Counts the number of occurrences of one color in the list of damages.
      *

@@ -56,7 +56,7 @@ public class Furnace extends WeaponCard {
     public void cozyFireMode(Map map,Player currentPlayer,Square targetSquare) throws NotValidDistance {
 
         Square currentPlayerSquare = map.findPlayer(currentPlayer);
-        ArrayList<Player> playersInTargetSquare=new ArrayList<>();
+        ArrayList<Player> playersInTargetSquare;
         playersInTargetSquare=map.playersOnSquare(targetSquare);
 
         if(map.distance(currentPlayerSquare,targetSquare)==1){

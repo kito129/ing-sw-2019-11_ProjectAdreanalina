@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class RocketLauncher extends WeaponCard {
 
     private ArrayList<EnumColorCardAndAmmo> rocketJumpCost;
-    private ArrayList<EnumColorCardAndAmmo> fragmentingWarhead;
+    private ArrayList<EnumColorCardAndAmmo> fragmentingWarheadCost;
 
 
     /**
@@ -27,8 +27,8 @@ public class RocketLauncher extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rocketJumpCost =new ArrayList<EnumColorCardAndAmmo>();
         rocketJumpCost.add(EnumColorCardAndAmmo.BLU);
-        fragmentingWarhead = new ArrayList<EnumColorCardAndAmmo>();
-        fragmentingWarhead.add(EnumColorCardAndAmmo.YELLOW);
+        fragmentingWarheadCost = new ArrayList<EnumColorCardAndAmmo>();
+        fragmentingWarheadCost.add(EnumColorCardAndAmmo.YELLOW);
     }
 
     public ArrayList<EnumColorCardAndAmmo> getRocketJumpCost() {
@@ -36,12 +36,13 @@ public class RocketLauncher extends WeaponCard {
         return rocketJumpCost;
     }
 
-    public ArrayList<EnumColorCardAndAmmo> getFragmentingWarhead() {
+    public ArrayList<EnumColorCardAndAmmo> getFragmentingWarheadCost() {
 
-        return fragmentingWarhead;
+        return fragmentingWarheadCost;
     }
 
     // todo capire come gestire lo spostamento. dell'effetto base.
+    // todo farei un metodo a parte per lo spostamento
 
     public void baseEffect(Map map, Player target1, Player currentPlayer) throws NotVisibleTarget, NotValidDistance {
 
@@ -63,9 +64,23 @@ public class RocketLauncher extends WeaponCard {
         }
     }
 
-    //todo ricominciare da qua
+    //todo puo essere usato prima dell'effetto base o dopo
     public void rocketJumpEffect(Map map, Player currentPlayer,Square destSquare)throws NotValidDistance {
 
+        Square squareOfCurrentPlayer=map.findPlayer(currentPlayer);
+
+        if((map.distance(squareOfCurrentPlayer,destSquare)==1)||(map.distance(squareOfCurrentPlayer,destSquare)==2)){
+
+            map.movePlayer(currentPlayer,destSquare);
+        }else{
+
+            throw new NotValidDistance();
+        }
+    }
+
+    //todo durante l'effetto base si può usare questo
+    // da fare poi
+    public void fragmentingWarheadEffect(Map map,Square targetSquare,Player currentPlayer){
 
 
     }

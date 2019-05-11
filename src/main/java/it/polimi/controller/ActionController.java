@@ -1,6 +1,6 @@
 package it.polimi.controller;
 
-import com.sun.org.apache.bcel.internal.generic.PUSH;
+
 import it.polimi.model.*;
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.NotValidAmmoException;
@@ -19,7 +19,7 @@ import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.Electroscythe;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.cli.Game;
-import jdk.dynalink.NamedOperation;
+
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;

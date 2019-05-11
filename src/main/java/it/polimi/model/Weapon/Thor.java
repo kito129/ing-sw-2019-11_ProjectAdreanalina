@@ -19,7 +19,7 @@ public class Thor extends WeaponCard {
      */
     public Thor() {
 
-        super("MACHINE GUN", EnumColorCardAndAmmo.BLU);
+        super("T.H.O.R", EnumColorCardAndAmmo.BLU);
         rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.RED);

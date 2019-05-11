@@ -34,7 +34,7 @@ public class Newton extends PowerUpCard {
                 && ( map.distance(destSquare, map.findPlayer(target)) >0)) {
 
             map.movePlayer(target, destSquare);
-        }else if ((map.sameDirection(destSquare, map.findPlayer(target))) == false) {
+        }else if (!(map.sameDirection(destSquare, map.findPlayer(target)))) {
 
             throw new NotInSameDirection();
         }else if ((map.distance(destSquare, map.findPlayer(target)) > 3)&&(map.distance(destSquare, map.findPlayer(target))==0) ){
