@@ -221,14 +221,12 @@ public class PlayerBoard {
      *
      * @param ammoToDecrease color ammo that ammo will be removed.
      */
-    public void decreaseAmmo(EnumColorCardAndAmmo ammoToDecrease){
+    public void decreaseAmmo(EnumColorCardAndAmmo ammoToDecrease) {
+    
+        for (EnumColorCardAndAmmo ammo : this.ammo) {
         
-        for (EnumColorCardAndAmmo ammo:this.ammo) {
-            
-            if(ammo.equals(ammoToDecrease)){
+            if (ammo.equals(ammoToDecrease)) {
                 this.ammo.remove(ammo);
-            } else {
-                new NotValidAmmoException();
             }
         }
     }
@@ -238,7 +236,7 @@ public class PlayerBoard {
      *
      * @param ammoToDecrease list of colored ammo will be removed.
      */
-    public void decreaseAmmos(ArrayList<EnumColorCardAndAmmo> ammoToDecrease){
+    public void decreaseAmmo(ArrayList<EnumColorCardAndAmmo> ammoToDecrease){
 
         for (EnumColorCardAndAmmo ammo:ammoToDecrease) {
 
@@ -420,9 +418,12 @@ public class PlayerBoard {
 
         increaseDamages(removeMarkOfColor(colorOfMark));
     }
-
-
     
+    /**
+     * Get all weapon that is not charge.
+     *
+     * @return all weapon that is not charge.
+     */
     public ArrayList<WeaponCard> getWeaponToCharge(){
 
         ArrayList<WeaponCard> tempWeapon = new ArrayList<>();

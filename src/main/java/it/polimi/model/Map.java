@@ -330,9 +330,23 @@ public class Map {
      * @param b PlayerB
      * @return true if PlayerA is in the same cardinal direction of PlayerB
      */
-    public boolean sameDirection(Player a, Player b){
+    public boolean sameDirection(Player a, Player b,Player c){
         
-        return sameDirection(getSquare(a.getRow(),a.getColumn()), getSquare(b.getColumn(),b.getRow()));
+        return sameDirection(findPlayer(a),findPlayer(b),findPlayer(c));
+    }
+    
+    /**
+     * Calculate if SquareA is in the same cardinal direction of SquareB.
+     *
+     * @param a Square A
+     * @param b Square B
+     * @param c Square C
+     *
+     * @return true if A is in the same cardinal direction of B
+     */
+    public boolean sameDirection(Square a, Square b, Square c){
+
+        return (((a.getRow() == b.getRow()) && (b.getRow() == c.getRow())) || ((a.getColumn() == b.getColumn()) && (b.getColumn() == c.getColumn())));
     }
     
     /**
@@ -343,8 +357,8 @@ public class Map {
      * @return true if A is in the same cardinal direction of B
      */
     public boolean sameDirection(Square a, Square b){
-
-        return a.getRow() == b.getRow() || a.getColumn() == b.getColumn();
+        
+        return ((a.getRow() == b.getRow()) || ((a.getColumn() == b.getColumn())));
     }
     
     /**

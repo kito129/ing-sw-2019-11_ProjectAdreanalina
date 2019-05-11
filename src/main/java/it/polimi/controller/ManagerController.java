@@ -102,13 +102,13 @@ public class ManagerController {
             }
         }
         if(gameModel.getState().equals(State.PASSTURN)){
-            //verifico se ci sono givaori morit, se si, processo di respawn
+            //verifico se ci sono givaori mortI, se si, processo di respawn
             
             if(gameModel.getDeadPlayers().size()>0){
                 gameModel.setState(State.PLAYERBOARDSCORING);
                 //PRIMA INCASSO PLANCE DI TUTTI POI RIANIMO TUTTI
     
-                //TODO AVANTI DA QUI 6/05
+                //TODO AVANTI DA QUI 11/05
                 
                 actionController.respawnPlayer(gameModel.getDeadPlayers());
             }

@@ -12,9 +12,7 @@ public class WeaponCard {
     protected EnumColorCardAndAmmo colorWeaponCard;
     protected boolean isCharge;
     
-    public WeaponCard(){
     
-    }
 
     /**
      * Instantiates a new weapon card.

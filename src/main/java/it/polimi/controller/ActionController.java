@@ -1,6 +1,6 @@
 package it.polimi.controller;
 
-import com.sun.org.apache.bcel.internal.generic.PUSH;
+
 import it.polimi.model.*;
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.NotValidAmmoException;
@@ -18,10 +18,6 @@ import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.Electroscythe;
 import it.polimi.model.Weapon.LockRifle;
-import it.polimi.view.cli.Game;
-import jdk.dynalink.NamedOperation;
-
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 
@@ -124,9 +120,7 @@ public class ActionController {
     public void rechargeController(Player player, ArrayList<WeaponCard> weapon){
     
         //creo var temporanee
-        WeaponCard weaponToCharge = new WeaponCard();
-        ArrayList<EnumColorCardAndAmmo> avaiableAmmo = player.getPlayerBoard().getAmmo();
-        
+        WeaponCard weaponToCharge = null;
     
         //fino a che ho armi disponibili
         while (weapon.size()>0) {
@@ -139,6 +133,7 @@ public class ActionController {
             for (WeaponCard a : weapon) {
                 
                 weaponToCharge = weapon.get(viewSelection);
+                
                 //prendo il costo di ricarica
                 ArrayList<EnumColorCardAndAmmo> rechargeCost = weaponToCharge.getRechargeCost();
                 rechargeCost.add(weaponToCharge.getColorWeaponCard());
@@ -155,9 +150,6 @@ public class ActionController {
             }
         }
     }
-            
-            
-    
     
     public void payAmmo(Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay) throws NotValidAmmoException, NoPowerUpAvaible {
         
@@ -168,19 +160,20 @@ public class ActionController {
         ArrayList<EnumColorCardAndAmmo> avaibleAmmo = new ArrayList<>(playerBoard.getAmmo());
         ArrayList<EnumColorCardAndAmmo> avaiblePowerUpAsAmmo = new ArrayList<>();
         
+        //calcolo powerup come ammo
         for (PowerUpCard a : playerBoard.getPlayerPowerUps()) {
             
             avaiblePowerUpAsAmmo.add(a.getColorPowerUpCard());
         }
-        if (avaiblePowerUpAsAmmo.size()==0){
-            throw  new NoPowerUpAvaible();
-        }
-    
+        
         if (avaibleAmmo.containsAll(ammoToPay)) {
-            //pago e rendo carica l'arma
+            //pago
+            playerBoard.decreaseAmmo(ammoToPay);
         
-            playerBoard.decreaseAmmos(ammoToPay);
-        
+        } else if (avaiblePowerUpAsAmmo.size()==0) {
+            
+            // se non ho power up
+            throw new NoPowerUpAvaible();
         } else {
         
             // avviso la view che con solo le ammo non può pagare
@@ -206,13 +199,18 @@ public class ActionController {
                             playerBoard.decreaseAmmo(a);
                         } else if (avaiblePowerUpAsAmmo.contains(a)) {
                             
-                            for (PowerUpCard b : playerBoard.getPlayerPowerUps()) {
-                                
-                                if (b.getColorPowerUpCard().equals(a)) {
-                                    
-                                    playerBoard.removePowerUp(b);
-                                }
+                            //lista di power up che faccio vedere alla view, lui scelge
+                            ArrayList<PowerUpCard> powerUpToView = new ArrayList<>();
+                            for (PowerUpCard b: playerBoard.getPlayerPowerUps()){
+                              powerUpToView.add(b);
                             }
+                            //lmi torna l'indice di quale vuole usare
+                            String stringWeapon = "NEWTON";
+                            
+                            // rimuovo quell power up
+                            playerBoard.getPlayerPowerUps().removeIf(n ->(n.getNameCard().equals(stringWeapon)));
+                        } else {
+                            throw new NoPowerUpAvaible();
                         }
                     }
                 }
