@@ -1,7 +1,7 @@
 package it.polimi.model.Weapon;
 
-import it.polimi.model.EnumColorCardAndAmmo;
-import it.polimi.model.WeaponCard;
+import it.polimi.model.*;
+import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
 
@@ -30,12 +30,32 @@ public class Zx2 extends WeaponCard {
         return scannerModeCost;
     }
 
-    public void baseMode()  {
+    public void baseMode(Map map, Player currentPlayer,Player target1) throws NotVisibleTarget{
 
+        if(map.isVisible(currentPlayer,target1)){
 
+            ArrayList<EnumColorPlayer> zx2marks=new ArrayList<>();
+            zx2marks.add(currentPlayer.getColor());
+            zx2marks.add(currentPlayer.getColor());
+            target1.singleDamageMultipleMarks(currentPlayer.getColor(),zx2marks);
+        }else{
+
+            throw new NotVisibleTarget();
+        }
     }
 
-    public void scannerMode() {
+    public void scannerMode(Map map,Player currentPLayer,ArrayList<Player> targets)throws NotVisibleTarget{
 
+        for(Player player:targets){
+
+            if(!(map.isVisible(currentPLayer,player))){
+
+                throw new NotVisibleTarget();
+            }
+        }
+        for(Player player:targets){
+
+            player.singleMark(currentPLayer.getColor());
+        }
     }
 }

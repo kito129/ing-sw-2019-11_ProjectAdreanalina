@@ -1,7 +1,8 @@
 package it.polimi.model.Weapon;
 
-import it.polimi.model.EnumColorCardAndAmmo;
-import it.polimi.model.WeaponCard;
+import it.polimi.model.*;
+import it.polimi.model.Exception.NotValidDistance;
+import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
 
@@ -30,12 +31,35 @@ public class Shotgun extends WeaponCard {
         return longBarrelModeCost;
     }
 
-    public void baseMode()  {
+    //todo mettere la funzione di spostamento
 
+    public void baseMode(Map map, Player currentPlayer, Player target1)throws NotVisibleTarget {
 
+        if (map.distance(currentPlayer,target1)==0){
+
+            ArrayList<EnumColorPlayer> shotGunDamages=new ArrayList<>();
+            shotGunDamages.add(currentPlayer.getColor());
+            shotGunDamages.add(currentPlayer.getColor());
+            shotGunDamages.add(currentPlayer.getColor());
+            target1.multipleDamages(shotGunDamages);
+        }else{
+
+            throw new NotVisibleTarget();
+        }
     }
 
-    public void longBarrelMode() {
+    public void longBarrelMode(Map map, Player currentPlayer, Player target1) throws NotValidDistance {
+
+        if(map.distance(currentPlayer,target1)==1){
+
+            ArrayList<EnumColorPlayer> shotGunDamages= new ArrayList<>();
+            shotGunDamages.add(currentPlayer.getColor());
+            shotGunDamages.add(currentPlayer.getColor());
+            target1.multipleDamages(shotGunDamages);
+        }else {
+
+            throw new NotValidDistance();
+        }
 
     }
 }

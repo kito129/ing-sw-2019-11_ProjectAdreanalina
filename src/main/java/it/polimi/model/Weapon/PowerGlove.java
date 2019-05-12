@@ -1,7 +1,7 @@
 package it.polimi.model.Weapon;
 
-import it.polimi.model.EnumColorCardAndAmmo;
-import it.polimi.model.WeaponCard;
+import it.polimi.model.*;
+import it.polimi.model.Exception.NotValidDistance;
 
 import java.util.ArrayList;
 
@@ -30,12 +30,24 @@ public class PowerGlove extends WeaponCard {
         return rocketFistModeCost;
     }
 
-    public void baseMode()  {
+    public void baseMode(Map map, Player currentPlayer,Player target1)throws NotValidDistance{
 
+        if(map.distance(currentPlayer,target1)==1){
 
+            Square squareOfTarget1=map.findPlayer(target1);
+            map.movePlayer(currentPlayer,squareOfTarget1);
+            ArrayList<EnumColorPlayer> powerGloveMarks=new ArrayList<>();
+            powerGloveMarks.add(currentPlayer.getColor());
+            powerGloveMarks.add(currentPlayer.getColor());
+            target1.singleDamageMultipleMarks(currentPlayer.getColor(),powerGloveMarks);
+        }else{
+
+            throw new NotValidDistance();
+        }
     }
 
-    public void rocketFistMode() {
+    // todo chiedere a marco se la funzione in same line dice che sono sulla stessa linea ma se sono anche attaccate.
+    public void rocketFistMode(Map map,Player currentPlayer) {
 
     }
 }
