@@ -218,17 +218,17 @@ public class PlayerBoard{
     }
     
     //MARCO
-    
     /**
      * Decreases the value of ammo in the player board.
      *
-     * @param ammoToDecrease color ammo that ammo will be removed.
+     * @param ammoToDecrease colored ammo will be removed.
      */
     public void decreaseAmmo(EnumColorCardAndAmmo ammoToDecrease) {
     
         for (EnumColorCardAndAmmo ammo : this.ammo) {
-        
-            if (ammo.equals(ammoToDecrease)) {
+
+            if (ammo==ammoToDecrease){
+
                 this.ammo.remove(ammo);
             }
         }

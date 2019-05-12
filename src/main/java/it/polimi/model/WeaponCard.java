@@ -62,7 +62,7 @@ public class WeaponCard {
      * @param rechargeCost the recharge cost we want to set.
      */
 
-    public void setRechargeCost(ArrayList<EnumColorCardAndAmmo> rechargeCost) {
+    protected void setRechargeCost(ArrayList<EnumColorCardAndAmmo> rechargeCost) {
 
         this.rechargeCost = rechargeCost;
     }

@@ -58,7 +58,7 @@ public class PowerUpCard {
      * @param description the description of the card.
      */
 
-    public void setDescription(String description) {
+    protected void setDescription(String description) {
 
         this.description = description;
     }
