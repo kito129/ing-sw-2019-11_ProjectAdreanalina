@@ -18,9 +18,10 @@ public class LockRifle extends WeaponCard {
     public LockRifle(){
 
         super("LOCK RIFLE", EnumColorCardAndAmmo.BLU);
-        rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
+        setRechargeCost(rechargeCost);
         secondLockCost=new ArrayList<EnumColorCardAndAmmo>();
         secondLockCost.add(EnumColorCardAndAmmo.RED);
     }

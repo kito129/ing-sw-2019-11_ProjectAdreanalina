@@ -21,8 +21,9 @@ public class FlameThrower extends WeaponCard {
     public FlameThrower() {
 
         super("FLAME THROWER", EnumColorCardAndAmmo.RED);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.RED);
+        setRechargeCost(rechargeCost);
         barbecueModeCost = new ArrayList<EnumColorCardAndAmmo>();
         barbecueModeCost.add(EnumColorCardAndAmmo.YELLOW);
         barbecueModeCost.add(EnumColorCardAndAmmo.YELLOW);
@@ -35,6 +36,8 @@ public class FlameThrower extends WeaponCard {
 
 
     //TODO da rifare
+
+    /*
 
     public void baseMode(Map map, Player currentPlayer,Player target1,Player target2) throws NotValidDistance, NotInSameDirection {
 
@@ -74,5 +77,9 @@ public class FlameThrower extends WeaponCard {
 
     }
 
+
+     */
 }
+
+
 

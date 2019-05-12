@@ -20,9 +20,10 @@ public class VortexCannon extends WeaponCard {
     public VortexCannon(){
 
         super("VORTEX CANNON", EnumColorCardAndAmmo.RED);
-        rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
+        setRechargeCost(rechargeCost);
         blackHoleCost =new ArrayList<EnumColorCardAndAmmo>();
         blackHoleCost.add(EnumColorCardAndAmmo.RED);
     }

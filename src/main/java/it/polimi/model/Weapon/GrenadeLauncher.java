@@ -19,8 +19,9 @@ public class GrenadeLauncher extends WeaponCard {
     public GrenadeLauncher(){
 
         super("GRENADE LAUNCHER", EnumColorCardAndAmmo.RED);
-        rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.RED);
+        setRechargeCost(rechargeCost);
         extraGrenadeCost =new ArrayList<EnumColorCardAndAmmo>();
         extraGrenadeCost.add(EnumColorCardAndAmmo.RED);
     }

@@ -1,6 +1,6 @@
 package it.polimi.controller;
 
-
+//import com.sun.org.apache.bcel.internal.generic.PUSH; //todo occhio che non fa compilare con questo chi lha messo lo sistemi
 import it.polimi.model.*;
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.NotValidAmmoException;
@@ -18,19 +18,22 @@ import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.Electroscythe;
 import it.polimi.model.Weapon.LockRifle;
+import it.polimi.view.cli.Game;
+// import jdk.dynalink.NamedOperation; //todo occhio che non fa compilare chi la messo lo sistemi
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 
 public class ActionController {
-    
-    
+
+
     public void runActionController (ActionModel actionModel,Map map) throws SquareNotExistException {
-        
+
         //answer to view an input Square
         Square inputSquare = new Square(1,0,EnumColorSquare.RED);
         //temp variables
          map.existInMap(inputSquare);
-         
+
         //effective move
         try {
             actionModel.runActionModel(inputSquare);
@@ -38,179 +41,175 @@ public class ActionController {
             //da gestire se mossa non valida
         }
     }
-    
+
     public void grabActionController (ActionModel actionModel,Map map) throws SquareNotExistException {
-        
+
         //answer to view an input Square
         Square inputSquare = new Square(1,0,EnumColorSquare.RED);
         Integer indexWeapon=null;
         //temp variables
         map.existInMap(inputSquare);
-        
-        
+
+
         //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
         if(map.isGenerationSquare(inputSquare)){
-            
+
             //chiedi alla view l'index dellarma
             //solo prova
             indexWeapon= 1;
         } else {
             indexWeapon=null;
         }
-        
+
         //effective catch gia con l'index giusto se è una Generation Square
         try {
-            
+
             actionModel.grabActionModel(inputSquare,indexWeapon);
         } catch (CatchActionMaxDistLimitException catchActionMaxDistExpetion) {
-        
+
         } catch (CatchActionFullObjException e) {
-        
+
         }
     }
-    
+
     public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvaible {
-        
+
         //NEWTON
         if (powerUpCard.getClass().equals(Newton.class)) {
-            
+
             //chiedi i parametri di newton
             Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
             Square targetSquare = new Square(1,1,EnumColorSquare.RED);
             try {
-                
+
                 actionModel.usePowerUpNewton((Newton)powerUpCard,targetPlayer, targetSquare);
             } catch (NotInSameDirection notInSameDirection) {
-                
+
                 //TODO
             } catch (NotValidDistance notValidDistance) {
-                
+
                 //TODO
             }
-            
+
         //TAGBACK GRANATE
         } else if (powerUpCard.getClass().equals(TagBackGrenade.class)) {
-            
+
             //chiedi i parametri di teleporter
             Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
             try {
-        
+
                 actionModel.usePowerUpTagBackGrenade((TagBackGrenade) powerUpCard,targetPlayer );
             } catch (NotVisibleTarget notVisibleTarget) {
                 notVisibleTarget.printStackTrace();
             }
-    
+
         //TELEPORTER
         } else if (powerUpCard.getClass().equals(Teleporter.class)) {
-            
+
             //chiedi i parametri di teleporter
             Square targetSquare = new Square(1,1,EnumColorSquare.RED);
             actionModel.usePowerUpTeleporter((Teleporter) powerUpCard, targetSquare);
-            
+
         //TARGETING SCOPE
         } else if (powerUpCard.getClass().equals(TargetingScope.class)) {
-            
+
             //chiedi i parametri di TargetingScope
             Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
             actionModel.usePowerUpTargetingScope((TargetingScope) powerUpCard, targetPlayer);
-            
+
         }
     }
-    
+
     public void rechargeController(Player player, ArrayList<WeaponCard> weapon){
-    
+
         //creo var temporanee
-        WeaponCard weaponToCharge = null;
-    
+        WeaponCard weaponToCharge = new WeaponCard("ciao",EnumColorCardAndAmmo.BLU); //todo ho messo parametri a caso perchè non compila.
+        ArrayList<EnumColorCardAndAmmo> avaiableAmmo = player.getPlayerBoard().getAmmo();
+
+
         //fino a che ho armi disponibili
         while (weapon.size()>0) {
-            
+
             // faccio scegliere al player quali armi sono scariche,
             // mi tornerà un index, che setto qui sotto
             int viewSelection = 1;
-            
+
             //seleziono l'arma e vedo il costo
             for (WeaponCard a : weapon) {
-                
+
                 weaponToCharge = weapon.get(viewSelection);
-                
                 //prendo il costo di ricarica
                 ArrayList<EnumColorCardAndAmmo> rechargeCost = weaponToCharge.getRechargeCost();
                 rechargeCost.add(weaponToCharge.getColorWeaponCard());
-                
+
                 try {
                     payAmmo(player,rechargeCost);
                     weaponToCharge.setCharge(true);
-                    
+
                 } catch (NotValidAmmoException e) {
-                
-                } catch (NoPowerUpAvaible NoPowerUpAvaible) {
-                
+
                 }
             }
         }
     }
-    
+
+
+
+
     public void payAmmo(Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay) throws NotValidAmmoException, NoPowerUpAvaible {
-        
+
         //prendo playerboard
         PlayerBoard playerBoard = player.getPlayerBoard();
-        
+
         //var temporanee
         ArrayList<EnumColorCardAndAmmo> avaibleAmmo = new ArrayList<>(playerBoard.getAmmo());
         ArrayList<EnumColorCardAndAmmo> avaiblePowerUpAsAmmo = new ArrayList<>();
-        
-        //calcolo powerup come ammo
+
         for (PowerUpCard a : playerBoard.getPlayerPowerUps()) {
-            
+
             avaiblePowerUpAsAmmo.add(a.getColorPowerUpCard());
         }
-        
+        if (avaiblePowerUpAsAmmo.size()==0){
+            throw  new NoPowerUpAvaible();
+        }
+
         if (avaibleAmmo.containsAll(ammoToPay)) {
-            //pago
-            playerBoard.decreaseAmmo(ammoToPay);
-        
-        } else if (avaiblePowerUpAsAmmo.size()==0) {
-            
-            // se non ho power up
-            throw new NoPowerUpAvaible();
+            //pago e rendo carica l'arma
+
+            //playerBoard.decreaseAmmos(ammoToPay);   // todo ti ho messo il commento perhè non mi compilava
+
         } else {
-        
+
             // avviso la view che con solo le ammo non può pagare
             //verifico allora se usando i power up può pagare,
-        
+
             ArrayList<EnumColorCardAndAmmo> tempAvaible = new ArrayList<>();
             tempAvaible.addAll(avaibleAmmo);
             tempAvaible.addAll(avaiblePowerUpAsAmmo);
-        
+
             if (tempAvaible.containsAll(ammoToPay)) {
-            
+
                 // posso pagare usando ammo e power up
-            
+
                 // chiedo alla view se lo vuole fare
                 Boolean viewAnswer = true;
-            
+
                 if (viewAnswer) {
-                
+
                     for (EnumColorCardAndAmmo a : ammoToPay) {
-                        
+
                         if (avaibleAmmo.contains(a)) {
-                            
+
                             playerBoard.decreaseAmmo(a);
                         } else if (avaiblePowerUpAsAmmo.contains(a)) {
-                            
-                            //lista di power up che faccio vedere alla view, lui scelge
-                            ArrayList<PowerUpCard> powerUpToView = new ArrayList<>();
-                            for (PowerUpCard b: playerBoard.getPlayerPowerUps()){
-                              powerUpToView.add(b);
+
+                            for (PowerUpCard b : playerBoard.getPlayerPowerUps()) {
+
+                                if (b.getColorPowerUpCard().equals(a)) {
+
+                                    playerBoard.removePowerUp(b);
+                                }
                             }
-                            //lmi torna l'indice di quale vuole usare
-                            String stringWeapon = "NEWTON";
-                            
-                            // rimuovo quell power up
-                            playerBoard.getPlayerPowerUps().removeIf(n ->(n.getNameCard().equals(stringWeapon)));
-                        } else {
-                            throw new NoPowerUpAvaible();
                         }
                     }
                 }

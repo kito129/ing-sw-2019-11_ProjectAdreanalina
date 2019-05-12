@@ -17,8 +17,9 @@ public class Electroscythe extends WeaponCard {
     public Electroscythe() {
 
         super("ELECTOSCYTHE", EnumColorCardAndAmmo.BLU);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
+        setRechargeCost(rechargeCost);
         reaperModeCost= new ArrayList<EnumColorCardAndAmmo>();
         reaperModeCost.add(EnumColorCardAndAmmo.BLU);
         reaperModeCost.add(EnumColorCardAndAmmo.RED);

@@ -20,9 +20,10 @@ public class MachineGun extends WeaponCard {
     public MachineGun(){
 
         super("MACHINE GUN", EnumColorCardAndAmmo.BLU);
-        rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
+        setRechargeCost(rechargeCost);
         focusShotCost=new ArrayList<EnumColorCardAndAmmo>();
         focusShotCost.add(EnumColorCardAndAmmo.YELLOW);
         turretTripodCost=new ArrayList<EnumColorCardAndAmmo>();
