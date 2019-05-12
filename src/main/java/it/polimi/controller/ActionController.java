@@ -148,8 +148,6 @@ public class ActionController {
 
                 } catch (NotValidAmmoException e) {
 
-                } catch (NoPowerUpAvaible noPowerUpAvaible) {
-
                 }
             }
         }
@@ -221,10 +219,24 @@ public class ActionController {
         }
     }
     
-    public void respawnPlayer(ArrayList<Player> deadPlayer){
+    public void respawnPlayer(ActionModel actionModel,GameModel gameModel, ArrayList<Player> deadPlayer){
         
         for (Player a: deadPlayer){
-            //rianimo uno alla volta i player
+            //devo essere rianimaro, pesco due power up ne scelgo uno e vado nel colore di quello che scarto
+            
+            //mostro 2 powerup peschati dal mazzo e faccio sceglere al utente quale tenere
+            PowerUpCard powerUp1 = new PowerUpCard("NEWTON",EnumColorCardAndAmmo.RED);
+            PowerUpCard powerUp2= new PowerUpCard("TAGBACKGANATE",EnumColorCardAndAmmo.BLU);
+            
+            //utente mi dice quale usare da quello prendo il colore
+            
+            EnumColorCardAndAmmo chosedColor = powerUp2.getColorPowerUpCard();
+            
+            //adesso devo cercare la qaure di geneazione giusta dopo ho tutti i paramentri da passare
+            Square destSquare = gameModel.getMap().getGenerationSquare(chosedColor);
+            
+            actionModel.respawnPlayer(a,destSquare,powerUp1);
+            
             
         }
     }
@@ -235,7 +247,7 @@ public class ActionController {
             //incasso un plancia lal volta
     
     
-            //TODO AVANTI DA QUI 6/05
+          
         }
     
     }

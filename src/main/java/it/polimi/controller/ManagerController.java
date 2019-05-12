@@ -22,7 +22,7 @@ public class ManagerController {
         PlayerBoard actualPlayerBoard = actualPlayer.getPlayerBoard();
         
         //2 action and multiple power up use
-        while ((actionModel.checkTurn() || actualPlayerBoard.getPlayerPowerUps().size()>0) && !gameModel.getState().equals(State.ENDACTION)){
+        while ((actionModel.checkActionCount() || actualPlayerBoard.getPlayerPowerUps().size()>0) && !gameModel.getState().equals(State.ENDACTION)){
             //scegli una mossa, chiedi alla view
             String mossa = new String("RUN");
             
@@ -108,9 +108,11 @@ public class ManagerController {
                 gameModel.setState(State.PLAYERBOARDSCORING);
                 //PRIMA INCASSO PLANCE DI TUTTI POI RIANIMO TUTTI
     
-                //TODO AVANTI DA QUI 11/05
+                // fase incasso plancie
                 
-                actionController.respawnPlayer(gameModel.getDeadPlayers());
+                
+                //fase di rianimazione
+                actionController.respawnPlayer(actionModel,gameModel,gameModel.getDeadPlayers());
             }
             
         }

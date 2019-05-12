@@ -324,11 +324,12 @@ public class Map {
     
     
     /**
-     * Calculate if PlayerA is in the same cardinal direction of PlayerB.
+     * Calculate if PlayerA is in the same cardinal direction of PlayerB, and PlayerC.
      *
      * @param a PlayerA
      * @param b PlayerB
-     * @return true if PlayerA is in the same cardinal direction of PlayerB
+     * @param c Player c
+     * @return true if PlayerA is in the same cardinal direction of PlayerB, and PlayerC
      */
     public boolean sameDirection(Player a, Player b,Player c){
         
@@ -336,13 +337,12 @@ public class Map {
     }
     
     /**
-     * Calculate if SquareA is in the same cardinal direction of SquareB.
+     * Calculate if SquareA is in the same cardinal direction of SquareB, and PlayerC.
      *
      * @param a Square A
      * @param b Square B
      * @param c Square C
-     *
-     * @return true if A is in the same cardinal direction of B
+     * @return true if A is in the same cardinal direction of B, and PlayerC.
      */
     public boolean sameDirection(Square a, Square b, Square c){
 
@@ -499,6 +499,24 @@ public class Map {
     public boolean isGenerationSquare(Square square){
     
         return square.getClass().equals(GenerationSquare.class);
+    }
+    
+    /**
+     * Gets generation square of the passed color.
+     *
+     * @param color the color to search
+     * @return the generation square of this color
+     * @throws SquareNotExistException the square of this colo not exist or there are no generation of this Color
+     */
+    public Square getGenerationSquare(EnumColorSquare color) throws SquareNotExistException {
+        for (Square a:squares){
+            if(this.isGenerationSquare(a) && (a.getColor() == color)){
+                return a;
+            } else {
+                throw new SquareNotExistException();
+            }
+        }
+        return null;
     }
     
 }
