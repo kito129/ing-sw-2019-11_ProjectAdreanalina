@@ -1,6 +1,5 @@
 package it.polimi.model;
 
-
 import java.util.ArrayList;
 
 public class Main {
@@ -52,7 +51,7 @@ public class Main {
         ArrayList<EnumColorCardAndAmmo> ammoToDecrease= new ArrayList<>();
         ammoToDecrease.add(EnumColorCardAndAmmo.YELLOW);
         ammoToDecrease.add(EnumColorCardAndAmmo.BLU);
-        playerBoard.decreaseAmmo(EnumColorCardAndAmmo.RED);
+        ammoToDecrease.add(EnumColorCardAndAmmo.RED);
         playerBoard.decreaseAmmo(ammoToDecrease);
 
         System.out.println(playerBoard.getAmmo());
@@ -66,6 +65,8 @@ public class Main {
         System.out.println(playerBoard.getPlayerPowerUps());
         System.out.println(playerBoard.getPlayerWeapons());
         System.out.println();
+
+        //todo testare da qui.
 
 
 
