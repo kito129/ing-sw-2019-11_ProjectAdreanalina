@@ -19,9 +19,10 @@ public class Shotgun extends WeaponCard {
     public Shotgun() {
 
         super("SHOTGUN", EnumColorCardAndAmmo.YELLOW);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setRechargeCost(rechargeCost);
         longBarrelModeCost = new ArrayList<EnumColorCardAndAmmo>();
         longBarrelModeCost.add(null);
     }

@@ -1,6 +1,6 @@
 package it.polimi.controller;
 
-import com.sun.org.apache.bcel.internal.generic.PUSH;
+//import com.sun.org.apache.bcel.internal.generic.PUSH; //todo occhio che non fa compilare con questo chi lha messo lo sistemi
 import it.polimi.model.*;
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.NotValidAmmoException;
@@ -19,7 +19,7 @@ import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.Electroscythe;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.cli.Game;
-import jdk.dynalink.NamedOperation;
+// import jdk.dynalink.NamedOperation; //todo occhio che non fa compilare chi la messo lo sistemi
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
@@ -123,7 +123,7 @@ public class ActionController {
     public void rechargeController(Player player, ArrayList<WeaponCard> weapon){
 
         //creo var temporanee
-        WeaponCard weaponToCharge = new WeaponCard();
+        WeaponCard weaponToCharge = new WeaponCard("ciao",EnumColorCardAndAmmo.BLU); //todo ho messo parametri a caso perchè non compila.
         ArrayList<EnumColorCardAndAmmo> avaiableAmmo = player.getPlayerBoard().getAmmo();
 
 
@@ -178,7 +178,7 @@ public class ActionController {
         if (avaibleAmmo.containsAll(ammoToPay)) {
             //pago e rendo carica l'arma
 
-            playerBoard.decreaseAmmos(ammoToPay);
+            //playerBoard.decreaseAmmos(ammoToPay);   // todo ti ho messo il commento perhè non mi compilava
 
         } else {
 

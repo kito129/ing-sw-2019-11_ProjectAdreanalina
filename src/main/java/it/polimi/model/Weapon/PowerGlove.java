@@ -18,9 +18,10 @@ public class PowerGlove extends WeaponCard {
     public PowerGlove() {
 
         super("POWER GLOVE", EnumColorCardAndAmmo.YELLOW);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
+        setRechargeCost(rechargeCost);
         rocketFistModeCost = new ArrayList<EnumColorCardAndAmmo>();
         rocketFistModeCost.add(EnumColorCardAndAmmo.BLU);
     }

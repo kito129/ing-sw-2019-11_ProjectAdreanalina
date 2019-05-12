@@ -19,8 +19,9 @@ public class TractorBeam extends WeaponCard {
     public TractorBeam() {
 
         super("TRACTOR BEAM", EnumColorCardAndAmmo.BLU);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
+        setRechargeCost(rechargeCost);
         punisherModeCost = new ArrayList<EnumColorCardAndAmmo>();
         punisherModeCost.add(EnumColorCardAndAmmo.RED);
         punisherModeCost.add(EnumColorCardAndAmmo.YELLOW);

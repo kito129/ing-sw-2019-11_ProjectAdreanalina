@@ -20,6 +20,8 @@ public class AmmoCard {
      */
     public AmmoCard(int ammoR, int ammoY, int ammoB, PowerUpCard powerUpCard){
 
+        this.ammo=new ArrayList<EnumColorCardAndAmmo>();
+
         for(int i=0; i<ammoR;i++){
 
             this.ammo.add(EnumColorCardAndAmmo.RED);

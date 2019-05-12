@@ -19,9 +19,10 @@ public class Hellion extends WeaponCard {
     public Hellion() {
 
         super("HELLION", EnumColorCardAndAmmo.RED);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setRechargeCost(rechargeCost);
         nanoTracerModeCost = new ArrayList<EnumColorCardAndAmmo>();
         nanoTracerModeCost.add(EnumColorCardAndAmmo.RED);
     }

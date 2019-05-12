@@ -3,21 +3,12 @@ package it.polimi.model;
 /**
  * The type Power up card.
  */
-public  class PowerUpCard {
+public class PowerUpCard {
     
-    /**
-     * The Name power up card.
-     */
-    protected String namePowerUpCard;
-    /**
-     * The Color power up card.
-     */
-    protected EnumColorCardAndAmmo colorPowerUpCard;
-    /**
-     * The Description.
-     */
-    protected String description;
-    
+
+    private String namePowerUpCard;
+    private EnumColorCardAndAmmo colorPowerUpCard;
+    private String description;
     
     /**
      * Instantiates a new Power up card.
@@ -29,7 +20,6 @@ public  class PowerUpCard {
 
         this.namePowerUpCard = namePowerUpCard;
         this.colorPowerUpCard = colorCard;
-
     }
     
     /**
@@ -61,17 +51,15 @@ public  class PowerUpCard {
 
         return colorPowerUpCard;
     }
-    
 
-    @Override
-    public String toString(){
+    /**
+     * Sets description.
+     *
+     * @param description the description of the card.
+     */
 
-        return namePowerUpCard;
+    public void setDescription(String description) {
+
+        this.description = description;
     }
-
-
-
-
-
-
 }

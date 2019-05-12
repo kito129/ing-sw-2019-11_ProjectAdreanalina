@@ -18,8 +18,9 @@ public class Shockwave extends WeaponCard {
     public Shockwave() {
 
         super("SHOCKWAVE", EnumColorCardAndAmmo.YELLOW);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setRechargeCost(rechargeCost);
         tsunamiModeCost = new ArrayList<EnumColorCardAndAmmo>();
         tsunamiModeCost.add(EnumColorCardAndAmmo.YELLOW);
     }

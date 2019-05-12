@@ -21,9 +21,10 @@ public class PlasmaGun extends WeaponCard {
     public PlasmaGun() {
 
         super("PLASMA GUN", EnumColorCardAndAmmo.BLU);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setRechargeCost(rechargeCost);
         phaseGlideCost = new ArrayList<EnumColorCardAndAmmo>();
         phaseGlideCost.add(null);
         chargedShotCost = new ArrayList<EnumColorCardAndAmmo>();

@@ -1,13 +1,11 @@
 package it.polimi.model;
 
-import it.polimi.model.Exception.ModelException.NotValidAmmoException;
-
 import java.util.ArrayList;
 
 /**
  * The type Player board.
  */
-public class PlayerBoard {
+public class PlayerBoard{
 
     private ArrayList<EnumColorCardAndAmmo> ammo;
     private int boardValue;
@@ -36,6 +34,11 @@ public class PlayerBoard {
         playerPowerUps = new ArrayList<PowerUpCard>();
     }
 
+    /**
+     * Gets ammo.
+     *
+     * @return the ammo
+     */
     public ArrayList<EnumColorCardAndAmmo> getAmmo() {
 
         return ammo;
@@ -429,7 +432,7 @@ public class PlayerBoard {
         ArrayList<WeaponCard> tempWeapon = new ArrayList<>();
         for (WeaponCard a:playerWeapons){
 
-            if(!a.isCharge){
+            if(!a.isCharge()){
 
                 tempWeapon.add(a);
             }
@@ -457,6 +460,15 @@ public class PlayerBoard {
         return count;
     }
 
+
+
+
+
+
+
+
+
+
     /**
      * Verifies if one color is present in the list of marks.
      *
@@ -475,6 +487,8 @@ public class PlayerBoard {
         }
         return false;
     }
+
+
 
     // todo chiede al prof perche non va.
     public ArrayList<EnumColorPlayer> removeMarkOfColor1(EnumColorPlayer colorOfMark) {

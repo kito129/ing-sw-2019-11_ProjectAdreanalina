@@ -18,9 +18,10 @@ public class Zx2 extends WeaponCard {
     public Zx2() {
 
         super("ZX-2", EnumColorCardAndAmmo.YELLOW);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
+        setRechargeCost(rechargeCost);
         scannerModeCost = new ArrayList<EnumColorCardAndAmmo>();
         scannerModeCost.add(null);
     }

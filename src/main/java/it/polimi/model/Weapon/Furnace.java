@@ -20,9 +20,10 @@ public class Furnace extends WeaponCard {
     public Furnace() {
 
         super("FURNACE", EnumColorCardAndAmmo.RED);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
+        setRechargeCost(rechargeCost);
         cozyFireModeCost = new ArrayList<EnumColorCardAndAmmo>();
         cozyFireModeCost.add(null);
     }

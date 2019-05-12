@@ -2,7 +2,7 @@ package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
 import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotVisibleTarget;
+
 
 import java.util.ArrayList;
 
@@ -21,9 +21,10 @@ public class Cyberblade extends WeaponCard {
     public Cyberblade(){
 
         super("CYBERBLADE", EnumColorCardAndAmmo.YELLOW);
-        rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo> rechargeCost =new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
+        setRechargeCost(rechargeCost);
         shadowStepCost =new ArrayList<EnumColorCardAndAmmo>();
         shadowStepCost.add(null);
         sliceAndDiceCost = new ArrayList<EnumColorCardAndAmmo>();

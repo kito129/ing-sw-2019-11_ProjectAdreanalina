@@ -16,10 +16,11 @@ public class Whisper extends WeaponCard {
     public Whisper() {
 
         super("WHISPER", EnumColorCardAndAmmo.BLU);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setRechargeCost(rechargeCost);
     }
 
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotValidDistance {

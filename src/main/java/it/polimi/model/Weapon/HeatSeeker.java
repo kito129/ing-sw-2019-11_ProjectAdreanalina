@@ -16,10 +16,11 @@ public class HeatSeeker extends WeaponCard {
     public HeatSeeker(){
 
         super("HEAT SEEKER", EnumColorCardAndAmmo.RED);
-        rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setRechargeCost(rechargeCost);
     }
 
 

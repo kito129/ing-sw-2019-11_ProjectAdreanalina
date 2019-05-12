@@ -7,13 +7,11 @@ import java.util.ArrayList;
  */
 public class WeaponCard {
 
-    protected String nameWeaponCard;
-    protected ArrayList<EnumColorCardAndAmmo> rechargeCost;
-    protected EnumColorCardAndAmmo colorWeaponCard;
-    protected boolean isCharge;
+    private String nameWeaponCard;
+    private ArrayList<EnumColorCardAndAmmo> rechargeCost;
+    private EnumColorCardAndAmmo colorWeaponCard;
+    private boolean isCharge;
     
-    
-
     /**
      * Instantiates a new weapon card.
      * Sets the field is charge true.
@@ -56,6 +54,17 @@ public class WeaponCard {
     public EnumColorCardAndAmmo getColorWeaponCard() {
 
         return colorWeaponCard;
+    }
+
+    /**
+     * Sets recharge cost.
+     *
+     * @param rechargeCost the recharge cost we want to set.
+     */
+
+    public void setRechargeCost(ArrayList<EnumColorCardAndAmmo> rechargeCost) {
+
+        this.rechargeCost = rechargeCost;
     }
 
     /**

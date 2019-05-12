@@ -19,8 +19,9 @@ public class Sledgehammer extends WeaponCard {
     public Sledgehammer() {
 
         super("SLADGEHAMMER", EnumColorCardAndAmmo.YELLOW);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setRechargeCost(rechargeCost);
         pulverizeModeCost = new ArrayList<EnumColorCardAndAmmo>();
         pulverizeModeCost.add(EnumColorCardAndAmmo.RED);
     }

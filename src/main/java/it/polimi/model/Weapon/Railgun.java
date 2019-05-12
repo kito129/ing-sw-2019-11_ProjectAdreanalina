@@ -19,10 +19,11 @@ public class Railgun extends WeaponCard {
     public Railgun() {
 
         super("RAILGUN", EnumColorCardAndAmmo.YELLOW);
-        rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
+        setRechargeCost(rechargeCost);
         piercingModeCost = new ArrayList<EnumColorCardAndAmmo>();
         piercingModeCost.add(null);
     }

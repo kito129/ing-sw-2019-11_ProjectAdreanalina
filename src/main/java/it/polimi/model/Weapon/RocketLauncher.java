@@ -22,9 +22,10 @@ public class RocketLauncher extends WeaponCard {
     public RocketLauncher(){
 
         super("ROCKET LAUNCHER", EnumColorCardAndAmmo.RED);
-        rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo>rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
+        setRechargeCost(rechargeCost);
         rocketJumpCost =new ArrayList<EnumColorCardAndAmmo>();
         rocketJumpCost.add(EnumColorCardAndAmmo.BLU);
         fragmentingWarheadCost = new ArrayList<EnumColorCardAndAmmo>();
