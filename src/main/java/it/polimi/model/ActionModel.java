@@ -21,52 +21,52 @@ import java.util.HashMap;
  * The type Action model.
  */
 public class ActionModel {
-    
+
     private GameModel gameModel;
-    private int action=0;
-    
-    Map map=gameModel.getMap();
-    Player actualPlayer=gameModel.getActualPlayer();
-    
+    private int action = 0;
+
+    Map map = gameModel.getMap();
+    Player actualPlayer = gameModel.getActualPlayer();
+
     /**
      * Gets action number.
      *
      * @return the action number
      */
-    public int getAction () {
-        
+    public int getAction() {
+
         return action;
     }
-    
+
     /**
      * Gets game model.
      *
      * @return the game model
      */
-    public GameModel getGameModel () {
-        
+    public GameModel getGameModel() {
+
         return gameModel;
     }
-    
+
     /**
      * Run Action.
      *
      * @param targetSquare the target square to move
      * @throws RunActionMaxDistLimitException the run action max dist limit exception
      */
-    public void runActionModel (Square targetSquare) throws RunActionMaxDistLimitException {
-        
-        if(map.distance(map.findPlayer(actualPlayer),targetSquare)<4){
-            
-            map.movePlayer(actualPlayer,targetSquare);
+    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException {
+
+        if (map.distance(map.findPlayer(actualPlayer), targetSquare) < 4) {
+
+            map.movePlayer(actualPlayer, targetSquare);
             action++;
         } else {
-            
+
             //run action not valid
             throw new RunActionMaxDistLimitException();
         }
     }
-    
+
     /**
      * Grab Action.
      *
@@ -75,76 +75,74 @@ public class ActionModel {
      * @throws CatchActionMaxDistLimitException the catch action max dist limit exception
      * @throws CatchActionFullObjException      the catch action full obj exception
      */
-    public void grabActionModel (Square targetSquare, int weaponIndex) throws CatchActionMaxDistLimitException, CatchActionFullObjException {
-        
+    public void grabActionModel(Square targetSquare, int weaponIndex) throws CatchActionMaxDistLimitException, CatchActionFullObjException {
+
         //adrenalinic distance
         int maxDist;
-        
-        if(actualPlayer.getPlayerBoard().getDamages().size()<2){
-            
-            maxDist=1;
+
+        if (actualPlayer.getPlayerBoard().getDamages().size() < 2) {
+
+            maxDist = 1;
         } else {
-            
+
             maxDist = 2;
         }
-        if(map.distance(map.findPlayer(actualPlayer),targetSquare)<maxDist) {
-            
-            map.movePlayer(actualPlayer,targetSquare);
-            if(!map.isGenerationSquare(targetSquare) && actualPlayer.getPlayerBoard().getPlayerPowerUps().size()<4) {
-                
+        if (map.distance(map.findPlayer(actualPlayer), targetSquare) < maxDist) {
+
+            map.movePlayer(actualPlayer, targetSquare);
+            if (!map.isGenerationSquare(targetSquare) && actualPlayer.getPlayerBoard().getPlayerPowerUps().size() < 4) {
+
                 actualPlayer.catchAmmoCard(((NormalSquare) map.findPlayer(actualPlayer)).catchAmmoCard());
                 action++;
-            } else if (map.isGenerationSquare(targetSquare) && actualPlayer.getPlayerBoard().getPlayerWeapons().size()<4) {
-    
+            } else if (map.isGenerationSquare(targetSquare) && actualPlayer.getPlayerBoard().getPlayerWeapons().size() < 4) {
+
                 actualPlayer.getPlayerBoard().addWeapon(((GenerationSquare) map.findPlayer(actualPlayer)).catchWeapon(weaponIndex));
                 action++;
-            }else {
-                
+            } else {
+
                 throw new CatchActionFullObjException();
             }
         } else {
-        
+
             throw new CatchActionMaxDistLimitException();
         }
     }
-    
+
     /**
      * Check the number in the turn.
      *
      * @return true if can do action, else otherwise
      */
-    public boolean checkActionCount (){
-        if(action==1){
-            
+    public boolean checkActionCount() {
+        if (action == 1) {
+
             gameModel.setState(State.ACTION1);
             return true;
-        }
-        else if (action==2){
-            
+        } else if (action == 2) {
+
             gameModel.setState(State.ACTION2);
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
-    
-    
+
+
     private PowerUpCard getPowerUp(PowerUpCard powerUp) throws NoPowerUpAvaible {
-        
-        for(PowerUpCard a:gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps()){
-            
-            if(a.equals(powerUp)){
-                
+
+        for (PowerUpCard a : gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps()) {
+
+            if (a.equals(powerUp)) {
+
                 return a;
             } else {
-                
+
                 throw new NoPowerUpAvaible();
             }
         }
         return null;
     }
-    
+
     /**
      * Use power up Newton.
      *
@@ -155,14 +153,14 @@ public class ActionModel {
      * @throws NotInSameDirection Not in same direction
      * @throws NotValidDistance   Not valid distance
      */
-    public void usePowerUpNewton(Newton newton,Player targetPlayer, Square targetSquare) throws NoPowerUpAvaible, NotInSameDirection, NotValidDistance {
-        
+    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvaible, NotInSameDirection, NotValidDistance {
+
         gameModel.setState(State.POWERUP);
-        Newton newton1=(Newton)getPowerUp(newton);
-        newton1.effect(gameModel.getMap(),targetSquare,targetPlayer);
-        
+        Newton newton1 = (Newton) getPowerUp(newton);
+        newton1.effect(gameModel.getMap(), targetSquare, targetPlayer);
+
     }
-    
+
     /**
      * Use power up Teleporter.
      *
@@ -171,13 +169,13 @@ public class ActionModel {
      * @throws NoPowerUpAvaible the no power up avaible
      */
     public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvaible {
-    
+
         gameModel.setState(State.POWERUP);
-        Teleporter teleporter1=(Teleporter) getPowerUp(teleporter);
-        teleporter1.effect(gameModel.getActualPlayer(),gameModel.getMap(),targetSquare);
-        
+        Teleporter teleporter1 = (Teleporter) getPowerUp(teleporter);
+        teleporter1.effect(gameModel.getActualPlayer(), gameModel.getMap(), targetSquare);
+
     }
-    
+
     /**
      * Use power up Targeting Scope.
      *
@@ -185,14 +183,14 @@ public class ActionModel {
      * @param targetPlayer   the target player
      * @throws NoPowerUpAvaible NO power up available
      */
-    public void usePowerUpTargetingScope(TargetingScope targetingScope,Player targetPlayer) throws NoPowerUpAvaible {
-    
+    public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer) throws NoPowerUpAvaible {
+
         gameModel.setState(State.POWERUP);
-        TargetingScope tagertingScope1=(TargetingScope) getPowerUp(targetingScope);
-        tagertingScope1.effect(gameModel.getActualPlayer(),targetPlayer);
-        
+        TargetingScope tagertingScope1 = (TargetingScope) getPowerUp(targetingScope);
+        tagertingScope1.effect(gameModel.getActualPlayer(), targetPlayer);
+
     }
-    
+
     /**
      * Use power up Tag Back Grenade.
      *
@@ -202,12 +200,12 @@ public class ActionModel {
      * @throws NotVisibleTarget Not visible target
      */
     public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NoPowerUpAvaible, NotVisibleTarget {
-    
+
         gameModel.setState(State.POWERUP);
         TagBackGrenade tagBackGrenade1 = (TagBackGrenade) getPowerUp(tagBackGrenade);
         tagBackGrenade1.effect(gameModel.getMap(), gameModel.getActualPlayer(), targetPlayer);
     }
-    
+
     /**
      * Respawn player.
      *
@@ -215,28 +213,30 @@ public class ActionModel {
      * @param generationSquare the generation square
      * @param powerUpCard      the power up card to add to player
      */
-    public void respawnPlayer(Player player, Square generationSquare, PowerUpCard powerUpCard){
-        
+    public void respawnPlayer(Player player, Square generationSquare, PowerUpCard powerUpCard) {
+
         player.getPlayerBoard().resetDamage();
         player.setAlive(true);
-        gameModel.getMap().addPlayerOnSquare(generationSquare,player);
+        gameModel.getMap().addPlayerOnSquare(generationSquare, player);
         player.getPlayerBoard().addPowerUp(powerUpCard);
     }
-    
-    
+
+
     public void scoringPlayerBoard(Player player) {
-    
+
         PlayerBoard playerBoard = player.getPlayerBoard();
         HashMap<EnumColorPlayer, Integer> colorDamageHashMap = new HashMap<>();
-    
+
         for (Player a : gameModel.getPlayers()) {
             colorDamageHashMap.put(a.getColor(), player.getPlayerBoard().colorOccurrenceInDamages(a.getColor()));
         }
-        
+
         //first blood
         playerBoard.getDamages();
-        }
     }
+
+
+}
         
     
         

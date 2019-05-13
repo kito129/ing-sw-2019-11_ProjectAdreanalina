@@ -15,6 +15,7 @@ public class Player {
     private int column;
     private int score;
     private boolean alive;
+    private boolean damaged;
     
     /**
      * Instantiates a new Player setting the id, name and color with the given parameters.
@@ -116,6 +117,16 @@ public class Player {
     
         return alive;
     }
+
+    /**
+     * Gets the value of the field damaged.
+     *
+     * @return true if the player it was damaged, false otherwise.
+     */
+    public boolean isDamaged(){
+
+        return damaged;
+    }
     
     /**
      * Sets the column
@@ -189,12 +200,15 @@ public class Player {
 
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);
+        this.damaged=true;
+
     }
 
     public void multipleDamages(ArrayList<EnumColorPlayer> damages){
 
         this.playerBoard.increaseDamages(damages);
         this.playerBoard.shiftMarks(damages.get(0));
+        this.damaged=true;
     }
 
     public void multipleDamagesSingleMark(ArrayList<EnumColorPlayer> damages, EnumColorPlayer mark){
@@ -202,6 +216,7 @@ public class Player {
         this.playerBoard.increaseDamages(damages);
         this.playerBoard.shiftMarks(mark);
         this.playerBoard.increaseMarks(mark);
+        this.damaged=true;
     }
 
     public void singleDamageMultipleMarks(EnumColorPlayer damage, ArrayList<EnumColorPlayer> marks) {
@@ -209,6 +224,7 @@ public class Player {
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);
         this.playerBoard.increaseMarks(marks);
+        this.damaged=true;
     }
 
     @Override
