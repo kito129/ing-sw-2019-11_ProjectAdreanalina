@@ -117,18 +117,14 @@ public class ManagerController {
         
     }
     
-    private WeaponCard getWeaponPlayer(Player player, String weaponString){
+    private WeaponCard getWeaponPlayer(Player player, String weaponString) {
         for (WeaponCard a: player.getPlayerBoard().getPlayerWeapons()){
             
             if(a.getNameWeaponCard().equals(weaponString)){
                 
                 return a;
-            } else {
-             
-             new NoWeaponAvaibleExeception();
             }
         }
         return null;
     }
-    
 }

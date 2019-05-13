@@ -128,20 +128,6 @@ public class ActionModel {
     }
 
 
-    private PowerUpCard getPowerUp(PowerUpCard powerUp) throws NoPowerUpAvaible {
-
-        for (PowerUpCard a : gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps()) {
-
-            if (a.equals(powerUp)) {
-
-                return a;
-            } else {
-
-                throw new NoPowerUpAvaible();
-            }
-        }
-        return null;
-    }
 
     /**
      * Use power up Newton.
@@ -156,8 +142,7 @@ public class ActionModel {
     public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvaible, NotInSameDirection, NotValidDistance {
 
         gameModel.setState(State.POWERUP);
-        Newton newton1 = (Newton) getPowerUp(newton);
-        newton1.effect(gameModel.getMap(), targetSquare, targetPlayer);
+        newton.effect(gameModel.getMap(), targetSquare, targetPlayer);
 
     }
 
@@ -171,8 +156,7 @@ public class ActionModel {
     public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvaible {
 
         gameModel.setState(State.POWERUP);
-        Teleporter teleporter1 = (Teleporter) getPowerUp(teleporter);
-        teleporter1.effect(gameModel.getActualPlayer(), gameModel.getMap(), targetSquare);
+        teleporter.effect(gameModel.getActualPlayer(), gameModel.getMap(), targetSquare);
 
     }
 
@@ -186,8 +170,7 @@ public class ActionModel {
     public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer) throws NoPowerUpAvaible {
 
         gameModel.setState(State.POWERUP);
-        TargetingScope tagertingScope1 = (TargetingScope) getPowerUp(targetingScope);
-        tagertingScope1.effect(gameModel.getActualPlayer(), targetPlayer);
+        targetingScope.effect(gameModel.getActualPlayer(), targetPlayer);
 
     }
 
@@ -202,8 +185,7 @@ public class ActionModel {
     public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NoPowerUpAvaible, NotVisibleTarget {
 
         gameModel.setState(State.POWERUP);
-        TagBackGrenade tagBackGrenade1 = (TagBackGrenade) getPowerUp(tagBackGrenade);
-        tagBackGrenade1.effect(gameModel.getMap(), gameModel.getActualPlayer(), targetPlayer);
+        tagBackGrenade.effect(gameModel.getMap(), gameModel.getActualPlayer(), targetPlayer);
     }
 
     /**
