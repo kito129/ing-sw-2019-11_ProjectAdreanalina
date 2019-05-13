@@ -68,8 +68,6 @@ public class ManagerController {
                             Electroscythe electroscythe = (Electroscythe) getWeaponPlayer(gameModel.getActualPlayer(),string);
                             actionController.ElectroscytheWeapon(gameModel,electroscythe);
                             
-                            
-                            
                         case "LOCKRIFLE":
                             LockRifle lockRifle = (LockRifle) getWeaponPlayer(gameModel.getActualPlayer(),string);
                             actionController.LockRifleweapon(gameModel,lockRifle);
@@ -126,6 +124,7 @@ public class ManagerController {
                 
                 return a;
             } else {
+             
              new NoWeaponAvaibleExeception();
             }
         }

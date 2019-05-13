@@ -2,6 +2,7 @@ package it.polimi.controller;
 
 
 import it.polimi.model.*;
+//chiedere perche devo importare tutto
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.NotValidAmmoException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
@@ -111,6 +112,7 @@ public class ActionController {
         } else if (powerUpCard.getClass().equals(TargetingScope.class)) {
 
             //chiedi i parametri di TargetingScope
+            //gestione di quando farlo verifica sul danno
             Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
             actionModel.usePowerUpTargetingScope((TargetingScope) powerUpCard, targetPlayer);
 
@@ -254,6 +256,7 @@ public class ActionController {
     
     //GESTIONE DELLE ARMI
     
+    
     public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon){
         
         //chiedi quale dei due effetti vuoi usare
@@ -329,8 +332,6 @@ public class ActionController {
                         notVisibleTarget.printStackTrace();
                     }
                 }
-               
-                
         }
     }
         
