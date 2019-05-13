@@ -23,7 +23,7 @@ public class PrintPlayer implements Serializable {
 
     /**
      * Print Player's attributes.
-     * @param player   the player to print
+     * @param players the player to print
      */
     public static void print(ArrayList<Player> players){
 
