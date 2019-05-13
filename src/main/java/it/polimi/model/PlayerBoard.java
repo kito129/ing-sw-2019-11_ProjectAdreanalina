@@ -217,21 +217,14 @@ public class PlayerBoard{
         }
     }
     
-    //MARCO
     /**
      * Decreases the value of ammo in the player board.
      *
      * @param ammoToDecrease colored ammo will be removed.
      */
     public void decreaseAmmo(EnumColorCardAndAmmo ammoToDecrease) {
-    
-        for (EnumColorCardAndAmmo ammo : this.ammo) {
 
-            if (ammo==ammoToDecrease){
-
-                this.ammo.remove(ammo);
-            }
-        }
+        this.ammo.remove(ammoToDecrease);
     }
 
     /**
@@ -357,17 +350,23 @@ public class PlayerBoard{
      *
      * @param marks list of marks of the player's color who made the marks.
      */
+
     public void increaseMarks(ArrayList<EnumColorPlayer> marks) {
 
-        if (colorOccurrenceInMarks(marks.get(0)) + marks.size() > 3) {
+        if(marks.size()!=0){
 
-            while (colorOccurrenceInMarks(marks.get(0)) < 3) {
+            EnumColorPlayer colorOfMarks= marks.get(0);
 
-                this.marks.add(marks.get(0));
+            if (colorOccurrenceInMarks(colorOfMarks) + marks.size() > 3) {
+
+                while (colorOccurrenceInMarks(colorOfMarks) < 3) {
+
+                    this.marks.add(colorOfMarks);
+                }
+            } else {
+
+                this.marks.addAll(marks);
             }
-        } else {
-
-            this.marks.addAll(marks);
         }
     }
 
@@ -430,7 +429,7 @@ public class PlayerBoard{
     public ArrayList<WeaponCard> getWeaponToCharge(){
 
         ArrayList<WeaponCard> tempWeapon = new ArrayList<>();
-        for (WeaponCard a:playerWeapons){
+        for (WeaponCard a:this.playerWeapons){
 
             if(!a.isCharge()){
 
@@ -464,8 +463,7 @@ public class PlayerBoard{
 
 
 
-
-
+//todo metodi non più utili
 
 
 
@@ -504,6 +502,9 @@ public class PlayerBoard{
         }
         return marksRemoved;
     }
+
+
+
 
 
 }

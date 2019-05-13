@@ -1,5 +1,8 @@
 package it.polimi.model;
 
+import it.polimi.model.PowerUp.Newton;
+import it.polimi.model.Weapon.Cyberblade;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -21,38 +24,22 @@ public class Main {
         System.out.println();
 
 
-        PowerUpCard powerUpCard= new PowerUpCard("prova",EnumColorCardAndAmmo.BLU);
-        System.out.println(powerUpCard.getDescription());
-        System.out.println(powerUpCard.getNameCard());
-        System.out.println(powerUpCard.getColorPowerUpCard());
-        System.out.println();
 
 
-        AmmoCard ammoCard=new AmmoCard(1,1,1,powerUpCard);
-        System.out.println(ammoCard.getAmmo());
-        System.out.println((ammoCard.getPowerUpCard()));
-        System.out.println();
 
-        playerBoard.manageAmmoCard(ammoCard);
+        ArrayList<EnumColorPlayer> damages =new ArrayList<>();
+        damages.add(EnumColorPlayer.BLU);
+        damages.add(EnumColorPlayer.BLU);
+        damages.add(EnumColorPlayer.BLU);
+        damages.add(EnumColorPlayer.BLU);
+        damages.add(EnumColorPlayer.BLU);
+        damages.add(EnumColorPlayer.BLU);
+        damages.add(EnumColorPlayer.PINK);
+        damages.add(EnumColorPlayer.PINK);
+        damages.add(EnumColorPlayer.PINK);
+        damages.add(EnumColorPlayer.PINK);
 
-
-        System.out.println(playerBoard.getAmmo());
-        System.out.println(playerBoard.getAmmoR());
-        System.out.println(playerBoard.getAmmoB());
-        System.out.println(playerBoard.getAmmoY());
-        System.out.println(playerBoard.getBoardValue());
-        System.out.println(playerBoard.getNumberOfDeaths());
-        System.out.println(playerBoard.getDamages());
-        System.out.println(playerBoard.getMarks());
-        System.out.println(playerBoard.getPlayerPowerUps());
-        System.out.println(playerBoard.getPlayerWeapons());
-        System.out.println();
-
-        ArrayList<EnumColorCardAndAmmo> ammoToDecrease= new ArrayList<>();
-        ammoToDecrease.add(EnumColorCardAndAmmo.YELLOW);
-        ammoToDecrease.add(EnumColorCardAndAmmo.BLU);
-        ammoToDecrease.add(EnumColorCardAndAmmo.RED);
-        playerBoard.decreaseAmmo(ammoToDecrease);
+        playerBoard.increaseDamages(damages);
 
         System.out.println(playerBoard.getAmmo());
         System.out.println(playerBoard.getAmmoR());
@@ -66,16 +53,41 @@ public class Main {
         System.out.println(playerBoard.getPlayerWeapons());
         System.out.println();
 
-        //todo testare da qui.
+        playerBoard.increaseMarks(EnumColorPlayer.BLU);
+        playerBoard.increaseMarks(EnumColorPlayer.BLU);
+        playerBoard.increaseMarks(EnumColorPlayer.BLU);
+        playerBoard.increaseMarks(EnumColorPlayer.BLU);
+
+        System.out.println(playerBoard.getAmmo());
+        System.out.println(playerBoard.getAmmoR());
+        System.out.println(playerBoard.getAmmoB());
+        System.out.println(playerBoard.getAmmoY());
+        System.out.println(playerBoard.getBoardValue());
+        System.out.println(playerBoard.getNumberOfDeaths());
+        System.out.println(playerBoard.getDamages());
+        System.out.println(playerBoard.getMarks());
+        System.out.println(playerBoard.getPlayerPowerUps());
+        System.out.println(playerBoard.getPlayerWeapons());
+        System.out.println();
+
+        playerBoard.shiftMarks(EnumColorPlayer.BLU);
+        System.out.println(playerBoard.getAmmo());
+        System.out.println(playerBoard.getAmmoR());
+        System.out.println(playerBoard.getAmmoB());
+        System.out.println(playerBoard.getAmmoY());
+        System.out.println(playerBoard.getBoardValue());
+        System.out.println(playerBoard.getNumberOfDeaths());
+        System.out.println(playerBoard.getDamages());
+        System.out.println(playerBoard.getMarks());
+        System.out.println(playerBoard.getPlayerPowerUps());
+        System.out.println(playerBoard.getPlayerWeapons());
+        System.out.println();
 
 
 
 
 
-
-
-
-
+ // todo testare le funzioni di player che incassano danno
 
 
     }

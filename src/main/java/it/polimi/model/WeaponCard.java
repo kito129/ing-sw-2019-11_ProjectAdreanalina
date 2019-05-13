@@ -86,5 +86,10 @@ public class WeaponCard {
 
         isCharge = charge;
     }
+
+    public String toString(){
+
+        return this.nameWeaponCard;
+    }
 }
     

@@ -62,4 +62,9 @@ public class PowerUpCard {
 
         this.description = description;
     }
+
+    public String toString(){
+
+        return this.namePowerUpCard;
+    }
 }
