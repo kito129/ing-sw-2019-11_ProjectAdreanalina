@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.view.gui.fxml.SelectMap">
    <children>
-      <Text fill="WHITE" layoutX="433.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELCET MAP" AnchorPane.leftAnchor="433.0" AnchorPane.rightAnchor="433.8299865722656" AnchorPane.topAnchor="19.5">
+      <Text fill="WHITE" layoutX="433.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT MAP" AnchorPane.leftAnchor="433.0" AnchorPane.rightAnchor="433.8299865722656" AnchorPane.topAnchor="19.5">
          <font>
             <Font name="FFF World Cup 2018 Adidas" size="50.0" />
          </font>
