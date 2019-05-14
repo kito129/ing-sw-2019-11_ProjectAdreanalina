@@ -1,8 +1,7 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.GameModel;
-import it.polimi.model.PlayerBoard;
-import it.polimi.model.PowerUpCard;
+import it.polimi.model.*;
+import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 
 import java.io.Serializable;
 
@@ -20,8 +19,8 @@ public class PrintMenu implements Serializable {
         System.out.println("4) VIEW YOUR WEAPONS"); //take weapons from ActualPlayer (printWeapon)
         System.out.println("5) VIEW YOUR POWERUP"); //printPowerUp
         System.out.println("6) VIEW YOUR AMMO"); //only ammo (printAmmo)
-        System.out.println("7) VIEW OTHER PLAYER'S ATTRIBUTES"); //id, name, position and score (printPlayer)
-        System.out.println("8) VIEW OTHER PLAYER'S PLAYERBOARD"); //damages, marks and ammo (printPlayerBoard)
+        System.out.println("7) VIEW ANOTHER PLAYER'S ATTRIBUTES"); //id, name, position and score (printPlayer)
+        System.out.println("8) VIEW ANOTHER PLAYER'S PLAYERBOARD"); //damages, marks and ammo (printPlayerBoard)
         System.out.println("9) VIEW OTHER WEAPONS ON THE MAP"); //take weapons from generation square (printWeapon)
         System.out.println("10) VIEW THE MAP");
         System.out.println("--------------------------------------------------------");
@@ -47,14 +46,18 @@ public class PrintMenu implements Serializable {
             case 6:
                 PrintAmmo.print(gameModel.getActualPlayer());
                 break;
-            case 7:
-                PrintPlayer.print(gameModel.getPlayers());
+            case 7: //passare nome o id
+                PrintPlayer.print();
                 break;
-            case 8:
-                PrintPlayerBoard.print(gameModel.getPlayers());
+            case 8: //passare nome o id
+                PrintPlayerBoard.print());
                 break;
             case 9:
-                //TODO
+                try {
+                    GenerationSquare gs =(GenerationSquare) gameModel.getMap().getGenerationSquare(EnumColorSquare.BLU).
+                } catch (SquareNotExistException e) {
+                    e.printStackTrace();
+                });
                 break;
             case 10:
                 //TODO
