@@ -47,17 +47,17 @@ public class PrintMenu implements Serializable {
                 PrintAmmo.print(gameModel.getActualPlayer());
                 break;
             case 7: //passare nome o id
-                PrintPlayer.print();
+                //PrintPlayer.print();
                 break;
             case 8: //passare nome o id
-                PrintPlayerBoard.print());
+                //PrintPlayerBoard.print();
                 break;
             case 9:
                 try {
-                    GenerationSquare gs =(GenerationSquare) gameModel.getMap().getGenerationSquare(EnumColorSquare.BLU).
+                    GenerationSquare gs =(GenerationSquare) gameModel.getMap().getGenerationSquare(EnumColorSquare.BLU);
                 } catch (SquareNotExistException e) {
                     e.printStackTrace();
-                });
+                };
                 break;
             case 10:
                 //TODO

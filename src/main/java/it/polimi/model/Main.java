@@ -1,7 +1,7 @@
 package it.polimi.model;
 
+
 import it.polimi.model.PowerUp.Newton;
-import it.polimi.model.Weapon.Cyberblade;
 
 import java.util.ArrayList;
 
@@ -9,85 +9,91 @@ public class Main {
 
     public static void main(String args[]) {
 
-        PlayerBoard playerBoard= new PlayerBoard();
+        ArrayList<Player> players=new ArrayList<>();
+        Player p1=new Player(1,"ANDREA",EnumColorPlayer.BLU);
+        Player p2=new Player(2,"MARCO",EnumColorPlayer.PINK);
+        Player p3=new Player(3,"SIMO",EnumColorPlayer.YELLOW);
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
 
-        System.out.println(playerBoard.getAmmo());
-        System.out.println(playerBoard.getAmmoR());
-        System.out.println(playerBoard.getAmmoB());
-        System.out.println(playerBoard.getAmmoY());
-        System.out.println(playerBoard.getBoardValue());
-        System.out.println(playerBoard.getNumberOfDeaths());
-        System.out.println(playerBoard.getDamages());
-        System.out.println(playerBoard.getMarks());
-        System.out.println(playerBoard.getPlayerPowerUps());
-        System.out.println(playerBoard.getPlayerWeapons());
+        ArrayList<EnumColorPlayer> ANDREADANNI=new ArrayList<>();
+        ANDREADANNI.add(EnumColorPlayer.BLU);
+        ANDREADANNI.add(EnumColorPlayer.BLU);
+        ANDREADANNI.add(EnumColorPlayer.BLU);
+
+        ArrayList<EnumColorPlayer> ANDREAMARCHI=new ArrayList<>();
+        ANDREAMARCHI.add(EnumColorPlayer.BLU);
+
+        ArrayList<EnumColorPlayer> SIMONEDANNI=new ArrayList<>();
+        SIMONEDANNI.add(EnumColorPlayer.YELLOW);
+        SIMONEDANNI.add(EnumColorPlayer.YELLOW);
+        SIMONEDANNI.add(EnumColorPlayer.YELLOW);
+        ArrayList<EnumColorPlayer> SIMONEMARCHI=new ArrayList<>();
+        SIMONEMARCHI.add(EnumColorPlayer.YELLOW);
+        SIMONEMARCHI.add(EnumColorPlayer.YELLOW);
+
+        ArrayList<EnumColorPlayer> MARCODANNI=new ArrayList<>();
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+        MARCODANNI.add(EnumColorPlayer.PINK);
+
+        ArrayList<EnumColorPlayer> MARCOMARCHI=new ArrayList<>();
+        MARCOMARCHI.add(EnumColorPlayer.PINK);
+        MARCOMARCHI.add(EnumColorPlayer.PINK);
+
+
+
+        for(Player p:players){
+
+            p.stampa();
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        p3.multipleDamages(MARCODANNI);
+        p3.multipleDamages(MARCODANNI);
+
+
+
+
+        for(Player p:players){
+
+            p.stampa();
+        }
+        System.out.println();
+        System.out.println();
         System.out.println();
 
 
 
 
 
-        ArrayList<EnumColorPlayer> damages =new ArrayList<>();
-        damages.add(EnumColorPlayer.BLU);
-        damages.add(EnumColorPlayer.BLU);
-        damages.add(EnumColorPlayer.BLU);
-        damages.add(EnumColorPlayer.BLU);
-        damages.add(EnumColorPlayer.BLU);
-        damages.add(EnumColorPlayer.BLU);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.PINK);
-
-        playerBoard.increaseDamages(damages);
-
-        System.out.println(playerBoard.getAmmo());
-        System.out.println(playerBoard.getAmmoR());
-        System.out.println(playerBoard.getAmmoB());
-        System.out.println(playerBoard.getAmmoY());
-        System.out.println(playerBoard.getBoardValue());
-        System.out.println(playerBoard.getNumberOfDeaths());
-        System.out.println(playerBoard.getDamages());
-        System.out.println(playerBoard.getMarks());
-        System.out.println(playerBoard.getPlayerPowerUps());
-        System.out.println(playerBoard.getPlayerWeapons());
-        System.out.println();
-
-        playerBoard.increaseMarks(EnumColorPlayer.BLU);
-        playerBoard.increaseMarks(EnumColorPlayer.BLU);
-        playerBoard.increaseMarks(EnumColorPlayer.BLU);
-        playerBoard.increaseMarks(EnumColorPlayer.BLU);
-
-        System.out.println(playerBoard.getAmmo());
-        System.out.println(playerBoard.getAmmoR());
-        System.out.println(playerBoard.getAmmoB());
-        System.out.println(playerBoard.getAmmoY());
-        System.out.println(playerBoard.getBoardValue());
-        System.out.println(playerBoard.getNumberOfDeaths());
-        System.out.println(playerBoard.getDamages());
-        System.out.println(playerBoard.getMarks());
-        System.out.println(playerBoard.getPlayerPowerUps());
-        System.out.println(playerBoard.getPlayerWeapons());
-        System.out.println();
-
-        playerBoard.shiftMarks(EnumColorPlayer.BLU);
-        System.out.println(playerBoard.getAmmo());
-        System.out.println(playerBoard.getAmmoR());
-        System.out.println(playerBoard.getAmmoB());
-        System.out.println(playerBoard.getAmmoY());
-        System.out.println(playerBoard.getBoardValue());
-        System.out.println(playerBoard.getNumberOfDeaths());
-        System.out.println(playerBoard.getDamages());
-        System.out.println(playerBoard.getMarks());
-        System.out.println(playerBoard.getPlayerPowerUps());
-        System.out.println(playerBoard.getPlayerWeapons());
-        System.out.println();
 
 
 
 
 
- // todo testare le funzioni di player che incassano danno
+
+
+
+
+
+
+
+
+
+
 
 
     }

@@ -304,22 +304,33 @@ public class PlayerBoard{
 
     /**
      * Increases damages of the damaged player, adding a single damage of the player's color who did the damage.
+     * The list of damages can grow up to a maximum of 12 damage.
      *
      * @param damage damage of the player's color who did the damage.
      */
     public void increaseDamages(EnumColorPlayer damage) {
 
-        this.damages.add(damage);
+        if(this.damages.size()<12){
+
+            this.damages.add(damage);
+        }
     }
 
     /**
      * Increases damages of the damaged player, adding multiple damages of the player's color who did the damages.
+     * The list of damages can grow up to a maximum of 12 damage.
      *
      * @param damages list of damages of the player's color who did the damage.
      */
     public void increaseDamages(ArrayList<EnumColorPlayer> damages) {
 
-        this.damages.addAll(damages);
+        for (EnumColorPlayer color : damages) {
+
+            if (this.damages.size() < 12) {
+
+                this.damages.add(color);
+            }
+        }
     }
 
     /**

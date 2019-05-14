@@ -28,7 +28,7 @@ public class PrintMap implements Serializable {
     /**
      * Get and set map: control if the row and column exists and set them with the corresponding color; if doesn't exists,
      * set that square with black color
-     * @param map   the map choosen for the game
+     * @param squares   the map choosen for the game
      */
     public static void getMap(ArrayList<Square> squares) {
 
@@ -55,16 +55,14 @@ public class PrintMap implements Serializable {
                         //RED SQUARE
                         if (s.getColor().equals(EnumColorSquare.RED) && i == 1 && j == 0) {
                             map[s.getRow()][s.getColumn()] = ANSI_RED + "w" + ANSI_RESET + ANSI_RED_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
-                        }
-                        else if (s.getColor().equals(EnumColorSquare.RED)) {
+                        } else if (s.getColor().equals(EnumColorSquare.RED)) {
                             map[s.getRow()][s.getColumn()] = " " + ANSI_RED_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
 
                         //YELLOW SQUARE
                         if (s.getColor().equals(EnumColorSquare.YELLOW) && i == 2 && j == 3) {
                             map[s.getRow()][s.getColumn()] = " " + ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + ANSI_YELLOW + "w" + ANSI_RESET;
-                        }
-                        else if (s.getColor().equals(EnumColorSquare.YELLOW)) {
+                        } else if (s.getColor().equals(EnumColorSquare.YELLOW)) {
                             map[s.getRow()][s.getColumn()] = " " + ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
 
@@ -74,16 +72,16 @@ public class PrintMap implements Serializable {
                         }
 
                         //BLACK SQUARE
-                        } else {
-                            map[s.getRow()][s.getColumn()] = ANSI_BLACK_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ";
-                        }
+                    } else {
+                        map[s.getRow()][s.getColumn()] = ANSI_BLACK_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ";
                     }
                 }
-
             }
         }
-
     }
+
+
+
 
     /**
      * Print map.
