@@ -24,43 +24,44 @@ public class PrintMap implements Serializable {
     public static final String ANSI_RESET = "\u001b[0m";
 
     public static String[][] map = new String[3][4];
-    public static int maxR=0;
-    public static int maxC=0;
 
-    public static void print(ArrayList<Square> squares) {
+    public static void getMap(ArrayList<Square> squares) {
 
         for(Square s : squares) {
-            if (s.getColor().equals(EnumColorSquare.BLU)) {
-                map[s.getRow()][s.getColumn()] = ANSI_BLUE_BACKGROUND + " ";
-            }
-            if (s.getColor().equals(EnumColorSquare.GREEN)) {
-                map[s.getRow()][s.getColumn()] = ANSI_GREEN_BACKGROUND + " ";
-            }
-            if (s.getColor().equals(EnumColorSquare.PINK)) {
-                map[s.getRow()][s.getColumn()] = ANSI_PURPLE_BACKGROUND + " ";
-            }
-            if (s.getColor().equals(EnumColorSquare.RED)) {
-                map[s.getRow()][s.getColumn()] = ANSI_RED_BACKGROUND + " ";
-            }
-            if (s.getColor().equals(EnumColorSquare.YELLOW)) {
-                map[s.getRow()][s.getColumn()] = ANSI_YELLOW_BACKGROUND + " ";
-            }
-            if (s.getColor().equals(EnumColorSquare.WHITE)) {
-                map[s.getRow()][s.getColumn()] = ANSI_WHITE_BACKGROUND + " ";
-            }
-            if(s.getRow()>maxR){
-                maxR=s.getRow();
-            }
-            if(s.getColumn()>maxC){
-                maxC=s.getColumn();
+            for(int i = 0; i < 3; i++){
+                for(int j = 0; j < 4; j++){
+                    if(s.getRow() == i && s.getColumn() == j){
+                        if (s.getColor().equals(EnumColorSquare.BLU)) {
+                            map[s.getRow()][s.getColumn()] = ANSI_BLUE_BACKGROUND + "  ";
+                        }
+                        if (s.getColor().equals(EnumColorSquare.GREEN)) {
+                            map[s.getRow()][s.getColumn()] = ANSI_GREEN_BACKGROUND + "  ";
+                        }
+                        if (s.getColor().equals(EnumColorSquare.PINK)) {
+                            map[s.getRow()][s.getColumn()] = ANSI_PURPLE_BACKGROUND + "  ";
+                        }
+                        if (s.getColor().equals(EnumColorSquare.RED)) {
+                            map[s.getRow()][s.getColumn()] = ANSI_RED_BACKGROUND + "  ";
+                        }
+                        if (s.getColor().equals(EnumColorSquare.YELLOW)) {
+                            map[s.getRow()][s.getColumn()] = ANSI_YELLOW_BACKGROUND + "  ";
+                        }
+                        if (s.getColor().equals(EnumColorSquare.WHITE)) {
+                            map[s.getRow()][s.getColumn()] = ANSI_WHITE_BACKGROUND + "  ";
+                        }
+                    }else{
+                        map[s.getRow()][s.getColumn()] = ANSI_BLACK_BACKGROUND + "  ";
+                    }
+                }
             }
 
         }
+    }
 
-        /* print map */
-        for(int i=0; i<maxR; i++) {
-            for (int j = 0; j < maxC; j++) {
-                System.out.print(map[i][j] + ANSI_BLACK_BACKGROUND + " ");
+    public static void printMap(String[][] map) {
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 4; j++){
+                System.out.print(map[i][j]);
             }
             System.out.println();
         }
