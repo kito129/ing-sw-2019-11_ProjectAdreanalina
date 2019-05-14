@@ -9,15 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.view.gui.fxml.Start">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="570.0" layoutX="53.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="400.0" fitWidth="570.0" layoutX="53.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../images/adrenalina_cover.jpg" />
          </image>
       </ImageView>
-      <Button alignment="CENTER" layoutX="185.0" layoutY="274.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="PLAY" textAlignment="CENTER">
+      <Button alignment="CENTER" layoutX="185.0" layoutY="290.0" mnemonicParsing="false" opacity="0.95" prefHeight="50.0" prefWidth="200.0" text="PLAY" textAlignment="CENTER">
          <font>
             <Font name="FFF World Cup 2018 Adidas" size="30.0" />
          </font>
