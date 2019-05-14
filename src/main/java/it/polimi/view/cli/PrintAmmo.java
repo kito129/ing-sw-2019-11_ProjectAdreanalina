@@ -10,7 +10,6 @@ public class PrintAmmo implements Serializable {
      * Print Client's ammo.
      * @param player   the player who has those ammo
      */
-
     public static void print(Player player) {
 
         System.out.println("AMMO BLUE: " +player.getPlayerBoard().getAmmoB());

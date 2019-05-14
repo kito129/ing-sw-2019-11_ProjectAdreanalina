@@ -25,6 +25,11 @@ public class PrintMap implements Serializable {
 
     public static String[][] map = new String[3][4];
 
+    /**
+     * Get and set map: control if the row and column exists and set them with the corresponding color; if doesn't exists,
+     * set that square with black color
+     * @param map   the map choosen for the game
+     */
     public static void getMap(ArrayList<Square> squares) {
 
         for(Square s : squares) {
@@ -58,6 +63,10 @@ public class PrintMap implements Serializable {
         }
     }
 
+    /**
+     * Print map.
+     * @param map   the map choosen for the game
+     */
     public static void printMap(String[][] map) {
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 4; j++){
@@ -65,6 +74,8 @@ public class PrintMap implements Serializable {
             }
             System.out.println();
         }
+        //TODO fare in modo che stampa un segno in corrispondenza dei punti di generazione (che sono sempre gli stessi)
+        //TODO per le porte bisogna verificare se fra due indici di riga/colonna seguenti è presente un link
     }
 }
 
