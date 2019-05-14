@@ -37,25 +37,25 @@ public class PrintMap implements Serializable {
                 for(int j = 0; j < 4; j++){
                     if(s.getRow() == i && s.getColumn() == j){
                         if (s.getColor().equals(EnumColorSquare.BLU)) {
-                            map[s.getRow()][s.getColumn()] = ANSI_BLUE_BACKGROUND + "  ";
+                            map[s.getRow()][s.getColumn()] = ANSI_BLUE_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
                         if (s.getColor().equals(EnumColorSquare.GREEN)) {
-                            map[s.getRow()][s.getColumn()] = ANSI_GREEN_BACKGROUND + "  ";
+                            map[s.getRow()][s.getColumn()] = ANSI_GREEN_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
                         if (s.getColor().equals(EnumColorSquare.PINK)) {
-                            map[s.getRow()][s.getColumn()] = ANSI_PURPLE_BACKGROUND + "  ";
+                            map[s.getRow()][s.getColumn()] = ANSI_PURPLE_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
                         if (s.getColor().equals(EnumColorSquare.RED)) {
-                            map[s.getRow()][s.getColumn()] = ANSI_RED_BACKGROUND + "  ";
+                            map[s.getRow()][s.getColumn()] = ANSI_RED_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
                         if (s.getColor().equals(EnumColorSquare.YELLOW)) {
-                            map[s.getRow()][s.getColumn()] = ANSI_YELLOW_BACKGROUND + "  ";
+                            map[s.getRow()][s.getColumn()] = ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
                         if (s.getColor().equals(EnumColorSquare.WHITE)) {
-                            map[s.getRow()][s.getColumn()] = ANSI_WHITE_BACKGROUND + "  ";
+                            map[s.getRow()][s.getColumn()] = ANSI_WHITE_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
                     }else{
-                        map[s.getRow()][s.getColumn()] = ANSI_BLACK_BACKGROUND + "  ";
+                        map[s.getRow()][s.getColumn()] = ANSI_BLACK_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ";
                     }
                 }
             }
@@ -72,6 +72,7 @@ public class PrintMap implements Serializable {
             for(int j = 0; j < 4; j++){
                 System.out.print(map[i][j]);
             }
+            System.out.println();
             System.out.println();
         }
         //TODO fare in modo che stampa un segno in corrispondenza dei punti di generazione (che sono sempre gli stessi)
