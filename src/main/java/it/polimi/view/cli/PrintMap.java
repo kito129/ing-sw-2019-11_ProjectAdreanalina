@@ -55,24 +55,25 @@ public class PrintMap implements Serializable {
                         //RED SQUARE
                         if (s.getColor().equals(EnumColorSquare.RED) && i == 1 && j == 0) {
                             map[s.getRow()][s.getColumn()] = ANSI_RED + "w" + ANSI_RESET + ANSI_RED_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
-                            if (s.getColor().equals(EnumColorSquare.RED)) {
-                                map[s.getRow()][s.getColumn()] = " " + ANSI_RED_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
-                            }
+                        }
+                        else if (s.getColor().equals(EnumColorSquare.RED)) {
+                            map[s.getRow()][s.getColumn()] = " " + ANSI_RED_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
+                        }
 
-                            //YELLOW SQUARE
-                            if (s.getColor().equals(EnumColorSquare.YELLOW) && i == 2 && j == 3) {
-                                map[s.getRow()][s.getColumn()] = " " + ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + ANSI_YELLOW + "w" + ANSI_RESET;
-                            }
-                            if (s.getColor().equals(EnumColorSquare.YELLOW)) {
-                                map[s.getRow()][s.getColumn()] = " " + ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
-                            }
+                        //YELLOW SQUARE
+                        if (s.getColor().equals(EnumColorSquare.YELLOW) && i == 2 && j == 3) {
+                            map[s.getRow()][s.getColumn()] = " " + ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + ANSI_YELLOW + "w" + ANSI_RESET;
+                        }
+                        else if (s.getColor().equals(EnumColorSquare.YELLOW)) {
+                            map[s.getRow()][s.getColumn()] = " " + ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
+                        }
 
-                            //WHITE SQUARE
-                            if (s.getColor().equals(EnumColorSquare.WHITE)) {
-                                map[s.getRow()][s.getColumn()] = " " + ANSI_WHITE_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
-                            }
+                        //WHITE SQUARE
+                        if (s.getColor().equals(EnumColorSquare.WHITE)) {
+                            map[s.getRow()][s.getColumn()] = " " + ANSI_WHITE_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
+                        }
 
-                            //BLACK SQUARE
+                        //BLACK SQUARE
                         } else {
                             map[s.getRow()][s.getColumn()] = ANSI_BLACK_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ";
                         }
