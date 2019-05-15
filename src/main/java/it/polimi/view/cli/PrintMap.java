@@ -33,8 +33,11 @@ public class PrintMap implements Serializable {
     public static void getMap(ArrayList<Square> squares) {
 
         for (Square s : squares) {
+
             for (int i = 0; i < 3; i++) {
+
                 for (int j = 0; j < 4; j++) {
+
                     if (s.getRow() == i && s.getColumn() == j) {
 
                         //BLU SQUARE

@@ -30,7 +30,10 @@ public class PrintWeapon implements Serializable {
             if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)){
                 System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
             }
-            System.out.println("RECHARGE COST: " +wc.getRechargeCost().toString());
+
+            System.out.print("RECHARGE COST: ");
+            PrintRechargeCost.print(weaponList);
+
             System.out.println("LOADED WEAPON: " +wc.isCharge());
         }
     }
