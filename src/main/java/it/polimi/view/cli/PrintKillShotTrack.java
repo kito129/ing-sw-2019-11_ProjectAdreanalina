@@ -24,36 +24,73 @@ public class PrintKillShotTrack implements Serializable {
      */
     public static void print(ArrayList<KillShotTrackPoint> killShotTrackPoints){
 
+        System.out.println("KILL SHOT TRACK POINT: ");
+
         for(KillShotTrackPoint k : killShotTrackPoints){
+
+            int i = 0;
+            i++;
+
+            System.out.println();
+            System.out.println("N°: " + i);
 
             if(k.isSkull()){
 
                 System.out.print(ANSI_RED + "SKULL" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
             }
-
-            if(k.getMark1().equals(EnumColorPlayer.BLU)){
+            //killShotTrackPoint Blu
+            if (k.getMark1().equals(EnumColorPlayer.BLU)) {
 
                 System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+
+                if (k.getMark2().equals(EnumColorPlayer.BLU)){
+
+                    System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                }
             }
 
-            if(k.getMark1().equals(EnumColorPlayer.GREEN)){
+            //killShotTrackPoint Green
+            if (k.getMark1().equals(EnumColorPlayer.GREEN)) {
 
                 System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+
+                if (k.getMark2().equals(EnumColorPlayer.GREEN)) {
+
+                    System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                }
             }
 
-            if(k.getMark1().equals(EnumColorPlayer.GREY)){
+            //killShotTrackPoint Grey
+            if (k.getMark1().equals(EnumColorPlayer.GREY)) {
 
                 System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+
+                if (k.getMark2().equals(EnumColorPlayer.GREY)) {
+
+                    System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                }
             }
 
-            if(k.getMark1().equals(EnumColorPlayer.PINK)){
+            //killShotTrackPoint Pink
+            if (k.getMark1().equals(EnumColorPlayer.PINK)) {
 
                 System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+
+                if (k.getMark2().equals(EnumColorPlayer.PINK)) {
+
+                    System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                }
             }
 
-            if(k.getMark1().equals(EnumColorPlayer.YELLOW)){
+            //killShotTrackPoint Yellow
+            if (k.getMark1().equals(EnumColorPlayer.YELLOW)) {
 
                 System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+
+                if (k.getMark2().equals(EnumColorPlayer.YELLOW)) {
+
+                    System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                }
             }
         }
     }
