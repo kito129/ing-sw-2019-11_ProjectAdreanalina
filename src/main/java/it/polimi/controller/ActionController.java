@@ -294,28 +294,38 @@ public class ActionController {
     }
     
     public void LockRifleweapon(GameModel gameModel, LockRifle weapon){
-        
+
+        Player target1;
+        Player target2;
+        Player currentPlayer;
+        Map map;
+
         //chiedi quale dei due effetti vuoi usare
         String message = new String("base mode");
-        
-        //questi verrano settati dalla view
+
+        /*questi verrano settati dalla view
         Map map = new Map(MapCreator.createA());
         Player currentPlayer = new Player(1,"marco",EnumColorPlayer.BLU);
         Player target1 =new Player(2,"andre",EnumColorPlayer.GREEN);
         Player target2 =new Player(3,"simo",EnumColorPlayer.PINK);
-        
+
+         */
+
         switch (message){
             case "base effect":
                 //gestione per costo base
-    
-                //public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
-                try {
-                    weapon.baseEffect(map,currentPlayer,target1);
-                    weapon.setCharge(false);
-                } catch (NotVisibleTarget notVisibleTarget) {
-                
+
+                try{
+
+                    weapon.baseEffect(map,currentPlayer,target2);
+                }catch (NotVisibleTarget notVisibleTarget){
+
                 }
-                
+                weapon.setCharge(false);
+
+
+                        
+
             case "second Lock Effect":
                 //gestione per costo extra
                 
