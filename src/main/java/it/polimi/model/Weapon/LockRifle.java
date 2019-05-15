@@ -13,6 +13,7 @@ public class LockRifle extends WeaponCard {
      * Instantiates a new Lock Rifle card.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost settings its value to BLU,BLU.
+     * Creates the list of effects setting its value to BaseEffect,SecondLockEffect.
      * Creates the list of second lock cost(cost of optional effect 1) settings it to RED.
      */
     public LockRifle(){
@@ -22,6 +23,10 @@ public class LockRifle extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects=new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseEffect);
+        weaponEffects.add(WeaponsEffect.SecondLockEffect);
+        setWeaponEffects(weaponEffects);
         secondLockCost=new ArrayList<EnumColorCardAndAmmo>();
         secondLockCost.add(EnumColorCardAndAmmo.RED);
     }
@@ -45,10 +50,7 @@ public class LockRifle extends WeaponCard {
         }
     }
 
-
-    //todo gestire il fatto che target 2 deve essere diverso da target 1
-
-    public void secondLockEffect(Map map, Player currentPlayer, Player target2)throws NotVisibleTarget {
+    public void secondLockEffect(Map map, Player currentPlayer, Player target2) throws NotVisibleTarget {
 
         if (map.isVisible(currentPlayer, target2)){
 

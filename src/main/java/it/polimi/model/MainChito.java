@@ -4,7 +4,7 @@ public class MainChito {
     public static void main(String[] args){
         
         
-        Map mappa = new Map(MapCreator.createC());
+        Map mappa = new Map();//todo default costruttore perchè npn mi compila
         
         int a,b,c,d=0;
         

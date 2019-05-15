@@ -33,7 +33,12 @@ public class Map {
         }
         //System.out.println("\ncreo la mappa\n");
     }
-    
+
+    public Map(){
+
+        //todo metodo da cancellare
+    }
+
     /**
      * Search square passed row and column, they represent the grid.
      *

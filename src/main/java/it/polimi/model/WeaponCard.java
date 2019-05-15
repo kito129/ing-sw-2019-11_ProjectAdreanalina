@@ -10,6 +10,7 @@ public class WeaponCard {
     private String nameWeaponCard;
     private ArrayList<EnumColorCardAndAmmo> rechargeCost;
     private EnumColorCardAndAmmo colorWeaponCard;
+    private ArrayList<WeaponsEffect> weaponEffects;
     private boolean isCharge;
     
     /**
@@ -57,6 +58,17 @@ public class WeaponCard {
     }
 
     /**
+     * Gets weapon effects.
+     *
+     * @return the weapon effects.
+     */
+
+    public ArrayList<WeaponsEffect> getWeaponEffects() {
+
+        return weaponEffects;
+    }
+
+    /**
      * Sets recharge cost.
      *
      * @param rechargeCost the recharge cost we want to set.
@@ -65,6 +77,17 @@ public class WeaponCard {
     protected void setRechargeCost(ArrayList<EnumColorCardAndAmmo> rechargeCost) {
 
         this.rechargeCost = rechargeCost;
+    }
+
+    /**
+     * Sets weapon effects.
+     *
+     * @param weaponEffects the effects we want to set.
+     */
+
+    protected void setWeaponEffects(ArrayList<WeaponsEffect> weaponEffects){
+
+        this.weaponEffects=weaponEffects;
     }
 
     /**

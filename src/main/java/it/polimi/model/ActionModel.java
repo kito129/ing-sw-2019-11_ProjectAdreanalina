@@ -116,11 +116,11 @@ public class ActionModel {
     public boolean checkActionCount() {
         if (action == 1) {
 
-            gameModel.setState(State.ACTION1);
+            //gameModel.setState(State.ACTION1);//todo commento perchè non mi compila
             return true;
         } else if (action == 2) {
 
-            gameModel.setState(State.ACTION2);
+            //gameModel.setState(State.ACTION2);todo commento perchè non mi compila
             return true;
         } else {
             return false;

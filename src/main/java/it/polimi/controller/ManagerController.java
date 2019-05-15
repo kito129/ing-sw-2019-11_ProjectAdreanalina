@@ -64,12 +64,12 @@ public class ManagerController {
                     
                     switch (string){
                         case "ELECTOSCYTHE":
-                            Electroscythe electroscythe = (Electroscythe) getWeaponPlayer(gameModel.getActualPlayer(),string);
-                            actionController.ElectroscytheWeapon(gameModel,electroscythe);
+                            //Electroscythe electroscythe = (Electroscythe) getWeaponPlayer(gameModel.getActualPlayer(),string);//todo ti commento perchè npn mi compila
+                           // actionController.ElectroscytheWeapon(gameModel,electroscythe);
                             
                         case "LOCKRIFLE":
-                            LockRifle lockRifle = (LockRifle) getWeaponPlayer(gameModel.getActualPlayer(),string);
-                            actionController.LockRifleweapon(gameModel,lockRifle);
+                           // LockRifle lockRifle = (LockRifle) getWeaponPlayer(gameModel.getActualPlayer(),string);//todo ti commento perchè npn mi compila
+                           // actionController.LockRifleweapon(gameModel,lockRifle);
                             
                     }
     

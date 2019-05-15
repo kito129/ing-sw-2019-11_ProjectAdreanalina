@@ -39,6 +39,11 @@ public class Player {
     
     }
 
+    public Player(){
+
+        //todo metodo da cancellare
+    }
+
     /**
      * Gets id.
      *

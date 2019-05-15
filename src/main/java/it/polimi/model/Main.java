@@ -2,6 +2,7 @@ package it.polimi.model;
 
 
 import it.polimi.model.PowerUp.Newton;
+import it.polimi.model.Weapon.LockRifle;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ public class Main {
 
     public static void main(String args[]) {
 
-        ArrayList<Player> players=new ArrayList<>();
+        /*ArrayList<Player> players=new ArrayList<>();
         Player p1=new Player(1,"ANDREA",EnumColorPlayer.BLU);
         Player p2=new Player(2,"MARCO",EnumColorPlayer.PINK);
         Player p3=new Player(3,"SIMO",EnumColorPlayer.YELLOW);
@@ -74,6 +75,13 @@ public class Main {
         System.out.println();
         System.out.println();
         System.out.println();
+
+         */
+
+        LockRifle lockRifle=new LockRifle();
+
+        System.out.println(lockRifle.getWeaponEffects());
+
 
 
 
