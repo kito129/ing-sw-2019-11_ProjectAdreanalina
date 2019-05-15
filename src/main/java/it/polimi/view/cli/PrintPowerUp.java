@@ -20,15 +20,23 @@ public class PrintPowerUp implements Serializable {
     public static void print(ArrayList<PowerUpCard> powerUpCards){
 
         for(PowerUpCard puc : powerUpCards){
+
+            System.out.println();
             System.out.println("NAME: " +puc.getNameCard());
+
             if(puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.BLU)){
-                System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+
+                System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
+
             if(puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.RED)){
-                System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+
+                System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
+
             if(puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.YELLOW)){
-                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+
+                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
         }
     }

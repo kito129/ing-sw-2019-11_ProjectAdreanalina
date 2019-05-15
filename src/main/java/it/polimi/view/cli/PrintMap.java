@@ -117,4 +117,3 @@ public class PrintMap implements Serializable {
         //TODO per le porte bisogna verificare se fra due indici di riga/colonna seguenti è presente un link
     }
 }
-

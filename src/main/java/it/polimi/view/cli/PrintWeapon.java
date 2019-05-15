@@ -20,15 +20,23 @@ public class PrintWeapon implements Serializable {
     public static void print(ArrayList<WeaponCard> weaponList){
 
         for(WeaponCard wc : weaponList) {
+
+            System.out.println();
             System.out.println("NAME: " +wc.getNameWeaponCard());
+
             if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)){
-                    System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+
+                    System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
+
             if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.RED)){
-                System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+
+                System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
+
             if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)){
-                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+
+                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
 
             System.out.print("RECHARGE COST: ");

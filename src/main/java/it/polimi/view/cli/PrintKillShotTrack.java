@@ -32,7 +32,7 @@ public class PrintKillShotTrack implements Serializable {
             i++;
 
             System.out.println();
-            System.out.println("N°: " + i);
+            System.out.println("KST POINT " + i + ":");
 
             if(k.isSkull()){
 
