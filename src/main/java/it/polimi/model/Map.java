@@ -10,13 +10,14 @@ import java.util.ArrayList;
 public class Map {
     
     private ArrayList<Square> squares;
+    private String name;
     
     /**
      * Instantiates a new Map.
      *
      * @param squares list of square to insert in the map
      */
-    public Map(ArrayList<Square> squares) {
+    public Map(ArrayList<Square> squares,String name) {
 
         ArrayList<Square> temp = new ArrayList<>();
         if (squares != null) {
@@ -27,7 +28,8 @@ public class Map {
                     temp.add(l);
                 //System.out.println("aggiungo "+ l.toString());
             }
-            this.squares=temp;
+            this.squares= new ArrayList<>(temp);
+            this.name=name;
         }
         //System.out.println("\ncreo la mappa\n");
     }
@@ -517,6 +519,13 @@ public class Map {
             }
         }
         return null;
+    }
+    
+    public boolean isPort(Square squareA,Square squareB){
+        if(squareA.getLink().contains(squareB) && squareB.getLink().contains(squareA)){
+            return true;
+        }
+        return false;
     }
     
 }

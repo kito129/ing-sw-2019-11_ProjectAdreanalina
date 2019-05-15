@@ -24,10 +24,9 @@ public class ManagerController {
         //2 action and multiple power up use
         while ((actionModel.checkActionCount() || actualPlayerBoard.getPlayerPowerUps().size()>0) && !gameModel.getState().equals(State.ENDACTION)){
             //scegli una mossa, chiedi alla view
-            String mossa = new String("RUN");
-            
+            State mossa = State.RUN  ;
             switch (mossa) {
-                case "RUN":
+                case RUN:
                     try {
                         
                         actionController.runActionController(actionModel, gameModel.getMap());
@@ -35,7 +34,7 @@ public class ManagerController {
                         
                         //TODO
                     }
-                case "GRAB":
+                case GRAB:
                     try {
                         
                         actionController.grabActionController(actionModel, gameModel.getMap());
@@ -43,7 +42,7 @@ public class ManagerController {
                         
                         //TODO
                     }
-                case "USE POWER UP":
+                case POWERUP:
                     //chiedo che power up vuole usare
                     ArrayList<PowerUpCard> powerUpAvailable = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps();
     
@@ -56,7 +55,7 @@ public class ManagerController {
                         
                         //TODO
                     }
-                case "SHOOT":
+                case SHOOT:
                     //prendo le armi che ho, le mostro alla vieee che decide cosa usare
                     
                     //es
@@ -74,7 +73,7 @@ public class ManagerController {
                             
                     }
     
-                case "END ACTION":
+                case ENDACTION:
                     gameModel.setState(State.ENDACTION);
     
                 default:
@@ -88,11 +87,13 @@ public class ManagerController {
             if(actualPlayerBoard.getWeaponToCharge().size()>0){
                 
                 //chiedi alla view se vuoi ricaricare??
-                Boolean risposta=true;
+                State recharge=State.RECHARGE;
+                //nel caso la view voglia ricaricare
+                
                 gameModel.setState(State.RECHARGE);
                 // se si chiama metodo che verfica se puoi ricarcaire, lui ricaciehraà
                 
-                if(risposta){
+                if(recharge==State.RECHARGE){
                     
                     actionController.rechargeController(actualPlayer,actualPlayerBoard.getWeaponToCharge());
                 }
@@ -108,23 +109,9 @@ public class ManagerController {
     
                 // fase incasso plancie
                 
-                
                 //fase di rianimazione
                 actionController.respawnPlayer(actionModel,gameModel,gameModel.getDeadPlayers());
             }
-            
         }
-        
-    }
-    
-    private WeaponCard getWeaponPlayer(Player player, String weaponString) {
-        for (WeaponCard a: player.getPlayerBoard().getPlayerWeapons()){
-            
-            if(a.getNameWeaponCard().equals(weaponString)){
-                
-                return a;
-            }
-        }
-        return null;
     }
 }
