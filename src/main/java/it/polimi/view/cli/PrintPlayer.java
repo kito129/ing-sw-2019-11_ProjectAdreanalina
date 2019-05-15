@@ -15,7 +15,7 @@ public class PrintPlayer implements Serializable {
 
         PrintPlayerInfo.print(player);
         PrintCoordinate.print(player);
-        System.out.println("SCORE: " +player.getScore());
+        PrintScore.print(player);
         System.out.println("ALIVE: " +player.isAlive());
     }
 }
