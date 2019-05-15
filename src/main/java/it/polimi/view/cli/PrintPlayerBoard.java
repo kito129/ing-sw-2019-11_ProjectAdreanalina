@@ -3,7 +3,6 @@ package it.polimi.view.cli;
 import it.polimi.model.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class PrintPlayerBoard implements Serializable {
 
@@ -14,9 +13,11 @@ public class PrintPlayerBoard implements Serializable {
 
         System.out.println("BOARD VALUE: " +player.getPlayerBoard().getBoardValue());
         System.out.println("N. DEATHS: " +player.getPlayerBoard().getNumberOfDeaths());
-        System.out.println("DAMAGES: " +player.getPlayerBoard().getDamages().toString());
-        System.out.println("MARKS: " +player.getPlayerBoard().getMarks().toString());
         PrintAmmo.print(player);
-    }
-
+        System.out.print("DAMAGES: ");
+        PrintDamagesAndMarks.printDamages(player);
+        System.out.println();
+        System.out.print("MARKS: ");
+        PrintDamagesAndMarks.printMarks(player);
+        }
 }

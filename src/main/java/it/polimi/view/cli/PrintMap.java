@@ -39,40 +39,50 @@ public class PrintMap implements Serializable {
 
                         //BLU SQUARE
                         if (s.getColor().equals(EnumColorSquare.BLU)) {
+
                             map[s.getRow()][s.getColumn()] = " " + ANSI_BLUE_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
 
                         //GREEN SQUARE
                         if (s.getColor().equals(EnumColorSquare.GREEN)) {
+
                             map[s.getRow()][s.getColumn()] = " " + ANSI_GREEN_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
 
                         //PINK SQUARE
                         if (s.getColor().equals(EnumColorSquare.PINK)) {
+
                             map[s.getRow()][s.getColumn()] = " " + ANSI_PURPLE_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
 
+
                         //RED SQUARE
                         if (s.getColor().equals(EnumColorSquare.RED) && i == 1 && j == 0) {
+
                             map[s.getRow()][s.getColumn()] = ANSI_RED + "w" + ANSI_RESET + ANSI_RED_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         } else if (s.getColor().equals(EnumColorSquare.RED)) {
+
                             map[s.getRow()][s.getColumn()] = " " + ANSI_RED_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
 
                         //YELLOW SQUARE
                         if (s.getColor().equals(EnumColorSquare.YELLOW) && i == 2 && j == 3) {
+
                             map[s.getRow()][s.getColumn()] = " " + ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + ANSI_YELLOW + "w" + ANSI_RESET;
                         } else if (s.getColor().equals(EnumColorSquare.YELLOW)) {
+
                             map[s.getRow()][s.getColumn()] = " " + ANSI_YELLOW_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
 
                         //WHITE SQUARE
                         if (s.getColor().equals(EnumColorSquare.WHITE)) {
+
                             map[s.getRow()][s.getColumn()] = " " + ANSI_WHITE_BACKGROUND + "   " + ANSI_BLACK_BACKGROUND + " ";
                         }
 
                         //BLACK SQUARE
                     } else {
+
                         map[s.getRow()][s.getColumn()] = ANSI_BLACK_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ";
                     }
                 }
@@ -80,16 +90,16 @@ public class PrintMap implements Serializable {
         }
     }
 
-
-
-
     /**
      * Print map.
      * @param map   the map choosen for the game
      */
     public static void printMap(String[][] map) {
+
         for(int i = 0; i < 3; i++){
+
             for(int j = 0; j < 4; j++){
+
                 System.out.print(map[i][j]);
             }
             System.out.println();
