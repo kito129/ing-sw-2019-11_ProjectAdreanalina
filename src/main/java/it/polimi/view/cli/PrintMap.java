@@ -96,17 +96,21 @@ public class PrintMap implements Serializable {
      */
     public static void printMap(String[][] map) {
 
+        System.out.println("    0   1   2   3");
+        System.out.println("            " + ANSI_BLUE + "w" + ANSI_RESET);
 
         for(int i = 0; i < 3; i++){
 
             for(int j = 0; j < 4; j++){
 
+                if((i==0 && j==0) || (i==1 && j==0) || (i==2 && j==0)){
+                    System.out.print(i);
+                }
                 System.out.print(map[i][j]);
             }
             System.out.println();
             System.out.println();
         }
-        //TODO fare in modo che stampa un segno in corrispondenza dei punti di generazione (che sono sempre gli stessi)
         //TODO per le porte bisogna verificare se fra due indici di riga/colonna seguenti è presente un link
     }
 }
