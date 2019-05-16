@@ -16,7 +16,6 @@ public class PrintKillShotTrack implements Serializable {
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001b[0m";
-    public static final String SKULL = "\u2620";
 
     /**
      * Print the killShotTrack
@@ -24,7 +23,7 @@ public class PrintKillShotTrack implements Serializable {
      */
     public static void print(ArrayList<KillShotTrackPoint> killShotTrackPoints){
 
-        System.out.println("KILL SHOT TRACK POINT: ");
+        System.out.println("KILL SHOT TRACK: ");
 
         for(KillShotTrackPoint k : killShotTrackPoints){
 
@@ -38,6 +37,7 @@ public class PrintKillShotTrack implements Serializable {
 
                 System.out.print(ANSI_RED + "SKULL" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
             }
+
             //killShotTrackPoint Blu
             if (k.getMark1().equals(EnumColorPlayer.BLU)) {
 
