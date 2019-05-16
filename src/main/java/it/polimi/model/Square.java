@@ -29,6 +29,11 @@ public class Square{
         this.players= new ArrayList<>();
         this.visited=false;
     }
+
+    public Square(){
+
+        //todo da eliminare serve per compilare
+    }
     
     /**
      * Gets column of the square.

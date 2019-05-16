@@ -14,6 +14,7 @@ public class TractorBeam extends WeaponCard {
      * Instantiates a new Tractor Beam card.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to BLU.
+     * Creates the list of effects setting its value to BaseMode,PunisherMode.
      * Creates the list of punisher mode cost (cost of alternative fire mode) settings it to RED,YELLOW.
      */
     public TractorBeam() {
@@ -22,6 +23,10 @@ public class TractorBeam extends WeaponCard {
         ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseMode);
+        weaponEffects.add(WeaponsEffect.PunisherMode);
+        setWeaponEffects(weaponEffects);
         punisherModeCost = new ArrayList<EnumColorCardAndAmmo>();
         punisherModeCost.add(EnumColorCardAndAmmo.RED);
         punisherModeCost.add(EnumColorCardAndAmmo.YELLOW);
@@ -51,10 +56,9 @@ public class TractorBeam extends WeaponCard {
 
     public void punisherMode(Map map,Player currentPlayer,Player target1) throws NotValidDistance{
 
-        Square currentPlayerSquare = map.findPlayer(currentPlayer);
-        Square target1Square = map.findPlayer(target1);
-        if(map.distance(currentPlayerSquare,target1Square)<3){
+        if(map.distance(currentPlayer,target1)<3){
 
+            Square currentPlayerSquare = map.findPlayer(currentPlayer);
             map.movePlayer(target1,currentPlayerSquare);
             ArrayList<EnumColorPlayer> tractorBeamDamages=new ArrayList<EnumColorPlayer>();
             tractorBeamDamages.add(currentPlayer.getColor());

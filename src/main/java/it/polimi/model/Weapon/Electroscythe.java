@@ -12,6 +12,7 @@ public class Electroscythe extends WeaponCard {
      * Instantiates a new Lock Electoscythe card.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to BLU.
+     * Creates the list of effects setting its value to BaseMode,ReaperMode.
      * Creates the list of reaper mode cost (cost of alternative fire mode) settings it to BLU,RED.
      */
     public Electroscythe() {
@@ -20,6 +21,10 @@ public class Electroscythe extends WeaponCard {
         ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects=new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseMode);
+        weaponEffects.add(WeaponsEffect.ReaperMode);
+        setWeaponEffects(weaponEffects);
         reaperModeCost= new ArrayList<EnumColorCardAndAmmo>();
         reaperModeCost.add(EnumColorCardAndAmmo.BLU);
         reaperModeCost.add(EnumColorCardAndAmmo.RED);
@@ -54,10 +59,12 @@ public class Electroscythe extends WeaponCard {
         playersOnSquare.remove(currentPlayer);
         if(playersOnSquare.size()>0){
 
+            ArrayList<EnumColorPlayer> electroscytheDamages=new ArrayList<>();
+            electroscytheDamages.add(currentPlayer.getColor());
+            electroscytheDamages.add(currentPlayer.getColor());
             for(Player p:playersOnSquare) {
 
-                p.singleDamage(currentPlayer.getColor());
-                p.singleDamage(currentPlayer.getColor());
+                p.multipleDamages(electroscytheDamages);
             }
         }else {
 

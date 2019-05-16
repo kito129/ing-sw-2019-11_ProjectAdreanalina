@@ -2,5 +2,5 @@ package it.polimi.model;
 
 public enum WeaponsEffect {
 
-    BaseEffect,SecondLockEffect,
+    BaseEffect,SecondLockEffect,BaseMode,ReaperMode,FocusShotEffect,TurretTripodEffect,PunisherMode,
 }

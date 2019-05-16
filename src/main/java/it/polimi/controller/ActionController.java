@@ -14,8 +14,9 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
-import it.polimi.model.Weapon.Electroscythe;
-import it.polimi.model.Weapon.LockRifle;
+import it.polimi.model.Weapon.*;
+import it.polimi.view.cli.Game;
+
 import java.util.ArrayList;
 
 
@@ -254,45 +255,44 @@ public class ActionController {
     //GESTIONE DELLE ARMI
 
 
-    public void LockRifleweapon(GameModel gameModel, LockRifle weapon){
+    public void LockRifleweapon(GameModel gameModel, LockRifle weapon) {
 
-        Player target1=new Player();
-        Player target2=new Player();
-        Player currentPlayer= new Player();
+        Player targetBase = new Player();
+        Player targetSecondLock = new Player();
+        Player currentPlayer = new Player();
         Map map = new Map();
-        String message="";
+        String message = "";
 
-        switch (message){
+        switch (message) {
             case "base effect":
-                try{
+                try {
 
-                    weapon.baseEffect(map,currentPlayer,target1);
-                }catch (NotVisibleTarget notVisibleTarget){
+                    weapon.baseEffect(map, currentPlayer, targetBase);
+                } catch (NotVisibleTarget notVisibleTarget) {
 
                 }
             case "second Lock Effect":
-                try{
+                try {
 
-                    if(target1!=target2){
+                    if (targetBase != targetSecondLock) {
 
-                        weapon.secondLockEffect(map,currentPlayer,target2);
-                    }else{
+                        weapon.secondLockEffect(map, currentPlayer, targetSecondLock);
+                    } else {
 
                         throw new NotValidInput();
                     }
-                }catch (NotValidInput notValidInput){
+                } catch (NotValidInput notValidInput) {
 
-                    //gestione target1==target2
+                    //gestione targetBase==targetSecondLock
 
-                }catch (NotVisibleTarget notVisibleTarget){
+                } catch (NotVisibleTarget notVisibleTarget) {
 
                     //gestione target non visibile
                 }
         }
+        //settare arma scarica
     }
 
-    //todo ripartire da qui
-    
     public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon){
 
         Map map=new Map();
@@ -303,29 +303,126 @@ public class ActionController {
             case "base mode":
 
                 try {
-                    
+
                     weapon.baseMode(map,currentPlayer);
-                    weapon.setCharge(false);
                 } catch (NoTargetInSquare noTargetInSquare) {
-                
+
+                    //gestione nessun target nella stanza in cui si trova il current player.
                 }
             
             case "reaper mode":
-                //gestione per costo extra
-                
-                //public void reaperMode(Map map,Player currentPlayer) throws NoTargetInSquare {
+
                 try {
                     
                     weapon.reaperMode(map,currentPlayer);
-                    weapon.setCharge(false);
                 } catch (NoTargetInSquare noTargetInSquare) {
-                
+
+                    //gestione nessun target nella stanza in cui si trova il current player
+                }
+        }
+        //settare arma scarica
+    }
+
+    public void MachineGun(GameModel gameModel, MachineGun weapon){
+
+        Player target1Base=new Player();
+        Player target2Base=new Player(); // se l'utente per l'effetto base non vuole colpire due target, questo viene messo a null.
+        Player targetFocusShot=new Player();
+        Player targetTurretTripod=new Player();
+        Player currentPlayer=new Player();
+        Map map=new Map();
+        String message="";
+        ArrayList<Player> targetBase=new ArrayList<>();
+
+        switch (message){
+
+            case "base effect":
+
+                try{
+
+                    if(target2Base==null){
+
+                        targetBase.add(target1Base);
+                        weapon.baseEffect(map,currentPlayer,targetBase);
+                    }else if(target1Base!=target2Base){
+
+                        targetBase.add(target1Base);
+                        targetBase.add(target2Base);
+                        weapon.baseEffect(map,currentPlayer,targetBase);
+                    }else{
+
+                        throw new NotValidInput();
+                    }
+                }catch (NotVisibleTarget notVisibleTarget){
+
+                    //gestione target 1 o 2 effetto base non visibili con il curretnPLayer
+                }catch (NotValidInput notValidInput){
+
+                    //gestione target 1==target 2 effetto base
+                }
+
+            case"focus shot effect":
+
+                try{
+
+                    if(targetFocusShot==target1Base || targetFocusShot==target2Base){
+
+                        weapon.focusShotEffect(currentPlayer,targetFocusShot);
+                    }else{
+
+                        throw new NotValidInput();
+                    }
+                }catch (NotValidInput notValidInput){
+
+                    //gestione se target focus shot dovesse essere diverso sia da target 1 sia target 2 effetto base
+                }
+
+            case "turret tripod":
+
+                // todo da finire ...chiedere a marco
+
+        }
+    }
+
+    public void TractorBeam(GameModel gameModel, TractorBeam weapon){
+
+        Square destSquareBase=new Square();
+        Player targetBaseOrPunisher=new Player();
+        Player currentPlayer=new Player();
+        Map map=new Map();
+        String message="";
+
+        switch(message) {
+
+            case "base mode":
+
+                try {
+
+                    weapon.baseMode(map, destSquareBase, currentPlayer, targetBaseOrPunisher);
+                } catch (NotVisibleTarget notVisibleTarget) {
+
+                    //gestire il fatto che la il giocatore ha spostato il target in una square che non vede
+                } catch (NotValidDistance notValidDistance) {
+
+                    //gestire il fatto che il giocatore prova a muovere il target  più di 2 quadrati
+                }
+            case "punisher mode":
+
+                try {
+
+                    weapon.punisherMode(map, currentPlayer, targetBaseOrPunisher);
+                } catch (NotValidDistance notValidDistance) {
+
+                    //gestire se il target scelto non si trova a 0,1,2 quadrate dal currentplayer.
                 }
         }
     }
-    
 
+    public void Thor(GameModel gameModel, Thor weapon){
 
+        //todo ripartire da qui.
+        //questa carta limita l'ordine con cui puoi usare i suoi effetti.
+    }
 }
 
 
