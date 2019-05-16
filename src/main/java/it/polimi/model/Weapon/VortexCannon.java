@@ -15,6 +15,7 @@ public class VortexCannon extends WeaponCard {
      * Instantiates a new Vortex Cannon card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost settings its value to RED,BLU.
+     * Creates the list of effects setting its value to BaseEffect,BlackHoleEffect.
      * Creates the list of black hole cost(cost of optional effect 1) settings it to RED.
      */
     public VortexCannon(){
@@ -24,6 +25,10 @@ public class VortexCannon extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects=new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseEffect);
+        weaponEffects.add(WeaponsEffect.BlackHoleEffect);
+        setWeaponEffects(weaponEffects);
         blackHoleCost =new ArrayList<EnumColorCardAndAmmo>();
         blackHoleCost.add(EnumColorCardAndAmmo.RED);
     }

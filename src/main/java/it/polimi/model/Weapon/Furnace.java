@@ -15,6 +15,7 @@ public class Furnace extends WeaponCard {
      * Instantiates a new Furnace card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to RED,BLU.
+     * Creates the list of effects setting its value to BaseMode,CozyFireMode.
      * Creates the list of cozy fire mode cost (cost of alternative fire mode) settings it to null.
      */
     public Furnace() {
@@ -24,6 +25,10 @@ public class Furnace extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects=new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseMode);
+        weaponEffects.add(WeaponsEffect.CozyFireMode);
+        setWeaponEffects(weaponEffects);
         cozyFireModeCost = new ArrayList<EnumColorCardAndAmmo>();
         cozyFireModeCost.add(null);
     }

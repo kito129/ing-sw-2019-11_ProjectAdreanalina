@@ -15,6 +15,7 @@ public class PlasmaGun extends WeaponCard {
      * Instantiates a new Plasma gun card.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost settings its value to BLU,YELLOW.
+     * Creates the list of effects setting its value to BaseEffect,PhaseGlideEffect,ChargedShotEffect.
      * Creates the list of phase glide cost(cost of optional effect1) settings it to null.
      * Creates the list of charged shot cost(cost of optional effect2) settings it to blu.
      */
@@ -25,6 +26,11 @@ public class PlasmaGun extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseEffect);
+        weaponEffects.add(WeaponsEffect.PhaseGlideEffect);
+        weaponEffects.add(WeaponsEffect.ChargedShotEffect);
+        setWeaponEffects(weaponEffects);
         phaseGlideCost = new ArrayList<EnumColorCardAndAmmo>();
         phaseGlideCost.add(null);
         chargedShotCost = new ArrayList<EnumColorCardAndAmmo>();
@@ -56,7 +62,6 @@ public class PlasmaGun extends WeaponCard {
         }
     }
 
-    // todo da usare quando si vuole anche prima dell effetto base.
     public void phaseGlideEffect(Map map, Square destSquare, Player currentPlayer) throws NotValidDistance{
 
         Square currentPlayerSquare=map.findPlayer(currentPlayer);
@@ -69,7 +74,6 @@ public class PlasmaGun extends WeaponCard {
         }
     }
 
-    //TODo stesso target dell'effetto base
     public void chargedShotEffect(Player currentPlayer, Player target1){
 
         target1.singleDamage(currentPlayer.getColor());

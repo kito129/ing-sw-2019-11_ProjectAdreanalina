@@ -16,6 +16,7 @@ public class FlameThrower extends WeaponCard {
      * Instantiates a new Flame thrower card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to RED.
+     * Creates the list of effects setting its value to BaseMode,BarbecueMode.
      * Creates the list of barbecue mode cost (cost of alternative fire mode) settings it to YELLOW,YELLOW.
      */
     public FlameThrower() {
@@ -24,6 +25,10 @@ public class FlameThrower extends WeaponCard {
         ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects=new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseMode);
+        weaponEffects.add(WeaponsEffect.BarbecueMode);
+        setWeaponEffects(weaponEffects);
         barbecueModeCost = new ArrayList<EnumColorCardAndAmmo>();
         barbecueModeCost.add(EnumColorCardAndAmmo.YELLOW);
         barbecueModeCost.add(EnumColorCardAndAmmo.YELLOW);

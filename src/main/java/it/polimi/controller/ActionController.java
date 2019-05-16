@@ -152,9 +152,6 @@ public class ActionController {
         }
     }
 
-
-
-
     public void payAmmo(Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay) throws NotValidAmmoException, NoPowerUpAvaible {
 
         //prendo playerboard
@@ -418,10 +415,128 @@ public class ActionController {
         }
     }
 
-    public void Thor(GameModel gameModel, Thor weapon){
+    public void Thor(GameModel gameModel, Thor weapon) {
 
-        //todo ripartire da qui.
         //questa carta limita l'ordine con cui puoi usare i suoi effetti.
+        Player targetBase = new Player();
+        Player targetChainReaction = new Player();
+        Player targetHighVoltage = new Player();
+        Player currentPlayer = new Player();
+        Map map = new Map();
+        String message = "";
+
+        switch (message) {
+
+            case "base effect":
+
+                try {
+
+                    weapon.baseEffect(map, currentPlayer, targetBase);
+                } catch (NotVisibleTarget notVisibleTarget) {
+
+                    // gestione target base non visibile
+                }
+
+            case "chain reaction":
+
+                try {
+
+                    if ((map.isVisible(targetBase, targetChainReaction)) && (targetBase != targetChainReaction)) {
+
+                        weapon.chainReactionEffect(currentPlayer, targetChainReaction);
+                    } else {
+
+                        throw new NotValidInput();
+                    }
+                } catch (NotValidInput notValidInput) {
+
+                    //gestisce il fatto che il target effetto base non vede target chain reaction o che target base sia uguale a target chain rection
+                }
+
+            case "high voltage":
+
+                //usabile solo se si ha usato chain reaction.
+
+                try {
+
+                    if ((map.isVisible(targetChainReaction, targetHighVoltage)) && (targetChainReaction != targetHighVoltage)
+                            && (targetBase != targetHighVoltage)) {
+
+                        weapon.highVoltageEffect(currentPlayer, targetHighVoltage);
+                    } else {
+
+                        throw new NotValidInput();
+                    }
+                } catch (NotValidInput notValidInput) {
+
+                    //gestione il fatto che target chain reaction non veda target high voltage e che i target non siano tutti diversi
+                }
+        }
+    }
+
+    public void PlasmaGun (GameModel gameModel,PlasmaGun weapon){
+
+        Player targetBase=new Player();
+        Player currentPlayer=new Player();
+        Square destSquarePhaseGlide=new Square();
+        Map map=new Map();
+        String message="";
+
+        switch (message){
+
+            case "base effect":
+
+                try{
+
+                    weapon.baseEffect(map,currentPlayer,targetBase);
+                }catch(NotVisibleTarget notVisibleTarget){
+
+                    //gestione targetbase non visibile
+                }
+
+            case "phase glide":
+
+                //usabile prima o dopo l'effetto base
+                try{
+
+                    weapon.phaseGlideEffect(map,destSquarePhaseGlide,currentPlayer);
+                }catch(NotValidDistance notValidDistance){
+
+                    //gestire se square di destinazione è distante più di 2 o meno di 1 quadrati dalla square del curretn player
+                }
+            case "charged shot":
+
+                //nessuna eccezione da lanciare;il target è lo stesso dell'effetto base quindi il controllo sulla visibilità è gia garantito
+                //quando viene chiamaro l'effetto base-->sicuramente l'effetto base è stato usato se usiamo questo effetto.
+
+                weapon.chargedShotEffect(currentPlayer,targetBase);
+        }
+    }
+
+    public void Whisper(GameModel gameModel,Whisper weapon){
+
+        Player currentPlayer=new Player();
+        Player targetBase=new Player();
+        Map map=new Map();
+        // unico effetto metto solo la chiamata del metodo, non ti metto il case switch, vedrai tu come gestire..marco number one.
+
+        try{
+
+            weapon.baseEffect(map,currentPlayer,targetBase);
+        }catch(NotValidDistance notValidDistance){
+
+            //gestione target distante meno di due movimenti
+        }catch(NotVisibleTarget notVisibleTarget){
+
+            //gestione target non visibile.
+        }
+
+
+
+
+
+
+
     }
 }
 

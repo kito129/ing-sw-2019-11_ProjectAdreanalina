@@ -12,6 +12,7 @@ public class HeatSeeker extends WeaponCard {
      * Instantiates a new Heat Seeker card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost settings its value to RED,RED,YELLOW.
+     * Creates the list of effects setting its value to BaseEffect.
      */
     public HeatSeeker(){
 
@@ -21,10 +22,12 @@ public class HeatSeeker extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects=new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseEffect);
     }
 
 
-    public void singleEffect(Map map,Player currentPlayer,Player targetPlayer) throws VisibleTarget {
+    public void BaseEffect(Map map,Player currentPlayer,Player targetPlayer) throws VisibleTarget {
 
         if(!(map.isVisible(currentPlayer,targetPlayer))){
 

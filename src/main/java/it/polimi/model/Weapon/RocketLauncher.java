@@ -16,6 +16,7 @@ public class RocketLauncher extends WeaponCard {
      * Instantiates a new RocketLauncher card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost settings its value to RED,RED.
+     * Creates the list of effects setting its value to BaseEffect,RocketJumpEffect,FragmentingWarheadEffect.
      * Creates the list of rocket jump cost(cost of optional effect 1) settings it to BLU.
      * Creates the list of fragment warhead cost(cost of optional effect 1) settings it to YELLOW.
      */
@@ -26,6 +27,11 @@ public class RocketLauncher extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseEffect);
+        weaponEffects.add(WeaponsEffect.RocketJumpEffect);
+        weaponEffects.add(WeaponsEffect.FragmentingWarheadEffect);
+        setWeaponEffects(weaponEffects);
         rocketJumpCost =new ArrayList<EnumColorCardAndAmmo>();
         rocketJumpCost.add(EnumColorCardAndAmmo.BLU);
         fragmentingWarheadCost = new ArrayList<EnumColorCardAndAmmo>();

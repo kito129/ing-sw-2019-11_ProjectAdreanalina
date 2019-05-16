@@ -14,6 +14,7 @@ public class Hellion extends WeaponCard {
      * Instantiates a new Hellion card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to RED,YELLOW.
+     * Creates the list of effects setting its value to BaseMode,NanoTracerMode
      * Creates the list of nano tracer mode cost (cost of alternative fire mode) settings it to RED.
      */
     public Hellion() {
@@ -23,6 +24,10 @@ public class Hellion extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseMode);
+        weaponEffects.add(WeaponsEffect.NanoTracerMode);
+        setWeaponEffects(weaponEffects);
         nanoTracerModeCost = new ArrayList<EnumColorCardAndAmmo>();
         nanoTracerModeCost.add(EnumColorCardAndAmmo.RED);
     }

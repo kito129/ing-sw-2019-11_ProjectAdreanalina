@@ -14,6 +14,7 @@ public class Thor extends WeaponCard {
      * Instantiates a new Thor card.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost settings its value to BLU,RED.
+     * Creates the list of effects setting its value to BaseEffect,ChainReactionEffect,HighVoltageEffect.
      * Creates the list of chain reaction cost(cost of optional effect1) settings it to blu.
      * Creates the list of high voltage cost(cost of optional effect2) settings it to blu.
      */
@@ -24,6 +25,11 @@ public class Thor extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects=new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseEffect);
+        weaponEffects.add(WeaponsEffect.ChainReactionEffect);
+        weaponEffects.add(WeaponsEffect.HighVoltageEffect);
+        setWeaponEffects(weaponEffects);
         chainReactionCost = new ArrayList<EnumColorCardAndAmmo>();
         chainReactionCost.add(EnumColorCardAndAmmo.BLU);
         highVoltageCost = new ArrayList<EnumColorCardAndAmmo>();
@@ -55,13 +61,11 @@ public class Thor extends WeaponCard {
         }
     }
 
-    // todo garantire che il target di questa funzione vede il target dell effetto base
-    public void chainReactionEffect(Player currentPlayer, Player target2) {
+    public void chainReactionEffect(Player currentPlayer, Player target2){
 
         target2.singleDamage(currentPlayer.getColor());
     }
 
-    // todo garantire che il target 3 vede il target 2 della chian reaction.effetto usabile solo se si usa chain reaction
     public void highVoltageEffect(Player currentPlayer, Player target3) {
 
         ArrayList<EnumColorPlayer> highVoltageDamages=new ArrayList<>();
