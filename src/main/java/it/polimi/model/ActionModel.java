@@ -207,16 +207,24 @@ public class ActionModel {
     public void scoringPlayerBoard(Player player) {
 
         PlayerBoard playerBoard = player.getPlayerBoard();
+        int valuePlayerBoard = playerBoard.getBoardValue();
         HashMap<EnumColorPlayer, Integer> colorDamageHashMap = new HashMap<>();
+        int pointBlu =0;
+        int pointYellow =0;
+        int pointGrey =0;
+        int pointPink=0;
+        int pointGreen=0;
+        
 
         for (Player a : gameModel.getPlayers()) {
             colorDamageHashMap.put(a.getColor(), player.getPlayerBoard().colorOccurrenceInDamages(a.getColor()));
         }
+        
+        
 
         //first blood
-        playerBoard.getDamages();
+        EnumColorPlayer firstBlood = playerBoard.getDamages().get(0);
     }
-
 
 }
         

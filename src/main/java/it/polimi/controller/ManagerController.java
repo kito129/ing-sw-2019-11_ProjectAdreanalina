@@ -114,4 +114,8 @@ public class ManagerController {
             }
         }
     }
+    
+    public GameModel getGameModel(){
+        return this.gameModel;
+    }
 }

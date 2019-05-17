@@ -1,11 +1,12 @@
 package it.polimi.model;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 /**
  * The type Game model.
  */
-public class GameModel {
+public class GameModel implements RemoteGameModel, Remote {
 
     private Map map;
     private KillShotTrackPoint killShotTrackPoint;

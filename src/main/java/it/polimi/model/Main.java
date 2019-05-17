@@ -77,32 +77,12 @@ public class Main {
         System.out.println();
 
          */
-
-        LockRifle lockRifle=new LockRifle();
-
+    
+        LockRifle lockRifle = new LockRifle();
+    
         System.out.println(lockRifle.getWeaponEffects());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
 
     }
 
