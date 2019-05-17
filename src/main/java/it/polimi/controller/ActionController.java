@@ -530,13 +530,96 @@ public class ActionController {
 
             //gestione target non visibile.
         }
+    }
 
+    public void VortexCannon ( GameModel gameModel,VortexCannon weapon) {
 
+        Player currentPlayer = new Player();
+        Player targetBase = new Player();
+        Square vortexSquare = new Square();
+        Player target1BlackHole = new Player();
+        Player target2BlackHole = new Player(); // se viene scelto solo un target questo deve essere messo a null.
+        ArrayList<Player> targetsBlackHole = new ArrayList<>();
+        Map map = new Map();
+        String message = "";
 
+        switch (message) {
 
+            case "base effetc":
 
+                try {
 
+                    weapon.baseEffect(map, vortexSquare, currentPlayer, targetBase);
+                } catch (NotVisibleTarget notVisibleTarget) {
 
+                    //gestione square scelta non è visibile dal current PLyaer.
+                } catch (NotValidDistance notValidDistance) {
+
+                    //gestione square scelta non è ad almeno un movimento di distanza dal current player, oppure viene lanciata se il target scelto non si trova
+                    // ne ad un movimento dalla sqaure scelta ne sulla square scelta.
+                }
+
+            case "black Hole":
+
+                try {
+
+                    if (target2BlackHole == null) {
+
+                        if (target1BlackHole != targetBase) {
+
+                            targetsBlackHole.add(target1BlackHole);
+                            weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
+                        } else {
+
+                            throw new NotValidInput();
+                        }
+                    } else {
+
+                        if ((target1BlackHole != target2BlackHole) && (target1BlackHole != targetBase) && (target2BlackHole != targetBase)) {
+
+                            targetsBlackHole.add(target1BlackHole);
+                            targetsBlackHole.add(target2BlackHole);
+                            weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
+                        } else {
+
+                            throw new NotValidInput();
+                        }
+                    }
+                } catch (NotValidDistance notValidDistance) {
+
+                    //gestire se uno dei due bersagli scelti come black hole target non sono nel vortice e non sono neanche
+                    //distanti un movimento
+                } catch (NotValidInput notValidInput) {
+
+                    //gestire il fatto che i target del buco nero non sono diveri tra di loro e diversi con il target effetto base.
+                }
+        }
+
+    }
+
+    public void Furnace(GameModel gameModel,Furnace weapon){
+
+        EnumColorSquare roomTarget=null;
+        Map map=new Map();
+        Player currentPlayer=new Player();
+        String message="";
+
+        switch (message){
+
+            case "base mode":
+
+                try{
+
+                    weapon.baseMode(map,currentPlayer,roomTarget);
+                }catch (NotValidDistance notValidDistance){
+
+                    //gestire se la stanza selezionata è le stanza del currente player
+
+                }catch (NotVisibleTarget notVisibleTarget){
+
+                    //gestire se la stanza selezionata non è visibile dal current player.
+                }
+        }
     }
 }
 

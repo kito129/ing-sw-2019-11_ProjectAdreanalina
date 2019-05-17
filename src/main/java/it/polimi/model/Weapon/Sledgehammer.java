@@ -14,6 +14,7 @@ public class Sledgehammer extends WeaponCard {
      * Instantiates a new Sladgehammer card.
      * Sets the field color to YELLOW calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to YELLOW.
+     * Creates the list of effects setting its value to BaseMode,PulverizeMode.
      * Creates the list of pulverize mode cost (cost of alternative fire mode) settings it to RED.
      */
     public Sledgehammer() {
@@ -22,6 +23,10 @@ public class Sledgehammer extends WeaponCard {
         ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponsEffects= new ArrayList<>();
+        weaponsEffects.add(WeaponsEffect.BaseMode);
+        weaponsEffects.add(WeaponsEffect.PulverizeMode);
+        setWeaponEffects(weaponsEffects);
         pulverizeModeCost = new ArrayList<EnumColorCardAndAmmo>();
         pulverizeModeCost.add(EnumColorCardAndAmmo.RED);
     }

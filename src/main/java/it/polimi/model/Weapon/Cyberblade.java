@@ -8,13 +8,14 @@ import java.util.ArrayList;
 
 public class Cyberblade extends WeaponCard {
 
-    private ArrayList<EnumColorCardAndAmmo> shadowStepCost;
+    private ArrayList<EnumColorCardAndAmmo> shadowstepCost;
     private ArrayList<EnumColorCardAndAmmo> sliceAndDiceCost;
 
     /**
      * Instantiates a new Cyberblade card.
      * Sets the field color to YELLOW calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost settings its value to YELLOW,RED.
+     * Creates the list of effects setting its value to BaseEffect,ShadowstepEffect,SliceAndDiceEffect.
      * Creates the list of shadow step cost(cost of optional effect 1) settings it to null.
      * Creates the list of slice and dice cost(cost of optional effect 2) settings it to YELLOW.
      */
@@ -25,15 +26,20 @@ public class Cyberblade extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         setRechargeCost(rechargeCost);
-        shadowStepCost =new ArrayList<EnumColorCardAndAmmo>();
-        shadowStepCost.add(null);
+        ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseEffect);
+        weaponEffects.add(WeaponsEffect.ShadowstepEffect);
+        weaponEffects.add(WeaponsEffect.SliceAndDiceEffect);
+        setWeaponEffects(weaponEffects);
+        shadowstepCost =new ArrayList<EnumColorCardAndAmmo>();
+        shadowstepCost.add(null);
         sliceAndDiceCost = new ArrayList<EnumColorCardAndAmmo>();
         sliceAndDiceCost.add(EnumColorCardAndAmmo.YELLOW);
     }
 
-    public ArrayList<EnumColorCardAndAmmo> getShadowStepCost() {
+    public ArrayList<EnumColorCardAndAmmo> getShadowstepCost() {
 
-        return shadowStepCost;
+        return shadowstepCost;
     }
 
     public ArrayList<EnumColorCardAndAmmo> getSliceAndDiceCost() {
@@ -55,7 +61,7 @@ public class Cyberblade extends WeaponCard {
         }
     }
     // todo prima o dopo leffetto base.
-    public void shadowStepEffect(Map map,Player currentPlayer,Square destSquare)throws NotValidDistance{
+    public void shadowstepEffect(Map map, Player currentPlayer, Square destSquare)throws NotValidDistance{
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         if(map.distance(squareOfCurrentPlayer,destSquare)==1){

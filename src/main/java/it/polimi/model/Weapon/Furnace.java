@@ -38,22 +38,22 @@ public class Furnace extends WeaponCard {
         return cozyFireModeCost;
     }
 
-    public void baseMode(Map map, Player currentPlayer,EnumColorSquare targetRoomColor) throws NotVisibleTarget, NotValidDistance {
 
-        Square currentPlayerSquare = map.findPlayer(currentPlayer);
-        ArrayList<Player> playersInTargetRoom = map.playerInRoom(targetRoomColor);
+    public void baseMode(Map map, Player currentPlayer,EnumColorSquare targetRoomColor) throws NotVisibleTarget, NotValidDistance{
 
+        Square currentPlayerSquare= map.findPlayer(currentPlayer);
+        if((map.isVisibleRoom(currentPlayer,targetRoomColor))&& (currentPlayerSquare.getColor()!=targetRoomColor)){
 
-        if ((map.isVisibleRoom(currentPlayer, targetRoomColor) && (targetRoomColor != currentPlayerSquare.getColor()))) {
-
-            for (Player p : playersInTargetRoom) {
+            ArrayList<Player> targetPlayers=map.playerInRoom(targetRoomColor);
+            targetPlayers.remove(currentPlayer);   //rimuovo il current player dai target per sicurezza; se i metodi funzioanano correttamente non dovrebbe servire
+            for(Player p:targetPlayers){
 
                 p.singleDamage(currentPlayer.getColor());
             }
-        }else if (!(map.isVisibleRoom(currentPlayer,targetRoomColor))){
+        }else if(!(map.isVisibleRoom(currentPlayer,targetRoomColor))){
 
-            throw new  NotVisibleTarget();
-        }else if (targetRoomColor == currentPlayerSquare.getColor()){
+            throw new NotVisibleTarget();
+        }else if(currentPlayerSquare.getColor()==targetRoomColor){
 
             throw new NotValidDistance();
         }
@@ -80,3 +80,29 @@ public class Furnace extends WeaponCard {
 
 
 }
+
+
+// metodo rifatto non dovrebe servire piu.
+/* public void baseMode1(Map map, Player currentPlayer,EnumColorSquare targetRoomColor) throws NotVisibleTarget, NotValidDistance {
+
+        Square currentPlayerSquare = map.findPlayer(currentPlayer);
+        ArrayList<Player> playersInTargetRoom = map.playerInRoom(targetRoomColor);
+
+
+        if ((map.isVisibleRoom(currentPlayer, targetRoomColor) && (targetRoomColor != currentPlayerSquare.getColor()))) {
+
+            for (Player p : playersInTargetRoom) {
+
+                p.singleDamage(currentPlayer.getColor());
+            }
+        }else if (!(map.isVisibleRoom(currentPlayer,targetRoomColor))){
+
+            throw new  NotVisibleTarget();
+        }else if (targetRoomColor == currentPlayerSquare.getColor()){
+
+            throw new NotValidDistance();
+        }
+    }
+
+
+ */

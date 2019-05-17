@@ -13,6 +13,7 @@ public class PowerGlove extends WeaponCard {
      * Instantiates a new Power glove card.
      * Sets the field color to YELLOW calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to YELLOW,BLU.
+     * Creates the list of effects setting its value to BaseMode,RocketFistMode.
      * Creates the list of rocket fist mode cost (cost of alternative fire mode) settings it to BLU.
      */
     public PowerGlove() {
@@ -22,6 +23,10 @@ public class PowerGlove extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseMode);
+        weaponEffects.add(WeaponsEffect.RocketFistMode);
+        setWeaponEffects(weaponEffects);
         rocketFistModeCost = new ArrayList<EnumColorCardAndAmmo>();
         rocketFistModeCost.add(EnumColorCardAndAmmo.BLU);
     }

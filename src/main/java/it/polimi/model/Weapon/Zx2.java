@@ -13,6 +13,7 @@ public class Zx2 extends WeaponCard {
      * Instantiates a new Zx2 card.
      * Sets the field color to YELLOW calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to YELLOW,RED.
+     * Creates the list of effects setting its value to BaseMode,ScannerMode.
      * Creates the list of scanner mode cost (cost of alternative fire mode) settings it to null.
      */
     public Zx2() {
@@ -22,6 +23,10 @@ public class Zx2 extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect>weaponEffects= new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseMode);
+        weaponEffects.add(WeaponsEffect.ScannerMode);
+        setWeaponEffects(weaponEffects);
         scannerModeCost = new ArrayList<EnumColorCardAndAmmo>();
         scannerModeCost.add(null);
     }

@@ -37,10 +37,76 @@ public class VortexCannon extends WeaponCard {
 
         return blackHoleCost;
     }
-    // todo vedere magari con metodi overload
-    //todo fargli scegliere il target tra le possibili azioni ... metodo potrebbe essere da rifare
-    // todo metodo da ricontrollare e rifare chiede secondo me dei controlli lato controller .
-    public void baseEffect(Map map, Square vortexSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance{
+
+    public void baseEffect(Map map,Square vortexSquare,Player currentPlayer,Player target1)throws NotVisibleTarget,NotValidDistance{
+
+        Square currentPlayerSquare= map.findPlayer(currentPlayer);
+        if((map.isVisible(currentPlayerSquare,vortexSquare))&&(map.distance(vortexSquare,currentPlayerSquare)>0)){
+
+            Square target1Square=map.findPlayer(target1);
+            if(target1Square==vortexSquare){
+
+                ArrayList<EnumColorPlayer> vortexCannonDamages=new ArrayList<>();
+                vortexCannonDamages.add(currentPlayer.getColor());
+                vortexCannonDamages.add(currentPlayer.getColor());
+                target1.multipleDamages(vortexCannonDamages);
+            }else if(map.distance(target1Square,vortexSquare)==1){
+
+                map.movePlayer(target1,vortexSquare);
+                ArrayList<EnumColorPlayer> vortexCannonDamages= new ArrayList<>();
+                vortexCannonDamages.add(currentPlayer.getColor());
+                vortexCannonDamages.add(currentPlayer.getColor());
+                target1.multipleDamages(vortexCannonDamages);
+            }else{
+
+                throw new NotValidDistance();
+            }
+        }else if(!(map.isVisible(currentPlayerSquare,vortexSquare))){
+
+            throw new NotVisibleTarget();
+        }else if(map.distance(currentPlayerSquare,vortexSquare)==0){
+
+            throw new NotValidDistance();
+        }
+    }
+
+    public void blackHoleEffect(Map map,Square vortexSquare,Player currentPlayer,ArrayList<Player> targetBlackHole) throws NotValidDistance {
+
+        Square targetSquare;
+
+        for(Player p:targetBlackHole){
+
+            targetSquare=map.findPlayer(p);
+
+            if(map.distance(targetSquare,vortexSquare)>1){
+
+                throw new NotValidDistance();
+            }
+        }
+
+        for(Player p:targetBlackHole){
+
+            targetSquare=map.findPlayer(p);
+            if(targetSquare==vortexSquare){
+
+                p.singleDamage(currentPlayer.getColor());
+            }else if(map.distance(targetSquare,vortexSquare)==1){
+
+                map.movePlayer(p,vortexSquare);
+                p.singleDamage(currentPlayer.getColor());
+            }
+        }
+    }
+}
+
+
+
+
+/*    // metodo rifatto su
+    //  vedere magari con metodi overload
+    // fargli scegliere il target tra le possibili azioni ... metodo potrebbe essere da rifare
+    //  metodo da ricontrollare e rifare chiede secondo me dei controlli lato controller .
+    public void baseEffect1(Map map, Square vortexSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance{
 
         Square currentPlayerSquare = map.findPlayer(currentPlayer);
         Square targetSquare=map.findPlayer(target1);
@@ -74,15 +140,4 @@ public class VortexCannon extends WeaponCard {
         }
     }
 
-
-
-
-    //todo da vedere
-    public void blackHoleEffect(Map map, Player currentPlayer, Player target2)throws NotVisibleTarget {
-
-
-
-    }
-
-
-}
+ */

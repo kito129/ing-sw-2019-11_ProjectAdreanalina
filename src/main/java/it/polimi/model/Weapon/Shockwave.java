@@ -13,6 +13,7 @@ public class Shockwave extends WeaponCard {
      * Instantiates a new Shockwave card.
      * Sets the field color to YELLOW calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to YELLOW.
+     * Creates the list of effects setting its value to BaseMode,TsunamiMode.
      * Creates the list of tsunami mode cost (cost of alternative fire mode) settings it to YELLOW.
      */
     public Shockwave() {
@@ -21,6 +22,10 @@ public class Shockwave extends WeaponCard {
         ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponsEffects= new ArrayList<>();
+        weaponsEffects.add(WeaponsEffect.BaseMode);
+        weaponsEffects.add(WeaponsEffect.TsunamiMode);
+        setWeaponEffects(weaponsEffects);
         tsunamiModeCost = new ArrayList<EnumColorCardAndAmmo>();
         tsunamiModeCost.add(EnumColorCardAndAmmo.YELLOW);
     }

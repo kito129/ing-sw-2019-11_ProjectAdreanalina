@@ -14,6 +14,7 @@ public class Railgun extends WeaponCard {
      * Instantiates a new Railgun card.
      * Sets the field color to YELLOW calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost setting its value to YELLOW,YELLOW,BLU.
+     * Creates the list of effects setting its value to BaseMode,PiercingMode
      * Creates the list of piercing mode cost (cost of alternative fire mode) settings it to null.
      */
     public Railgun() {
@@ -24,6 +25,10 @@ public class Railgun extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         rechargeCost.add(EnumColorCardAndAmmo.BLU);
         setRechargeCost(rechargeCost);
+        ArrayList<WeaponsEffect> weaponEffects = new ArrayList<>();
+        weaponEffects.add(WeaponsEffect.BaseMode);
+        weaponEffects.add(WeaponsEffect.PiercingMode);
+        setWeaponEffects(weaponEffects);
         piercingModeCost = new ArrayList<EnumColorCardAndAmmo>();
         piercingModeCost.add(null);
     }
