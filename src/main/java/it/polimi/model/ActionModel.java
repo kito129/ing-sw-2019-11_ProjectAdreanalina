@@ -151,7 +151,7 @@ public class ActionModel {
      */
     public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvailable, NotInSameDirection, NotValidDistance {
 
-        gameModel.setState(State.POWERUP);
+        gameModel.setState(State.USEPOWERUP);
         newton.effect(gameModel.getMap(), targetSquare, targetPlayer);
 
     }
@@ -165,7 +165,7 @@ public class ActionModel {
      */
     public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvailable {
 
-        gameModel.setState(State.POWERUP);
+        gameModel.setState(State.USEPOWERUP);
         teleporter.effect(gameModel.getActualPlayer(), gameModel.getMap(), targetSquare);
 
     }
@@ -179,7 +179,7 @@ public class ActionModel {
      */
     public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer) throws NoPowerUpAvailable {
 
-        gameModel.setState(State.POWERUP);
+        gameModel.setState(State.USEPOWERUP);
         targetingScope.effect(gameModel.getActualPlayer(), targetPlayer);
 
     }
@@ -194,7 +194,7 @@ public class ActionModel {
      */
     public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NoPowerUpAvailable, NotVisibleTarget {
 
-        gameModel.setState(State.POWERUP);
+        gameModel.setState(State.USEPOWERUP);
         tagBackGrenade.effect(gameModel.getMap(), gameModel.getActualPlayer(), targetPlayer);
     }
     
