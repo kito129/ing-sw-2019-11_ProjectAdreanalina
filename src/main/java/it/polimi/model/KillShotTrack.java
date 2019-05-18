@@ -51,7 +51,7 @@ public class KillShotTrack{
     /**
      * Update track, with color gat from playerBoard.
      *
-     * @param color the color to add, an array if there are to colo to add
+     * @param color the color to add, an array if there are to color to add
      */
     public void updateTrack(ArrayList<EnumColorPlayer> color){
         for (KillShotTrackPoint a : track) {

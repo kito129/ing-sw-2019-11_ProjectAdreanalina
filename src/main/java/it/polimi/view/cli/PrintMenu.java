@@ -44,7 +44,7 @@ public class PrintMenu implements Serializable {
                 PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps());
                 break;
             case 6:
-                PrintAmmo.print(gameModel.getActualPlayer());
+                //PrintAmmo.print(gameModel.getActualPlayer());
                 break;
             case 7: //passare nome o id
                 //PrintPlayer.print();

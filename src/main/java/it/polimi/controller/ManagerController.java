@@ -2,10 +2,7 @@ package it.polimi.controller;
 
 import it.polimi.model.*;
 import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
-import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvaible;
-import it.polimi.model.Exception.NoWeaponAvaibleExeception;
-import it.polimi.model.Weapon.Electroscythe;
-import it.polimi.model.Weapon.LockRifle;
+import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
 
 import java.util.ArrayList;
 
@@ -51,7 +48,7 @@ public class ManagerController {
                     try {
                         
                         actionController.usePowerUpController(actionModel,usedPowerUp);
-                    } catch (NoPowerUpAvaible noPowerUpAvaible) {
+                    } catch (NoPowerUpAvailable noPowerUpAvailable) {
                         
                         //TODO
                     }
@@ -108,9 +105,11 @@ public class ManagerController {
                 //PRIMA INCASSO PLANCE DI TUTTI POI RIANIMO TUTTI
     
                 // fase incasso plancie
+                actionController.scoringPlayerBoardController(actionModel);
                 
                 //fase di rianimazione
-                actionController.respawnPlayer(actionModel,gameModel,gameModel.getDeadPlayers());
+                actionController.respawnPlayerController(actionModel);
+                
             }
         }
     }

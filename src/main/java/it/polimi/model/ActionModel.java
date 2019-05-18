@@ -5,7 +5,7 @@ package it.polimi.model;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
-import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvaible;
+import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
 import it.polimi.model.Exception.NotInSameDirection;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotVisibleTarget;
@@ -14,8 +14,7 @@ import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * The type Action model.
@@ -24,10 +23,22 @@ public class ActionModel {
 
     private GameModel gameModel;
     private int action = 0;
-
+    /**
+     * The Map.
+     */
     Map map = gameModel.getMap();
+    /**
+     * The Actual player.
+     */
     Player actualPlayer = gameModel.getActualPlayer();
-
+    
+    /**
+     * Instantiates a new Action model.
+     */
+    public ActionModel(){
+    
+    }
+    
     /**
      * Gets action number.
      *
@@ -37,7 +48,7 @@ public class ActionModel {
 
         return action;
     }
-
+    
     /**
      * Gets game model.
      *
@@ -47,7 +58,7 @@ public class ActionModel {
 
         return gameModel;
     }
-
+    
     /**
      * Run Action.
      *
@@ -66,7 +77,7 @@ public class ActionModel {
             throw new RunActionMaxDistLimitException();
         }
     }
-
+    
     /**
      * Grab Action.
      *
@@ -107,7 +118,7 @@ public class ActionModel {
             throw new CatchActionMaxDistLimitException();
         }
     }
-
+    
     /**
      * Check the number in the turn.
      *
@@ -126,68 +137,67 @@ public class ActionModel {
             return false;
         }
     }
-
-
-
+    
+    
     /**
      * Use power up Newton.
      *
      * @param newton       the newton powerUp
      * @param targetPlayer the target player
      * @param targetSquare the target square
-     * @throws NoPowerUpAvaible   No power up avaible
+     * @throws NoPowerUpAvailable   No power up avaible
      * @throws NotInSameDirection Not in same direction
      * @throws NotValidDistance   Not valid distance
      */
-    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvaible, NotInSameDirection, NotValidDistance {
+    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvailable, NotInSameDirection, NotValidDistance {
 
         gameModel.setState(State.POWERUP);
         newton.effect(gameModel.getMap(), targetSquare, targetPlayer);
 
     }
-
+    
     /**
      * Use power up Teleporter.
      *
      * @param teleporter   the teleporter PowerUp
      * @param targetSquare the target square
-     * @throws NoPowerUpAvaible the no power up avaible
+     * @throws NoPowerUpAvailable the no power up avaible
      */
-    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvaible {
+    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvailable {
 
         gameModel.setState(State.POWERUP);
         teleporter.effect(gameModel.getActualPlayer(), gameModel.getMap(), targetSquare);
 
     }
-
+    
     /**
      * Use power up Targeting Scope.
      *
      * @param targetingScope the targeting scope PowerUp
      * @param targetPlayer   the target player
-     * @throws NoPowerUpAvaible NO power up available
+     * @throws NoPowerUpAvailable NO power up available
      */
-    public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer) throws NoPowerUpAvaible {
+    public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer) throws NoPowerUpAvailable {
 
         gameModel.setState(State.POWERUP);
         targetingScope.effect(gameModel.getActualPlayer(), targetPlayer);
 
     }
-
+    
     /**
      * Use power up Tag Back Grenade.
      *
      * @param tagBackGrenade the tag back grenade powerUp
      * @param targetPlayer   the target player
-     * @throws NoPowerUpAvaible No power up avaible
+     * @throws NoPowerUpAvailable No power up avaible
      * @throws NotVisibleTarget Not visible target
      */
-    public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NoPowerUpAvaible, NotVisibleTarget {
+    public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NoPowerUpAvailable, NotVisibleTarget {
 
         gameModel.setState(State.POWERUP);
         tagBackGrenade.effect(gameModel.getMap(), gameModel.getActualPlayer(), targetPlayer);
     }
-
+    
     /**
      * Respawn player.
      *
@@ -202,30 +212,234 @@ public class ActionModel {
         gameModel.getMap().addPlayerOnSquare(generationSquare, player);
         player.getPlayerBoard().addPowerUp(powerUpCard);
     }
-
-
-    public void scoringPlayerBoard(Player player) {
-
-        PlayerBoard playerBoard = player.getPlayerBoard();
-        int valuePlayerBoard = playerBoard.getBoardValue();
-        HashMap<EnumColorPlayer, Integer> colorDamageHashMap = new HashMap<>();
-        int pointBlu =0;
-        int pointYellow =0;
-        int pointGrey =0;
-        int pointPink=0;
-        int pointGreen=0;
+    
+    // TODO 18/05
+    
+    /**
+     * The type Player score, useful for scoring computation.
+     */
+    public class PlayerScore implements Comparable<PlayerScore>{
         
-
-        for (Player a : gameModel.getPlayers()) {
-            colorDamageHashMap.put(a.getColor(), player.getPlayerBoard().colorOccurrenceInDamages(a.getColor()));
+        private EnumColorPlayer color;
+        private int value;
+        
+        @Override
+        public int compareTo(PlayerScore o) {
+            
+            return (this.getValue()-o.getValue());
+        }
+    
+        /**
+         * Instantiates a new Player score.
+         *
+         * @param color the color of the player
+         * @param value color value in point.
+         */
+        public PlayerScore(EnumColorPlayer color, int value){
+            
+            this.color=color;
+            this.value=value;
+        }
+    
+        /**
+         * Gets color of the player.
+         *
+         * @return the color
+         */
+        public EnumColorPlayer getColor () {
+        
+            return color;
+        }
+    
+        /**
+         * Gets value of the color player.
+         *
+         * @return the value
+         */
+        public int getValue () {
+        
+            return value;
+        }
+    
+        /**
+         * Sets value.
+         *
+         * @param value the value
+         */
+        public void setValue (int value) {
+        
+            this.value = value;
         }
         
-        
-
-        //first blood
-        EnumColorPlayer firstBlood = playerBoard.getDamages().get(0);
     }
-
+    
+    /**
+     * Calculate damages point, valuating occurrence and tie
+     *
+     * @param player the player that have PlayerBoard to scoring
+     * @return an Array list in order by the point to add to single player with same color.
+     */
+    public ArrayList<EnumColorPlayer> damagesOrderColor (Player player) {
+        
+        //create temp variables
+        PlayerBoard playerBoard = player.getPlayerBoard();
+        ArrayList<PlayerScore> playerScores = new ArrayList<PlayerScore>();
+        ArrayList<EnumColorPlayer> playerColor = new ArrayList<EnumColorPlayer>(gameModel.getPlayerColor());
+        
+        //get color occurrence for all player in game
+        for (EnumColorPlayer a : playerColor) {
+            
+            playerScores.add( new PlayerScore(a,playerBoard.colorOccurrenceInDamages(a)));
+        }
+        
+        //order in descending
+        Collections.sort(playerScores);
+        //System.out.println(playerScores);
+        
+        //calculate the tie
+        for (int i = 0; i < playerScores.size(); i++) {
+            PlayerScore cur = playerScores.get(i);
+            PlayerScore next = playerScores.get(i+1);
+            
+            if(cur.getValue()==next.getValue()){
+                if(playerBoard.getFirstOccurrenceInDamage(cur.getColor())>playerBoard.getFirstOccurrenceInDamage(next.getColor())){
+                    Collections.swap(playerScores,i,i+1);
+                }
+            }
+        }
+        
+        //create array of color in order of occurrence, calculated tie
+        ArrayList<EnumColorPlayer> playerOrder = new ArrayList<>();
+        
+        for (PlayerScore a:playerScores){
+            
+            playerOrder.add(a.getColor());
+        }
+        return playerOrder;
+    }
+    
+    /**
+     * Scoring player board.
+     *
+     * @param player the player that have PlayerBoard to Score.
+     */
+    public void scoringPlayerBoard(Player player){
+        
+        PlayerBoard playerBoard = player.getPlayerBoard();
+        
+        //player color in order by occurrence (tie calculated)
+        ArrayList<EnumColorPlayer> playerOrderDamage = new ArrayList<>(damagesOrderColor(player));
+        //fist blood
+        EnumColorPlayer firstBlood=playerBoard.getDamages().get(0);
+        //death
+        EnumColorPlayer death = playerBoard.getDamages().get(11);
+        //overkill
+        EnumColorPlayer overkill= playerBoard.getDamages().get(12);
+        //TODO double kill
+        
+        //player point
+        ArrayList<PlayerScore> playerPoint = new ArrayList<PlayerScore>();
+        
+        int pointTo=0;
+        //create danno
+        switch (playerBoard.getBoardValue()){
+        case 8:
+           pointTo =10;
+            for (EnumColorPlayer a : playerOrderDamage) {
+        
+                //decrement point to ad to the a player
+                int temp = pointTo - 2;
+                if (temp < 2) {
+    
+                    pointTo = 1;
+                }
+                //add point if first blood
+                if (a == firstBlood) {
+                    
+                    temp++;
+                }
+                playerPoint.add(new PlayerScore(a, temp));
+            }
+           
+           break;
+        case 6:
+           pointTo =8;
+            for (EnumColorPlayer a : playerOrderDamage) {
+        
+                int temp = pointTo - 2;
+                if (temp < 2) {
+            
+                    pointTo = 1;
+                    playerPoint.add(new PlayerScore(a, pointTo));
+                }
+            }
+            break;
+        case 4:
+            pointTo =6;
+            for (EnumColorPlayer a : playerOrderDamage) {
+        
+                int temp = pointTo - 2;
+                if (temp < 2) {
+            
+                    pointTo = 1;
+                    playerPoint.add(new PlayerScore(a, pointTo));
+                }
+            }
+            break;
+        case 2:
+            pointTo =4;
+            for (EnumColorPlayer a : playerOrderDamage) {
+        
+                int temp = pointTo - 2;
+                if (temp < 2) {
+            
+                    pointTo = 1;
+                    playerPoint.add(new PlayerScore(a, pointTo));
+                }
+            }
+           break;
+        case 1:
+            pointTo =1;
+            for (EnumColorPlayer a : playerOrderDamage) {
+        
+                int temp = pointTo - 2;
+                if (temp < 2) {
+            
+                    pointTo = 1;
+                    playerPoint.add(new PlayerScore(a, pointTo));
+                }
+            }
+            break;
+           
+        }
+        
+        //share point to player in player point
+        for (PlayerScore a:playerPoint){
+            
+            gameModel.getPlayerByColor(a.getColor()).increaseScore(a.value);
+        }
+        
+        //put color in killshot track
+        if(gameModel.getKillShotTrack().skullNumber()>1){
+            
+            ArrayList<EnumColorPlayer> toKillShot = new ArrayList<>();
+            
+            if(overkill!=null){
+                
+                toKillShot.add(death);
+                toKillShot.add(overkill);
+            } else {
+                
+                toKillShot.add(death);
+            }
+            
+            //update the killshot track point
+            gameModel.getKillShotTrack().updateTrack(toKillShot);
+            
+        }
+    }
+    
+    // TODO FINE 18/05
 }
         
     

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 /**
  * The type Game model.
  */
-public class GameModel implements RemoteGameModel, Remote {
+public class GameModel implements RemoteGameModel {
 
     private Map map;
-    private KillShotTrackPoint killShotTrackPoint;
+    private KillShotTrack killShotTrack;
     private ArrayList<Player> players;
     private AmmoDeck ammoDeck;
     private PowerUpDeck powerUpDeck;
@@ -47,14 +47,15 @@ public class GameModel implements RemoteGameModel, Remote {
         return map;
     }
     
+    
     /**
-     * Gets kill shot track point.
+     * Gets kill shot track .
      *
-     * @return the kill shot track point
+     * @return the kill shot track
      */
-    public KillShotTrackPoint getKillShotTrackPoint() {
+    public KillShotTrack getKillShotTrack() {
 
-        return killShotTrackPoint;
+        return killShotTrack;
     }
     
     /**
@@ -115,5 +116,24 @@ public class GameModel implements RemoteGameModel, Remote {
             }
         }
         return tempPLayers;
+    }
+    
+    public ArrayList<EnumColorPlayer> getPlayerColor(){
+        ArrayList<EnumColorPlayer> playerColor = new ArrayList<>();
+        
+        for (Player a: getPlayers()){
+            playerColor.add(a.getColor());
+        }
+        return playerColor;
+    }
+    
+    public Player getPlayerByColor(EnumColorPlayer color){
+        
+        for (Player a:players){
+            if (a.getColor()==color){
+                return a;
+            }
+        }
+        return null;
     }
 }

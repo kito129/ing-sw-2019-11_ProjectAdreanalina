@@ -258,7 +258,7 @@ public class Map {
     }
     
     /**
-     * Public interface to private is visible. Calculate if SquareA see SquareB.
+     * Calculate if SquareA see SquareB.
      *
      * @param a current square
      * @param b search square
@@ -271,7 +271,7 @@ public class Map {
     
     
     /**
-     * Private call to Calculate if  A(c0,r0) see B(c1,r1).
+     * Calculate if  A(c0,r0) see B(c1,r1).
      *
      * @param r0 row of current square
      * @param c0 column of current square
@@ -526,7 +526,13 @@ public class Map {
         return null;
     }
     
-    public boolean isPort(Square squareA,Square squareB){
+    /**
+    * Calculate if there is a port from SquareA to SquareB.
+    * @param squareA Square A
+    * @param squareB Square B
+    * @return true if there is a port, false otherwise
+    * */
+    public boolean isPort(Square squareA, Square squareB){
         if(squareA.getLink().contains(squareB) && squareB.getLink().contains(squareA)){
             return true;
         }

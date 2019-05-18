@@ -9,20 +9,29 @@ import it.polimi.model.Exception.ModelException.NotValidAmmoException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
-import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvaible;
+import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.*;
-import it.polimi.view.cli.Game;
 
 import java.util.ArrayList;
 
 
+/**
+ * The type Action controller.
+ */
 public class ActionController {
-
-
+    
+    
+    /**
+     * Run action .
+     *
+     * @param actionModel the action model
+     * @param map         the map of current game
+     * @throws SquareNotExistException  square not exist exception
+     */
     public void runActionController (ActionModel actionModel,Map map) throws SquareNotExistException {
 
         //answer to view an input Square
@@ -37,7 +46,14 @@ public class ActionController {
             //da gestire se mossa non valida
         }
     }
-
+    
+    /**
+     * Grab action.
+     *
+     * @param actionModel the action model
+     * @param map         the map of current game
+     * @throws SquareNotExistException  square not exist exception
+     */
     public void grabActionController (ActionModel actionModel,Map map) throws SquareNotExistException {
 
         //answer to view an input Square
@@ -67,8 +83,15 @@ public class ActionController {
 
         }
     }
-
-    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvaible {
+    
+    /**
+     * Use power up.
+     *
+     * @param actionModel the action model
+     * @param powerUpCard the power up card
+     * @throws NoPowerUpAvailable  no power up available
+     */
+    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable {
 
         //NEWTON
         if (powerUpCard.getClass().equals(Newton.class)) {
@@ -116,7 +139,13 @@ public class ActionController {
 
         }
     }
-
+    
+    /**
+     * Recharge.
+     *
+     * @param player the player want to recharge
+     * @param weapon the weapon want to recharge
+     */
     public void rechargeController(Player player, ArrayList<WeaponCard> weapon){
 
         //creo var temporanee
@@ -140,19 +169,27 @@ public class ActionController {
                 rechargeCost.add(weaponToCharge.getColorWeaponCard());
 
                 try {
-                    payAmmo(player,rechargeCost);
+                    payAmmoController(player,rechargeCost);
                     weaponToCharge.setCharge(true);
 
                 } catch (NotValidAmmoException e) {
 
-                } catch (NoPowerUpAvaible noPowerUpAvaible) {
-                    noPowerUpAvaible.printStackTrace();
+                } catch (NoPowerUpAvailable noPowerUpAvailable) {
+                    noPowerUpAvailable.printStackTrace();
                 }
             }
         }
     }
-
-    public void payAmmo(Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay) throws NotValidAmmoException, NoPowerUpAvaible {
+    
+    /**
+     * Pay ammo controller..
+     *
+     * @param player    the player want to pay
+     * @param ammoToPay Array list of  ammo to pay
+     * @throws NotValidAmmoException  not valid ammo exception
+     * @throws NoPowerUpAvailable       no power up available
+     */
+    public void payAmmoController (Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay) throws NotValidAmmoException, NoPowerUpAvailable {
 
         //prendo playerboard
         PlayerBoard playerBoard = player.getPlayerBoard();
@@ -166,7 +203,7 @@ public class ActionController {
             avaiblePowerUpAsAmmo.add(a.getColorPowerUpCard());
         }
         if (avaiblePowerUpAsAmmo.size()==0){
-            throw  new NoPowerUpAvaible();
+            throw  new NoPowerUpAvailable();
         }
 
         if (avaibleAmmo.containsAll(ammoToPay)) {
@@ -215,7 +252,15 @@ public class ActionController {
         }
     }
     
-    public void respawnPlayer(ActionModel actionModel,GameModel gameModel, ArrayList<Player> deadPlayer){
+    /**
+     * Respawn player .
+     *
+     * @param actionModel the action model
+     */
+    public void respawnPlayerController (ActionModel actionModel){
+    
+        //get dead Player
+        ArrayList<Player> deadPlayer = actionModel.getGameModel().getDeadPlayers();
         
         for (Player a: deadPlayer){
             //devo essere rianimaro, pesco due power up ne scelgo uno e vado nel colore di quello che scarto
@@ -231,27 +276,39 @@ public class ActionController {
             //adesso devo cercare la qaure di geneazione giusta dopo ho tutti i paramentri da passare
             //Square destSquare = gameModel.getMap().getGenerationSquare(chosedColor);
             
-            //actionModel.respawnPlayer(a,destSquare,powerUp1);
+            //actionModel.respawnPlayerController(a,destSquare,powerUp1);
             
             
         }
     }
     
-    public void scoringPlayerBoard(ArrayList<Player> deadPlayer){
+    /**
+     * Scoring player board.
+     *
+     * @param actionModel the action model
+     */
+    public void scoringPlayerBoardController (ActionModel actionModel){
+        
+        //get dead Player
+        ArrayList<Player> deadPlayer = actionModel.getGameModel().getDeadPlayers();
         
         for (Player a:deadPlayer){
-            //incasso un plancia lal volta
-    
-    
-          
+            //incasso una plancia alla volta e gestisco le mort
+            actionModel.scoringPlayerBoard(a);
         }
     
     }
     
     
     //GESTIONE DELLE ARMI
-
-
+    
+    
+    /**
+     * Lock rifleweapon.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void LockRifleweapon(GameModel gameModel, LockRifle weapon) {
 
         Player targetBase = new Player();
@@ -289,7 +346,13 @@ public class ActionController {
         }
         //settare arma scarica
     }
-
+    
+    /**
+     * Electroscythe weapon.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon){
 
         Map map=new Map();
@@ -319,7 +382,13 @@ public class ActionController {
         }
         //settare arma scarica
     }
-
+    
+    /**
+     * Machine gun.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void MachineGun(GameModel gameModel, MachineGun weapon){
 
         Player target1Base=new Player();
@@ -380,7 +449,13 @@ public class ActionController {
 
         }
     }
-
+    
+    /**
+     * Tractor beam.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void TractorBeam(GameModel gameModel, TractorBeam weapon){
 
         Square destSquareBase=new Square();
@@ -414,7 +489,13 @@ public class ActionController {
                 }
         }
     }
-
+    
+    /**
+     * Thor.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void Thor(GameModel gameModel, Thor weapon) {
 
         //questa carta limita l'ordine con cui puoi usare i suoi effetti.
@@ -473,7 +554,13 @@ public class ActionController {
                 }
         }
     }
-
+    
+    /**
+     * Plasma gun.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void PlasmaGun (GameModel gameModel,PlasmaGun weapon){
 
         Player targetBase=new Player();
@@ -512,7 +599,13 @@ public class ActionController {
                 weapon.chargedShotEffect(currentPlayer,targetBase);
         }
     }
-
+    
+    /**
+     * Whisper.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void Whisper(GameModel gameModel,Whisper weapon){
 
         Player currentPlayer=new Player();
@@ -531,7 +624,13 @@ public class ActionController {
             //gestione target non visibile.
         }
     }
-
+    
+    /**
+     * Vortex cannon.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void VortexCannon ( GameModel gameModel,VortexCannon weapon) {
 
         Player currentPlayer = new Player();
@@ -596,7 +695,13 @@ public class ActionController {
         }
 
     }
-
+    
+    /**
+     * Furnace.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     */
     public void Furnace(GameModel gameModel,Furnace weapon){
 
         EnumColorSquare roomTarget=null;

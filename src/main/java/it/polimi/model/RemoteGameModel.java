@@ -29,7 +29,7 @@ public interface RemoteGameModel{
          *
          * @return the kill shot track point
          */
-        public KillShotTrackPoint getKillShotTrackPoint();
+        public KillShotTrack getKillShotTrack();
         /**
          * Gets players.
          *

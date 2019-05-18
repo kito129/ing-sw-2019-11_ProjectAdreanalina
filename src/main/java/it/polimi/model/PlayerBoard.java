@@ -1,5 +1,7 @@
 package it.polimi.model;
 
+import org.omg.CORBA.INTERNAL;
+
 import java.util.ArrayList;
 
 /**
@@ -14,7 +16,7 @@ public class PlayerBoard{
     private ArrayList<EnumColorPlayer> marks;
     private ArrayList<WeaponCard> playerWeapons;
     private ArrayList<PowerUpCard> playerPowerUps;
-
+    
     /**
      * Instantiates a new Player board, setting ammo, board value and number of deaths to the start value.
      * Instantiates two ArrayList of Color player for the damages and marks, an ArrayList of weapon card
@@ -33,7 +35,7 @@ public class PlayerBoard{
         playerWeapons = new ArrayList<WeaponCard>();
         playerPowerUps = new ArrayList<PowerUpCard>();
     }
-
+    
     /**
      * Gets ammo.
      *
@@ -43,7 +45,7 @@ public class PlayerBoard{
 
         return ammo;
     }
-
+    
     /**
      * Gets ammo y.
      *
@@ -61,7 +63,7 @@ public class PlayerBoard{
         }
         return yellowAmmo;
     }
-
+    
     /**
      * Gets ammo r.
      *
@@ -79,7 +81,7 @@ public class PlayerBoard{
         }
         return redAmmo;
     }
-
+    
     /**
      * Gets ammo b.
      *
@@ -97,7 +99,7 @@ public class PlayerBoard{
         }
         return bluAmmo;
     }
-
+    
     /**
      * Gets board value.
      *
@@ -107,7 +109,7 @@ public class PlayerBoard{
 
         return boardValue;
     }
-
+    
     /**
      * Gets number of deaths.
      *
@@ -117,7 +119,7 @@ public class PlayerBoard{
 
         return numberOfDeaths;
     }
-
+    
     /**
      * Gets damages.
      *
@@ -127,7 +129,7 @@ public class PlayerBoard{
 
         return damages;
     }
-
+    
     /**
      * Gets marks.
      *
@@ -137,7 +139,7 @@ public class PlayerBoard{
 
         return marks;
     }
-
+    
     /**
      * Gets player weapons.
      *
@@ -147,7 +149,7 @@ public class PlayerBoard{
 
         return playerWeapons;
     }
-
+    
     /**
      * Gets player power ups.
      *
@@ -157,7 +159,7 @@ public class PlayerBoard{
 
         return playerPowerUps;
     }
-
+    
     /**
      * Manages the draft of ammo card, increasing the fields of ammo and adding to the list of power up, if is present,
      * the power up shown in the ammo card drawn
@@ -172,7 +174,7 @@ public class PlayerBoard{
         }
         increaseAmmo(ammoCard.getAmmo());
     }
-
+    
     /**
      * Adds a new power up card in player power up.
      *
@@ -182,7 +184,7 @@ public class PlayerBoard{
 
         this.playerPowerUps.add(powerUpCard);
     }
-
+    
     /**
      * Removes a power up card from player power up.
      *
@@ -226,7 +228,7 @@ public class PlayerBoard{
 
         this.ammo.remove(ammoToDecrease);
     }
-
+    
     /**
      * Decreases the value of ammo in the player board.
      *
@@ -250,7 +252,7 @@ public class PlayerBoard{
             }
         }
     }
-
+    
     /**
      * Increases by one the number of deaths of the player.
      */
@@ -258,7 +260,7 @@ public class PlayerBoard{
 
         this.numberOfDeaths += 1;
     }
-
+    
     /**
      * Decreases the value of board depending of the number of deaths of the player.
      */
@@ -281,7 +283,7 @@ public class PlayerBoard{
             this.boardValue = 1;
         }
     }
-
+    
     /**
      * Adds a new weapon card in player weapons.
      *
@@ -291,7 +293,7 @@ public class PlayerBoard{
 
         this.playerWeapons.add(weaponCard);
     }
-
+    
     /**
      * Removes weapon card from player weapons.
      *
@@ -301,7 +303,7 @@ public class PlayerBoard{
 
         this.playerWeapons.remove(weaponCard);
     }
-
+    
     /**
      * Increases damages of the damaged player, adding a single damage of the player's color who did the damage.
      * The list of damages can grow up to a maximum of 12 damage.
@@ -315,7 +317,7 @@ public class PlayerBoard{
             this.damages.add(damage);
         }
     }
-
+    
     /**
      * Increases damages of the damaged player, adding multiple damages of the player's color who did the damages.
      * The list of damages can grow up to a maximum of 12 damage.
@@ -332,7 +334,7 @@ public class PlayerBoard{
             }
         }
     }
-
+    
     /**
      * Resets damage in the player board.
      */
@@ -340,7 +342,7 @@ public class PlayerBoard{
 
         this.damages.clear();
     }
-
+    
     /**
      * Increases marks of the marked player, adding a single mark of the player's color who made the mark.
      * Increases marks of the marked player only if, the number of marks of the specified color(the parameter's color), is less then three.
@@ -354,14 +356,13 @@ public class PlayerBoard{
             this.marks.add(mark);
         }
     }
-
+    
     /**
      * Increases marks of the marked player, adding multiple marks of the player's color who made the marks.
      * The marks of the marked player can be increased until reaching the maximum value of three for each colors.
      *
      * @param marks list of marks of the player's color who made the marks.
      */
-
     public void increaseMarks(ArrayList<EnumColorPlayer> marks) {
 
         if(marks.size()!=0){
@@ -420,13 +421,12 @@ public class PlayerBoard{
         }
         return marksRemoved;
     }
-
+    
     /**
      * Shifts all the occurrences of one color from the list of marks, to the list of damages.
      *
      * @param colorOfMark color of marks to shift from the list of marks to the list of damages.
      */
-
     public void shiftMarks(EnumColorPlayer colorOfMark) {
 
         increaseDamages(removeMarkOfColor(colorOfMark));
@@ -449,8 +449,8 @@ public class PlayerBoard{
         }
         return tempWeapon;
     }
-
-
+    
+    
     /**
      * Counts the number of occurrences of one color in the list of damages.
      *
@@ -475,16 +475,14 @@ public class PlayerBoard{
 
 
 //todo metodi non più utili
-
-
-
+    
+    
     /**
      * Verifies if one color is present in the list of marks.
      *
      * @param color color we want to know if is present.
      * @return true if the color is present, false otherwise.
      */
-
     public boolean isColorInMarks(EnumColorPlayer color) {
 
         for (EnumColorPlayer c : marks) {
@@ -496,9 +494,9 @@ public class PlayerBoard{
         }
         return false;
     }
-
-
-
+    
+    
+    
     // todo chiede al prof perche non va.
     public ArrayList<EnumColorPlayer> removeMarkOfColor1(EnumColorPlayer colorOfMark) {
 
@@ -512,6 +510,23 @@ public class PlayerBoard{
             }
         }
         return marksRemoved;
+    }
+    
+    /**
+     * Get first occurrence in damage integer.
+     *
+     * @param color the color of the player
+     * @return index of the first occurrence, null if not found
+     */
+    public Integer getFirstOccurrenceInDamage (EnumColorPlayer color){
+    
+        for (int i = 0; i < damages.size(); i++) {
+            EnumColorPlayer a = damages.get(i);
+            if (a == color) {
+                return i;
+            }
+        }
+        return null;
     }
 
 
