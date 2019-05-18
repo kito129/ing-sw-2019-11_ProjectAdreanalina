@@ -1,13 +1,3 @@
-.startbg{
-    -fx-background-image: url("../images/adrenalina_cover.jpg");
-    -fx-background-size: 100% 100%;
-}
-
-.gamebg{
-    -fx-background-image: url("../images/game_background.jpg");
-    -fx-background-size: 100% 100%;
-}
-
 .button{
     -fx-background-weight: bold;
     -fx-background-color: #000000;

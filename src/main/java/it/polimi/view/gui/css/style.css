@@ -1,0 +1,9 @@
+.gamebg{
+    -fx-background-image: url("../images/background.png");
+    -fx-background-size: 100% 100%;
+}
+
+.startbg{
+    -fx-background-image: url("../images/adrenalina_cover.jpg");
+    -fx-background-size: 100% 100%;
+}
