@@ -185,7 +185,9 @@ public class Player {
 
         this.score += scoreToAdd;
     }
-    
+
+    //todo metodo forse da rifare per gestire il powerUP come boolean
+
     public void catchAmmoCard(AmmoCard ammoCard){
 
         this.playerBoard.manageAmmoCard(ammoCard);

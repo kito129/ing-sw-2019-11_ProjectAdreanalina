@@ -14,7 +14,7 @@ public class TagBackGrenade extends PowerUpCard {
      */
     public TagBackGrenade(EnumColorCardAndAmmo colorCard) {
 
-        super("TAGBACK GRANATE", colorCard);
+        super("TAGBACK GRENADE", colorCard);
     }
 
     /**

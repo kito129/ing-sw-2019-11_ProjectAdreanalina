@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class AmmoCard {
 
     private ArrayList<EnumColorCardAndAmmo> ammo;
+    private boolean hasPowerUpCard;
     private PowerUpCard powerUpCard;
     
     /**
@@ -18,7 +19,7 @@ public class AmmoCard {
      * @param ammoB       the number of blu ammo.
      * @param powerUpCard the power up card contained in ammo card.
      */
-    public AmmoCard(int ammoR, int ammoY, int ammoB, PowerUpCard powerUpCard){
+    public AmmoCard(int ammoR, int ammoY, int ammoB, boolean powerUpCard){
 
         this.ammo=new ArrayList<EnumColorCardAndAmmo>();
 
@@ -34,7 +35,8 @@ public class AmmoCard {
 
             this.ammo.add(EnumColorCardAndAmmo.BLU);
         }
-        this.powerUpCard=powerUpCard;
+        this.hasPowerUpCard=powerUpCard;
+        this.powerUpCard=null;
     }
 
     /**
@@ -48,17 +50,26 @@ public class AmmoCard {
         return ammo;
     }
 
-    /**
-     * Gets power up card.
-     *
-     * @return the power up card
-     */
-    public PowerUpCard getPowerUpCard(){
+    public PowerUpCard getPowerUpCard() {
 
         return powerUpCard;
     }
 
+    /**
+     * Gets powerUpCard.
+     *
+     * @return true if ammoCard contains a powerUpCard,false otherwise.
+     */
 
+    public boolean hasPowerUpCard() {
+
+        return hasPowerUpCard;
+    }
+
+    public void setPowerUpCard(PowerUpCard powerUpCard) {
+
+        this.powerUpCard = powerUpCard;
+    }
 
 
 }

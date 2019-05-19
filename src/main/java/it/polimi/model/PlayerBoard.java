@@ -1,6 +1,6 @@
 package it.polimi.model;
 
-import org.omg.CORBA.INTERNAL;
+
 
 import java.util.ArrayList;
 
@@ -174,7 +174,7 @@ public class PlayerBoard{
         }
         increaseAmmo(ammoCard.getAmmo());
     }
-    
+
     /**
      * Adds a new power up card in player power up.
      *
@@ -470,6 +470,23 @@ public class PlayerBoard{
         return count;
     }
 
+    /**
+     * Get first occurrence in damage integer.
+     *
+     * @param color the color of the player
+     * @return index of the first occurrence, null if not found
+     */
+    public Integer getFirstOccurrenceInDamage (EnumColorPlayer color){
+
+        for (int i = 0; i < damages.size(); i++) {
+            EnumColorPlayer a = damages.get(i);
+            if (a == color) {
+                return i;
+            }
+        }
+        return null;
+    }
+
 
 
 
@@ -512,22 +529,7 @@ public class PlayerBoard{
         return marksRemoved;
     }
     
-    /**
-     * Get first occurrence in damage integer.
-     *
-     * @param color the color of the player
-     * @return index of the first occurrence, null if not found
-     */
-    public Integer getFirstOccurrenceInDamage (EnumColorPlayer color){
-    
-        for (int i = 0; i < damages.size(); i++) {
-            EnumColorPlayer a = damages.get(i);
-            if (a == color) {
-                return i;
-            }
-        }
-        return null;
-    }
+
 
 
 

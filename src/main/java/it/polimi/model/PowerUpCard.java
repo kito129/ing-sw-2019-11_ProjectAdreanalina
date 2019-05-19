@@ -65,6 +65,21 @@ public class PowerUpCard {
 
     public String toString(){
 
-        return this.namePowerUpCard;
+        String color="";
+
+        if (this.colorPowerUpCard==EnumColorCardAndAmmo.YELLOW){
+
+            color="Yellow";
+        }
+        if (this.colorPowerUpCard==EnumColorCardAndAmmo.RED){
+
+            color="Red";
+        }
+        if (this.colorPowerUpCard==EnumColorCardAndAmmo.BLU){
+
+            color="Blu";
+        }
+
+        return this.namePowerUpCard+" "+color;
     }
 }
