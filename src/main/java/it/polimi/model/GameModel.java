@@ -1,13 +1,18 @@
 package it.polimi.model;
 
+import it.polimi.view.RemoteView;
+
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Game model.
  */
 public class GameModel implements RemoteGameModel {
-
+    
+    private List<RemoteView> list = new ArrayList<>();
     private Map map;
     private KillShotTrack killShotTrack;
     private ArrayList<Player> players;
@@ -135,5 +140,44 @@ public class GameModel implements RemoteGameModel {
             }
         }
         return null;
+    }
+    
+    @Override
+    public List<RemoteView> getObservers (){
+        return list;
+    }
+    /**
+     * adds an RMI observer at the beginning
+     * @param observer the observer to be added
+     */
+    @Override
+    public void addObserver(RemoteView observer){
+        list.add(observer);
+    }
+    
+    /**
+     * removes an RMI observer from the observers's list (setting him as 'null')
+     * @param observer the observer to be removed
+     */
+    @Override
+    public void removeObserver(RemoteView observer){
+        list.set(getObservers().indexOf(observer), null);
+    }
+    
+    /**
+     * adds again an RMI observer after he has lost connection
+     * @param observer the observer to be added
+     * @throws RemoteException if the reference could not be accessed
+     */
+    @Override
+    public void reAddObserver(RemoteView observer) throws RemoteException {
+        int index = 0;
+        for(Player a : players){
+            if((a.getName()).equals(observer.getUser())) {
+                index = players.indexOf(a);
+                break;
+            }
+        }
+        list.set(index, observer);
     }
 }

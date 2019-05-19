@@ -1,7 +1,6 @@
 package it.polimi.view.cli;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 
 import java.io.Serializable;
 
@@ -53,11 +52,7 @@ public class PrintMenu implements Serializable {
                 //PrintPlayerBoard.print();
                 break;
             case 9:
-                try {
-                    GenerationSquare gs =(GenerationSquare) gameModel.getMap().getGenerationSquare(EnumColorSquare.BLU);
-                } catch (SquareNotExistException e) {
-                    e.printStackTrace();
-                };
+                GenerationSquare gs =(GenerationSquare) gameModel.getMap().getGenerationSquare(EnumColorSquare.BLU);
                 break;
             case 10:
                 //TODO

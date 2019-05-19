@@ -16,6 +16,7 @@ public class Player {
     private int score;
     private boolean alive;
     private boolean damaged;
+    private boolean online;
     
     /**
      * Instantiates a new Player setting the id, name and color with the given parameters.
@@ -132,6 +133,16 @@ public class Player {
     public boolean isDamaged(){
 
         return damaged;
+    }
+    
+    public boolean getOnline(){
+        
+        return online;
+    }
+    
+    public void setOnline(Boolean online){
+        
+        this.online=online;
     }
     
     /**

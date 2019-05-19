@@ -4,7 +4,6 @@ package it.polimi.controller;
 import it.polimi.model.*;
 //chiedere perche devo importare tutto
 import it.polimi.model.Exception.*;
-import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.NotValidAmmoException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
@@ -15,7 +14,9 @@ import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.*;
+import it.polimi.view.RemoteView;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 
@@ -29,58 +30,67 @@ public class ActionController {
      * Run action .
      *
      * @param actionModel the action model
-     * @param map         the map of current game
-     * @throws SquareNotExistException  square not exist exception
      */
-    public void runActionController (ActionModel actionModel,Map map) throws SquareNotExistException {
-
+    public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException {
+        
+        //take necessary
+        Map map= actionModel.getGameModel().getMap();
+        
         //answer to view an input Square
-        Square inputSquare = new Square(1,0,EnumColorSquare.RED);
+        Square inputSquare = map.getSquare(view.getRow(),view.getColumn());
+        
         //temp variables
-         map.existInMap(inputSquare);
+         if(map.existInMap(inputSquare)){
+             //effective move
+             try {
+                 actionModel.runActionModel(inputSquare);
+             } catch (RunActionMaxDistLimitException e) {
+                 actionModel.getGameModel().setState(State.ERROR);
+             }
+         }
 
-        //effective move
-        try {
-            actionModel.runActionModel(inputSquare);
-        } catch (RunActionMaxDistLimitException e) {
-            //da gestire se mossa non valida
-        }
+        
     }
     
     /**
      * Grab action.
      *
      * @param actionModel the action model
-     * @param map         the map of current game
-     * @throws SquareNotExistException  square not exist exception
      */
-    public void grabActionController (ActionModel actionModel,Map map) throws SquareNotExistException {
-
+    public void grabActionController (ActionModel actionModel,RemoteView view) throws RemoteException {
+    
+        //take necessary
+        Map map =actionModel.getGameModel().getMap();
+        
+        
         //answer to view an input Square
-        Square inputSquare = new Square(1,0,EnumColorSquare.RED);
-        Integer indexWeapon=null;
+        Square inputSquare = map.getSquare(view.getRow(),view.getColumn());
+        Integer indexWeapon=view.getIndex();
         //temp variables
-        map.existInMap(inputSquare);
-
-
-        //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
-        if(map.isGenerationSquare(inputSquare)){
-
-            //chiedi alla view l'index dellarma
-            //solo prova
-            indexWeapon= 1;
-        } else {
-            indexWeapon=null;
-        }
-
-        //effective catch gia con l'index giusto se è una Generation Square
-        try {
-
-            actionModel.grabActionModel(inputSquare,indexWeapon);
-        } catch (CatchActionMaxDistLimitException catchActionMaxDistExpetion) {
-
-        } catch (CatchActionFullObjException e) {
-
+        if(map.existInMap(inputSquare)) {
+    
+    
+            //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
+            if (map.isGenerationSquare(inputSquare)) {
+        
+                //chiedi alla view l'index dellarma
+                //solo prova
+                indexWeapon = 1;
+            } else {
+                indexWeapon = null;
+            }
+    
+            //effective catch gia con l'index giusto se è una Generation Square
+            try {
+        
+                actionModel.grabActionModel(inputSquare, indexWeapon);
+            } catch (CatchActionMaxDistLimitException catchActionMaxDistExpetion) {
+        
+            } catch (CatchActionFullObjException e) {
+        
+            }
+        }else  {
+            actionModel.getGameModel().setState(State.ERROR);
         }
     }
     

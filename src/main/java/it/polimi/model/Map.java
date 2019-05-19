@@ -1,7 +1,5 @@
 package it.polimi.model;
 
-import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
-
 import java.util.ArrayList;
 
 /**
@@ -478,22 +476,19 @@ public class Map {
      * Exist in map.
      *
      * @param square the square
-     * @throws SquareNotExistException the square not exist exception
      */
-    public void existInMap(Square square) throws SquareNotExistException {
+    public boolean existInMap(Square square){
         
         boolean found=false;
         
         for (Square a:squares) {
             if (a.getRow() == square.getRow() && a.getColumn() == square.getColumn()) {
                 
-                found = true;
+                return true;
             }
         }
-        if(!found){
-            
-            throw new SquareNotExistException();
-        }
+       return false;
+       
     }
     
     
@@ -513,14 +508,12 @@ public class Map {
      *
      * @param color the color to search
      * @return the generation square of this color
-     * @throws SquareNotExistException the square of this colo not exist or there are no generation of this Color
      */
-    public Square getGenerationSquare(EnumColorSquare color) throws SquareNotExistException {
-        for (Square a:squares){
-            if(this.isGenerationSquare(a) && (a.getColor() == color)){
+    public Square getGenerationSquare(EnumColorSquare color) {
+    
+        for (Square a : squares) {
+            if (this.isGenerationSquare(a) && (a.getColor() == color)) {
                 return a;
-            } else {
-                throw new SquareNotExistException();
             }
         }
         return null;

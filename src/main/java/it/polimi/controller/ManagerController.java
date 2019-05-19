@@ -1,20 +1,65 @@
 package it.polimi.controller;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.ControllerException.RoudControllerException.SquareNotExistException;
 import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
-import it.polimi.model.Weapon.Electroscythe;
-
+import it.polimi.view.RemoteView;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class ManagerController {
+public class ManagerController implements RemoteGameController {
     
     private ActionController actionController;
     private ActionModel actionModel;
-    private GameModel gameModel= actionModel.getGameModel();
+    private GameModel gameModel;
+    private Player actualPlayer;
+    private boolean gameStarted;
+    
+    public boolean getStaretd(){
+        return gameStarted;
+    }
+    
+    public GameModel getGameModel () {
+        
+        
+        return this.gameModel;
+    }
+    
+    public ActionModel getActionModel () {
+        
+        return actionModel;
+    }
+    
+    public void setGameModel (GameModel gameModel) {
+        
+        this.gameModel = gameModel;
+    }
+    
+    public void setActionController (ActionController actionController) {
+        
+        this.actionController = actionController;
+    }
+    
+    public void setActionModel (ActionModel actionModel) {
+        
+        this.actionModel = actionModel;
+    }
+    
+    public void setGameStarted (boolean gameStarted) {
+        
+        this.gameStarted = gameStarted;
+    }
+    
+    public Player getActualPlayer () {
+        
+        return actualPlayer;
+    }
     
     
-    public void turn() {
+    @Override
+    public void update (RemoteView view) throws RemoteException {
+    
+        if(gameStarted)
+            verifyObserver();
     
         Player actualPlayer = gameModel.getActualPlayer();
         PlayerBoard actualPlayerBoard = actualPlayer.getPlayerBoard();
@@ -28,6 +73,8 @@ public class ManagerController {
                 case PLAYERSETUP:
                     break;
                 case SPAWNPLAYER:
+                    break;
+                case LOBBY:
                     break;
                 case STARTTURN:
                     break;
@@ -46,22 +93,11 @@ public class ManagerController {
                     }
                     break;
                 case RUN:
-                    try {
-    
-                        actionController.runActionController(actionModel, gameModel.getMap());
-                    } catch (SquareNotExistException e) {
-    
-                        //TODO
-                    }
+                    //oggi
+                    actionController.runActionController(actionModel, view);
                     break;
                 case GRAB:
-                    try {
-    
-                        actionController.grabActionController(actionModel, gameModel.getMap());
-                    } catch (SquareNotExistException e) {
-    
-                        //TODO
-                    }
+                    actionController.grabActionController(actionModel, view);
                     break;
                 case SHOOT:
                     //prendo le armi che ho, le mostro alla vieee che decide cosa usare
@@ -95,7 +131,7 @@ public class ManagerController {
                         // se si chiama metodo che verfica se puoi ricarcaire, lui ricaciehraà
     
                         if (recharge == State.RECHARGE) {
-                            
+        
                             //chiamo la ricarica
                             actionController.rechargeController(actualPlayer, actualPlayerBoard.getWeaponToCharge());
                         }
@@ -127,10 +163,55 @@ public class ManagerController {
         }
     }
     
+    @Override
+    public void setPlayerOnline (String user, boolean online){
+        for(Player a : gameModel.getPlayers()){
+            if(a.getName().equals(user)){
+                a.setOnline(online);
+            }
+        }
+    }
     
-    public GameModel getGameModel(){
+    //metodo che per ora non serve
+    private void verifyObserver() {
         
-        
-        return this.gameModel;
+        for(int i=0; i<gameModel.getObservers().size(); i++){
+            try{
+                if(gameModel.getObservers().get(i) != null)
+                    gameModel.getObservers().get(i).getUser();
+            } catch(RemoteException e){
+                if(gameModel.getState().equals(State.LOBBY)) {
+                    gameModel.getPlayers().get(i).setOnline(false);
+                    gameModel.getPlayers().remove(i);
+                    gameModel.getObservers().remove(i);
+                }
+                else {
+                    gameModel.getPlayers().get(i).setOnline(false);
+                    gameModel.removeObserver(gameModel.getObservers().get(i));
+                }
+            }
+           
+        }
+    }
+    
+    @Override
+    public void addObserver (RemoteView view) throws RemoteException {
+    
+    }
+    
+    @Override
+    public void reAddObserver (RemoteView view) throws RemoteException {
+    
     }
 }
+
+
+
+
+
+
+
+
+
+    
+
