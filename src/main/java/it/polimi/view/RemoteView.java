@@ -20,5 +20,4 @@ public interface RemoteView extends Remote {
     
     void update(RemoteGameModel gameModel) throws RemoteException;
     
-    void run () throws RemoteException;
 }

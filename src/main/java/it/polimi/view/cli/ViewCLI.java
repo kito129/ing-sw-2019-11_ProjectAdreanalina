@@ -20,10 +20,10 @@ public class ViewCLI implements RemoteView {
     RemoteGameModel gameModel;
     RemoteGameController gameController;
     protected boolean online;
-    
     //attribute for run
     private int row;
     private int column;
+    //attribute for grab
     private int index;
     
     @Override
@@ -96,9 +96,21 @@ public class ViewCLI implements RemoteView {
         this.gameModel = gameModel;
     }
     
+    /**
+     * modifies the view based on the current state
+     * @param gameModel the gamemodel of the match
+     */
+    @Override
+    public void update(RemoteGameModel gameModel) throws RemoteException {
+        
+        this.gameModel = gameModel;
+        this.run();
+    }
+    
     public void run() throws RemoteException {
     
         switch (gameModel.getState()) {
+            
             case SETUP:
                 break;
             case PLAYERSETUP:
@@ -144,16 +156,7 @@ public class ViewCLI implements RemoteView {
     
     //metodi di rete e observer
     
-    /**
-     * modifies the view based on the current state
-     * @param gameModel the gamemodel of the match
-     */
-    @Override
-    public void update(RemoteGameModel gameModel) throws RemoteException {
-        
-        this.gameModel = gameModel;
-        this.run();
-    }
+    
     
     private void notifyController() throws RemoteException {
         

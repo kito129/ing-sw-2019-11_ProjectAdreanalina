@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class GameModel implements RemoteGameModel {
     
+    //observable pattern
     private List<RemoteView> list = new ArrayList<>();
     private Map map;
     private KillShotTrack killShotTrack;
@@ -161,6 +162,7 @@ public class GameModel implements RemoteGameModel {
      */
     @Override
     public void removeObserver(RemoteView observer){
+        
         list.set(getObservers().indexOf(observer), null);
     }
     
