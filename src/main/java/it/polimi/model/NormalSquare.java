@@ -19,7 +19,7 @@ public class NormalSquare extends Square {
     public NormalSquare(int r, int c, EnumColorSquare color) {
 
        super(r,c,color);
-       this.ammoCard= new AmmoCard(0,0,0,null);
+       this.ammoCard= new AmmoCard(0,0,0,false);
 
     }
     
