@@ -23,14 +23,15 @@ public class ActionModel {
 
     private GameModel gameModel;
     private int action = 0;
-    /**
-     * The Map.
-     */
-    Map map = gameModel.getMap();
-    /**
-     * The Actual player.
-     */
-    Player actualPlayer = gameModel.getActualPlayer();
+    private Map map;
+    private Player actualPlayer;
+
+    public ActionModel(GameModel gameModel){
+
+        this.gameModel=gameModel;
+    }
+
+
     
     /**
      * Instantiates a new Action model.

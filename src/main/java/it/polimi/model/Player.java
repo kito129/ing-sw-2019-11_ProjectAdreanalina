@@ -254,25 +254,25 @@ public class Player {
 
     public void stampa(){
 
-        System.out.print("id: "+this.id+"   ");
-        System.out.print("name: "+this.name+"   ");
-        System.out.print("color: "+this.color+"   ");
+        System.out.print("id: "+this.id+"              ");
+        System.out.print("name: "+this.name+"              ");
+        System.out.print("color: "+this.color+"             ");
         //System.out.println("playboard: "+this.playerBoard);
-        //System.out.println("row :"+this.row);
-        //System.out.println("column: "+this.column);
-        //System.out.println("score: "+this.score);
-        //System.out.println("alive: "+this.alive);
-        System.out.print("damaged: "+this.damaged+"   ");
-        //System.out.println("ammo: "+playerBoard.getAmmo());
+        System.out.print("row :"+this.row+"            ");
+        System.out.print("column: "+this.column+"            ");
+        System.out.print("score: "+this.score+"           ");
+        System.out.print("alive: "+this.alive+"            ");
+        System.out.print("damaged: "+this.damaged+"           ");
+        System.out.print("ammo: "+playerBoard.getAmmo()+"           ");
         //System.out.println("ammoY: "+playerBoard.getAmmoY());
         //System.out.println("ammoR: "+playerBoard.getAmmoR());
         //System.out.println("ammoB: "+playerBoard.getAmmoB());
-        //System.out.println("boardvalue: "+playerBoard.getBoardValue());
-        //System.out.println("deaths: "+playerBoard.getNumberOfDeaths());
-        System.out.print("damages: "+playerBoard.getDamages()+"   ");
-        System.out.print("marks: "+playerBoard.getMarks()+"   ");
-        //System.out.println("weapons: "+playerBoard.getPlayerWeapons());
-        //System.out.println("powerup :"+playerBoard.getPlayerPowerUps());
+        System.out.print("boardvalue: "+playerBoard.getBoardValue()+"            ");
+        System.out.print("damages: "+playerBoard.getDamages()+"            ");
+        System.out.print("marks: "+playerBoard.getMarks()+"             ");
+        System.out.print("weapons: "+playerBoard.getPlayerWeapons()+"              ");
+        System.out.print("powerup :"+playerBoard.getPlayerPowerUps()+"            ");
+        System.out.println();
         System.out.println();
     }
 

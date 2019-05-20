@@ -22,6 +22,16 @@ public class GameModel implements RemoteGameModel {
     private WeaponDeck weaponDeck;
     private Player actualPlayer;
     private State state;
+
+
+    public GameModel(Map map,KillShotTrack killShotTrack,ArrayList<Player> players){
+
+        this.map=map;
+        this.killShotTrack=killShotTrack;
+        this.players=players;
+    }
+
+
     
     /**
      * Sets actual player.

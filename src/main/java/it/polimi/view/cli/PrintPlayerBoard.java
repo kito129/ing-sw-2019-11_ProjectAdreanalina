@@ -12,7 +12,6 @@ public class PrintPlayerBoard implements Serializable {
     public static void print(Player player){
 
         System.out.println("BOARD VALUE: " +player.getPlayerBoard().getBoardValue());
-        System.out.println("N. DEATHS: " +player.getPlayerBoard().getNumberOfDeaths());
         //PrintAmmo.print(player);
         System.out.print("DAMAGES: ");
         PrintDamagesAndMarks.printDamages(player);

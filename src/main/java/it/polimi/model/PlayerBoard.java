@@ -11,14 +11,13 @@ public class PlayerBoard{
 
     private ArrayList<EnumColorCardAndAmmo> ammo;
     private int boardValue;
-    private int numberOfDeaths;
     private ArrayList<EnumColorPlayer> damages;
     private ArrayList<EnumColorPlayer> marks;
     private ArrayList<WeaponCard> playerWeapons;
     private ArrayList<PowerUpCard> playerPowerUps;
     
     /**
-     * Instantiates a new Player board, setting ammo, board value and number of deaths to the start value.
+     * Instantiates a new Player board, setting ammo, board value to the start value.
      * Instantiates two ArrayList of Color player for the damages and marks, an ArrayList of weapon card
      * and an ArrayList of power up card.
      */
@@ -29,7 +28,6 @@ public class PlayerBoard{
         ammo.add(EnumColorCardAndAmmo.RED);
         ammo.add(EnumColorCardAndAmmo.BLU);
         boardValue = 8;
-        numberOfDeaths = 0;
         damages = new ArrayList<EnumColorPlayer>();
         marks = new ArrayList<EnumColorPlayer>();
         playerWeapons = new ArrayList<WeaponCard>();
@@ -108,16 +106,6 @@ public class PlayerBoard{
     public int getBoardValue() {
 
         return boardValue;
-    }
-    
-    /**
-     * Gets number of deaths.
-     *
-     * @return the number of deaths
-     */
-    public int getNumberOfDeaths() {
-
-        return numberOfDeaths;
     }
     
     /**
@@ -252,38 +240,23 @@ public class PlayerBoard{
             }
         }
     }
-    
-    /**
-     * Increases by one the number of deaths of the player.
-     */
-    public void increaseNumberOfDeaths() {
 
-        this.numberOfDeaths += 1;
-    }
-    
     /**
      * Decreases the value of board depending of the number of deaths of the player.
      */
     public void decreaseBoardValue() {
 
-        if (numberOfDeaths == 0) {
+        if (boardValue == 2) {
 
-            this.boardValue = 8;
-        } else if (numberOfDeaths == 1) {
+            boardValue = 1;
+        } else if (boardValue != 1) {
 
-            this.boardValue = 6;
-        } else if (numberOfDeaths == 2) {
-
-            this.boardValue = 4;
-        } else if (numberOfDeaths == 3) {
-
-            this.boardValue = 2;
-        } else if (numberOfDeaths == 4) {
-
-            this.boardValue = 1;
+            boardValue -= 2;
         }
     }
-    
+
+
+
     /**
      * Adds a new weapon card in player weapons.
      *
