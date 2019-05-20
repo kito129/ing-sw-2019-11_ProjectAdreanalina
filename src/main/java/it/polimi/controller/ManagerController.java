@@ -193,7 +193,7 @@ public class ManagerController implements RemoteGameController {
            
         }
     }
-    
+    /*
     @Override
     public void addObserver (RemoteView view) throws RemoteException {
     
@@ -203,6 +203,7 @@ public class ManagerController implements RemoteGameController {
     public void reAddObserver (RemoteView view) throws RemoteException {
     
     }
+    */
 }
 
 
