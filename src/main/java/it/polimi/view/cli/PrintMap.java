@@ -23,14 +23,14 @@ public class PrintMap implements Serializable {
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_RESET = "\u001b[0m";
 
-    public static String[][] map = new String[3][4];
-
     /**
      * Get and set map: control if the row and column exists and set them with the corresponding color; if doesn't exists,
      * set that square with black color
      * @param squares   the map choosen for the game
      */
-    public static void getMap(ArrayList<Square> squares) {
+    private static String[][] getMap(ArrayList<Square> squares) {
+
+        String[][] map = new String[3][4];
 
         for (Square s : squares) {
 
@@ -91,15 +91,25 @@ public class PrintMap implements Serializable {
                 }
             }
         }
+
+        return map;
     }
 
     /**
      * Print map.
-     * @param map   the map choosen for the game
+     * @param squares   the squares of the map choosen for the game
      */
-    public static void printMap(String[][] map) {
+    public static void printMap(ArrayList<Square> squares) {
 
-        System.out.println("    0   1   2   3");
+        String[][] map = getMap(squares);
+
+        System.out.println("    ");
+        for(int i = 0; i < 3; i++){
+
+            System.out.print(i + "   ");
+        }
+
+        System.out.println();
         System.out.println("            " + ANSI_BLUE + "w" + ANSI_RESET);
 
         for(int i = 0; i < 3; i++){
