@@ -1,7 +1,5 @@
 package it.polimi.model;
 
-
-
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
@@ -23,6 +21,7 @@ public class ActionModel {
 
     private GameModel gameModel;
     private int action = 0;
+<<<<<<< HEAD
     private Map map;
     private Player actualPlayer;
 
@@ -32,6 +31,18 @@ public class ActionModel {
     }
 
 
+=======
+    
+    /**
+     * The Map.
+     */
+    Map map = gameModel.getMap();
+    
+    /**
+     * The Actual player.
+     */
+    Player actualPlayer = gameModel.getActualPlayer();
+>>>>>>> d19738c8b5be1d7c4370c7fb96682387f8c7aa02
     
     /**
      * Instantiates a new Action model.
@@ -299,12 +310,14 @@ public class ActionModel {
         
         //calculate the tie
         for (int i = 0; i < playerScores.size(); i++) {
-            PlayerScore cur = playerScores.get(i);
-            PlayerScore next = playerScores.get(i+1);
-            
-            if(cur.getValue()==next.getValue()){
-                if(playerBoard.getFirstOccurrenceInDamage(cur.getColor())>playerBoard.getFirstOccurrenceInDamage(next.getColor())){
-                    Collections.swap(playerScores,i,i+1);
+            if(i<playerScores.size()-1) {
+                PlayerScore cur = playerScores.get(i);
+                PlayerScore next = playerScores.get(i + 1);
+        
+                if (cur.getValue() == next.getValue()) {
+                    if (playerBoard.getFirstOccurrenceInDamage(cur.getColor()) > playerBoard.getFirstOccurrenceInDamage(next.getColor())) {
+                        Collections.swap(playerScores, i, i + 1);
+                    }
                 }
             }
         }
