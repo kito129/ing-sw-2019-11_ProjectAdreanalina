@@ -56,6 +56,7 @@ public class ViewCLI implements RemoteView {
         
         return false;
     }
+
     public void setOnline (boolean online) {
         
         this.online = online;
@@ -155,9 +156,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //metodi di rete e observer
-    
-    
-    
+
     private void notifyController() throws RemoteException {
         
         if (getOnline()) {
@@ -188,5 +187,4 @@ public class ViewCLI implements RemoteView {
         //notifica che hai preso i valori
         notifyController();
     }
-    
 }
