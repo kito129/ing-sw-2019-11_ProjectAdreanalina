@@ -178,9 +178,11 @@ public class ViewCLI implements RemoteView {
         Scanner input = new Scanner(System.in);
         while(!input.hasNextInt())
             input = new Scanner(System.in);
+        
         setRow(input.nextInt());
         while(!input.hasNextInt())
             input = new Scanner(System.in);
+        
         setColumn(input.nextInt());
         
         //notifica che hai preso i valori

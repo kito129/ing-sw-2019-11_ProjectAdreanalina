@@ -45,6 +45,7 @@ public class ActionController {
              try {
                  actionModel.runActionModel(inputSquare);
              } catch (RunActionMaxDistLimitException e) {
+                //print error or choose another action
                  actionModel.getGameModel().setState(State.ERROR);
              }
          }
