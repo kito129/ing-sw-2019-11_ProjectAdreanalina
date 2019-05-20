@@ -9,13 +9,6 @@ import java.util.List;
 public interface RemoteGameModel{
     
     /**
-    * Sets actual player.
-    *
-    * @param actualPlayer the actual player
-    */
-    void setActualPlayer(Player actualPlayer);
-        
-    /**
      * Gets actual player.
      *
      * @return the actual player

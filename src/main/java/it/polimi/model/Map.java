@@ -36,7 +36,12 @@ public class Map {
 
         //todo metodo da cancellare
     }
-
+    
+    public ArrayList<Square> getSquares () {
+        
+        return squares;
+    }
+    
     /**
      * Search square passed row and column, they represent the grid.
      *
