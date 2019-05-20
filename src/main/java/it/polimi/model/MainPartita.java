@@ -1,6 +1,9 @@
 package it.polimi.model;
 
 
+import it.polimi.model.Exception.NotVisibleTarget;
+import it.polimi.model.Weapon.LockRifle;
+
 import java.util.ArrayList;
 
 public class MainPartita {
@@ -13,7 +16,7 @@ public class MainPartita {
         Player player3 = new Player(3, "simone", EnumColorPlayer.GREEN);
         Player player4 = new Player(4,"niko",EnumColorPlayer.PINK);
         Player player5 = new Player(5,"teo",EnumColorPlayer.GREY);
-        Map map=new Map(MapCreator.createA(),"mappa a");
+        Map map=new Map(MapCreator.createB(),"mappa a");
         KillShotTrack killShotTrack=new KillShotTrack();
         ArrayList<Player> players = new ArrayList<>();
         players.add(player1);
@@ -24,35 +27,28 @@ public class MainPartita {
         GameModel gameModel=new GameModel(map,killShotTrack,players);
         ActionModel actionModel= new ActionModel(gameModel);
 
-
-        ArrayList<EnumColorPlayer> damages=new ArrayList<>();
-        damages.add(EnumColorPlayer.YELLOW);
-        damages.add(EnumColorPlayer.YELLOW);
-        damages.add(EnumColorPlayer.YELLOW);
-        damages.add(EnumColorPlayer.BLU);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.GREEN);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.PINK);
-        damages.add(EnumColorPlayer.GREEN);
-        damages.add(EnumColorPlayer.YELLOW);
-
-        player1.multipleDamages(damages);
-
         for(Player p:players){
 
             p.stampa();
         }
 
-        actionModel.scoringPlayerBoard(player1);
 
-        for(Player p:players){
+        map.addPlayerOnSquare(map.getSquare(0,1),player1);
+        map.addPlayerOnSquare(map.getSquare(0,2),player2);
+        System.out.println(map.isVisible(player1,player2));
+        LockRifle lockRifle=new LockRifle();
+        try{
 
-            p.stampa();
+            lockRifle.baseEffect(map,player1,player2);
+
+        }catch(NotVisibleTarget notVisibleTarget){
+
+            System.out.println("non visibile");
         }
+
+
+
+
 
 
 

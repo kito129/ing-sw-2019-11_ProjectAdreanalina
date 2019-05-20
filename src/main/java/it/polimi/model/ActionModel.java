@@ -21,7 +21,6 @@ public class ActionModel {
 
     private GameModel gameModel;
     private int action = 0;
-<<<<<<< HEAD
     private Map map;
     private Player actualPlayer;
 
@@ -30,19 +29,9 @@ public class ActionModel {
         this.gameModel=gameModel;
     }
 
+    
 
-=======
-    
-    /**
-     * The Map.
-     */
-    Map map = gameModel.getMap();
-    
-    /**
-     * The Actual player.
-     */
-    Player actualPlayer = gameModel.getActualPlayer();
->>>>>>> d19738c8b5be1d7c4370c7fb96682387f8c7aa02
+
     
     /**
      * Instantiates a new Action model.
@@ -346,9 +335,9 @@ public class ActionModel {
         //fist blood
         EnumColorPlayer firstBlood=playerBoard.getDamages().get(0);
         //death
-        EnumColorPlayer death = playerBoard.getDamages().get(11);
+        EnumColorPlayer death = playerBoard.getDamages().get(10);
         //overkill
-        EnumColorPlayer overkill= playerBoard.getDamages().get(12);
+        EnumColorPlayer overkill= playerBoard.getDamages().get(11);
         //TODO double kill
         
         //player point

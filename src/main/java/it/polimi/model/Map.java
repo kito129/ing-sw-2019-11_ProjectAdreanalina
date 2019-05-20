@@ -133,7 +133,7 @@ public class Map {
      * @param dist recursive dist in this pass of algorithm
      * @return minimum distance between A and B
      */
-    private int distance(Square a, Square b, int dist){
+    public int distance(Square a, Square b, int dist){
         if(a.getRow()==b.getRow() && a.getColumn()==b.getColumn()) {
             return 0;
         }else
@@ -150,7 +150,7 @@ public class Map {
      * @param dist recursive dist in this pass of algorithm
      * @return minimum distance from A(rInit,cInit) to B(rDest,cDest)
      */
-    private int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
+    public int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
         
         int distance = dist;
         int currR = rInit;
@@ -282,7 +282,7 @@ public class Map {
      * @param c1 column of search square
      * @return true if A(c0,r0) see B(c1,r1)
      */
-    private boolean isVisible(int r0, int c0,int r1, int c1) {
+    public boolean isVisible(int r0, int c0,int r1, int c1) {
 
         Square currSquare= getSquare(r0,c0);
         Square destSquare= getSquare(r1,c1);

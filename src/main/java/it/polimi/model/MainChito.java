@@ -4,12 +4,12 @@ public class MainChito {
     public static void main(String[] args){
         
         
-        Map mappa = new Map();//todo default costruttore perchè npn mi compila
+        Map mappa = new Map(MapCreator.createA(),"mPP");//todo default costruttore perchè npn mi compila
         
         int a,b,c,d=0;
         
 
-/*
+
         //cerco disatnza
         a=1;
         b=1;
@@ -123,7 +123,9 @@ public class MainChito {
         } else System.out.println("\n NON VISIBILE\n");
         
         mappa.refreshMap();
-        */
+
+
+
         //cerco funzioni
         a=0;
         b=2;
