@@ -3,7 +3,7 @@ package it.polimi.model;
 public class MainChito {
     public static void main(String[] args){
         
-        
+        /*
         Map mappa = new Map(MapCreator.createA(),"mPP");//todo default costruttore perchè npn mi compila
         
         int a,b,c,d=0;
@@ -183,6 +183,8 @@ public class MainChito {
         System.out.println("is generation player A: " + mappa.isGenerationSquare(mappa.findPlayer(playerA)));
         //MAIN ARMI
         
+        
+         */
         
     
     

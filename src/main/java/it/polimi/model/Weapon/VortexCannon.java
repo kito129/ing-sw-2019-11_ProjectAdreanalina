@@ -1,7 +1,9 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.ModelException.NotValidSquareException;
 import it.polimi.model.Exception.NotValidDistance;
+import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class VortexCannon extends WeaponCard {
         return blackHoleCost;
     }
 
-    public void baseEffect(Map map,Square vortexSquare,Player currentPlayer,Player target1)throws NotVisibleTarget,NotValidDistance{
+    public void baseEffect(Map map,Square vortexSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance, NotValidInput, NotValidSquareException {
 
         Square currentPlayerSquare= map.findPlayer(currentPlayer);
         if((map.isVisible(currentPlayerSquare,vortexSquare))&&(map.distance(vortexSquare,currentPlayerSquare)>0)){
@@ -70,7 +72,7 @@ public class VortexCannon extends WeaponCard {
         }
     }
 
-    public void blackHoleEffect(Map map,Square vortexSquare,Player currentPlayer,ArrayList<Player> targetBlackHole) throws NotValidDistance {
+    public void blackHoleEffect(Map map,Square vortexSquare,Player currentPlayer,ArrayList<Player> targetBlackHole) throws NotValidDistance, NotValidInput, NotValidSquareException {
 
         Square targetSquare;
 

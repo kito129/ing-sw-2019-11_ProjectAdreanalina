@@ -1,11 +1,13 @@
 package it.polimi.model;
 
+import it.polimi.model.Exception.ModelException.NotValidSquareException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
 import it.polimi.model.Exception.NotInSameDirection;
 import it.polimi.model.Exception.NotValidDistance;
+import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
@@ -66,7 +68,7 @@ public class ActionModel {
      * @param targetSquare the target square to move
      * @throws RunActionMaxDistLimitException the run action max dist limit exception
      */
-    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException {
+    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException, NotValidInput, NotValidSquareException {
 
         if (map.distance(map.findPlayer(actualPlayer), targetSquare) < 4) {
 
@@ -87,7 +89,7 @@ public class ActionModel {
      * @throws CatchActionMaxDistLimitException the catch action max dist limit exception
      * @throws CatchActionFullObjException      the catch action full obj exception
      */
-    public void grabActionModel(Square targetSquare, int weaponIndex) throws CatchActionMaxDistLimitException, CatchActionFullObjException {
+    public void grabActionModel(Square targetSquare, int weaponIndex) throws CatchActionMaxDistLimitException, CatchActionFullObjException, NotValidInput, NotValidSquareException {
 
         //adrenalinic distance
         int maxDist;
@@ -150,7 +152,7 @@ public class ActionModel {
      * @throws NotInSameDirection Not in same direction
      * @throws NotValidDistance   Not valid distance
      */
-    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvailable, NotInSameDirection, NotValidDistance {
+    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvailable, NotInSameDirection, NotValidDistance, NotValidInput, NotValidSquareException {
 
         gameModel.setState(State.USEPOWERUP);
         newton.effect(gameModel.getMap(), targetSquare, targetPlayer);
@@ -164,7 +166,7 @@ public class ActionModel {
      * @param targetSquare the target square
      * @throws NoPowerUpAvailable the no power up avaible
      */
-    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvailable {
+    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvailable, NotValidInput, NotValidSquareException {
 
         gameModel.setState(State.USEPOWERUP);
         teleporter.effect(gameModel.getActualPlayer(), gameModel.getMap(), targetSquare);
@@ -206,7 +208,7 @@ public class ActionModel {
      * @param generationSquare the generation square
      * @param powerUpCard      the power up card to add to player
      */
-    public void respawnPlayer(Player player, Square generationSquare, PowerUpCard powerUpCard) {
+    public void respawnPlayer(Player player, Square generationSquare, PowerUpCard powerUpCard) throws NotValidSquareException {
 
         player.getPlayerBoard().resetDamage();
         player.setAlive(true);
@@ -285,12 +287,15 @@ public class ActionModel {
         //create temp variables
         PlayerBoard playerBoard = player.getPlayerBoard();
         ArrayList<PlayerScore> playerScores = new ArrayList<PlayerScore>();
+        
         ArrayList<EnumColorPlayer> playerColor = new ArrayList<EnumColorPlayer>(gameModel.getPlayerColor());
         
         //get color occurrence for all player in game
         for (EnumColorPlayer a : playerColor) {
             
-            playerScores.add( new PlayerScore(a,playerBoard.colorOccurrenceInDamages(a)));
+            if(playerBoard.colorOccurrenceInDamages(a)>0) {
+                playerScores.add(new PlayerScore(a, playerBoard.colorOccurrenceInDamages(a)));
+            }
         }
         
         //order in descending
@@ -342,34 +347,36 @@ public class ActionModel {
         
         //player point
         ArrayList<PlayerScore> playerPoint = new ArrayList<PlayerScore>();
-        
+        int temp=0;
         int pointTo=0;
         //create danno
         switch (playerBoard.getBoardValue()){
         case 8:
            pointTo =10;
+           temp=pointTo;
             for (EnumColorPlayer a : playerOrderDamage) {
         
                 //decrement point to ad to the a player
-                int temp = pointTo - 2;
+                temp-=2;
                 if (temp < 2) {
     
-                    pointTo = 1;
+                    temp = 1;
                 }
                 //add point if first blood
                 if (a == firstBlood) {
                     
                     temp++;
                 }
+                System.out.println("sono qui"+ temp);
                 playerPoint.add(new PlayerScore(a, temp));
             }
            
            break;
         case 6:
-           pointTo =8;
+            pointTo =8;
             for (EnumColorPlayer a : playerOrderDamage) {
-        
-                int temp = pointTo - 2;
+    
+                temp-=2;
                 if (temp < 2) {
             
                     pointTo = 1;
@@ -380,8 +387,8 @@ public class ActionModel {
         case 4:
             pointTo =6;
             for (EnumColorPlayer a : playerOrderDamage) {
-        
-                int temp = pointTo - 2;
+    
+                temp-=2;
                 if (temp < 2) {
             
                     pointTo = 1;
@@ -392,8 +399,8 @@ public class ActionModel {
         case 2:
             pointTo =4;
             for (EnumColorPlayer a : playerOrderDamage) {
-        
-                int temp = pointTo - 2;
+    
+                temp-=2;
                 if (temp < 2) {
             
                     pointTo = 1;
@@ -402,10 +409,10 @@ public class ActionModel {
             }
            break;
         case 1:
-            pointTo =1;
+            pointTo =2;
             for (EnumColorPlayer a : playerOrderDamage) {
         
-                int temp = pointTo - 2;
+                temp-=2;
                 if (temp < 2) {
             
                     pointTo = 1;

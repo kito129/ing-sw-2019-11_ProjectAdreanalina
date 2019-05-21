@@ -1,7 +1,9 @@
 package it.polimi.controller;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.ModelException.NotValidSquareException;
 import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
+import it.polimi.model.Exception.NotValidInput;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -90,14 +92,26 @@ public class ManagerController implements RemoteGameController {
                     } catch (NoPowerUpAvailable noPowerUpAvailable) {
     
                         //TODO
+                    } catch (NotValidInput notValidInput) {
+                        notValidInput.printStackTrace();
+                    } catch (NotValidSquareException e) {
+                        e.printStackTrace();
                     }
                     break;
                 case RUN:
                     //oggi
-                    actionController.runActionController(actionModel, view);
+                    try {
+                        actionController.runActionController(actionModel, view);
+                    } catch (NotValidSquareException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case GRAB:
-                    actionController.grabActionController(actionModel, view);
+                    try {
+                        actionController.grabActionController(actionModel, view);
+                    } catch (NotValidSquareException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case SHOOT:
                     //prendo le armi che ho, le mostro alla vieee che decide cosa usare

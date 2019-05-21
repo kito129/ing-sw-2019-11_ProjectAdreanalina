@@ -1,7 +1,9 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.ModelException.NotValidSquareException;
 import it.polimi.model.Exception.NotValidDistance;
+import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ public class GrenadeLauncher extends WeaponCard {
         }
     }
 
-    public void baseEffect(Map map,Player target1,Player currentPlayer,Square destSquare) throws NotVisibleTarget,NotValidDistance{
+    public void baseEffect(Map map,Player target1,Player currentPlayer,Square destSquare) throws NotVisibleTarget, NotValidDistance, NotValidInput, NotValidSquareException {
 
         Square squareOfTarget1Player = map.findPlayer(target1);
 
@@ -65,7 +67,7 @@ public class GrenadeLauncher extends WeaponCard {
     }
 
     // todo si dovrebbe poter usare questo metodo anche prima del movimento dell'effetto base.
-    public void extraGrenadeEffect(Map map, Player currentPlayer,Square targetSquare)throws NotVisibleTarget{
+    public void extraGrenadeEffect(Map map, Player currentPlayer,Square targetSquare) throws NotVisibleTarget, NotValidInput {
 
         Square squareOfCurrentPlayer =map.findPlayer(currentPlayer);
         ArrayList<Player> playersOnTargetSquare=map.playersOnSquare(targetSquare);

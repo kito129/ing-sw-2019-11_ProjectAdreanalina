@@ -1,5 +1,8 @@
 package it.polimi.model;
 
+import it.polimi.model.Exception.ModelException.NotValidSquareException;
+import it.polimi.model.Exception.NotValidInput;
+
 import java.util.ArrayList;
 
 /**
@@ -49,7 +52,7 @@ public class Map {
      * @param column column to search
      * @return the square with passe coordinates
      */
-    public Square getSquare (int row, int column) {
+    public Square getSquare (int row, int column) throws NotValidSquareException {
 
         for (Square s : squares) {
 
@@ -58,7 +61,8 @@ public class Map {
                 return s;
             }
         }
-        return null;
+        System.out.println("square non trovata");
+        throw new NotValidSquareException();
     }
     
     /**
@@ -67,7 +71,7 @@ public class Map {
      * @param player the player
      * @return square where are positioned the player
      */
-    public Square findPlayer(Player player) {
+    public Square findPlayer(Player player) throws NotValidInput {
 
         for (Square s : squares) {
 
@@ -76,7 +80,7 @@ public class Map {
                 return s;
             }
         }
-        return null;
+        throw new NotValidInput();
     }
     
     /**
@@ -85,7 +89,7 @@ public class Map {
      * @param s square where search player
      * @return a list of player in a square
      */
-    public ArrayList<Player> playersOnSquare(Square s) {
+    public ArrayList<Player> playersOnSquare(Square s) throws NotValidInput {
 
         for (Square a:squares){
 
@@ -93,7 +97,7 @@ public class Map {
                 return s.getPlayers();
             }
         }
-        return null;
+        throw new NotValidInput();
     }
     
     /**
@@ -157,10 +161,21 @@ public class Map {
         int curC = cInit;
         int tempPath=0;
         ArrayList<Integer> path =new ArrayList<>();
-
-        Square curSquare = getSquare(currR, curC);
-       // System.out.println("curr square : " + curSquare.toString());
-        Square destSquare = getSquare(rDest, cDest);
+    
+        Square curSquare = null;
+        try {
+            curSquare = getSquare(currR, curC);
+        } catch (NotValidSquareException e) {
+            return -1;
+        }
+        // System.out.println("curr square : " + curSquare.toString());
+        Square destSquare = null;
+        try {
+            destSquare = getSquare(rDest, cDest);
+        } catch (NotValidSquareException e) {
+            return -1;
+        }
+        
         //System.out.println("search square : " + destSquare.toString());
         ArrayList<Square> link = curSquare.getLink();
         
@@ -231,19 +246,23 @@ public class Map {
      * @return true if player can see room of the color passed
      */
     public boolean isVisibleRoom(Player player, EnumColorSquare colorSquare) {
-
-        if(this.findPlayer(player).getColor()==colorSquare){
-
-            return true;
-        } else {
-
-            for (Square a:this.findPlayer(player).getLink()){
-
-                if(a.getColor()==colorSquare){
-
-                    return true;
+    
+        try {
+            if(this.findPlayer(player).getColor()==colorSquare){
+    
+                return true;
+            } else {
+    
+                for (Square a:this.findPlayer(player).getLink()){
+    
+                    if(a.getColor()==colorSquare){
+    
+                        return true;
+                    }
                 }
             }
+        } catch (NotValidInput notValidInput) {
+            return false;
         }
         return false;
     }
@@ -256,8 +275,14 @@ public class Map {
      * @return true if PlayerA see PlayerB
      */
     public boolean isVisible(Player a, Player b) {
-        
-        return isVisible(getSquare(a.getRow(),a.getColumn()), getSquare(b.getColumn(),b.getRow()));
+    
+        try {
+            return isVisible(findPlayer(a),findPlayer(b));
+        } catch (NotValidInput notValidInput) {
+            System.out.println("is visible down");
+            return false;
+            
+        }
     }
     
     /**
@@ -283,20 +308,31 @@ public class Map {
      * @return true if A(c0,r0) see B(c1,r1)
      */
     public boolean isVisible(int r0, int c0,int r1, int c1) {
-
-        Square currSquare= getSquare(r0,c0);
-        Square destSquare= getSquare(r1,c1);
-        if(currSquare.getColor()==destSquare.getColor()){
-
-            return true;
-        }else {
-
-            for (Square a:currSquare.getLink()){
-
-                if(a.getColor()==destSquare.getColor()) return true;
+        
+        try {
+            Square currSquare = getSquare(r0,c0);
+            Square destSquare = getSquare(r1,c1);
+    
+            if(currSquare.getColor()==destSquare.getColor()){
+        
+                return true;
+            }else {
+        
+                for (Square a:currSquare.getLink()){
+            
+                    if(a.getColor()==destSquare.getColor()) return true;
+                }
             }
+            return false;
+            
+        } catch (NotValidSquareException e) {
+            return false;
         }
-        return false;
+        
+        
+        
+        
+        
     }
     
     /**
@@ -305,7 +341,7 @@ public class Map {
      * @param player the player to move
      * @param square the square where to move
      */
-    public void movePlayer(Player player, Square square) {
+    public void movePlayer(Player player, Square square) throws NotValidSquareException, NotValidInput {
   
     removePlayerFromSquare(player);
     addPlayerOnSquare(square,player);
@@ -317,7 +353,7 @@ public class Map {
      * @param square the square where add
      * @param player the player to add
      */
-    public void addPlayerOnSquare(Square square, Player player) {
+    public void addPlayerOnSquare(Square square, Player player) throws NotValidSquareException {
 
         getSquare(square.getRow(),square.getColumn()).addPlayer(player);
     }
@@ -327,7 +363,7 @@ public class Map {
      *
      * @param player the player to remove
      */
-    public void removePlayerFromSquare(Player player) {
+    public void removePlayerFromSquare(Player player) throws NotValidInput, NotValidSquareException {
 
         getSquare(findPlayer(player).getRow(),findPlayer(player).getColumn()).removePlayer(player);
     }
@@ -341,7 +377,7 @@ public class Map {
      * @param c Player c
      * @return true if PlayerA is in the same cardinal direction of PlayerB, and PlayerC
      */
-    public boolean sameDirection(Player a, Player b,Player c){
+    public boolean sameDirection(Player a, Player b,Player c) throws NotValidInput {
         
         return sameDirection(findPlayer(a),findPlayer(b),findPlayer(c));
     }
@@ -379,8 +415,14 @@ public class Map {
      * @return tru if if Player A is in the same Square of the Player B
      */
     public boolean isInMySquare(Player actualPlayer,Player otherPlayer){
-
-        return this.playersOnSquare(this.getSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
+    
+        try {
+            return this.playersOnSquare(this.getSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
+        } catch (NotValidInput notValidInput) {
+            return false;
+        } catch (NotValidSquareException e) {
+            return false;
+        }
     }
     
     /**
@@ -493,7 +535,6 @@ public class Map {
             }
         }
        return false;
-       
     }
     
     
@@ -537,4 +578,9 @@ public class Map {
         return false;
     }
     
+    public void print(){
+        for (Square a: squares){
+            System.out.println(a.toString());
+        }
+    }
 }

@@ -451,13 +451,7 @@ public class PlayerBoard{
      */
     public Integer getFirstOccurrenceInDamage (EnumColorPlayer color){
 
-        for (int i = 0; i < damages.size(); i++) {
-            EnumColorPlayer a = damages.get(i);
-            if (a == color) {
-                return i;
-            }
-        }
-        return null;
+        return damages.indexOf(color);
     }
 
 

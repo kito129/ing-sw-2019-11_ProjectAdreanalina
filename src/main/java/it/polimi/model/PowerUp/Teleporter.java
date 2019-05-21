@@ -1,5 +1,7 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
+import it.polimi.model.Exception.ModelException.NotValidSquareException;
+import it.polimi.model.Exception.NotValidInput;
 
 /**
  * The poweup Teleporter.
@@ -23,7 +25,7 @@ public class Teleporter extends PowerUpCard {
      * @param map           the map of the game.
      * @param destSquare    the square where the player wants to go.
      */
-    public void effect(Player currentPlayer, Map map, Square destSquare) {
+    public void effect(Player currentPlayer, Map map, Square destSquare) throws NotValidInput, NotValidSquareException {
 
         map.movePlayer(currentPlayer, destSquare);
     }

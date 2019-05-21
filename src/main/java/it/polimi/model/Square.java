@@ -166,7 +166,7 @@ public class Square{
     
     @Override
     public String toString() {
-        return ("("+getRow() +"," +getColumn()+ ","+ isVisited() +")");
+        return ("("+getRow() +"," +getColumn()+ ","+ getColor().toString() + getPlayers().toString() +")");
     }
 
 }

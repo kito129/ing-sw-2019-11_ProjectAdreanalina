@@ -5,6 +5,7 @@ import it.polimi.model.*;
 //chiedere perche devo importare tutto
 import it.polimi.model.Exception.*;
 import it.polimi.model.Exception.ModelException.NotValidAmmoException;
+import it.polimi.model.Exception.ModelException.NotValidSquareException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
 import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
@@ -31,7 +32,7 @@ public class ActionController {
      *
      * @param actionModel the action model
      */
-    public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException {
+    public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException, NotValidSquareException {
         
         //take necessary
         Map map= actionModel.getGameModel().getMap();
@@ -47,6 +48,8 @@ public class ActionController {
              } catch (RunActionMaxDistLimitException e) {
                 //print error or choose another action
                  actionModel.getGameModel().setState(State.ERROR);
+             } catch (NotValidInput notValidInput) {
+                 notValidInput.printStackTrace();
              }
          }
 
@@ -58,7 +61,7 @@ public class ActionController {
      *
      * @param actionModel the action model
      */
-    public void grabActionController (ActionModel actionModel,RemoteView view) throws RemoteException {
+    public void grabActionController (ActionModel actionModel,RemoteView view) throws RemoteException, NotValidSquareException {
     
         //take necessary
         Map map =actionModel.getGameModel().getMap();
@@ -89,6 +92,8 @@ public class ActionController {
         
             } catch (CatchActionFullObjException e) {
         
+            } catch (NotValidInput notValidInput) {
+            
             }
         }else  {
             actionModel.getGameModel().setState(State.ERROR);
@@ -102,7 +107,7 @@ public class ActionController {
      * @param powerUpCard the power up card
      * @throws NoPowerUpAvailable  no power up available
      */
-    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable {
+    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable, NotValidInput, NotValidSquareException {
 
         //NEWTON
         if (powerUpCard.getClass().equals(Newton.class)) {
@@ -364,7 +369,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon){
+    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon) throws NotValidInput {
 
         Map map=new Map();
         Player currentPlayer= new Player();
@@ -467,7 +472,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void TractorBeam(GameModel gameModel, TractorBeam weapon){
+    public void TractorBeam(GameModel gameModel, TractorBeam weapon) throws NotValidInput, NotValidSquareException {
 
         Square destSquareBase=new Square();
         Player targetBaseOrPunisher=new Player();
@@ -572,7 +577,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void PlasmaGun (GameModel gameModel,PlasmaGun weapon){
+    public void PlasmaGun (GameModel gameModel,PlasmaGun weapon) throws NotValidInput, NotValidSquareException {
 
         Player targetBase=new Player();
         Player currentPlayer=new Player();
@@ -642,7 +647,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void VortexCannon ( GameModel gameModel,VortexCannon weapon) {
+    public void VortexCannon ( GameModel gameModel,VortexCannon weapon) throws NotValidSquareException, NotValidInput {
 
         Player currentPlayer = new Player();
         Player targetBase = new Player();
@@ -713,7 +718,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void Furnace(GameModel gameModel,Furnace weapon){
+    public void Furnace(GameModel gameModel,Furnace weapon) throws NotValidInput {
 
         EnumColorSquare roomTarget=null;
         Map map=new Map();

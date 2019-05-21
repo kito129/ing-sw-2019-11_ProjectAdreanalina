@@ -1,7 +1,9 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.ModelException.NotValidSquareException;
 import it.polimi.model.Exception.NotValidDistance;
+import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
@@ -51,7 +53,7 @@ public class RocketLauncher extends WeaponCard {
     // todo capire come gestire lo spostamento. dell'effetto base.
     // todo farei un metodo a parte per lo spostamento
 
-    public void baseEffect(Map map, Player target1, Player currentPlayer) throws NotVisibleTarget, NotValidDistance {
+    public void baseEffect(Map map, Player target1, Player currentPlayer) throws NotVisibleTarget, NotValidDistance, NotValidInput {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         Square squareOfTarget1Player = map.findPlayer(target1);
@@ -72,7 +74,7 @@ public class RocketLauncher extends WeaponCard {
     }
 
     //todo puo essere usato prima dell'effetto base o dopo
-    public void rocketJumpEffect(Map map, Player currentPlayer,Square destSquare)throws NotValidDistance {
+    public void rocketJumpEffect(Map map, Player currentPlayer,Square destSquare) throws NotValidDistance, NotValidInput, NotValidSquareException {
 
         Square squareOfCurrentPlayer=map.findPlayer(currentPlayer);
 
