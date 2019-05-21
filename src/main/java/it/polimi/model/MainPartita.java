@@ -55,6 +55,21 @@ public class MainPartita {
         } catch (NotValidSquareException e) {
             System.out.println("error");
         }
+        try {
+            map.addPlayerOnSquare(map.getSquare(1,2),player3);
+        } catch (NotValidSquareException e) {
+            System.out.println("error");
+        }
+        try {
+            map.addPlayerOnSquare(map.getSquare(1,2),player4);
+        } catch (NotValidSquareException e) {
+            System.out.println("error");
+        }
+        try {
+            map.addPlayerOnSquare(map.getSquare(1,3),player5);
+        } catch (NotValidSquareException e) {
+            System.out.println("error");
+        }
     
         for(Player p:players){
         
@@ -87,7 +102,7 @@ public class MainPartita {
             System.out.println("non visibile");
         }
         //spara
-        
+    
         try{
         
             lockRifle.baseEffect(map,player1,player2);
@@ -96,28 +111,35 @@ public class MainPartita {
         
             System.out.println("non visibile");
         }
-        //spara
-        
-        try{
-        
-            lockRifle.baseEffect(map,player1,player2);
-        
-        }catch(NotVisibleTarget notVisibleTarget){
-        
-            System.out.println("non visibile");
-        }
-        //spara
+    
+    
+        //spara con altro player
+        LockRifle lockRifle1=new LockRifle();
        
+    
         try{
         
-            lockRifle.baseEffect(map,player1,player2);
+            lockRifle.secondLockEffect(map,player4,player2);
+        
+        }catch(NotVisibleTarget notVisibleTarget) {
+    
+            System.out.println("non visibile");
+        }
+    
+    
+        try{
+        
+            lockRifle.baseEffect(map,player4,player2);
         
         }catch(NotVisibleTarget notVisibleTarget){
         
             System.out.println("non visibile");
         }
-        
-        
+    
+    
+    
+    
+    
         //stampa player
         for(Player p:players){
         

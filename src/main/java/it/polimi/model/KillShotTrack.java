@@ -60,7 +60,7 @@ public class KillShotTrack{
                 
                 a.setSkull(false);
                 a.setMark1(color.get(0));
-                if(color.get(1)!=null){
+                if(color.size()>1){
                     
                     a.setMark2((color.get(1)));
                 }

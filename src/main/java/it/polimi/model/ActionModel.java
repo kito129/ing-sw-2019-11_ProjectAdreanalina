@@ -333,7 +333,14 @@ public class ActionModel {
      */
     public void scoringPlayerBoard(Player player){
         
+        /*
+        if(player.isAlive()){
+            return;
+        }
+        
+         */
         PlayerBoard playerBoard = player.getPlayerBoard();
+        
         
         //player color in order by occurrence (tie calculated)
         ArrayList<EnumColorPlayer> playerOrderDamage = new ArrayList<>(damagesOrderColor(player));
@@ -342,7 +349,10 @@ public class ActionModel {
         //death
         EnumColorPlayer death = playerBoard.getDamages().get(10);
         //overkill
-        EnumColorPlayer overkill= playerBoard.getDamages().get(11);
+        EnumColorPlayer overkill = null;
+        if(playerBoard.getDamages().size()==12) {
+            overkill = playerBoard.getDamages().get(11);
+        }
         //TODO double kill
         
         //player point
