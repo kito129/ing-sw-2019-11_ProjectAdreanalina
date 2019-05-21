@@ -25,7 +25,7 @@ public class PrintSquare implements Serializable {
      * @param normalSquare   the square selected
      */
     public static void printNormalSquare(NormalSquare normalSquare) {
-        
+
         System.out.println("ROW: " +normalSquare.getRow());
         System.out.println("COLUMN: " +normalSquare.getColumn());
 
