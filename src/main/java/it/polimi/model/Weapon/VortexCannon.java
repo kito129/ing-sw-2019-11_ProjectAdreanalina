@@ -40,7 +40,7 @@ public class VortexCannon extends WeaponCard {
         return blackHoleCost;
     }
 
-    public void baseEffect(Map map,Square vortexSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance, NotValidInput, MapException {
+    public void baseEffect(Map map,Square vortexSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance,MapException {
 
         Square currentPlayerSquare= map.findPlayer(currentPlayer);
         if((map.isVisible(currentPlayerSquare,vortexSquare))&&(map.distance(vortexSquare,currentPlayerSquare)>0)){
@@ -66,13 +66,13 @@ public class VortexCannon extends WeaponCard {
         }else if(!(map.isVisible(currentPlayerSquare,vortexSquare))){
 
             throw new NotVisibleTarget();
-        }else if(map.distance(currentPlayerSquare,vortexSquare)==0){
+        }else if(!(map.distance(currentPlayerSquare,vortexSquare)>0)){
 
             throw new NotValidDistance();
         }
     }
 
-    public void blackHoleEffect(Map map,Square vortexSquare,Player currentPlayer,ArrayList<Player> targetBlackHole) throws NotValidDistance, NotValidInput, MapException {
+    public void blackHoleEffect(Map map,Square vortexSquare,Player currentPlayer,ArrayList<Player> targetBlackHole) throws NotValidDistance,MapException {
 
         Square targetSquare;
 
@@ -80,7 +80,7 @@ public class VortexCannon extends WeaponCard {
 
             targetSquare=map.findPlayer(p);
 
-            if(map.distance(targetSquare,vortexSquare)>1){
+            if((map.distance(targetSquare,vortexSquare)>1) && (map.distance(targetSquare,vortexSquare)==-1)){
 
                 throw new NotValidDistance();
             }
