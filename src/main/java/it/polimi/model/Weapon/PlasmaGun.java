@@ -61,10 +61,10 @@ public class PlasmaGun extends WeaponCard {
         }
     }
 
-    public void phaseGlideEffect(Map map, Square destSquare, Player currentPlayer) throws NotValidDistance, NotValidInput, MapException, NotValidSquareException {
+    public void phaseGlideEffect(Map map, Square destSquare, Player currentPlayer) throws NotValidDistance, MapException {
 
         Square currentPlayerSquare=map.findPlayer(currentPlayer);
-        if(map.distance(destSquare,currentPlayerSquare)<3 && map.distance(destSquare,currentPlayerSquare)>0){
+        if(map.distance(destSquare,currentPlayerSquare)==1 && map.distance(destSquare,currentPlayerSquare)==2){
 
             map.movePlayer(currentPlayer,destSquare);
         }else{
