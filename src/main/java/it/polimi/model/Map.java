@@ -93,7 +93,7 @@ public class Map {
 
         for (Square a:squares){
 
-            if(a.equals(s)) {
+            if(a==s) {
                 return s.getPlayers();
             }
         }
@@ -137,7 +137,7 @@ public class Map {
      * @param dist recursive dist in this pass of algorithm
      * @return minimum distance between A and B
      */
-    public int distance(Square a, Square b, int dist){
+    private int distance(Square a, Square b, int dist){
         if(a.getRow()==b.getRow() && a.getColumn()==b.getColumn()) {
             return 0;
         }else
@@ -154,7 +154,7 @@ public class Map {
      * @param dist recursive dist in this pass of algorithm
      * @return minimum distance from A(rInit,cInit) to B(rDest,cDest)
      */
-    public int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
+    private int distance(int rInit, int cInit, int rDest, int cDest, int dist) {
         
         int distance = dist;
         int currR = rInit;
@@ -377,9 +377,13 @@ public class Map {
      * @param c Player c
      * @return true if PlayerA is in the same cardinal direction of PlayerB, and PlayerC
      */
-    public boolean sameDirection(Player a, Player b,Player c) throws NotValidInput {
-        
-        return sameDirection(findPlayer(a),findPlayer(b),findPlayer(c));
+    public boolean sameDirection(Player a, Player b,Player c){
+    
+        try {
+            return sameDirection(findPlayer(a),findPlayer(b),findPlayer(c));
+        } catch (NotValidInput notValidInput) {
+            return false;
+        }
     }
     
     /**

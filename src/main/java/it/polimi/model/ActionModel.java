@@ -232,6 +232,12 @@ public class ActionModel {
             return (this.getValue()-o.getValue());
         }
     
+        @Override
+        public String toString () {
+        
+            return (this.getValue() + this.getColor().toString());
+        }
+    
         /**
          * Instantiates a new Player score.
          *
@@ -300,6 +306,7 @@ public class ActionModel {
         
         //order in descending
         Collections.sort(playerScores);
+        Collections.reverse(playerScores);
         //System.out.println(playerScores);
         
         //calculate the tie
@@ -357,6 +364,9 @@ public class ActionModel {
         
         //player point
         ArrayList<PlayerScore> playerPoint = new ArrayList<PlayerScore>();
+        
+        System.out.println(playerPoint);
+        
         int temp=0;
         int pointTo=0;
         //create danno
@@ -377,7 +387,6 @@ public class ActionModel {
                     
                     temp++;
                 }
-                System.out.println("sono qui"+ temp);
                 playerPoint.add(new PlayerScore(a, temp));
             }
            
@@ -432,6 +441,9 @@ public class ActionModel {
             break;
            
         }
+        for (PlayerScore a:playerPoint){
+            a.toString();
+        }
         
         //share point to player in player point
         for (PlayerScore a:playerPoint){
@@ -455,6 +467,7 @@ public class ActionModel {
             
             //update the killshot track point
             gameModel.getKillShotTrack().updateTrack(toKillShot);
+            playerBoard.resetDamage();
             playerBoard.decreaseBoardValue();
             
         }

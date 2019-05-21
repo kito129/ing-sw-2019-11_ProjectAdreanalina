@@ -2,6 +2,7 @@ package it.polimi.model;
 
 
 import it.polimi.model.Exception.ModelException.NotValidSquareException;
+import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
 import it.polimi.model.Weapon.LockRifle;
 import sun.rmi.runtime.Log;
@@ -91,6 +92,12 @@ public class MainPartita {
         
             System.out.println("non visibile");
         }
+    
+        //stampa player
+        for(Player p:players){
+        
+            p.stampa();
+        }
         //spara
         
         try{
@@ -101,6 +108,12 @@ public class MainPartita {
         
             System.out.println("non visibile");
         }
+    
+        //stampa player
+        for(Player p:players){
+        
+            p.stampa();
+        }
         //spara
     
         try{
@@ -110,6 +123,11 @@ public class MainPartita {
         }catch(NotVisibleTarget notVisibleTarget){
         
             System.out.println("non visibile");
+        }
+        //stampa player
+        for(Player p:players){
+        
+            p.stampa();
         }
     
     
@@ -125,7 +143,17 @@ public class MainPartita {
     
             System.out.println("non visibile");
         }
+        //stampa player
+        for(Player p:players){
+        
+            p.stampa();
+        }
     
+        //stampa player
+        for(Player p:players){
+        
+            p.stampa();
+        }
     
         try{
         
@@ -153,7 +181,20 @@ public class MainPartita {
         
             p.stampa();
         }
-
+    
+        try {
+            map.movePlayer(player4,map.getSquare(2,1));
+        } catch (NotValidSquareException e) {
+            e.printStackTrace();
+        } catch (NotValidInput notValidInput) {
+            notValidInput.printStackTrace();
+        }
+    
+        //stampa player
+        for(Player p:players){
+        
+            p.stampa();
+        }
     }
 
 
