@@ -1,6 +1,7 @@
 package it.polimi.view.cli;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 
 import java.io.Serializable;
 
@@ -52,7 +53,11 @@ public class PrintMenu implements Serializable {
                 //PrintPlayerBoard.print();
                 break;
             case 9:
-                GenerationSquare gs =(GenerationSquare) gameModel.getMap().getGenerationSquare(EnumColorSquare.BLU);
+                try {
+                    GenerationSquare gs =(GenerationSquare) gameModel.getMap().getGenerationSquare(EnumColorSquare.BLU);
+                } catch (MapException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 10:
                 //TODO

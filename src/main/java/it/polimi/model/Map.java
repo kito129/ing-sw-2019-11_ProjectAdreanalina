@@ -394,7 +394,7 @@ public class Map {
      * @return true if A is in the same cardinal direction of B, and PlayerC.
      */
     public boolean sameDirection(Square a, Square b, Square c){
-
+        //TODO SISTEMARE QUI
         return (((a.getRow() == b.getRow()) && (b.getRow() == c.getRow())) || ((a.getColumn() == b.getColumn()) && (b.getColumn() == c.getColumn())));
     }
     
@@ -406,7 +406,7 @@ public class Map {
      * @return true if A is in the same cardinal direction of B
      */
     public boolean sameDirection(Square a, Square b){
-        
+        //TODO SISTEMARE QUI
         return ((a.getRow() == b.getRow()) || ((a.getColumn() == b.getColumn())));
     }
     
@@ -546,7 +546,7 @@ public class Map {
      * @return true if this square is Generation Square
      */
     public boolean isGenerationSquare(Square square){
-    
+        //TODO SISTEMARE
         return square.getClass().equals(GenerationSquare.class);
     }
     
@@ -556,14 +556,14 @@ public class Map {
      * @param color the color to search
      * @return the generation square of this color
      */
-    public Square getGenerationSquare(EnumColorSquare color) {
+    public Square getGenerationSquare(EnumColorSquare color) throws MapException {
     
         for (Square a : squares) {
             if (this.isGenerationSquare(a) && (a.getColor() == color)) {
                 return a;
             }
         }
-        return null;
+        throw new MapException();
     }
     
     /**
