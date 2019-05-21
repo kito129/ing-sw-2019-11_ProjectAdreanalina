@@ -91,7 +91,7 @@ public class Map {
      * @param s square where search player
      * @return a list of player in a square
      */
-    public ArrayList<Player> playersOnSquare(Square s) throws NotValidInput {
+    public ArrayList<Player> playersOnSquare(Square s){
 
         for (Square a:squares){
 
@@ -99,7 +99,7 @@ public class Map {
                 return s.getPlayers();
             }
         }
-        throw new NotValidInput();
+        return new ArrayList<Player>();
     }
     
     /**
@@ -421,8 +421,6 @@ public class Map {
     
         try {
             return this.playersOnSquare(this.getSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
-        } catch (NotValidInput notValidInput) {
-            return false;
         } catch (MapException e) {
             return false;
         }
