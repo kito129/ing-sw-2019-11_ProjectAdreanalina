@@ -91,7 +91,6 @@ public class PrintMap implements Serializable {
                 }
             }
         }
-
         return map;
     }
 
@@ -104,7 +103,7 @@ public class PrintMap implements Serializable {
         String[][] map = getMap(squares);
 
         System.out.println("    ");
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i <= 3; i++){
 
             System.out.print(i + "   ");
         }
