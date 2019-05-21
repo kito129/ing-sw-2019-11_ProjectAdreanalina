@@ -22,10 +22,9 @@ public class ActionModel {
     public ActionModel(GameModel gameModel){
 
         this.gameModel=gameModel;
+        this.map=gameModel.getMap();
+        this.actualPlayer=gameModel.getActualPlayer();
     }
-
-    
-
 
     
     /**
@@ -176,7 +175,8 @@ public class ActionModel {
     public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer)  {
 
         gameModel.setState(State.USEPOWERUP);
-        targetingScope.effect(gameModel.getActualPlayer(), targetPlayer);
+        System.out.println(gameModel.getActualPlayer().toString());
+        targetingScope.effect(gameModel.getActualPlayer(),targetPlayer);
 
     }
     

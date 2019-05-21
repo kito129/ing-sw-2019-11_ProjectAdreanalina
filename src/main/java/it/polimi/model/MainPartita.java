@@ -1,10 +1,8 @@
 package it.polimi.model;
 
 
-import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotValidSquareException;
-import it.polimi.model.Exception.NotVisibleTarget;
+import it.polimi.controller.ActionController;
+import it.polimi.model.Exception.*;
 import it.polimi.model.Weapon.LockRifle;
 
 
@@ -161,8 +159,51 @@ public class MainPartita {
 
             p.stampa();
         }
-
-
+        
+        actionModel.scoringPlayerBoard(player2);
+        //stampa player
+        for (Player p : players) {
+        
+            p.stampa();
+        }
+        
+        System.out.println("\n\nFINE\n\n");
+        
+        
+        
+        
+        gameModel.setActualPlayer(player1);
+        ActionModel actionModel1 = new ActionModel(gameModel);
+        ActionController actionController = new ActionController();
+        
+        PowerUpDeck powerUpDeck = new PowerUpDeck();
+        PowerUpCard powerUp= powerUpDeck.drawnPowerUpCard();
+        player1.getPlayerBoard().addPowerUp(powerUp);
+        try {
+            map.movePlayer(player4,map.getSquare(0,2));
+        } catch (MapException e) {
+            e.printStackTrace();
+        }
+    
+        try {
+            actionController.usePowerUpController(actionModel,powerUp);
+        } catch (NoPowerUpAvailable noPowerUpAvailable) {
+            noPowerUpAvailable.printStackTrace();
+        } catch (NotValidInput notValidInput) {
+            notValidInput.printStackTrace();
+        } catch (MapException e) {
+            e.printStackTrace();
+        }
+    
+        
+        //stampa player
+        for (Player p : players) {
+        
+            p.toString();
+            p.stampa();
+        }
+    
+    
     }
 }
 

@@ -25,6 +25,8 @@ public class TargetingScope extends PowerUpCard {
     public void effect(Player currentPlayer, Player target){
 
         target.singleDamage(currentPlayer.getColor());
+        System.out.println("danneggio lui:");
+        target.stampa();
     }
 
 

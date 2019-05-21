@@ -25,7 +25,7 @@ public class Teleporter extends PowerUpCard {
      * @param map           the map of the game.
      * @param destSquare    the square where the player wants to go.
      */
-    public void effect(Player currentPlayer, Map map, Square destSquare) throws NotValidInput, MapException {
+    public void effect(Player currentPlayer, Map map, Square destSquare) throws  MapException {
 
         map.movePlayer(currentPlayer, destSquare);
     }

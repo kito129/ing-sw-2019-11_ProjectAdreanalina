@@ -105,14 +105,15 @@ public class ActionController {
     public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable, NotValidInput, MapException {
 
         //NEWTON
-        if (powerUpCard.getClass().equals(Newton.class)) {
+        if (Newton.class.equals(powerUpCard.getClass())) {
 
             //chiedi i parametri di newton
-            Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
-            Square targetSquare = new Square(1,1,EnumColorSquare.RED);
+            Player targetPlayer = actionModel.getGameModel().getMap().playersOnSquare(actionModel.getGameModel().getMap().getSquare(1,2)).get(0);
+            Square targetSquare = new Square(1,1,EnumColorSquare.PINK);
             try {
 
                 actionModel.usePowerUpNewton((Newton)powerUpCard,targetPlayer, targetSquare);
+                System.out.println("NETWON MUOVO SIMO IN 1,1");
             } catch (NotInSameDirection notInSameDirection) {
 
                 //TODO
@@ -126,11 +127,13 @@ public class ActionController {
             //TAGBACK GRANATE
         } else if (powerUpCard.getClass().equals(TagBackGrenade.class)) {
 
-            //chiedi i parametri di teleporter
-            Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
+            //chiedi i parametri di TAGBACK GRANATE
+            Player targetPlayer = actionModel.getGameModel().getMap().playersOnSquare(actionModel.getGameModel().getMap().getSquare(1,2)).get(0);
+            targetPlayer.stampa();
             try {
 
                 actionModel.usePowerUpTagBackGrenade((TagBackGrenade) powerUpCard,targetPlayer );
+                System.out.println("TAG BACKfaccio danno di uno ad andre con colre di simo");
             } catch (NotVisibleTarget notVisibleTarget) {
                 notVisibleTarget.printStackTrace();
             }
@@ -139,16 +142,18 @@ public class ActionController {
         } else if (powerUpCard.getClass().equals(Teleporter.class)) {
 
             //chiedi i parametri di teleporter
-            Square targetSquare = new Square(1,1,EnumColorSquare.RED);
+            Square targetSquare = new Square(2,3,EnumColorSquare.YELLOW);
             actionModel.usePowerUpTeleporter((Teleporter) powerUpCard, targetSquare);
+            System.out.println("TELPORTTE muovo adnre in 2,3");
 
         //TARGETING SCOPE
         } else if (powerUpCard.getClass().equals(TargetingScope.class)) {
 
             //chiedi i parametri di TargetingScope
             //gestione di quando farlo verifica sul danno
-            Player targetPlayer = new Player(1,"marco", EnumColorPlayer.BLU);
+            Player targetPlayer = actionModel.getGameModel().getMap().playersOnSquare(actionModel.getGameModel().getMap().getSquare(1,3)).get(0);
             actionModel.usePowerUpTargetingScope((TargetingScope) powerUpCard, targetPlayer);
+            System.out.println("TARGETIN SCOPE faccio danno di uno a teo");
 
         }
     }

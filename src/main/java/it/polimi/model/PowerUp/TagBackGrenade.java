@@ -22,14 +22,16 @@ public class TagBackGrenade extends PowerUpCard {
      *
      * @param map the map of the game.
      * @param currentPlayer the player who did damage.
-     * @param damagedPlayer the player who made the mark.
+     * @param targetPlayer the player who made the mark.
      * @throws NotVisibleTarget if the damaged player can't see the current player who did the damage
      */
-    public void effect(Map map, Player currentPlayer, Player damagedPlayer) throws NotVisibleTarget {
+    public void effect(Map map, Player currentPlayer, Player targetPlayer) throws NotVisibleTarget {
 
-        if (map.isVisible(currentPlayer, damagedPlayer)) {
+        if (map.isVisible(currentPlayer, targetPlayer)) {
 
-            currentPlayer.singleMark(damagedPlayer.getColor());
+            currentPlayer.singleDamage(targetPlayer.getColor());
+            System.out.println("danneggio adnre con mrchio di ");
+            currentPlayer.stampa();
         } else {
 
             throw new NotVisibleTarget();
