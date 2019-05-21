@@ -455,6 +455,7 @@ public class ActionModel {
             
             //update the killshot track point
             gameModel.getKillShotTrack().updateTrack(toKillShot);
+            playerBoard.decreaseBoardValue();
             
         }
     }
