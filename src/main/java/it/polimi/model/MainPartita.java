@@ -185,8 +185,6 @@ public class MainPartita {
     
         try {
             map.movePlayer(player4,map.getSquare(2,1));
-        } catch (NotValidInput notValidInput) {
-            notValidInput.printStackTrace();
         } catch (MapException e) {
             e.printStackTrace();
         }
