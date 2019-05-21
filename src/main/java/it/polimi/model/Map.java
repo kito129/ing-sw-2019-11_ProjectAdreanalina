@@ -1,6 +1,7 @@
 package it.polimi.model;
 
 
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotValidSquareException;
 
@@ -53,7 +54,7 @@ public class Map {
      * @param column column to search
      * @return the square with passe coordinates
      */
-    public Square getSquare (int row, int column) throws NotValidSquareException {
+    public Square getSquare (int row, int column) throws  MapException {
 
         for (Square s : squares) {
 
@@ -63,7 +64,7 @@ public class Map {
             }
         }
         System.out.println("square non trovata");
-        throw new NotValidSquareException();
+        throw new MapException();
     }
     
     /**
@@ -72,7 +73,7 @@ public class Map {
      * @param player the player
      * @return square where are positioned the player
      */
-    public Square findPlayer(Player player) throws NotValidInput {
+    public Square findPlayer(Player player) throws MapException {
 
         for (Square s : squares) {
 
@@ -81,7 +82,7 @@ public class Map {
                 return s;
             }
         }
-        throw new NotValidInput();
+        throw new MapException();
     }
     
     /**
@@ -166,17 +167,17 @@ public class Map {
         Square curSquare = null;
         try {
             curSquare = getSquare(currR, curC);
-        } catch (NotValidSquareException e) {
+        } catch (MapException e) {
             return -1;
         }
         // System.out.println("curr square : " + curSquare.toString());
         Square destSquare = null;
         try {
             destSquare = getSquare(rDest, cDest);
-        } catch (NotValidSquareException e) {
+        } catch (MapException e) {
             return -1;
         }
-        
+    
         //System.out.println("search square : " + destSquare.toString());
         ArrayList<Square> link = curSquare.getLink();
         
@@ -262,7 +263,7 @@ public class Map {
                     }
                 }
             }
-        } catch (NotValidInput notValidInput) {
+        } catch (MapException e) {
             return false;
         }
         return false;
@@ -279,7 +280,7 @@ public class Map {
     
         try {
             return isVisible(findPlayer(a),findPlayer(b));
-        } catch (NotValidInput notValidInput) {
+        } catch (MapException e) {
             System.out.println("is visible down");
             return false;
             
@@ -326,14 +327,11 @@ public class Map {
             }
             return false;
             
-        } catch (NotValidSquareException e) {
+        } catch (MapException e) {
             return false;
         }
-        
-        
-        
-        
-        
+    
+    
     }
     
     /**
@@ -342,7 +340,7 @@ public class Map {
      * @param player the player to move
      * @param square the square where to move
      */
-    public void movePlayer(Player player, Square square) throws NotValidSquareException, NotValidInput {
+    public void movePlayer(Player player, Square square) throws NotValidInput, MapException {
   
     removePlayerFromSquare(player);
     addPlayerOnSquare(square,player);
@@ -354,7 +352,7 @@ public class Map {
      * @param square the square where add
      * @param player the player to add
      */
-    public void addPlayerOnSquare(Square square, Player player) throws NotValidSquareException {
+    public void addPlayerOnSquare(Square square, Player player) throws  MapException {
 
         getSquare(square.getRow(),square.getColumn()).addPlayer(player);
     }
@@ -364,7 +362,7 @@ public class Map {
      *
      * @param player the player to remove
      */
-    public void removePlayerFromSquare(Player player) throws NotValidInput, NotValidSquareException {
+    public void removePlayerFromSquare(Player player) throws  MapException {
 
         getSquare(findPlayer(player).getRow(),findPlayer(player).getColumn()).removePlayer(player);
     }
@@ -382,7 +380,7 @@ public class Map {
     
         try {
             return sameDirection(findPlayer(a),findPlayer(b),findPlayer(c));
-        } catch (NotValidInput notValidInput) {
+        } catch (MapException e) {
             return false;
         }
     }
@@ -425,7 +423,7 @@ public class Map {
             return this.playersOnSquare(this.getSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
         } catch (NotValidInput notValidInput) {
             return false;
-        } catch (NotValidSquareException e) {
+        } catch (MapException e) {
             return false;
         }
     }

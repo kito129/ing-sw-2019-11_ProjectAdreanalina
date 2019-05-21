@@ -1,8 +1,9 @@
 package it.polimi.model;
 
 
-import it.polimi.model.Exception.ModelException.NotValidSquareException;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidInput;
+import it.polimi.model.Exception.NotValidSquareException;
 import it.polimi.model.Exception.NotVisibleTarget;
 import it.polimi.model.Weapon.LockRifle;
 
@@ -48,27 +49,27 @@ public class MainPartita {
     
         try {
             map.addPlayerOnSquare(map.getSquare(0,1),player1);
-        } catch (NotValidSquareException e) {
+        } catch ( MapException e) {
             System.out.println("error");
         }
         try {
             map.addPlayerOnSquare(map.getSquare(0,2),player2);
-        } catch (NotValidSquareException e) {
+        } catch ( MapException e) {
             System.out.println("error");
         }
         try {
             map.addPlayerOnSquare(map.getSquare(1,2),player3);
-        } catch (NotValidSquareException e) {
+        } catch ( MapException e) {
             System.out.println("error");
         }
         try {
             map.addPlayerOnSquare(map.getSquare(1,2),player4);
-        } catch (NotValidSquareException e) {
+        } catch ( MapException e) {
             System.out.println("error");
         }
         try {
             map.addPlayerOnSquare(map.getSquare(1,3),player5);
-        } catch (NotValidSquareException e) {
+        } catch ( MapException e) {
             System.out.println("error");
         }
     
@@ -184,10 +185,10 @@ public class MainPartita {
     
         try {
             map.movePlayer(player4,map.getSquare(2,1));
-        } catch (NotValidSquareException e) {
-            e.printStackTrace();
         } catch (NotValidInput notValidInput) {
             notValidInput.printStackTrace();
+        } catch (MapException e) {
+            e.printStackTrace();
         }
     
         //stampa player

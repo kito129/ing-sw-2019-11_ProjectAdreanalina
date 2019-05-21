@@ -1,10 +1,7 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
 
-import it.polimi.model.Exception.NotInSameDirection;
-import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotValidSquareException;
+import it.polimi.model.Exception.*;
 
 /**
  * The type Newton.
@@ -30,7 +27,7 @@ public class Newton extends PowerUpCard {
      * @throws NotInSameDirection if the destination square in not in the same direction with the actual target's square.
      * @throws NotValidDistance if the destination square is more than two squares away from the actual target's square.
      */
-    public void effect(Map map, Square destSquare, Player target) throws NotInSameDirection, NotValidDistance, NotValidInput, NotValidSquareException {
+    public void effect(Map map, Square destSquare, Player target) throws NotInSameDirection, NotValidDistance, NotValidInput, MapException {
 
         if ((map.sameDirection(destSquare, map.findPlayer(target))) && ( map.distance(destSquare, map.findPlayer(target)) < 3)
                 && ( map.distance(destSquare, map.findPlayer(target)) >0)) {

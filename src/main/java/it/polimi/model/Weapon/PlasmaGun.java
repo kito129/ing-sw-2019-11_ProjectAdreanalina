@@ -1,10 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.ModelException.NotValidSquareException;
-import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotVisibleTarget;
+import it.polimi.model.Exception.*;
 
 import java.util.ArrayList;
 
@@ -64,7 +61,7 @@ public class PlasmaGun extends WeaponCard {
         }
     }
 
-    public void phaseGlideEffect(Map map, Square destSquare, Player currentPlayer) throws NotValidDistance, NotValidInput, NotValidSquareException {
+    public void phaseGlideEffect(Map map, Square destSquare, Player currentPlayer) throws NotValidDistance, NotValidInput, MapException, NotValidSquareException {
 
         Square currentPlayerSquare=map.findPlayer(currentPlayer);
         if(map.distance(destSquare,currentPlayerSquare)<3 && map.distance(destSquare,currentPlayerSquare)>0){

@@ -2,6 +2,7 @@ package it.polimi.model.Weapon;
 
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
@@ -40,7 +41,7 @@ public class Furnace extends WeaponCard {
     }
 
 
-    public void baseMode(Map map, Player currentPlayer,EnumColorSquare targetRoomColor) throws NotVisibleTarget, NotValidDistance, NotValidInput {
+    public void baseMode(Map map, Player currentPlayer,EnumColorSquare targetRoomColor) throws NotVisibleTarget, NotValidDistance, MapException {
 
         Square currentPlayerSquare= map.findPlayer(currentPlayer);
         if((map.isVisibleRoom(currentPlayer,targetRoomColor))&& (currentPlayerSquare.getColor()!=targetRoomColor)){
@@ -60,7 +61,7 @@ public class Furnace extends WeaponCard {
         }
     }
 
-    public void cozyFireMode(Map map,Player currentPlayer,Square targetSquare) throws NotValidDistance, NotValidInput {
+    public void cozyFireMode(Map map,Player currentPlayer,Square targetSquare) throws NotValidDistance, NotValidInput, MapException {
 
         Square currentPlayerSquare = map.findPlayer(currentPlayer);
         ArrayList<Player> playersInTargetSquare;

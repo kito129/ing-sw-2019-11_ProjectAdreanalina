@@ -1,14 +1,7 @@
 package it.polimi.model;
 
-import it.polimi.model.Exception.ModelException.NotValidSquareException;
+import it.polimi.model.Exception.*;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
-import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
-import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
-import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
-import it.polimi.model.Exception.NotInSameDirection;
-import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotVisibleTarget;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
@@ -68,7 +61,7 @@ public class ActionModel {
      * @param targetSquare the target square to move
      * @throws RunActionMaxDistLimitException the run action max dist limit exception
      */
-    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException, NotValidInput, NotValidSquareException {
+    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException, NotValidInput, NotValidSquareException, MapException {
 
         if (map.distance(map.findPlayer(actualPlayer), targetSquare) < 4) {
 
@@ -89,7 +82,7 @@ public class ActionModel {
      * @throws CatchActionMaxDistLimitException the catch action max dist limit exception
      * @throws CatchActionFullObjException      the catch action full obj exception
      */
-    public void grabActionModel(Square targetSquare, int weaponIndex) throws CatchActionMaxDistLimitException, CatchActionFullObjException, NotValidInput, NotValidSquareException {
+    public void grabActionModel(Square targetSquare, int weaponIndex) throws CatchActionMaxDistLimitException, CatchActionFullObjException, NotValidInput, NotValidSquareException, MapException {
 
         //adrenalinic distance
         int maxDist;
@@ -152,7 +145,7 @@ public class ActionModel {
      * @throws NotInSameDirection Not in same direction
      * @throws NotValidDistance   Not valid distance
      */
-    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvailable, NotInSameDirection, NotValidDistance, NotValidInput, NotValidSquareException {
+    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvailable, NotInSameDirection, NotValidDistance, NotValidInput, MapException {
 
         gameModel.setState(State.USEPOWERUP);
         newton.effect(gameModel.getMap(), targetSquare, targetPlayer);
@@ -166,7 +159,7 @@ public class ActionModel {
      * @param targetSquare the target square
      * @throws NoPowerUpAvailable the no power up avaible
      */
-    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NoPowerUpAvailable, NotValidInput, NotValidSquareException {
+    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws  NotValidInput, MapException {
 
         gameModel.setState(State.USEPOWERUP);
         teleporter.effect(gameModel.getActualPlayer(), gameModel.getMap(), targetSquare);
@@ -180,7 +173,7 @@ public class ActionModel {
      * @param targetPlayer   the target player
      * @throws NoPowerUpAvailable NO power up available
      */
-    public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer) throws NoPowerUpAvailable {
+    public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer)  {
 
         gameModel.setState(State.USEPOWERUP);
         targetingScope.effect(gameModel.getActualPlayer(), targetPlayer);
@@ -195,7 +188,7 @@ public class ActionModel {
      * @throws NoPowerUpAvailable No power up avaible
      * @throws NotVisibleTarget Not visible target
      */
-    public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NoPowerUpAvailable, NotVisibleTarget {
+    public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NotVisibleTarget   {
 
         gameModel.setState(State.USEPOWERUP);
         tagBackGrenade.effect(gameModel.getMap(), gameModel.getActualPlayer(), targetPlayer);
@@ -208,7 +201,7 @@ public class ActionModel {
      * @param generationSquare the generation square
      * @param powerUpCard      the power up card to add to player
      */
-    public void respawnPlayer(Player player, Square generationSquare, PowerUpCard powerUpCard) throws NotValidSquareException {
+    public void respawnPlayer(Player player, Square generationSquare, PowerUpCard powerUpCard) throws  MapException {
 
         player.getPlayerBoard().resetDamage();
         player.setAlive(true);

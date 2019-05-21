@@ -1,7 +1,8 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.ModelException.NotValidSquareException;
+
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
@@ -39,7 +40,7 @@ public class TractorBeam extends WeaponCard {
         return punisherModeCost;
     }
 
-    public void baseMode(Map map,Square destSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance, NotValidInput, NotValidSquareException {
+    public void baseMode(Map map,Square destSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance, NotValidInput, MapException {
 
         Square currentPlayerSquare = map.findPlayer(currentPlayer);
         Square target1Square = map.findPlayer(target1);
@@ -56,7 +57,7 @@ public class TractorBeam extends WeaponCard {
         }
     }
 
-    public void punisherMode(Map map,Player currentPlayer,Player target1) throws NotValidDistance, NotValidInput, NotValidSquareException {
+    public void punisherMode(Map map,Player currentPlayer,Player target1) throws NotValidDistance, NotValidInput, MapException {
 
         if(map.distance(currentPlayer,target1)<3){
 

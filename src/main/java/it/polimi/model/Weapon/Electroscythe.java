@@ -1,6 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NoTargetInSquare;
 import it.polimi.model.Exception.NotValidInput;
 
@@ -37,7 +38,7 @@ public class Electroscythe extends WeaponCard {
         return reaperModeCost;
     }
 
-    public void baseMode(Map map, Player currentPlayer) throws NoTargetInSquare, NotValidInput {
+    public void baseMode(Map map, Player currentPlayer) throws NoTargetInSquare, NotValidInput, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         ArrayList<Player> playersOnSquare = map.playersOnSquare(squareOfCurrentPlayer);
@@ -54,7 +55,7 @@ public class Electroscythe extends WeaponCard {
         }
     }
 
-    public void reaperMode(Map map,Player currentPlayer) throws NoTargetInSquare, NotValidInput {
+    public void reaperMode(Map map,Player currentPlayer) throws NoTargetInSquare, NotValidInput, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         ArrayList<Player> playersOnSquare = map.playersOnSquare(squareOfCurrentPlayer);

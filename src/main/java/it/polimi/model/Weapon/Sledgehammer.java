@@ -1,6 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotInSameDirection;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotValidInput;
@@ -51,7 +52,7 @@ public class Sledgehammer extends WeaponCard {
         }
     }
 
-    public void pulverizeMode(Map map, Player currentPlayer,Player target1,Square destSquare) throws NotValidDistance, NotInSameDirection, NotValidInput {
+    public void pulverizeMode(Map map, Player currentPlayer,Player target1,Square destSquare) throws NotValidDistance, NotInSameDirection, MapException {
 
         Square target1Square= map.findPlayer(target1);
 

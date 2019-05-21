@@ -1,9 +1,10 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.ModelException.NotValidSquareException;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotValidInput;
+import it.polimi.model.Exception.NotValidSquareException;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class PowerGlove extends WeaponCard {
         return rocketFistModeCost;
     }
 
-    public void baseMode(Map map, Player currentPlayer,Player target1) throws NotValidDistance, NotValidInput, NotValidSquareException {
+    public void baseMode(Map map, Player currentPlayer,Player target1) throws NotValidDistance, NotValidInput, MapException, NotValidSquareException {
 
         if(map.distance(currentPlayer,target1)==1){
 

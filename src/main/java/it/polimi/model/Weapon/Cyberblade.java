@@ -1,6 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotValidSquareException;
@@ -49,7 +50,7 @@ public class Cyberblade extends WeaponCard {
         return sliceAndDiceCost;
     }
 
-    public void baseEffect(Map map,Player currentPlayer,Player target1) throws NotValidDistance, NotValidInput {
+    public void baseEffect(Map map,Player currentPlayer,Player target1) throws NotValidDistance, MapException {
 
         if(map.findPlayer(currentPlayer)==map.findPlayer(target1)){
 
@@ -63,7 +64,7 @@ public class Cyberblade extends WeaponCard {
         }
     }
     // todo prima o dopo leffetto base.
-    public void shadowstepEffect(Map map, Player currentPlayer, Square destSquare) throws NotValidDistance, NotValidInput, NotValidSquareException {
+    public void shadowstepEffect(Map map, Player currentPlayer, Square destSquare) throws NotValidDistance, NotValidInput, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         if(map.distance(squareOfCurrentPlayer,destSquare)==1){

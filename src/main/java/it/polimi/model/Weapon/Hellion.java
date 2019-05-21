@@ -1,6 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
@@ -38,7 +39,7 @@ public class Hellion extends WeaponCard {
         return nanoTracerModeCost;
     }
 
-    public void baseMode(Map map, Player currentPlayer,Player targetPlayer) throws NotVisibleTarget, NotValidDistance, NotValidInput {
+    public void baseMode(Map map, Player currentPlayer,Player targetPlayer) throws NotVisibleTarget, NotValidDistance, NotValidInput, MapException {
 
         Square targetSquare = map.findPlayer(targetPlayer);
         ArrayList<Player> playersInTargetSquare;
@@ -59,7 +60,7 @@ public class Hellion extends WeaponCard {
         }
     }
 
-    public void nanoTracerMode(Map map, Player currentPlayer,Player targetPlayer) throws NotVisibleTarget, NotValidDistance, NotValidInput {
+    public void nanoTracerMode(Map map, Player currentPlayer,Player targetPlayer) throws NotVisibleTarget, NotValidDistance, NotValidInput, MapException {
 
         Square targetSquare = map.findPlayer(targetPlayer);
         ArrayList<Player> playersInTargetSquare;

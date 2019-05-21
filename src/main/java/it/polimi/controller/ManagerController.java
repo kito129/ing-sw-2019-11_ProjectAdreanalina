@@ -1,9 +1,10 @@
 package it.polimi.controller;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.ModelException.NotValidSquareException;
-import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
+import it.polimi.model.Exception.MapException;
+import it.polimi.model.Exception.NoPowerUpAvailable;
 import it.polimi.model.Exception.NotValidInput;
+import it.polimi.model.Exception.NotValidSquareException;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -94,7 +95,7 @@ public class ManagerController implements RemoteGameController {
                         //TODO
                     } catch (NotValidInput notValidInput) {
                         notValidInput.printStackTrace();
-                    } catch (NotValidSquareException e) {
+                    } catch (MapException e) {
                         e.printStackTrace();
                     }
                     break;
@@ -102,14 +103,14 @@ public class ManagerController implements RemoteGameController {
                     //oggi
                     try {
                         actionController.runActionController(actionModel, view);
-                    } catch (NotValidSquareException e) {
+                    } catch (NotValidSquareException | MapException e) {
                         e.printStackTrace();
                     }
                     break;
                 case GRAB:
                     try {
                         actionController.grabActionController(actionModel, view);
-                    } catch (NotValidSquareException e) {
+                    } catch (NotValidSquareException | MapException e) {
                         e.printStackTrace();
                     }
                     break;

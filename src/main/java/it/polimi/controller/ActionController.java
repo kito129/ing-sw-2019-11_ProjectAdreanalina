@@ -4,12 +4,7 @@ package it.polimi.controller;
 import it.polimi.model.*;
 //chiedere perche devo importare tutto
 import it.polimi.model.Exception.*;
-import it.polimi.model.Exception.ModelException.NotValidAmmoException;
-import it.polimi.model.Exception.ModelException.NotValidSquareException;
 import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
-import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionMaxDistLimitException;
-import it.polimi.model.Exception.ModelException.RoundModelException.RunActionMaxDistLimitException;
-import it.polimi.model.Exception.ModelException.RoundModelException.NoPowerUpAvailable;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
@@ -32,7 +27,7 @@ public class ActionController {
      *
      * @param actionModel the action model
      */
-    public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException, NotValidSquareException {
+    public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException, NotValidSquareException, MapException {
         
         //take necessary
         Map map= actionModel.getGameModel().getMap();
@@ -61,7 +56,7 @@ public class ActionController {
      *
      * @param actionModel the action model
      */
-    public void grabActionController (ActionModel actionModel,RemoteView view) throws RemoteException, NotValidSquareException {
+    public void grabActionController (ActionModel actionModel,RemoteView view) throws RemoteException, NotValidSquareException, MapException {
     
         //take necessary
         Map map =actionModel.getGameModel().getMap();
@@ -107,7 +102,7 @@ public class ActionController {
      * @param powerUpCard the power up card
      * @throws NoPowerUpAvailable  no power up available
      */
-    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable, NotValidInput, NotValidSquareException {
+    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable, NotValidInput, MapException {
 
         //NEWTON
         if (powerUpCard.getClass().equals(Newton.class)) {
@@ -124,9 +119,11 @@ public class ActionController {
             } catch (NotValidDistance notValidDistance) {
 
                 //TODO
+            } catch (MapException e) {
+                e.printStackTrace();
             }
-
-        //TAGBACK GRANATE
+    
+            //TAGBACK GRANATE
         } else if (powerUpCard.getClass().equals(TagBackGrenade.class)) {
 
             //chiedi i parametri di teleporter
@@ -384,8 +381,10 @@ public class ActionController {
                 } catch (NoTargetInSquare noTargetInSquare) {
 
                     //gestione nessun target nella stanza in cui si trova il current player.
+                } catch (MapException e) {
+                    e.printStackTrace();
                 }
-            
+    
             case "reaper mode":
 
                 try {
@@ -394,6 +393,8 @@ public class ActionController {
                 } catch (NoTargetInSquare noTargetInSquare) {
 
                     //gestione nessun target nella stanza in cui si trova il current player
+                } catch (MapException e) {
+                    e.printStackTrace();
                 }
         }
         //settare arma scarica
@@ -472,7 +473,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void TractorBeam(GameModel gameModel, TractorBeam weapon) throws NotValidInput, NotValidSquareException {
+    public void TractorBeam(GameModel gameModel, TractorBeam weapon) throws NotValidInput, MapException {
 
         Square destSquareBase=new Square();
         Player targetBaseOrPunisher=new Player();
@@ -603,7 +604,7 @@ public class ActionController {
                 try{
 
                     weapon.phaseGlideEffect(map,destSquarePhaseGlide,currentPlayer);
-                }catch(NotValidDistance notValidDistance){
+                }catch(NotValidDistance | MapException notValidDistance){
 
                     //gestire se square di destinazione è distante più di 2 o meno di 1 quadrati dalla square del curretn player
                 }
@@ -647,7 +648,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void VortexCannon ( GameModel gameModel,VortexCannon weapon) throws NotValidSquareException, NotValidInput {
+    public void VortexCannon ( GameModel gameModel,VortexCannon weapon) throws  NotValidInput, MapException {
 
         Player currentPlayer = new Player();
         Player targetBase = new Player();
@@ -718,7 +719,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void Furnace(GameModel gameModel,Furnace weapon) throws NotValidInput {
+    public void Furnace(GameModel gameModel,Furnace weapon) throws NotValidInput, MapException {
 
         EnumColorSquare roomTarget=null;
         Map map=new Map();
