@@ -340,7 +340,7 @@ public class Map {
      * @param player the player to move
      * @param square the square where to move
      */
-    public void movePlayer(Player player, Square square) throws NotValidInput, MapException {
+    public void movePlayer(Player player, Square square) throws MapException {
   
     removePlayerFromSquare(player);
     addPlayerOnSquare(square,player);
