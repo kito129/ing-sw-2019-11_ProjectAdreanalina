@@ -1,7 +1,8 @@
 package it.polimi.model;
 
-import it.polimi.model.Exception.ModelException.NotValidSquareException;
+
 import it.polimi.model.Exception.NotValidInput;
+import it.polimi.model.Exception.NotValidSquareException;
 
 import java.util.ArrayList;
 

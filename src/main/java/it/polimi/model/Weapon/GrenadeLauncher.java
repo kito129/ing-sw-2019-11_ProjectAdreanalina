@@ -59,7 +59,7 @@ public class GrenadeLauncher extends WeaponCard {
             map.movePlayer(target1,destSquare);
         }else if(!(map.isVisible(currentPlayer,target1))){
 
-            throw new NotValidDistance();
+            throw new NotVisibleTarget();
         }else if(!(map.distance(squareOfTarget1Player,destSquare)==1)){
 
             throw new NotValidDistance();

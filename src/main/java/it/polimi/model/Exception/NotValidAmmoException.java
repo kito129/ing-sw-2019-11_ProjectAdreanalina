@@ -1,4 +1,4 @@
-package it.polimi.model.Exception.ModelException;
+package it.polimi.model.Exception;
 
 public class NotValidAmmoException extends  Exception {
     

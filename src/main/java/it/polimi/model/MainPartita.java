@@ -5,10 +5,10 @@ import it.polimi.model.Exception.ModelException.NotValidSquareException;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotVisibleTarget;
 import it.polimi.model.Weapon.LockRifle;
-import sun.rmi.runtime.Log;
+
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
+
 
 public class MainPartita {
 
