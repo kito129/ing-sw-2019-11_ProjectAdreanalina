@@ -453,6 +453,7 @@ public class ActionModel {
                 
                 toKillShot.add(death);
                 toKillShot.add(overkill);
+                gameModel.getPlayerByColor(overkill).singleMark(player.getColor());
             } else {
                 
                 toKillShot.add(death);
@@ -462,6 +463,7 @@ public class ActionModel {
             gameModel.getKillShotTrack().updateTrack(toKillShot);
             playerBoard.resetDamage();
             playerBoard.decreaseBoardValue();
+            
             
         }
     }
