@@ -7,7 +7,6 @@ import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotValidSquareException;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 public class ManagerController implements RemoteGameController {
     
@@ -87,9 +86,9 @@ public class ManagerController implements RemoteGameController {
                     break;
                 case USEPOWERUP:
                     //chiedo che power up vuole usare
-                    if( gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex())!=null){
+                    if( gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndexWeapon())!=null){
                         
-                        PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex());
+                        PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndexWeapon());
                         try {
         
                             actionController.usePowerUpController(actionModel, usedPowerUp);

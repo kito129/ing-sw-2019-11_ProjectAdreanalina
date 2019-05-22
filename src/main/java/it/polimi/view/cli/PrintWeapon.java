@@ -15,7 +15,7 @@ public class PrintWeapon implements Serializable {
 
     /**
      * Print Client's weapons.
-     * @param weaponList       list of player's weapon.
+     * @param weaponList       list of weapon.
      */
     public static void print(ArrayList<WeaponCard> weaponList){
 
@@ -43,6 +43,7 @@ public class PrintWeapon implements Serializable {
             PrintRechargeCost.print(weaponList);
 
             System.out.println("LOADED WEAPON: " +wc.isCharge());
+
         }
     }
 }

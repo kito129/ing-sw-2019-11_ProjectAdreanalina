@@ -28,4 +28,11 @@ public class PrintSelectMove implements Serializable {
     public static void printColumn(){
         System.out.println("COLUMN: ");
     }
+
+    /**
+     * prints the index weapon
+     */
+    public static void printIndexWeapon(){
+        System.out.println("INDEX WEAPON: ");
+    }
 }
