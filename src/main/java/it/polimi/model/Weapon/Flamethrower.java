@@ -8,7 +8,7 @@ import it.polimi.model.Exception.NotValidDistance;
 import java.util.ArrayList;
 
 
-public class FlameThrower extends WeaponCard {
+public class Flamethrower extends WeaponCard {
 
     private ArrayList<EnumColorCardAndAmmo> barbecueModeCost;
 
@@ -19,7 +19,8 @@ public class FlameThrower extends WeaponCard {
      * Creates the list of effects setting its value to BaseMode,BarbecueMode.
      * Creates the list of barbecue mode cost (cost of alternative fire mode) settings it to YELLOW,YELLOW.
      */
-    public FlameThrower() {
+    //todo inserire tutti gli effetti
+    public Flamethrower() {
 
         super("FLAME THROWER", EnumColorCardAndAmmo.RED);
         ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();

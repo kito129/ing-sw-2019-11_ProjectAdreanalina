@@ -16,7 +16,7 @@ public class GrenadeLauncher extends WeaponCard {
      * Instantiates a new Grenade Launcher card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
      * Creates the list of recharge cost settings its value to RED.
-     * Creates the list of effects setting its value to BaseEffect,ExtraGrenadeEffect.
+     * Creates the list of effects setting its value to BaseEffect,MoveTarget,ExtraGrenadeEffect.
      * Creates the list of extra grenade cost(cost of optional effect 1) settings it to RED.
      */
     public GrenadeLauncher(){
@@ -27,6 +27,7 @@ public class GrenadeLauncher extends WeaponCard {
         setRechargeCost(rechargeCost);
         ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
         weaponEffects.add(WeaponsEffect.BaseEffect);
+        weaponEffects.add(WeaponsEffect.MoveTarget);
         weaponEffects.add(WeaponsEffect.ExtraGrenadeEffect);
         setWeaponEffects(weaponEffects);
         extraGrenadeCost =new ArrayList<EnumColorCardAndAmmo>();
@@ -49,7 +50,12 @@ public class GrenadeLauncher extends WeaponCard {
         }
     }
 
-    public void baseEffect(Map map,Player target1,Player currentPlayer,Square destSquare) throws NotVisibleTarget, NotValidDistance, NotValidInput, MapException {
+    public void moveTarget(Map map,Player target1,Player currentPlayer,Square destSquare){
+
+        //todo fare questo metodo separato dall'effetto base perchè òa granata extra può essere usata prima o dopo il movimento
+    }
+
+    public void baseEffect(Map map,Player target1,Player currentPlayer,Square destSquare) throws NotVisibleTarget, NotValidDistance, MapException {
 
         Square squareOfTarget1Player = map.findPlayer(target1);
 

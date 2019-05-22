@@ -780,11 +780,76 @@ public class ActionController {
         }
     }
 
-    public void HeatSeeker(GameModel gameModel, HeatSeeker weapon){
+    public void HeatSeeker(GameModel gameModel, Heatseeker weapon){
 
         //todo problema target deve essere non visibile ma se uso il metodo di marco, farebbe l'effetto base anche quando il target nella mappa non
         //todo esiste
         //todo ripartire da qui
+    }
+
+    public void Hellion(GameModel gameModel,Hellion weapon){
+
+        Player targetBaseOrTracer=new Player();
+        Map map=new Map();
+        Player currentPlayer=new Player();
+
+        String message="";
+
+        switch (message) {
+
+            case "base mode":
+
+                try {
+
+                    weapon.baseMode(map, currentPlayer, targetBaseOrTracer);
+                } catch (NotValidDistance notValidDistance) {
+                    // target non visibile
+
+                } catch (NotVisibleTarget notVisibleTarget) {
+                    //target non distante almeno 1 movimento
+
+                } catch (MapException mapException) {
+                    // eccezzioni di mappa
+
+                }
+            case "nano tracer":
+
+                try {
+
+                    weapon.nanoTracerMode(map, currentPlayer, targetBaseOrTracer);
+                } catch (NotValidDistance notValidDistance) {
+                    // target non visibile
+
+                } catch (NotVisibleTarget notVisibleTarget) {
+                    //target non distante almeno 1 movimento
+
+                } catch (MapException mapException) {
+                    // eccezzioni di mappa
+                }
+
+
+        }
+    }
+
+    public void Flamethrower(GameModel gameModel, Flamethrower weapon){
+
+        //todo da fare poi
+    }
+
+    public void GrenadeLauncher(GameModel gameModel,GrenadeLauncher weapon){
+
+        Player currentPlayer=new Player();
+        Player targetBase=new Player();
+        Boolean moveTargetBase=true;
+        Square destSquareBase=new Square();
+        Map map=new Map();
+        String message="";
+
+        switch (message){
+
+
+        }
+
     }
 }
 
