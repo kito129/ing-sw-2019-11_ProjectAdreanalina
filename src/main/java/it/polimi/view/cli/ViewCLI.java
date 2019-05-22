@@ -2,7 +2,6 @@ package it.polimi.view.cli;
 
 import it.polimi.controller.RemoteGameController;
 import it.polimi.model.RemoteGameModel;
-import it.polimi.model.Square;
 import it.polimi.model.State;
 import it.polimi.view.RemoteView;
 
@@ -21,14 +20,14 @@ public class ViewCLI implements RemoteView {
     private int row;
     private int column;
     //attribute for grab
-    private int indexWeapon;
+    private int index;
     
   
     
     @Override
-    public int getIndexWeapon() {
+    public int getIndex () {
         
-        return indexWeapon;
+        return index;
     }
     
     @Override
@@ -71,9 +70,9 @@ public class ViewCLI implements RemoteView {
         this.column = column;
     }
     
-    public void setIndexWeapon(int indexWeapon) {
+    public void setIndex (int index) {
         
-        this.indexWeapon = indexWeapon;
+        this.index = index;
     }
     
     public void setState (State state) {
@@ -232,7 +231,7 @@ public class ViewCLI implements RemoteView {
         PrintSelectMove.printIndexWeapon();
         while(!input.hasNextInt())
             input = new Scanner(System.in);
-        setIndexWeapon(input.nextInt());
+        setIndex(input.nextInt());
 
         notifyController();
     }

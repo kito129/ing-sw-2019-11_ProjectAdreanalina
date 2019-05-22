@@ -90,13 +90,17 @@ public class AmmoDeck {
         Collections.shuffle(this.ammoCards);
     }
 
-    public AmmoCard drawAmmoCard() {
+    public AmmoCard drawAmmoCard(PowerUpDeck powerUpDeck) {
 
         if (ammoCards.size() != 0) {
 
             AmmoCard firstCard = ammoCards.get(0);
             discardedCards.add(firstCard);
             ammoCards.remove(0);
+            //fatto qui perchè comodo
+            if(firstCard.hasPowerUpCard()){
+                firstCard.setPowerUpCard(powerUpDeck.drawnPowerUpCard());
+            }
             return firstCard;
         }else{
 
@@ -106,6 +110,10 @@ public class AmmoDeck {
             AmmoCard firstCard=ammoCards.get(0);
             discardedCards.add(firstCard);
             ammoCards.remove(0);
+            //fatto qui perchè comodo
+            if(firstCard.hasPowerUpCard()){
+                firstCard.setPowerUpCard(powerUpDeck.drawnPowerUpCard());
+            }
             return firstCard;
         }
     }

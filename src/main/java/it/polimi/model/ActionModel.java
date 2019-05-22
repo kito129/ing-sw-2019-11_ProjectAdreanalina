@@ -1,7 +1,6 @@
 package it.polimi.model;
 
 import it.polimi.model.Exception.*;
-import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
@@ -79,10 +78,10 @@ public class ActionModel {
      *
      * @param targetSquare the target square where grab
      * @param weaponIndex  the weapon index position in generation square
-     * @throws CatchActionMaxDistLimitException the catch action max dist limit exception
-     * @throws CatchActionFullObjException      the catch action full obj exception
+     * @throws GrabActionMaxDistLimitException the catch action max dist limit exception
+     * @throws it.polimi.model.Exception.ModelException.RoundModelException.GrabActionFullObjException      the catch action full obj exception
      */
-    public void grabActionModel(Square targetSquare, int weaponIndex) throws CatchActionMaxDistLimitException, CatchActionFullObjException, NotValidInput, NotValidSquareException, MapException {
+    public void grabActionModel(Square targetSquare, int weaponIndex) throws GrabActionMaxDistLimitException, it.polimi.model.Exception.ModelException.RoundModelException.GrabActionFullObjException, NotValidInput, NotValidSquareException, MapException {
 
         //adrenalinic distance
         int maxDist;
@@ -94,7 +93,7 @@ public class ActionModel {
 
             maxDist = 2;
         }
-        if (map.distance(map.findPlayer(actualPlayer), targetSquare) < maxDist) {
+        if (map.distance(map.findPlayer(actualPlayer), targetSquare) <= maxDist) {
 
             map.movePlayer(actualPlayer, targetSquare);
             
@@ -108,11 +107,11 @@ public class ActionModel {
                 action++;
             } else {
 
-                throw new CatchActionFullObjException();
+                throw new it.polimi.model.Exception.ModelException.RoundModelException.GrabActionFullObjException();
             }
         } else {
 
-            throw new CatchActionMaxDistLimitException();
+            throw new GrabActionMaxDistLimitException();
         }
     }
     
@@ -481,7 +480,7 @@ public class ActionModel {
 
             if(!(map.isGenerationSquare(s))&&(((NormalSquare) s).getAmmoCard()==null)){
 
-                AmmoCard ammoCardDrawn = gameModel.getAmmoDeck().drawAmmoCard();
+                AmmoCard ammoCardDrawn = gameModel.getAmmoDeck().drawAmmoCard(gameModel.getPowerUpDeck());
                 ((NormalSquare) s).setAmmoCard(ammoCardDrawn);
             }
         }

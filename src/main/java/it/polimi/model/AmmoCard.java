@@ -70,6 +70,15 @@ public class AmmoCard {
 
         this.powerUpCard = powerUpCard;
     }
-
-
+    
+    @Override
+    public String toString () {
+        String message = new String();
+       
+        message+=this.ammo.toString();
+        if(hasPowerUpCard){
+            message+=this.getPowerUpCard();
+        }
+        return message;
+    }
 }

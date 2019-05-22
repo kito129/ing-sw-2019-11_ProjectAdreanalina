@@ -19,7 +19,7 @@ public class GenerationSquare extends Square{
     public GenerationSquare(int r, int c, EnumColorSquare color) {
 
         super(r,c,color);
-        this.weaponList=null;
+        this.weaponList=new ArrayList<>();
     }
     
     /**

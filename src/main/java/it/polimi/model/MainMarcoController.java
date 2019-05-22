@@ -112,12 +112,15 @@ public class MainMarcoController {
             p.toString();
             p.stampa();
         }
-        
+    
+        actionModel.refreshMapAmmoCard();
+        actionModel.refreshMapWeaponCard();
+        map.print();
         
         ViewCLI viewCLI = new ViewCLI();
-        viewCLI.setRow(2);
-        viewCLI.setColumn(0);
-        viewCLI.setIndexWeapon(0);
+        viewCLI.setRow(0);
+        viewCLI.setColumn(2);
+        viewCLI.setIndex(0);
     
         try {
             actionController.runActionController(actionModel, viewCLI);
@@ -136,6 +139,12 @@ public class MainMarcoController {
             p.toString();
             p.stampa();
         }
+        
+        //grab 1
+        System.out.println("GRab action in 0,2");
+        viewCLI.setRow(0);
+        viewCLI.setColumn(2);
+        viewCLI.setIndex(0);
     
         try {
             actionController.grabActionController(actionModel,viewCLI);
@@ -152,8 +161,34 @@ public class MainMarcoController {
             p.toString();
             p.stampa();
         }
+        map.print();
     
-        System.out.println(map.isNotVisible(player1,player5));
+    
+    
+        //grab 1
+        System.out.println("GRab action in 0,1");
+        viewCLI.setRow(0);
+        viewCLI.setColumn(1);
+        viewCLI.setIndex(0);
+    
+        try {
+            actionController.grabActionController(actionModel,viewCLI);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotValidSquareException e) {
+            e.printStackTrace();
+        } catch (MapException e) {
+            e.printStackTrace();
+        }
+    
+        for (Player p : players) {
         
+            p.toString();
+            p.stampa();
+        }
+        map.print();
+    
+    
+    
     }
 }

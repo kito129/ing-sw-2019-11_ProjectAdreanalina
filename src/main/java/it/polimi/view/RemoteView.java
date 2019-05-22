@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 public interface RemoteView extends Remote {
     
     
-    int getIndexWeapon();
+    int getIndex ();
     
     int getRow() throws RemoteException;
     

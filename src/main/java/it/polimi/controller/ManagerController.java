@@ -82,9 +82,9 @@ public class ManagerController implements RemoteGameController {
                     break;
                 case USEPOWERUP:
                     //chiedo che power up vuole usare
-                    if( gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndexWeapon())!=null){
+                    if( gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex())!=null){
                         
-                        PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndexWeapon());
+                        PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex());
                         try {
         
                             actionController.usePowerUpController(actionModel, usedPowerUp);
