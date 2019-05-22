@@ -210,7 +210,7 @@ public class ActionModel {
         player.getPlayerBoard().addPowerUp(powerUpCard);
     }
     
-    // TODO 18/05
+  
     
     /**
      * The type Player score, useful for scoring computation.
@@ -469,7 +469,19 @@ public class ActionModel {
         }
     }
     
-    // TODO FINE 18/05
+    //TODO ANDRE
+    //metodo per refresh delle ammoCard in map (NO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
+    //non lancia eccezioni perchè è tuto gestito
+    public void refreshMapAmmoCard(){
+    
+    }
+    
+    //TODO ANDRE
+    //metodo per refresh delle WeaponCard in map (SOLO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
+    //non lancia eccezioni perchè è tuto gestito
+    public void refreshMapWeaponCard(){
+    
+    }
 }
         
     

@@ -137,5 +137,7 @@ public class MainMarcoController {
             p.stampa();
         }
         
+        System.out.println(map.isNotVisible(player1,player5));
+        
     }
 }
