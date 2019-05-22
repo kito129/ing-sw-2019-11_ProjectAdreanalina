@@ -360,7 +360,7 @@ public class ActionController {
 
                 } catch (NotVisibleTarget notVisibleTarget) {
 
-                    //gestione target non visibile
+                    //gestione target non visibile o errore di mappa
                 }
         }
         //settare arma scarica
@@ -372,7 +372,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon) throws NotValidInput {
+    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon){
 
         Map map=new Map();
         Player currentPlayer= new Player();
@@ -387,8 +387,8 @@ public class ActionController {
                 } catch (NoTargetInSquare noTargetInSquare) {
 
                     //gestione nessun target nella stanza in cui si trova il current player.
-                } catch (MapException e) {
-                    e.printStackTrace();
+                } catch (MapException mapException){
+
                 }
     
             case "reaper mode":
@@ -399,8 +399,8 @@ public class ActionController {
                 } catch (NoTargetInSquare noTargetInSquare) {
 
                     //gestione nessun target nella stanza in cui si trova il current player
-                } catch (MapException e) {
-                    e.printStackTrace();
+                } catch (MapException mapException ) {
+
                 }
         }
         //settare arma scarica
@@ -479,7 +479,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void TractorBeam(GameModel gameModel, TractorBeam weapon) throws NotValidInput, MapException {
+    public void TractorBeam(GameModel gameModel, TractorBeam weapon) {
 
         Square destSquareBase=new Square();
         Player targetBaseOrPunisher=new Player();
@@ -500,7 +500,11 @@ public class ActionController {
                 } catch (NotValidDistance notValidDistance) {
 
                     //gestire il fatto che il giocatore prova a muovere il target  più di 2 quadrati
+                } catch (MapException mapException){
+
+
                 }
+
             case "punisher mode":
 
                 try {
@@ -509,6 +513,9 @@ public class ActionController {
                 } catch (NotValidDistance notValidDistance) {
 
                     //gestire se il target scelto non si trova a 0,1,2 quadrate dal currentplayer.
+                }catch (MapException mapException){
+
+
                 }
         }
     }
@@ -584,7 +591,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void PlasmaGun (GameModel gameModel,PlasmaGun weapon) throws NotValidInput, NotValidSquareException {
+    public void PlasmaGun (GameModel gameModel,PlasmaGun weapon)  {
 
         Player targetBase=new Player();
         Player currentPlayer=new Player();
@@ -610,9 +617,12 @@ public class ActionController {
                 try{
 
                     weapon.phaseGlideEffect(map,destSquarePhaseGlide,currentPlayer);
-                }catch(NotValidDistance | MapException notValidDistance){
+                }catch(NotValidDistance notValidDistance){
 
                     //gestire se square di destinazione è distante più di 2 o meno di 1 quadrati dalla square del curretn player
+                }catch (MapException mapException){
+
+
                 }
             case "charged shot":
 
@@ -654,7 +664,7 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void VortexCannon ( GameModel gameModel,VortexCannon weapon) throws  NotValidInput, MapException {
+    public void VortexCannon ( GameModel gameModel,VortexCannon weapon) {
 
         Player currentPlayer = new Player();
         Player targetBase = new Player();
@@ -679,6 +689,8 @@ public class ActionController {
 
                     //gestione square scelta non è ad almeno un movimento di distanza dal current player, oppure viene lanciata se il target scelto non si trova
                     // ne ad un movimento dalla sqaure scelta ne sulla square scelta.
+                }catch (MapException mapException){
+
                 }
 
             case "black Hole":
@@ -714,6 +726,8 @@ public class ActionController {
                 } catch (NotValidInput notValidInput) {
 
                     //gestire il fatto che i target del buco nero non sono diveri tra di loro e diversi con il target effetto base.
+                }catch (MapException mapException){
+
                 }
         }
 
@@ -725,11 +739,12 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void Furnace(GameModel gameModel,Furnace weapon) throws NotValidInput, MapException {
+    public void Furnace(GameModel gameModel,Furnace weapon) {
 
         EnumColorSquare roomTarget=null;
         Map map=new Map();
         Player currentPlayer=new Player();
+        Square targetSquareCozy=new Square();
         String message="";
 
         switch (message){
@@ -746,10 +761,97 @@ public class ActionController {
                 }catch (NotVisibleTarget notVisibleTarget){
 
                     //gestire se la stanza selezionata non è visibile dal current player.
+                }catch (MapException mapException){
+
+
                 }
+            case "cozy fire":
+
+                try{
+
+                    weapon.cozyFireMode(map,currentPlayer,targetSquareCozy);
+                }catch (NotValidDistance notValidDistance){
+
+                    //quadrato scelto non è distante esattamente un movimento
+                } catch (MapException mapException){
+
+                }
+
+
         }
     }
-    //todo ripartire da qui
+
+    public void HeatSeeker(GameModel gameModel, Heatseeker weapon){
+
+        //todo problema target deve essere non visibile ma se uso il metodo di marco, farebbe l'effetto base anche quando il target nella mappa non
+        //todo esiste
+        //todo ripartire da qui
+    }
+
+    public void Hellion(GameModel gameModel,Hellion weapon){
+
+        Player targetBaseOrTracer=new Player();
+        Map map=new Map();
+        Player currentPlayer=new Player();
+
+        String message="";
+
+        switch (message) {
+
+            case "base mode":
+
+                try {
+
+                    weapon.baseMode(map, currentPlayer, targetBaseOrTracer);
+                } catch (NotValidDistance notValidDistance) {
+                    // target non visibile
+
+                } catch (NotVisibleTarget notVisibleTarget) {
+                    //target non distante almeno 1 movimento
+
+                } catch (MapException mapException) {
+                    // eccezzioni di mappa
+
+                }
+            case "nano tracer":
+
+                try {
+
+                    weapon.nanoTracerMode(map, currentPlayer, targetBaseOrTracer);
+                } catch (NotValidDistance notValidDistance) {
+                    // target non visibile
+
+                } catch (NotVisibleTarget notVisibleTarget) {
+                    //target non distante almeno 1 movimento
+
+                } catch (MapException mapException) {
+                    // eccezzioni di mappa
+                }
+
+
+        }
+    }
+
+    public void Flamethrower(GameModel gameModel, Flamethrower weapon){
+
+        //todo da fare poi
+    }
+
+    public void GrenadeLauncher(GameModel gameModel,GrenadeLauncher weapon){
+
+        Player currentPlayer=new Player();
+        Player targetBase=new Player();
+        Boolean moveTargetBase=true;
+        Square destSquareBase=new Square();
+        Map map=new Map();
+        String message="";
+
+        switch (message){
+
+
+        }
+
+    }
 }
 
 
