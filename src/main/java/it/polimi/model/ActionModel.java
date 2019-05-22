@@ -60,11 +60,12 @@ public class ActionModel {
      * @param targetSquare the target square to move
      * @throws RunActionMaxDistLimitException the run action max dist limit exception
      */
-    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException, NotValidInput, NotValidSquareException, MapException {
+    public void runActionModel(Player player, Square targetSquare) throws RunActionMaxDistLimitException, NotValidInput, NotValidSquareException, MapException {
 
-        if (map.distance(map.findPlayer(actualPlayer), targetSquare) < 4) {
+        if (map.distance(map.findPlayer(player), targetSquare) < 4) {
 
-            map.movePlayer(actualPlayer, targetSquare);
+            map.movePlayer(player, targetSquare);
+            System.out.println("muovo andrea (actual player  in 2,0)");
             action++;
         } else {
 
@@ -209,7 +210,7 @@ public class ActionModel {
         player.getPlayerBoard().addPowerUp(powerUpCard);
     }
     
-    // TODO 18/05
+  
     
     /**
      * The type Player score, useful for scoring computation.
@@ -468,9 +469,25 @@ public class ActionModel {
         }
     }
     
+<<<<<<< HEAD
     // TODO FINE 18/05
 
 
+=======
+    //TODO ANDRE
+    //metodo per refresh delle ammoCard in map (NO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
+    //non lancia eccezioni perchè è tuto gestito
+    public void refreshMapAmmoCard(){
+    
+    }
+    
+    //TODO ANDRE
+    //metodo per refresh delle WeaponCard in map (SOLO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
+    //non lancia eccezioni perchè è tuto gestito
+    public void refreshMapWeaponCard(){
+    
+    }
+>>>>>>> 5957e336d87e560de3e68ee0cb41a32e98a35324
 }
         
     

@@ -277,7 +277,7 @@ public class Map {
      * @return true if PlayerA see PlayerB
      */
     public boolean isVisible(Player a, Player b) {
-    
+        
         try {
             return isVisible(findPlayer(a),findPlayer(b));
         } catch (MapException e) {
@@ -286,6 +286,19 @@ public class Map {
             
         }
     }
+    
+    public boolean isNotVisible(Player a, Player b) {
+        
+        try {
+            return !isVisible(findPlayer(a),findPlayer(b));
+        } catch (MapException e) {
+            System.out.println("is visible down");
+            return false;
+            
+        }
+    }
+    
+    
     
     /**
      * Calculate if SquareA see SquareB.

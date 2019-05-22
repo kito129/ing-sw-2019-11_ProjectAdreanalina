@@ -14,6 +14,7 @@ import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -39,7 +40,7 @@ public class ActionController {
          if(map.existInMap(inputSquare)){
              //effective move
              try {
-                 actionModel.runActionModel(inputSquare);
+                 actionModel.runActionModel(actionModel.getGameModel().getActualPlayer(),inputSquare);
              } catch (RunActionMaxDistLimitException e) {
                 //print error or choose another action
                  actionModel.getGameModel().setState(State.ERROR);
@@ -166,11 +167,7 @@ public class ActionController {
      */
     public void rechargeController(Player player, ArrayList<WeaponCard> weapon){
 
-        //creo var temporanee
-        WeaponCard weaponToCharge = new WeaponCard("ciao",EnumColorCardAndAmmo.BLU);
-        ArrayList<EnumColorCardAndAmmo> avaiableAmmo = player.getPlayerBoard().getAmmo();
-
-
+       WeaponCard weaponToCharge=weapon.get(0);
         //fino a che ho armi disponibili
         while (weapon.size()>0) {
 
@@ -179,23 +176,22 @@ public class ActionController {
             int viewSelection = 1;
 
             //seleziono l'arma e vedo il costo
-            for (WeaponCard a : weapon) {
+                
+            //prendo il costo di ricarica
+            ArrayList<EnumColorCardAndAmmo> rechargeCost = weaponToCharge.getRechargeCost();
+            System.out.println("costo di ricarica: " + rechargeCost);
 
-                weaponToCharge = weapon.get(viewSelection);
-                //prendo il costo di ricarica
-                ArrayList<EnumColorCardAndAmmo> rechargeCost = weaponToCharge.getRechargeCost();
-                rechargeCost.add(weaponToCharge.getColorWeaponCard());
+            try {
+                payAmmoController(player,rechargeCost);
+                weaponToCharge.setCharge(true);
+                weapon.remove(0);
 
-                try {
-                    payAmmoController(player,rechargeCost);
-                    weaponToCharge.setCharge(true);
+            } catch (NotValidAmmoException e) {
 
-                } catch (NotValidAmmoException e) {
-
-                } catch (NoPowerUpAvailable noPowerUpAvailable) {
-                    noPowerUpAvailable.printStackTrace();
-                }
+            } catch (NoPowerUpAvailable noPowerUpAvailable) {
+                noPowerUpAvailable.printStackTrace();
             }
+            
         }
     }
     
@@ -220,14 +216,20 @@ public class ActionController {
 
             avaiblePowerUpAsAmmo.add(a.getColorPowerUpCard());
         }
+        
+        System.out.println("avaiable ammo" + avaibleAmmo);
+        System.out.println("avaiable powerup ammo" + avaiblePowerUpAsAmmo);
         if (avaiblePowerUpAsAmmo.size()==0){
             throw  new NoPowerUpAvailable();
         }
-
-        if (avaibleAmmo.containsAll(ammoToPay)) {
+        
+    
+        if (false) {
+            
             //pago e rendo carica l'arma
 
             playerBoard.decreaseAmmo(ammoToPay);
+            System.out.println("sono qui");
 
         } else {
 
@@ -237,13 +239,15 @@ public class ActionController {
             ArrayList<EnumColorCardAndAmmo> tempAvaible = new ArrayList<>();
             tempAvaible.addAll(avaibleAmmo);
             tempAvaible.addAll(avaiblePowerUpAsAmmo);
-
+            System.out.println(tempAvaible);
+            
             if (tempAvaible.containsAll(ammoToPay)) {
 
                 // posso pagare usando ammo e power up
 
                 // chiedo alla view se lo vuole fare
                 Boolean viewAnswer = true;
+                System.out.println(ammoToPay);
 
                 if (viewAnswer) {
 
@@ -253,14 +257,11 @@ public class ActionController {
 
                             playerBoard.decreaseAmmo(a);
                         } else if (avaiblePowerUpAsAmmo.contains(a)) {
-
-                            for (PowerUpCard b : playerBoard.getPlayerPowerUps()) {
-
-                                if (b.getColorPowerUpCard().equals(a)) {
-
-                                    playerBoard.removePowerUp(b);
-                                }
-                            }
+                        
+                        System.out.println("sonoqui");
+                         playerBoard.getPlayerPowerUps().remove(a);
+                        }else {
+                            throw new NotValidAmmoException();
                         }
                     }
                 }
