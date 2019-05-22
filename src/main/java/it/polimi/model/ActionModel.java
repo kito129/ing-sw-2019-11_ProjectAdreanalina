@@ -97,6 +97,7 @@ public class ActionModel {
         if (map.distance(map.findPlayer(actualPlayer), targetSquare) < maxDist) {
 
             map.movePlayer(actualPlayer, targetSquare);
+            
             if (!map.isGenerationSquare(targetSquare) && actualPlayer.getPlayerBoard().getPlayerPowerUps().size() < 4) {
 
                 actualPlayer.catchAmmoCard(((NormalSquare) map.findPlayer(actualPlayer)).catchAmmoCard());

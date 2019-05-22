@@ -71,10 +71,7 @@ public class ActionController {
     
             //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
             if (map.isGenerationSquare(inputSquare)) {
-        
-                //chiedi alla view l'index dellarma
-                //solo prova
-                indexWeapon = 1;
+            
             } else {
                 indexWeapon = null;
             }

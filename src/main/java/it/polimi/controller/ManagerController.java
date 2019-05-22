@@ -13,12 +13,12 @@ public class ManagerController implements RemoteGameController {
     private ActionController actionController;
     private ActionModel actionModel;
     private GameModel gameModel;
-    private Player actualPlayer;
     private boolean gameStarted;
     private State state;
     private State beforeError;
     
     public boolean getStaretd(){
+        
         return gameStarted;
     }
     
@@ -53,10 +53,6 @@ public class ManagerController implements RemoteGameController {
         this.gameStarted = gameStarted;
     }
     
-    public Player getActualPlayer () {
-        
-        return actualPlayer;
-    }
     
     
     @Override

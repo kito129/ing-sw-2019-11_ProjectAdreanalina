@@ -136,7 +136,23 @@ public class MainMarcoController {
             p.toString();
             p.stampa();
         }
+    
+        try {
+            actionController.grabActionController(actionModel,viewCLI);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotValidSquareException e) {
+            e.printStackTrace();
+        } catch (MapException e) {
+            e.printStackTrace();
+        }
+    
+        for (Player p : players) {
         
+            p.toString();
+            p.stampa();
+        }
+    
         System.out.println(map.isNotVisible(player1,player5));
         
     }
