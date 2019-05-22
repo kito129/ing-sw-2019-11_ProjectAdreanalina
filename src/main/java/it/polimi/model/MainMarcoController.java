@@ -117,7 +117,7 @@ public class MainMarcoController {
         ViewCLI viewCLI = new ViewCLI();
         viewCLI.setRow(2);
         viewCLI.setColumn(0);
-        viewCLI.setIndex(0);
+        viewCLI.setIndexWeapon(0);
     
         try {
             actionController.runActionController(actionModel, viewCLI);

@@ -14,7 +14,6 @@ import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 
 /**
@@ -65,7 +64,7 @@ public class ActionController {
         
         //answer to view an input Square
         Square inputSquare = map.getSquare(view.getRow(),view.getColumn());
-        Integer indexWeapon=view.getIndex();
+        Integer indexWeapon=view.getIndexWeapon();
         //temp variables
         if(map.existInMap(inputSquare)) {
     

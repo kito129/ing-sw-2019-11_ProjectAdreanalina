@@ -26,7 +26,7 @@ public class PrintSquare implements Serializable {
      */
     public static void printNormalSquare(NormalSquare normalSquare) {
 
-        String[][] square = new String[4][3];
+        String[][] square = new String[4][5];
 
         System.out.println("ROW: " +normalSquare.getRow());
         System.out.println("COLUMN: " +normalSquare.getColumn());
