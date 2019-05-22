@@ -26,13 +26,17 @@ public class PrintSquare implements Serializable {
      */
     public static void printNormalSquare(NormalSquare normalSquare) {
 
+        String[][] square = new String[4][3];
+
         System.out.println("ROW: " +normalSquare.getRow());
         System.out.println("COLUMN: " +normalSquare.getColumn());
 
-        if(normalSquare.getColor().equals(EnumColorSquare.BLU)){
-            //todo
-        }
+        if(!(normalSquare.getRow() == 0 && normalSquare.getColumn() == 2  || normalSquare.getRow() == 1 && normalSquare.getColumn() == 0 || normalSquare.getRow() == 2 && normalSquare.getColumn() == 3)){
 
+            square[0][0] = "a";
+            square[0][1] = "m";
+            square[0][2] = "m";
+        }
     }
 
     /**

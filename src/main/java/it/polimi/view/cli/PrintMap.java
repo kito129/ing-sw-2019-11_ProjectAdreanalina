@@ -108,6 +108,10 @@ public class PrintMap implements Serializable {
         return map;
     }
 
+    /**
+     * Set the right string to view for CLI to the corresponding color
+     * @param player      the selected player
+     */
     private static String colorString(Player player){
 
         String s = "";
@@ -120,12 +124,29 @@ public class PrintMap implements Serializable {
 
             s = ANSI_GREEN_BACKGROUND + "G" + ANSI_BLACK_BACKGROUND;
         }
-        //todo
+        else if(player.getColor().equals(EnumColorPlayer.GREY)){
+
+            s = ANSI_WHITE_BACKGROUND + "G" + ANSI_BLACK_BACKGROUND;
+        }
+        else if(player.getColor().equals(EnumColorPlayer.PINK)){
+
+            s = ANSI_PURPLE_BACKGROUND + "G" + ANSI_BLACK_BACKGROUND;
+        }
+        else if(player.getColor().equals(EnumColorPlayer.YELLOW)){
+
+            s = ANSI_YELLOW_BACKGROUND + "G" + ANSI_BLACK_BACKGROUND;
+        }
 
         return s;
     }
 
-    private static String[][] getPlayersOnMap(ArrayList<Square> squares, String[][] map){
+    /**
+     * Set the initial letter corresponding to the player's color in the right position to view the player on the map
+     * Set the string "amm" in the right position (NormalSquare)
+     * @param squares   the squares of the map
+     * @param map       the map choosen for the game
+     */
+    public static String[][] getPlayersOnMap(ArrayList<Square> squares, String[][] map){
 
         for (Square s : squares){
 
