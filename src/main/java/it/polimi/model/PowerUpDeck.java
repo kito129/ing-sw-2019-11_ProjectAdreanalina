@@ -13,8 +13,8 @@ import java.util.Collections;
  */
 public class PowerUpDeck {
 
-    public ArrayList<PowerUpCard> powerUpCards;
-    public ArrayList<PowerUpCard> discardedCards;
+    private ArrayList<PowerUpCard> powerUpCards;
+    private ArrayList<PowerUpCard> discardedCards;
 
     public PowerUpDeck() {
 
