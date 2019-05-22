@@ -127,7 +127,7 @@ public class ViewCLI implements RemoteView {
             case USEPOWERUP:
                 break;
             case RUN:
-                
+                viewRun();
                 break;
             case SELECTRUN:
                 viewRunSelection();
@@ -179,15 +179,17 @@ public class ViewCLI implements RemoteView {
     public void viewRunSelection() throws RemoteException {
         
         PrintRunAction.print();
-        
+
         Scanner input = new Scanner(System.in);
+
+        PrintSelectMove.printRow();
         while(!input.hasNextInt())
             input = new Scanner(System.in);
-        
         setRow(input.nextInt());
+
+        PrintSelectMove.printColumn();
         while(!input.hasNextInt())
             input = new Scanner(System.in);
-        
         setColumn(input.nextInt());
         
         //notifica che hai preso i valori
@@ -197,6 +199,5 @@ public class ViewCLI implements RemoteView {
     public void viewRun() throws RemoteException {
         
         PrintMap.printMap(gameModel.getMap().getSquares());
-        
     }
 }

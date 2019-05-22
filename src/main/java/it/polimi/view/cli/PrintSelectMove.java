@@ -14,4 +14,18 @@ public class PrintSelectMove implements Serializable {
         System.out.println("3) SHOOT PEOPLE");
         System.out.println("0) END YOUR TURN (before finishing your turn, if you have ammo, you can reload your weapons");
     }
+
+    /**
+     * prints the client's row
+     */
+    public static void printRow(){
+        System.out.println("ROW: ");
+        }
+
+    /**
+     * prints the client's column
+     */
+    public static void printColumn(){
+        System.out.println("COLUMN: ");
+    }
 }
