@@ -469,28 +469,44 @@ public class ActionModel {
         }
     }
     
-<<<<<<< HEAD
+
     // TODO FINE 18/05
 
-
-=======
-    //TODO ANDRE
     //metodo per refresh delle ammoCard in map (NO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
     //non lancia eccezioni perchè è tuto gestito
     public void refreshMapAmmoCard(){
+
+        for(Square s:map.getSquares()){
+
+            if(!(map.isGenerationSquare(s))&&(((NormalSquare) s).getAmmoCard()==null)){
+
+                AmmoCard ammoCardDrawn = gameModel.getAmmoDeck().drawAmmoCard();
+                ((NormalSquare) s).setAmmoCard(ammoCardDrawn);
+            }
+        }
     
     }
-    
-    //TODO ANDRE
+
     //metodo per refresh delle WeaponCard in map (SOLO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
     //non lancia eccezioni perchè è tuto gestito
-    public void refreshMapWeaponCard(){
-    
+    public void refreshMapWeaponCard()throws NoAvaibleCard {
+
+        for (Square s : map.getSquares()) {
+
+            if (map.isGenerationSquare(s)) {
+
+                ArrayList<WeaponCard> weaponList = ((GenerationSquare) s).getWeaponList();
+                for (int i = weaponList.size(); i <= 3; i++) {
+
+                    WeaponCard weaponCardDraw = gameModel.getWeaponDeck().drawWeaponCard();
+                    ((GenerationSquare) s).addWeaponCard(weaponCardDraw);
+                }
+            }
+        }
     }
->>>>>>> 5957e336d87e560de3e68ee0cb41a32e98a35324
 }
-        
-    
+
+
         
 
 
