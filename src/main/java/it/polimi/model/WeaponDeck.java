@@ -24,9 +24,9 @@ public class WeaponDeck {
         WeaponCard whisper=new Whisper();
         WeaponCard vortexCannon=new VortexCannon();
         WeaponCard furnace=new Furnace();
-        WeaponCard heatSeeker=new HeatSeeker();
+        WeaponCard heatSeeker=new Heatseeker();
         WeaponCard hellion=new Hellion();
-        WeaponCard flameThrower=new FlameThrower();
+        WeaponCard flameThrower=new Flamethrower();
         WeaponCard grenadeLauncher= new GrenadeLauncher();
         WeaponCard rocketLauncher=new RocketLauncher();
         WeaponCard railgun=new Railgun();

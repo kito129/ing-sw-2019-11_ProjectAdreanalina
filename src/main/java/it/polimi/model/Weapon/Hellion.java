@@ -62,11 +62,11 @@ public class Hellion extends WeaponCard {
 
     public void nanoTracerMode(Map map, Player currentPlayer,Player targetPlayer) throws NotVisibleTarget, NotValidDistance, MapException {
 
-        Square targetSquare = map.findPlayer(targetPlayer);
-        ArrayList<Player> playersInTargetSquare;
-        playersInTargetSquare=map.playersOnSquare(targetSquare);
         if((map.isVisible(currentPlayer,targetPlayer)) && (map.distance(currentPlayer,targetPlayer)>0)){
 
+            Square targetSquare = map.findPlayer(targetPlayer);
+            ArrayList<Player> playersInTargetSquare;
+            playersInTargetSquare=map.playersOnSquare(targetSquare);
             targetPlayer.singleDamage(currentPlayer.getColor());
             ArrayList<EnumColorPlayer> hellionMarks= new ArrayList<>();
             hellionMarks.add(currentPlayer.getColor());
@@ -78,7 +78,7 @@ public class Hellion extends WeaponCard {
         }else if(!(map.isVisible(currentPlayer,targetPlayer))){
 
             throw new NotVisibleTarget();
-        }else if(map.distance(currentPlayer,targetPlayer)==0){
+        }else if(!(map.distance(currentPlayer,targetPlayer)>0)){
 
             throw new NotValidDistance();
         }

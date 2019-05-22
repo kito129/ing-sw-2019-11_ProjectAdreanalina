@@ -22,6 +22,7 @@ public class GameModel implements RemoteGameModel {
     private WeaponDeck weaponDeck;
     private Player actualPlayer;
     private State state;
+    private State extraState;
 
 
     public GameModel(Map map,KillShotTrack killShotTrack,ArrayList<Player> players){
@@ -29,19 +30,12 @@ public class GameModel implements RemoteGameModel {
         this.map=map;
         this.killShotTrack=killShotTrack;
         this.players=players;
+        this.ammoDeck = new AmmoDeck();
+        this.powerUpDeck=new PowerUpDeck();
+        this.weaponDeck=new WeaponDeck();
     }
-
 
     
-    /**
-     * Sets actual player.
-     *
-     * @param actualPlayer the actual player
-     */
-    public void setActualPlayer(Player actualPlayer) {
-
-        this.actualPlayer = actualPlayer;
-    }
     
     /**
      * Gets actual player.
@@ -119,6 +113,21 @@ public class GameModel implements RemoteGameModel {
         return state;
     }
     
+    public State getExtraState () {
+        
+        return extraState;
+    }
+    
+    /**
+     * Sets actual player.
+     *
+     * @param actualPlayer the actual player
+     */
+    public void setActualPlayer(Player actualPlayer) {
+        
+        this.actualPlayer = actualPlayer;
+    }
+    
     public void setState (State state) {
         
         this.state = state;
@@ -132,6 +141,11 @@ public class GameModel implements RemoteGameModel {
             }
         }
         return tempPLayers;
+    }
+    
+    public void setExtraState (State extraState) {
+        
+        this.extraState = extraState;
     }
     
     public ArrayList<EnumColorPlayer> getPlayerColor(){

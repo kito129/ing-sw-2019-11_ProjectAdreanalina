@@ -26,6 +26,8 @@ public class ViewCLI implements RemoteView {
     //attribute for grab
     private int index;
     
+  
+    
     @Override
     public int getIndex () {
         

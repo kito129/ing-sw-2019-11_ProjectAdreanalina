@@ -112,7 +112,7 @@ public class WeaponCard {
 
     public String toString(){
 
-        return this.nameWeaponCard;
+        return this.nameWeaponCard + this.isCharge;
     }
 }
     

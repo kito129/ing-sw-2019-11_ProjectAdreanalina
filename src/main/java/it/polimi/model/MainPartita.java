@@ -4,8 +4,11 @@ package it.polimi.model;
 import it.polimi.controller.ActionController;
 import it.polimi.model.Exception.*;
 import it.polimi.model.Weapon.LockRifle;
+import it.polimi.view.RemoteView;
+import it.polimi.view.cli.ViewCLI;
 
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 
@@ -82,6 +85,8 @@ public class MainPartita {
 
         //spara
         LockRifle lockRifle = new LockRifle();
+        player1.getPlayerBoard().addWeapon(lockRifle);
+        
         try {
 
             lockRifle.baseEffect(map, player1, player2);
@@ -171,38 +176,6 @@ public class MainPartita {
         
         
         
-        
-        gameModel.setActualPlayer(player1);
-        ActionModel actionModel1 = new ActionModel(gameModel);
-        ActionController actionController = new ActionController();
-        
-        PowerUpDeck powerUpDeck = new PowerUpDeck();
-        PowerUpCard powerUp= powerUpDeck.drawnPowerUpCard();
-        player1.getPlayerBoard().addPowerUp(powerUp);
-        try {
-            map.movePlayer(player4,map.getSquare(0,2));
-        } catch (MapException e) {
-            e.printStackTrace();
-        }
-    
-        try {
-            actionController.usePowerUpController(actionModel,powerUp);
-        } catch (NoPowerUpAvailable noPowerUpAvailable) {
-            noPowerUpAvailable.printStackTrace();
-        } catch (NotValidInput notValidInput) {
-            notValidInput.printStackTrace();
-        } catch (MapException e) {
-            e.printStackTrace();
-        }
-    
-        
-        //stampa player
-        for (Player p : players) {
-        
-            p.toString();
-            p.stampa();
-        }
-    
     
     }
 }

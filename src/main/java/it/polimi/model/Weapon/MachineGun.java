@@ -18,6 +18,7 @@ public class MachineGun extends WeaponCard {
      * Creates the list of focus shot cost(cost of optional effect1) settings it to yellow.
      * Creates the list of turret tripod cost(cost of optional effect2) settings it to blu.
      */
+    //todo controllare tutti gli effetti che devono essere inseriti
     public MachineGun() {
 
         super("MACHINE GUN", EnumColorCardAndAmmo.BLU);

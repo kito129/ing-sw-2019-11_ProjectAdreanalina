@@ -6,7 +6,7 @@ import it.polimi.model.Exception.VisibleTarget;
 
 import java.util.ArrayList;
 
-public class HeatSeeker extends WeaponCard {
+public class Heatseeker extends WeaponCard {
 
     /**
      * Instantiates a new Heat Seeker card.
@@ -14,7 +14,7 @@ public class HeatSeeker extends WeaponCard {
      * Creates the list of recharge cost settings its value to RED,RED,YELLOW.
      * Creates the list of effects setting its value to BaseEffect.
      */
-    public HeatSeeker(){
+    public Heatseeker(){
 
         super("HEAT SEEKER", EnumColorCardAndAmmo.RED);
         ArrayList<EnumColorCardAndAmmo>rechargeCost=new ArrayList<EnumColorCardAndAmmo>();
