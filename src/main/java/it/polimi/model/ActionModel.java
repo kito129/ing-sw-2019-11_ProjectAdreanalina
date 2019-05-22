@@ -60,11 +60,12 @@ public class ActionModel {
      * @param targetSquare the target square to move
      * @throws RunActionMaxDistLimitException the run action max dist limit exception
      */
-    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException, NotValidInput, NotValidSquareException, MapException {
+    public void runActionModel(Player player, Square targetSquare) throws RunActionMaxDistLimitException, NotValidInput, NotValidSquareException, MapException {
 
-        if (map.distance(map.findPlayer(actualPlayer), targetSquare) < 4) {
+        if (map.distance(map.findPlayer(player), targetSquare) < 4) {
 
-            map.movePlayer(actualPlayer, targetSquare);
+            map.movePlayer(player, targetSquare);
+            System.out.println("muovo andrea (actual player  in 2,0)");
             action++;
         } else {
 

@@ -40,7 +40,7 @@ public class ActionController {
          if(map.existInMap(inputSquare)){
              //effective move
              try {
-                 actionModel.runActionModel(inputSquare);
+                 actionModel.runActionModel(actionModel.getGameModel().getActualPlayer(),inputSquare);
              } catch (RunActionMaxDistLimitException e) {
                 //print error or choose another action
                  actionModel.getGameModel().setState(State.ERROR);

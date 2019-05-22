@@ -16,6 +16,8 @@ public class ManagerController implements RemoteGameController {
     private GameModel gameModel;
     private Player actualPlayer;
     private boolean gameStarted;
+    private State state;
+    private State beforeError;
     
     public boolean getStaretd(){
         return gameStarted;
@@ -81,22 +83,33 @@ public class ManagerController implements RemoteGameController {
                     break;
                 case STARTTURN:
                     break;
+                case CHOSE:
+                    break;
                 case USEPOWERUP:
                     //chiedo che power up vuole usare
-                    ArrayList<PowerUpCard> powerUpAvailable = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps();
-    
-                    //chiedo al player qualche vuole usare
-                    PowerUpCard usedPowerUp = powerUpAvailable.get(0);
-                    try {
-    
-                        actionController.usePowerUpController(actionModel, usedPowerUp);
-                    } catch (NoPowerUpAvailable noPowerUpAvailable) {
-    
-                        //TODO
-                    } catch (NotValidInput notValidInput) {
-                        notValidInput.printStackTrace();
-                    } catch (MapException e) {
-                        e.printStackTrace();
+                    if( gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex())!=null){
+                        
+                        PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex());
+                        try {
+        
+                            actionController.usePowerUpController(actionModel, usedPowerUp);
+                        } catch (NoPowerUpAvailable noPowerUpAvailable) {
+                            beforeError=gameModel.getState();
+                            gameModel.setState(State.ERROR);
+                            System.out.println("ERROR");
+                        } catch (NotValidInput notValidInput) {
+                            beforeError=gameModel.getState();
+                            gameModel.setState(State.ERROR);
+                            System.out.println("ERROR");
+                        } catch (MapException e) {
+                            beforeError=gameModel.getState();
+                            gameModel.setState(State.ERROR);
+                            System.out.println("ERROR");
+                        }
+                    }else {
+                        beforeError=gameModel.getState();
+                        gameModel.setState(State.ERROR);
+                        System.out.println("ERROR");
                     }
                     break;
                 case RUN:
@@ -104,6 +117,9 @@ public class ManagerController implements RemoteGameController {
                     try {
                         actionController.runActionController(actionModel, view);
                     } catch (NotValidSquareException | MapException e) {
+                        beforeError=gameModel.getState();
+                        gameModel.setState(State.ERROR);
+                        System.out.println("ERROR");
                         e.printStackTrace();
                     }
                     break;
