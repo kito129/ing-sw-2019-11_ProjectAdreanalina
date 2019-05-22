@@ -489,7 +489,7 @@ public class ActionModel {
 
     //metodo per refresh delle WeaponCard in map (SOLO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
     //non lancia eccezioni perchè è tuto gestito
-    public void refreshMapWeaponCard()throws NoAvaibleCard {
+    public void refreshMapWeaponCard(){
 
         for (Square s : map.getSquares()) {
 
@@ -499,7 +499,10 @@ public class ActionModel {
                 for (int i = weaponList.size(); i <3; i++) {
 
                     WeaponCard weaponCardDraw = gameModel.getWeaponDeck().drawWeaponCard();
-                    ((GenerationSquare) s).addWeaponCard(weaponCardDraw);
+                    if(weaponCardDraw!=null){
+
+                        ((GenerationSquare) s).addWeaponCard(weaponCardDraw);
+                    }
                 }
             }
         }
