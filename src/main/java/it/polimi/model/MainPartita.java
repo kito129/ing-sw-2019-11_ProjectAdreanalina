@@ -82,6 +82,8 @@ public class MainPartita {
 
         //spara
         LockRifle lockRifle = new LockRifle();
+        player1.getPlayerBoard().addWeapon(lockRifle);
+        
         try {
 
             lockRifle.baseEffect(map, player1, player2);
@@ -202,7 +204,18 @@ public class MainPartita {
             p.toString();
             p.stampa();
         }
+        
+        System.out.println("\n\nFINE\n\n");
+
+        
+        lockRifle.setCharge(false);
+        actionController.rechargeController(player1,player1.getPlayerBoard().getWeaponToCharge());
     
+        for (Player p : players) {
+        
+            p.toString();
+            p.stampa();
+        }
     
     }
 }
