@@ -496,7 +496,7 @@ public class ActionModel {
             if (map.isGenerationSquare(s)) {
 
                 ArrayList<WeaponCard> weaponList = ((GenerationSquare) s).getWeaponList();
-                for (int i = weaponList.size(); i <= 3; i++) {
+                for (int i = weaponList.size(); i <3; i++) {
 
                     WeaponCard weaponCardDraw = gameModel.getWeaponDeck().drawWeaponCard();
                     ((GenerationSquare) s).addWeaponCard(weaponCardDraw);
