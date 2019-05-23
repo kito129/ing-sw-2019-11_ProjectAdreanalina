@@ -232,7 +232,6 @@ public class ViewCLI implements RemoteView {
 
                 PrintGrabAction.printGrabWeapon();
                 PrintWeapon.print(((GenerationSquare) squareSelected).getWeaponList());
-                //todo stampare le armi così da poter vedere cosa scegliere
                 PrintSelectMove.printIndexWeapon();
                 while(!input.hasNextInt())
                     input = new Scanner(System.in);
