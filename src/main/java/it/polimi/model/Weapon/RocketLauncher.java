@@ -59,7 +59,7 @@ public class RocketLauncher extends WeaponCard {
             if((destSquare!=null)&&(map.distance(squareOfTarget1Player,destSquare)==1)){
 
                 map.movePlayer(target1,destSquare);
-            }else if((!(map.distance(squareOfTarget1Player,destSquare)==1))&&(destSquare!=null)){
+            }else if((destSquare!=null)&&(!(map.distance(squareOfTarget1Player,destSquare)==1))){
 
                 throw new NotValidDistance();
             }
