@@ -62,7 +62,7 @@ public class WeaponDeck {
 
     }
 
-    public WeaponCard drawWeaponCard() throws NoAvaibleCard {
+    public WeaponCard drawWeaponCard(){
 
         if(weaponCards.size()!=0){
 
@@ -71,7 +71,7 @@ public class WeaponDeck {
             return firstCard;
         }else {
 
-            throw new NoAvaibleCard();
+            return null;
         }
     }
 

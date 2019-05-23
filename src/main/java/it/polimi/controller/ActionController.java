@@ -4,7 +4,6 @@ package it.polimi.controller;
 import it.polimi.model.*;
 //chiedere perche devo importare tutto
 import it.polimi.model.Exception.*;
-import it.polimi.model.Exception.ModelException.RoundModelException.CatchActionFullObjException;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
@@ -64,30 +63,28 @@ public class ActionController {
         
         //answer to view an input Square
         Square inputSquare = map.getSquare(view.getRow(),view.getColumn());
-        Integer indexWeapon=view.getIndexWeapon();
+        Integer indexWeapon=-1;
         //temp variables
         if(map.existInMap(inputSquare)) {
     
     
             //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
             if (map.isGenerationSquare(inputSquare)) {
-        
-                //chiedi alla view l'index dellarma
-                //solo prova
-                indexWeapon = 1;
-            } else {
-                indexWeapon = null;
+                indexWeapon=view.getIndex();
             }
     
             //effective catch gia con l'index giusto se è una Generation Square
             try {
         
                 actionModel.grabActionModel(inputSquare, indexWeapon);
-            } catch (CatchActionMaxDistLimitException catchActionMaxDistExpetion) {
+            } catch (GrabActionMaxDistLimitException catchActionMaxDistExpetion) {
+                catchActionMaxDistExpetion.printStackTrace();
         
-            } catch (CatchActionFullObjException e) {
+            } catch (it.polimi.model.Exception.ModelException.RoundModelException.GrabActionFullObjException e) {
+                e.printStackTrace();
         
             } catch (NotValidInput notValidInput) {
+                notValidInput.printStackTrace();
             
             }
         }else  {

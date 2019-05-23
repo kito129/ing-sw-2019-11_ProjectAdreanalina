@@ -594,7 +594,11 @@ public class Map {
     
     public void print(){
         for (Square a: squares){
-            System.out.println(a.toString());
+            if(this.isGenerationSquare(a)){
+                System.out.println(a.toString()+((GenerationSquare) a).getWeaponList().toString());
+            }else if(((NormalSquare) a).getAmmoCard()!=null){
+                System.out.println(a.toString()+((NormalSquare) a).getAmmoCard().toString());
+            }
         }
     }
 }

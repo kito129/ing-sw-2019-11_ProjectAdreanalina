@@ -13,12 +13,12 @@ public class ManagerController implements RemoteGameController {
     private ActionController actionController;
     private ActionModel actionModel;
     private GameModel gameModel;
-    private Player actualPlayer;
     private boolean gameStarted;
     private State state;
     private State beforeError;
     
     public boolean getStaretd(){
+        
         return gameStarted;
     }
     
@@ -53,10 +53,6 @@ public class ManagerController implements RemoteGameController {
         this.gameStarted = gameStarted;
     }
     
-    public Player getActualPlayer () {
-        
-        return actualPlayer;
-    }
     
     
     @Override
@@ -86,9 +82,9 @@ public class ManagerController implements RemoteGameController {
                     break;
                 case USEPOWERUP:
                     //chiedo che power up vuole usare
-                    if( gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndexWeapon())!=null){
+                    if( gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex())!=null){
                         
-                        PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndexWeapon());
+                        PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex());
                         try {
         
                             actionController.usePowerUpController(actionModel, usedPowerUp);
