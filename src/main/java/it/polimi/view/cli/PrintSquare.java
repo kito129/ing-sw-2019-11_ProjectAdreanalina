@@ -23,7 +23,7 @@ public class PrintSquare implements Serializable {
      * set that square with black color
      * @param square   the square selected
      */
-    public static void getsetSquare(Square square) {
+    public static String[][] getsetSquare(Square square) {
 
         String[][] s = new String[4][6];
 
@@ -64,6 +64,7 @@ public class PrintSquare implements Serializable {
 
             s[square.getRow()][square.getColumn()] = ANSI_BLACK_BACKGROUND + " ";
         }
+        return s;
     }
 
     /**
