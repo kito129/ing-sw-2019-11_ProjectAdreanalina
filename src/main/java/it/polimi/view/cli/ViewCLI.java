@@ -185,7 +185,7 @@ public class ViewCLI implements RemoteView {
     }
     
     public void viewRunSelection() throws RemoteException {
-        
+
         PrintRunAction.print();
 
         Scanner input = new Scanner(System.in);
@@ -231,7 +231,7 @@ public class ViewCLI implements RemoteView {
 
         System.out.println();
 
-        if(gameModel.getMap().isGenerationSquare(gameModel.getMap().getSquare(row,column))){
+        if(gameModel.getMap().getSquare(row, column)){
 
             PrintGrabAction.printGrabWeapon();
             PrintWeapon.print(...);

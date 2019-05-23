@@ -14,6 +14,7 @@ public class PrintRechargeCost implements Serializable {
     public static void print(ArrayList<WeaponCard> weaponList){
 
         for(WeaponCard wc : weaponList){
+
             PrintEnumCardsAmmo.print(wc.getRechargeCost());
         }
     }

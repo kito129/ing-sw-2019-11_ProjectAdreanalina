@@ -1,10 +1,9 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.EnumColorSquare;
-import it.polimi.model.GenerationSquare;
-import it.polimi.model.NormalSquare;
+import it.polimi.model.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class PrintSquare implements Serializable {
 
@@ -21,22 +20,62 @@ public class PrintSquare implements Serializable {
     public static final String ANSI_RESET = "\u001b[0m";
 
     /**
+     * Get and set a single square: control if the row and column exists and set them with the corresponding color; if doesn't exists,
+     * set that square with black color
+     * @param square   the square selected
+     */
+    public static void getsetSquare(Square square) {
+
+        String[][] s = new String[4][6];
+
+        System.out.println("ROW: " +square.getRow());
+        System.out.println("COLUMN: " +square.getColumn());
+
+        if(square.getColor().equals(EnumColorSquare.BLU)){
+
+            s[square.getRow()][square.getColumn()] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+        }
+
+        if(square.getColor().equals(EnumColorSquare.GREEN)){
+
+            s[square.getRow()][square.getColumn()] = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+        }
+
+        if(square.getColor().equals(EnumColorSquare.PINK)){
+
+            s[square.getRow()][square.getColumn()] = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+        }
+
+        if(square.getColor().equals(EnumColorSquare.RED)){
+
+            s[square.getRow()][square.getColumn()] = ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+        }
+
+        if(square.getColor().equals(EnumColorSquare.YELLOW)){
+
+            s[square.getRow()][square.getColumn()] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+        }
+
+        if(square.getColor().equals(EnumColorSquare.WHITE)){
+
+            s[square.getRow()][square.getColumn()] = ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+        }
+
+        else {
+
+            s[square.getRow()][square.getColumn()] = ANSI_BLACK_BACKGROUND + " ";
+        }
+    }
+
+    /**
      * Print a single square of the map to view its attributes
      * @param normalSquare   the square selected
      */
     public static void printNormalSquare(NormalSquare normalSquare) {
 
-        String[][] square = new String[4][5];
-
         System.out.println("ROW: " +normalSquare.getRow());
         System.out.println("COLUMN: " +normalSquare.getColumn());
-
-        if(!(normalSquare.getRow() == 0 && normalSquare.getColumn() == 2  || normalSquare.getRow() == 1 && normalSquare.getColumn() == 0 || normalSquare.getRow() == 2 && normalSquare.getColumn() == 3)){
-
-            square[0][0] = "a";
-            square[0][1] = "m";
-            square[0][2] = "m";
-        }
+        PrintEnumCardsAmmo.print(normalSquare.getAmmoCard().getAmmo());
     }
 
     /**
@@ -47,10 +86,6 @@ public class PrintSquare implements Serializable {
 
         System.out.println("ROW: " +generationSquare.getRow());
         System.out.println("COLUMN: " +generationSquare.getColumn());
-
-        if(generationSquare.getColor().equals(EnumColorSquare.BLU)){
-            //todo
-        }
-
+        PrintEnumCardsAmmo.print();
     }
 }
