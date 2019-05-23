@@ -63,15 +63,10 @@ public class MachineGun extends WeaponCard {
         }
     }
 
-    //todo non controllo la visibilà del target perchè questo effetto è utilizzabile solo se è stato usato prima l'effetto base
-    //todo nell'effetto base controllo gia la visibilità
-
     public void focusShotEffect(Player currentPlayer, Player target1or2) {
 
         target1or2.singleDamage(currentPlayer.getColor());
     }
-
-    //riguardare da qua
 
     // todo danno aggiuntivo del tripod all'altro dei due bersagli ( quello su cui non hai usato focus).assicurarsi che siano quindi diversi
 

@@ -316,6 +316,8 @@ public class ActionController {
     
     
     //GESTIONE DELLE ARMI
+    //errori di mappa map exception non dovrebbero mai verificarsi perchè garantisci che non verranno mai sollevate.
+    //solo per ricordatelo gli errori di visibilità distanza... inglobano anche errori di mappa oltre agli errori stessi
     
     
     /**
@@ -453,6 +455,7 @@ public class ActionController {
                     if(targetFocusShot==target1Base || targetFocusShot==target2Base){
 
                         weapon.focusShotEffect(currentPlayer,targetFocusShot);
+
                     }else{
 
                         throw new NotValidInput();
@@ -464,7 +467,8 @@ public class ActionController {
 
             case "turret tripod":
 
-                // todo da finire ...chiedere a marco
+                //todo da finire
+
 
         }
     }
@@ -779,9 +783,23 @@ public class ActionController {
 
     public void HeatSeeker(GameModel gameModel, Heatseeker weapon){
 
-        //todo problema target deve essere non visibile ma se uso il metodo di marco, farebbe l'effetto base anche quando il target nella mappa non
-        //todo esiste
-        //todo ripartire da qui
+        Map map=new Map();
+        Player currentPlayer=new Player();
+        Player targetBase=new Player();
+        String message="";
+
+        switch (message){
+
+            case"base effect":
+
+                try{
+
+                    weapon.BaseEffect(map,currentPlayer,targetBase);
+                }catch (VisibleTarget visibleTarget){
+
+                    //gestire se il player vede il target o errore di mappa
+                }
+        }
     }
 
     public void Hellion(GameModel gameModel,Hellion weapon){
@@ -837,17 +855,68 @@ public class ActionController {
 
         Player currentPlayer=new Player();
         Player targetBase=new Player();
-        Boolean moveTargetBase=true;
         Square destSquareBase=new Square();
+        Square targetSquareExtra=new Square();
         Map map=new Map();
         String message="";
 
         switch (message){
 
+            case"base effect":
 
+                try{
+
+                    weapon.baseEffect(map,targetBase,currentPlayer);
+
+                }catch (NotVisibleTarget notVisibleTarget){
+
+                    //gestione target visibile o errore di mappa
+                }
+
+            case"move":
+                //non controllo se è stato effettuato l'effetto base prrchè per le armi opzionali l'effetto base è obbligatorio.
+
+                try{
+
+                    weapon.moveTarget(map,targetBase,destSquareBase);
+                }catch (NotValidDistance notValidDistance){
+
+                    //distanza di spostamento non valida
+                }catch (MapException mapException){
+
+                    //errori di mappa
+                }
+
+            case"extra grenade":
+
+                //la move lho messo come metodo a parte perchè può essere usata anche dopo questo effetto
+
+                try{
+
+                    weapon.extraGrenadeEffect(map,currentPlayer,targetSquareExtra);
+                }catch (NotVisibleTarget notVisibleTarget){
+
+                    //gestione quadrato scelto non visibile
+                }catch (MapException mapExcpetion){
+
+                    //errori di mappa
+                }
         }
+    }
+
+    public void RocketLauncher(GameModel gameModel,RocketLauncher weapon){
+
+        Player currentPlayer=new Player();
+        Map map=new Map();
+        Player targetBase=new Player();
+        Square destSquareBase= new Square();//se l'utente non vuole fare lo spostamento questo campo sarà null
+
 
     }
+
+
+
+
 }
 
 
