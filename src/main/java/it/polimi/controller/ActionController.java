@@ -904,15 +904,109 @@ public class ActionController {
         }
     }
 
-    public void RocketLauncher(GameModel gameModel,RocketLauncher weapon){
+    public void RocketLauncher(GameModel gameModel,RocketLauncher weapon) {
+
+        Player currentPlayer = new Player();
+        Map map = new Map();
+        Player targetBase = new Player();
+        Square destSquareBase = new Square();//se l'utente non vuole fare lo spostamento questo campo sarà null
+        Square destSquareJump=new Square();
+        String message = "";
+
+        switch (message) {
+
+            case "base effect":
+
+                try {
+
+                    weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
+                }catch (NotVisibleTarget notVisibleTarget) {
+
+                    //target non visibile
+
+                }catch (NotValidDistance notValidDistance){
+
+                    //errore di distanza,sia se il target è nella tuo stesso quadrato,sia se il movimento che gli facciamo fare al target non è validp
+                }catch (MapException mapExcpetion){
+
+
+                }
+
+            case"rocket jump":
+
+                try{
+
+                    weapon.rocketJumpEffect(map,currentPlayer,destSquareJump);
+
+                }catch (NotValidDistance notValidDistance){
+
+                    //errore di distanza non è 1 o 2.
+                }catch (MapException mapException){
+
+                    //errore di mappa
+                }
+            case"":
+
+                //todo chiedere a marco.
+        }
+
+    }
+
+    public void RailGun(GameModel gameModel,Railgun weapon){
 
         Player currentPlayer=new Player();
+        Player target1=new Player();
+        Player target2=new Player();//se in modalità perforazione viene scelto solo un bersaglio questo è null.
+        ArrayList<Player> piercingTargets=new ArrayList<>();
+        String direction="";
+        String message="";
         Map map=new Map();
-        Player targetBase=new Player();
-        Square destSquareBase= new Square();//se l'utente non vuole fare lo spostamento questo campo sarà null
+
+        switch (message){
+
+            case"base mode":
+
+                try{
+
+                    weapon.baseMode(map,currentPlayer,target1,direction);
+                }catch (NotValidCardinalDirection notValidCardinalDirection){
+
+                    //eccezione lanciata se la stringa passata non è una direzione cardinale
+                }catch (NotInDirection notInDirection){
+
+                    //se il player non si trova nella direzione cardinale passata.
+                }
+
+            case"piercing":
+
+                try{
+                    if(target2!=null){
+
+                        piercingTargets.add(target1);
+                        piercingTargets.add(target2);
+                        weapon.piercingMode(map,currentPlayer,piercingTargets,direction);
+                    }else{
+
+                        piercingTargets.add(target1);
+                        weapon.piercingMode(map,currentPlayer,piercingTargets,direction);
+                    }
+                }catch (NotValidCardinalDirection notValidCardinalDirection){
+
+                    ////eccezione lanciata se la stringa passata non è una direzione cardinale
+                }catch (NotInDirection notInDirection){
+
+                    //se uno dei player non si trova nella direzione cardinale passata.
+                }
+        }
 
 
     }
+
+
+
+
+
+
 
 
 

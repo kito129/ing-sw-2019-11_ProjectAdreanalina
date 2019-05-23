@@ -86,13 +86,72 @@ public class Railgun extends WeaponCard {
         }
     }
 
+    public void piercingMode(Map map,Player currentPlayer,ArrayList<Player> targets,String direction)throws NotValidCardinalDirection,NotInDirection{
 
-    public void piercingMode(Map map,Player currentPlayer,Player target1,String direction)throws NotValidCardinalDirection,NotInDirection{
+        if((direction.equals("NORTH"))||(direction.equals("EST"))||(direction.equals("SOUTH"))||(direction.equals("WEST"))){
 
-        baseMode(map,currentPlayer,target1,direction);
+            if (direction.equals("NORTH")) {
+
+                ArrayList<Player> playersOnNorth = map.playerOnMyNorth(currentPlayer);
+                for(Player p:targets) {
+
+                    if (!(playersOnNorth.contains(p))) {
+
+                        throw new NotInDirection();
+                    }
+                }
+            }
+            if (direction.equals("EST")) {
+
+                ArrayList<Player> playersOnEst = map.playerOnMyEst(currentPlayer);
+                for(Player p:targets) {
+
+                    if (!(playersOnEst.contains(p))) {
+
+                        throw new NotInDirection();
+                    }
+                }
+            }
+            if (direction.equals("SOUTH")) {
+
+                ArrayList<Player> playersOnSouth = map.playerOnMySouth(currentPlayer);
+                for(Player p:targets) {
+
+                    if (!(playersOnSouth.contains(p))) {
+
+                        throw new NotInDirection();
+                    }
+                }
+            }
+            if (direction.equals("WEST")) {
+
+                ArrayList<Player> playersOnWest = map.playerOnMyWest(currentPlayer);
+                for(Player p:targets) {
+
+                    if (!(playersOnWest.contains(p))) {
+
+                        throw new NotInDirection();
+                    }
+                }
+            }
+            ArrayList<EnumColorPlayer> railGunDamages = new ArrayList<>();
+            railGunDamages.add(currentPlayer.getColor());
+            railGunDamages.add(currentPlayer.getColor());
+            for(Player p:targets){
+
+                p.multipleDamages(railGunDamages);
+            }
+        }else{
+
+            throw new NotValidCardinalDirection();
+        }
     }
 
-    public void piercingMode(Map map,Player currentPlayer,Player target1,Player target2,String direction)throws NotValidCardinalDirection,NotInDirection{
+
+
+}
+/*non serve più
+ public void piercingMode(Map map,Player currentPlayer,Player target1,Player target2,String direction)throws NotValidCardinalDirection,NotInDirection{
 
         if((direction.equals("NORTH"))||(direction.equals("EST"))||(direction.equals("SOUTH"))||(direction.equals("WEST"))){
 
@@ -140,4 +199,4 @@ public class Railgun extends WeaponCard {
         }
     }
 
-}
+ */

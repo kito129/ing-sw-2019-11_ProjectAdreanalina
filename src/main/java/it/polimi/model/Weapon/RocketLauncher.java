@@ -76,8 +76,7 @@ public class RocketLauncher extends WeaponCard {
         }
     }
 
-    //todo puo essere usato prima dell'effetto base o dopo
-    public void rocketJumpEffect(Map map, Player currentPlayer,Square destSquare) throws NotValidDistance, NotValidInput, MapException {
+    public void rocketJumpEffect(Map map, Player currentPlayer,Square destSquare) throws NotValidDistance, MapException {
 
         Square squareOfCurrentPlayer=map.findPlayer(currentPlayer);
 
