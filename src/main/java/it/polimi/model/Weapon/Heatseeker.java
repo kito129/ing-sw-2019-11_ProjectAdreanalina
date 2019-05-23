@@ -29,7 +29,7 @@ public class Heatseeker extends WeaponCard {
 
     public void BaseEffect(Map map,Player currentPlayer,Player targetPlayer) throws VisibleTarget {
 
-        if(!(map.isVisible(currentPlayer,targetPlayer))){
+        if((map.isNotVisible(currentPlayer,targetPlayer))){
 
             ArrayList<EnumColorPlayer> heatSeekerDamages=new ArrayList<>();
             heatSeekerDamages.add(currentPlayer.getColor());

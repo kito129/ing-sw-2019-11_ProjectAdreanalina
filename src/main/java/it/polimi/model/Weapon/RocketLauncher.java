@@ -50,16 +50,19 @@ public class RocketLauncher extends WeaponCard {
         return fragmentingWarheadCost;
     }
 
-    // todo capire come gestire lo spostamento. dell'effetto base.
-    // todo farei un metodo a parte per lo spostamento
-
-    public void baseEffect(Map map, Player target1, Player currentPlayer) throws NotVisibleTarget, NotValidDistance, MapException {
+    public void baseEffect(Map map, Player target1, Player currentPlayer,Square destSquare) throws NotVisibleTarget, NotValidDistance, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         Square squareOfTarget1Player = map.findPlayer(target1);
-
         if((map.isVisible(target1,currentPlayer)) && (!(squareOfCurrentPlayer == squareOfTarget1Player))){
 
+            if((destSquare!=null)&&(map.distance(squareOfTarget1Player,destSquare)==1)){
+
+                map.movePlayer(target1,destSquare);
+            }else if((!(map.distance(squareOfTarget1Player,destSquare)==1))&&(destSquare!=null)){
+
+                throw new NotValidDistance();
+            }
             ArrayList<EnumColorPlayer> rocketLauncherDamages=new ArrayList<>();
             rocketLauncherDamages.add(currentPlayer.getColor());
             rocketLauncherDamages.add(currentPlayer.getColor());

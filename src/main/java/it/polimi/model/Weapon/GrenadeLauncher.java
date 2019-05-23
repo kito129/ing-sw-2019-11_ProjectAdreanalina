@@ -50,12 +50,40 @@ public class GrenadeLauncher extends WeaponCard {
         }
     }
 
-    public void moveTarget(Map map,Player target1,Player currentPlayer,Square destSquare){
+    public void moveTarget(Map map,Player target1,Square destSquare)throws MapException,NotValidDistance{
 
-        //todo fare questo metodo separato dall'effetto base perchè òa granata extra può essere usata prima o dopo il movimento
+        Square squareOfTarget=map.findPlayer(target1);
+        if(map.distance(squareOfTarget,destSquare)==1){
+
+            map.movePlayer(target1,destSquare);
+        }else{
+
+            throw new NotValidDistance();
+        }
     }
 
-    public void baseEffect(Map map,Player target1,Player currentPlayer,Square destSquare) throws NotVisibleTarget, NotValidDistance, MapException {
+    public void extraGrenadeEffect(Map map, Player currentPlayer,Square targetSquare) throws NotVisibleTarget, MapException {
+
+        Square squareOfCurrentPlayer =map.findPlayer(currentPlayer);
+        if(map.isVisible(targetSquare,squareOfCurrentPlayer)){
+
+            ArrayList<Player> playersOnTargetSquare=map.playersOnSquare(targetSquare);
+            playersOnTargetSquare.remove(currentPlayer);
+            for(Player p:playersOnTargetSquare){
+
+                p.singleDamage(currentPlayer.getColor());
+            }
+        }else {
+
+            throw  new NotVisibleTarget();
+        }
+    }
+
+}
+
+
+/*// metodo non serve più
+ public void baseEffect(Map map,Player target1,Player currentPlayer,Square destSquare) throws NotVisibleTarget, NotValidDistance, MapException {
 
         Square squareOfTarget1Player = map.findPlayer(target1);
 
@@ -71,24 +99,4 @@ public class GrenadeLauncher extends WeaponCard {
             throw new NotValidDistance();
         }
     }
-
-    // todo si dovrebbe poter usare questo metodo anche prima del movimento dell'effetto base.
-    public void extraGrenadeEffect(Map map, Player currentPlayer,Square targetSquare) throws NotVisibleTarget, NotValidInput, MapException {
-
-        Square squareOfCurrentPlayer =map.findPlayer(currentPlayer);
-        ArrayList<Player> playersOnTargetSquare=map.playersOnSquare(targetSquare);
-        playersOnTargetSquare.remove(currentPlayer);
-
-        if(map.isVisible(targetSquare,squareOfCurrentPlayer)){
-
-            for(Player p:playersOnTargetSquare){
-
-                p.singleDamage(currentPlayer.getColor());
-            }
-        }else {
-
-            throw  new NotVisibleTarget();
-        }
-    }
-
-}
+ */
