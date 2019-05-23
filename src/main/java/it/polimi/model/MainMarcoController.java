@@ -120,7 +120,7 @@ public class MainMarcoController {
         ViewCLI viewCLI = new ViewCLI();
         viewCLI.setRow(0);
         viewCLI.setColumn(2);
-        viewCLI.setIndex(0);
+        viewCLI.setIndexWeapon(0);
     
         try {
             actionController.runActionController(actionModel, viewCLI);
@@ -144,7 +144,7 @@ public class MainMarcoController {
         System.out.println("GRab action in 0,2");
         viewCLI.setRow(0);
         viewCLI.setColumn(2);
-        viewCLI.setIndex(0);
+        viewCLI.setIndexWeapon(0);
     
         try {
             actionController.grabActionController(actionModel,viewCLI);
@@ -169,7 +169,7 @@ public class MainMarcoController {
         System.out.println("GRab action in 0,1");
         viewCLI.setRow(0);
         viewCLI.setColumn(1);
-        viewCLI.setIndex(0);
+        viewCLI.setIndexWeapon(0);
     
         try {
             actionController.grabActionController(actionModel,viewCLI);

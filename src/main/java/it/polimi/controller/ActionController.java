@@ -70,7 +70,7 @@ public class ActionController {
     
             //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
             if (map.isGenerationSquare(inputSquare)) {
-                indexWeapon=view.getIndex();
+                indexWeapon=view.getIndexWeapon();
             }
     
             //effective catch gia con l'index giusto se è una Generation Square

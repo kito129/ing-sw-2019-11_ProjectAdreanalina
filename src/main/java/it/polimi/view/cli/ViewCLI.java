@@ -1,7 +1,6 @@
 package it.polimi.view.cli;
 
 import it.polimi.controller.RemoteGameController;
-import it.polimi.model.EnumColorSquare;
 import it.polimi.model.RemoteGameModel;
 import it.polimi.model.State;
 import it.polimi.view.RemoteView;
@@ -21,14 +20,14 @@ public class ViewCLI implements RemoteView {
     private int row;
     private int column;
     //attribute for grab
-    private int index;
+    private int indexWeapon;
     
   
     
     @Override
-    public int getIndex () {
+    public int getIndexWeapon() {
         
-        return index;
+        return indexWeapon;
     }
     
     @Override
@@ -71,9 +70,9 @@ public class ViewCLI implements RemoteView {
         this.column = column;
     }
     
-    public void setIndex (int index) {
+    public void setIndexWeapon(int indexWeapon) {
         
-        this.index = index;
+        this.indexWeapon = indexWeapon;
     }
     
     public void setState (State state) {
@@ -226,7 +225,6 @@ public class ViewCLI implements RemoteView {
 
         System.out.println();
 
-<<<<<<< HEAD
         if(gameModel.getMap().isGenerationSquare(gameModel.getMap().getSquare(row,column))){
 
             PrintGrabAction.printGrabWeapon();
@@ -237,15 +235,6 @@ public class ViewCLI implements RemoteView {
                 input = new Scanner(System.in);
             setIndexWeapon(input.nextInt());
         }
-=======
-        //todo mettere un if e chiedere di inserire l'index solo se dalla riga e la colonna capisco che sono in una generation square
-        PrintGrabAction.printGrabWeapon();
-        //todo stampare le armi così da poter vedere cosa scegliere
-        PrintSelectMove.printIndexWeapon();
-        while(!input.hasNextInt())
-            input = new Scanner(System.in);
-        setIndex(input.nextInt());
->>>>>>> edf23c19b154d49fa0a7dcb36cacca214a43e273
 
         notifyController();
     }
