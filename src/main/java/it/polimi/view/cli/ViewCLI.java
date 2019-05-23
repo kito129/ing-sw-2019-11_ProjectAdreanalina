@@ -117,6 +117,7 @@ public class ViewCLI implements RemoteView {
             case SPAWNPLAYER:
                 break;
             case LOBBY:
+                viewLobby();
                 break;
             case STARTTURN:
                 break;
@@ -177,6 +178,11 @@ public class ViewCLI implements RemoteView {
     }
     
     //metodi di contr
+
+    public void viewLobby() throws RemoteException{
+
+        PrintMenu.print();
+    }
     
     public void viewRunSelection() throws RemoteException {
         
