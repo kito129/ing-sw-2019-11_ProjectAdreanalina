@@ -3,7 +3,6 @@ package it.polimi.view.cli;
 import it.polimi.model.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class PrintSquare implements Serializable {
 
@@ -76,6 +75,8 @@ public class PrintSquare implements Serializable {
         System.out.println("ROW: " +normalSquare.getRow());
         System.out.println("COLUMN: " +normalSquare.getColumn());
         PrintEnumCardsAmmo.print(normalSquare.getAmmoCard().getAmmo());
+
+        //todo stampare a colori
     }
 
     /**
@@ -86,6 +87,10 @@ public class PrintSquare implements Serializable {
 
         System.out.println("ROW: " +generationSquare.getRow());
         System.out.println("COLUMN: " +generationSquare.getColumn());
-        PrintEnumCardsAmmo.print();
+        System.out.println();
+        System.out.println("WEAPON LIST: ");
+        PrintWeapon.print(generationSquare.getWeaponList());
+
+        //todo stampare a colori
     }
 }

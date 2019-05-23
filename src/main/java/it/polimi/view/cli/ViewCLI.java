@@ -1,8 +1,8 @@
 package it.polimi.view.cli;
 
 import it.polimi.controller.RemoteGameController;
-import it.polimi.model.RemoteGameModel;
-import it.polimi.model.State;
+import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
@@ -117,23 +117,18 @@ public class ViewCLI implements RemoteView {
             case SPAWNPLAYER:
                 break;
             case LOBBY:
-                viewLobby();
                 break;
             case STARTTURN:
                 break;
             case USEPOWERUP:
                 break;
             case RUN:
-                viewRun();
                 break;
             case SELECTRUN:
-                viewRunSelection();
                 break;
             case GRAB:
-                viewGrab();
                 break;
             case SELECTGRAB:
-                viewGrabSelection();
                 break;
             case SHOOT:
                 break;
@@ -231,15 +226,20 @@ public class ViewCLI implements RemoteView {
 
         System.out.println();
 
-        if(gameModel.getMap().getSquare(row, column)){
+        try {
+            Square squareSelected = gameModel.getMap().getSquare(row, column);
+            if(gameModel.getMap().isGenerationSquare(squareSelected)){
 
-            PrintGrabAction.printGrabWeapon();
-            PrintWeapon.print(...);
-            //todo stampare le armi così da poter vedere cosa scegliere
-            PrintSelectMove.printIndexWeapon();
-            while(!input.hasNextInt())
-                input = new Scanner(System.in);
-            setIndexWeapon(input.nextInt());
+                PrintGrabAction.printGrabWeapon();
+                PrintWeapon.print(((GenerationSquare) squareSelected).getWeaponList());
+                //todo stampare le armi così da poter vedere cosa scegliere
+                PrintSelectMove.printIndexWeapon();
+                while(!input.hasNextInt())
+                    input = new Scanner(System.in);
+                setIndexWeapon(input.nextInt());
+            }
+        } catch (MapException e) {
+            e.printStackTrace();
         }
 
         notifyController();
