@@ -1,6 +1,7 @@
 package it.polimi.view.cli;
 
 import it.polimi.controller.RemoteGameController;
+import it.polimi.model.EnumColorSquare;
 import it.polimi.model.RemoteGameModel;
 import it.polimi.model.Square;
 import it.polimi.model.State;
@@ -226,13 +227,16 @@ public class ViewCLI implements RemoteView {
 
         System.out.println();
 
-        //todo mettere un if e chiedere di inserire l'index solo se dalla riga e la colonna capisco che sono in una generation square
-        PrintGrabAction.printGrabWeapon();
-        //todo stampare le armi così da poter vedere cosa scegliere
-        PrintSelectMove.printIndexWeapon();
-        while(!input.hasNextInt())
-            input = new Scanner(System.in);
-        setIndexWeapon(input.nextInt());
+        if(gameModel.getMap().isGenerationSquare(gameModel.getMap().getSquare(row,column))){
+
+            PrintGrabAction.printGrabWeapon();
+            PrintWeapon.print(...);
+            //todo stampare le armi così da poter vedere cosa scegliere
+            PrintSelectMove.printIndexWeapon();
+            while(!input.hasNextInt())
+                input = new Scanner(System.in);
+            setIndexWeapon(input.nextInt());
+        }
 
         notifyController();
     }
