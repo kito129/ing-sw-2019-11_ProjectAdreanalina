@@ -30,7 +30,7 @@ public class PrintMap implements Serializable {
      * set that square with black color
      * @param squares   the map choosen for the game
      */
-    private static String[][] getMap(ArrayList<Square> squares) {
+    private static String[][] getsetMap(ArrayList<Square> squares) {
 
         String[][] map = new String[14][23];
 
@@ -112,7 +112,7 @@ public class PrintMap implements Serializable {
      * Set the right string to view for CLI to the corresponding color
      * @param player      the selected player
      */
-    private static String colorString(Player player){
+    public static String colorString(Player player){
 
         String s = "";
 
@@ -126,15 +126,15 @@ public class PrintMap implements Serializable {
         }
         else if(player.getColor().equals(EnumColorPlayer.GREY)){
 
-            s = ANSI_WHITE_BACKGROUND + "G" + ANSI_BLACK_BACKGROUND;
+            s = ANSI_WHITE_BACKGROUND + "W" + ANSI_BLACK_BACKGROUND;
         }
         else if(player.getColor().equals(EnumColorPlayer.PINK)){
 
-            s = ANSI_PURPLE_BACKGROUND + "G" + ANSI_BLACK_BACKGROUND;
+            s = ANSI_PURPLE_BACKGROUND + "P" + ANSI_BLACK_BACKGROUND;
         }
         else if(player.getColor().equals(EnumColorPlayer.YELLOW)){
 
-            s = ANSI_YELLOW_BACKGROUND + "G" + ANSI_BLACK_BACKGROUND;
+            s = ANSI_YELLOW_BACKGROUND + "Y" + ANSI_BLACK_BACKGROUND;
         }
 
         return s;
@@ -146,7 +146,7 @@ public class PrintMap implements Serializable {
      * @param squares   the squares of the map
      * @param map       the map choosen for the game
      */
-    public static String[][] getPlayersOnMap(ArrayList<Square> squares, String[][] map){
+    private static String[][] getsetPlayersOnMap(ArrayList<Square> squares, String[][] map){
 
         for (Square s : squares){
 
@@ -199,8 +199,8 @@ public class PrintMap implements Serializable {
      */
     public static void printMap(ArrayList<Square> squares) {
 
-        String[][] map = getMap(squares);
-        map = getPlayersOnMap(squares, map);
+        String[][] map = getsetMap(squares);
+        map = getsetPlayersOnMap(squares, map);
 
         for(int i = 0; i < 15; i++){
 
