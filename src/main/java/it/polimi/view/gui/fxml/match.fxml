@@ -1,53 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.6328320802005013" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="800.0" prefWidth="1200.0" styleClass="conceptbg" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.6390977443609023" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="800.0" prefWidth="1200.0" styleClass="conceptbg" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="278.0" prefWidth="1198.0">
          <children>
-            <SplitPane dividerPositions="0.37145242070116863" prefHeight="396.0" prefWidth="1200.0" styleClass="gamebg" stylesheets="@../css/style.css">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <HBox layoutX="-1.0" layoutY="-4.0" prefHeight="292.0" prefWidth="444.0">
+               <children>
+                  <Region prefHeight="292.0" prefWidth="66.0" />
+                  <VBox prefHeight="292.0" prefWidth="148.0">
                      <children>
-                        <ImageView fitHeight="260.0" fitWidth="154.0" layoutX="13.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+                        <Region prefHeight="24.0" prefWidth="136.0" />
+                        <ImageView fitHeight="244.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true" />
+                        <Region prefHeight="21.0" prefWidth="136.0" />
                      </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                     <children>
-                        <Label layoutX="170.0" layoutY="-2.0" prefHeight="56.0" prefWidth="410.0" text="OTHERS PLAYERBOARD" textFill="WHITE">
-                           <font>
-                              <Font name="FFF World Cup 2018 Adidas" size="51.0" />
-                           </font>
-                        </Label>
-                        <GridPane layoutX="26.0" layoutY="60.0" prefHeight="224.0" prefWidth="701.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <ImageView fitHeight="100.0" fitWidth="354.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                              <ImageView fitHeight="119.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
+                  </VBox>
+                  <Region prefHeight="292.0" prefWidth="64.0" />
+                  <TextArea prefHeight="292.0" prefWidth="328.0" styleClass="text-area" stylesheets="@../css/style.css" />
+               </children>
+            </HBox>
          </children></AnchorPane>
   </items>
 </SplitPane>

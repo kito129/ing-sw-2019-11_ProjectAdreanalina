@@ -19,6 +19,6 @@
 }
 
 .text-area{
-    -fx-background-color: transparent;
+    -fx-control-inner-background: black;
     -fx-text-fill: white;
 }
