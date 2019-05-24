@@ -7,3 +7,18 @@
     -fx-background-image: url("../images/adrenalina_cover.jpg");
     -fx-background-size: 100% 100%;
 }
+
+.conceptbg{
+    -fx-background-image: url("../images/concept_game_weapon_unloaded.png");
+    -fx-background-size: 100% 100%;
+}
+
+.sottoconceptbg{
+    -fx-background-image: url("../images/sotto_concept_game_weapon_unloaded.png");
+    -fx-background-size: 100% 100%;
+}
+
+.text-area{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
