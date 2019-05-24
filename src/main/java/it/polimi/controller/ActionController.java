@@ -10,6 +10,7 @@ import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.*;
 import it.polimi.view.RemoteView;
+import it.polimi.view.cli.Game;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -419,7 +420,6 @@ public class ActionController {
         Player currentPlayer=new Player();
         Map map=new Map();
         String message="";
-        ArrayList<Player> targetBase=new ArrayList<>();
 
         switch (message){
 
@@ -429,10 +429,12 @@ public class ActionController {
 
                     if(target2Base==null){
 
+                        ArrayList<Player> targetBase=new ArrayList<>();
                         targetBase.add(target1Base);
                         weapon.baseEffect(map,currentPlayer,targetBase);
                     }else if(target1Base!=target2Base){
 
+                        ArrayList<Player> targetBase=new ArrayList<>();
                         targetBase.add(target1Base);
                         targetBase.add(target2Base);
                         weapon.baseEffect(map,currentPlayer,targetBase);
@@ -671,7 +673,6 @@ public class ActionController {
         Square vortexSquare = new Square();
         Player target1BlackHole = new Player();
         Player target2BlackHole = new Player(); // se viene scelto solo un target questo deve essere messo a null.
-        ArrayList<Player> targetsBlackHole = new ArrayList<>();
         Map map = new Map();
         String message = "";
 
@@ -701,6 +702,7 @@ public class ActionController {
 
                         if (target1BlackHole != targetBase) {
 
+                            ArrayList<Player> targetsBlackHole = new ArrayList<>();
                             targetsBlackHole.add(target1BlackHole);
                             weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
                         } else {
@@ -711,6 +713,7 @@ public class ActionController {
 
                         if ((target1BlackHole != target2BlackHole) && (target1BlackHole != targetBase) && (target2BlackHole != targetBase)) {
 
+                            ArrayList<Player> targetsBlackHole = new ArrayList<>();
                             targetsBlackHole.add(target1BlackHole);
                             targetsBlackHole.add(target2BlackHole);
                             weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
@@ -957,7 +960,6 @@ public class ActionController {
         Player currentPlayer=new Player();
         Player target1=new Player();
         Player target2=new Player();//se in modalità perforazione viene scelto solo un bersaglio questo è null.
-        ArrayList<Player> piercingTargets=new ArrayList<>();
         String direction="";
         String message="";
         Map map=new Map();
@@ -982,11 +984,13 @@ public class ActionController {
                 try{
                     if(target2!=null){
 
+                        ArrayList<Player> piercingTargets=new ArrayList<>();
                         piercingTargets.add(target1);
                         piercingTargets.add(target2);
                         weapon.piercingMode(map,currentPlayer,piercingTargets,direction);
                     }else{
 
+                        ArrayList<Player> piercingTargets=new ArrayList<>();
                         piercingTargets.add(target1);
                         weapon.piercingMode(map,currentPlayer,piercingTargets,direction);
                     }
@@ -1000,6 +1004,189 @@ public class ActionController {
         }
 
 
+    }
+
+    public void Cyberblade(GameModel gameModel,Cyberblade weapon){
+
+        Player currentPlayer=new Player();
+        Player targetBase=new Player();
+        Map map=new Map();
+        Square destSquareShadow=new Square();
+        Player targetSliceAndDice=new Player();
+        String message="";
+
+        switch (message){
+
+            case"base effect":
+
+                try{
+
+                    weapon.baseEffect(map,currentPlayer,targetBase);
+                }catch(NotValidDistance notValidDistance){
+
+                    //target non è nella square del curretn player
+                }catch (MapException mapException){
+
+                    //errori di mappa
+                }
+
+            case"shadowstep":
+
+                try{
+
+                    weapon.shadowstepEffect(map,currentPlayer,destSquareShadow);
+                }catch(NotValidDistance notValidDistance){
+
+                    //dest square più di un movimento di distanza
+                }catch (MapException mapException){
+
+                    //errori di mappa
+                }
+            case"Slice and dice":
+
+                try{
+
+                    if(targetBase!=targetSliceAndDice){
+
+                        weapon.sliceAndDiceEffect(map,currentPlayer,targetSliceAndDice);
+                    }else{
+
+                        throw new NotValidInput();
+                    }
+                }catch (NotValidInput notValidInput){
+
+                    //gestione target slice and dice è uguale al target base
+                }catch (NotValidDistance notValidDistance){
+
+                    //target slice and dice non è nel quadrato del curretn player.
+                }catch (MapException mapException){
+
+                    //errori di mappa
+                }
+        }
+    }
+
+    public void Zx2(GameModel gameModel,Zx2 weapon) {
+
+        Player currentPlayer = new Player();
+        Player target1 = new Player();
+        Player target2 = new Player();
+        Player target3 = new Player();
+        Map map = new Map();
+        String message = "";
+
+        switch (message) {
+
+            case "base mode":
+
+                try {
+
+                    weapon.baseMode(map, currentPlayer, target1);
+                } catch (NotVisibleTarget notVisibleTarget) {
+
+                    //target non visibile
+                }
+            case "scanner mode":
+
+                try {
+
+                    if((target3 == null)&&(target2 == null)){
+
+                        ArrayList<Player> scannerModeTargets = new ArrayList<>();
+                        scannerModeTargets.add(target1);
+                        weapon.scannerMode(map,currentPlayer,scannerModeTargets);
+                    }else if(target3==null){
+
+                        if(target1!=target2){
+
+                            ArrayList<Player> scannerModeTargets=new ArrayList<>();
+                            scannerModeTargets.add(target1);
+                            scannerModeTargets.add(target2);
+                            weapon.scannerMode(map,currentPlayer,scannerModeTargets);
+                        }else{
+
+                            throw new NotValidInput();
+                        }
+                    }else{
+
+                        if((target1!=target2)&&(target1!=target3)&&(target2!=target3)){
+
+                            ArrayList<Player> scannerModeTargets=new ArrayList<>();
+                            scannerModeTargets.add(target1);
+                            scannerModeTargets.add(target2);
+                            scannerModeTargets.add(target3);
+                            weapon.scannerMode(map,currentPlayer,scannerModeTargets);
+                        }else{
+
+                            throw new NotValidInput();
+                        }
+                    }
+                }catch (NotVisibleTarget notVisibleTarget){
+
+                    //uno dei target non è visibile.
+                }catch (NotValidInput notValidInput){
+
+                    //errori di imput i target non sono diversi
+                }
+        }
+    }
+
+    public void Shotgun(GameModel gameModel,Shotgun weapon){
+
+//todo aspettare lunedi per chiarire lo spostamento
+    }
+
+
+    public void PowerGlove(GameModel gameModel,PowerGlove weapon){
+
+
+    }
+
+    public void Shockwave(GameModel gameModel,Shockwave weapon){
+
+        Player currentPlayer=new Player();
+        Player target1Base=new Player();
+        Player target2Base=new Player();
+        Player target3Base=new Player();
+        Map map=new Map();
+        ArrayList<Player> allPlayerInGame=new ArrayList<>();
+        String message="";
+
+        switch (message){
+
+            case"base mode":
+
+                try{
+
+                    if((target3Base==null)&&(target2Base==null)){
+
+                        weapon.baseMode(map,currentPlayer,target1Base);
+                    }else if((target3Base==null)&&(target2Base!=null)) {
+
+                        weapon.baseMode(map, currentPlayer, target1Base, target2Base);
+                    }else {
+
+                        weapon.baseMode(map,currentPlayer,target1Base,target2Base,target3Base);
+                    }
+                }catch (NotValidDistance notValidDistance){
+
+                    //errori di distanza
+                }
+            case"tsunami":
+
+                try{
+
+                    weapon.tsunamiMode(map,currentPlayer,allPlayerInGame);
+                }catch (NotValidDistance notValidDistance){
+
+                    //nessun player è distante un movimento.
+                }
+        }
+    }
+
+    public void Sledgehammer(GameModel gameModel,Sledgehammer weapon){
+
+        //todo ripartire da qui
     }
 
 

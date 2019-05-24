@@ -39,9 +39,9 @@ public class Shotgun extends WeaponCard {
 
     //todo mettere la funzione di spostamento
 
-    public void baseMode(Map map, Player currentPlayer, Player target1)throws NotVisibleTarget {
+    public void baseMode(Map map, Player currentPlayer, Player target1)throws NotValidDistance {
 
-        if (map.distance(currentPlayer,target1)==0){
+        if(map.distance(currentPlayer,target1)==0){
 
             ArrayList<EnumColorPlayer> shotGunDamages=new ArrayList<>();
             shotGunDamages.add(currentPlayer.getColor());
@@ -50,7 +50,7 @@ public class Shotgun extends WeaponCard {
             target1.multipleDamages(shotGunDamages);
         }else{
 
-            throw new NotVisibleTarget();
+            throw new NotValidDistance();
         }
     }
 

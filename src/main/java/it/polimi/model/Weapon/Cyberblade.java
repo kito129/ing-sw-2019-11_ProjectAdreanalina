@@ -63,8 +63,8 @@ public class Cyberblade extends WeaponCard {
             throw new NotValidDistance();
         }
     }
-    // todo prima o dopo leffetto base.
-    public void shadowstepEffect(Map map, Player currentPlayer, Square destSquare) throws NotValidDistance, NotValidInput, MapException {
+
+    public void shadowstepEffect(Map map, Player currentPlayer, Square destSquare) throws NotValidDistance, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         if(map.distance(squareOfCurrentPlayer,destSquare)==1){
@@ -76,9 +76,10 @@ public class Cyberblade extends WeaponCard {
         }
     }
 
-    //todo target2 deve essere diverso da target1.il codice è lo steso dell effetto base.
 
-    public void sliceAndDiceEffect()throws NotValidDistance{
+    public void sliceAndDiceEffect(Map map,Player currentPlayer,Player target2)throws NotValidDistance,MapException{
+
+        baseEffect(map,currentPlayer,target2);
 
     }
 

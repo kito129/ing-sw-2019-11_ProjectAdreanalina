@@ -35,7 +35,6 @@ public class Shockwave extends WeaponCard {
         return tsunamiModeCost;
     }
 
-    //todo potrei fare una sola funzione che prende un arraylist di player
 
     public void baseMode(Map map, Player currentPlayer,Player target1)throws NotValidDistance {
 
@@ -74,7 +73,6 @@ public class Shockwave extends WeaponCard {
         }
     }
 
-    //todo parametro allPlayers sono tutti i giocatori in gioco
     public void tsunamiMode(Map map,Player currentPlayer,ArrayList<Player> allPlayers) throws NotValidDistance{
 
         allPlayers.remove(currentPlayer);
