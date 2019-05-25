@@ -12,6 +12,7 @@ public class WeaponCard {
     private EnumColorCardAndAmmo colorWeaponCard;
     private ArrayList<WeaponsEffect> weaponEffects;
     private boolean isCharge;
+    private String description;
     
     /**
      * Instantiates a new weapon card.
@@ -68,6 +69,11 @@ public class WeaponCard {
         return weaponEffects;
     }
 
+    public String getDescription() {
+
+        return description;
+    }
+
     /**
      * Sets recharge cost.
      *
@@ -98,6 +104,11 @@ public class WeaponCard {
     public boolean isCharge() {
 
         return isCharge;
+    }
+
+    protected void setDescription(String description) {
+
+        this.description = description;
     }
 
     /**

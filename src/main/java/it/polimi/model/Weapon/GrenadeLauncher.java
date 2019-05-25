@@ -32,6 +32,12 @@ public class GrenadeLauncher extends WeaponCard {
         setWeaponEffects(weaponEffects);
         extraGrenadeCost =new ArrayList<EnumColorCardAndAmmo>();
         extraGrenadeCost.add(EnumColorCardAndAmmo.RED);
+        setDescription("effetto base: Dai 1 danno a 1 bersaglio che puoi vedere. Poi puoi muovere il bersaglio di 1 quadrato.\n\n" +
+                "granata extra: Dai 1 danno a ogni giocatore in quadrato che puoi vedere. Puoi usare questo effetto prima o dopo il movimento dell'effetto base.\n\n" +
+                "Nota: Per esempio puoi sparare a un bersaglio, muoverlo in un quadrato con altri bersagli e danneggiare chiunque, incluso il primo bersaglio.\n" +
+                "Oppure puoi dare 2 danni a un bersaglio principale e 1 a tutti gli altri in quel quadrato, e poi muovere il bersaglio principale.\n" +
+                "Oppure puoi dare 1 danno a un bersaglio isolato e 1 a chiunque in quadrato diverso.\n" +
+                "Se bersagli il quadrato in cui ti trovi non potrai essere mosso o danneggiato.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getExtraGrenadeCost() {

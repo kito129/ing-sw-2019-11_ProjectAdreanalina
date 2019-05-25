@@ -16,6 +16,9 @@ public class Teleporter extends PowerUpCard {
     public Teleporter(EnumColorCardAndAmmo colorCard) {
 
         super("TELEPORTER", colorCard);
+        setDescription("Puoi giocare questa carta nel tuo turno prima o dopo aver svolto qualsiasi azione.\n" +
+                "Prendi la tua miniatura e piazzala in un qualsiasi quadrato sulla plancia.\n" +
+                "(Non puoi usare questo potenziamento dopo che hai visto dove un altro giocatore si rigenera alla fine del tuo turno, è troppo tardi.)");
     }
 
     /**

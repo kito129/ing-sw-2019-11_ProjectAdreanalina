@@ -14,6 +14,10 @@ public class TargetingScope extends PowerUpCard {
     public TargetingScope(EnumColorCardAndAmmo colorCard) {
 
         super("TARGETING SCOPE", colorCard);
+        setDescription("Puoi giocare questa carta quando stai dando danno a uno o più bersagli.\n" +
+                "Paga 1 cubo munizioni di qualsiasi colore.\n" +
+                "Scegli 1 dei bersagli e dagli 1 segnalino danno aggiuntivo.\n" +
+                "Nota: non puoi usare questo potenziamento per dare 1 danno a un bersaglio che sta solo ricevendo marchi.");
     }
 
     /**

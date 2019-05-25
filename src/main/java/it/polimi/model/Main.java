@@ -5,6 +5,7 @@ import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NoAvaibleCard;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TargetingScope;
+import it.polimi.model.Weapon.*;
 
 import java.util.ArrayList;
 
@@ -18,11 +19,8 @@ public class Main {
 
     public static void main(String args[]) {
 
-        Map map = new Map(MapCreator.createB(), "mappa a");
-
-        Main main=new Main();
-
-        main.prova(null);
+        WeaponCard weapon=new Thor();
+        System.out.println(weapon.getDescription());
 
 
     }

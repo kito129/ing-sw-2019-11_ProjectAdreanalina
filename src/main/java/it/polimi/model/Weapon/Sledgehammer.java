@@ -31,6 +31,9 @@ public class Sledgehammer extends WeaponCard {
         setWeaponEffects(weaponsEffects);
         pulverizeModeCost = new ArrayList<EnumColorCardAndAmmo>();
         pulverizeModeCost.add(EnumColorCardAndAmmo.RED);
+        setDescription("modalità base: Dai 2 danni a 1 bersaglio nel quadrato in cui ti trovi.\n\n" +
+                "modalità polverizzare: Dai 3 danni a 1 bersaglio nel quadrato in cui ti trovi, poi muovi quel bersaglio di 0, 1 o 2 quadrati in una direzione.\n\n" +
+                "Nota: Ricordati che i movimenti passano attraverso le porte ma non attraverso le pareti.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getPulverizeModeCost() {

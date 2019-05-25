@@ -34,6 +34,13 @@ public class Thor extends WeaponCard {
         chainReactionCost.add(EnumColorCardAndAmmo.BLU);
         highVoltageCost = new ArrayList<EnumColorCardAndAmmo>();
         highVoltageCost.add(EnumColorCardAndAmmo.BLU);
+        setDescription("effetto base: Dai 2 danni a 1 bersaglio che puoi vedere.\n\n" +
+                "reazione a catena: Dai 1 danno a un secondo bersaglio che il tuo primo bersaglio può vedere.\n\n" +
+                "alta tensione: Dai 2 danni a un terzo bersaglio che il tuo secondo bersaglio può vedere.\n" +
+                "Non puoi usare questo effetto se prima non hai usato reazione a catena.\n\n" +
+                "Nota: Questa carta limita l'ordine in cui puoi utilizzare i suoi effetti.\n" +
+                "(Molte carte non lo fanno.)\n" +
+                "Inoltre ogni bersaglio deve essere un giocatore differente.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getChainReactionCost() {

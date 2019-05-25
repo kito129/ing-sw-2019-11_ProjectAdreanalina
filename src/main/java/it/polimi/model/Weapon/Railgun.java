@@ -31,6 +31,16 @@ public class Railgun extends WeaponCard {
         setWeaponEffects(weaponEffects);
         piercingModeCost = new ArrayList<EnumColorCardAndAmmo>();
         piercingModeCost.add(null);
+        setDescription("modalità base : Scegli una direzione cardinale e 1 bersaglio in quella direzione.\n" +
+                "Dagli 3 danni.\n\n" +
+                "modalità perforazione: Scegli una direzione cardinale e 1 o 2 bersagli in quella direzione.\n" +
+                "Dai 2 danni a ciascuno.\n\n" +
+                "Nota: In pratica spari in linea retta ignorando i muri.\n" +
+                "Non hai bisogno di scegliere un bersaglio dall'altro lato del muro, potrebbe anche essere qualcuno nel tuo stesso quadrato, ma sparare attraverso i muri è sicuramente divertente.\n" +
+                "Ci sono solo 4 direzioni cardinali.\n" +
+                "Immagina di essere di fronte a un muro o una porta, imbracciare il fucile e sparare in quella direzione.\n" +
+                "Chiunque si trovi su un quadrato in quella direzione (incluso il tuo) è un bersaglio valido.\n" +
+                "In modalità perforazione i 2 bersagli possono essere nello stesso quadrato o in quadrati diversi.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getPiercingModeCost() {

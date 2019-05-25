@@ -26,6 +26,10 @@ public class Whisper extends WeaponCard {
         ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
         weaponEffects.add(WeaponsEffect.BaseEffect);
         setWeaponEffects(weaponEffects);
+        setDescription("effetto: Dai 3 danni e 1 marchio a 1 bersaglio che puoi vedere." +
+                "Il bersaglio deve essere ad almeno 2 movimenti da te.\n\n" +
+                "Nota: Per esempio, nella stanza 2x2, non puoi sparare a un bersaglio in un quadrato adiacente, ma puoi sparare a un bersaglio lungo la diagonale.\n" +
+                "Se sei vicino a una porta non puoi sparare a un bersaglio dall'altra parte della porta, ma puoi sparare a un bersaglio su un quadrato diverso in quella stanza.");
     }
 
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotValidDistance, NotVisibleTarget {
