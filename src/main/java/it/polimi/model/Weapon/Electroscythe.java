@@ -31,6 +31,8 @@ public class Electroscythe extends WeaponCard {
         reaperModeCost= new ArrayList<EnumColorCardAndAmmo>();
         reaperModeCost.add(EnumColorCardAndAmmo.BLU);
         reaperModeCost.add(EnumColorCardAndAmmo.RED);
+        setDescription("modalità base: Dai 1 danno a ogni altro giocatore presente nel quadrato in cui ti trovi.\n\n" +
+                "modalità mietitore: Dai 2 danni a ogni altro giocatore presente nel quadrato in cui ti trovi.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getReaperModeCost() {

@@ -33,6 +33,8 @@ public class Furnace extends WeaponCard {
         setWeaponEffects(weaponEffects);
         cozyFireModeCost = new ArrayList<EnumColorCardAndAmmo>();
         cozyFireModeCost.add(null);
+        setDescription("modalità base: Scegli una stanza che puoi vedere, ma non la stanza in cui ti trovi. Dai 1 danno a ognuno in quella stanza.\n\n" +
+                "modalità fuoco confortevole: Scegli un quadrato distante esattamente 1 movimento. Dai 1 danno e 1 marchio a ognuno in quel quadrato.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getCozyFireModeCost() {

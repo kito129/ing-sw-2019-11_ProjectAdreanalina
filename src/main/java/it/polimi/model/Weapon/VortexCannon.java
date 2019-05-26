@@ -33,6 +33,16 @@ public class VortexCannon extends WeaponCard {
         setWeaponEffects(weaponEffects);
         blackHoleCost =new ArrayList<EnumColorCardAndAmmo>();
         blackHoleCost.add(EnumColorCardAndAmmo.RED);
+        setDescription("effetto base: Scegli un quadrato che puoi vedere ad almeno 1 movimento di distanza.\n" +
+                "Un vortice si apre in quel punto.\n" +
+                "Scegli un bersaglio nel quadrato in cui si trova il vortice o distante 1 movimento.\n" +
+                "Muovi il bersaglio nel quadrato in cui si trova il vortice e dagli 2 danni.\n\n" +
+                "buco nero: Scegli fino ad altri 2 bersagli nel quadrato in cui si trova il vortice o distanti 1 movimento." +
+                "Muovili nel quadrato in cui si trova il vortice e dai loro 1 danno ciascuno.\n\n" +
+                "Nota: I 3 bersagli devono essere diversi, ma alcuni di loro potrebbero partire dallo stesso quadrato (anche nel quadrato in cui ti trovi tu).\n" +
+                "Finiscono tutti sullo stesso quadrato con il vortice.\n" +
+                "Non hai bisogno di vedere i bersagli.\n" +
+                "Spari al quadrato che puoi vedere, crei un vortice lì e i tuoi bersagli vi vengono risucchiati.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getBlackHoleCost() {

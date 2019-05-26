@@ -38,6 +38,14 @@ public class RocketLauncher extends WeaponCard {
         rocketJumpCost.add(EnumColorCardAndAmmo.BLU);
         fragmentingWarheadCost = new ArrayList<EnumColorCardAndAmmo>();
         fragmentingWarheadCost.add(EnumColorCardAndAmmo.YELLOW);
+        setDescription("effetto base: Dai 2 danni a 1 bersaglio che puoi vedere e che non si trova nel tuo quadrato.\n" +
+                "Poi puoi muovere il bersaglio di 1 quadrato.\n\n" +
+                "razzi portatili: Muovi di 1 o 2 quadrati. Questo effetto può essere usato prima o dopo l'effetto base.\n" +
+                "testata a frammentazione: Durante l'effetto base, dai 1 danno a ogni giocatore presente nel quadrato in cui si trovava originariamente il bersaglio, incluso il bersaglio, anche se lo hai mosso.\n\n" +
+                "Nota: Se usi i razzi portatili prima dell'effetto base considera solo il tuo nuovo quadrato per determinare se il bersaglio è valido.\n" +
+                "Puoi anche spostarti di 1 quadrato per potergli sparare.\n" +
+                "Usando la testata a frammentazione dai danno a chiunque si trovi nel quadrato in cui il bersaglio si trovava prima di muoversi.\n" +
+                "Il bersaglio riceve così 3 danni in totale.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getRocketJumpCost() {

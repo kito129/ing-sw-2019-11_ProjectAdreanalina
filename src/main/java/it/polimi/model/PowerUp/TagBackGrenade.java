@@ -15,6 +15,8 @@ public class TagBackGrenade extends PowerUpCard {
     public TagBackGrenade(EnumColorCardAndAmmo colorCard) {
 
         super("TAGBACK GRENADE", colorCard);
+        setDescription("Puoi giocare questa carta quando ricevi un danno da un giocatore che puoi vedere.\n" +
+                "Dai 1 marchio a quel giocatore.");
     }
 
     /**

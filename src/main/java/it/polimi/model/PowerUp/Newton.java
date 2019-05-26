@@ -16,6 +16,10 @@ public class Newton extends PowerUpCard {
     public Newton(EnumColorCardAndAmmo colorCard){
 
         super("NEWTON", colorCard);
+        setDescription("Puoi giocare questa carta nel tuo turno prima o dopo aver svolto qualsiasi azione.\n" +
+                "Scegli la miniatura di un altro giocatore e muovila di 1 o 2 quadrati in una direzione.\n" +
+                "(Non puoi usare questo potenziamento per muovere una miniatura dopo che è stata rigenerata alla fine del tuo turno, è troppo tardi.)");
+
     }
 
     /**
