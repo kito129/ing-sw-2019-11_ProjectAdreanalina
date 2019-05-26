@@ -1,5 +1,6 @@
 package it.polimi.view.cli;
 
+import it.polimi.controller.ManagerController;
 import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
@@ -20,14 +21,20 @@ public class ViewCLI implements RemoteView {
     private int row;
     private int column;
     //attribute for grab
-    private int indexWeapon;
+    private int index;
     
+    public ViewCLI(ManagerController managerController){
+        this.state=managerController.getGameModel().getState();
+        this.gameModel=managerController.getGameModel();
+        this.gameController=managerController;
+        
+    }
   
     
     @Override
-    public int getIndexWeapon() {
+    public int getIndex () {
         
-        return indexWeapon;
+        return index;
     }
     
     @Override
@@ -70,9 +77,9 @@ public class ViewCLI implements RemoteView {
         this.column = column;
     }
     
-    public void setIndexWeapon(int indexWeapon) {
+    public void setIndex (int index) {
         
-        this.indexWeapon = indexWeapon;
+        this.index = index;
     }
     
     public void setState (State state) {
@@ -93,6 +100,13 @@ public class ViewCLI implements RemoteView {
     public void setGameModel (RemoteGameModel gameModel) {
         
         this.gameModel = gameModel;
+    }
+    
+    @Override
+    public void reserInput () throws RemoteException {
+        setColumn(-1);
+        setRow(-1);
+        setIndex(-1);
     }
     
     /**
@@ -123,12 +137,16 @@ public class ViewCLI implements RemoteView {
             case USEPOWERUP:
                 break;
             case RUN:
+                viewRun();
                 break;
             case SELECTRUN:
+                viewRunSelection();
                 break;
             case GRAB:
+                viewGrab();
                 break;
             case SELECTGRAB:
+                viewGrabSelection();
                 break;
             case SHOOT:
                 break;
@@ -162,8 +180,8 @@ public class ViewCLI implements RemoteView {
 
     private void notifyController() throws RemoteException {
         
-        if (getOnline()) {
-            
+        if (true) {
+            this.state=gameController.getGameModel().getState();
             gameController.update(this);
         } else {
             
@@ -184,22 +202,37 @@ public class ViewCLI implements RemoteView {
         PrintRunAction.print();
 
         Scanner input = new Scanner(System.in);
-
-        PrintSelectMove.printRow();
-        while(!input.hasNextInt())
-            input = new Scanner(System.in);
-        setRow(input.nextInt());
-
-        System.out.println();
-
-        PrintSelectMove.printColumn();
-        while(!input.hasNextInt())
-            input = new Scanner(System.in);
-        setColumn(input.nextInt());
+    
+        Square target = null;
+    
+        while (target==null) {
+    
+            PrintSelectMove.printRow();
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setRow(input.nextInt());
+    
+            System.out.println();
+    
+            PrintSelectMove.printColumn();
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setColumn(input.nextInt());
+    
+            if ((gameModel.getMap().existInMap(getRow(), getColumn()))) {
+                try {
+                    target = gameModel.getMap().getSquare(getRow(), getColumn());
+                } catch (MapException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         
         //notifica che hai preso i valori
+
         notifyController();
     }
+    
     
     public void viewRun() throws RemoteException {
         
@@ -209,38 +242,47 @@ public class ViewCLI implements RemoteView {
     public void viewGrabSelection() throws RemoteException {
 
         PrintGrabAction.printGrabStuff();
-
-        Scanner input = new Scanner(System.in);
-
-        PrintSelectMove.printRow();
-        while(!input.hasNextInt())
-            input = new Scanner(System.in);
-        setRow(input.nextInt());
-
-        System.out.println();
-
-        PrintSelectMove.printColumn();
-        while(!input.hasNextInt())
-            input = new Scanner(System.in);
-        setColumn(input.nextInt());
-
-        System.out.println();
-
-        try {
-            Square squareSelected = gameModel.getMap().getSquare(row, column);
-            if(gameModel.getMap().isGenerationSquare(squareSelected)){
-
-                PrintGrabAction.printGrabWeapon();
-                PrintWeapon.print(((GenerationSquare) squareSelected).getWeaponList());
-                PrintSelectMove.printIndexWeapon();
-                while(!input.hasNextInt())
-                    input = new Scanner(System.in);
-                setIndexWeapon(input.nextInt());
+        Square target = null;
+        
+        while (target==null) {
+            Scanner input = new Scanner(System.in);
+    
+            PrintSelectMove.printRow();
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setRow(input.nextInt());
+    
+            System.out.println();
+    
+            PrintSelectMove.printColumn();
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setColumn(input.nextInt());
+            
+            if((gameModel.getMap().existInMap(getRow(),getColumn()))){
+                try {
+                    target=gameModel.getMap().getSquare(getRow(),getColumn());
+                } catch (MapException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (MapException e) {
-            e.printStackTrace();
+            
         }
+        
+        System.out.println("input corretto");
+        
+        if(gameModel.getMap().isGenerationSquare(target)){
 
+            PrintGrabAction.printGrabWeapon();
+            PrintWeapon.print(((GenerationSquare) target).getWeaponList());
+            PrintSelectMove.printIndexWeapon();
+            Scanner input = new Scanner(System.in);
+            
+            while(!input.hasNextInt())
+                input = new Scanner(System.in);
+            setIndex(input.nextInt());
+        }
+        
         notifyController();
     }
 

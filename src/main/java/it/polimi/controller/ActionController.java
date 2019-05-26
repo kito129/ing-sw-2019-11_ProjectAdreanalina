@@ -10,7 +10,6 @@ import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.*;
 import it.polimi.view.RemoteView;
-import it.polimi.view.cli.Game;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -21,74 +20,112 @@ import java.util.ArrayList;
  */
 public class ActionController {
     
+    private State beforeError;
+    
+    
+    public void errorState(ActionModel actionModel) throws RemoteException {
+        System.out.println("STATO DI ERRORE, RIPARTO DAL PRECENDENTE\n");
+        
+        if(beforeError==State.RUN){
+            System.out.println("input di RUN errarti\n Ripartiamo..");
+            actionModel.getGameModel().setState(State.SELECTRUN);
+        };
+        
+        
+    }
+    
     
     /**
      * Run action .
      *
      * @param actionModel the action model
      */
-    public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException, NotValidSquareException, MapException {
+    public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException {
         
         //take necessary
         Map map= actionModel.getGameModel().getMap();
         
         //answer to view an input Square
-        Square inputSquare = map.getSquare(view.getRow(),view.getColumn());
-        
-        //temp variables
-         if(map.existInMap(inputSquare)){
-             //effective move
-             try {
-                 actionModel.runActionModel(actionModel.getGameModel().getActualPlayer(),inputSquare);
-             } catch (RunActionMaxDistLimitException e) {
-                //print error or choose another action
-                 actionModel.getGameModel().setState(State.ERROR);
-             } catch (NotValidInput notValidInput) {
-                 notValidInput.printStackTrace();
-             }
-         }
-
+        Square inputSquare = null;
+        try {
+            inputSquare = map.getSquare(view.getRow(),view.getColumn());
+            if(map.existInMap(inputSquare)) {
+    
+                actionModel.runActionModel(actionModel.getGameModel().getActualPlayer(), inputSquare);
+                view.reserInput();
+            }
+        } catch (MapException e) {
+            e.printStackTrace();
+            this.beforeError=actionModel.getGameModel().getState();
+            actionModel.getGameModel().setState(State.ERROR);
+        } catch (NotValidSquareException e) {
+            e.printStackTrace();
+            this.beforeError=actionModel.getGameModel().getState();
+            actionModel.getGameModel().setState(State.ERROR);
+        } catch (RunActionMaxDistLimitException e) {
+            System.out.println("massima distanza superata");
+            this.beforeError=actionModel.getGameModel().getState();
+            actionModel.getGameModel().setState(State.ERROR);
+        } catch (NotValidInput notValidInput) {
+            notValidInput.printStackTrace();
+            this.beforeError=actionModel.getGameModel().getState();
+            actionModel.getGameModel().setState(State.ERROR);
+        }
         
     }
+    
     
     /**
      * Grab action.
      *
      * @param actionModel the action model
      */
-    public void grabActionController (ActionModel actionModel,RemoteView view) throws RemoteException, NotValidSquareException, MapException {
+    public void grabActionController (ActionModel actionModel,RemoteView view) throws RemoteException{
     
         //take necessary
         Map map =actionModel.getGameModel().getMap();
         
         
         //answer to view an input Square
-        Square inputSquare = map.getSquare(view.getRow(),view.getColumn());
+        Square inputSquare = null;
+        try {
+            inputSquare = map.getSquare(view.getRow(),view.getColumn());
+        } catch (MapException e) {
+            e.printStackTrace();
+        }
         Integer indexWeapon=-1;
+        
         //temp variables
         if(map.existInMap(inputSquare)) {
     
     
             //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
             if (map.isGenerationSquare(inputSquare)) {
-                indexWeapon=view.getIndexWeapon();
+                indexWeapon=view.getIndex();
             }
     
             //effective catch gia con l'index giusto se è una Generation Square
             try {
         
                 actionModel.grabActionModel(inputSquare, indexWeapon);
+                
             } catch (GrabActionMaxDistLimitException catchActionMaxDistExpetion) {
-                catchActionMaxDistExpetion.printStackTrace();
+                System.out.println("massima distanza superata");
+                this.beforeError=actionModel.getGameModel().getState();
+                actionModel.getGameModel().setState(State.ERROR);
         
-            } catch (it.polimi.model.Exception.ModelException.RoundModelException.GrabActionFullObjException e) {
+            } catch (GrabActionFullObjException e) {
                 e.printStackTrace();
-        
-            } catch (NotValidInput notValidInput) {
-                notValidInput.printStackTrace();
-            
+                this.beforeError = actionModel.getGameModel().getState();
+                actionModel.getGameModel().setState(State.ERROR);
+    
+            } catch (MapException e) {
+                e.printStackTrace();
+                this.beforeError=actionModel.getGameModel().getState();
+                actionModel.getGameModel().setState(State.ERROR);
             }
         }else  {
+            this.beforeError=actionModel.getGameModel().getState();
             actionModel.getGameModel().setState(State.ERROR);
         }
     }
@@ -100,7 +137,7 @@ public class ActionController {
      * @param powerUpCard the power up card
      * @throws NoPowerUpAvailable  no power up available
      */
-    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable, NotValidInput, MapException {
+    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable, NotValidInput, MapException, RemoteException {
 
         //NEWTON
         if (Newton.class.equals(powerUpCard.getClass())) {

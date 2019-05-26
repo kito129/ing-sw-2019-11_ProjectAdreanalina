@@ -35,6 +35,8 @@ public class Player {
         alive = true;
         damaged = false;
         playerBoard = new PlayerBoard();
+        this.row=-1;
+        this.column=-1;
 
         // TODO vedere come gestire posizione in fase di inizializzazione.io inizialmente le metterei a  null quando vengono istanziati
     

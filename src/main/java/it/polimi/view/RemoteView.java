@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 public interface RemoteView extends Remote {
     
     
-    int getIndexWeapon();
+    int getIndex ();
     
     int getRow() throws RemoteException;
     
@@ -17,6 +17,8 @@ public interface RemoteView extends Remote {
     String getUser() throws RemoteException;
     
     boolean getOnline() throws RemoteException;
+    
+    void reserInput () throws RemoteException;
     
     void update(RemoteGameModel gameModel) throws RemoteException;
     

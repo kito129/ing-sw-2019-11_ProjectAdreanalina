@@ -113,6 +113,13 @@ public class GameModel implements RemoteGameModel {
         return state;
     }
     
+    @Override
+    public void setState (State state) throws RemoteException {
+        
+        this.state=state;
+        notifyObserver(this);
+    }
+    
     public State getExtraState () {
         
         return extraState;
@@ -128,10 +135,6 @@ public class GameModel implements RemoteGameModel {
         this.actualPlayer = actualPlayer;
     }
     
-    public void setState (State state) {
-        
-        this.state = state;
-    }
     
     public ArrayList<Player> getDeadPlayers(){
         ArrayList<Player> tempPLayers = new ArrayList<>();
@@ -169,6 +172,7 @@ public class GameModel implements RemoteGameModel {
     
     @Override
     public List<RemoteView> getObservers (){
+        
         return list;
     }
     /**
@@ -177,6 +181,7 @@ public class GameModel implements RemoteGameModel {
      */
     @Override
     public void addObserver(RemoteView observer){
+        
         list.add(observer);
     }
     
@@ -205,5 +210,24 @@ public class GameModel implements RemoteGameModel {
             }
         }
         list.set(index, observer);
+    }
+    
+    public void notifyObserver (GameModel gameModel){
+            try {
+                int tmp = 0;
+                for(RemoteView observer: getObservers()) {
+                    if(observer!=null) {
+                        if (true) {
+                            if (true) {
+                                observer.update(gameModel);
+                            }
+                        } else {
+                            tmp = getObservers().indexOf(observer);
+                        }
+                    }
+                }
+            } catch (RemoteException e) {
+                //do nothing
+            }
     }
 }

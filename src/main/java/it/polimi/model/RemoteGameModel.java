@@ -2,6 +2,7 @@ package it.polimi.model;
 
 import it.polimi.view.RemoteView;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +92,9 @@ public interface RemoteGameModel{
      * @throws RemoteException if the reference could not be accessed
      */
     State getState() throws RemoteException;
+    
+    void setState(State  state) throws RemoteException;
+    
     
 
 }

@@ -1,4 +1,4 @@
-package it.polimi.model.Exception.ModelException.RoundModelException;
+package it.polimi.model.Exception;
 
 public class GrabActionFullObjException extends Exception {
     

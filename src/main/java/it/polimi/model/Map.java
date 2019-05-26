@@ -550,6 +550,24 @@ public class Map {
         }
        return false;
     }
+    /**
+     * Exist in map.
+     *
+     * @param row the ore of square
+        * @param column the ore of square
+     */
+    public boolean existInMap(int row, int column){
+        
+        boolean found=false;
+        
+        for (Square a:squares) {
+            if (row == a.getRow() && column == a.getColumn()) {
+                
+                return true;
+            }
+        }
+        return false;
+    }
     
     
     /**
@@ -559,8 +577,9 @@ public class Map {
      * @return true if this square is Generation Square
      */
     public boolean isGenerationSquare(Square square){
-        //TODO SISTEMARE
-        return square.getClass().equals(GenerationSquare.class);
+        if(square!=null) {
+            return square.getClass().equals(GenerationSquare.class);
+        } return false;
     }
     
     /**

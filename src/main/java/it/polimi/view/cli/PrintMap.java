@@ -30,13 +30,13 @@ public class PrintMap implements Serializable {
      * set that square with black color
      * @param squares   the map choosen for the game
      */
-    private static String[][] getsetMap(ArrayList<Square> squares) {
+    private static String[][] getSetMap (ArrayList<Square> squares) {
 
         String[][] map = new String[14][23];
 
         for (Square s : squares) {
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 14; i++) {
 
                 //per colorare il generation square rosso a lato
                 if(i >= 6 && i <= 9){
@@ -44,7 +44,7 @@ public class PrintMap implements Serializable {
                     map[i][0] = ANSI_RED + "|" + ANSI_RESET;
                 }
 
-                for (int j = 0; j < 24; j++) {
+                for (int j = 0; j < 23; j++) {
 
                     if (s.getRow() == (i-1)/5 && i!=5 && i!=10 && s.getColumn() == (j-1)/6 && j!=6 && j!=12 && j!=18) {
 
@@ -146,7 +146,7 @@ public class PrintMap implements Serializable {
      * @param squares   the squares of the map
      * @param map       the map choosen for the game
      */
-    private static String[][] getsetPlayersOnMap(ArrayList<Square> squares, String[][] map){
+    private static String[][] getSetPlayersOnMap (ArrayList<Square> squares, String[][] map){
 
         for (Square s : squares){
 
@@ -199,10 +199,10 @@ public class PrintMap implements Serializable {
      */
     public static void printMap(ArrayList<Square> squares) {
 
-        String[][] map = getsetMap(squares);
-        map = getsetPlayersOnMap(squares, map);
+        String[][] map = getSetMap(squares);
+        map = getSetPlayersOnMap(squares, map);
 
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 14; i++){
 
             if(i == 2 || i == 7 || i == 12){
 
@@ -212,7 +212,7 @@ public class PrintMap implements Serializable {
 
                 System.out.print("   ");
             }
-            for(int j = 0; j < 24; j++){
+            for(int j = 0; j < 23; j++){
 
                 System.out.print(map[i][j]);
             }
