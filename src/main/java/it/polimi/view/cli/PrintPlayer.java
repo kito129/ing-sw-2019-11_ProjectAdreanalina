@@ -13,6 +13,7 @@ public class PrintPlayer implements Serializable {
      */
     public static void print(Player player){
 
+        System.out.println();
         PrintPlayerInfo.print(player);
         PrintCoordinate.print(player);
         PrintScore.print(player);

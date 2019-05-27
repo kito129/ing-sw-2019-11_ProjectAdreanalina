@@ -190,6 +190,7 @@ public class ViewCLI implements RemoteView {
                 viewGrabSelection();
                 break;
             case SHOOT:
+                viewLockRifleBaseEffect(gameModel);
                 break;
             case SELECTSHOOT:
                 break;
@@ -332,7 +333,7 @@ public class ViewCLI implements RemoteView {
         PrintMap.printMap(gameModel.getMap().getSquares());
     }
 
-    public void viewLockRifleBaseEffect(GameModel gameModel) throws RemoteException{
+    public void viewLockRifleBaseEffect(RemoteGameModel gameModel) throws RemoteException{
 
         PrintEffectWeapon.printLockRifleBaseEffect(gameModel);
         Scanner input = new Scanner(System.in);
@@ -342,12 +343,12 @@ public class ViewCLI implements RemoteView {
             while (!input.hasNextInt())
                 input = new Scanner(System.in);
 
-        } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
+        } while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
 
-        setTarget1(input.nextInt());
+        setTarget1( input.nextInt());
     }
 
-    public void viewLockRifleSecondLock(GameModel gameModel) throws RemoteException{
+    public void viewLockRifleSecondLock(RemoteGameModel gameModel) throws RemoteException{
 
         System.out.println("Do you want to use the second effect?");
         System.out.println("0 -> YES");
@@ -365,7 +366,7 @@ public class ViewCLI implements RemoteView {
 
             } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
 
-            setTarget1(input.nextInt());
+            setTarget2(input.nextInt());
         }
     }
 }

@@ -4,6 +4,7 @@ import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NoPowerUpAvailable;
 import it.polimi.model.Exception.NotValidInput;
+import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 
@@ -128,17 +129,16 @@ public class ManagerController implements RemoteGameController {
                         //prendo le armi che ho, le mostro alla vieee che decide cosa usare
                 
                         //es
-                        String string = "Lock Rifle ";
+                        String string = "LOCKRIFLE";
                 
                 
                         switch (string) {
                             case "ELECTOSCYTHE":
-                                //Electroscythe electroscythe =
-                                //actionController.ElectroscytheWeapon(gameModel,electroscythe);
+
                     
                             case "LOCKRIFLE":
-                                // LockRifle lockRifle = (LockRifle) getWeaponPlayer(gameModel.getActualPlayer(),string);//todo ti commento perchè npn mi compila
-                                // actionController.LockRifleweapon(gameModel,lockRifle);
+                                LockRifle lockRifle = new LockRifle();
+                                actionController.LockRifleweapon(gameModel,lockRifle,view);
                     
                         }
                         break;

@@ -230,4 +230,17 @@ public class GameModel implements RemoteGameModel {
                 //do nothing
             }
     }
+
+    public Player getPlayerById(int i){
+
+        for (Player a : this.players){
+
+            if(a.getId()==i){
+                return a;
+            }
+        }
+    return null;
+    }
+
+
 }
