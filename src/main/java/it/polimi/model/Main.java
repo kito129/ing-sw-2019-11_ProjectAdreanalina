@@ -19,9 +19,7 @@ public class Main {
 
     public static void main(String args[]) {
 
-        WeaponCard weapon=new Thor();
-        System.out.println(weapon.getDescription());
-
+    
 
     }
 }

@@ -3,10 +3,6 @@ package it.polimi.model;
 import it.polimi.controller.ActionController;
 import it.polimi.controller.ManagerController;
 import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NoPowerUpAvailable;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotValidSquareException;
-import it.polimi.view.RemoteView;
 import it.polimi.view.cli.ViewCLI;
 
 import java.rmi.RemoteException;
@@ -26,6 +22,7 @@ public class MainMarcoController {
         Player player3 = new Player(3, "simone", EnumColorPlayer.GREEN);
         Player player4 = new Player(4, "niko", EnumColorPlayer.PINK);
         Player player5 = new Player(5, "teo", EnumColorPlayer.GREY);
+        
         for (Player p : players) {
         
             p.stampa();
@@ -110,14 +107,16 @@ public class MainMarcoController {
         }
         //chiamo la viees
     
-        /*
+     /*
         try {
             viewCLI.update(gameModel);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+        
+      */
       
-         */
+        
     
         map.print();
         
@@ -129,14 +128,16 @@ public class MainMarcoController {
         }
         
         
-        /*
+/*
         try {
             viewCLI.update(gameModel);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
         
-         */
+ */
+        
+      
         
         
         map.print();

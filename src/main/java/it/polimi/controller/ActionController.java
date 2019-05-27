@@ -42,6 +42,7 @@ public class ActionController {
      */
     public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException {
         
+        
         //take necessary
         Map map= actionModel.getGameModel().getMap();
         
@@ -50,6 +51,8 @@ public class ActionController {
         try {
             inputSquare = map.getSquare(view.getRow(),view.getColumn());
             if(map.existInMap(inputSquare)) {
+                //set the state in run
+                actionModel.getGameModel().setState(State.RUN);
     
                 actionModel.runActionModel(actionModel.getGameModel().getActualPlayer(), inputSquare);
                 view.reserInput();
