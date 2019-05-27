@@ -339,14 +339,15 @@ public class ViewCLI implements RemoteView {
         PrintEffectWeapon.printLockRifleBaseEffect(gameModel);
         Scanner input = new Scanner(System.in);
 
-        do {
+        //do {
 
             while (!input.hasNextInt())
                 input = new Scanner(System.in);
 
-        } while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
 
         setTarget1( input.nextInt());
+        notifyController();
     }
 
     public void viewLockRifleSecondLock(RemoteGameModel gameModel) throws RemoteException{
@@ -361,10 +362,10 @@ public class ViewCLI implements RemoteView {
 
             PrintEffectWeapon.printLockRifleSecondLock(gameModel);
             do {
-
-                while (!input.hasNextInt())
+    
+                while(!input.hasNextInt())
                     input = new Scanner(System.in);
-
+                
             } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
 
             setTarget2(input.nextInt());

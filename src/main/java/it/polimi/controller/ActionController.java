@@ -378,14 +378,16 @@ public class ActionController {
              targetBase = gameModel.getPlayerById(view.getTarget1());
         } else
             return;
-        if(gameModel.getPlayerById(view.getTarget2())!=null) {
+        /*if(gameModel.getPlayerById(view.getTarget2())!=null) {
 
              targetSecondLock = gameModel.getPlayerById(view.getTarget1());
         }else
             return;
 
+
+         */
         Player currentPlayer =gameModel.getActualPlayer();
-        Map map = new Map();
+        Map map = gameModel.getMap();
         String message = "base effect";
 
         switch (message) {
@@ -397,7 +399,7 @@ public class ActionController {
 
                 }
             case "second Lock Effect":
-                try {
+                /*try {
 
                     if (targetBase != targetSecondLock) {
 
@@ -414,6 +416,8 @@ public class ActionController {
 
                     //gestione target non visibile o errore di mappa
                 }
+                
+                 */
         }
         //settare arma scarica
     }

@@ -75,7 +75,7 @@ public class Map {
      */
     public Square findPlayer(Player player) throws MapException {
 
-        for (Square s : squares) {
+        for (Square s : this.squares) {
 
             if (s.getPlayers().contains(player)) {
 
@@ -609,6 +609,23 @@ public class Map {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * Calculate if there is a port from SquareA to SquareB.
+     * @param squareA Square A
+     * @param squareB Square B
+     * @return true if there is a port, false otherwise
+     * */
+    public boolean isPort(int row1,int col1, int row2,int col2){
+    
+        try {
+            if(isPort(getSquare(row1,col1),getSquare(row2,col2))){
+                return true;
+            }else return false;
+        } catch (MapException e) {
+            return false;
+        }
     }
     
     public void print(){

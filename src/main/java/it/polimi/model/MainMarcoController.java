@@ -132,7 +132,7 @@ public class MainMarcoController {
             e.printStackTrace();
         }
         
-      */
+      
       
 
     
@@ -161,13 +161,13 @@ public class MainMarcoController {
         
             p.stampa();
         }
-        */
+        
         
     
     
 
 
-       /*
+       
 
         
        
