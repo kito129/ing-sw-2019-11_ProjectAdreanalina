@@ -136,7 +136,6 @@ public class PrintMap implements Serializable {
 
             s = ANSI_YELLOW_BACKGROUND + "Y" + ANSI_BLACK_BACKGROUND;
         }
-
         return s;
     }
 
@@ -219,5 +218,6 @@ public class PrintMap implements Serializable {
             System.out.println();
         }
         //TODO per le porte bisogna verificare se fra due indici di riga/colonna seguenti è presente un link
+        //TODO stampare indici colonna fuori dalla mappa
     }
 }

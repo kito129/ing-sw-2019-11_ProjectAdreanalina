@@ -20,6 +20,7 @@ public class PrintPlayerInfo implements Serializable {
      */
     public static void print(Player player){
 
+        System.out.println();
         if(player.getColor().equals(EnumColorPlayer.BLU)){
 
             System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
@@ -43,6 +44,5 @@ public class PrintPlayerInfo implements Serializable {
 
         System.out.println("ID: " +player.getId());
         System.out.println("NAME: " +player.getName());
-
     }
 }

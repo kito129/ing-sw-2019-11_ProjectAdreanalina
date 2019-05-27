@@ -28,7 +28,7 @@ public class PrintPlayer implements Serializable {
 
         for(Player p : players){
 
-            PrintPlayer.print(p);
+            PrintPlayerInfo.print(p);
         }
     }
 }
