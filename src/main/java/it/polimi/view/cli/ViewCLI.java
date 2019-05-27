@@ -22,6 +22,11 @@ public class ViewCLI implements RemoteView {
     private int column;
     //attribute for grab
     private int index;
+    //attribute for shoot
+    private int target1;
+    private int target2;
+    private int target3;
+    private int target4;
     
     public ViewCLI(ManagerController managerController){
         this.state=managerController.getGameModel().getState();
@@ -48,8 +53,27 @@ public class ViewCLI implements RemoteView {
         
         return column;
     }
-    
-    
+
+    @Override
+    public int getTarget1() {
+        return target1;
+    }
+
+    @Override
+    public int getTarget2() {
+        return target2;
+    }
+
+    @Override
+    public int getTarget3() {
+        return target3;
+    }
+
+    @Override
+    public int getTarget4() {
+        return target4;
+    }
+
     @Override
     public String getUser () throws RemoteException {
         
@@ -76,7 +100,24 @@ public class ViewCLI implements RemoteView {
         
         this.column = column;
     }
-    
+
+    public void setTarget1(int target1) {
+        this.target1 = target1;
+    }
+
+    public void setTarget2(int target2) {
+        this.target2 = target2;
+    }
+
+    public void setTarget3(int target3) {
+        this.target3 = target3;
+    }
+
+    public void setTarget4(int target4) {
+        this.target4 = target4;
+    }
+
+
     public void setIndex (int index) {
         
         this.index = index;
@@ -289,5 +330,42 @@ public class ViewCLI implements RemoteView {
     public void viewGrab() throws RemoteException {
 
         PrintMap.printMap(gameModel.getMap().getSquares());
+    }
+
+    public void viewLockRifleBaseEffect(GameModel gameModel) throws RemoteException{
+
+        PrintEffectWeapon.printLockRifleBaseEffect(gameModel);
+        Scanner input = new Scanner(System.in);
+
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+        } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
+
+        setTarget1(input.nextInt());
+    }
+
+    public void viewLockRifleSecondLock(GameModel gameModel) throws RemoteException{
+
+        System.out.println("Do you want to use the second effect?");
+        System.out.println("0 -> YES");
+        System.out.println("1 -> NO");
+        Scanner input = new Scanner(System.in);
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+        if(input.nextInt()==0){
+
+            PrintEffectWeapon.printLockRifleSecondLock(gameModel);
+            do {
+
+                while (!input.hasNextInt())
+                    input = new Scanner(System.in);
+
+            } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
+
+            setTarget1(input.nextInt());
+        }
     }
 }

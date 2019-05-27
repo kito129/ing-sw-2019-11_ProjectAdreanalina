@@ -18,4 +18,16 @@ public class PrintPlayer implements Serializable {
         PrintScore.print(player);
         System.out.println("ALIVE: " +player.isAlive());
     }
+
+    /**
+     * Print Players' attributes.
+     * @param players   the player to print
+     */
+    public static void print(ArrayList<Player> players){
+
+        for(Player p : players){
+
+            PrintPlayer.print(p);
+        }
+    }
 }
