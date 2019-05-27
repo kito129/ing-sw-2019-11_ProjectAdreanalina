@@ -32,11 +32,11 @@ public class PrintMap implements Serializable {
      */
     private static String[][] getSetMap (ArrayList<Square> squares) {
 
-        String[][] map = new String[14][23];
+        String[][] map = new String[15][24];
 
         for (Square s : squares) {
 
-            for (int i = 0; i < 14; i++) {
+            for (int i = 0; i < 15; i++) {
 
                 //per colorare il generation square rosso a lato
                 if(i >= 6 && i <= 9){
@@ -44,7 +44,7 @@ public class PrintMap implements Serializable {
                     map[i][0] = ANSI_RED + "|" + ANSI_RESET;
                 }
 
-                for (int j = 0; j < 23; j++) {
+                for (int j = 0; j < 24; j++) {
 
                     if (s.getRow() == (i-1)/5 && i!=5 && i!=10 && s.getColumn() == (j-1)/6 && j!=6 && j!=12 && j!=18) {
 
@@ -136,7 +136,6 @@ public class PrintMap implements Serializable {
 
             s = ANSI_YELLOW_BACKGROUND + "Y" + ANSI_BLACK_BACKGROUND;
         }
-
         return s;
     }
 
@@ -202,7 +201,7 @@ public class PrintMap implements Serializable {
         String[][] map = getSetMap(squares);
         map = getSetPlayersOnMap(squares, map);
 
-        for(int i = 0; i < 14; i++){
+        for(int i = 0; i < 15; i++){
 
             if(i == 2 || i == 7 || i == 12){
 
@@ -212,12 +211,13 @@ public class PrintMap implements Serializable {
 
                 System.out.print("   ");
             }
-            for(int j = 0; j < 23; j++){
+            for(int j = 0; j < 24; j++){
 
                 System.out.print(map[i][j]);
             }
             System.out.println();
         }
         //TODO per le porte bisogna verificare se fra due indici di riga/colonna seguenti è presente un link
+        //TODO stampare indici colonna fuori dalla mappa
     }
 }

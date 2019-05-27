@@ -96,8 +96,26 @@ public class MainMarcoController {
             
             p.stampa();
         }
+
+        try {
+            gameModel.setState(State.SHOOT);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        try {
+            viewCLI.update(gameModel);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        map.print();
+        for (Player p : players) {
+
+            p.stampa();
+        }
+
         
-       
+       /*
         //prova run
     
         try {
@@ -107,7 +125,7 @@ public class MainMarcoController {
         }
         //chiamo la viees
     
-     /*
+
         try {
             viewCLI.update(gameModel);
         } catch (RemoteException e) {
@@ -116,7 +134,7 @@ public class MainMarcoController {
         
       */
       
-        
+
     
         map.print();
         
@@ -128,16 +146,14 @@ public class MainMarcoController {
         }
         
         
-/*
+
         try {
             viewCLI.update(gameModel);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
         
- */
-        
-      
+
         
         
         map.print();
@@ -145,13 +161,14 @@ public class MainMarcoController {
         
             p.stampa();
         }
+        */
         
     
     
-        
-    
-        
-        /*
+
+
+       /*
+
         
        
         //piazza i player in mappa
@@ -212,9 +229,11 @@ public class MainMarcoController {
             notValidInput.printStackTrace();
         } catch (MapException e) {
             e.printStackTrace();
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
-        
-        
+
+
         //stampa player
         for (Player p : players) {
             

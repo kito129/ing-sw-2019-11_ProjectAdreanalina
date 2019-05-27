@@ -367,13 +367,26 @@ public class ActionController {
      * @param gameModel the game model
      * @param weapon    the weapon
      */
-    public void LockRifleweapon(GameModel gameModel, LockRifle weapon) {
+    public void LockRifleweapon(GameModel gameModel, LockRifle weapon,RemoteView view) {
 
-        Player targetBase = new Player();
-        Player targetSecondLock = new Player();
-        Player currentPlayer = new Player();
+
+        Player targetBase;
+        Player targetSecondLock;
+
+        if(gameModel.getPlayerById(view.getTarget1())!=null) {
+
+             targetBase = gameModel.getPlayerById(view.getTarget1());
+        } else
+            return;
+        if(gameModel.getPlayerById(view.getTarget2())!=null) {
+
+             targetSecondLock = gameModel.getPlayerById(view.getTarget1());
+        }else
+            return;
+
+        Player currentPlayer =gameModel.getActualPlayer();
         Map map = new Map();
-        String message = "";
+        String message = "base effect";
 
         switch (message) {
             case "base effect":

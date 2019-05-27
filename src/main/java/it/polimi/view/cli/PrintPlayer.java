@@ -13,9 +13,22 @@ public class PrintPlayer implements Serializable {
      */
     public static void print(Player player){
 
+        System.out.println();
         PrintPlayerInfo.print(player);
         PrintCoordinate.print(player);
         PrintScore.print(player);
         System.out.println("ALIVE: " +player.isAlive());
+    }
+
+    /**
+     * Print Players' attributes.
+     * @param players   the player to print
+     */
+    public static void print(ArrayList<Player> players){
+
+        for(Player p : players){
+
+            PrintPlayerInfo.print(p);
+        }
     }
 }
