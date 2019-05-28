@@ -193,7 +193,7 @@ public class ManagerController implements RemoteGameController {
     
     @Override
     public void setPlayerOnline (String user, boolean online){
-        for(Player a : gameModel.getPlayers()){
+        for(Player a : gameModel.getPlayers(true)){
             if(a.getName().equals(user)){
                 a.setOnline(online);
             }
@@ -209,12 +209,12 @@ public class ManagerController implements RemoteGameController {
                     gameModel.getObservers().get(i).getUser();
             } catch(RemoteException e){
                 if(gameModel.getState().equals(State.LOBBY)) {
-                    gameModel.getPlayers().get(i).setOnline(false);
-                    gameModel.getPlayers().remove(i);
+                    gameModel.getPlayers(true).get(i).setOnline(false);
+                    gameModel.getPlayers(true).remove(i);
                     gameModel.getObservers().remove(i);
                 }
                 else {
-                    gameModel.getPlayers().get(i).setOnline(false);
+                    gameModel.getPlayers(true).get(i).setOnline(false);
                     gameModel.removeObserver(gameModel.getObservers().get(i));
                 }
             }

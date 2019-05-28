@@ -18,6 +18,7 @@ public class ViewCLI implements RemoteView {
     
     protected State state;
     protected String user;
+    protected Player player;
     RemoteGameModel gameModel;
     RemoteGameController gameController;
     protected boolean online;
