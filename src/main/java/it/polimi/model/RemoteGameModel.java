@@ -30,12 +30,8 @@ public interface RemoteGameModel{
      */
     KillShotTrack getKillShotTrack();
     
-    /**
-     * Gets players.
-     *
-     * @return the players
-     */
-    ArrayList<Player> getPlayers();
+    
+    ArrayList<Player> getPlayers (boolean wantCurrent);
     
     /**
      * Gets ammo deck.

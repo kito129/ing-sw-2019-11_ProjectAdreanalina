@@ -73,14 +73,15 @@ public class GameModel implements RemoteGameModel {
      *
      * @return the players
      */
+    @Override
     public ArrayList<Player> getPlayers(boolean wantCurrent) {
         if (wantCurrent==true) {
 
             return players;        
         } else
         {
-            
-            return players.remove(getActualPlayer);
+            players.remove(getActualPlayer());
+            return players;
         }
 
     }
@@ -161,7 +162,7 @@ public class GameModel implements RemoteGameModel {
     public ArrayList<EnumColorPlayer> getPlayerColor(){
         ArrayList<EnumColorPlayer> playerColor = new ArrayList<>();
         
-        for (Player a: getPlayers()){
+        for (Player a: getPlayers(true)){
             playerColor.add(a.getColor());
         }
         return playerColor;
