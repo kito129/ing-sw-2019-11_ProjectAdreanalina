@@ -4,6 +4,7 @@ import it.polimi.controller.ManagerController;
 import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
+import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
@@ -333,10 +334,12 @@ public class ViewCLI implements RemoteView {
         PrintMap.printMap(gameModel.getMap().getSquares());
     }
 
+    //WEAPON
+
     //LOCK RIFLE
     public void viewLockRifleBasicEffect(RemoteGameModel gameModel) throws RemoteException{
 
-        PrintEffectWeapon.printLockRifleBaseEffect(gameModel);
+        PrintEffectWeapon.printLockRifleBasicEffect(gameModel);
         Scanner input = new Scanner(System.in);
 
         //do {
@@ -352,15 +355,18 @@ public class ViewCLI implements RemoteView {
 
     public void viewLockRifleSecondLock(RemoteGameModel gameModel) throws RemoteException{
 
-        System.out.println("Do you want to use the Second Lock effect?");
+        System.out.println("Do you want to use the Second Lock?");
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
+        
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
             input = new Scanner(System.in);
         if(input.nextInt()==0){
 
             PrintEffectWeapon.printLockRifleSecondLock(gameModel);
+
+            PrintTarget.print();
             do {
     
                 while(!input.hasNextInt())
@@ -368,7 +374,99 @@ public class ViewCLI implements RemoteView {
                 
             } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
 
-            setTarget2(input.nextInt());
+            setTarget1(input.nextInt());
+        }
+    }
+
+    //ELECTROSCYTHE
+    public void viewElectroscytheBasicMode() throws RemoteException{
+
+        PrintEffectWeapon.printElectroscytheBasicMode();
+    }
+
+    public void viewElectroscytheReaperMode() throws RemoteException{
+
+        PrintEffectWeapon.printElectroscytheReaperMode();
+    }
+
+    //MACHINE GUN
+    public void viewMachineGunBasicEffect(RemoteGameModel gameModel) throws RemoteException{
+
+        PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
+        Scanner input = new Scanner(System.in);
+
+        PrintTarget.print();
+        //do {
+
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
+        setTarget1( input.nextInt());
+
+        PrintTarget.print();
+        //do {
+
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
+        setTarget2( input.nextInt());
+    }
+
+    public void viewMachineGunFocusShot(RemoteGameModel gameModel) throws RemoteException{
+
+        System.out.println("Do you want to use the Focus Shot?");
+        System.out.println("0 -> YES");
+        System.out.println("1 -> NO");
+        Scanner input = new Scanner(System.in);
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+        if(input.nextInt()==0){
+
+            PrintEffectWeapon.printMachineGunFocusShot(gameModel);
+
+            PrintTarget.print();
+            do {
+
+                while (!input.hasNextInt())
+                    input = new Scanner(System.in);
+
+            } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
+
+            setTarget1(input.nextInt());
+        }
+    }
+
+    public void viewMachineGunTurretTripod(RemoteGameModel gameModel) throws RemoteException{
+
+        System.out.println("Do you want to use the Turret Tripod?");
+        System.out.println("0 -> YES");
+        System.out.println("1 -> NO");
+        Scanner input = new Scanner(System.in);
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+        if(input.nextInt()==0){
+
+            PrintEffectWeapon.printMachineGunTurretTripod(gameModel);
+
+            PrintTarget.print();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
+            setTarget1( input.nextInt());
+
+            PrintTarget.print();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
+            setTarget2( input.nextInt());
         }
     }
 
@@ -378,6 +476,7 @@ public class ViewCLI implements RemoteView {
         PrintEffectWeapon.printThorBasicEffect(gameModel);
         Scanner input = new Scanner(System.in);
 
+        PrintTarget.print();
         do {
 
             while (!input.hasNextInt())
@@ -390,7 +489,7 @@ public class ViewCLI implements RemoteView {
 
     public void viewThorChainReaction(RemoteGameModel gameModel) throws RemoteException{
 
-        System.out.println("Do you want to use the Chain Reaction effect?");
+        System.out.println("Do you want to use the Chain Reaction?");
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
         Scanner input = new Scanner(System.in);
@@ -399,6 +498,8 @@ public class ViewCLI implements RemoteView {
         if(input.nextInt()==0){
 
             PrintEffectWeapon.printThorChainReaction(gameModel);
+
+            PrintTarget.print();
             do {
 
                 while (!input.hasNextInt())
@@ -406,13 +507,13 @@ public class ViewCLI implements RemoteView {
 
             } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
 
-            setTarget2(input.nextInt());
+            setTarget1(input.nextInt());
         }
     }
 
     public void viewThorHighVoltage(RemoteGameModel gameModel) throws RemoteException{
 
-        System.out.println("Do you want to use the High Voltage effect?");
+        System.out.println("Do you want to use the High Voltage?");
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
         Scanner input = new Scanner(System.in);
@@ -421,6 +522,8 @@ public class ViewCLI implements RemoteView {
         if(input.nextInt()==0){
 
             PrintEffectWeapon.printThorHighVoltage(gameModel);
+
+            PrintTarget.print();
             do {
 
                 while (!input.hasNextInt())
@@ -428,8 +531,7 @@ public class ViewCLI implements RemoteView {
 
             } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
 
-            setTarget3(input.nextInt());
+            setTarget1(input.nextInt());
         }
     }
-
 }
