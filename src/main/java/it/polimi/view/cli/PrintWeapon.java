@@ -41,7 +41,6 @@ public class PrintWeapon implements Serializable {
 
             System.out.print("RECHARGE COST: ");
             PrintRechargeCost.print(weaponList);
-
             System.out.println("LOADED WEAPON: " + wc.isCharge());
             System.out.println("DESCRIPTION: ");
             System.out.println(wc.getDescription());

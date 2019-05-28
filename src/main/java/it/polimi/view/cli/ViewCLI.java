@@ -23,6 +23,8 @@ public class ViewCLI implements RemoteView {
     private int column;
     //attribute for grab
     private int index;
+    //scelta arma
+    private int choicePlayer;
     //attribute for shoot
     private int target1;
     private int target2;
@@ -42,7 +44,12 @@ public class ViewCLI implements RemoteView {
         
         return index;
     }
-    
+
+    @Override
+    public int getChoicePlayer() {
+        return choicePlayer;
+    }
+
     @Override
     public int getRow () {
         
@@ -103,18 +110,22 @@ public class ViewCLI implements RemoteView {
     }
 
     public void setTarget1(int target1) {
+
         this.target1 = target1;
     }
 
     public void setTarget2(int target2) {
+
         this.target2 = target2;
     }
 
     public void setTarget3(int target3) {
+
         this.target3 = target3;
     }
 
     public void setTarget4(int target4) {
+
         this.target4 = target4;
     }
 
@@ -123,7 +134,12 @@ public class ViewCLI implements RemoteView {
         
         this.index = index;
     }
-    
+
+    public void setChoicePlayer(int choicePlayer) {
+
+        this.choicePlayer = choicePlayer;
+    }
+
     public void setState (State state) {
         
         this.state = state;
@@ -359,7 +375,8 @@ public class ViewCLI implements RemoteView {
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
         //todo stampare costo effetto
-        //todo stampare munizioni giocatore
+        System.out.println("YOUR AMMO:");
+        PrintEnumCardsAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo());
 
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
@@ -376,19 +393,22 @@ public class ViewCLI implements RemoteView {
                 
             } while (input.nextInt()>0 && input.nextInt()<gameModel.getPlayers().size());
 
-            setTarget1(input.nextInt());
+            setTarget2(input.nextInt());
         }
+        notifyController();
     }
 
     //ELECTROSCYTHE
     public void viewElectroscytheBasicMode() throws RemoteException{
 
         PrintEffectWeapon.printElectroscytheBasicMode();
+        notifyController();
     }
 
     public void viewElectroscytheReaperMode() throws RemoteException{
 
         PrintEffectWeapon.printElectroscytheReaperMode();
+        notifyController();
     }
 
     //MACHINE GUN
@@ -414,6 +434,7 @@ public class ViewCLI implements RemoteView {
 
         //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
         setTarget2( input.nextInt());
+        notifyController();
     }
 
     public void viewMachineGunFocusShot(RemoteGameModel gameModel) throws RemoteException{
@@ -442,6 +463,7 @@ public class ViewCLI implements RemoteView {
 
             setTarget1(input.nextInt());
         }
+        notifyController();
     }
 
     public void viewMachineGunTurretTripod(RemoteGameModel gameModel) throws RemoteException{
@@ -478,6 +500,7 @@ public class ViewCLI implements RemoteView {
             //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
             setTarget2( input.nextInt());
         }
+        notifyController();
     }
 
     //THOR
@@ -495,6 +518,7 @@ public class ViewCLI implements RemoteView {
         } while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers().size());
 
         setTarget1( input.nextInt());
+        notifyController();
     }
 
     public void viewThorChainReaction(RemoteGameModel gameModel) throws RemoteException{
@@ -523,6 +547,7 @@ public class ViewCLI implements RemoteView {
 
             setTarget1(input.nextInt());
         }
+        notifyController();
     }
 
     public void viewThorHighVoltage(RemoteGameModel gameModel) throws RemoteException{
@@ -551,5 +576,6 @@ public class ViewCLI implements RemoteView {
 
             setTarget1(input.nextInt());
         }
+        notifyController();
     }
 }
