@@ -358,7 +358,9 @@ public class ViewCLI implements RemoteView {
         System.out.println("Do you want to use the Second Lock?");
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
-        
+        //todo stampare costo effetto
+        //todo stampare munizioni giocatore
+
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
             input = new Scanner(System.in);
@@ -419,6 +421,9 @@ public class ViewCLI implements RemoteView {
         System.out.println("Do you want to use the Focus Shot?");
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
+        //todo stampare costo effetto
+        //todo stampare munizioni giocatore
+
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
             input = new Scanner(System.in);
@@ -443,6 +448,9 @@ public class ViewCLI implements RemoteView {
         System.out.println("Do you want to use the Turret Tripod?");
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
+        //todo stampare costo effetto
+        //todo stampare munizioni giocatore
+
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
             input = new Scanner(System.in);
@@ -492,6 +500,9 @@ public class ViewCLI implements RemoteView {
         System.out.println("Do you want to use the Chain Reaction?");
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
+        //todo stampare costo effetto
+        //todo stampare munizioni giocatore
+
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
             input = new Scanner(System.in);
@@ -516,6 +527,9 @@ public class ViewCLI implements RemoteView {
         System.out.println("Do you want to use the High Voltage?");
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
+        //todo stampare costo effetto
+        //todo stampare munizioni giocatore
+        
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
             input = new Scanner(System.in);
