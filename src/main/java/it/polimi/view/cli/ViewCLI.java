@@ -422,7 +422,8 @@ public class ViewCLI implements RemoteView {
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
         //todo stampare costo effetto
-        //todo stampare munizioni giocatore
+        System.out.println("YOUR AMMO:");
+        PrintEnumCardsAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo());
 
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
@@ -449,7 +450,8 @@ public class ViewCLI implements RemoteView {
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
         //todo stampare costo effetto
-        //todo stampare munizioni giocatore
+        System.out.println("YOUR AMMO:");
+        PrintEnumCardsAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo());
 
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
@@ -501,7 +503,8 @@ public class ViewCLI implements RemoteView {
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
         //todo stampare costo effetto
-        //todo stampare munizioni giocatore
+        System.out.println("YOUR AMMO:");
+        PrintEnumCardsAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo());
 
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
@@ -528,8 +531,9 @@ public class ViewCLI implements RemoteView {
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
         //todo stampare costo effetto
-        //todo stampare munizioni giocatore
-        
+        System.out.println("YOUR AMMO:");
+        PrintEnumCardsAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo());
+
         Scanner input = new Scanner(System.in);
         while (!input.hasNextInt())
             input = new Scanner(System.in);

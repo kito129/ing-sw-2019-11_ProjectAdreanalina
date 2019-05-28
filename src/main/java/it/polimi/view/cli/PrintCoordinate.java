@@ -12,6 +12,7 @@ public class PrintCoordinate implements Serializable {
      */
     public static void print(Player player){
 
+        System.out.println();
         System.out.println("ROW: " +player.getRow());
         System.out.println("COLUMN: " +player.getColumn());
     }
