@@ -73,9 +73,16 @@ public class GameModel implements RemoteGameModel {
      *
      * @return the players
      */
-    public ArrayList<Player> getPlayers() {
+    public ArrayList<Player> getPlayers(boolean wantCurrent) {
+        if (wantCurrent==true) {
 
-        return players;
+            return players;        
+        } else
+        {
+            
+            return players.remove(getActualPlayer);
+        }
+
     }
     
     /**
