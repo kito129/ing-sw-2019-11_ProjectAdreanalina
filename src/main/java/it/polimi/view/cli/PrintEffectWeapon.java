@@ -16,7 +16,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("BASIC EFFECT");
         System.out.println("Who is your target? (insert player's ID)");
-        PrintPlayer.print(gameModel.getPlayers());
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 
     /**
@@ -28,7 +28,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE SECOND LOCK");
         System.out.println("Select a different target you can see. (insert player's ID)");
-        PrintPlayer.print(gameModel.getPlayers());
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 
     //ELECTROSCYTHE
@@ -60,7 +60,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("BASIC EFFECT");
         System.out.println("Who is/are your target/s? The targets must be different and visible to you (insert players' ID)");
         System.out.println("if you want to shoot only one player enter -1 as the ID of the second");
-        PrintPlayer.print(gameModel.getPlayers());
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 
     /**
@@ -70,8 +70,10 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED FOCUS SHOT");
-        System.out.print("Select one of the two targets (insert players' ID); ");
-        PrintPlayer.print(gameModel.getPlayers());
+        System.out.print("Select one of the two targets");
+        System.out.println("0 -> first target");
+        System.out.println("1 -> second target");
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 
     /**
@@ -81,9 +83,9 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED TURRET TRIPOD");
-        System.out.print("Select the other target and / or select a third target you can see (insert players' ID)");
-        System.out.println("if you want to shoot only the third player enter -1 as the ID of the first target");
-        PrintPlayer.print(gameModel.getPlayers());
+        System.out.print("Select the other target and/or select a third target you can see (insert players' ID)");
+        System.out.println("if you want to shoot only the third player enter -1 as first choice");
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 
     //THOR
@@ -96,7 +98,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("BASIC EFFECT");
         System.out.println("Who is your target? (insert player's ID)");
-        PrintPlayer.print(gameModel.getPlayers());
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 
     /**
@@ -108,7 +110,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE CHAIN REACTION");
         System.out.println("Select a second target that your first target can see (insert player's ID)");
-        PrintPlayer.print(gameModel.getPlayers());
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 
     /**
@@ -120,6 +122,6 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE HIGH VOLTAGE");
         System.out.println("Select a third target that your second target can see (insert player's ID)");
-        PrintPlayer.print(gameModel.getPlayers());
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 }

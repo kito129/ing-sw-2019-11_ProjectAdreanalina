@@ -10,7 +10,9 @@ public interface RemoteView extends Remote {
     
     int getIndex ();
 
-    int getChoicePlayer();
+    int getChoicePlayer1();
+
+    int getChoicePlayer2();
 
     int getRow() throws RemoteException;
     
