@@ -2,6 +2,7 @@ package it.polimi.view;
 
 import it.polimi.model.EnumColorSquare;
 import it.polimi.model.RemoteGameModel;
+import it.polimi.model.WeaponsEffect;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -24,7 +25,13 @@ public interface RemoteView extends Remote {
     int getTarget3();
 
     int getTarget4();
-
+    
+    boolean isUseSecondEffect ();
+    
+    boolean isUseThirdEffect ();
+    
+    WeaponsEffect getWeaponsEffect ();
+    
     EnumColorSquare getColorRoom();
 
     String getUser() throws RemoteException;

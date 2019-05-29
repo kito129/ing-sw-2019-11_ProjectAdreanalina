@@ -638,8 +638,17 @@ public class Map {
         }
     }
 
-    public ArrayList<EnumColorSquare> getRoom(){
-
-        //todo
+    public ArrayList<EnumColorSquare> getRoomColor (){
+        
+        ArrayList<EnumColorSquare> temp = new ArrayList<>();
+        
+        for (Square a:squares){
+            
+            if(!temp.contains(a.getColor())){
+                
+                temp.add(a.getColor());
+            }
+        }
+    return temp;
     }
 }

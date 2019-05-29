@@ -75,13 +75,15 @@ public class GameModel implements RemoteGameModel {
      */
     @Override
     public ArrayList<Player> getPlayers(boolean wantCurrent) {
-        if (wantCurrent==true) {
+        
+        if (wantCurrent) {
 
             return players;        
         } else
         {
-            players.remove(getActualPlayer());
-            return players;
+            ArrayList<Player> temp =new ArrayList<Player>(players);
+            temp.remove(getActualPlayer());
+            return temp;
         }
 
     }

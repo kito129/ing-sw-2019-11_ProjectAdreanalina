@@ -139,6 +139,7 @@ public class ManagerController implements RemoteGameController {
                             case "LOCKRIFLE":
                                 LockRifle lockRifle = new LockRifle();
                                 actionController.LockRifleweapon(gameModel,lockRifle,view);
+                                action++;
                                 break;
                         }
                         break;
