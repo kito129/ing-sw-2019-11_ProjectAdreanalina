@@ -34,6 +34,8 @@ public class ViewCLI implements RemoteView {
     private int target2;
     private int target3;
     private int target4;
+    //attribute for room
+    private EnumColorSquare colorRoom;
     
     public ViewCLI(ManagerController managerController){
 

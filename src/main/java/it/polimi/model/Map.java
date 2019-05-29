@@ -637,4 +637,9 @@ public class Map {
             }
         }
     }
+
+    public ArrayList<EnumColorSquare> getRoom(){
+
+        //todo
+    }
 }
