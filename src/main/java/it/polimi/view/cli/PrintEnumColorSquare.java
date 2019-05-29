@@ -22,39 +22,39 @@ public class PrintEnumColorSquare implements Serializable {
     public static void print(ArrayList<EnumColorSquare> enumColorSquares){
 
         System.out.println();
-        for(EnumColorSquare c : enumColorSquares){
+        
 
-            for(int i = 0; i < enumColorSquares.size(); i++){
+        for(int i = 0; i < enumColorSquares.size(); i++){
+            EnumColorSquare c = enumColorSquares.get(i);
 
-                if(c.equals(EnumColorSquare.BLU)){
+            if(c.equals(EnumColorSquare.BLU)){
 
-                    System.out.print(i + ") " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
+                System.out.print(i + ") " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+            }
 
-                if(c.equals(EnumColorSquare.GREEN)){
+            if(c.equals(EnumColorSquare.GREEN)){
 
-                    System.out.print(i + ") " + ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
+                System.out.print(i + ") " + ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+            }
 
-                if(c.equals(EnumColorSquare.PINK)){
+            if(c.equals(EnumColorSquare.PINK)){
 
-                    System.out.print(i + ") " + ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
+                System.out.print(i + ") " + ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+            }
 
-                if(c.equals(EnumColorSquare.RED)){
+            if(c.equals(EnumColorSquare.RED)){
 
-                    System.out.print(i + ") " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
+                System.out.print(i + ") " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+            }
 
-                if(c.equals(EnumColorSquare.YELLOW)){
+            if(c.equals(EnumColorSquare.YELLOW)){
 
-                    System.out.print(i + ") " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
+                System.out.print(i + ") " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+            }
 
-                if(c.equals(EnumColorSquare.WHITE)){
+            if(c.equals(EnumColorSquare.WHITE)){
 
-                    System.out.print(i + ") " + ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
+                System.out.print(i + ") " + ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
         }
     }
