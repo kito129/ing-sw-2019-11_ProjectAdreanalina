@@ -28,6 +28,6 @@ public class PrintTarget implements Serializable {
     public static void printRoom(){
 
         System.out.println();
-        System.out.print("Room target: ");
+        System.out.println("Room target (insert ID corresponding to the color you want):");
     }
 }

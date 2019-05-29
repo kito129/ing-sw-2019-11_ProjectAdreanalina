@@ -90,6 +90,11 @@ public class ViewCLI implements RemoteView {
     }
 
     @Override
+    public EnumColorSquare getColorRoom() {
+        return colorRoom;
+    }
+
+    @Override
     public String getUser () throws RemoteException {
         
         return user;
@@ -136,6 +141,10 @@ public class ViewCLI implements RemoteView {
         this.target4 = target4;
     }
 
+    public void setColorRoom(EnumColorSquare colorRoom) {
+
+        this.colorRoom = colorRoom;
+    }
 
     public void setIndex (int index) {
         
@@ -332,7 +341,6 @@ public class ViewCLI implements RemoteView {
                     e.printStackTrace();
                 }
             }
-            
         }
         
         System.out.println("input corretto");
@@ -366,7 +374,6 @@ public class ViewCLI implements RemoteView {
         Scanner input = new Scanner(System.in);
 
         PrintTarget.print();
-
 
         //do {
 
@@ -512,6 +519,7 @@ public class ViewCLI implements RemoteView {
 
         //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
         setColumn( input.nextInt());
+
 
         notifyController();
     }
@@ -732,6 +740,7 @@ public class ViewCLI implements RemoteView {
         Scanner input = new Scanner(System.in);
 
         PrintTarget.printRoom();
+        PrintEnumColorSquare.print(gameModel.getMap().getRoom());
 
         //do {
 
@@ -739,7 +748,7 @@ public class ViewCLI implements RemoteView {
             input = new Scanner(System.in);
 
         //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
-        setIndex(input.nextInt());
+        setColorRoom(gameModel.getMap().getRoom().get(input.nextInt()));
 
         notifyController();
     }
