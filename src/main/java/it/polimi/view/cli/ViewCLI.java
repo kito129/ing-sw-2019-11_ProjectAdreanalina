@@ -297,7 +297,6 @@ public class ViewCLI implements RemoteView {
     }
     
     //metodi di rete e observer
-
     private void notifyController() throws RemoteException {
         
         if (true) {
@@ -774,6 +773,7 @@ public class ViewCLI implements RemoteView {
             i=input.nextInt();
         
         } while (i<0 || i>gameModel.getPlayers(true).size() || i==gameModel.getActualPlayer().getId());
+        
         return i;
     }
 }
