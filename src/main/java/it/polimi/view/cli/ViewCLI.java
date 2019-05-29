@@ -417,21 +417,12 @@ public class ViewCLI implements RemoteView {
     public void viewLockRifleBasicEffect(RemoteGameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printLockRifleBasicEffect(gameModel);
-        Scanner input = new Scanner(System.in);
+        
         
         PrintTarget.print();
-        int i=-1;
-        int h=-1;
         
-        do {
-            
-            while (!input.hasNextInt())
-            input = new Scanner(System.in);
-            i=input.nextInt();
-            h= gameModel.getActualPlayer().getId();
-        
-        } while (i<0 || i>gameModel.getPlayers(true).size() || i==gameModel.getActualPlayer().getId());
-        setTarget1( i);
+        //metodo per prender in input un player con il controllo
+        setTarget1(getPlayerInput());
         
         notifyController();
     }
@@ -443,14 +434,9 @@ public class ViewCLI implements RemoteView {
         
         PrintTarget.print();
         
-        //do {
-        
-        while (!input.hasNextInt())
-            input = new Scanner(System.in);
-        
-        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
-        setTarget2(input.nextInt());
-        
+        //metodo per prender in input un player con il controllo
+        setTarget2(getPlayerInput());
+    
         notifyController();
     }
     
@@ -902,5 +888,19 @@ public class ViewCLI implements RemoteView {
             System.out.println("\n\nOPS... AN ERROR OCCURRED. PLEASE RESTART THE GAME.");
             System.exit(0);
         }
+    }
+    
+    public int getPlayerInput(){
+        int i=-1;
+       
+        Scanner input = new Scanner(System.in);
+        do {
+            
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            i=input.nextInt();
+        
+        } while (i<0 || i>gameModel.getPlayers(true).size() || i==gameModel.getActualPlayer().getId());
+        return i;
     }
 }
