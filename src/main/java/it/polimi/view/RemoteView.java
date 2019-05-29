@@ -12,8 +12,6 @@ public interface RemoteView extends Remote {
 
     int getChoicePlayer();
 
-    int getChoicePlayer2();
-
     int getRow() throws RemoteException;
     
     int getColumn() throws RemoteException;

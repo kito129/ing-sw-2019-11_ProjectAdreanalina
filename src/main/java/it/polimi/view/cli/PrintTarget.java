@@ -12,4 +12,22 @@ public class PrintTarget implements Serializable {
         System.out.println();
         System.out.print("Target: ");
     }
+
+    /**
+     * Print a string to choose the target
+     */
+    public static void printSquare(){
+
+        System.out.println();
+        System.out.print("Square target: ");
+    }
+
+    /**
+     * Print a string to choose the target
+     */
+    public static void printRoom(){
+
+        System.out.println();
+        System.out.print("Room target: ");
+    }
 }
