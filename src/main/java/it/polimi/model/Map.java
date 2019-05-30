@@ -651,4 +651,12 @@ public class Map {
         }
     return temp;
     }
+
+    public ArrayList<EnumCardinalDirection> getCardinalDirection(){
+
+        ArrayList<EnumCardinalDirection> temp = new ArrayList<>();
+
+
+        return temp;
+    }
 }
