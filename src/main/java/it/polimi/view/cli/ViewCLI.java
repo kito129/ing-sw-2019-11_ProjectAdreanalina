@@ -416,7 +416,7 @@ public class ViewCLI implements RemoteView {
     
     public void viewRun() throws RemoteException {
         
-        PrintMap.printMap(gameModel.getMap().getSquares());
+        PrintMap.printMap(gameModel.getMap());
     }
 
     public void viewGrabSelection() throws RemoteException {
@@ -467,7 +467,7 @@ public class ViewCLI implements RemoteView {
 
     public void viewGrab() throws RemoteException {
 
-        PrintMap.printMap(gameModel.getMap().getSquares());
+        PrintMap.printMap(gameModel.getMap());
     }
     
     //WEAPON

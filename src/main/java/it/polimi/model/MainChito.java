@@ -2,7 +2,7 @@ package it.polimi.model;
 
 public class MainChito {
     public static void main(String[] args){
-        
+
         /*
         Map mappa = new Map(MapCreator.createA(),"mPP");//todo default costruttore perchè npn mi compila
         

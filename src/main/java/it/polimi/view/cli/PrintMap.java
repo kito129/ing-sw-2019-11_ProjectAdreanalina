@@ -1,9 +1,6 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.EnumColorPlayer;
-import it.polimi.model.EnumColorSquare;
-import it.polimi.model.Player;
-import it.polimi.model.Square;
+import it.polimi.model.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -193,13 +190,44 @@ public class PrintMap implements Serializable {
     }
 
     /**
-     * Print map.
-     * @param squares   the squares of the map choosen for the game
+     * Set the doors on the map.
+     * @param m   the choosen for the game
+     * @param map       the map choosen for the game
      */
-    public static void printMap(ArrayList<Square> squares) {
+    private static String[][] putDoors (Map m, String[][] map){
 
-        String[][] map = getSetMap(squares);
-        map = getSetPlayersOnMap(squares, map);
+        for (Square s : m.getSquares()){
+
+            if(s.getColumn()<3 && m.isPort(s.getRow(),s.getColumn(),s.getRow(),s.getColumn()+1)){
+
+                for(int i = 1; i <= 4; i++){
+
+                    map[5*s.getRow()+i][6*(s.getColumn()+1)] = "⇄";
+                }
+            }
+
+            if(s.getRow()<2 && m.isPort(s.getRow(),s.getColumn(),s.getRow()+1,s.getColumn())){
+
+                for (int i = 1; i <= 5; i++){
+
+                    map[5*(s.getRow()+1)][6*s.getColumn()+i] = "⇅";
+                }
+            }
+        }
+        return map;
+    }
+
+    /**
+     * Print map.
+     * @param m   the choosen for the game
+     */
+    public static void printMap(Map m) {
+
+        String[][] map = getSetMap(m.getSquares());
+        map = putDoors(m, map);
+        map = getSetPlayersOnMap(m.getSquares(), map);
+
+        System.out.println("      0     1     2     3");
 
         for(int i = 0; i < 15; i++){
 
@@ -217,7 +245,5 @@ public class PrintMap implements Serializable {
             }
             System.out.println();
         }
-        //TODO per le porte bisogna verificare se fra due indici di riga/colonna seguenti è presente un link
-        //TODO stampare indici colonna fuori dalla mappa
     }
 }
