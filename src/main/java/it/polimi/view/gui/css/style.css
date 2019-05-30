@@ -3,6 +3,11 @@
     -fx-background-size: 100% 100%;
 }
 
+.conceptbg2{
+    -fx-background-image: url("../images/conceptmatch.png");
+    -fx-background-size: 100% 100%;
+}
+
 .startbg{
     -fx-background-image: url("../images/adrenalina_cover.jpg");
     -fx-background-size: 100% 100%;
@@ -11,14 +16,4 @@
 .conceptbg{
     -fx-background-image: url("../images/concept_game_weapon_unloaded.png");
     -fx-background-size: 100% 100%;
-}
-
-.sottoconceptbg{
-    -fx-background-image: url("../images/sotto_concept_game_weapon_unloaded.png");
-    -fx-background-size: 100% 100%;
-}
-
-.text-area{
-    -fx-control-inner-background: black;
-    -fx-text-fill: white;
 }
