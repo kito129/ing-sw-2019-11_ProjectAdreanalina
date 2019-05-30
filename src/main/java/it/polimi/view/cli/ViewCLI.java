@@ -1348,6 +1348,151 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
+    //FLAMETHROWER
+    public void viewFlamethrowerBasicMode(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printFlamethrowerBasicMode(gameModel);
+        Scanner input = new Scanner(System.in);
+
+        PrintTarget.printNumbTarget();
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setIndex(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>2);
+
+        if(index==1){
+
+            PrintTarget.printSquare();
+            PrintSelectMove.printRow();
+
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setRow(input.nextInt());
+
+            PrintSelectMove.printColumn();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setColumn(input.nextInt());
+
+            PrintTarget.print();
+            setTarget1(getPlayerInput());
+        }
+
+        if(index==2){
+
+            PrintTarget.printSquare();
+            PrintSelectMove.printRow();
+
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setRow(input.nextInt());
+
+            PrintSelectMove.printColumn();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setColumn(input.nextInt());
+
+            PrintTarget.print();
+            setTarget1(getPlayerInput());
+
+            PrintTarget.print();
+            setTarget2(getPlayerInput());
+        }
+
+        notifyController();
+    }
+
+    public void viewFlamethrowerBarbecueMode(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printFlamethrowerBarbecueMode(gameModel);
+        Scanner input = new Scanner(System.in);
+
+        PrintTarget.printNumbTarget();
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setIndex(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>2);
+
+        if(index==1){
+
+            PrintTarget.printSquare();
+            PrintSelectMove.printRow();
+
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setRow2(input.nextInt());
+
+            PrintSelectMove.printColumn();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setColumn2(input.nextInt());
+
+            PrintTarget.print();
+            setTarget3(getPlayerInput());
+        }
+
+        if(index==2){
+
+            PrintTarget.printSquare();
+            PrintSelectMove.printRow();
+
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setRow2(input.nextInt());
+
+            PrintSelectMove.printColumn();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setColumn2(input.nextInt());
+
+            PrintTarget.print();
+            setTarget3(getPlayerInput());
+
+            PrintTarget.print();
+            setTarget4(getPlayerInput());
+        }
+
+        notifyController();
+    }
+
     //FINE ARMI
     //-------------------------------------------------------------------------------------------------
 

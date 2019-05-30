@@ -532,7 +532,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
-        System.out.println("Who is your target? (you can choose who you want");
+        System.out.println("Who is your target? (you can choose who you want)");
         System.out.println("(first enter the cardinal direction and then the player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
@@ -547,6 +547,35 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("YOU HAVE SELECTED THE PIERCING MODE");
         System.out.println("Who is/are your target/s? (you can choose who you want, but max 2");
         System.out.println("(first enter the cardinal direction, than the number of targets and finally then the players' ID)");
+        PrintPlayer.print(gameModel.getPlayers(false));
+    }
+
+    //FLAMETHROWER
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printFlamethrowerBasicMode(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("YOU HAVE SELECTED THE BASIC MODE");
+        System.out.println("Who is/are your target/s? (1 or 2; they must be in different square and the squares must be 1 movement from your square and from first square selected and in the same direction");
+        System.out.println("(first enter the number of targets, then row and column for the first square and finally enter players' ID)");
+        System.out.println("(if you selected 2 as the number of squares, the second will be set consequently to the first one)");
+        PrintPlayer.print(gameModel.getPlayers(false));
+    }
+
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printFlamethrowerBarbecueMode(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("YOU HAVE SELECTED THE BARBECUE MODE");
+        System.out.println("Who is/are your target/s? (1 or 2; they must be in different square and the squares must be 1 movement from your square and from first square selected and in the same direction");
+        System.out.println("(first enter the number of targets, then row and column for the first square and finally enter players' ID)");
+        System.out.println("(if you selected 2 as the number of squares, the second will be set consequently to the first one)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 }
