@@ -230,11 +230,6 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
         System.out.println("Choose a room you can see, but not yours. (enter ID corresponding to the color)");
-        System.out.println("0 -> blue");
-        System.out.println("1 -> green");
-        System.out.println("2 -> pink");
-        System.out.println("3 -> red");
-        System.out.println("4 -> white");
     }
 
     /**
@@ -323,7 +318,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("BASIC EFFECT");
         System.out.println("Who is your target? (it must be visible)");
         System.out.println("After having shot him you also want to move him? (in a square 1 movement away from you)");
-        System.out.println("(first enter the player's ID and then 0 to say YES or 1 to say NO and then row and column)");
+        System.out.println("(first enter the player's ID, then 0 to say YES or 1 to say NO and finally row and column)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -349,7 +344,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
         System.out.println("Who is your target? (it must be in your square)");
         System.out.println("After having shot him you also want to move him? (in a square 1 movement away from you)");
-        System.out.println("(first enter the player's ID and then 0 to say YES or 1 to say NO and then row and column)");
+        System.out.println("(first enter the player's ID, then 0 to say YES or 1 to say NO and finally row and column)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -441,7 +436,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("BASIC EFFECT");
         System.out.println("Who is your target? (it must be visible and it must be in a square different from yours)");
         System.out.println("After having shot him you also want to move him? (max 1 movement)");
-        System.out.println("(first enter the player's ID and then 0 to say YES or 1 to say NO and then row and column)");
+        System.out.println("(first enter the player's ID, then 0 to say YES or 1 to say NO and finally row and column)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -489,7 +484,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("YOU HAVE SELECTED THE ROCKET FIRST MODE");
         System.out.println("In which square do you want to move? (exactly 1 movement) (enter row and column)");
         System.out.println("Do you want to shoot a target after your movement? (max 1 movement)");
-        System.out.println("(first enter row and column and then 0 to say YES or 1 to say NO and then player's ID)");
+        System.out.println("(first enter row and column, then 0 to say YES or 1 to say NO and finally player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -501,7 +496,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("Now you can still move exactly 1 square and repeat the same effect");
-        System.out.println("(so now pay attention: enter 0 to say YES or 1 to say NO, then enter row and column, then again 0 to say YES or 1 to say NO to choose to shoot end finally player's ID)");
+        System.out.println("(so now pay attention: enter 0 to say YES or 1 to say NO, then enter row and column, then again 0 to say YES or 1 to say NO to choose to shoot and finally player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -526,5 +521,32 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE TSUNAMI MODE");
+    }
+
+    //RAILGUN
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printRailgunBasicMode(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("YOU HAVE SELECTED THE BASIC MODE");
+        System.out.println("Who is your target? (you can choose who you want");
+        System.out.println("(first enter the cardinal direction and then the player's ID)");
+        PrintPlayer.print(gameModel.getPlayers(false));
+    }
+
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printRailgunPiercingMode(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("YOU HAVE SELECTED THE PIERCING MODE");
+        System.out.println("Who is/are your target/s? (you can choose who you want, but max 2");
+        System.out.println("(first enter the cardinal direction, than the number of targets and finally then the players' ID)");
+        PrintPlayer.print(gameModel.getPlayers(false));
     }
 }

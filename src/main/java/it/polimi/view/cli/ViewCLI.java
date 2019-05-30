@@ -736,6 +736,7 @@ public class ViewCLI implements RemoteView {
         
         PrintTarget.printRoom();
         PrintEnumColorSquare.print(gameModel.getMap().getRoomColor());
+        PrintTarget.printColor();
         
         //do {
         
@@ -1246,8 +1247,9 @@ public class ViewCLI implements RemoteView {
     public void viewShockwaveBasicMode(RemoteGameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printShockwaveBasicMode(gameModel);
-
         Scanner input = new Scanner(System.in);
+
+        PrintTarget.printNumbTarget();
         do {
 
             while (!input.hasNextInt())
@@ -1281,6 +1283,67 @@ public class ViewCLI implements RemoteView {
     public void viewShockwaveTsunamiMode() throws RemoteException{
 
         PrintEffectWeapon.printShockwaveTsunamiMode();
+
+        notifyController();
+    }
+
+    //RAILGUN
+    public void viewRailgunBasicMode(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printRailgunBasicMode(gameModel);
+        Scanner input = new Scanner(System.in);
+
+        PrintTarget.printCardinalDirection();
+        //do {
+
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+        setCardinalDirection(gameModel.getMap().getCardinalDirection().get(input.nextInt()));
+
+        PrintTarget.print();
+        setTarget1(getPlayerInput());
+
+        notifyController();
+    }
+
+    public void viewRailgunPiercingMode(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printRailgunPiercingMode(gameModel);
+        Scanner input = new Scanner(System.in);
+
+        PrintTarget.printCardinalDirection();
+        //do {
+
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+        setCardinalDirection(gameModel.getMap().getCardinalDirection().get(input.nextInt()));
+
+        PrintTarget.printNumbTarget();
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setIndex(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>2);
+
+        for(int i = 0; i < input.nextInt(); i++){
+
+            PrintTarget.print();
+            if(i==0){
+
+                setTarget1(getPlayerInput());
+            }
+
+            if(i==1){
+
+                setTarget2(getPlayerInput());
+            }
+        }
 
         notifyController();
     }
