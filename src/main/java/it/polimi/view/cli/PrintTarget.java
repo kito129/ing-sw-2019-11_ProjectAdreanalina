@@ -30,4 +30,15 @@ public class PrintTarget implements Serializable {
         System.out.println();
         System.out.println("Room target (insert ID corresponding to the color you want):");
     }
+
+    /**
+     * Print a string to choose the target
+     */
+    public static void printYesNo(){
+
+        System.out.println();
+        System.out.println("What's your choice?");
+        System.out.println("0 -> YES");
+        System.out.println("1 -> NO");
+    }
 }
