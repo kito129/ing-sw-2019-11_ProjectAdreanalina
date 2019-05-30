@@ -656,7 +656,7 @@ public class Map {
 
         ArrayList<EnumCardinalDirection> temp = new ArrayList<>();
 
-
+        //todo
         return temp;
     }
 }
