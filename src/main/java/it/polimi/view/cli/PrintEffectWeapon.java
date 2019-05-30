@@ -169,7 +169,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE PHASE GLIDE");
-        System.out.println("In which square do you want to move? (enter row and column)");
+        System.out.println("In which square do you want to move? (1 or 2 movements) (enter row and column)");
     }
 
     /**
@@ -388,7 +388,6 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("SHADOWSTEP");
         System.out.println("In which square do you want to move? (max 1 movement) (enter row and column)");
-        PrintPlayer.print(gameModel.getPlayers(false));
     }
 
     /**
@@ -428,6 +427,81 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("After having shot him you also want to move him? (in a square 0, 1 or 2 movements away from you)");
         System.out.println("(first enter the player's ID and then row and column)");
         System.out.println("(if you don't want to move it, insert the coordinates of your square)");
+        PrintPlayer.print(gameModel.getPlayers(false));
+    }
+
+    //ROCKET LAUNCHER
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printRocketLauncherBasicEffect(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("BASIC EFFECT");
+        System.out.println("Who is your target? (it must be visible and it must be in a square different from yours)");
+        System.out.println("After having shot him you also want to move him? (max 1 movement)");
+        System.out.println("(first enter the player's ID and then 0 to say YES or 1 to say NO and then row and column)");
+        PrintPlayer.print(gameModel.getPlayers(false));
+    }
+
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printRocketLauncherRocketJump(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("ROCKET JUMP");
+        System.out.println("In which square do you want to move? (1 or 2 movements) (enter row and column)");
+    }
+
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printRocketLauncherFragmentingWarhead(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("FRAGMENTING WARHEAD");
+    }
+
+    //POWER GLOVE
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printPowerGloveBasicMode(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("BASIC MODE");
+        System.out.println("Who is your target? (it must be in a square exactly 1 movement from you) (enter player's ID)");
+        PrintPlayer.print(gameModel.getPlayers(false));
+    }
+
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printPowerGloveRocketFirstMode(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("ROCKET FIRST MODE");
+        System.out.println("In which square do you want to move? (exactly 1 movement) (enter row and column)");
+        System.out.println("Do you want to shoot a target after your movement? (max 1 movement)");
+        System.out.println("(first enter row and column and then 0 to say YES or 1 to say NO and then player's ID)");
+        PrintPlayer.print(gameModel.getPlayers(false));
+    }
+
+    /**
+     * Print the effect of this weapon
+     * @param gameModel   the reference to the RemoteGameModel
+     */
+    public static void printPowerGloveRocketFirstMode2(RemoteGameModel gameModel){
+
+        System.out.println();
+        System.out.println("Now you can still move exactly 1 square and repeat the same effect");
+        System.out.println("(so now pay attention: enter 0 to say YES or 1 to say NO, then enter row and column, then again 0 to say YES or 1 to say NO to choose to shoot end finally player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 }

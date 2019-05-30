@@ -34,6 +34,8 @@ public class ViewCLI implements RemoteView {
     private int index;
     //scelta arma
     private int choicePlayer;
+    private int choicePlayer2;
+    private int choicePlayer3;
     private boolean useSecondEffect;
     private boolean useThirdEffect;
     private WeaponsEffect weaponsEffect;
@@ -67,6 +69,18 @@ public class ViewCLI implements RemoteView {
     public int getChoicePlayer() {
 
         return choicePlayer;
+    }
+
+    @Override
+    public int getChoicePlayer2() {
+
+        return choicePlayer2;
+    }
+
+    @Override
+    public int getChoicePlayer3() {
+
+        return choicePlayer3;
     }
 
     @Override
@@ -221,6 +235,16 @@ public class ViewCLI implements RemoteView {
     public void setChoicePlayer(int choicePlayer) {
 
         this.choicePlayer = choicePlayer;
+    }
+
+    public void setChoicePlayer2(int choicePlayer2) {
+
+        this.choicePlayer2 = choicePlayer2;
+    }
+
+    public void setChoicePlayer3(int choicePlayer3) {
+
+        this.choicePlayer3 = choicePlayer3;
     }
 
     public void setState (State state) {
@@ -1002,7 +1026,7 @@ public class ViewCLI implements RemoteView {
 
         PrintTarget.print();
         setTarget2(getPlayerInput());
-        
+
         Scanner input = new Scanner(System.in);
 
         PrintTarget.printSquare();
@@ -1023,6 +1047,186 @@ public class ViewCLI implements RemoteView {
 
         //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
         setColumn(input.nextInt());
+
+        notifyController();
+    }
+
+    //ROCKET LAUNCHER
+    public void viewRocketLauncherBasicEffect(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printRocketLauncherBasicEffect(gameModel);
+
+        PrintTarget.print();
+        setTarget1(getPlayerInput());
+
+        PrintTarget.printYesNo();
+        Scanner input = new Scanner(System.in);
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setChoicePlayer(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>1);
+
+        if(input.nextInt()==0){
+
+            PrintTarget.printSquare();
+            PrintSelectMove.printRow();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setRow(input.nextInt());
+
+            PrintSelectMove.printColumn();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setColumn(input.nextInt());
+        }
+
+        notifyController();
+    }
+
+    public void viewRocketLauncherRocketJump(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printRocketLauncherRocketJump(gameModel);
+        Scanner input = new Scanner(System.in);
+
+        PrintTarget.printSquare();
+        PrintSelectMove.printRow();
+        //do {
+
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+        setRow(input.nextInt());
+
+        PrintSelectMove.printColumn();
+        //do {
+
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+        setColumn(input.nextInt());
+
+        notifyController();
+    }
+
+    public void viewRocketLauncherFragmentingWarhead() throws RemoteException{
+
+        PrintEffectWeapon.printRocketLauncherFragmentingWarhead(gameModel);
+
+        notifyController();
+    }
+
+    //POWER GLOVE
+    public void viewPowerGloveBasicMode(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printPowerGloveBasicMode(gameModel);
+
+        PrintTarget.print();
+        setTarget1(getPlayerInput());
+
+        notifyController();
+    }
+
+    public void viewPowerGloveRocketFirstMode(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printPowerGloveRocketFirstMode(gameModel);
+        Scanner input = new Scanner(System.in);
+
+        PrintTarget.printSquare();
+        PrintSelectMove.printRow();
+        //do {
+
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+        setRow(input.nextInt());
+
+        PrintSelectMove.printColumn();
+        //do {
+
+        while (!input.hasNextInt())
+            input = new Scanner(System.in);
+
+        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+        setColumn(input.nextInt());
+
+        PrintTarget.printYesNo();
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setChoicePlayer(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>1);
+
+        if(input.nextInt()==0){
+
+            PrintTarget.print();
+            setTarget2(getPlayerInput());
+        }
+
+        PrintEffectWeapon.printPowerGloveRocketFirstMode2(gameModel);
+
+        PrintTarget.printYesNo();
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setChoicePlayer2(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>1);
+
+        if(input.nextInt()==0){
+
+            PrintTarget.printSquare();
+            PrintSelectMove.printRow();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setRow2(input.nextInt());
+
+            PrintSelectMove.printColumn();
+            //do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+
+            //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
+            setColumn2(input.nextInt());
+
+            PrintTarget.printYesNo();
+            do {
+
+                while (!input.hasNextInt())
+                    input = new Scanner(System.in);
+                setChoicePlayer3(input.nextInt());
+
+            } while (input.nextInt()<0 || input.nextInt()>1);
+
+            if(input.nextInt()==0){
+
+                PrintTarget.print();
+                setTarget3(getPlayerInput());
+            }
+        }
+
+        notifyController();
     }
 
     //FINE ARMI
