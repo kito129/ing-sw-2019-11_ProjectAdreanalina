@@ -1,5 +1,6 @@
 package it.polimi.view;
 
+import it.polimi.model.EnumCardinalDirection;
 import it.polimi.model.EnumColorSquare;
 import it.polimi.model.RemoteGameModel;
 import it.polimi.model.WeaponsEffect;
@@ -41,6 +42,8 @@ public interface RemoteView extends Remote {
     WeaponsEffect getWeaponsEffect ();
     
     EnumColorSquare getColorRoom();
+
+    EnumCardinalDirection getCardinalDirection();
 
     String getUser() throws RemoteException;
     

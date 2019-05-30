@@ -46,6 +46,8 @@ public class ViewCLI implements RemoteView {
     private int target4;
     //attribute for room
     private EnumColorSquare colorRoom;
+    //attribute for direction
+    private EnumCardinalDirection cardinalDirection;
     
     public ViewCLI(RemoteGameController remoteGameController){
         
@@ -151,6 +153,12 @@ public class ViewCLI implements RemoteView {
     }
 
     @Override
+    public EnumCardinalDirection getCardinalDirection() {
+
+        return cardinalDirection;
+    }
+
+    @Override
     public String getUser () throws RemoteException {
         
         return user;
@@ -225,6 +233,11 @@ public class ViewCLI implements RemoteView {
     public void setColorRoom(EnumColorSquare colorRoom) {
 
         this.colorRoom = colorRoom;
+    }
+
+    public void setCardinalDirection(EnumCardinalDirection cardinalDirection) {
+
+        this.cardinalDirection = cardinalDirection;
     }
 
     public void setIndex (int index) {
@@ -833,7 +846,7 @@ public class ViewCLI implements RemoteView {
 
             if(i==2){
 
-                setTarget3(getPlayerInput());
+                setTarget4(getPlayerInput());
             }
         }
 
@@ -1225,6 +1238,49 @@ public class ViewCLI implements RemoteView {
                 setTarget3(getPlayerInput());
             }
         }
+
+        notifyController();
+    }
+
+    //SHOCKWAVE
+    public void viewShockwaveBasicMode(RemoteGameModel gameModel) throws RemoteException {
+
+        PrintEffectWeapon.printShockwaveBasicMode(gameModel);
+
+        Scanner input = new Scanner(System.in);
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setIndex(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>3 || input.nextInt()>gameModel.getPlayers(true).size());
+
+        for(int i = 0; i < input.nextInt(); i++){
+
+            PrintTarget.print();
+            if(i==0){
+
+                setTarget1(getPlayerInput());
+            }
+
+            if(i==1){
+
+                setTarget2(getPlayerInput());
+            }
+
+            if(i==2){
+
+                setTarget3(getPlayerInput());
+            }
+        }
+
+        notifyController();
+    }
+
+    public void viewShockwaveTsunamiMode() throws RemoteException{
+
+        PrintEffectWeapon.printShockwaveTsunamiMode();
 
         notifyController();
     }

@@ -41,4 +41,17 @@ public class PrintTarget implements Serializable {
         System.out.println("0 -> YES");
         System.out.println("1 -> NO");
     }
+
+    /**
+     * Print a string to choose the target
+     */
+    public static void printCardinalDirection(){
+
+        System.out.println();
+        System.out.println("Choose a cardinal direction:");
+        System.out.println("0 -> NORTH");
+        System.out.println("1 -> SOUTH");
+        System.out.println("2 -> EAST");
+        System.out.println("3 -> WEST");
+    }
 }
