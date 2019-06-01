@@ -2,18 +2,20 @@ package it.polimi.model;
 
 import it.polimi.view.RemoteView;
 
-import java.rmi.Remote;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Game model.
+ * The type GameModel model.
  */
-public class GameModel implements RemoteGameModel {
+public class GameModel implements Serializable {
+
+    //capire quali classi vanno serializzate
     
     //observable pattern
-    private List<RemoteView> list = new ArrayList<>();
+    private ArrayList<RemoteView> list = new ArrayList<>();
     private Map map;
     private KillShotTrack killShotTrack;
     private ArrayList<Player> players;
@@ -25,7 +27,7 @@ public class GameModel implements RemoteGameModel {
     private State extraState;
 
 
-    public GameModel(Map map,KillShotTrack killShotTrack,ArrayList<Player> players){
+    public GameModel(Map map, KillShotTrack killShotTrack, ArrayList<Player> players){
 
         this.map=map;
         this.killShotTrack=killShotTrack;
@@ -73,7 +75,7 @@ public class GameModel implements RemoteGameModel {
      *
      * @return the players
      */
-    @Override
+
     public ArrayList<Player> getPlayers(boolean wantCurrent) {
         
         if (wantCurrent) {
@@ -123,7 +125,7 @@ public class GameModel implements RemoteGameModel {
         return state;
     }
     
-    @Override
+
     public void setState (State state) throws RemoteException {
         
         this.state=state;
@@ -180,7 +182,7 @@ public class GameModel implements RemoteGameModel {
         return null;
     }
     
-    @Override
+
     public List<RemoteView> getObservers (){
         
         return list;
@@ -189,7 +191,7 @@ public class GameModel implements RemoteGameModel {
      * adds an RMI observer at the beginning
      * @param observer the observer to be added
      */
-    @Override
+
     public void addObserver(RemoteView observer){
         
         list.add(observer);
@@ -199,7 +201,7 @@ public class GameModel implements RemoteGameModel {
      * removes an RMI observer from the observers's list (setting him as 'null')
      * @param observer the observer to be removed
      */
-    @Override
+
     public void removeObserver(RemoteView observer){
         
         list.set(getObservers().indexOf(observer), null);
@@ -210,7 +212,7 @@ public class GameModel implements RemoteGameModel {
      * @param observer the observer to be added
      * @throws RemoteException if the reference could not be accessed
      */
-    @Override
+
     public void reAddObserver(RemoteView observer) throws RemoteException {
         int index = 0;
         for(Player a : players){

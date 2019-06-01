@@ -14,7 +14,7 @@ public interface RemoteGameController extends Remote {
     
     void update(RemoteView view) throws RemoteException;
     
-    void setPlayerOnline (String user, boolean online);
+    void setPlayerOnline (String user, boolean online) throws RemoteException;
     
     boolean getStaretd();
     /*

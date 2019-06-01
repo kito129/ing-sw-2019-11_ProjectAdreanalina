@@ -11,7 +11,6 @@ import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.*;
 import it.polimi.view.RemoteView;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -56,7 +55,7 @@ public class ActionController {
                 actionModel.getGameModel().setState(State.RUN);
     
                 actionModel.runActionModel(actionModel.getGameModel().getActualPlayer(), inputSquare);
-                view.reserInput();
+                view.resetInput();
             }
         } catch (MapException e) {
             e.printStackTrace();
@@ -365,14 +364,14 @@ public class ActionController {
     /**
      * Lock rifleweapon.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void LockRifleweapon(GameModel gameModel, LockRifle weapon,RemoteView view) {
+    public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) {
     
         //use always base and optional for second effect
         //necessary from model
-        Player currentPlayer =gameModel.getActualPlayer();
+        Player currentPlayer = gameModel.getActualPlayer();
         Map map = gameModel.getMap();
         //necessary input
         Player targetBase;
@@ -434,13 +433,13 @@ public class ActionController {
     /**
      * Electroscythe weapon.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon,RemoteView view){
+    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon, RemoteView view){
     
         //necessary from model
-        Map map=gameModel.getMap();
+        Map map= gameModel.getMap();
         Player currentPlayer= gameModel.getActualPlayer();
         //necessary input
         WeaponsEffect effect = view.getWeaponsEffect();
@@ -477,10 +476,10 @@ public class ActionController {
     /**
      * Machine gun.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void MachineGun(GameModel gameModel, MachineGun weapon,RemoteView view) {
+    public void MachineGun(GameModel gameModel, MachineGun weapon, RemoteView view) {
     
         //necessary from model
         Player currentPlayer = gameModel.getActualPlayer();
@@ -584,13 +583,13 @@ public class ActionController {
     /**
      * Tractor beam.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
     public void TractorBeam(GameModel gameModel, TractorBeam weapon, RemoteView view) {
     
         //necessary from model
-        Map map=gameModel.getMap();
+        Map map= gameModel.getMap();
         Player currentPlayer= gameModel.getActualPlayer();
         //necessary input
         WeaponsEffect effect = view.getWeaponsEffect();
@@ -651,13 +650,13 @@ public class ActionController {
     /**
      * Thor.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void Thor(GameModel gameModel, Thor weapon,RemoteView view) {
+    public void Thor(GameModel gameModel, Thor weapon, RemoteView view) {
         
         //necessary from model
-        Map map=gameModel.getMap();
+        Map map= gameModel.getMap();
         Player currentPlayer= gameModel.getActualPlayer();
         //necessary input
         Player targetBase;
@@ -746,13 +745,13 @@ public class ActionController {
     /**
      * Plasma gun.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void PlasmaGun (GameModel gameModel,PlasmaGun weapon,RemoteView view)  {
+    public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view)  {
     
         //necessary from model
-        Map map=gameModel.getMap();
+        Map map= gameModel.getMap();
         Player currentPlayer= gameModel.getActualPlayer();
         //necessary input
         Player targetBase;
@@ -826,7 +825,7 @@ public class ActionController {
     /**
      * Whisper.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
     public void Whisper(GameModel gameModel, Whisper weapon, RemoteView view) {
@@ -862,10 +861,10 @@ public class ActionController {
     /**
      * Vortex cannon.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void VortexCannon ( GameModel gameModel,VortexCannon weapon,RemoteView view) {
+    public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) {
     
         //necessary from model
         Map map = gameModel.getMap();
@@ -910,7 +909,7 @@ public class ActionController {
         } else{
             //black hole effect
 
-            if (gameModel.getPlayerById(view.getTarget1()) != null&&gameModel.getPlayerById(view.getTarget2()) != null && gameModel.getPlayerById(view.getTarget3()) != null) {
+            if (gameModel.getPlayerById(view.getTarget1()) != null&& gameModel.getPlayerById(view.getTarget2()) != null && gameModel.getPlayerById(view.getTarget3()) != null) {
 
                 try {
                     
@@ -970,10 +969,10 @@ public class ActionController {
     /**
      * Furnace.
      *
-     * @param gameModel the game model
+     * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void Furnace(GameModel gameModel,Furnace weapon, RemoteView view) {
+    public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) {
     
         //necessary from model
         Map map = gameModel.getMap();
@@ -1027,7 +1026,7 @@ public class ActionController {
         }
     }
 
-    public void HeatSeeker(GameModel gameModel, Heatseeker weapon,RemoteView view){
+    public void HeatSeeker(GameModel gameModel, Heatseeker weapon, RemoteView view){
     
     
         //necessary from model
@@ -1054,7 +1053,7 @@ public class ActionController {
       
     }
 
-    public void Hellion(GameModel gameModel,Hellion weapon, RemoteView view){
+    public void Hellion(GameModel gameModel, Hellion weapon, RemoteView view){
     
         //necessary from model
         Map map = gameModel.getMap();
@@ -1111,7 +1110,7 @@ public class ActionController {
         //todo da fare poi
     }
 
-    public void GrenadeLauncher(GameModel gameModel,GrenadeLauncher weapon){
+    public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon){
 
         Player currentPlayer=new Player();
         Player targetBase=new Player();
@@ -1164,7 +1163,7 @@ public class ActionController {
         }
     }
 
-    public void RocketLauncher(GameModel gameModel,RocketLauncher weapon) {
+    public void RocketLauncher(GameModel gameModel, RocketLauncher weapon) {
 
         Player currentPlayer = new Player();
         Map map = new Map();
@@ -1212,7 +1211,7 @@ public class ActionController {
 
     }
 
-    public void RailGun(GameModel gameModel,Railgun weapon){
+    public void RailGun(GameModel gameModel, Railgun weapon){
 
         Player currentPlayer=new Player();
         Player target1=new Player();
@@ -1263,7 +1262,7 @@ public class ActionController {
 
     }
 
-    public void Cyberblade(GameModel gameModel,Cyberblade weapon){
+    public void Cyberblade(GameModel gameModel, Cyberblade weapon){
 
         Player currentPlayer=new Player();
         Player targetBase=new Player();
@@ -1323,7 +1322,7 @@ public class ActionController {
         }
     }
 
-    public void Zx2(GameModel gameModel,Zx2 weapon) {
+    public void Zx2(GameModel gameModel, Zx2 weapon) {
 
         Player currentPlayer = new Player();
         Player target1 = new Player();
@@ -1388,18 +1387,18 @@ public class ActionController {
         }
     }
 
-    public void Shotgun(GameModel gameModel,Shotgun weapon){
+    public void Shotgun(GameModel gameModel, Shotgun weapon){
 
 //todo aspettare lunedi per chiarire lo spostamento
     }
 
 
-    public void PowerGlove(GameModel gameModel,PowerGlove weapon){
+    public void PowerGlove(GameModel gameModel, PowerGlove weapon){
 
 
     }
 
-    public void Shockwave(GameModel gameModel,Shockwave weapon){
+    public void Shockwave(GameModel gameModel, Shockwave weapon){
 
         Player currentPlayer=new Player();
         Player target1Base=new Player();
@@ -1441,7 +1440,7 @@ public class ActionController {
         }
     }
 
-    public void Sledgehammer(GameModel gameModel,Sledgehammer weapon){
+    public void Sledgehammer(GameModel gameModel, Sledgehammer weapon){
 
         //todo ripartire da quin
     }

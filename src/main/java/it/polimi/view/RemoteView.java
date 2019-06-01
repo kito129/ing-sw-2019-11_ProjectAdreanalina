@@ -2,7 +2,7 @@ package it.polimi.view;
 
 import it.polimi.model.EnumCardinalDirection;
 import it.polimi.model.EnumColorSquare;
-import it.polimi.model.RemoteGameModel;
+import it.polimi.model.GameModel;
 import it.polimi.model.WeaponsEffect;
 
 import java.rmi.Remote;
@@ -49,8 +49,8 @@ public interface RemoteView extends Remote {
     
     boolean getOnline() throws RemoteException;
 
-    void reserInput () throws RemoteException;
+    void resetInput() throws RemoteException;
     
-    void update(RemoteGameModel gameModel) throws RemoteException;
+    void update(GameModel gameModel) throws RemoteException;
     
 }

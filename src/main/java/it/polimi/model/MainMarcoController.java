@@ -1,7 +1,7 @@
 package it.polimi.model;
 
 import it.polimi.controller.ActionController;
-import it.polimi.controller.ManagerController;
+import it.polimi.controller.GameController;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.cli.ViewCLI;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MainMarcoController {
     
-    public static void main (String args[]) {
+    public static void main (String args[]) throws RemoteException {
     
         System.out.println("creo killshot track" );
         KillShotTrack killShotTrack = new KillShotTrack();
@@ -48,8 +48,8 @@ public class MainMarcoController {
         gameModel.setActualPlayer(player1);
         ActionModel actionModel = new ActionModel(gameModel);
         ActionController actionController = new ActionController();
-        ManagerController managerController = new ManagerController(actionController,actionModel);
-        ViewCLI viewCLI = new ViewCLI(managerController);
+        GameController gameController = new GameController(actionController,actionModel);
+        ViewCLI viewCLI = new ViewCLI(gameController);
     
         //metto oggetti in mappa
         System.out.println("refresh mappa");

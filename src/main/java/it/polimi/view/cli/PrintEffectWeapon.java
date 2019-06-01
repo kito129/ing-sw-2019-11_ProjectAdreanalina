@@ -1,6 +1,6 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.RemoteGameModel;
+import it.polimi.model.GameModel;
 
 import java.io.Serializable;
 
@@ -9,9 +9,9 @@ public class PrintEffectWeapon implements Serializable {
     //LOCK RIFLE
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printLockRifleBasicEffect(RemoteGameModel gameModel){
+    public static void printLockRifleBasicEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("BASIC EFFECT");
@@ -21,9 +21,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printLockRifleSecondLock(RemoteGameModel gameModel){
+    public static void printLockRifleSecondLock(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE SECOND LOCK");
@@ -54,7 +54,7 @@ public class PrintEffectWeapon implements Serializable {
     /**
      * Print the effect of this weapon
      */
-    public static void printMachineGunBasicEffect(RemoteGameModel gameModel){
+    public static void printMachineGunBasicEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("BASIC EFFECT");
@@ -66,7 +66,7 @@ public class PrintEffectWeapon implements Serializable {
     /**
      * Print the effect of this weapon
      */
-    public static void printMachineGunFocusShot(RemoteGameModel gameModel){
+    public static void printMachineGunFocusShot(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED FOCUS SHOT");
@@ -79,7 +79,7 @@ public class PrintEffectWeapon implements Serializable {
     /**
      * Print the effect of this weapon
      */
-    public static void printMachineGunTurretTripod(RemoteGameModel gameModel){
+    public static void printMachineGunTurretTripod(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED TURRET TRIPOD");
@@ -92,7 +92,7 @@ public class PrintEffectWeapon implements Serializable {
     /**
      * Print the effect of this weapon
      */
-    public static void printTractorBeamBasicMode(RemoteGameModel gameModel){
+    public static void printTractorBeamBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED BASIC MODE");
@@ -103,7 +103,7 @@ public class PrintEffectWeapon implements Serializable {
     /**
      * Print the effect of this weapon
      */
-    public static void printTractorBeamPunisherMode(RemoteGameModel gameModel){
+    public static void printTractorBeamPunisherMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED PUNISHER MODE");
@@ -114,9 +114,9 @@ public class PrintEffectWeapon implements Serializable {
     //THOR
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printThorBasicEffect(RemoteGameModel gameModel){
+    public static void printThorBasicEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("BASIC EFFECT");
@@ -126,9 +126,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printThorChainReaction(RemoteGameModel gameModel){
+    public static void printThorChainReaction(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE CHAIN REACTION");
@@ -138,9 +138,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printThorHighVoltage(RemoteGameModel gameModel){
+    public static void printThorHighVoltage(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE HIGH VOLTAGE");
@@ -151,9 +151,9 @@ public class PrintEffectWeapon implements Serializable {
     //PLASMA GUN
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printPlasmaGunBasicEffect(RemoteGameModel gameModel){
+    public static void printPlasmaGunBasicEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("BASIC EFFECT");
@@ -163,9 +163,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printPlasmaGunPhaseGlide(RemoteGameModel gameModel){
+    public static void printPlasmaGunPhaseGlide(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE PHASE GLIDE");
@@ -184,9 +184,9 @@ public class PrintEffectWeapon implements Serializable {
     //WHISPER
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printWhisperEffect(RemoteGameModel gameModel){
+    public static void printWhisperEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("WHISPER EFFECT");
@@ -197,9 +197,9 @@ public class PrintEffectWeapon implements Serializable {
     //CANNON VORTEX
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printCannonVortexBasicEffect(RemoteGameModel gameModel){
+    public static void printCannonVortexBasicEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("BASIC EFFECT");
@@ -209,9 +209,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printCannonVortexBlackHole(RemoteGameModel gameModel){
+    public static void printCannonVortexBlackHole(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BLACK HOLE");
@@ -223,9 +223,9 @@ public class PrintEffectWeapon implements Serializable {
     //FURNACE
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printFurnaceBasicMode(RemoteGameModel gameModel){
+    public static void printFurnaceBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -234,9 +234,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printFurnaceCozyFireMode(RemoteGameModel gameModel){
+    public static void printFurnaceCozyFireMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE COZY FIRE MODE");
@@ -246,9 +246,9 @@ public class PrintEffectWeapon implements Serializable {
     //HEATSEEKER
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printHeatseekerEffect(RemoteGameModel gameModel){
+    public static void printHeatseekerEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("HEATSEEKER EFFECT");
@@ -259,9 +259,9 @@ public class PrintEffectWeapon implements Serializable {
     //HELLION
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printHellionBasicMode(RemoteGameModel gameModel){
+    public static void printHellionBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -271,9 +271,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printHellionNanoTracerMode(RemoteGameModel gameModel){
+    public static void printHellionNanoTracerMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE NANO-TRACER MODE");
@@ -284,9 +284,9 @@ public class PrintEffectWeapon implements Serializable {
     //ZX-2
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printZX2BasicMode(RemoteGameModel gameModel){
+    public static void printZX2BasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -296,9 +296,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printZX2ScannerMode(RemoteGameModel gameModel){
+    public static void printZX2ScannerMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE SCANNER MODE");
@@ -310,9 +310,9 @@ public class PrintEffectWeapon implements Serializable {
     //GRENADE LAUNCHER
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printGrenadeLauncherBasicEffect(RemoteGameModel gameModel){
+    public static void printGrenadeLauncherBasicEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("BASIC EFFECT");
@@ -324,9 +324,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printGrenadeLauncherExtraGrenade(RemoteGameModel gameModel){
+    public static void printGrenadeLauncherExtraGrenade(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE EXTRA GRENADE");
@@ -336,9 +336,9 @@ public class PrintEffectWeapon implements Serializable {
     //SHOTGUN
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printShotGunBasicMode(RemoteGameModel gameModel){
+    public static void printShotGunBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -350,9 +350,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printShotGunLongBarrelMode(RemoteGameModel gameModel){
+    public static void printShotGunLongBarrelMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE LONG BARREL MODE");
@@ -364,9 +364,9 @@ public class PrintEffectWeapon implements Serializable {
     //CYBERBLADE
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printCyberbladeBasicEffect(RemoteGameModel gameModel){
+    public static void printCyberbladeBasicEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("BASIC EFFECT");
@@ -376,9 +376,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printCyberbladeShadowstep(RemoteGameModel gameModel){
+    public static void printCyberbladeShadowstep(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE SHADOWSTEP");
@@ -387,9 +387,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printCyberbladeSliceAndDice(RemoteGameModel gameModel){
+    public static void printCyberbladeSliceAndDice(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE SLICE AND DICE");
@@ -400,9 +400,9 @@ public class PrintEffectWeapon implements Serializable {
     //SLEDGEHAMMER
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printSledgehammerBasicMode(RemoteGameModel gameModel){
+    public static void printSledgehammerBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -412,9 +412,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printSledgehammerPulverizeMode(RemoteGameModel gameModel){
+    public static void printSledgehammerPulverizeMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE PULVERIZE MODE");
@@ -428,9 +428,9 @@ public class PrintEffectWeapon implements Serializable {
     //ROCKET LAUNCHER
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printRocketLauncherBasicEffect(RemoteGameModel gameModel){
+    public static void printRocketLauncherBasicEffect(GameModel gameModel){
 
         System.out.println();
         System.out.println("BASIC EFFECT");
@@ -442,9 +442,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printRocketLauncherRocketJump(RemoteGameModel gameModel){
+    public static void printRocketLauncherRocketJump(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE ROCKET JUMP");
@@ -453,9 +453,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printRocketLauncherFragmentingWarhead(RemoteGameModel gameModel){
+    public static void printRocketLauncherFragmentingWarhead(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE FRAGMENTING WARHEAD");
@@ -464,9 +464,9 @@ public class PrintEffectWeapon implements Serializable {
     //POWER GLOVE
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printPowerGloveBasicMode(RemoteGameModel gameModel){
+    public static void printPowerGloveBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -476,9 +476,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printPowerGloveRocketFirstMode(RemoteGameModel gameModel){
+    public static void printPowerGloveRocketFirstMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE ROCKET FIRST MODE");
@@ -490,9 +490,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printPowerGloveRocketFirstMode2(RemoteGameModel gameModel){
+    public static void printPowerGloveRocketFirstMode2(GameModel gameModel){
 
         System.out.println();
         System.out.println("Now you can still move exactly 1 square and repeat the same effect");
@@ -503,9 +503,9 @@ public class PrintEffectWeapon implements Serializable {
     //SHOCKWAVE
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printShockwaveBasicMode(RemoteGameModel gameModel){
+    public static void printShockwaveBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -526,9 +526,9 @@ public class PrintEffectWeapon implements Serializable {
     //RAILGUN
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printRailgunBasicMode(RemoteGameModel gameModel){
+    public static void printRailgunBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -539,9 +539,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printRailgunPiercingMode(RemoteGameModel gameModel){
+    public static void printRailgunPiercingMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE PIERCING MODE");
@@ -553,9 +553,9 @@ public class PrintEffectWeapon implements Serializable {
     //FLAMETHROWER
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printFlamethrowerBasicMode(RemoteGameModel gameModel){
+    public static void printFlamethrowerBasicMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
@@ -567,9 +567,9 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the RemoteGameModel
+     * @param gameModel   the reference to the GameModel
      */
-    public static void printFlamethrowerBarbecueMode(RemoteGameModel gameModel){
+    public static void printFlamethrowerBarbecueMode(GameModel gameModel){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BARBECUE MODE");

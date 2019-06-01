@@ -1,14 +1,10 @@
 package it.polimi.model;
 
 
-import it.polimi.controller.ActionController;
 import it.polimi.model.Exception.*;
 import it.polimi.model.Weapon.LockRifle;
-import it.polimi.view.RemoteView;
-import it.polimi.view.cli.ViewCLI;
 
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 

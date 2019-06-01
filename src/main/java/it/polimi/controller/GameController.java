@@ -7,8 +7,9 @@ import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class ManagerController implements RemoteGameController {
+public class GameController extends UnicastRemoteObject implements RemoteGameController {
     
     private ActionController actionController;
     private ActionModel actionModel;
@@ -17,12 +18,16 @@ public class ManagerController implements RemoteGameController {
     private State state;
     private State beforeError;
     
-    public ManagerController(ActionController actionController,ActionModel actionModel){
+    public GameController(ActionController actionController, ActionModel actionModel) throws RemoteException{
         this.actionController=actionController;
         this.actionModel=actionModel;
-        this.gameModel=actionModel.getGameModel();
-        this.state=gameModel.getState();
+        this.gameModel =actionModel.getGameModel();
+        this.state= gameModel.getState();
         
+    }
+
+    public GameController() throws RemoteException{
+
     }
     
     public boolean getStaretd(){
@@ -30,7 +35,7 @@ public class ManagerController implements RemoteGameController {
         return gameStarted;
     }
     
-    public GameModel getGameModel () {
+    public GameModel getGameModel() {
         
         
         return this.gameModel;
@@ -41,7 +46,7 @@ public class ManagerController implements RemoteGameController {
         return actionModel;
     }
     
-    public void setGameModel (GameModel gameModel) {
+    public void setGameModel(GameModel gameModel) {
         
         this.gameModel = gameModel;
     }
@@ -204,7 +209,7 @@ public class ManagerController implements RemoteGameController {
     //metodo che per ora non serve
     private void verifyObserver() {
         
-        for(int i=0; i<gameModel.getObservers().size(); i++){
+        for(int i = 0; i< gameModel.getObservers().size(); i++){
             try{
                 if(gameModel.getObservers().get(i) != null)
                     gameModel.getObservers().get(i).getUser();

@@ -6,13 +6,16 @@ import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-public class ViewCLI implements RemoteView {
+public class ViewCLI implements RemoteView, Serializable {
+
+    //dobbiamo capire quali classi della view devono essere serializzabili
 
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
@@ -22,7 +25,7 @@ public class ViewCLI implements RemoteView {
     protected State state;
     protected String user;
     protected Player player;
-    public RemoteGameModel gameModel;
+    public GameModel gameModel;
     public RemoteGameController gameController;
     protected boolean online;
     //attribute for run
@@ -59,6 +62,10 @@ public class ViewCLI implements RemoteView {
             e.printStackTrace();
         }
         
+    }
+
+    public ViewCLI(){
+
     }
 
     @Override
@@ -275,13 +282,13 @@ public class ViewCLI implements RemoteView {
         gameController = gameController;
     }
     
-    public void setGameModel (RemoteGameModel gameModel) {
+    public void setGameModel (GameModel gameModel) {
         
         this.gameModel = gameModel;
     }
     
     @Override
-    public void reserInput () throws RemoteException {
+    public void resetInput() throws RemoteException {
         setColumn(-1);
         setRow(-1);
         setIndex(-1);
@@ -292,7 +299,7 @@ public class ViewCLI implements RemoteView {
      * @param gameModel the gamemodel of the match
      */
     @Override
-    public void update(RemoteGameModel gameModel) throws RemoteException {
+    public void update(GameModel gameModel) throws RemoteException {
         
         this.gameModel = gameModel;
         this.run();
@@ -473,7 +480,7 @@ public class ViewCLI implements RemoteView {
     //WEAPON
     
     //LOCK RIFLE
-    public void viewLockRifleBasicEffect(RemoteGameModel gameModel) throws RemoteException{
+    public void viewLockRifleBasicEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printLockRifleBasicEffect(gameModel);
 
@@ -484,7 +491,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewLockRifleSecondLock(RemoteGameModel gameModel) throws RemoteException{
+    public void viewLockRifleSecondLock(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printLockRifleSecondLock(gameModel);
 
@@ -511,7 +518,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //MACHINE GUN
-    public void viewMachineGunBasicEffect(RemoteGameModel gameModel) throws RemoteException{
+    public void viewMachineGunBasicEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
         Scanner input = new Scanner(System.in);
@@ -525,7 +532,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewMachineGunFocusShot(RemoteGameModel gameModel) throws RemoteException{
+    public void viewMachineGunFocusShot(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printMachineGunFocusShot(gameModel);
         Scanner input = new Scanner(System.in);
@@ -545,7 +552,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewMachineGunTurretTripod(RemoteGameModel gameModel) throws RemoteException{
+    public void viewMachineGunTurretTripod(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printMachineGunTurretTripod(gameModel);
         Scanner input = new Scanner(System.in);
@@ -557,7 +564,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //TRACTOR BEAM
-    public void viewTractorBeamBasicMode(RemoteGameModel gameModel) throws RemoteException{
+    public void viewTractorBeamBasicMode(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printTractorBeamBasicMode(gameModel);
         Scanner input = new Scanner(System.in);
@@ -587,7 +594,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewTractorBeamPunisherMode(RemoteGameModel gameModel) throws RemoteException{
+    public void viewTractorBeamPunisherMode(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printTractorBeamPunisherMode(gameModel);
 
@@ -598,7 +605,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //THOR
-    public void viewThorBasicEffect(RemoteGameModel gameModel) throws RemoteException{
+    public void viewThorBasicEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printThorBasicEffect(gameModel);
 
@@ -608,7 +615,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewThorChainReaction(RemoteGameModel gameModel) throws RemoteException{
+    public void viewThorChainReaction(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printThorChainReaction(gameModel);
 
@@ -618,7 +625,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewThorHighVoltage(RemoteGameModel gameModel) throws RemoteException{
+    public void viewThorHighVoltage(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printThorHighVoltage(gameModel);
 
@@ -629,7 +636,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //PLASMA GUN
-    public void viewPlasmaGunBasicEffect(RemoteGameModel gameModel) throws RemoteException{
+    public void viewPlasmaGunBasicEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printPlasmaGunBasicEffect(gameModel);
 
@@ -639,7 +646,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewPlasmaGunPhaseGlide(RemoteGameModel gameModel) throws RemoteException{
+    public void viewPlasmaGunPhaseGlide(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printPlasmaGunPhaseGlide(gameModel);
         Scanner input = new Scanner(System.in);
@@ -674,7 +681,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //WHISPER
-    public void viewWhisperEffect(RemoteGameModel gameModel) throws RemoteException{
+    public void viewWhisperEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printWhisperEffect(gameModel);
 
@@ -685,7 +692,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //CANNON VORTEX
-    public void viewCannonVortexBasicEffect(RemoteGameModel gameModel) throws RemoteException{
+    public void viewCannonVortexBasicEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printCannonVortexBasicEffect(gameModel);
         Scanner input = new Scanner(System.in);
@@ -715,7 +722,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewCannonVortexBlackHole(RemoteGameModel gameModel) throws RemoteException{
+    public void viewCannonVortexBlackHole(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printCannonVortexBlackHole(gameModel);
 
@@ -729,7 +736,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //FURNACE
-    public void viewFurnaceBasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewFurnaceBasicMode(GameModel gameModel) throws RemoteException {
         
         PrintEffectWeapon.printFurnaceBasicMode(gameModel);
         Scanner input = new Scanner(System.in);
@@ -749,7 +756,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewFurnaceCozyFireMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewFurnaceCozyFireMode(GameModel gameModel) throws RemoteException {
         
         PrintEffectWeapon.printFurnaceCozyFireMode(gameModel);
         Scanner input = new Scanner(System.in);
@@ -777,7 +784,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //HEATSEEKER
-    public void viewHeatseekerEffect(RemoteGameModel gameModel) throws RemoteException {
+    public void viewHeatseekerEffect(GameModel gameModel) throws RemoteException {
         
         PrintEffectWeapon.printHeatseekerEffect(gameModel);
 
@@ -788,7 +795,7 @@ public class ViewCLI implements RemoteView {
     }
     
     //HELLION
-    public void viewHellionBasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewHellionBasicMode(GameModel gameModel) throws RemoteException {
         
         PrintEffectWeapon.printHellionBasicMode(gameModel);
 
@@ -798,7 +805,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
     
-    public void viewHellionNanoTracerMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewHellionNanoTracerMode(GameModel gameModel) throws RemoteException {
         
         PrintEffectWeapon.printHellionNanoTracerMode(gameModel);
 
@@ -809,7 +816,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //ZX-2
-    public void viewZX2BasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewZX2BasicMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printZX2BasicMode(gameModel);
 
@@ -819,7 +826,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewZX2ScannerMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewZX2ScannerMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printZX2ScannerMode(gameModel);
 
@@ -855,7 +862,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //GRENADE LAUNCHER
-    public void viewGrenadeLauncherBasicEffect(RemoteGameModel gameModel) throws RemoteException {
+    public void viewGrenadeLauncherBasicEffect(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printGrenadeLauncherBasicEffect(gameModel);
 
@@ -897,7 +904,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewGrenadeLauncherExtraGrenade(RemoteGameModel gameModel) throws RemoteException {
+    public void viewGrenadeLauncherExtraGrenade(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printGrenadeLauncherExtraGrenade(gameModel);
         Scanner input = new Scanner(System.in);
@@ -925,7 +932,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //SHOTGUN
-    public void viewShotGunBasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewShotGunBasicMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printShotGunBasicMode(gameModel);
 
@@ -967,7 +974,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewShotgunLongBarrelMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewShotgunLongBarrelMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printShotGunLongBarrelMode(gameModel);
 
@@ -978,7 +985,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //CYBERBLADE
-    public void viewCyberbladeBasicEffect(RemoteGameModel gameModel) throws RemoteException {
+    public void viewCyberbladeBasicEffect(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printCyberbladeBasicEffect(gameModel);
 
@@ -988,7 +995,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewCyberbladeShadowstep(RemoteGameModel gameModel) throws RemoteException {
+    public void viewCyberbladeShadowstep(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printCyberbladeShadowstep(gameModel);
         Scanner input = new Scanner(System.in);
@@ -1013,7 +1020,7 @@ public class ViewCLI implements RemoteView {
         setColumn(input.nextInt());
     }
 
-    public void viewCyberbladeSliceAndDice(RemoteGameModel gameModel) throws RemoteException {
+    public void viewCyberbladeSliceAndDice(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printCyberbladeSliceAndDice(gameModel);
 
@@ -1024,7 +1031,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //SLEDGEHAMMER
-    public void viewSledgehammerBasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewSledgehammerBasicMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printSledgehammerBasicMode(gameModel);
 
@@ -1034,7 +1041,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewSledgehammerPulverizeMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewSledgehammerPulverizeMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printSledgehammerPulverizeMode(gameModel);
 
@@ -1066,7 +1073,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //ROCKET LAUNCHER
-    public void viewRocketLauncherBasicEffect(RemoteGameModel gameModel) throws RemoteException {
+    public void viewRocketLauncherBasicEffect(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printRocketLauncherBasicEffect(gameModel);
 
@@ -1108,7 +1115,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewRocketLauncherRocketJump(RemoteGameModel gameModel) throws RemoteException {
+    public void viewRocketLauncherRocketJump(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printRocketLauncherRocketJump(gameModel);
         Scanner input = new Scanner(System.in);
@@ -1143,7 +1150,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //POWER GLOVE
-    public void viewPowerGloveBasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewPowerGloveBasicMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printPowerGloveBasicMode(gameModel);
 
@@ -1153,7 +1160,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewPowerGloveRocketFirstMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewPowerGloveRocketFirstMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printPowerGloveRocketFirstMode(gameModel);
         Scanner input = new Scanner(System.in);
@@ -1244,7 +1251,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //SHOCKWAVE
-    public void viewShockwaveBasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewShockwaveBasicMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printShockwaveBasicMode(gameModel);
         Scanner input = new Scanner(System.in);
@@ -1288,7 +1295,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //RAILGUN
-    public void viewRailgunBasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewRailgunBasicMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printRailgunBasicMode(gameModel);
         Scanner input = new Scanner(System.in);
@@ -1308,7 +1315,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewRailgunPiercingMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewRailgunPiercingMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printRailgunPiercingMode(gameModel);
         Scanner input = new Scanner(System.in);
@@ -1349,7 +1356,7 @@ public class ViewCLI implements RemoteView {
     }
 
     //FLAMETHROWER
-    public void viewFlamethrowerBasicMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewFlamethrowerBasicMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printFlamethrowerBasicMode(gameModel);
         Scanner input = new Scanner(System.in);
@@ -1421,7 +1428,7 @@ public class ViewCLI implements RemoteView {
         notifyController();
     }
 
-    public void viewFlamethrowerBarbecueMode(RemoteGameModel gameModel) throws RemoteException {
+    public void viewFlamethrowerBarbecueMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printFlamethrowerBarbecueMode(gameModel);
         Scanner input = new Scanner(System.in);

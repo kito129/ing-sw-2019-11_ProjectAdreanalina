@@ -22,9 +22,9 @@ public class ActionModel {
 
     public ActionModel(GameModel gameModel){
 
-        this.gameModel=gameModel;
-        this.map=gameModel.getMap();
-        this.actualPlayer=gameModel.getActualPlayer();
+        this.gameModel = gameModel;
+        this.map= gameModel.getMap();
+        this.actualPlayer= gameModel.getActualPlayer();
     }
 
     
@@ -46,9 +46,9 @@ public class ActionModel {
     }
     
     /**
-     * Gets game model.
+     * Gets gameModel model.
      *
-     * @return the game model
+     * @return the gameModel model
      */
     public GameModel getGameModel() {
 
@@ -290,7 +290,7 @@ public class ActionModel {
         
         ArrayList<EnumColorPlayer> playerColor = new ArrayList<EnumColorPlayer>(gameModel.getPlayerColor());
         
-        //get color occurrence for all player in game
+        //get color occurrence for all player in gameModel
         for (EnumColorPlayer a : playerColor) {
             
             if(playerBoard.colorOccurrenceInDamages(a)>0) {
