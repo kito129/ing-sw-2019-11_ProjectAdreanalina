@@ -367,7 +367,7 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) {
+    public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) throws RemoteException{
     
         //use always base and optional for second effect
         //necessary from model
@@ -390,8 +390,8 @@ public class ActionController {
             
                     weapon.baseEffect(map, currentPlayer, targetBase);
                 } catch (NotVisibleTarget notVisibleTarget) {
-                    System.out.println("non visible");
-            
+
+                    System.out.println("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
                 }
             } else {
                 //errore
@@ -416,11 +416,10 @@ public class ActionController {
                 }
             } catch (NotValidInput notValidInput) {
         
-                //gestione targetBase==targetSecondLock
-        
+                System.out.println("ERROR: THE CHOSEN TARGET IS THE SAME OF BASIC EFFECT");
             } catch (NotVisibleTarget notVisibleTarget) {
-        
-                //gestione target non visibile o errore di mappa
+
+                System.out.println("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
             }
             }else {
                 //errore
@@ -436,7 +435,7 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon, RemoteView view){
+    public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon, RemoteView view) throws RemoteException{
     
         //necessary from model
         Map map= gameModel.getMap();
@@ -453,9 +452,10 @@ public class ActionController {
                     weapon.baseMode(map,currentPlayer);
                 } catch (NoTargetInSquare noTargetInSquare) {
 
-                    //gestione nessun target nella stanza in cui si trova il current player.
+                    System.out.println("ERROR: NO TARGET IN YOUR SQUARE");
                 } catch (MapException mapException){
 
+                    System.out.println("ERROR: MAP ERROR");
                 }
     
             case ReaperMode:
@@ -465,9 +465,10 @@ public class ActionController {
                     weapon.reaperMode(map,currentPlayer);
                 } catch (NoTargetInSquare noTargetInSquare) {
 
-                    //gestione nessun target nella stanza in cui si trova il current player
+                    System.out.println("ERROR: NO TARGET IN YOUR SQUARE");
                 } catch (MapException mapException ) {
 
+                    System.out.println("ERROR: MAP ERROR");
                 }
         }
 
@@ -479,7 +480,8 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void MachineGun(GameModel gameModel, MachineGun weapon, RemoteView view) {
+    //todo da finire
+    public void MachineGun(GameModel gameModel, MachineGun weapon, RemoteView view) throws RemoteException{
     
         //necessary from model
         Player currentPlayer = gameModel.getActualPlayer();
@@ -579,14 +581,13 @@ public class ActionController {
     }
     
     
-    
     /**
      * Tractor beam.
      *
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void TractorBeam(GameModel gameModel, TractorBeam weapon, RemoteView view) {
+    public void TractorBeam(GameModel gameModel, TractorBeam weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
         Map map= gameModel.getMap();
@@ -597,15 +598,12 @@ public class ActionController {
         Square destSquareBase;
         Player targetBaseOrPunisher;
 
-       
-
         switch(effect) {
 
             case BaseMode:
                 if (gameModel.getPlayerById(view.getTarget1()) != null ) {
                     
                     try {
-                        
                         //get the target
                         destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                         targetBaseOrPunisher = gameModel.getPlayerById(view.getTarget1());
@@ -613,16 +611,18 @@ public class ActionController {
                         //do the effect
                         weapon.baseMode(map, destSquareBase, currentPlayer, targetBaseOrPunisher);
                     } catch (NotVisibleTarget notVisibleTarget) {
+
+                        System.out.println("ERROR: THE DESTINATION SQUARE IS NOT VISIBLE FROM YOUR POSITION");
         
                         //gestire il fatto che la il giocatore ha spostato il target in una square che non vede
                     } catch (NotValidDistance notValidDistance) {
+
+                        System.out.println("ERROR: YOU CAN'T MOVE YOUR TARGET MORE THAN TWO MOVES");
         
                         //gestire il fatto che il giocatore prova a muovere il target  più di 2 quadrati
                     } catch (MapException mapException) {
-        
-        
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
+
+                        System.out.println("ERROR: MAP ERROR");
                     }
                 } else {
                     //errore
@@ -631,18 +631,23 @@ public class ActionController {
             case PunisherMode:
     
                 if (gameModel.getPlayerById(view.getTarget1()) != null ) {
+
                     targetBaseOrPunisher = gameModel.getPlayerById(view.getTarget1());
-    
                     try {
         
                         weapon.punisherMode(map, currentPlayer, targetBaseOrPunisher);
                     } catch (NotValidDistance notValidDistance) {
-        
+
+                        System.out.println("ERROR: THE CHOSEN TARGET IS MORE THAN THO MOVES FROM YOU");
+
                         //gestire se il target scelto non si trova a 0,1,2 quadrate dal currentplayer.
                     } catch (MapException mapException) {
-        
-        
+
+                        System.out.println("ERROR: MAP ERROR");
                     }
+                }else{
+
+                    //errore
                 }
         }
     }
@@ -653,7 +658,9 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void Thor(GameModel gameModel, Thor weapon, RemoteView view) {
+
+    //todo da rivedere la logica di marco
+    public void Thor(GameModel gameModel, Thor weapon, RemoteView view) throws RemoteException {
         
         //necessary from model
         Map map= gameModel.getMap();
@@ -678,6 +685,8 @@ public class ActionController {
         
                 weapon.baseEffect(map, currentPlayer, targetBase);
             } catch (NotVisibleTarget notVisibleTarget) {
+
+                System.out.println("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
         
                 // gestione target base non visibile
             }
@@ -690,7 +699,7 @@ public class ActionController {
                     targetChainReaction = gameModel.getPlayerById(view.getTarget2());
     
                     try {
-        
+
                         if ((map.isVisible(targetBase, targetChainReaction)) && (targetBase != targetChainReaction)) {
             
                             weapon.chainReactionEffect(currentPlayer, targetChainReaction);
@@ -699,20 +708,20 @@ public class ActionController {
                             throw new NotValidInput();
                         }
                     } catch (NotValidInput notValidInput) {
-        
+
+                        System.out.println("ERROR: THE TARGET OF BASE EFFECT DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT " +
+                                "FROM THE TARGET OF BASE EFFECT ");
                         //gestisce il fatto che il target effetto base non vede target chain reaction o che target base sia uguale a target chain rection
                     }
                     if (choice2) {
                         //high voltage
                         //usabile solo se si ha usato chain reaction.
-    
                         if (gameModel.getPlayerById(view.getTarget1()) != null && gameModel.getPlayerById(view.getTarget2()) != null && gameModel.getPlayerById(view.getTarget3()) != null) {
         
                             //get the target
                             targetBase = gameModel.getPlayerById(view.getTarget1());
                             targetChainReaction = gameModel.getPlayerById(view.getTarget2());
                             targetHighVoltage = gameModel.getPlayerById(view.getTarget3());
-        
                             try {
             
                                 if ((map.isVisible(targetChainReaction, targetHighVoltage)) && (targetChainReaction != targetHighVoltage)
@@ -724,10 +733,12 @@ public class ActionController {
                                     throw new NotValidInput();
                                 }
                             } catch (NotValidInput notValidInput) {
+
+                                System.out.println("ERROR: THE TARGET OF CHAIN REACTION DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT" +
+                                        "FROM THE TARGET OF BASE EFFECT AND FROM THE TARGET OF CHAIN REACTION");
             
                                 //gestione il fatto che target chain reaction non veda target high voltage e che i target non siano tutti diversi
                             }
-        
                         }
     
                     } else {
@@ -748,7 +759,7 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view)  {
+    public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view) throws RemoteException  {
     
         //necessary from model
         Map map= gameModel.getMap();
@@ -769,14 +780,12 @@ public class ActionController {
     
                 //get the target
                 targetBase = gameModel.getPlayerById(view.getTarget1());
-    
-    
                 try {
         
                     weapon.baseEffect(map, currentPlayer, targetBase);
                 } catch (NotVisibleTarget notVisibleTarget) {
-        
-                    //gestione targetbase non visibile
+
+                    System.out.println("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
                 }
     
             } else {
@@ -788,19 +797,17 @@ public class ActionController {
                 
                 case PhaseGlideEffect:
                     //usabile prima o dopo l'effetto base
-    
                     try {
+
                         destSquarePhaseGlide = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                        
                         weapon.phaseGlideEffect(map,destSquarePhaseGlide,currentPlayer);
                     } catch (MapException e) {
-                        e.printStackTrace();
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
+
+                        System.out.println("ERROR: MAP ERROR");
                     } catch (NotValidDistance notValidDistance) {
-                        notValidDistance.printStackTrace();
+
+                        System.out.println("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVES");
                     }
-                    
                     break;
                 case ChargedShotEffect:
                     //nessuna eccezione da lanciare;il target è lo stesso dell'effetto base quindi il controllo sulla visibilità è gia garantito
@@ -821,14 +828,14 @@ public class ActionController {
             }
         }
     }
-    
+    //todo ripartire da qui
     /**
      * Whisper.
      *
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void Whisper(GameModel gameModel, Whisper weapon, RemoteView view) {
+    public void Whisper(GameModel gameModel, Whisper weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
         Map map = gameModel.getMap();
@@ -864,7 +871,7 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) {
+    public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
         Map map = gameModel.getMap();
@@ -972,7 +979,7 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) {
+    public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
         Map map = gameModel.getMap();
@@ -1026,7 +1033,7 @@ public class ActionController {
         }
     }
 
-    public void HeatSeeker(GameModel gameModel, Heatseeker weapon, RemoteView view){
+    public void HeatSeeker(GameModel gameModel, Heatseeker weapon, RemoteView view) throws RemoteException{
     
     
         //necessary from model
@@ -1053,7 +1060,7 @@ public class ActionController {
       
     }
 
-    public void Hellion(GameModel gameModel, Hellion weapon, RemoteView view){
+    public void Hellion(GameModel gameModel, Hellion weapon, RemoteView view) throws RemoteException{
     
         //necessary from model
         Map map = gameModel.getMap();
@@ -1105,12 +1112,12 @@ public class ActionController {
         }
     }
 
-    public void Flamethrower(GameModel gameModel, Flamethrower weapon){
+    public void Flamethrower(GameModel gameModel, Flamethrower weapon) throws RemoteException{
 
         //todo da fare poi
     }
 
-    public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon){
+    public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon) throws RemoteException{
 
         Player currentPlayer=new Player();
         Player targetBase=new Player();
@@ -1163,7 +1170,7 @@ public class ActionController {
         }
     }
 
-    public void RocketLauncher(GameModel gameModel, RocketLauncher weapon) {
+    public void RocketLauncher(GameModel gameModel, RocketLauncher weapon) throws RemoteException {
 
         Player currentPlayer = new Player();
         Map map = new Map();
@@ -1211,7 +1218,7 @@ public class ActionController {
 
     }
 
-    public void RailGun(GameModel gameModel, Railgun weapon){
+    public void RailGun(GameModel gameModel, Railgun weapon) throws RemoteException{
 
         Player currentPlayer=new Player();
         Player target1=new Player();
@@ -1262,7 +1269,7 @@ public class ActionController {
 
     }
 
-    public void Cyberblade(GameModel gameModel, Cyberblade weapon){
+    public void Cyberblade(GameModel gameModel, Cyberblade weapon) throws RemoteException{
 
         Player currentPlayer=new Player();
         Player targetBase=new Player();
@@ -1322,7 +1329,7 @@ public class ActionController {
         }
     }
 
-    public void Zx2(GameModel gameModel, Zx2 weapon) {
+    public void Zx2(GameModel gameModel, Zx2 weapon) throws RemoteException {
 
         Player currentPlayer = new Player();
         Player target1 = new Player();
@@ -1387,18 +1394,18 @@ public class ActionController {
         }
     }
 
-    public void Shotgun(GameModel gameModel, Shotgun weapon){
+    public void Shotgun(GameModel gameModel, Shotgun weapon) throws RemoteException{
 
 //todo aspettare lunedi per chiarire lo spostamento
     }
 
 
-    public void PowerGlove(GameModel gameModel, PowerGlove weapon){
+    public void PowerGlove(GameModel gameModel, PowerGlove weapon) throws RemoteException{
 
 
     }
 
-    public void Shockwave(GameModel gameModel, Shockwave weapon){
+    public void Shockwave(GameModel gameModel, Shockwave weapon) throws RemoteException{
 
         Player currentPlayer=new Player();
         Player target1Base=new Player();
@@ -1440,7 +1447,7 @@ public class ActionController {
         }
     }
 
-    public void Sledgehammer(GameModel gameModel, Sledgehammer weapon){
+    public void Sledgehammer(GameModel gameModel, Sledgehammer weapon) throws RemoteException{
 
         //todo ripartire da quin
     }

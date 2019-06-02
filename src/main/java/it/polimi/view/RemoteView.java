@@ -11,39 +11,39 @@ import java.rmi.RemoteException;
 public interface RemoteView extends Remote {
     
     
-    int getIndex ();
+    int getIndex () throws RemoteException;
 
-    int getChoicePlayer();
+    int getChoicePlayer() throws RemoteException;
 
-    int getChoicePlayer2();
+    int getChoicePlayer2() throws RemoteException;
 
-    int getChoicePlayer3();
+    int getChoicePlayer3() throws RemoteException;
 
     int getRow() throws RemoteException;
 
-    int getRow2();
+    int getRow2() throws RemoteException;
 
     int getColumn() throws RemoteException;
 
-    int getColumn2();
+    int getColumn2() throws RemoteException;
 
-    int getTarget1();
+    int getTarget1() throws RemoteException;
 
-    int getTarget2();
+    int getTarget2() throws RemoteException;
 
-    int getTarget3();
+    int getTarget3() throws RemoteException;
 
-    int getTarget4();
+    int getTarget4() throws RemoteException;
     
-    boolean isUseSecondEffect ();
+    boolean isUseSecondEffect () throws RemoteException;
     
-    boolean isUseThirdEffect ();
+    boolean isUseThirdEffect () throws RemoteException;
     
-    WeaponsEffect getWeaponsEffect ();
+    WeaponsEffect getWeaponsEffect () throws RemoteException;
     
-    EnumColorSquare getColorRoom();
+    EnumColorSquare getColorRoom() throws RemoteException;
 
-    EnumCardinalDirection getCardinalDirection();
+    EnumCardinalDirection getCardinalDirection() throws RemoteException;
 
     String getUser() throws RemoteException;
     
