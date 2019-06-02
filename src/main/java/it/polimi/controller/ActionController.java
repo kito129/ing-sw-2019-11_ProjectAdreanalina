@@ -470,7 +470,7 @@ public class ActionController {
 
                 }
         }
-        //settare arma scarica
+
     }
     
     /**
