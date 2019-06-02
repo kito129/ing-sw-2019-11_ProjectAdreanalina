@@ -90,7 +90,7 @@ public class VortexCannon extends WeaponCard {
 
             targetSquare=map.findPlayer(p);
 
-            if((map.distance(targetSquare,vortexSquare)>1) && (map.distance(targetSquare,vortexSquare)==-1)){
+            if((map.distance(targetSquare,vortexSquare)>1) || (map.distance(targetSquare,vortexSquare)==-1)){
 
                 throw new NotValidDistance();
             }
@@ -108,6 +108,7 @@ public class VortexCannon extends WeaponCard {
                 p.singleDamage(currentPlayer.getColor());
             }
         }
+        //todo impossibile vedere se lo spostamento dei playere vadano tutti a buon termine.
     }
 }
 

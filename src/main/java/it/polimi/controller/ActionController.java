@@ -828,7 +828,6 @@ public class ActionController {
             }
         }
     }
-    //todo ripartire da qui
     /**
      * Whisper.
      *
@@ -853,11 +852,12 @@ public class ActionController {
         
                 weapon.baseEffect(map, currentPlayer, targetBase);
             } catch (NotValidDistance notValidDistance) {
-        
+
+                System.out.println("ERROR: THE CHOSEN TARGET IS NOT AT LEAST 2 MOVES FROM YOU");
                 //gestione target distante meno di due movimenti
             } catch (NotVisibleTarget notVisibleTarget) {
-        
-                //gestione target non visibile.
+
+                System.out.println("ERROR: THE CHOSEN TARGET IS NON VISIBLE");
             }
         }
         else {
@@ -871,6 +871,9 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
+
+    //todo da rivedere le eccezioni
+
     public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
@@ -893,21 +896,25 @@ public class ActionController {
         
                 //get the target
                 targetBase = gameModel.getPlayerById(view.getTarget1());
-    
                 try {
                     vortexSquare = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.baseEffect(map, vortexSquare, currentPlayer, targetBase);
                 } catch (NotVisibleTarget notVisibleTarget) {
+
+                    System.out.println("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE FROM YOUR POSITION");
         
                     //gestione square scelta non è visibile dal current PLyaer.
                 } catch (NotValidDistance notValidDistance) {
+
+                    System.out.println("ERROR: THE CHOSEN SQUARE IN NOT AT LEAST ONE MOVE FROM YOU OR THE CHOSEN TARGET IS NOT " +
+                            "ON VORTEX SQUARE OR IS NOT DISTANCE ONE MOVE FROM THE VORTEX SQUARE");
         
                     //gestione square scelta non è ad almeno un movimento di distanza dal current player, oppure viene lanciata se il target scelto non si trova
                     // ne ad un movimento dalla sqaure scelta ne sulla square scelta.
                 } catch (MapException mapException) {
+
+                    System.out.println("ERROR: MAP ERROR");
         
-                } catch (RemoteException e) {
-                    e.printStackTrace();
                 }
     
             } else {
@@ -919,30 +926,30 @@ public class ActionController {
             if (gameModel.getPlayerById(view.getTarget1()) != null&& gameModel.getPlayerById(view.getTarget2()) != null && gameModel.getPlayerById(view.getTarget3()) != null) {
 
                 try {
-                    
                     //get input
                     vortexSquare = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     target1BlackHole = gameModel.getPlayerById(view.getTarget2());
                     target2BlackHole = gameModel.getPlayerById(view.getTarget3());
-
                     if (target2BlackHole == null) {
 
                         if (target1BlackHole != targetBase) {
 
                             ArrayList<Player> targetsBlackHole = new ArrayList<>();
                             targetsBlackHole.add(target1BlackHole);
-
                             try {
                                 weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
                             } catch (NotValidDistance notValidDistance) {
-                                notValidDistance.printStackTrace();
+
+                                System.out.println("ERROR: THE CHOSEN TARGET IS NOT ON VORTEX SQUARE OR IS NOT DISTANCE " +
+                                        "ONE MOVE FROM THE VORTEX SQUARE");
                             } catch (MapException e) {
-                                e.printStackTrace();
+
+                                System.out.println("ERROR: MAP ERROR");
                             }
                         } else {
 
-                            throw new NotValidInput();
+                            System.out.println("THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
                         }
                     } else {
 
@@ -957,10 +964,7 @@ public class ActionController {
                             throw new NotValidInput();
                         }
                     }
-           
                 } catch (MapException e) {
-                    e.printStackTrace();
-                } catch (RemoteException e) {
                     e.printStackTrace();
                 } catch (NotValidDistance notValidDistance) {
                     notValidDistance.printStackTrace();
@@ -972,7 +976,8 @@ public class ActionController {
             }
         }
     }
-    
+
+    //TODO RIPARTIRE DA QUI
     /**
      * Furnace.
      *
@@ -991,7 +996,6 @@ public class ActionController {
         WeaponsEffect effect = view.getWeaponsEffect();
     
         try {
-            
             //get input
             targetSquareCozy = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
             roomTarget=view.getColorRoom();
@@ -1027,9 +1031,8 @@ public class ActionController {
                     }
             }
         } catch (MapException e) {
-            e.printStackTrace();
-        } catch (RemoteException e) {
-            e.printStackTrace();
+
+            System.out.println("ERROR: MAP ERROR");
         }
     }
 
