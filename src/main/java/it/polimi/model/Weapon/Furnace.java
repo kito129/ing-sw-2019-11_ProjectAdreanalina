@@ -49,7 +49,6 @@ public class Furnace extends WeaponCard {
         if((map.isVisibleRoom(currentPlayer,targetRoomColor))&& (currentPlayerSquare.getColor()!=targetRoomColor)){
 
             ArrayList<Player> targetPlayers=map.playerInRoom(targetRoomColor);
-            targetPlayers.remove(currentPlayer);   //rimuovo il current player dai target per sicurezza; se i metodi funzioanano correttamente non dovrebbe servire
             for(Player p:targetPlayers){
 
                 p.singleDamage(currentPlayer.getColor());
