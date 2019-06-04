@@ -546,7 +546,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE PIERCING MODE");
         System.out.println("Who is/are your target/s? (you can choose who you want, but max 2");
-        System.out.println("(first enter the cardinal direction, than the number of targets and finally then the players' ID)");
+        System.out.println("(first enter the cardinal direction, than the number of targets and finally the players' ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -559,9 +559,8 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
-        System.out.println("Who is/are your target/s? (1 or 2; they must be in different square and the squares must be 1 movement from your square and from first square selected and in the same direction");
-        System.out.println("(first enter the number of targets, then row and column for the first square and finally enter players' ID)");
-        System.out.println("(if you selected 2 as the number of squares, the second will be set consequently to the first one)");
+        System.out.println("Who is/are your target/s? (1 or 2; they must be in different square and the squares must be 1 movement from your square and from first square selected and also in the same direction");
+        System.out.println("(first enter the number of targets and then enter players' ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -573,9 +572,8 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BARBECUE MODE");
-        System.out.println("Who is/are your target/s? (1 or 2; they must be in different square and the squares must be 1 movement from your square and from first square selected and in the same direction");
-        System.out.println("(first enter the number of targets, then row and column for the first square and finally enter players' ID)");
-        System.out.println("(if you selected 2 as the number of squares, the second will be set consequently to the first one)");
+        System.out.println("Who is/are your target/s? (1 or 2; they must be in different square and the squares must be 1 movement from your square and from first square selected and also in the same direction");
+        System.out.println("(first enter the number of targets and then enter players' ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 }
