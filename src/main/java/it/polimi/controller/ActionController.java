@@ -1008,13 +1008,19 @@ public class ActionController {
                 
                         weapon.baseMode(map,currentPlayer,roomTarget);
                     }catch (NotValidDistance notValidDistance){
+
+                        System.out.println("ERROR: CHOOSE A DIFFERENT ROOM THAN YOURS ");
                 
                         //gestire se la stanza selezionata è le stanza del currente player
                 
                     }catch (NotVisibleTarget notVisibleTarget){
-                
+
+                        System.out.println("ERROR: THE CHOSEN ROOM IS NOT VISIBLE ");
+
                         //gestire se la stanza selezionata non è visibile dal current player.
                     }catch (MapException mapException){
+
+                        System.out.println("ERROR: MAP ERROR");
                 
                 
                     }
@@ -1024,9 +1030,13 @@ public class ActionController {
                 
                         weapon.cozyFireMode(map,currentPlayer,targetSquareCozy);
                     }catch (NotValidDistance notValidDistance){
+
+                        System.out.println("ERROR: THE CHOSEN SQUARE IS NOT DISTANCE ONE MOVE");
                 
                         //quadrato scelto non è distante esattamente un movimento
                     } catch (MapException mapException){
+
+                        System.out.println("ERROR: MAP ERROR");
                 
                     }
             }
@@ -1054,6 +1064,8 @@ public class ActionController {
         
                 weapon.BaseEffect(map, currentPlayer, targetBase);
             } catch (VisibleTarget visibleTarget) {
+
+                System.out.println("ERROR: THE CHOSEN TARGET IS VISIBLE");
         
                 //gestire se il player vede il target o errore di mappa
             }
@@ -1086,13 +1098,22 @@ public class ActionController {
     
                         weapon.baseMode(map, currentPlayer, targetBaseOrTracer);
                     } catch (NotValidDistance notValidDistance) {
-                        // target non visibile
-    
-                    } catch (NotVisibleTarget notVisibleTarget) {
+
+                        System.out.println("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVE FROM YOU" );
+
                         //target non distante almeno 1 movimento
     
+                    } catch (NotVisibleTarget notVisibleTarget) {
+
+
+                        System.out.println("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+
+                        // target non visibile
+
+    
                     } catch (MapException mapException) {
-                        // eccezzioni di mappa
+
+                        System.out.println("ERROR: MAP ERROR");
     
                     }
                 case NanoTracerMode:
@@ -1101,12 +1122,19 @@ public class ActionController {
     
                         weapon.nanoTracerMode(map, currentPlayer, targetBaseOrTracer);
                     } catch (NotValidDistance notValidDistance) {
+
+                        System.out.println("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVE FROM YOU" );
+
                         // target non visibile
     
                     } catch (NotVisibleTarget notVisibleTarget) {
-                        //target non distante almeno 1 movimento
+
+                        System.out.println("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+
     
                     } catch (MapException mapException) {
+
+                        System.out.println("ERROR: MAP ERROR");
                         // eccezzioni di mappa
                     }
             }
