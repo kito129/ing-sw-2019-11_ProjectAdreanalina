@@ -25,6 +25,7 @@ public class GameModel implements Serializable {
     private Player actualPlayer;
     private State state;
     private State extraState;
+    private String errorMessage;
 
 
     public GameModel(Map map, KillShotTrack killShotTrack, ArrayList<Player> players){
@@ -48,7 +49,12 @@ public class GameModel implements Serializable {
 
         return actualPlayer;
     }
-    
+
+    public String getErrorMessage() {
+
+        return errorMessage;
+    }
+
     /**
      * Gets map.
      *
@@ -136,7 +142,12 @@ public class GameModel implements Serializable {
         
         return extraState;
     }
-    
+
+    public void setErrorMessage(String errorMessage) {
+
+        this.errorMessage = errorMessage;
+    }
+
     /**
      * Sets actual player.
      *

@@ -389,6 +389,7 @@ public class ActionController {
                 try {
             
                     weapon.baseEffect(map, currentPlayer, targetBase);
+
                 } catch (NotVisibleTarget notVisibleTarget) {
 
                     System.out.println("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
@@ -480,7 +481,7 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
-    //todo da finire
+    //todo da finire lasciare lla fine
     public void MachineGun(GameModel gameModel, MachineGun weapon, RemoteView view) throws RemoteException{
     
         //necessary from model
@@ -659,7 +660,7 @@ public class ActionController {
      * @param weapon    the weapon
      */
 
-    //todo da rivedere la logica di marco
+    //todo da rivedere la logica di marco da lasciare alla fine
     public void Thor(GameModel gameModel, Thor weapon, RemoteView view) throws RemoteException {
         
         //necessary from model
@@ -759,6 +760,7 @@ public class ActionController {
      * @param gameModel the gameModel model
      * @param weapon    the weapon
      */
+    //todo da lasciare alla fine
     public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view) throws RemoteException  {
     
         //necessary from model
@@ -872,7 +874,6 @@ public class ActionController {
      * @param weapon    the weapon
      */
 
-    //todo da rivedere le eccezioni
 
     public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) throws RemoteException {
     
@@ -977,7 +978,7 @@ public class ActionController {
         }
     }
 
-    //TODO RIPARTIRE DA QUI
+
     /**
      * Furnace.
      *
@@ -1143,11 +1144,15 @@ public class ActionController {
         }
     }
 
+
+    //todo da lasciare alla fine
     public void Flamethrower(GameModel gameModel, Flamethrower weapon) throws RemoteException{
 
         //todo da fare poi
     }
 
+
+    //todo da lasciare alla fine
     public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon) throws RemoteException{
 
         Player currentPlayer=new Player();
@@ -1200,6 +1205,8 @@ public class ActionController {
                 }
         }
     }
+
+    //todo lasciare alla fine
 
     public void RocketLauncher(GameModel gameModel, RocketLauncher weapon) throws RemoteException {
 
@@ -1299,7 +1306,7 @@ public class ActionController {
 
 
     }
-
+    //todo lasciare all fine
     public void Cyberblade(GameModel gameModel, Cyberblade weapon) throws RemoteException{
 
         Player currentPlayer=new Player();
@@ -1425,12 +1432,16 @@ public class ActionController {
         }
     }
 
+    //todo lasciare
     public void Shotgun(GameModel gameModel, Shotgun weapon) throws RemoteException{
 
-//todo aspettare lunedi per chiarire lo spostamento
+
+
+
+
     }
 
-
+    //todo laaciare dopo
     public void PowerGlove(GameModel gameModel, PowerGlove weapon) throws RemoteException{
 
 
@@ -1477,6 +1488,8 @@ public class ActionController {
                 }
         }
     }
+
+    //todo lasciare dopo
 
     public void Sledgehammer(GameModel gameModel, Sledgehammer weapon) throws RemoteException{
 
