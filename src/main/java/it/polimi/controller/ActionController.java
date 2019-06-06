@@ -1669,8 +1669,7 @@ public class ActionController {
     }
 
     public void Shockwave(GameModel gameModel, Shockwave weapon,RemoteView view) throws RemoteException{
-    
-    
+        
         //necessary from model
         Map map = gameModel.getMap();
         Player currentPlayer = gameModel.getActualPlayer();
