@@ -48,7 +48,8 @@ public class Railgun extends WeaponCard {
         return piercingModeCost;
     }
 
-    public void baseMode(Map map, Player currentPlayer, Player target1, String direction) throws NotInDirection, NotValidCardinalDirection {
+    // TODO sistema strng a in enum
+    public void baseMode(Map map, Player currentPlayer, Player target1, EnumCardinalDirection direction) throws NotInDirection, NotValidCardinalDirection {
 
         if((direction.equals("NORTH"))||(direction.equals("EST"))||(direction.equals("SOUTH"))||(direction.equals("WEST"))){
 
@@ -96,7 +97,9 @@ public class Railgun extends WeaponCard {
         }
     }
 
-    public void piercingMode(Map map,Player currentPlayer,ArrayList<Player> targets,String direction)throws NotValidCardinalDirection,NotInDirection{
+    
+    //TODO sistema string in enum
+    public void piercingMode(Map map,Player currentPlayer,ArrayList<Player> targets,EnumCardinalDirection direction)throws NotValidCardinalDirection,NotInDirection{
 
         if((direction.equals("NORTH"))||(direction.equals("EST"))||(direction.equals("SOUTH"))||(direction.equals("WEST"))){
 
