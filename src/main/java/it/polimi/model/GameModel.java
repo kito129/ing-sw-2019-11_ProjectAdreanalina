@@ -26,6 +26,7 @@ public class GameModel implements Serializable {
     private State state;
     private State extraState;
     private String errorMessage;
+    
 
 
     public GameModel(Map map, KillShotTrack killShotTrack, ArrayList<Player> players){
