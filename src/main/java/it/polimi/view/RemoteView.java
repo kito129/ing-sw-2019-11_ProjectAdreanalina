@@ -41,6 +41,8 @@ public interface RemoteView extends Remote {
     
     WeaponsEffect getWeaponsEffect () throws RemoteException;
     
+    boolean isOptionWeapon ();
+    
     EnumColorSquare getColorRoom() throws RemoteException;
 
     EnumCardinalDirection getCardinalDirection() throws RemoteException;

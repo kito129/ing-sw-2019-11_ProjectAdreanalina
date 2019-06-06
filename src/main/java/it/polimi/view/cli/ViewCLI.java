@@ -42,6 +42,7 @@ public class ViewCLI implements RemoteView, Serializable {
     private boolean useSecondEffect;
     private boolean useThirdEffect;
     private WeaponsEffect weaponsEffect;
+    private boolean optionWeapon;
     //attribute for shoot
     private int target1;
     private int target2;
@@ -155,6 +156,12 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     @Override
+    public boolean isOptionWeapon () {
+        
+        return optionWeapon;
+    }
+    
+    @Override
     public EnumColorSquare getColorRoom() {
         return colorRoom;
     }
@@ -235,6 +242,11 @@ public class ViewCLI implements RemoteView, Serializable {
     public void setUseThirdEffect (boolean useThirdEffect) {
         
         this.useThirdEffect = useThirdEffect;
+    }
+    
+    public void setOptionWeapon (boolean optionWeapon) {
+        
+        this.optionWeapon = optionWeapon;
     }
     
     public void setColorRoom(EnumColorSquare colorRoom) {
