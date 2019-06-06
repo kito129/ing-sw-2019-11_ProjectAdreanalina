@@ -15,9 +15,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 
-/**
- * The type Action controller.
- */
 public class ActionController {
     
     private State beforeError;
@@ -35,11 +32,6 @@ public class ActionController {
     }
     
     
-    /**
-     * Run action .
-     *
-     * @param actionModel the action model
-     */
     public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException {
         
         
@@ -78,11 +70,6 @@ public class ActionController {
     }
     
     
-    /**
-     * Grab action.
-     *
-     * @param actionModel the action model
-     */
     public void grabActionController (ActionModel actionModel,RemoteView view) throws RemoteException{
     
         //take necessary
@@ -133,13 +120,6 @@ public class ActionController {
         }
     }
     
-    /**
-     * Use power up.
-     *
-     * @param actionModel the action model
-     * @param powerUpCard the power up card
-     * @throws NoPowerUpAvailable  no power up available
-     */
     public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable, NotValidInput, MapException, RemoteException {
 
         //NEWTON
@@ -196,12 +176,6 @@ public class ActionController {
         }
     }
     
-    /**
-     * Recharge.
-     *
-     * @param player the player want to recharge
-     * @param weapon the weapon want to recharge
-     */
     public void rechargeController(Player player, ArrayList<WeaponCard> weapon){
 
        WeaponCard weaponToCharge=weapon.get(0);
@@ -232,14 +206,6 @@ public class ActionController {
         }
     }
     
-    /**
-     * Pay ammo controller..
-     *
-     * @param player    the player want to pay
-     * @param ammoToPay Array list of  ammo to pay
-     * @throws NotValidAmmoException  not valid ammo exception
-     * @throws NoPowerUpAvailable       no power up available
-     */
     public void payAmmoController (Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay) throws NotValidAmmoException, NoPowerUpAvailable {
 
         //prendo playerboard
@@ -308,11 +274,6 @@ public class ActionController {
         }
     }
     
-    /**
-     * Respawn player .
-     *
-     * @param actionModel the action model
-     */
     public void respawnPlayerController (ActionModel actionModel){
     
         //get dead Player
@@ -338,11 +299,6 @@ public class ActionController {
         }
     }
     
-    /**
-     * Scoring player board.
-     *
-     * @param actionModel the action model
-     */
     public void scoringPlayerBoardController (ActionModel actionModel){
         
         //get dead Player
@@ -364,12 +320,6 @@ public class ActionController {
     //errori di mappa map exception non dovrebbero mai verificarsi perchè garantisci che non verranno mai sollevate.
     //solo per ricordatelo gli errori di visibilità distanza... inglobano anche errori di mappa oltre agli errori stessi
     
-    /**
-     * Lock rifleweapon.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
     public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) throws RemoteException{
     
         //use always base and optional for second effect
@@ -439,12 +389,6 @@ public class ActionController {
         
     }
     
-    /**
-     * Electroscythe weapon.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
     public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon, RemoteView view) throws RemoteException{
     
         //necessary from model
@@ -485,132 +429,8 @@ public class ActionController {
 
     }
     
-    /**
-     * Machine gun.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
-    //TODO FASE 2 ARMI
-    public void MachineGun(GameModel gameModel, MachineGun weapon, RemoteView view) throws RemoteException{
+   
     
-        //necessary from model
-        Player currentPlayer = gameModel.getActualPlayer();
-        Map map = gameModel.getMap();
-        //necessary input
-        Player target1Base;
-        Player target2Base; // se l'utente per l'effetto base non vuole colpire due target, questo viene messo a null.
-        Player targetFocusShot;
-        Player targetTurretTripod;
-        //necessary input
-        WeaponsEffect effect = view.getWeaponsEffect();
-        //get the effect  based on choice input fro view
-        boolean choice1;
-        choice1 = view.isUseSecondEffect();
-    
-        //array for target
-        ArrayList<Player> targetBase = new ArrayList<>();
-    
-        if (!choice1) {
-            
-            //base mode
-            if (gameModel.getPlayerById(view.getTarget1()) != null) {
-                
-                //get the target
-                target1Base = gameModel.getPlayerById(view.getTarget1());
-                //possible null
-                target2Base = gameModel.getPlayerById(view.getTarget2());
-        
-                try {
-            
-                    if (target2Base == null) {
-                        
-                        targetBase.add(target1Base);
-                        weapon.baseEffect(map, currentPlayer, targetBase);
-                    } else if (target1Base != target2Base) {
-                
-                        
-                        targetBase.add(target1Base);
-                        targetBase.add(target2Base);
-                        weapon.baseEffect(map, currentPlayer, targetBase);
-                    } else {
-                
-                        throw new NotValidInput();
-                    }
-                } catch (NotVisibleTarget notVisibleTarget) {
-            
-                    //gestione target 1 o 2 effetto base non visibili con il curretnPLayer
-                } catch (NotValidInput notValidInput) {
-            
-                    //gestione target 1==target 2 effetto base
-                }
-            } else {
-    
-                //errore
-                gameModel.setErrorMessage("ERROR: MAP ERROR");
-            }
-        } else {
-            
-            switch (effect) {
-                
-                case FocusShotEffect:
-    
-                    if (gameModel.getPlayerById(view.getTarget1()) != null && gameModel.getPlayerById(view.getTarget3()) != null) {
-    
-                        //get the target
-                        target1Base = gameModel.getPlayerById(view.getTarget1());
-                        target2Base = gameModel.getPlayerById(view.getTarget2()); // possible null
-                        targetFocusShot = gameModel.getPlayerById(view.getTarget3());
-                        
-    
-                        try {
-        
-                            if (targetFocusShot == target1Base || targetFocusShot == target2Base) {
-            
-                                weapon.focusShotEffect(currentPlayer, targetFocusShot);
-            
-                            } else {
-            
-                                throw new NotValidInput();
-                            }
-                        } catch (NotValidInput notValidInput) {
-        
-                            //gestione se target focus shot dovesse essere diverso sia da target 1 sia target 2 effetto base
-                        }
-                    } else {
-                        
-                        //errore
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-                    break;
-                case TurretTripodEffect:
-                    
-                    if (gameModel.getPlayerById(view.getTarget1()) != null && gameModel.getPlayerById(view.getTarget3()) != null && gameModel.getPlayerById(view.getTarget4()) != null) {
-                    
-                    //get the target
-                    target1Base = gameModel.getPlayerById(view.getTarget1());
-                    target2Base = gameModel.getPlayerById(view.getTarget2());
-                    targetFocusShot = gameModel.getPlayerById(view.getTarget3());
-                    targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
-                    
-                    //todo da finire
-                    
-                    break;
-                } else  {
-                    //errore
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-            }
-        }
-    }
-    
-    
-    /**
-     * Tractor beam.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
     public void TractorBeam(GameModel gameModel, TractorBeam weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
@@ -682,203 +502,10 @@ public class ActionController {
         }
     }
     
-    /**
-     * Thor.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
-
-    //TODO FASE 2 ARMI
-    public void Thor(GameModel gameModel, Thor weapon, RemoteView view) throws RemoteException {
-        
-        //necessary from model
-        Map map= gameModel.getMap();
-        Player currentPlayer= gameModel.getActualPlayer();
-        //necessary input
-        Player targetBase;
-        Player targetChainReaction;
-        Player targetHighVoltage;
-        //questa carta limita l'ordine con cui puoi usare i suoi effetti.
-        boolean choice1;
-        boolean choice2;
-        choice1 = view.isUseSecondEffect();
-        choice2 = view.isUseThirdEffect();
-        
-        //go to base effect
-        if (gameModel.getPlayerById(view.getTarget1()) != null) {
+   
     
-            //get the target
-            targetBase = gameModel.getPlayerById(view.getTarget1());
+   
     
-            try {
-        
-                weapon.baseEffect(map, currentPlayer, targetBase);
-            } catch (NotVisibleTarget notVisibleTarget) {
-
-                gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
-        
-                // gestione target base non visibile
-            }
-            if (choice1) {
-                //chain reaction
-                if ( gameModel.getPlayerById(view.getTarget2()) != null) {
-                    
-                    try {
-    
-                        //get the target
-                        targetBase = gameModel.getPlayerById(view.getTarget1());
-                        targetChainReaction = gameModel.getPlayerById(view.getTarget2());
-
-                        if ((map.isVisible(targetBase, targetChainReaction)) && (targetBase != targetChainReaction)) {
-            
-                            weapon.chainReactionEffect(currentPlayer, targetChainReaction);
-                        } else {
-            
-                            throw new NotValidInput();
-                        }
-                        
-                    } catch (NotValidInput notValidInput) {
-
-                        gameModel.setErrorMessage("ERROR: THE TARGET OF BASE EFFECT DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT " +
-                                "FROM THE TARGET OF BASE EFFECT ");
-                        //gestisce il fatto che il target effetto base non vede target chain reaction o che target base sia uguale a target chain rection
-                    }
-                    if (choice2) {
-                        
-                        //high voltage
-                        //usabile solo se si ha usato chain reaction.
-                        if (gameModel.getPlayerById(view.getTarget3()) != null) {
-                            
-                            try {
-                                
-                                //get the target
-                                targetBase = gameModel.getPlayerById(view.getTarget1());
-                                targetChainReaction = gameModel.getPlayerById(view.getTarget2());
-                                targetHighVoltage = gameModel.getPlayerById(view.getTarget3());
-            
-                                if ((map.isVisible(targetChainReaction, targetHighVoltage)) && (targetChainReaction != targetHighVoltage)
-                                        && (targetBase != targetHighVoltage)) {
-                
-                                    weapon.highVoltageEffect(currentPlayer, targetHighVoltage);
-                                } else {
-                
-                                    throw new NotValidInput();
-                                }
-                            } catch (NotValidInput notValidInput) {
-
-                                gameModel.setErrorMessage("ERROR: THE TARGET OF CHAIN REACTION DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT" +
-                                        "FROM THE TARGET OF BASE EFFECT AND FROM THE TARGET OF CHAIN REACTION");
-            
-                                //gestione il fatto che target chain reaction non veda target high voltage e che i target non siano tutti diversi
-                            }
-                        }
-                    } else {
-                        
-                        //errore high voltage
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-                }
-            } else {
-                //errore chain
-                gameModel.setErrorMessage("ERROR: MAP ERROR");
-            }
-        } else {
-            //errore base
-            gameModel.setErrorMessage("ERROR: MAP ERROR");
-        }
-    }
-    
-    /**
-     * Plasma gun.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
-    //TODO FASE 2 ARMI
-    public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view) throws RemoteException  {
-    
-        //necessary from model
-        Map map= gameModel.getMap();
-        Player currentPlayer= gameModel.getActualPlayer();
-        //necessary input
-        Player targetBase;
-        Square destSquarePhaseGlide;
-        //necessary input effect
-        WeaponsEffect effect = view.getWeaponsEffect();
-        //get choise
-        boolean choice1;
-        choice1 = view.isUseSecondEffect();
-
-        
-        if(!choice1){
-    
-            if (gameModel.getPlayerById(view.getTarget1()) != null ) {
-    
-                
-                try {
-                    
-                    //get the target
-                    targetBase = gameModel.getPlayerById(view.getTarget1());
-                    
-                    weapon.baseEffect(map, currentPlayer, targetBase);
-                } catch (NotVisibleTarget notVisibleTarget) {
-
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
-                }
-    
-            } else {
-                
-                //errore base mode
-                gameModel.setErrorMessage("ERROR: MAP ERROR");
-            }
-        } else {
-            
-            //second effect
-            switch (effect){
-                
-                case PhaseGlideEffect:
-                    //usabile prima o dopo l'effetto base
-                    try {
-
-                        destSquarePhaseGlide = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                        weapon.phaseGlideEffect(map,destSquarePhaseGlide,currentPlayer);
-                    } catch (MapException e) {
-
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    } catch (NotValidDistance notValidDistance) {
-
-                        gameModel.setErrorMessage("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVES");
-                    }
-                    break;
-                    
-                case ChargedShotEffect:
-                    //nessuna eccezione da lanciare;il target è lo stesso dell'effetto base quindi il controllo sulla visibilità è gia garantito
-                    //quando viene chiamaro l'effetto base-->sicuramente l'effetto base è stato usato se usiamo questo effetto.
-    
-                    if (gameModel.getPlayerById(view.getTarget1()) != null ) {
-        
-                        //get the target
-                        targetBase = gameModel.getPlayerById(view.getTarget1());
-                        
-                        //effect
-                        weapon.chargedShotEffect(currentPlayer,targetBase);
-                   
-                    break;
-            } else {
-                    //errore ChargedShotEffect
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-            }
-        }
-    }
-    
-    /**
-     * Whisper.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
     public void Whisper(GameModel gameModel, Whisper weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
@@ -913,12 +540,6 @@ public class ActionController {
         }
     }
     
-    /**
-     * Vortex cannon.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
     public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
@@ -1038,12 +659,6 @@ public class ActionController {
     }
 
 
-    /**
-     * Furnace.
-     *
-     * @param gameModel the gameModel model
-     * @param weapon    the weapon
-     */
     public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
@@ -1204,178 +819,6 @@ public class ActionController {
         }
     }
     
-    
-    //TODO FASE 2 ARMI
-    public void Flamethrower(GameModel gameModel, Flamethrower weapon) throws RemoteException{
-
-        //todo da fare poi
-    }
-
-
-    //TODO FASE 2 ARMI
-    public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon, RemoteView view) throws RemoteException{
-        
-        //necessary from model
-        Map map = gameModel.getMap();
-        Player currentPlayer = gameModel.getActualPlayer();
-        //necessary input
-        Player targetBase;
-        Square destSquareBase;
-        Square targetSquareExtra;
-        //necessary input effect
-        WeaponsEffect effect = view.getWeaponsEffect();
-        
-        if (gameModel.getPlayerById(view.getTarget1()) != null) {
-            
-            //get input
-            targetBase = gameModel.getPlayerById(view.getTarget1());
-            
-            switch (effect) {
-    
-                case BaseMode:
-        
-                    try {
-            
-                        weapon.baseEffect(map, targetBase, currentPlayer);
-            
-                    } catch (NotVisibleTarget notVisibleTarget) {
-            
-                        //gestione target visibile o errore di mappa
-                    }
-                    break;
-    
-                case MoveTarget:
-                    //non controllo se è stato effettuato l'effetto base prrchè per le armi opzionali l'effetto base è obbligatorio.
-        
-                    try {
-    
-                        //get input
-                        destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                        
-                        //effect
-                        weapon.moveTarget(map, targetBase, destSquareBase);
-                    } catch (NotValidDistance notValidDistance) {
-            
-                        //distanza di spostamento non valida
-                    } catch (MapException mapException) {
-            
-                        //errori
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-                    break;
-    
-                case ExtraGrenadeEffect:
-        
-                    //la move lho messo come metodo a parte perchè può essere usata anche dopo questo effetto
-        
-                    try {
-    
-                        //get input
-                        targetSquareExtra = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                        
-                        //effect
-                        weapon.extraGrenadeEffect(map, currentPlayer, targetSquareExtra);
-                    } catch (NotVisibleTarget notVisibleTarget) {
-            
-                        //gestione quadrato scelto non visibile
-                    } catch (MapException mapExcpetion) {
-            
-                        //errori
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-                    break;
-            }
-            } else {
-                
-                //errore
-                gameModel.setErrorMessage("ERROR: MAP ERROR");
-            }
-        }
-    
-    
-    //TODO FASE 2 ARMI
-    public void RocketLauncher(GameModel gameModel, RocketLauncher weapon,RemoteView view) throws RemoteException {
-    
-        //necessary from model
-        Map map = gameModel.getMap();
-        Player currentPlayer = gameModel.getActualPlayer();
-        //necessary input
-        Player targetBase;
-        Square destSquareBase;//se l'utente non vuole fare lo spostamento questo campo sarà null
-        Square destSquareJump;
-        //necessary input effect
-        WeaponsEffect effect = view.getWeaponsEffect();
-        //get choise for square in basic
-        boolean choice1;
-        choice1 = view.isUseSecondEffect();
-
-        switch (effect) {
-
-            case BaseMode:
-                if (gameModel.getPlayerById(view.getTarget1()) != null) {
-    
-                    try {
-    
-                        //get input
-                        targetBase = gameModel.getPlayerById(view.getTarget1());
-                        if(choice1){
-                            
-                            //get input
-                            destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                            weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
-                        } else {
-                            
-                            //set the input in null f player dont want to move the player
-                            destSquareBase=null;
-                            weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
-                        }
-                        
-                    } catch (NotVisibleTarget notVisibleTarget) {
-        
-                        //target non visibile
-        
-                    } catch (NotValidDistance notValidDistance) {
-        
-                        //errore  di distanza,sia se il target è nella tuo stesso quadrato,sia se il movimento che gli facciamo fare al target non è validp
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    } catch (MapException mapExcpetion) {
-        
-        
-                    }
-                } else {
-    
-                    //errore di mappa
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                }
-                break;
-
-            case RocketJumpEffect:
-
-                try{
-    
-                    //get input
-                    destSquareJump = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                    
-                    //effect
-                    weapon.rocketJumpEffect(map,currentPlayer,destSquareJump);
-
-                }catch (NotValidDistance notValidDistance){
-
-                    //errore di distanza non è 1 o 2.
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                }catch (MapException mapException){
-
-                    //errore di mappa
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                }
-                break;
-            case FragmentingWarheadEffect:
-
-                //todo chiedere a marco.
-        }
-
-    }
-
     public void RailGun(GameModel gameModel, Railgun weapon,RemoteView view) throws RemoteException{
         
         //necessary from model
@@ -1459,98 +902,6 @@ public class ActionController {
         }
     }
     
-    
-    //TODO FASE 2 ARMI
-    public void Cyberblade(GameModel gameModel, Cyberblade weapon,RemoteView view) throws RemoteException{
-    
-    
-        //necessary from model
-        Map map = gameModel.getMap();
-        Player currentPlayer = gameModel.getActualPlayer();
-        //necessary input
-        Player targetBase;
-        Square destSquareShadow;
-        Player targetSliceAndDice;
-        //necessary input effect
-        WeaponsEffect effect = view.getWeaponsEffect();
-        
-        switch (effect){
-
-            case BaseMode:
-    
-                if (gameModel.getPlayerById(view.getTarget1()) != null) {
-                    try {
-        
-                        //get input
-                        targetBase = gameModel.getPlayerById(view.getTarget1());
-        
-                        //effect
-                        weapon.baseEffect(map, currentPlayer, targetBase);
-                    } catch (NotValidDistance notValidDistance) {
-        
-                        //target non è nella square del curretn player
-                    } catch (MapException mapException) {
-        
-                        //errori
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-                } else {
-    
-                    //error
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                }
-
-            case ShadowstepEffect:
-                
-                try{
-    
-                    //get input
-                    destSquareShadow = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                    
-                    weapon.shadowstepEffect(map,currentPlayer,destSquareShadow);
-                }catch(NotValidDistance notValidDistance){
-
-                    //dest square più di un movimento di distanza
-                }catch (MapException mapException){
-
-                    //errori
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                }
-            case SliceAndDiceEffect:
-    
-                if (gameModel.getPlayerById(view.getTarget1()) != null) {
-                    
-                    try {
-                        
-                        //get input
-                        targetBase = gameModel.getPlayerById(view.getTarget1());
-                        targetSliceAndDice = gameModel.getPlayerById(view.getTarget2());
-        
-                        if (targetBase != targetSliceAndDice) {
-            
-                            weapon.sliceAndDiceEffect(map, currentPlayer, targetSliceAndDice);
-                        } else {
-            
-                            throw new NotValidInput();
-                        }
-                    } catch (NotValidInput notValidInput) {
-        
-                        //gestione target slice and dice è uguale al target base
-                    } catch (NotValidDistance notValidDistance) {
-        
-                        //target slice and dice non è nel quadrato del curretn player.
-                    } catch (MapException mapException) {
-        
-                        //errori
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-                } else {
-    
-                    //error
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                }
-        }
-    }
 
     public void Zx2(GameModel gameModel, Zx2 weapon,RemoteView view) throws RemoteException {
         
@@ -1652,22 +1003,366 @@ public class ActionController {
                 }
         }
     }
-
-    //todo lasciare
-    public void Shotgun(GameModel gameModel, Shotgun weapon) throws RemoteException{
-
-
-
-
-
+    
+    //TODO FASE 2 ARMI
+    //COMPLETA
+    public void Thor(GameModel gameModel, Thor weapon, RemoteView view) throws RemoteException {
+        
+        //necessary from model
+        Map map= gameModel.getMap();
+        Player currentPlayer= gameModel.getActualPlayer();
+        //necessary input
+        Player targetBase;
+        Player targetChainReaction;
+        Player targetHighVoltage;
+        //questa carta limita l'ordine con cui puoi usare i suoi effetti.
+        boolean choice1;
+        boolean choice2;
+        choice1 = view.isUseSecondEffect();
+        choice2 = view.isUseThirdEffect();
+        
+        //go to base effect
+        if (gameModel.getPlayerById(view.getTarget1()) != null) {
+            
+            //get the target
+            targetBase = gameModel.getPlayerById(view.getTarget1());
+            
+            try {
+                
+                weapon.baseEffect(map, currentPlayer, targetBase);
+            } catch (NotVisibleTarget notVisibleTarget) {
+                
+                gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                
+                // gestione target base non visibile
+            }
+            if (choice1) {
+                //chain reaction
+                if ( gameModel.getPlayerById(view.getTarget2()) != null) {
+                    
+                    try {
+                        
+                        //get the target
+                        targetBase = gameModel.getPlayerById(view.getTarget1());
+                        targetChainReaction = gameModel.getPlayerById(view.getTarget2());
+                        
+                        if ((map.isVisible(targetBase, targetChainReaction)) && (targetBase != targetChainReaction)) {
+                            
+                            weapon.chainReactionEffect(currentPlayer, targetChainReaction);
+                        } else {
+                            
+                            throw new NotValidInput();
+                        }
+                        
+                    } catch (NotValidInput notValidInput) {
+                        
+                        gameModel.setErrorMessage("ERROR: THE TARGET OF BASE EFFECT DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT " +
+                                "FROM THE TARGET OF BASE EFFECT ");
+                        //gestisce il fatto che il target effetto base non vede target chain reaction o che target base sia uguale a target chain rection
+                    }
+                    if (choice2) {
+                        
+                        //high voltage
+                        //usabile solo se si ha usato chain reaction.
+                        if (gameModel.getPlayerById(view.getTarget3()) != null) {
+                            
+                            try {
+                                
+                                //get the target
+                                targetBase = gameModel.getPlayerById(view.getTarget1());
+                                targetChainReaction = gameModel.getPlayerById(view.getTarget2());
+                                targetHighVoltage = gameModel.getPlayerById(view.getTarget3());
+                                
+                                if ((map.isVisible(targetChainReaction, targetHighVoltage)) && (targetChainReaction != targetHighVoltage)
+                                        && (targetBase != targetHighVoltage)) {
+                                    
+                                    weapon.highVoltageEffect(currentPlayer, targetHighVoltage);
+                                } else {
+                                    
+                                    throw new NotValidInput();
+                                }
+                            } catch (NotValidInput notValidInput) {
+                                
+                                gameModel.setErrorMessage("ERROR: THE TARGET OF CHAIN REACTION DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT" +
+                                        "FROM THE TARGET OF BASE EFFECT AND FROM THE TARGET OF CHAIN REACTION");
+                                
+                                //gestione il fatto che target chain reaction non veda target high voltage e che i target non siano tutti diversi
+                            }
+                        }
+                    } else {
+                        
+                        //errore high voltage
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+                }
+            } else {
+                //errore chain
+                gameModel.setErrorMessage("ERROR: MAP ERROR");
+            }
+        } else {
+            //errore base
+            gameModel.setErrorMessage("ERROR: MAP ERROR");
+        }
     }
-
-    //todo laaciare dopo
-    public void PowerGlove(GameModel gameModel, PowerGlove weapon) throws RemoteException{
-
-
+    
+    //TODO FASE 2 ARMI
+    //COMPLETA
+    public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view) throws RemoteException  {
+        
+        //necessary from model
+        Map map= gameModel.getMap();
+        Player currentPlayer= gameModel.getActualPlayer();
+        //necessary input
+        Player targetBase;
+        Square destSquarePhaseGlide;
+        //necessary input effect
+        WeaponsEffect effect = view.getWeaponsEffect();
+        //get choise
+        boolean choice1;
+        choice1 = view.isUseSecondEffect();
+        
+        
+        if(!choice1){
+            
+            if (gameModel.getPlayerById(view.getTarget1()) != null ) {
+                
+                
+                try {
+                    
+                    //get the target
+                    targetBase = gameModel.getPlayerById(view.getTarget1());
+                    
+                    weapon.baseEffect(map, currentPlayer, targetBase);
+                } catch (NotVisibleTarget notVisibleTarget) {
+                    
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                }
+                
+            } else {
+                
+                //errore base mode
+                gameModel.setErrorMessage("ERROR: MAP ERROR");
+            }
+        } else {
+            
+            //second effect
+            switch (effect){
+                
+                case PhaseGlideEffect:
+                    
+                    //usabile prima o dopo l'effetto base
+                    try {
+                        
+                        destSquarePhaseGlide = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                        weapon.phaseGlideEffect(map,destSquarePhaseGlide,currentPlayer);
+                    } catch (MapException e) {
+                        
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    } catch (NotValidDistance notValidDistance) {
+                        
+                        gameModel.setErrorMessage("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVES");
+                    }
+                    break;
+                
+                case ChargedShotEffect:
+                    //nessuna eccezione da lanciare;il target è lo stesso dell'effetto base quindi il controllo sulla visibilità è gia garantito
+                    //quando viene chiamaro l'effetto base-->sicuramente l'effetto base è stato usato se usiamo questo effetto.
+                    
+                    if (gameModel.getPlayerById(view.getTarget1()) != null ) {
+                        
+                        //get the target
+                        targetBase = gameModel.getPlayerById(view.getTarget1());
+                        
+                        //effect
+                        weapon.chargedShotEffect(currentPlayer,targetBase);
+                        
+                        break;
+                    } else {
+                        
+                        //errore ChargedShotEffect
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+            }
+        }
     }
-
+    
+    //TODO FASE 2 ARMI
+    //COMPLETA
+    public void Cyberblade(GameModel gameModel, Cyberblade weapon,RemoteView view) throws RemoteException{
+        
+        //necessary from model
+        Map map = gameModel.getMap();
+        Player currentPlayer = gameModel.getActualPlayer();
+        //necessary input
+        Player targetBase;
+        Square destSquareShadow;
+        Player targetSliceAndDice;
+        //necessary input effect
+        WeaponsEffect effect = view.getWeaponsEffect();
+        
+        switch (effect){
+            
+            case BaseMode:
+                
+                if (gameModel.getPlayerById(view.getTarget1()) != null) {
+                    try {
+                        
+                        //get input
+                        targetBase = gameModel.getPlayerById(view.getTarget1());
+                        
+                        //effect
+                        weapon.baseEffect(map, currentPlayer, targetBase);
+                    } catch (NotValidDistance notValidDistance) {
+                        
+                        //target non è nella square del curretn player
+                    } catch (MapException mapException) {
+                        
+                        //errori
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+                } else {
+                    
+                    //error
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }
+            
+            case ShadowstepEffect:
+                
+                try{
+                    
+                    //get input
+                    destSquareShadow = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                    
+                    weapon.shadowstepEffect(map,currentPlayer,destSquareShadow);
+                }catch(NotValidDistance notValidDistance){
+                    
+                    //dest square più di un movimento di distanza
+                }catch (MapException mapException){
+                    
+                    //errori
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }
+            case SliceAndDiceEffect:
+                
+                if (gameModel.getPlayerById(view.getTarget1()) != null) {
+                    
+                    try {
+                        
+                        //get input
+                        targetBase = gameModel.getPlayerById(view.getTarget1());
+                        targetSliceAndDice = gameModel.getPlayerById(view.getTarget2());
+                        
+                        if (targetBase != targetSliceAndDice) {
+                            
+                            weapon.sliceAndDiceEffect(map, currentPlayer, targetSliceAndDice);
+                        } else {
+                            
+                            throw new NotValidInput();
+                        }
+                    } catch (NotValidInput notValidInput) {
+                        
+                        //gestione target slice and dice è uguale al target base
+                    } catch (NotValidDistance notValidDistance) {
+                        
+                        //target slice and dice non è nel quadrato del curretn player.
+                    } catch (MapException mapException) {
+                        
+                        //errori
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+                } else {
+                    
+                    //error
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }
+        }
+    }
+    
+    //TODO FASE 2 ARMI
+    //COMPLETA
+    public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon, RemoteView view) throws RemoteException{
+        
+        //necessary from model
+        Map map = gameModel.getMap();
+        Player currentPlayer = gameModel.getActualPlayer();
+        //necessary input
+        Player targetBase;
+        Square destSquareBase;
+        Square targetSquareExtra;
+        //necessary input effect
+        WeaponsEffect effect = view.getWeaponsEffect();
+        
+        if (gameModel.getPlayerById(view.getTarget1()) != null) {
+            
+            //get input
+            targetBase = gameModel.getPlayerById(view.getTarget1());
+            
+            switch (effect) {
+                
+                case BaseMode:
+                    
+                    try {
+                        
+                        weapon.baseEffect(map, targetBase, currentPlayer);
+                        
+                    } catch (NotVisibleTarget notVisibleTarget) {
+                        
+                        //gestione target visibile o errore di mappa
+                    }
+                    break;
+                
+                case MoveTarget:
+                    //non controllo se è stato effettuato l'effetto base prrchè per le armi opzionali l'effetto base è obbligatorio.
+                    
+                    try {
+                        
+                        //get input
+                        destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                        
+                        //effect
+                        weapon.moveTarget(map, targetBase, destSquareBase);
+                    } catch (NotValidDistance notValidDistance) {
+                        
+                        //distanza di spostamento non valida
+                    } catch (MapException mapException) {
+                        
+                        //errori
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+                    break;
+                
+                case ExtraGrenadeEffect:
+                    
+                    //la move lho messo come metodo a parte perchè può essere usata anche dopo questo effetto
+                    
+                    try {
+                        
+                        //get input
+                        targetSquareExtra = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                        
+                        //effect
+                        weapon.extraGrenadeEffect(map, currentPlayer, targetSquareExtra);
+                    } catch (NotVisibleTarget notVisibleTarget) {
+                        
+                        //gestione quadrato scelto non visibile
+                    } catch (MapException mapExcpetion) {
+                        
+                        //errori
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+                    break;
+            }
+        } else {
+            
+            //errore
+            gameModel.setErrorMessage("ERROR: MAP ERROR");
+        }
+    }
+    
+    //TODO DA QUI IN GIU ANCORA ARMI DA FINIRE
+    
+    //TODO FASE 2 ARMI
+    //TODO RISOLVERE QUESTIONE ARRAYLIST
     public void Shockwave(GameModel gameModel, Shockwave weapon,RemoteView view) throws RemoteException{
         
         //necessary from model
@@ -1731,12 +1426,229 @@ public class ActionController {
                 break;
         }
     }
-
-    //todo lasciare dopo
-    public void Sledgehammer(GameModel gameModel, Sledgehammer weapon) throws RemoteException{
-
-        //todo ripartire da quin
+    
+    //TODO FASE 2 ARMI
+    public void MachineGun(GameModel gameModel, MachineGun weapon, RemoteView view) throws RemoteException{
+        
+        //necessary from model
+        Player currentPlayer = gameModel.getActualPlayer();
+        Map map = gameModel.getMap();
+        //necessary input
+        Player target1Base;
+        Player target2Base; // se l'utente per l'effetto base non vuole colpire due target, questo viene messo a null.
+        Player targetFocusShot;
+        Player targetTurretTripod;
+        //necessary input
+        WeaponsEffect effect = view.getWeaponsEffect();
+        //get the effect  based on choice input fro view
+        boolean choice1;
+        choice1 = view.isUseSecondEffect();
+        
+        //array for target
+        ArrayList<Player> targetBase = new ArrayList<>();
+        
+        if (!choice1) {
+            
+            //base mode
+            if (gameModel.getPlayerById(view.getTarget1()) != null) {
+                
+                //get the target
+                target1Base = gameModel.getPlayerById(view.getTarget1());
+                //possible null
+                target2Base = gameModel.getPlayerById(view.getTarget2());
+                
+                try {
+                    
+                    if (target2Base == null) {
+                        
+                        targetBase.add(target1Base);
+                        weapon.baseEffect(map, currentPlayer, targetBase);
+                    } else if (target1Base != target2Base) {
+                        
+                        
+                        targetBase.add(target1Base);
+                        targetBase.add(target2Base);
+                        weapon.baseEffect(map, currentPlayer, targetBase);
+                    } else {
+                        
+                        throw new NotValidInput();
+                    }
+                } catch (NotVisibleTarget notVisibleTarget) {
+                    
+                    //gestione target 1 o 2 effetto base non visibili con il curretnPLayer
+                } catch (NotValidInput notValidInput) {
+                    
+                    //gestione target 1==target 2 effetto base
+                }
+            } else {
+                
+                //errore
+                gameModel.setErrorMessage("ERROR: MAP ERROR");
+            }
+        } else {
+            
+            switch (effect) {
+                
+                case FocusShotEffect:
+                    
+                    if (gameModel.getPlayerById(view.getTarget1()) != null && gameModel.getPlayerById(view.getTarget3()) != null) {
+                        
+                        //get the target
+                        target1Base = gameModel.getPlayerById(view.getTarget1());
+                        target2Base = gameModel.getPlayerById(view.getTarget2()); // possible null
+                        targetFocusShot = gameModel.getPlayerById(view.getTarget3());
+                        
+                        
+                        try {
+                            
+                            if (targetFocusShot == target1Base || targetFocusShot == target2Base) {
+                                
+                                weapon.focusShotEffect(currentPlayer, targetFocusShot);
+                                
+                            } else {
+                                
+                                throw new NotValidInput();
+                            }
+                        } catch (NotValidInput notValidInput) {
+                            
+                            //gestione se target focus shot dovesse essere diverso sia da target 1 sia target 2 effetto base
+                        }
+                    } else {
+                        
+                        //errore
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+                    break;
+                case TurretTripodEffect:
+                    
+                    if (gameModel.getPlayerById(view.getTarget1()) != null && gameModel.getPlayerById(view.getTarget3()) != null && gameModel.getPlayerById(view.getTarget4()) != null) {
+                        
+                        //get the target
+                        target1Base = gameModel.getPlayerById(view.getTarget1());
+                        target2Base = gameModel.getPlayerById(view.getTarget2());
+                        targetFocusShot = gameModel.getPlayerById(view.getTarget3());
+                        targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
+                        
+                        //todo da finire
+                        
+                        break;
+                    } else  {
+                        //errore
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+            }
+        }
     }
+    
+    
+    
+   
+    //TODO FASE 2 ARMI
+    public void RocketLauncher(GameModel gameModel, RocketLauncher weapon,RemoteView view) throws RemoteException {
+        
+        //necessary from model
+        Map map = gameModel.getMap();
+        Player currentPlayer = gameModel.getActualPlayer();
+        //necessary input
+        Player targetBase;
+        Square destSquareBase;//se l'utente non vuole fare lo spostamento questo campo sarà null
+        Square destSquareJump;
+        //necessary input effect
+        WeaponsEffect effect = view.getWeaponsEffect();
+        //get choise for square in basic
+        boolean choice1;
+        choice1 = view.isUseSecondEffect();
+        
+        switch (effect) {
+            
+            case BaseMode:
+                if (gameModel.getPlayerById(view.getTarget1()) != null) {
+                    
+                    try {
+                        
+                        //get input
+                        targetBase = gameModel.getPlayerById(view.getTarget1());
+                        if(choice1){
+                            
+                            //get input
+                            destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                            weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
+                        } else {
+                            
+                            //set the input in null f player dont want to move the player
+                            destSquareBase=null;
+                            weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
+                        }
+                        
+                    } catch (NotVisibleTarget notVisibleTarget) {
+                        
+                        //target non visibile
+                        
+                    } catch (NotValidDistance notValidDistance) {
+                        
+                        //errore  di distanza,sia se il target è nella tuo stesso quadrato,sia se il movimento che gli facciamo fare al target non è validp
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    } catch (MapException mapExcpetion) {
+                    
+                    
+                    }
+                } else {
+                    
+                    //errore di mappa
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }
+                break;
+            
+            case RocketJumpEffect:
+                
+                try{
+                    
+                    //get input
+                    destSquareJump = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                    
+                    //effect
+                    weapon.rocketJumpEffect(map,currentPlayer,destSquareJump);
+                    
+                }catch (NotValidDistance notValidDistance){
+                    
+                    //errore di distanza non è 1 o 2.
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }catch (MapException mapException){
+                    
+                    //errore di mappa
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }
+                break;
+            case FragmentingWarheadEffect:
+                
+                //todo chiedere a marco.
+        }
+        
+    }
+    
+    
+    
+    
+    //TODO FASE 2 ARMI
+    public void Shotgun(GameModel gameModel, Shotgun weapon) throws RemoteException{
+    
+    }
+    
+    //TODO FASE 2 ARMI
+    public void Flamethrower(GameModel gameModel, Flamethrower weapon) throws RemoteException{
+    
+    }
+    
+    //TODO FASE 2 ARMI
+    public void PowerGlove(GameModel gameModel, PowerGlove weapon) throws RemoteException{
+    
+    }
+    
+    //TODO FASE 2 ARMI
+    public void Sledgehammer(GameModel gameModel, Sledgehammer weapon) throws RemoteException{
+    
+    }
+    
 }
 
 
