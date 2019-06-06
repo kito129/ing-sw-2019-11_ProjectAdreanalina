@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="627.0" prefWidth="896.0" styleClass="startbg" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.view.gui.fxml.Start">
+<AnchorPane prefHeight="627.0" prefWidth="896.0" styleClass="startbg" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.view.gui.StartController">
    <children>
       <Button alignment="CENTER" layoutX="290.0" layoutY="516.0" mnemonicParsing="false" opacity="0.95" prefHeight="57.0" prefWidth="317.0" text="PLAY" textAlignment="CENTER" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="289.0">
          <font>

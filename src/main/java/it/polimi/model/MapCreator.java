@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * The type Map creator.
  */
 public class MapCreator {
-    
+
     /**
      * Create a array list.
      *
