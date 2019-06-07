@@ -342,6 +342,7 @@ public class ActionController {
     
                     //param for effect
                     targetBase = gameModel.getPlayerById(view.getTarget1());
+                    
                     //effect
                     weapon.baseEffect(map, currentPlayer, targetBase);
 
@@ -350,11 +351,12 @@ public class ActionController {
                     gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
                 }
             } else {
+                
                 //errore
                 gameModel.setErrorMessage("ERROR: MAP ERROR");
-    
             }
         } else {
+            
             //second lock effect
             if(gameModel.getPlayerById(view.getTarget1()) != null && gameModel.getPlayerById(view.getTarget2())!=null) {
     
@@ -1338,7 +1340,7 @@ public class ActionController {
                     try {
                         
                         //get input
-                        targetSquareExtra = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                        targetSquareExtra = gameModel.getMap().getSquare(view.getRow2(), view.getColumn2());
                         
                         //effect
                         weapon.extraGrenadeEffect(map, currentPlayer, targetSquareExtra);
@@ -1539,9 +1541,6 @@ public class ActionController {
             }
         }
     }
-    
-    
-    
    
     //TODO FASE 2 ARMI
     public void RocketLauncher(GameModel gameModel, RocketLauncher weapon,RemoteView view) throws RemoteException {
@@ -1623,11 +1622,7 @@ public class ActionController {
                 
                 //todo chiedere a marco.
         }
-        
     }
-    
-    
-    
     
     //TODO FASE 2 ARMI
     public void Shotgun(GameModel gameModel, Shotgun weapon) throws RemoteException{
@@ -1648,7 +1643,6 @@ public class ActionController {
     public void Sledgehammer(GameModel gameModel, Sledgehammer weapon) throws RemoteException{
     
     }
-    
 }
 
 

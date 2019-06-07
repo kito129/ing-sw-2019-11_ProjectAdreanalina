@@ -1,5 +1,8 @@
 package it.polimi.view.cli;
 
+import it.polimi.model.EnumColorSquare;
+import it.polimi.model.GameModel;
+
 import java.io.Serializable;
 
 public class PrintTarget implements Serializable {
@@ -67,14 +70,12 @@ public class PrintTarget implements Serializable {
     /**
      * Print a string to choose the target
      */
-    public static void printColor(){
-
-        System.out.println("0 -> blue");
-        System.out.println("1 -> green");
-        System.out.println("2 -> pink");
-        System.out.println("3 -> red");
-        System.out.println("4 -> white");
+    public static void printColor(GameModel gameModel){
+        int id=0;
+        
+        for (EnumColorSquare a: gameModel.getMap().getRoomColor()){
+            
+            System.out.println(id + a.toString());
+        }
     }
-
-
 }
