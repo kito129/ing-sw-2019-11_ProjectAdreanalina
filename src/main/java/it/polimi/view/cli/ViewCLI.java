@@ -533,13 +533,11 @@ public class ViewCLI implements RemoteView, Serializable {
         
         PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
         Scanner input = new Scanner(System.in);
-        
-        PrintTarget.print();
+        //get the player target 1
         setTarget1(getPlayerInput());
-        
-        PrintTarget.print();
+        //get the player target 2
         setTarget2(getPlayerInput());
-        
+        //notify controller with new input
         notifyController();
     }
     
@@ -559,18 +557,16 @@ public class ViewCLI implements RemoteView, Serializable {
         
         //la scelta del target (se il primo o il secondo)
         setChoicePlayer(input.nextInt());
-        
+        //notify controller with new input
         notifyController();
     }
     
     public void viewMachineGunTurretTripod(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printMachineGunTurretTripod(gameModel);
-        Scanner input = new Scanner(System.in);
-        
-        PrintTarget.print();
+        //get the player target 3
         setTarget3(getPlayerInput());
-        
+        //notify controller with new input
         notifyController();
     }
     

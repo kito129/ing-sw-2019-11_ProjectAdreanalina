@@ -1561,6 +1561,7 @@ public class ActionController {
         switch (effect) {
             
             case BaseMode:
+                
                 if (gameModel.getPlayerById(view.getTarget1()) != null) {
                     
                     try {
