@@ -713,7 +713,7 @@ public class ActionController {
                         target1BlackHole = gameModel.getPlayerById(view.getTarget2());
                         target2BlackHole = gameModel.getPlayerById(view.getTarget3());
     
-                        if (target2BlackHole == null) {
+                        if (target2BlackHole == null){
         
                             if (target1BlackHole != targetBase) {
             
@@ -723,8 +723,8 @@ public class ActionController {
                                 //effect
                                 weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
                             } else {
-            
-                                gameModel.setErrorMessage("THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
+
+                                throw new NotValidInput();
                             }
                         } else {
         
@@ -743,13 +743,13 @@ public class ActionController {
                             }
                         }
                     } catch (NotValidDistance notValidDistance) {
-                    
-                    
-                    
+
+                        gameModel.setErrorMessage( "THE CHOSEN TARGET IS NOT ON VORTEX SQUARE OR IS NOT DISTANCE ONE MOVE FROM THE VORTEX SQUARE");
+
                     } catch (NotValidInput notValidInput) {
-                    
-                    
-                    
+
+                        gameModel.setErrorMessage("ONE OR TWO BLACK HOLE TARGET ARE THE SAME OF BASE EFFECT OR ARE EQUAL BETWEEN THEM");
+
                     } catch (MapException e) {
                         
                         gameModel.setErrorMessage("ERROR: MAP ERROR");
@@ -953,8 +953,9 @@ public class ActionController {
                         //effect
                         weapon.baseMode(map, currentPlayer, target1, direction);
                     } catch (NotValidCardinalDirection notValidCardinalDirection) {
-                
-                        //eccezione lanciata se la stringa passata non è una direzione cardinale
+
+                        gameModel.setErrorMessage("ERROR: THE CHOSEN DIRECTION DON'T EXIST");
+
                     } catch (NotInDirection notInDirection) {
                 
                         //se il player non si trova nella direzione cardinale passata.
