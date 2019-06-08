@@ -985,7 +985,8 @@ public class ActionController {
                     direction = view.getCardinalDirection();
     
                     if (target2 != null) {
-                        if (gameModel.getPlayerById(view.getTarget1()) != null) {
+                        
+                        if (gameModel.getPlayerById(view.getTarget2()) != null) {
                             //get input
                             piercingTargets.add(target1);
                             piercingTargets.add(target2);
