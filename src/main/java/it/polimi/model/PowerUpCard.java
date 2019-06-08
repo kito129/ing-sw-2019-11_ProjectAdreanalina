@@ -1,6 +1,6 @@
 package it.polimi.model;
 
-import com.sun.org.apache.regexp.internal.RE;
+
 
 /**
  * The type Power up card.
