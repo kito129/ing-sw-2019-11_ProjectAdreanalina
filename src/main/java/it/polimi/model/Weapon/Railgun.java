@@ -48,12 +48,13 @@ public class Railgun extends WeaponCard {
         return piercingModeCost;
     }
 
-    // TODO sistema strng a in enum
+
     public void baseMode(Map map, Player currentPlayer, Player target1, EnumCardinalDirection direction) throws NotInDirection, NotValidCardinalDirection {
 
-        if((direction.equals("NORTH"))||(direction.equals("EST"))||(direction.equals("SOUTH"))||(direction.equals("WEST"))){
+        if((direction==EnumCardinalDirection.N)||(direction==EnumCardinalDirection.E)||(direction==EnumCardinalDirection.S)
+                ||(direction==EnumCardinalDirection.W)){
 
-            if (direction.equals("NORTH")) {
+            if (direction==EnumCardinalDirection.N) {
 
                 ArrayList<Player> playersOnNorth = map.playerOnMyNorth(currentPlayer);
                 if (!(playersOnNorth.contains(target1))) {
@@ -61,7 +62,7 @@ public class Railgun extends WeaponCard {
                     throw new NotInDirection();
                 }
             }
-            if (direction.equals("EST")) {
+            if (direction==EnumCardinalDirection.E) {
 
                 ArrayList<Player> playersOnEst = map.playerOnMyEst(currentPlayer);
                 if (!(playersOnEst.contains(target1))) {
@@ -69,7 +70,7 @@ public class Railgun extends WeaponCard {
                     throw new NotInDirection();
                 }
             }
-            if (direction.equals("SOUTH")) {
+            if (direction==EnumCardinalDirection.S) {
 
                 ArrayList<Player> playersOnSouth = map.playerOnMySouth(currentPlayer);
                 if (!(playersOnSouth.contains(target1))) {
@@ -77,7 +78,7 @@ public class Railgun extends WeaponCard {
                     throw new NotInDirection();
                 }
             }
-            if (direction.equals("WEST")) {
+            if (direction==EnumCardinalDirection.W) {
 
                 ArrayList<Player> playersOnWest = map.playerOnMyWest(currentPlayer);
                 if (!(playersOnWest.contains(target1))) {
@@ -97,13 +98,12 @@ public class Railgun extends WeaponCard {
         }
     }
 
-    
-    //TODO sistema string in enum
     public void piercingMode(Map map,Player currentPlayer,ArrayList<Player> targets,EnumCardinalDirection direction)throws NotValidCardinalDirection,NotInDirection{
 
-        if((direction.equals("NORTH"))||(direction.equals("EST"))||(direction.equals("SOUTH"))||(direction.equals("WEST"))){
+        if((direction==EnumCardinalDirection.N)||(direction==EnumCardinalDirection.E)||(direction==EnumCardinalDirection.S)
+                ||(direction==EnumCardinalDirection.W)){
 
-            if (direction.equals("NORTH")) {
+            if (direction==EnumCardinalDirection.N) {
 
                 ArrayList<Player> playersOnNorth = map.playerOnMyNorth(currentPlayer);
                 for(Player p:targets) {
@@ -114,7 +114,7 @@ public class Railgun extends WeaponCard {
                     }
                 }
             }
-            if (direction.equals("EST")) {
+            if (direction==EnumCardinalDirection.E) {
 
                 ArrayList<Player> playersOnEst = map.playerOnMyEst(currentPlayer);
                 for(Player p:targets) {
@@ -125,7 +125,7 @@ public class Railgun extends WeaponCard {
                     }
                 }
             }
-            if (direction.equals("SOUTH")) {
+            if (direction==EnumCardinalDirection.S) {
 
                 ArrayList<Player> playersOnSouth = map.playerOnMySouth(currentPlayer);
                 for(Player p:targets) {
@@ -136,7 +136,7 @@ public class Railgun extends WeaponCard {
                     }
                 }
             }
-            if (direction.equals("WEST")) {
+            if (direction==EnumCardinalDirection.W) {
 
                 ArrayList<Player> playersOnWest = map.playerOnMyWest(currentPlayer);
                 for(Player p:targets) {
