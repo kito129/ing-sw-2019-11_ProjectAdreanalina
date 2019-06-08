@@ -701,7 +701,7 @@ public class ActionController {
         } else{
             
             //black hole effect
-            if (gameModel.getPlayerById(view.getTarget1()) != null&& gameModel.getPlayerById(view.getTarget2()) != null && gameModel.getPlayerById(view.getTarget3()) != null) {
+            if (gameModel.getPlayerById(view.getTarget1()) != null && gameModel.getPlayerById(view.getTarget2()) != null) {
 
                     try {
                         
@@ -727,20 +727,27 @@ public class ActionController {
                                 throw new NotValidInput();
                             }
                         } else {
+    
+                           if(gameModel.getPlayerById(view.getTarget3()) != null) {
+    
+                               if ((target1BlackHole != target2BlackHole) && (target1BlackHole != targetBase) && (target2BlackHole != targetBase)) {
         
-                            if ((target1BlackHole != target2BlackHole) && (target1BlackHole != targetBase) && (target2BlackHole != targetBase)) {
+        
+                                   //add the target in arrayList
+                                   targetsBlackHole.add(target1BlackHole);
+                                   targetsBlackHole.add(target2BlackHole);
+        
+                                   //effect
+                                   weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
+                               } else {
+        
+                                   throw new NotValidInput();
+                               }
+                           } else {
     
-    
-                                //add the target in arrayList
-                                targetsBlackHole.add(target1BlackHole);
-                                targetsBlackHole.add(target2BlackHole);
-            
-                                //effect
-                                weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
-                            } else {
-            
-                                throw new NotValidInput();
-                            }
+                               //errore black hole sul target 3
+                               gameModel.setErrorMessage("ERROR: MAP ERROR");
+                           }
                         }
                     } catch (NotValidDistance notValidDistance) {
 
@@ -757,7 +764,7 @@ public class ActionController {
     
             } else {
                 
-                //errore black hole
+                //errore black hole su target 1 o 2
                 gameModel.setErrorMessage("ERROR: MAP ERROR");
             }
         }
