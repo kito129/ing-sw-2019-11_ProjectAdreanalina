@@ -50,7 +50,9 @@ public interface RemoteView extends Remote {
     String getUser() throws RemoteException;
     
     boolean getOnline() throws RemoteException;
-
+    
+    boolean isBooleanChose ();
+    
     void resetInput() throws RemoteException;
     
     void update(GameModel gameModel) throws RemoteException;

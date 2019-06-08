@@ -35,6 +35,8 @@ public class ViewCLI implements RemoteView, Serializable {
     private int column2;
     //attribute for grab
     private int index;
+    //attribut yes or no
+    private boolean booleanChose;
     //scelta arma
     private int choicePlayer;
     private int choicePlayer2;
@@ -183,7 +185,18 @@ public class ViewCLI implements RemoteView, Serializable {
         
         return false;
     }
-
+    
+    @Override
+    public boolean isBooleanChose () {
+        
+        return booleanChose;
+    }
+    
+    public void setBooleanChose (boolean booleanChose) {
+        
+        this.booleanChose = booleanChose;
+    }
+    
     public void setOnline (boolean online) {
         
         this.online = online;

@@ -1,5 +1,6 @@
 package it.polimi.model;
 
+import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
 
 import java.io.Serializable;
@@ -255,7 +256,7 @@ public class GameModel implements Serializable {
             }
     }
 
-    public Player getPlayerById(int i){
+    public Player getPlayerById(int i) throws MapException {
 
         for (Player a : this.players){
 
@@ -263,7 +264,7 @@ public class GameModel implements Serializable {
                 return a;
             }
         }
-    return null;
+    throw  new MapException();
     }
 
 

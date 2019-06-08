@@ -61,9 +61,7 @@ public class MainMarcoController {
         
         
         //obesrver
-        
         gameModel.addObserver(viewCLI);
-        
         
         
         //piazza i player in mappa
@@ -99,7 +97,7 @@ public class MainMarcoController {
         }
 
         try {
-            gameModel.setState(State.SHOOT);
+            gameModel.setState(State.RECHARGE);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

@@ -101,7 +101,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                             PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex());
                             try {
                         
-                                actionController.usePowerUpController(actionModel, usedPowerUp);
+                                actionController.usePowerUpController(actionModel, usedPowerUp,view);
                             } catch (NoPowerUpAvailable noPowerUpAvailable) {
                                 beforeError = gameModel.getState();
                                 gameModel.setState(State.ERROR);
@@ -167,7 +167,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                             if (recharge == State.RECHARGE) {
                         
                                 //chiamo la ricarica
-                                actionController.rechargeController(actualPlayer, actualPlayerBoard.getWeaponToCharge());
+                                actionController.rechargeController(actualPlayer, actualPlayerBoard.getWeaponToCharge(),view);
                             }
                             gameModel.setState(State.PASSTURN);
                         }
@@ -185,7 +185,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                         break;
                     case RESPWANPLAYER:
                         //fase di rianimazione
-                        actionController.respawnPlayerController(actionModel);
+                        //creazione del player è temporanea
+                        actionController.respawnPlayerController(actionModel,new Player(),view);
                         break;
                     case ENDTURN:
                         break;
