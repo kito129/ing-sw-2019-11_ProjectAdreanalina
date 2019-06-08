@@ -964,8 +964,8 @@ public class ActionController {
                         gameModel.setErrorMessage("ERROR: THE CHOSEN DIRECTION DON'T EXIST");
 
                     } catch (NotInDirection notInDirection) {
-                
-                        //se il player non si trova nella direzione cardinale passata.
+
+                        gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION");
                     }
                 } else {
                     
@@ -1006,11 +1006,12 @@ public class ActionController {
                         gameModel.setErrorMessage("ERROR: MAP ERROR");
                     }
                 } catch (NotValidCardinalDirection notValidCardinalDirection) {
-    
-                    ////eccezione lanciata se la stringa passata non è una direzione cardinale
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN DIRECTION DON'T EXIST");
+
                 } catch (NotInDirection notInDirection) {
-    
-                    //se uno dei player non si trova nella direzione cardinale passata.
+
+                    gameModel.setErrorMessage("ERROR: ONE OF CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION");
                 }
             } else {
                     
