@@ -130,6 +130,9 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                         actionController.grabActionController(actionModel, view);
                         action++;
                         break;
+                    case SELECTWEAPON:
+                        
+                        break;
                     case SHOOT:
                         //prendo le armi che ho, le mostro alla vieee che decide cosa usare
                 

@@ -120,109 +120,135 @@ public class ActionController {
         }
     }
     
-    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard) throws NoPowerUpAvailable, NotValidInput, MapException, RemoteException {
+    public void usePowerUpController(ActionModel actionModel,PowerUpCard powerUpCard, RemoteView view) throws NoPowerUpAvailable, NotValidInput, MapException, RemoteException {
 
         //NEWTON
         if (Newton.class.equals(powerUpCard.getClass())) {
-
-            //chiedi i parametri di newton
-            Player targetPlayer = actionModel.getGameModel().getMap().playersOnSquare(actionModel.getGameModel().getMap().getSquare(1,2)).get(0);
-            Square targetSquare = new Square(1,1,EnumColorSquare.PINK);
+    
+    
+            if (actionModel.getGameModel().getPlayerById(view.getTarget1()) != null ) {
+            
+            
             try {
-
+                //chiedi i parametri di newton
+                Player targetPlayer = actionModel.getGameModel().getPlayerById(view.getTarget1());
+                Square targetSquare = actionModel.getGameModel().getMap().getSquare(view.getRow(), view.getColumn());
+                
                 actionModel.usePowerUpNewton((Newton)powerUpCard,targetPlayer, targetSquare);
-                System.out.println("NETWON MUOVO SIMO IN 1,1");
             } catch (NotInSameDirection notInSameDirection) {
 
-                //TODO
+
             } catch (NotValidDistance notValidDistance) {
 
-                //TODO
+  
             } catch (MapException e) {
-                e.printStackTrace();
+
+            
+            }
+            } else {
+                
+                //errore input
             }
     
             //TAGBACK GRANATE
         } else if (powerUpCard.getClass().equals(TagBackGrenade.class)) {
-
-            //chiedi i parametri di TAGBACK GRANATE
-            Player targetPlayer = actionModel.getGameModel().getMap().playersOnSquare(actionModel.getGameModel().getMap().getSquare(1,2)).get(0);
-            targetPlayer.stampa();
-            try {
-
-                actionModel.usePowerUpTagBackGrenade((TagBackGrenade) powerUpCard,targetPlayer );
-                System.out.println("TAG BACKfaccio danno di uno ad andre con colre di simo");
-            } catch (NotVisibleTarget notVisibleTarget) {
-                notVisibleTarget.printStackTrace();
+    
+            if (actionModel.getGameModel().getPlayerById(view.getTarget1()) != null ) {
+                
+                try {
+                    
+                    //chiedi i parametri di TAGBACK GRANATE
+                    Player targetPlayer = actionModel.getGameModel().getPlayerById(view.getTarget1());
+                    //effect
+                    actionModel.usePowerUpTagBackGrenade((TagBackGrenade) powerUpCard, targetPlayer);
+                } catch (NotVisibleTarget notVisibleTarget) {
+                    notVisibleTarget.printStackTrace();
+                }
+            } else {
+                
+                //errore input
             }
 
         //TELEPORTER
         } else if (powerUpCard.getClass().equals(Teleporter.class)) {
 
             //chiedi i parametri di teleporter
-            Square targetSquare = new Square(2,3,EnumColorSquare.YELLOW);
+            Square targetSquare = actionModel.getGameModel().getMap().getSquare(view.getRow(), view.getColumn());
+            //effect
             actionModel.usePowerUpTeleporter((Teleporter) powerUpCard, targetSquare);
-            System.out.println("TELPORTTE muovo adnre in 2,3");
 
         //TARGETING SCOPE
         } else if (powerUpCard.getClass().equals(TargetingScope.class)) {
-
-            //chiedi i parametri di TargetingScope
-            //gestione di quando farlo verifica sul danno
-            Player targetPlayer = actionModel.getGameModel().getMap().playersOnSquare(actionModel.getGameModel().getMap().getSquare(1,3)).get(0);
-            actionModel.usePowerUpTargetingScope((TargetingScope) powerUpCard, targetPlayer);
-            System.out.println("TARGETIN SCOPE faccio danno di uno a teo");
-
+    
+            if (actionModel.getGameModel().getPlayerById(view.getTarget1()) != null) {
+    
+                //chiedi i parametri di TargetingScope
+                //gestione di quando farlo verifica sul danno
+                Player targetPlayer = actionModel.getGameModel().getPlayerById(view.getTarget1());
+                //effect
+                actionModel.usePowerUpTargetingScope((TargetingScope) powerUpCard, targetPlayer);
+            } else {
+                
+                //errore input
+            }
         }
     }
     
-    public void rechargeController(Player player, ArrayList<WeaponCard> weapon){
-
-       WeaponCard weaponToCharge=weapon.get(0);
+    public void rechargeController(Player player, ArrayList<WeaponCard> weapon,RemoteView view){
+    
+        int viewSelection;
+        WeaponCard weaponToCharge;
+        
+        try {
         //fino a che ho armi disponibili
         while (weapon.size()>0) {
 
             // faccio scegliere al player quali armi sono scariche,
             // mi tornerà un index, che setto qui sotto
-            int viewSelection = 1;
-
-            //seleziono l'arma e vedo il costo
+            viewSelection = view.getIndex();
+            
+            if(weapon.get(viewSelection)!=null) {
+    
+                weaponToCharge = weapon.get(viewSelection);
+                //TODO AVANTI DA QUI
+                //prendo il costo di ricarica
+                ArrayList<EnumColorCardAndAmmo> rechargeCost = weaponToCharge.getRechargeCost();
                 
-            //prendo il costo di ricarica
-            ArrayList<EnumColorCardAndAmmo> rechargeCost = weaponToCharge.getRechargeCost();
-            System.out.println("costo di ricarica: " + rechargeCost);
-
-            try {
-                payAmmoController(player,rechargeCost);
+                payAmmoController(player, rechargeCost,weaponToCharge);
                 weaponToCharge.setCharge(true);
                 weapon.remove(0);
-
-            } catch (NotValidAmmoException e) {
-
-            } catch (NoPowerUpAvailable noPowerUpAvailable) {
-                noPowerUpAvailable.printStackTrace();
+            } else {
+                
+                //errore input
             }
             
         }
+        } catch (NotValidAmmoException e) {
+        
+        } catch (NoPowerUpAvailable noPowerUpAvailable) {
+            noPowerUpAvailable.printStackTrace();
+        } catch (RemoteException e) {
+        
+        }
     }
     
-    public void payAmmoController (Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay) throws NotValidAmmoException, NoPowerUpAvailable {
+    public void payAmmoController (Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay,WeaponCard weaponCard) throws NotValidAmmoException, NoPowerUpAvailable {
 
         //prendo playerboard
         PlayerBoard playerBoard = player.getPlayerBoard();
 
         //var temporanee
-        ArrayList<EnumColorCardAndAmmo> avaibleAmmo = new ArrayList<>(playerBoard.getAmmo());
-        ArrayList<EnumColorCardAndAmmo> avaiblePowerUpAsAmmo = new ArrayList<>();
+        ArrayList<EnumColorCardAndAmmo> availableAmmo = new ArrayList<>(playerBoard.getAmmo());
+        ArrayList<EnumColorCardAndAmmo> availablePowerUpAsAmmo = new ArrayList<>();
 
         for (PowerUpCard a : playerBoard.getPlayerPowerUps()) {
 
-            avaiblePowerUpAsAmmo.add(a.getColorPowerUpCard());
+            availablePowerUpAsAmmo.add(a.getColorPowerUpCard());
         }
         
-        System.out.println("avaiable ammo" + avaibleAmmo);
-        System.out.println("avaiable powerup ammo" + avaiblePowerUpAsAmmo);
-        if (avaiblePowerUpAsAmmo.size()==0){
+        System.out.println("avaiable ammo" + availableAmmo);
+        System.out.println("avaiable powerup ammo" + availablePowerUpAsAmmo);
+        if (availablePowerUpAsAmmo.size()==0){
             throw  new NoPowerUpAvailable();
         }
         
@@ -230,9 +256,7 @@ public class ActionController {
         if (false) {
             
             //pago e rendo carica l'arma
-
             playerBoard.decreaseAmmo(ammoToPay);
-            System.out.println("sono qui");
 
         } else {
 
@@ -240,8 +264,8 @@ public class ActionController {
             //verifico allora se usando i power up può pagare,
 
             ArrayList<EnumColorCardAndAmmo> tempAvaible = new ArrayList<>();
-            tempAvaible.addAll(avaibleAmmo);
-            tempAvaible.addAll(avaiblePowerUpAsAmmo);
+            tempAvaible.addAll(availableAmmo);
+            tempAvaible.addAll(availablePowerUpAsAmmo);
             System.out.println(tempAvaible);
             
             if (tempAvaible.containsAll(ammoToPay)) {
@@ -256,10 +280,10 @@ public class ActionController {
 
                     for (EnumColorCardAndAmmo a : ammoToPay) {
 
-                        if (avaibleAmmo.contains(a)) {
+                        if (availableAmmo.contains(a)) {
 
                             playerBoard.decreaseAmmo(a);
-                        } else if (avaiblePowerUpAsAmmo.contains(a)) {
+                        } else if (availablePowerUpAsAmmo.contains(a)) {
                         
                         System.out.println("sonoqui");
                          playerBoard.getPlayerPowerUps().remove(a);
@@ -272,30 +296,59 @@ public class ActionController {
                 throw new NotValidAmmoException();
             }
         }
+        if(weaponCard!=null){
+            weaponCard.setCharge(true);
+        }
     }
     
-    public void respawnPlayerController (ActionModel actionModel){
+    public void respawnPlayerDrawnController (ActionModel actionModel){
     
         //get dead Player
         ArrayList<Player> deadPlayer = actionModel.getGameModel().getDeadPlayers();
         
         for (Player a: deadPlayer){
-            //devo essere rianimaro, pesco due power up ne scelgo uno e vado nel colore di quello che scarto
             
-            //mostro 2 powerup peschati dal mazzo e faccio sceglere al utente quale tenere
-            PowerUpCard powerUp1 = new PowerUpCard("NEWTON",EnumColorCardAndAmmo.RED);
-            PowerUpCard powerUp2= new PowerUpCard("TAGBACKGANATE",EnumColorCardAndAmmo.BLU);
+            //drawn 2 powerup fro deck an add to attribute of th player
+            PowerUpCard powerUp1 = actionModel.getGameModel().getPowerUpDeck().drawnPowerUpCard();
+            PowerUpCard powerUp2 = actionModel.getGameModel().getPowerUpDeck().drawnPowerUpCard();
+            //set in player the power up
+            a.getPowerUpRespawn().add(powerUp1);
+            a.getPowerUpRespawn().add(powerUp2);
             
-            //utente mi dice quale usare da quello prendo il colore
+        }
+    }
+    
+    public void respawnPlayerController (ActionModel model,Player player, RemoteView view){
+        
+        int chosedPowerUp;
+        EnumColorSquare colorSquare;
+        PowerUpCard  powerUpCard;
+        
+        try {
             
-            EnumColorCardAndAmmo chosedColor = powerUp2.getColorPowerUpCard();
+            chosedPowerUp = view.getIndex();
             
-            //adesso devo cercare la qaure di geneazione giusta dopo ho tutti i paramentri da passare
-            //Square destSquare = gameModel.getMap().getGenerationSquare(chosedColor);
+            if(player.getPowerUpRespawn().get(chosedPowerUp)!=null){
+                
+                //get the color to respawn
+                colorSquare = player.getPowerUpRespawn().get(chosedPowerUp).getColorRespawn();
+                player.getPowerUpRespawn().remove(chosedPowerUp);
+                //add player on generation square of the color chosed
+                model.getGameModel().getMap().addPlayerOnSquare(model.getGameModel().getMap().getGenerationSquare(colorSquare),player);
+                
+                //add the other power up to player list
+                powerUpCard = player.getPowerUpRespawn().get(0);
+                player.getPlayerBoard().getPlayerPowerUps().add(powerUpCard);
+                
+            } else {
+                
+                //errore di input
+            }
             
-            //actionModel.respawnPlayerController(a,destSquare,powerUp1);
-            
-            
+        } catch (RemoteException e) {
+        
+        } catch (MapException e) {
+        
         }
     }
     
@@ -311,7 +364,57 @@ public class ActionController {
     
     }
     
+    public void selectWeapon(ActionModel actionModel,RemoteView view){
+        
+        WeaponCard weapon;
+        int i = 0;
+        try {
+            
+            i = view.getIndex();
+            if(actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().get(i)!=null){
+                
+                weapon = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().get(i);
+                
+                if(weapon.isCharge()){
+                    
+                    //wepoan is set in player attribute
+                    actionModel.getGameModel().getActualPlayer().setWeaponSelected(weapon);
+                } else {
+                    
+                    //arma scarica
+                    actionModel.getGameModel().setErrorMessage("THIS WEAPON IS NOT CHARGE: YOU CAN'T USE IT NOW");
+                }
+            } else {
+                
+                //errore di input, che sarà gia gestioto in view
+            }
+        } catch (RemoteException e) {
+            
+            e.printStackTrace();
+        }
+        
+    }
     
+    public void selectPowerUp(ActionModel actionModel,RemoteView view) {
+    
+        PowerUpCard powerUpCard;
+        int i;
+        try {
+    
+            i = view.getIndex();
+            if (actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i) != null) {
+    
+                powerUpCard = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i);
+                actionModel.getGameModel().getActualPlayer().setPowerUpSelected(powerUpCard);
+            } else {
+                
+                //errore di input, che sarà gia gestioto in view
+            }
+            } catch(RemoteException e){
+        
+                e.printStackTrace();
+            }
+        }
     
     
     

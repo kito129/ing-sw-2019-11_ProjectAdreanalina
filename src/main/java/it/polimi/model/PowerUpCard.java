@@ -1,5 +1,7 @@
 package it.polimi.model;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 /**
  * The type Power up card.
  */
@@ -8,6 +10,7 @@ public class PowerUpCard {
 
     private String namePowerUpCard;
     private EnumColorCardAndAmmo colorPowerUpCard;
+    private EnumColorSquare colorRespawn;
     private String description;
     
     /**
@@ -20,6 +23,17 @@ public class PowerUpCard {
 
         this.namePowerUpCard = namePowerUpCard;
         this.colorPowerUpCard = colorCard;
+        switch (colorCard){
+            case BLU:
+                colorRespawn = EnumColorSquare.BLU;
+                break;
+            case RED:
+                colorRespawn = EnumColorSquare.RED;
+                break;
+            case YELLOW:
+                colorRespawn = EnumColorSquare.YELLOW;
+                break;
+        }
     }
     
     /**
@@ -51,7 +65,12 @@ public class PowerUpCard {
 
         return colorPowerUpCard;
     }
-
+    
+    public EnumColorSquare getColorRespawn () {
+        
+        return colorRespawn;
+    }
+    
     /**
      * Sets description.
      *

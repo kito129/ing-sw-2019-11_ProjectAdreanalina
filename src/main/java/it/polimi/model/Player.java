@@ -17,6 +17,9 @@ public class Player {
     private boolean alive;
     private boolean damaged;
     private boolean online;
+    WeaponCard weaponSelected;
+    PowerUpCard powerUpSelected;
+    ArrayList<PowerUpCard> powerUpRespawn = new ArrayList<PowerUpCard>();
     
     /**
      * Instantiates a new Player setting the id, name and color with the given parameters.
@@ -142,6 +145,21 @@ public class Player {
         return online;
     }
     
+    public PowerUpCard getPowerUpSelected () {
+        
+        return powerUpSelected;
+    }
+    
+    public WeaponCard getWeaponSelected () {
+        
+        return weaponSelected;
+    }
+    
+    public ArrayList<PowerUpCard> getPowerUpRespawn () {
+        
+        return powerUpRespawn;
+    }
+    
     public void setOnline(Boolean online){
         
         this.online=online;
@@ -188,7 +206,17 @@ public class Player {
     
         this.alive = alive;
     }
-
+    
+    public void setWeaponSelected (WeaponCard weaponSelected) {
+        
+        this.weaponSelected = weaponSelected;
+    }
+    
+    public void setPowerUpSelected (PowerUpCard powerUpSelected) {
+        
+        this.powerUpSelected = powerUpSelected;
+    }
+    
     /**
      * Increase score of the player.
      *
