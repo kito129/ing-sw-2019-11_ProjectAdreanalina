@@ -1,10 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotVisibleTarget;
+import it.polimi.model.Exception.*;
 
 import java.util.ArrayList;
 
@@ -68,16 +65,22 @@ public class GrenadeLauncher extends WeaponCard {
         }
     }
 
-    public void extraGrenadeEffect(Map map, Player currentPlayer,Square targetSquare) throws NotVisibleTarget, MapException {
+    public void extraGrenadeEffect(Map map, Player currentPlayer,Square targetSquare) throws NoTargetInSquare, NotVisibleTarget, MapException {
 
         Square squareOfCurrentPlayer =map.findPlayer(currentPlayer);
         if(map.isVisible(targetSquare,squareOfCurrentPlayer)){
 
             ArrayList<Player> playersOnTargetSquare=map.playersOnSquare(targetSquare);
             playersOnTargetSquare.remove(currentPlayer);
-            for(Player p:playersOnTargetSquare){
+            if(playersOnTargetSquare.size()!=0){
 
-                p.singleDamage(currentPlayer.getColor());
+                for(Player p:playersOnTargetSquare){
+
+                    p.singleDamage(currentPlayer.getColor());
+                }
+            }else{
+
+                throw new NoTargetInSquare();
             }
         }else {
 

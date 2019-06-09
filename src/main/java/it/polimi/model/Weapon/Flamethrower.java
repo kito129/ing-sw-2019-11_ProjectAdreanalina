@@ -1,6 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NoTargetInSquare;
 import it.polimi.model.Exception.NotInSameDirection;
 import it.polimi.model.Exception.NotValidDistance;
@@ -47,21 +48,18 @@ public class Flamethrower extends WeaponCard {
     }
 
 
-    //TODO da rifare
-
-    /*
 
     public void baseMode(Map map, Player currentPlayer,Player target1,Player target2) throws NotValidDistance, NotInSameDirection {
 
-        if ((map.distance(currentPlayer, target1) == 1) && (map.sameDirection(currentPlayer, target1))
-                && (map.distance(target1, target2) == 1) && (map.sameDirection(currentPlayer, target2))) {
+        if((map.distance(currentPlayer,target1)==1)&&(map.distance(target1,target2)==1)
+        &&(map.sameDirection(currentPlayer,target1,target2))){
 
             target1.singleDamage(currentPlayer.getColor());
             target2.singleDamage(currentPlayer.getColor());
         } else if ((!(map.distance(currentPlayer, target1) == 1)) || (!(map.distance(target1, target2) == 1))){
 
             throw new NotValidDistance();
-        } else if ((!(map.sameDirection(currentPlayer,target1))) || (!(map.sameDirection(target1,target2)))){
+        } else if (!(map.sameDirection(currentPlayer,target1,target2))){
 
             throw new NotInSameDirection();
         }
@@ -78,19 +76,43 @@ public class Flamethrower extends WeaponCard {
         }
     }
 
-    public void barbecueMode(Map map,Player currentPlayer,Square targetSquare1,Square targetSquare2) {
+    public void barbecueMode(Map map,Player currentPlayer,Square targetSquare1,Square targetSquare2) throws MapException,NoTargetInSquare,NotValidDistance, NotInSameDirection{
 
-        Square currentPlayerSquare = map.findPlayer(currentPlayer);
-        if((map.distance(currentPlayerSquare,targetSquare1) == 1) && (map.sameDirection(currentPlayerSquare,targetSquare1))
-                && (map.distance(targetSquare1,targetSquare2) == 1) && (map.sameDirection(currentPlayerSquare,targetSquare2))){
+        Square squareOfCurrentPlayer=map.findPlayer(currentPlayer);
+        if((map.sameDirection(squareOfCurrentPlayer,targetSquare1,targetSquare2))&&(map.distance(squareOfCurrentPlayer,targetSquare1)==1)
+        &&(map.distance(targetSquare1,targetSquare2)==1)) {
 
+            ArrayList<Player> playersOnTarget1Square = map.playersOnSquare(targetSquare1);
+            ArrayList<Player> playersOnTarget2Square = map.playersOnSquare(targetSquare2);
+            if ((playersOnTarget1Square.size() != 0) && (playersOnTarget2Square.size() != 0)) {
 
+                for (Player p : playersOnTarget1Square) {
+
+                    p.singleDamage(currentPlayer.getColor());
+                    p.singleDamage(currentPlayer.getColor());
+                }
+                for (Player p : playersOnTarget2Square) {
+
+                    p.singleDamage(currentPlayer.getColor());
+                }
+            } else {
+
+                throw new NoTargetInSquare();
+            }
+        } else if ((!(map.distance(squareOfCurrentPlayer,targetSquare1) == 1)) || (!(map.distance(targetSquare1,targetSquare2) == 1))){
+
+            throw new NotValidDistance();
+        } else if (!(map.sameDirection(squareOfCurrentPlayer,targetSquare1,targetSquare2))){
+
+            throw new NotInSameDirection();
         }
+
+
 
     }
 
 
-     */
+
 }
 
 

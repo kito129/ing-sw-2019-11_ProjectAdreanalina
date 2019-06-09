@@ -1,10 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotValidSquareException;
+import it.polimi.model.Exception.*;
 
 import java.util.ArrayList;
 
@@ -47,7 +44,7 @@ public class PowerGlove extends WeaponCard {
         return rocketFistModeCost;
     }
 
-    public void baseMode(Map map, Player currentPlayer,Player target1) throws NotValidDistance, NotValidInput, MapException, NotValidSquareException {
+    public void baseMode(Map map, Player currentPlayer,Player target1) throws NotValidDistance, MapException {
 
         if(map.distance(currentPlayer,target1)==1){
 
@@ -63,8 +60,44 @@ public class PowerGlove extends WeaponCard {
         }
     }
 
-    // todo chiedere a marco se la funzione in same line dice che sono sulla stessa linea ma se sono anche attaccate.
-    public void rocketFistMode(Map map,Player currentPlayer) {
+    public void rocketFistMode(Map map,Player currentPlayer,Player target1)throws NotValidDistance,MapException {
+
+        if ((map.distance(currentPlayer, target1) == 1)) {
+
+            Square squareOfTarget1Player=map.findPlayer(target1);
+            map.movePlayer(currentPlayer,squareOfTarget1Player);
+            target1.singleDamage(currentPlayer.getColor());
+            target1.singleDamage(currentPlayer.getColor());
+        } else if (!(map.distance(currentPlayer, target1) == 1)) {
+
+            throw new NotValidDistance();
+        }
+
+    }
+
+    public void rocketFistMode(Map map,Player currentPlayer,Player target1,Player target2)throws NotValidDistance,MapException,NotInSameDirection{
+
+        if (((map.distance(currentPlayer, target1) == 1))&&(map.distance(target1,target2)==1)&&
+                (map.sameDirection(currentPlayer,target1,target2))){
+
+            ArrayList<EnumColorPlayer> powerGloveDamages=new ArrayList<>();
+            powerGloveDamages.add(currentPlayer.getColor());
+            powerGloveDamages.add(currentPlayer.getColor());
+            Square squareOfTarget2Player=map.findPlayer(target2);
+            map.movePlayer(currentPlayer,squareOfTarget2Player);
+            target1.multipleDamages(powerGloveDamages);
+            target2.multipleDamages(powerGloveDamages);
+        } else if ((!(map.distance(currentPlayer, target1) == 1))||(!(map.distance(target1,target2)==1))){
+
+            throw new NotValidDistance();
+        }else if(!(map.sameDirection(currentPlayer,target1,target2))){
+
+            throw new NotInSameDirection();
+        }
+
+
+
+
 
     }
 }

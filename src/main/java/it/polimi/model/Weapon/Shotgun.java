@@ -1,6 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidDistance;
 import it.polimi.model.Exception.NotVisibleTarget;
 
@@ -40,12 +41,18 @@ public class Shotgun extends WeaponCard {
         return longBarrelModeCost;
     }
 
-    //todo mettere la funzione di spostamento
+    public void baseMode(Map map, Player currentPlayer, Player target1,Square destSquare)throws NotValidDistance, MapException {
 
-    public void baseMode(Map map, Player currentPlayer, Player target1)throws NotValidDistance {
-
+        Square squareOfTargetPlayer=map.findPlayer(target1);
         if(map.distance(currentPlayer,target1)==0){
 
+            if((destSquare!=null)&&(map.distance(squareOfTargetPlayer,destSquare)==1)){
+
+                map.movePlayer(target1,destSquare);
+            }else if((destSquare!=null)&&(!(map.distance(squareOfTargetPlayer,destSquare)==1))){
+
+                throw new NotValidDistance();
+            }
             ArrayList<EnumColorPlayer> shotGunDamages=new ArrayList<>();
             shotGunDamages.add(currentPlayer.getColor());
             shotGunDamages.add(currentPlayer.getColor());

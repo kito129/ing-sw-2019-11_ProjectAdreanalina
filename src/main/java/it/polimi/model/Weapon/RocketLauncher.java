@@ -1,10 +1,7 @@
 package it.polimi.model.Weapon;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotVisibleTarget;
+import it.polimi.model.Exception.*;
 
 import java.util.ArrayList;
 
@@ -97,11 +94,43 @@ public class RocketLauncher extends WeaponCard {
         }
     }
 
-    //todo durante l'effetto base si può usare questo
-    // da fare poi
-    public void fragmentingWarheadEffect(Map map,Square targetSquare,Player currentPlayer){
 
+    public void baseEffectWithFragmenting(Map map, Player target1, Player currentPlayer,Square destSquare) throws NoTargetInSquare,NotVisibleTarget, NotValidDistance, MapException {
 
+        Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
+        Square squareOfTarget1Player = map.findPlayer(target1);
+        ArrayList<Player> playersOnTarget1Square=map.playersOnSquare(squareOfTarget1Player);
+        playersOnTarget1Square.remove(currentPlayer);//non dovrebbe servire.
+        if((map.isVisible(target1,currentPlayer)) && (!(squareOfCurrentPlayer == squareOfTarget1Player))
+                &&(playersOnTarget1Square.size()!=0)){
+
+            if((destSquare!=null)&&(map.distance(squareOfTarget1Player,destSquare)==1)){
+
+                map.movePlayer(target1,destSquare);
+
+            }else if((destSquare!=null)&&(!(map.distance(squareOfTarget1Player,destSquare)==1))){
+
+                throw new NotValidDistance();
+            }
+            for(Player p:playersOnTarget1Square){
+
+                p.singleDamage(currentPlayer.getColor());
+            }
+            ArrayList<EnumColorPlayer> rocketLauncherDamages=new ArrayList<>();
+            rocketLauncherDamages.add(currentPlayer.getColor());
+            rocketLauncherDamages.add(currentPlayer.getColor());
+            target1.multipleDamages(rocketLauncherDamages);
+        }else if(!(map.isVisible(target1,currentPlayer))){
+
+            throw new NotVisibleTarget();
+        }else if(squareOfCurrentPlayer==squareOfTarget1Player){
+
+            throw new NotValidDistance();
+        }else if(playersOnTarget1Square.size()==0){
+
+            throw new NoTargetInSquare();
+        }
     }
+
 
 }
