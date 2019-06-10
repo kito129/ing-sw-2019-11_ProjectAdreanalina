@@ -433,36 +433,9 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewRunSelection() throws RemoteException {
 
         PrintRunAction.print();
-
-        Scanner input = new Scanner(System.in);
-    
-        Square target = null;
-    
-        while (target==null) {
-    
-            PrintSelectMove.printRow();
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setRow(input.nextInt());
-    
-            System.out.println();
-    
-            PrintSelectMove.printColumn();
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setColumn(input.nextInt());
-    
-            if ((gameModel.getMap().existInMap(getRow(), getColumn()))) {
-                try {
-                    target = gameModel.getMap().getSquare(getRow(), getColumn());
-                } catch (MapException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        getSquareInput(1);
         
         //notifica che hai preso i valori
-
         notifyController();
     }
     
@@ -475,32 +448,16 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewGrabSelection() throws RemoteException {
 
         PrintGrabAction.printGrabStuff();
+        getSquareInput(1);
         Square target = null;
-        
-        while (target==null) {
-            Scanner input = new Scanner(System.in);
-    
-            PrintSelectMove.printRow();
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setRow(input.nextInt());
-    
-            System.out.println();
-    
-            PrintSelectMove.printColumn();
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setColumn(input.nextInt());
+        try {
             
-            if((gameModel.getMap().existInMap(getRow(),getColumn()))){
-                try {
-                    target=gameModel.getMap().getSquare(getRow(),getColumn());
-                } catch (MapException e) {
-                    e.printStackTrace();
-                }
-            }
+            target = gameModel.getMap().getSquare(row,column);
+        } catch (MapException e) {
+            e.printStackTrace();
         }
-        
+    
+    
         System.out.println("input corretto");
         
         if(gameModel.getMap().isGenerationSquare(target)){

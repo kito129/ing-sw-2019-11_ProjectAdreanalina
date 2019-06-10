@@ -581,6 +581,7 @@ public class Map {
             return square.getClass().equals(GenerationSquare.class);
         } return false;
     }
+
     
     /**
      * Gets generation square of the passed color.
