@@ -1,7 +1,8 @@
-package it.polimi.model;
+package it.polimi;
 
 import it.polimi.controller.ActionController;
 import it.polimi.controller.GameController;
+import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.cli.ViewCLI;
@@ -97,11 +98,22 @@ public class MainMarcoController {
             
             p.stampa();
         }
+    
+        try {
+            gameModel.setState(State.LOBBY);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        
+        
+        /*
         LockRifle lock = new LockRifle();
         player1.getPlayerBoard().getPlayerWeapons().add(lock);
         player1.getPlayerBoard().getPlayerWeapons().add(lock);
     
         gameModel.setWeaponsEffect(WeaponsEffect.BaseEffect);
+        
+       
 
         try {
             gameModel.setState(State.SELECTWEAPON);
@@ -127,6 +139,8 @@ public class MainMarcoController {
 
             p.stampa();
         }
+         */
+       
 
         
        /*
