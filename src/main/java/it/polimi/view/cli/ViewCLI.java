@@ -373,12 +373,16 @@ public class ViewCLI implements RemoteView, Serializable {
                 viewGrabSelection();
                 break;
             case SELECTWEAPON:
-            
-            break;
+                viewSelectWeapon();
+                break;
             case SHOOT:
-                viewLockRifleBasicEffect(gameModel);
-                setUseSecondEffect(true);
-                viewLockRifleSecondLock(gameModel);
+                switch (gameModel.getWeaponsEffect()) {
+                    
+                    case BaseEffect:
+                        viewLockRifleBasicEffect(gameModel);
+                    case SecondLockEffect:
+                        viewLockRifleSecondLock(gameModel);
+            }
                 break;
             case SELECTEFFECT:
                 break;
@@ -520,19 +524,27 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     public void viewSelectWeapon() {
-
+        
         ArrayList<WeaponCard> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
         PrintEffectWeapon.printSelectWeapon();
         PrintWeapon.printName(weapons);
+        int i;
 
         Scanner input = new Scanner(System.in);
-        do {
-
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setIndex(input.nextInt());
-
-        } while (input.nextInt()<0 || input.nextInt()>weapons.size());
+        try {
+            do {
+    
+                while (!input.hasNextInt())
+                    input = new Scanner(System.in);
+                i = input.nextInt();
+    
+            } while (i<0 || i>weapons.size());
+            
+            setIndex(i);
+            notifyController();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
     
     public void viewSelectWeaponEffect() {
@@ -540,15 +552,25 @@ public class ViewCLI implements RemoteView, Serializable {
         ArrayList<WeaponsEffect> weaponEffects = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(index).getWeaponEffects();
         PrintEffectWeapon.printSelectWeaponEffect();
         PrintWeapon.printEffectName(weaponEffects);
-
-        Scanner input = new Scanner(System.in);
-        do {
-
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setIndex2(input.nextInt());
-
-        } while (input.nextInt()<0 || input.nextInt()>weaponEffects.size());
+        int i;
+        
+        try {
+            Scanner input = new Scanner(System.in);
+            do {
+    
+                while (!input.hasNextInt())
+                    input = new Scanner(System.in);
+                i=input.nextInt();
+                
+    
+            } while (input.nextInt()<0 || input.nextInt()>weaponEffects.size());
+            
+            setIndex2(i);
+            notifyController();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    
     }
     
     //WEAPON

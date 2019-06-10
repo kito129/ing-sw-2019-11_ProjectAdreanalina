@@ -3,7 +3,9 @@ package it.polimi.model;
 import it.polimi.controller.ActionController;
 import it.polimi.controller.GameController;
 import it.polimi.model.Exception.MapException;
+import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.cli.ViewCLI;
+import sun.util.resources.ja.LocaleNames_ja;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -95,14 +97,30 @@ public class MainMarcoController {
             
             p.stampa();
         }
+        LockRifle lock = new LockRifle();
+        player1.getPlayerBoard().getPlayerWeapons().add(lock);
+        player1.getPlayerBoard().getPlayerWeapons().add(lock);
+    
+        gameModel.setWeaponsEffect(WeaponsEffect.BaseEffect);
 
         try {
-            gameModel.setState(State.RECHARGE);
+            gameModel.setState(State.SELECTWEAPON);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        try {
+            gameModel.setState(State.SHOOT);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
         
-   
+        gameModel.setWeaponsEffect(WeaponsEffect.SecondLockEffect);
+    
+        try {
+            gameModel.setState(State.SHOOT);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
         map.print();
         for (Player p : players) {
