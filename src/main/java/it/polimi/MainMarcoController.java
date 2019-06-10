@@ -6,7 +6,6 @@ import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.cli.ViewCLI;
-import sun.util.resources.ja.LocaleNames_ja;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
