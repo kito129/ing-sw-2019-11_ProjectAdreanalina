@@ -18,6 +18,9 @@ import java.util.ArrayList;
 public class ActionController {
     
     private State beforeError;
+    WeaponCard weaponSelected;
+    PowerUpCard powerUpSelected;
+    ArrayList<PowerUpCard> powerUpRespawn = new ArrayList<PowerUpCard>();
     
     
     public void errorState(ActionModel actionModel) throws RemoteException {
@@ -289,8 +292,8 @@ public class ActionController {
             PowerUpCard powerUp1 = actionModel.getGameModel().getPowerUpDeck().drawnPowerUpCard();
             PowerUpCard powerUp2 = actionModel.getGameModel().getPowerUpDeck().drawnPowerUpCard();
             //set in player the power up
-            a.getPowerUpRespawn().add(powerUp1);
-            a.getPowerUpRespawn().add(powerUp2);
+            powerUpRespawn.add(powerUp1);
+            powerUpRespawn.add(powerUp2);
             
         }
     }
@@ -305,16 +308,16 @@ public class ActionController {
             
             chosedPowerUp = view.getIndex();
             
-            if(player.getPowerUpRespawn().get(chosedPowerUp)!=null){
+            if(powerUpRespawn.get(chosedPowerUp)!=null){
                 
                 //get the color to respawn
-                colorSquare = player.getPowerUpRespawn().get(chosedPowerUp).getColorRespawn();
-                player.getPowerUpRespawn().remove(chosedPowerUp);
+                colorSquare = powerUpRespawn.get(chosedPowerUp).getColorRespawn();
+                powerUpRespawn.remove(chosedPowerUp);
                 //add player on generation square of the color chosed
                 model.getGameModel().getMap().addPlayerOnSquare(model.getGameModel().getMap().getGenerationSquare(colorSquare),player);
                 
                 //add the other power up to player list
-                powerUpCard = player.getPowerUpRespawn().get(0);
+                powerUpCard = powerUpRespawn.get(0);
                 player.getPlayerBoard().getPlayerPowerUps().add(powerUpCard);
                 
             } else {
@@ -344,7 +347,9 @@ public class ActionController {
     public void selectWeapon(ActionModel actionModel,RemoteView view){
         
         WeaponCard weapon;
+        GameModel gameModel = actionModel.getGameModel();
         int i = 0;
+        
         try {
             
             i = view.getIndex();
@@ -354,9 +359,78 @@ public class ActionController {
                 
                 if(weapon.isCharge()){
                     
-                    //wepoan is set in player attribute
-                    actionModel.getGameModel().getActualPlayer().setWeaponSelected(weapon);
-                } else {
+                    //weapon is set in player attribute
+                    weaponSelected = weapon;
+                    String name = weaponSelected.getNameWeaponCard();
+                    
+                    //set extra state
+                    switch (name) {
+                        case "CYBERBLADE":
+                            gameModel.setExtraState(WeaponState.Cyberblade);
+                            break;
+                        case "Electroscythe":
+                            gameModel.setExtraState(WeaponState.Electroscythe);
+                            break;
+                        case "Flamethrower":
+                            gameModel.setExtraState(WeaponState.Flamethrower);
+                            break;
+                        case "Furnace":
+                            gameModel.setExtraState(WeaponState.Furnace);
+                            break;
+                        case "GrenadeLauncher":
+                            gameModel.setExtraState(WeaponState.GrenadeLauncher);
+                            break;
+                        case "Heatseeker":
+                            gameModel.setExtraState(WeaponState.Heatseeker);
+                            break;
+                        case "Hellion":
+                            gameModel.setExtraState(WeaponState.Hellion);
+                            break;
+                        case "LockRifle":
+                            gameModel.setExtraState(WeaponState.LockRifle);
+                            break;
+                        case "MachineGun":
+                            gameModel.setExtraState(WeaponState.MachineGun);
+                            break;
+                        case "PlasmaGun":
+                            gameModel.setExtraState(WeaponState.PlasmaGun);
+                            break;
+                        case "PowerGlove":
+                            gameModel.setExtraState(WeaponState.PowerGlove);
+                            break;
+                        case "Railgun":
+                            gameModel.setExtraState(WeaponState.Railgun);
+                            break;
+                        case "RocketLauncher":
+                            gameModel.setExtraState(WeaponState.RocketLauncher);
+                            break;
+                        case "Shockwave":
+                            gameModel.setExtraState(WeaponState.Shockwave);
+                            break;
+                        case "Shotgun":
+                            gameModel.setExtraState(WeaponState.Shotgun);
+                            break;
+                        case "Sledgehammer":
+                            gameModel.setExtraState(WeaponState.Sledgehammer);
+                            break;
+                        case "Thor":
+                            gameModel.setExtraState(WeaponState.Thor);
+                            break;
+                        case "TractorBeam":
+                            gameModel.setExtraState(WeaponState.TractorBeam);
+                            break;
+                        case "VortexCannon":
+                            gameModel.setExtraState(WeaponState.VortexCannon);
+                            break;
+                        case "Whisper":
+                            gameModel.setExtraState(WeaponState.Whisper);
+                            break;
+                        case "Zx2":
+                            gameModel.setExtraState(WeaponState.Zx2);
+                            break;
+                    }
+                    
+                    } else {
                     
                     //arma scarica
                     actionModel.getGameModel().setErrorMessage("THIS WEAPON IS NOT CHARGE: YOU CAN'T USE IT NOW");
@@ -372,6 +446,16 @@ public class ActionController {
         
     }
     
+    public  void setWeaponEffect(ActionModel actionModel,RemoteView view){
+        
+        GameModel gameModel= actionModel.getGameModel();
+        int i;
+    
+        i = view.getIndex2();
+        gameModel.setWeaponsEffect(weaponSelected.getWeaponEffects().get(i));
+    }
+  
+    
     public void selectPowerUp(ActionModel actionModel,RemoteView view) {
     
         PowerUpCard powerUpCard;
@@ -382,7 +466,7 @@ public class ActionController {
             if (actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i) != null) {
     
                 powerUpCard = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i);
-                actionModel.getGameModel().getActualPlayer().setPowerUpSelected(powerUpCard);
+                powerUpSelected = powerUpCard;
             } else {
                 
                 //errore di input, che sarà gia gestioto in view

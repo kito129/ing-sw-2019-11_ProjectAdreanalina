@@ -53,6 +53,8 @@ public interface RemoteView extends Remote {
     
     boolean isBooleanChose ();
     
+    int getIndex2 ();
+    
     void resetInput() throws RemoteException;
     
     void update(GameModel gameModel) throws RemoteException;

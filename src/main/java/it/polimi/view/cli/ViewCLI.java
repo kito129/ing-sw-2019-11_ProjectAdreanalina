@@ -35,6 +35,7 @@ public class ViewCLI implements RemoteView, Serializable {
     private int column2;
     //attribute for grab
     private int index;
+    private int index2;
     //attribut yes or no
     private boolean booleanChose;
     //scelta arma
@@ -192,9 +193,20 @@ public class ViewCLI implements RemoteView, Serializable {
         return booleanChose;
     }
     
+    @Override
+    public int getIndex2 () {
+        
+        return index2;
+    }
+    
     public void setBooleanChose (boolean booleanChose) {
         
         this.booleanChose = booleanChose;
+    }
+    
+    public void setIndex2 (int index2) {
+        
+        this.index2 = index2;
     }
     
     public void setOnline (boolean online) {
@@ -363,7 +375,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 setUseSecondEffect(true);
                 viewLockRifleSecondLock(gameModel);
                 break;
-            case SELECTSHOOT:
+            case SELECTEFFECT:
                 break;
             case ENDACTION:
                 break;

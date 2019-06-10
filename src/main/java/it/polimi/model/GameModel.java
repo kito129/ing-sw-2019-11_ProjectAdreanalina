@@ -25,7 +25,8 @@ public class GameModel implements Serializable {
     private WeaponDeck weaponDeck;
     private Player actualPlayer;
     private State state;
-    private State extraState;
+    private WeaponState extraState;
+    private WeaponsEffect weaponsEffect;
     private String errorMessage;
     
 
@@ -140,11 +141,16 @@ public class GameModel implements Serializable {
         notifyObserver(this);
     }
     
-    public State getExtraState () {
+    public WeaponState getExtraState () {
         
         return extraState;
     }
-
+    
+    public WeaponsEffect getWeaponsEffect () {
+        
+        return weaponsEffect;
+    }
+    
     public void setErrorMessage(String errorMessage) {
 
         this.errorMessage = errorMessage;
@@ -171,12 +177,18 @@ public class GameModel implements Serializable {
         return tempPLayers;
     }
     
-    public void setExtraState (State extraState) {
+    public void setExtraState (WeaponState extraState) {
         
         this.extraState = extraState;
     }
     
+    public void setWeaponsEffect (WeaponsEffect weaponsEffect) {
+        
+        this.weaponsEffect = weaponsEffect;
+    }
+    
     public ArrayList<EnumColorPlayer> getPlayerColor(){
+        
         ArrayList<EnumColorPlayer> playerColor = new ArrayList<>();
         
         for (Player a: getPlayers(true)){

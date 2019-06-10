@@ -4,6 +4,7 @@ import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NoPowerUpAvailable;
 import it.polimi.model.Exception.NotValidInput;
+import it.polimi.model.Weapon.Cyberblade;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
@@ -121,17 +122,23 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                             System.out.println("ERROR");
                         }
                         break;
-                    case SELECTRUN:RUN:
+                    case SELECTRUN:
                         //oggi
                         actionController.runActionController(actionModel, view);
                         action++;
                         break;
-                    case SELECTGRAB:GRAB:
+                    case RUN:
+                        break;
+                    case SELECTGRAB:
                         actionController.grabActionController(actionModel, view);
                         action++;
                         break;
+                    case GRAB:
+                        break;
                     case SELECTWEAPON:
-                        
+                        actionController.selectWeapon(actionModel,view);
+                        break;
+                    case SELECTEFFECT:
                         break;
                     case SHOOT:
                         //prendo le armi che ho, le mostro alla vieee che decide cosa usare
@@ -200,7 +207,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
             }
         }
     }
-    
+
     @Override
     public void setPlayerOnline (String user, boolean online){
         for(Player a : gameModel.getPlayers(true)){
