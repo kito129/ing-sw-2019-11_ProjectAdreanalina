@@ -80,7 +80,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     
             //2 action and multiple power up use
             int action=0;
-            while (action<1) {
+            while (action<2) {
         
                 switch (gameModel.getState()) {
                     case SETUP:
@@ -137,26 +137,15 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                         break;
                     case SELECTWEAPON:
                         actionController.selectWeapon(actionModel,view);
+                        action++;
                         break;
                     case SELECTEFFECT:
+                        actionController.selectWeaponEffect(actionModel,view);
                         break;
                     case SHOOT:
-                        //prendo le armi che ho, le mostro alla vieee che decide cosa usare
-                
-                        //es
-                        String string = "LOCKRIFLE";
-                
-                
-                        switch (string) {
-                            case "ELECTOSCYTHE":
-
-                    
-                            case "LOCKRIFLE":
-                                LockRifle lockRifle = new LockRifle();
-                                actionController.LockRifleweapon(gameModel,lockRifle,view);
-                                action++;
-                                break;
-                        }
+                        
+                        actionController.LockRifleweapon(gameModel,(LockRifle) actionController.weaponSelected,view);
+                        action++;
                         break;
                     case ENDACTION:
                         break;
