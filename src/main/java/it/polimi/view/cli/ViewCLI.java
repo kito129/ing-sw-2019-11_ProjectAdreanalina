@@ -37,7 +37,7 @@ public class ViewCLI implements RemoteView, Serializable {
     //attribute for grab
     private int index;
     private int index2;
-    //attribut yes or no
+    //attribute yes or no
     private boolean booleanChose;
     //scelta arma
     private int choicePlayer;
@@ -78,6 +78,7 @@ public class ViewCLI implements RemoteView, Serializable {
         
         return index;
     }
+
 
     @Override
     public int getChoicePlayer() {
@@ -519,19 +520,35 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     public void viewSelectWeapon() {
-        
+
         ArrayList<WeaponCard> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
-        //qui mi setti l'inidice che sceglie di questo array in index
-        
-        
+        PrintEffectWeapon.printSelectWeapon();
+        PrintWeapon.printName(weapons);
+
+        Scanner input = new Scanner(System.in);
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setIndex(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>weapons.size());
     }
     
     public void viewSelectWeaponEffect() {
         
-        ArrayList<WeaponsEffect> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(index).getWeaponEffects();
-        //qui mi setti l'inidice che sceglie di questo array in index2
-        
-        
+        ArrayList<WeaponsEffect> weaponEffects = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(index).getWeaponEffects();
+        PrintEffectWeapon.printSelectWeaponEffect();
+        PrintWeapon.printEffectName(weaponEffects);
+
+        Scanner input = new Scanner(System.in);
+        do {
+
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            setIndex2(input.nextInt());
+
+        } while (input.nextInt()<0 || input.nextInt()>weaponEffects.size());
     }
     
     //WEAPON
@@ -551,7 +568,6 @@ public class ViewCLI implements RemoteView, Serializable {
         
         PrintEffectWeapon.printLockRifleSecondLock(gameModel);
 
-        
         //metodo per prender in input un player con il controllo
         setTarget2(getPlayerInput());
     

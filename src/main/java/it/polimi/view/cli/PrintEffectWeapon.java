@@ -576,4 +576,24 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("(first enter the number of targets and then enter players' ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
+
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * Print the weapons
+     */
+    public static void printSelectWeapon(){
+
+        System.out.println();
+        System.out.println("WHICH WEAPON DO YOU WANT TO USE?");
+    }
+
+    /**
+     * Print the effect of weapons
+     */
+    public static void printSelectWeaponEffect(){
+
+        System.out.println();
+        System.out.println("WHICH WEAPON EFFECT DO YOU WANT TO USE?");
+    }
 }

@@ -2,6 +2,7 @@ package it.polimi.view.cli;
 
 import it.polimi.model.EnumColorCardAndAmmo;
 import it.polimi.model.WeaponCard;
+import it.polimi.model.WeaponsEffect;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,6 +45,34 @@ public class PrintWeapon implements Serializable {
             System.out.println("LOADED WEAPON: " + wc.isCharge());
             System.out.println("DESCRIPTION: ");
             System.out.println(wc.getDescription());
+        }
+    }
+
+    /**
+     * Print Client's weapons.
+     * @param weaponList       list of weapon.
+     */
+    public static void printName(ArrayList<WeaponCard> weaponList){
+
+        System.out.println();
+        for (int i = 0; i < weaponList.size(); i++) {
+
+            WeaponCard wc = weaponList.get(i);
+            System.out.println(i + ")" + wc.getNameWeaponCard());
+        }
+    }
+
+    /**
+     * Print Client's effect weapons.
+     * @param weaponEffects       list of weapon effects.
+     */
+    public static void printEffectName(ArrayList<WeaponsEffect> weaponEffects){
+
+        System.out.println();
+        for (int i = 0; i < weaponEffects.size(); i++) {
+
+            WeaponsEffect we = weaponEffects.get(i);
+            System.out.println(i + ")" + we.toString());
         }
     }
 }
