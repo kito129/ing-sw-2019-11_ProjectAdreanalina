@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ViewCLI implements RemoteView, Serializable {
@@ -370,6 +371,9 @@ public class ViewCLI implements RemoteView, Serializable {
             case SELECTGRAB:
                 viewGrabSelection();
                 break;
+            case SELECTWEAPON:
+            
+            break;
             case SHOOT:
                 viewLockRifleBasicEffect(gameModel);
                 setUseSecondEffect(true);
@@ -512,6 +516,22 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewGrab() throws RemoteException {
 
         PrintMap.printMap(gameModel.getMap());
+    }
+    
+    public void viewSelectWeapon() {
+        
+        ArrayList<WeaponCard> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
+        //qui mi setti l'inidice che sceglie di questo array in index
+        
+        
+    }
+    
+    public void viewSelectWeaponEffect() {
+        
+        ArrayList<WeaponsEffect> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(index).getWeaponEffects();
+        //qui mi setti l'inidice che sceglie di questo array in index2
+        
+        
     }
     
     //WEAPON

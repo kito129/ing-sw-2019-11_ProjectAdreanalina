@@ -452,7 +452,13 @@ public class ActionController {
         int i;
     
         i = view.getIndex2();
-        gameModel.setWeaponsEffect(weaponSelected.getWeaponEffects().get(i));
+        if (weaponSelected.getWeaponEffects().get(i)!=null) {
+            gameModel.setWeaponsEffect(weaponSelected.getWeaponEffects().get(i));
+        } else {
+            
+            //errore di input dell'effetto
+            
+        }
     }
   
     
@@ -494,46 +500,56 @@ public class ActionController {
         Player targetBase;
         Player targetSecondLock;
         //get the effect  based on choice input fro view
+        //questi attributi non serviranno più
         boolean choice;
         choice=view.isUseSecondEffect();
         
-        if(!choice) {
-            //base effect
-            try {
-
-                targetBase = gameModel.getPlayerById(view.getTarget1());
-                weapon.baseEffect(map, currentPlayer, targetBase);
-            } catch (NotVisibleTarget notVisibleTarget) {
-
-                gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
-            } catch (MapException e) {
+        //test dell nuovo modo per scegliere gli effetti
+        switch (gameModel.getWeaponsEffect()) {
+            
+            case BaseEffect:
                 
-                gameModel.setErrorMessage("ERROR: MAP ERROR");
-            }
-        } else {
-            //second lock effect
-            try {
-                targetBase = gameModel.getPlayerById(view.getTarget1());
-                targetSecondLock = gameModel.getPlayerById(view.getTarget2());
-                if (targetBase != targetSecondLock) {
+                //base effect
+                try {
             
-                    weapon.secondLockEffect(map, currentPlayer, targetSecondLock);
-                } else {
+                    targetBase = gameModel.getPlayerById(view.getTarget1());
+                    weapon.baseEffect(map, currentPlayer, targetBase);
+                } catch (NotVisibleTarget notVisibleTarget) {
             
-                    throw new NotValidInput();
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                } catch (MapException e) {
+            
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
-            } catch (NotValidInput notValidInput) {
-
-                gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS THE SAME OF BASIC EFFECT");
-            } catch (NotVisibleTarget notVisibleTarget) {
-
-                gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
-            } catch (MapException e) {
-           
-                gameModel.setErrorMessage("ERROR: MAP ERROR");
+                break;
+                
+            case SecondLockEffect:
+                //second lock effect
+                try {
+                    targetBase = gameModel.getPlayerById(view.getTarget1());
+                    targetSecondLock = gameModel.getPlayerById(view.getTarget2());
+                    if (targetBase != targetSecondLock) {
+                
+                        weapon.secondLockEffect(map, currentPlayer, targetSecondLock);
+                    } else {
+                
+                        throw new NotValidInput();
+                    }
+                } catch (NotValidInput notValidInput) {
+            
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS THE SAME OF BASIC EFFECT");
+                } catch (NotVisibleTarget notVisibleTarget) {
+            
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                } catch (MapException e) {
+            
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }
+                break;
+                
             }
         }
-    }
+    
     
     public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon, RemoteView view) throws RemoteException{
     
