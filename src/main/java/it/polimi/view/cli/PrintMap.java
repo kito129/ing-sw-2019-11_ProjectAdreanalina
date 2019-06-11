@@ -9,6 +9,7 @@ public class PrintMap implements Serializable {
 
     //⇅ doppia freccia verticale
     //⇄ doppia freccia orizzontale
+    //⇔⇕
 
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
@@ -20,6 +21,7 @@ public class PrintMap implements Serializable {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RESET = "\u001b[0m";
 
     /**
@@ -123,7 +125,7 @@ public class PrintMap implements Serializable {
         }
         else if(player.getColor().equals(EnumColorPlayer.GREY)){
 
-            s = ANSI_WHITE_BACKGROUND + "W" + ANSI_BLACK_BACKGROUND;
+            s = ANSI_WHITE_BACKGROUND + ANSI_BLACK + "W" + ANSI_RESET + ANSI_BLACK_BACKGROUND;
         }
         else if(player.getColor().equals(EnumColorPlayer.PINK)){
 
@@ -131,7 +133,7 @@ public class PrintMap implements Serializable {
         }
         else if(player.getColor().equals(EnumColorPlayer.YELLOW)){
 
-            s = ANSI_YELLOW_BACKGROUND + "Y" + ANSI_BLACK_BACKGROUND;
+            s = ANSI_YELLOW_BACKGROUND + ANSI_BLACK + "Y" + ANSI_RESET + ANSI_BLACK_BACKGROUND;
         }
         return s;
     }
@@ -202,15 +204,16 @@ public class PrintMap implements Serializable {
 
                 for(int i = 1; i <= 4; i++){
 
-                    map[5*s.getRow()+i][6*(s.getColumn()+1)] = "⇄";
+                    map[5*s.getRow()+i][6*(s.getColumn()+1)] = "⇔";
                 }
             }
 
+            //⇄⇅
             if(s.getRow()<2 && m.isPort(s.getRow(),s.getColumn(),s.getRow()+1,s.getColumn())){
 
                 for (int i = 1; i <= 5; i++){
 
-                    map[5*(s.getRow()+1)][6*s.getColumn()+i] = "⇅";
+                    map[5*(s.getRow()+1)][6*s.getColumn()+i] = "⇕";
                 }
             }
         }
@@ -231,9 +234,9 @@ public class PrintMap implements Serializable {
 
         for(int i = 0; i < 15; i++){
 
-            if(i == 2 || i == 7 || i == 12){
+            if(i == 3 || i == 8 || i == 13){
 
-                System.out.print(" " + ((i/5)+1) + " ");
+                System.out.print(" " + (i/5) + " ");
             }
             else {
 
