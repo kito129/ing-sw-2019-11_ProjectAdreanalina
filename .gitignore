@@ -15,4 +15,5 @@ ing-sw-2019-11.iml
 target
 *.png
 *.jpg
+*.jar
 javaDoc
