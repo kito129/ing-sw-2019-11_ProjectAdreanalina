@@ -9,7 +9,6 @@ public class PrintMap implements Serializable {
 
     //⇅ doppia freccia verticale
     //⇄ doppia freccia orizzontale
-    //⇔⇕
 
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
@@ -204,7 +203,7 @@ public class PrintMap implements Serializable {
 
                 for(int i = 1; i <= 4; i++){
 
-                    map[5*s.getRow()+i][6*(s.getColumn()+1)] = "⇔";
+                    map[5*s.getRow()+i][6*(s.getColumn()+1)] = "-";
                 }
             }
 
@@ -213,7 +212,7 @@ public class PrintMap implements Serializable {
 
                 for (int i = 1; i <= 5; i++){
 
-                    map[5*(s.getRow()+1)][6*s.getColumn()+i] = "⇕";
+                    map[5*(s.getRow()+1)][6*s.getColumn()+i] = "|";
                 }
             }
         }
