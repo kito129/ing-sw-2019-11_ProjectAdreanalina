@@ -18,17 +18,13 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     private State state;
     private State beforeError;
 
-    public GameController(ActionController actionController, ActionModel actionModel) throws RemoteException{
-        this.actionController=actionController;
-        this.actionModel=actionModel;
-        this.gameModel =actionModel.getGameModel();
-        this.state= gameModel.getState();
-        
-    }
+
 
     public GameController() throws RemoteException{
 
         gameModel=new GameModel();
+        actionController=new ActionController();
+        actionModel=new ActionModel(gameModel);
 
     }
     
