@@ -9,6 +9,7 @@ import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class GameController extends UnicastRemoteObject implements RemoteGameController {
     
@@ -18,6 +19,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     private boolean gameStarted;
     private State state;
     private State beforeError;
+    private ArrayList<RemoteView> remoteViews=new ArrayList<>();
     
     public GameController(ActionController actionController, ActionModel actionModel) throws RemoteException{
         this.actionController=actionController;
@@ -227,17 +229,19 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
            
         }
     }
-    /*
+
     @Override
-    public void addObserver (RemoteView view) throws RemoteException {
-    
+    public void addObserver (RemoteView view)throws RemoteException  {
+
+        remoteViews.add(view);
+
     }
     
     @Override
     public void reAddObserver (RemoteView view) throws RemoteException {
     
     }
-    */
+
 }
 
 

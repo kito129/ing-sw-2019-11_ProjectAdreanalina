@@ -73,10 +73,21 @@ public class ViewCLI implements RemoteView, Serializable {
     public ViewCLI(){
 
         connection();
+        System.out.println("WELCOME TO ADRENALINA");
+        setOnline(true);
+        try {
+
+            gameController.addObserver(this);
+        }catch (RemoteException remoteException) {
+
+            System.out.println("NETWORK ERROR ");
+            System.exit(0);
+        }
+
 
     }
 
-    public void connection() {
+    public void connection()  {
 
         try {
 
@@ -84,18 +95,13 @@ public class ViewCLI implements RemoteView, Serializable {
             gameController = (RemoteGameController) registry.lookup("gameController");
             UnicastRemoteObject.exportObject(this, 0);
 
+
         } catch (RemoteException | NotBoundException e ) {
     
-            System.out.println("NETWORK ERROR remote");
+            System.out.println("NETWORK ERROR ");
             System.exit(0);
         }
-<<<<<<< HEAD
 
-=======
-        
-        setOnline(true);
-        System.out.println("preso il ref");
-        
     }
     
     @Override
@@ -106,10 +112,9 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    public void print(String s){
-        
+    public void print(String s) {
+
         System.out.println(s);
->>>>>>> b11fd7e8cfcd34182f45555f89e81086fc752069
     }
 
 
