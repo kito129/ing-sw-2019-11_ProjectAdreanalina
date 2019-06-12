@@ -388,16 +388,17 @@ public class ViewCLI implements RemoteView, Serializable {
     public void run() throws RemoteException {
     
         switch (gameModel.getState()) {
-            
+           
+            case LOBBY:
+                viewRun();
+                break;
             case SETUP:
                 break;
             case PLAYERSETUP:
                 break;
             case SPAWNPLAYER:
                 break;
-            case LOBBY:
-                viewRun();
-                break;
+            
             case STARTTURN:
                 break;
             case USEPOWERUP:
