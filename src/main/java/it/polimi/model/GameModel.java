@@ -273,6 +273,7 @@ public class GameModel implements Serializable {
         for (Player a : this.players){
 
             if(a.getId()==i){
+                
                 return a;
             }
         }

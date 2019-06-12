@@ -407,7 +407,7 @@ public class Map {
      * @return true if A is in the same cardinal direction of B, and PlayerC.
      */
     public boolean sameDirection(Square a, Square b, Square c){
-        //TODO SISTEMARE QUI
+
         return (((a.getRow() == b.getRow()) && (b.getRow() == c.getRow())) || ((a.getColumn() == b.getColumn()) && (b.getColumn() == c.getColumn())));
     }
     
@@ -419,7 +419,7 @@ public class Map {
      * @return true if A is in the same cardinal direction of B
      */
     public boolean sameDirection(Square a, Square b){
-        //TODO SISTEMARE QUI
+
         return ((a.getRow() == b.getRow()) || ((a.getColumn() == b.getColumn())));
     }
     
@@ -536,7 +536,7 @@ public class Map {
     /**
      * Exist in map.
      *
-     * @param square the square
+     * @param square the squar
      */
     public boolean existInMap(Square square){
         
