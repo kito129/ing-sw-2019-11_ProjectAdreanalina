@@ -88,7 +88,10 @@ public class ViewCLI implements RemoteView, Serializable {
             System.out.println("NETWORK ERROR remote");
             System.exit(0);
         }
+
     }
+
+
 
     @Override
     public int getIndex () {
