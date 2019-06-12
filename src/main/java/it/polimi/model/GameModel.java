@@ -29,17 +29,16 @@ public class GameModel implements Serializable {
     private WeaponsEffect weaponsEffect;
     private String errorMessage;
     
-
-
-    public GameModel(Map map, KillShotTrack killShotTrack, ArrayList<Player> players){
-
-        this.map=map;
-        this.killShotTrack=killShotTrack;
-        this.players=players;
+    public GameModel(){
+        
+        state=State.LOBBY;
+    
+        this.killShotTrack= new KillShotTrack();
         this.ammoDeck = new AmmoDeck();
         this.powerUpDeck=new PowerUpDeck();
         this.weaponDeck=new WeaponDeck();
     }
+    
 
     
     

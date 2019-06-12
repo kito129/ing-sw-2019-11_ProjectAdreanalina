@@ -27,6 +27,7 @@ public class ActionController {
     
     
     public void errorState(ActionModel actionModel) throws RemoteException {
+        
         System.out.println("STATO DI ERRORE, RIPARTO DAL PRECENDENTE\n");
         
         if(beforeError==State.RUN){
@@ -37,7 +38,6 @@ public class ActionController {
     
     
     public void runActionController (ActionModel actionModel, RemoteView view) throws RemoteException {
-        
         
         //take necessary
         Map map= actionModel.getGameModel().getMap();
