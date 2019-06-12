@@ -72,7 +72,7 @@ public class ViewCLI implements RemoteView, Serializable {
 
     public ViewCLI(){
 
-
+        connection();
 
     }
 
@@ -83,9 +83,9 @@ public class ViewCLI implements RemoteView, Serializable {
             Registry registry = LocateRegistry.getRegistry("localhost");
             gameController = (RemoteGameController) registry.lookup("gameController");
             UnicastRemoteObject.exportObject(this, 0);
-        } catch (RemoteException | NotBoundException remoteException){
-
-            System.out.println("NETWORK ERROR");
+        } catch (RemoteException | NotBoundException e ) {
+    
+            System.out.println("NETWORK ERROR remote");
             System.exit(0);
         }
     }

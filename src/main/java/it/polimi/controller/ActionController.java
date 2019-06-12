@@ -218,7 +218,7 @@ public class ActionController {
         }
     }
     
-    public void payAmmoController (Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay,WeaponCard weaponCard,RemoteView view) throws NotValidAmmoException, NoPowerUpAvailable {
+    public void payAmmoController (Player player, ArrayList<EnumColorCardAndAmmo> ammoToPay,WeaponCard weaponCard,RemoteView view) throws NotValidAmmoException, NoPowerUpAvailable, RemoteException {
 
         //prendo playerboard
         PlayerBoard playerBoard = player.getPlayerBoard();
@@ -448,7 +448,7 @@ public class ActionController {
         
     }
     
-    public void selectWeaponEffect(ActionModel actionModel,RemoteView view){
+    public void selectWeaponEffect(ActionModel actionModel,RemoteView view) throws RemoteException {
         
         GameModel gameModel= actionModel.getGameModel();
         int i;

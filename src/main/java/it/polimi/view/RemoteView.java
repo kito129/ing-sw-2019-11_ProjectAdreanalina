@@ -41,7 +41,7 @@ public interface RemoteView extends Remote {
     
     WeaponsEffect getWeaponsEffect () throws RemoteException;
     
-    boolean isOptionWeapon ();
+    boolean isOptionWeapon () throws RemoteException;
     
     EnumColorSquare getColorRoom() throws RemoteException;
 
@@ -51,9 +51,9 @@ public interface RemoteView extends Remote {
     
     boolean getOnline() throws RemoteException;
     
-    boolean isBooleanChose ();
+    boolean isBooleanChose () throws RemoteException;
     
-    int getIndex2 ();
+    int getIndex2 () throws RemoteException;
     
     void resetInput() throws RemoteException;
     
