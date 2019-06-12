@@ -7,6 +7,7 @@ import it.polimi.view.RemoteView;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -71,6 +72,22 @@ public class ViewCLI implements RemoteView, Serializable {
 
     public ViewCLI(){
 
+
+
+    }
+
+    public void connection() {
+
+        try {
+
+            Registry registry = LocateRegistry.getRegistry("localhost");
+            gameController = (RemoteGameController) registry.lookup("gameController");
+            UnicastRemoteObject.exportObject(this, 0);
+        } catch (RemoteException | NotBoundException remoteException){
+
+            System.out.println("NETWORK ERROR");
+            System.exit(0);
+        }
     }
 
     @Override
@@ -1200,24 +1217,7 @@ public class ViewCLI implements RemoteView, Serializable {
     //FINE ARMI
     //-------------------------------------------------------------------------------------------------
 
-    protected void connectionRequest() throws IOException {
-        int tmp;
-        System.out.println("IP ADDRESS: ");
-        Scanner input = new Scanner(System.in);
-        String ipAddress = input.next();
-        
-        try {
-            Registry registry = LocateRegistry.getRegistry(ipAddress);
-            gameController = (RemoteGameController) registry.lookup("network");
-            UnicastRemoteObject.exportObject(this, 0);
-        } catch (RemoteException e) {
-            System.out.println("\n\nTHIS IP ADDRESS DOES NOT EXIST");
-            System.exit(0);
-        } catch (Exception e) {
-            System.out.println("\n\nOPS... AN ERROR OCCURRED. PLEASE RESTART THE GAME.");
-            System.exit(0);
-        }
-    }
+
     
     public int getPlayerInput(){
     
