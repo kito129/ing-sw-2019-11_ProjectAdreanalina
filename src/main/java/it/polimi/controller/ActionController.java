@@ -1289,9 +1289,6 @@ public class ActionController {
     
     
     
-    
-    
-    
     //TODO andre
     public void Thor(GameModel gameModel, Thor weapon, RemoteView view) throws RemoteException {
 
@@ -1625,6 +1622,7 @@ public class ActionController {
     
     
     //TODO andre
+    /*
     public void RocketLauncher(GameModel gameModel, RocketLauncher weapon,RemoteView view) throws RemoteException {
         
         //necessary from model
@@ -1794,6 +1792,8 @@ public class ActionController {
         }
     
     }
+    
+     */
 }
 
 
