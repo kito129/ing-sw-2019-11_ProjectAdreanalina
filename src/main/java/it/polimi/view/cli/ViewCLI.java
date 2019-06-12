@@ -446,7 +446,7 @@ public class ViewCLI implements RemoteView, Serializable {
         PrintMap.printMap(gameModel.getMap());
     }
 
-    public void viewGrabSelection() throws RemoteException {
+    public void  viewGrabSelection() throws RemoteException {
 
         PrintGrabAction.printGrabStuff();
         getSquareInput(1);

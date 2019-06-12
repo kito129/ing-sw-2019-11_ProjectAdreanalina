@@ -606,7 +606,8 @@ public class Map {
     * @return true if there is a port, false otherwise
     * */
     public boolean isPort(Square squareA, Square squareB){
-        if(squareA.getLink().contains(squareB) && squareB.getLink().contains(squareA)){
+        
+        if(squareA.getLink().contains(squareB) && squareB.getLink().contains(squareA) && squareA.getColor()!=squareB.getColor()){
             return true;
         }
         return false;
