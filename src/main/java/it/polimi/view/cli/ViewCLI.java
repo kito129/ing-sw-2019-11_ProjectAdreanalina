@@ -78,6 +78,7 @@ public class ViewCLI implements RemoteView, Serializable {
         try {
 
             gameController.addObserver(this);
+            gameController.update(this);
         }catch (RemoteException remoteException) {
 
             System.out.println("NETWORK ERROR ");

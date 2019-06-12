@@ -4,12 +4,10 @@ import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NoPowerUpAvailable;
 import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Weapon.Cyberblade;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 
 public class GameController extends UnicastRemoteObject implements RemoteGameController {
     
@@ -19,8 +17,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     private boolean gameStarted;
     private State state;
     private State beforeError;
-    private ArrayList<RemoteView> remoteViews=new ArrayList<>();
-    
+
     public GameController(ActionController actionController, ActionModel actionModel) throws RemoteException{
         this.actionController=actionController;
         this.actionModel=actionModel;
@@ -30,6 +27,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     }
 
     public GameController() throws RemoteException{
+
+        gameModel=new GameModel();
 
     }
     
@@ -211,19 +210,19 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     //metodo che per ora non serve
     private void verifyObserver() {
         
-        for(int i = 0; i< gameModel.getObservers().size(); i++){
+        for(int i = 0; i< gameModel.getRemoteView().size(); i++){
             try{
-                if(gameModel.getObservers().get(i) != null)
-                    gameModel.getObservers().get(i).getUser();
+                if(gameModel.getRemoteView().get(i) != null)
+                    gameModel.getRemoteView().get(i).getUser();
             } catch(RemoteException e){
                 if(gameModel.getState().equals(State.LOBBY)) {
                     gameModel.getPlayers(true).get(i).setOnline(false);
                     gameModel.getPlayers(true).remove(i);
-                    gameModel.getObservers().remove(i);
+                    gameModel.getRemoteView().remove(i);
                 }
                 else {
                     gameModel.getPlayers(true).get(i).setOnline(false);
-                    gameModel.removeObserver(gameModel.getObservers().get(i));
+                    gameModel.removeObserver(gameModel.getRemoteView().get(i));
                 }
             }
            
@@ -233,7 +232,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     @Override
     public void addObserver (RemoteView view)throws RemoteException  {
 
-        remoteViews.add(view);
+        gameModel.addObserver(view);
+
 
     }
     

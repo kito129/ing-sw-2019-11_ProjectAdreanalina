@@ -16,7 +16,7 @@ public class GameModel implements Serializable {
     //capire quali classi vanno serializzate
     
     //observable pattern
-    private ArrayList<RemoteView> list = new ArrayList<>();
+    private ArrayList<RemoteView> remoteViews = new ArrayList<>();
     private Map map;
     private KillShotTrack killShotTrack;
     private ArrayList<Player> players;
@@ -137,7 +137,7 @@ public class GameModel implements Serializable {
     public void setState (State state) throws RemoteException {
         
         this.state=state;
-        notifyObserver(this);
+        notifyObserver1();
     }
     
     public WeaponState getExtraState () {
@@ -205,11 +205,11 @@ public class GameModel implements Serializable {
         }
         return null;
     }
-    
 
-    public List<RemoteView> getObservers (){
-        
-        return list;
+
+    public List<RemoteView> getRemoteView(){
+
+        return remoteViews;
     }
     /**
      * adds an RMI observer at the beginning
@@ -218,17 +218,17 @@ public class GameModel implements Serializable {
 
     public void addObserver(RemoteView observer){
         
-        list.add(observer);
+        remoteViews.add(observer);
     }
     
     /**
-     * removes an RMI observer from the observers's list (setting him as 'null')
+     * removes an RMI observer from the observers's remoteViews (setting him as 'null')
      * @param observer the observer to be removed
      */
 
     public void removeObserver(RemoteView observer){
         
-        list.set(getObservers().indexOf(observer), null);
+        remoteViews.set(getRemoteView().indexOf(observer), null);
     }
     
     /**
@@ -245,20 +245,34 @@ public class GameModel implements Serializable {
                 break;
             }
         }
-        list.set(index, observer);
+        remoteViews.set(index, observer);
+    }
+
+    public void notifyObserver1(){
+
+
+        for(RemoteView observer: getRemoteView()){
+
+            try {
+                observer.update(this);
+
+            } catch (RemoteException e) {
+
+            }
+        }
     }
     
     public void notifyObserver (GameModel gameModel){
             try {
                 int tmp = 0;
-                for(RemoteView observer: getObservers()) {
+                for(RemoteView observer: getRemoteView()) {
                     if(observer!=null) {
                         if (true) {
                             if (true) {
                                 observer.update(gameModel);
                             }
                         } else {
-                            tmp = getObservers().indexOf(observer);
+                            tmp = getRemoteView().indexOf(observer);
                         }
                     }
                 }
