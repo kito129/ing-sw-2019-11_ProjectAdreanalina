@@ -26,7 +26,6 @@ public class ViewCLI implements RemoteView, Serializable {
     
     protected State state;
     protected String user;
-    protected Player player;
     public GameModel gameModel;
     public RemoteGameController gameController;
     protected boolean online;
@@ -66,16 +65,22 @@ public class ViewCLI implements RemoteView, Serializable {
         System.out.println("WELCOME TO ADRENALINA");
 
         try {
+            
             gameModel=gameController.getGameModel();
+    
+            do {
+                setUser();
+            }while (verifyName(user));
+            
             gameController.addObserver(this);
             gameController.update(this);
+            
         }catch (RemoteException remoteException) {
 
             System.out.println("NETWORK ERROR ");
             System.exit(0);
         }
-
-
+        
     }
 
     public void connection()  {
@@ -104,6 +109,15 @@ public class ViewCLI implements RemoteView, Serializable {
             }
         }return false;
     }
+    
+    protected void setUser() {
+        
+        Scanner input;
+        input = new Scanner(System.in);
+        System.out.println("ENTER YOUR USERNAME:");
+        this.user = input.next().toUpperCase();
+    }
+
     
     @Override
     public void setOnline (boolean online){
@@ -354,10 +368,6 @@ public class ViewCLI implements RemoteView, Serializable {
         this.state = state;
     }
     
-    public void setUser (String user) {
-        
-        this.user = user;
-    }
     
     public void setGameController (RemoteGameController gameController) {
         
