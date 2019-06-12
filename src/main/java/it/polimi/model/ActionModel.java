@@ -23,8 +23,7 @@ public class ActionModel {
     public ActionModel(GameModel gameModel){
 
         this.gameModel = gameModel;
-        this.map= gameModel.getMap();
-        this.actualPlayer= gameModel.getActualPlayer();
+
     }
 
     

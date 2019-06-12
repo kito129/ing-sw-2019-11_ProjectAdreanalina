@@ -10,9 +10,14 @@ import it.polimi.view.cli.ViewCLI;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+
 public class MainMarcoController {
+
+
     
     public static void main (String args[]) throws RemoteException {
+
+        /*
     
         System.out.println("creo killshot track" );
         KillShotTrack killShotTrack = new KillShotTrack();
@@ -176,3 +181,4 @@ public class MainMarcoController {
     
     }
 }
+

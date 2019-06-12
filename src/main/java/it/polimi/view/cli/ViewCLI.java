@@ -58,25 +58,15 @@ public class ViewCLI implements RemoteView, Serializable {
     //attribute for direction
     private EnumCardinalDirection cardinalDirection;
     
-    public ViewCLI(RemoteGameController remoteGameController){
-        
-        try {
-            this.gameController=remoteGameController;
-            this.state=this.gameController.getGameModel().getState();
-            this.gameModel=this.gameController.getGameModel();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        
-    }
+
 
     public ViewCLI(){
 
         connection();
         System.out.println("WELCOME TO ADRENALINA");
-        setOnline(true);
-        try {
 
+        try {
+            gameModel=gameController.getGameModel();
             gameController.addObserver(this);
             gameController.update(this);
         }catch (RemoteException remoteException) {
@@ -95,12 +85,24 @@ public class ViewCLI implements RemoteView, Serializable {
             Registry registry = LocateRegistry.getRegistry("localhost");
             gameController = (RemoteGameController) registry.lookup("gameController");
             UnicastRemoteObject.exportObject(this, 0);
+            setOnline(true);
             
         } catch (RemoteException | NotBoundException e ) {
     
             System.out.println("NETWORK ERROR ");
             System.exit(0);
         }
+    }
+
+    private boolean verifyName(String name){
+
+        for(Player player:gameModel.getPlayers(true)){
+
+            if(name.equals(player.getName())){
+                System.out.println("THIS USERNAME ALREADY EXIST");
+                return true;
+            }
+        }return false;
     }
     
     @Override
