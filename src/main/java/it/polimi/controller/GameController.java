@@ -143,8 +143,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                         actionController.selectWeaponEffect(actionModel,view);
                         break;
                     case SHOOT:
-                        
-                        actionController.LockRifleweapon(gameModel,(LockRifle) actionController.weaponSelected,view);
+                        LockRifle lock = new LockRifle();
+                        actionController.LockRifleweapon(gameModel,lock,view);
                         action++;
                         break;
                     case ENDACTION:

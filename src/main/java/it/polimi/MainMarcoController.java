@@ -97,17 +97,10 @@ public class MainMarcoController {
             
             p.stampa();
         }
-    
-        try {
-            gameModel.setState(State.LOBBY);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
         
         
-        /*
+        
         LockRifle lock = new LockRifle();
-        player1.getPlayerBoard().getPlayerWeapons().add(lock);
         player1.getPlayerBoard().getPlayerWeapons().add(lock);
     
         gameModel.setWeaponsEffect(WeaponsEffect.BaseEffect);
@@ -115,15 +108,11 @@ public class MainMarcoController {
        
 
         try {
-            gameModel.setState(State.SELECTWEAPON);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        try {
             gameModel.setState(State.SHOOT);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+       
         
         gameModel.setWeaponsEffect(WeaponsEffect.SecondLockEffect);
     
@@ -138,7 +127,7 @@ public class MainMarcoController {
 
             p.stampa();
         }
-         */
+        
        
 
         

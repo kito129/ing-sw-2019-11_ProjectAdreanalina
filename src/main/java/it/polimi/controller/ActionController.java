@@ -21,6 +21,7 @@ public class ActionController {
     WeaponCard weaponSelected; //current weapon for current Player
     PowerUpCard powerUpSelected; //current weapon effect for current Player
     ArrayList<PowerUpCard> powerUpRespawn = new ArrayList<>();
+    WeaponsEffect beforeEffect;
     
     
     public void errorState(ActionModel actionModel) throws RemoteException {
@@ -488,6 +489,7 @@ public class ActionController {
     //errori di mappa map exception non dovrebbero mai verificarsi perchè garantisci che non verranno mai sollevate.
     //solo per ricordatelo gli errori di visibilità distanza... inglobano anche errori di mappa oltre agli errori stessi
     
+    //FINITA
     public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) throws RemoteException{
     
         //use always base and optional for second effect
@@ -520,6 +522,7 @@ public class ActionController {
                 
             case SecondLockEffect:
                 //second lock effect
+                
                 try {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     targetSecondLock = gameModel.getPlayerById(view.getTarget2());
@@ -545,7 +548,7 @@ public class ActionController {
             }
         }
     
-    
+    //FINITA
     public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon, RemoteView view) throws RemoteException{
     
         //necessary from model
@@ -583,6 +586,7 @@ public class ActionController {
         }
     }
     
+    //FINITA
     public void TractorBeam(GameModel gameModel, TractorBeam weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
@@ -636,7 +640,7 @@ public class ActionController {
         }
     }
     
-   
+   //FINITA
     public void Whisper(GameModel gameModel, Whisper weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
@@ -668,6 +672,7 @@ public class ActionController {
         }
     }
     
+    //FINITA
     public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) throws RemoteException {
     
         //necessary from model
@@ -690,6 +695,8 @@ public class ActionController {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     vortexSquare = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.baseEffect(map, vortexSquare, currentPlayer, targetBase);
+                    
+                    beforeEffect = WeaponsEffect.BaseEffect;
                 } catch (NotVisibleTarget notVisibleTarget) {
     
                     gameModel.setErrorMessage("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE FROM YOUR POSITION");
@@ -707,56 +714,63 @@ public class ActionController {
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
                 break;
+                
             case BlackHoleEffect:
             
-                //black hole effect
-                try {
-        
-                    vortexSquare = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                    targetBase = gameModel.getPlayerById(view.getTarget1());
-                    target1BlackHole = gameModel.getPlayerById(view.getTarget2());
-                    if (view.getTarget3()== -1){ //ha selezionato solo un target se entraimo qui
-        
-                        if (target1BlackHole != targetBase) {
-        
-                            targetsBlackHole.add(target1BlackHole);
-                            weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
-                        } else {
-        
-                            throw new NotValidInput();
-                        }
-                    } else {
-        
-                        target2BlackHole = gameModel.getPlayerById(view.getTarget3());
-                        if ((target1BlackHole != target2BlackHole) && (target1BlackHole != targetBase) && (target2BlackHole != targetBase)) {
-        
-                            targetsBlackHole.add(target1BlackHole);
-                            targetsBlackHole.add(target2BlackHole);
-                            weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
-                       } else {
-        
-                           throw new NotValidInput();
-                       }
-                      
-                    }
-                } catch (NotValidDistance notValidDistance) {
-        
-                    gameModel.setErrorMessage( "THE CHOSEN TARGET IS NOT ON VORTEX SQUARE OR IS NOT DISTANCE ONE MOVE FROM THE VORTEX SQUARE");
-        
-                } catch (NotValidInput notValidInput) {
-        
-                    gameModel.setErrorMessage("ONE OR TWO BLACK HOLE TARGET ARE THE SAME OF BASE EFFECT OR ARE EQUAL BETWEEN THEM");
-        
-                } catch (MapException e) {
+                if(beforeEffect==WeaponsEffect.BaseEffect) {
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    //black hole effect
+                    try {
+        
+                        vortexSquare = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                        targetBase = gameModel.getPlayerById(view.getTarget1());
+                        target1BlackHole = gameModel.getPlayerById(view.getTarget2());
+                        if (view.getTarget3() == -1) { //ha selezionato solo un target se entraimo qui
+            
+                            if (target1BlackHole != targetBase) {
+                
+                                targetsBlackHole.add(target1BlackHole);
+                                weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
+                            } else {
+                
+                                throw new NotValidInput();
+                            }
+                        } else {
+            
+                            target2BlackHole = gameModel.getPlayerById(view.getTarget3());
+                            if ((target1BlackHole != target2BlackHole) && (target1BlackHole != targetBase) && (target2BlackHole != targetBase)) {
+                
+                                targetsBlackHole.add(target1BlackHole);
+                                targetsBlackHole.add(target2BlackHole);
+                                weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
+                            } else {
+                
+                                throw new NotValidInput();
+                            }
+            
+                        }
+                    } catch (NotValidDistance notValidDistance) {
+        
+                        gameModel.setErrorMessage("THE CHOSEN TARGET IS NOT ON VORTEX SQUARE OR IS NOT DISTANCE ONE MOVE FROM THE VORTEX SQUARE");
+        
+                    } catch (NotValidInput notValidInput) {
+        
+                        gameModel.setErrorMessage("ONE OR TWO BLACK HOLE TARGET ARE THE SAME OF BASE EFFECT OR ARE EQUAL BETWEEN THEM");
+        
+                    } catch (MapException e) {
+        
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    }
+                } else {
+    
+                    gameModel.setErrorMessage("ERROR!");
                 }
                 break;
             }
             
     }
 
-
+    //FINITA
     public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) throws RemoteException {
 
         //necessary from model
@@ -774,7 +788,7 @@ public class ActionController {
 
                 try {
 
-                    roomTarget = view.getColorRoom();    //todo dovremmo verificare che il colore esiste in qeualla certa mappa
+                    roomTarget = view.getColorRoom();
                     weapon.baseMode(map, currentPlayer, roomTarget);
                 } catch (NotValidDistance notValidDistance) {
 
@@ -813,6 +827,7 @@ public class ActionController {
         }
     }
 
+    //FINITA
     public void HeatSeeker(GameModel gameModel, Heatseeker weapon, RemoteView view) throws RemoteException{
         
         //necessary from model
@@ -841,6 +856,7 @@ public class ActionController {
         }
     }
 
+    //FINITA
     public void Hellion(GameModel gameModel, Hellion weapon, RemoteView view) throws RemoteException{
     
         //necessary from model
@@ -897,6 +913,7 @@ public class ActionController {
         }
     }
     
+    //FINITA
     public void RailGun(GameModel gameModel, Railgun weapon,RemoteView view) throws RemoteException{
         
         //necessary from model
@@ -966,7 +983,7 @@ public class ActionController {
         }
     }
     
-
+    //FINITA
     public void Zx2(GameModel gameModel, Zx2 weapon,RemoteView view) throws RemoteException {
         
         //necessary from model
@@ -1024,8 +1041,7 @@ public class ActionController {
                             target2 = gameModel.getPlayerById(view.getTarget2());
                             target3 = gameModel.getPlayerById(view.getTarget3());
                             if ((target1 != target2) && (target1 != target3) && (target2 != target3)) {
-    
-                                target3 = gameModel.getPlayerById(view.getTarget3());
+
                                 scannerModeTargets.add(target1);
                                 scannerModeTargets.add(target2);
                                 scannerModeTargets.add(target3);
@@ -1053,7 +1069,7 @@ public class ActionController {
     }
     
 
-    
+    //FINITA
     public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view) throws RemoteException  {
         
         //necessary from model
@@ -1070,6 +1086,12 @@ public class ActionController {
 
                 targetBase = gameModel.getPlayerById(view.getTarget1());
                 weapon.baseEffect(map, currentPlayer, targetBase);
+    
+                if(view.isBooleanChose()) {
+                    
+                    weapon.chargedShotEffect(currentPlayer, targetBase);
+                }
+                
             } catch (NotVisibleTarget notVisibleTarget) {
                 
                 gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
@@ -1093,24 +1115,10 @@ public class ActionController {
                     gameModel.setErrorMessage("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVES");
                 }
                 break;
-                
-                case ChargedShotEffect:
-                    //nessuna eccezione da lanciare;il target è lo stesso dell'effetto base quindi il controllo sulla visibilità è gia garantito
-                    //quando viene chiamaro l'effetto base-->sicuramente l'effetto base è stato usato se usiamo questo effetto.
-                    //get the target
-                    try {
-    
-                        targetBase = gameModel.getPlayerById(view.getTarget1());
-                        weapon.chargedShotEffect(currentPlayer,targetBase);
-                    } catch (MapException e) {
-    
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
-                    }
-                    break;
             }
         }
     
-
+    //FINITA
     public void Cyberblade(GameModel gameModel, Cyberblade weapon,RemoteView view) throws RemoteException{
         
         //necessary from model
@@ -1129,6 +1137,9 @@ public class ActionController {
 
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, currentPlayer, targetBase);
+                    
+                    beforeEffect= WeaponsEffect.BaseEffect;
+                    
                 } catch (NotValidDistance notValidDistance) {
 
                      gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
@@ -1155,37 +1166,45 @@ public class ActionController {
                     //errori
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
+                
             case SliceAndDiceEffect:
                 
-                try {
-
-                    targetBase = gameModel.getPlayerById(view.getTarget1());
-                    targetSliceAndDice = gameModel.getPlayerById(view.getTarget2());
-                    if (targetBase != targetSliceAndDice) {
-                        
-                        weapon.sliceAndDiceEffect(map, currentPlayer, targetSliceAndDice);
-                    } else {
-                        
-                        throw new NotValidInput();
+                if(beforeEffect==WeaponsEffect.BaseEffect) {
+    
+                    try {
+        
+                        targetBase = gameModel.getPlayerById(view.getTarget1());
+                        targetSliceAndDice = gameModel.getPlayerById(view.getTarget2());
+                        if (targetBase != targetSliceAndDice) {
+            
+                            weapon.sliceAndDiceEffect(map, currentPlayer, targetSliceAndDice);
+                        } else {
+            
+                            throw new NotValidInput();
+                        }
+                    } catch (NotValidInput notValidInput) {
+        
+                        gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
+        
+                        //gestione target slice and dice è uguale al target base
+                    } catch (NotValidDistance notValidDistance) {
+        
+                        gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
+                        //target slice and dice non è nel quadrato del curretn player.
+                    } catch (MapException mapException) {
+        
+                        //errori
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
                     }
-                } catch (NotValidInput notValidInput) {
-
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
-                    
-                    //gestione target slice and dice è uguale al target base
-                } catch (NotValidDistance notValidDistance) {
-
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
-                    //target slice and dice non è nel quadrato del curretn player.
-                } catch (MapException mapException) {
-                    
-                    //errori
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                } else {
+    
+                    gameModel.setErrorMessage("ERROR!");
                 }
               
         }
     }
 
+    //FINITA
     public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon, RemoteView view) throws RemoteException{
         
         //necessary from model
@@ -1204,6 +1223,9 @@ public class ActionController {
 
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, targetBase, currentPlayer);
+                    
+                    beforeEffect = WeaponsEffect.BaseEffect;
+                    
                 } catch (NotVisibleTarget notVisibleTarget) {
 
                     gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
@@ -1234,22 +1256,28 @@ public class ActionController {
             
             case ExtraGrenadeEffect:
                 
-                //la move lho messo come metodo a parte perchè può essere usata anche dopo questo effetto
-                try {
-                    targetSquareExtra = gameModel.getMap().getSquare(view.getRow2(), view.getColumn2());
-                    weapon.extraGrenadeEffect(map, currentPlayer, targetSquareExtra);
-                } catch (NotVisibleTarget notVisibleTarget) {
-
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE");
-                    
-                    //gestione quadrato scelto non visibile
-                } catch (MapException mapExcpetion) {
-                    
-                    //errori
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
-                } catch (NoTargetInSquare noTargetInSquare){
-
-                    gameModel.setErrorMessage("ERROR: NO TARGET IN THE CHOSEN SQUARE");
+                if(beforeEffect == WeaponsEffect.BaseEffect) {
+    
+                    //la move lho messo come metodo a parte perchè può essere usata anche dopo questo effetto
+                    try {
+                        targetSquareExtra = gameModel.getMap().getSquare(view.getRow2(), view.getColumn2());
+                        weapon.extraGrenadeEffect(map, currentPlayer, targetSquareExtra);
+                    } catch (NotVisibleTarget notVisibleTarget) {
+        
+                        gameModel.setErrorMessage("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE");
+        
+                        //gestione quadrato scelto non visibile
+                    } catch (MapException mapExcpetion) {
+        
+                        //errori
+                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    } catch (NoTargetInSquare noTargetInSquare) {
+        
+                        gameModel.setErrorMessage("ERROR: NO TARGET IN THE CHOSEN SQUARE");
+                    }
+                } else {
+    
+                    gameModel.setErrorMessage("ERROR!");
                 }
                 break;
         }

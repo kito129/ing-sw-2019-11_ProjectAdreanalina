@@ -156,9 +156,11 @@ public class PrintEffectWeapon implements Serializable {
     public static void printPlasmaGunBasicEffect(GameModel gameModel){
 
         System.out.println();
-        System.out.println("BASIC EFFECT");
+        System.out.println("BASIC EFFECT + ");
         System.out.println("Who is your target? (it must be visible) (enter player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
+        System.out.println();
+        System.out.println("Do you want to use also Charged Shoot");
     }
 
     /**
@@ -172,14 +174,17 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("In which square do you want to move? (1 or 2 movements) (enter row and column)");
     }
 
-    /**
+
+/**
      * Print the effect of this weapon
-     */
+   
+ */
     public static void printPlasmaGunChargedShot(){
 
         System.out.println();
-        System.out.println("YOU HAVE SELECTED THE CHARGE SHOT");
+        System.out.println("Do you want to use also Charged Shoot");
     }
+    
 
     //WHISPER
     /**

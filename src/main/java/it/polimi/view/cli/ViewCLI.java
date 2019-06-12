@@ -667,6 +667,16 @@ public class ViewCLI implements RemoteView, Serializable {
         //get the player target
         setTarget1(getPlayerInput());
         //notify controller with new input
+    
+        PrintEffectWeapon.printPlasmaGunChargedShot();
+        
+        if (getMoveYesNo()==1) {
+            
+            setBooleanChose(true);
+            
+        } else {
+            setBooleanChose(false);
+        }
         notifyController();
     }
     
@@ -679,6 +689,7 @@ public class ViewCLI implements RemoteView, Serializable {
         notifyController();
     }
     
+    /*
     public void viewPlasmaGunChargedShot() throws RemoteException{
         
         PrintEffectWeapon.printPlasmaGunChargedShot();
@@ -686,6 +697,8 @@ public class ViewCLI implements RemoteView, Serializable {
         //TODO VEDERE SE é NECESsario notficare anche in caso non ci fossero input da parte della view
         notifyController();
     }
+    
+     */
     
     //WHISPER
     public void viewWhisperEffect(GameModel gameModel) throws RemoteException{
