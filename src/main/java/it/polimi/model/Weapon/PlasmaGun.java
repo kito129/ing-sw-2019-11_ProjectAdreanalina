@@ -28,7 +28,6 @@ public class PlasmaGun extends WeaponCard {
         ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
         weaponEffects.add(WeaponsEffect.BaseEffect);
         weaponEffects.add(WeaponsEffect.PhaseGlideEffect);
-        weaponEffects.add(WeaponsEffect.ChargedShotEffect);
         setWeaponEffects(weaponEffects);
         phaseGlideCost = new ArrayList<EnumColorCardAndAmmo>();
         phaseGlideCost.add(null);
