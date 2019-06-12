@@ -1,12 +1,13 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * The type Ammo deck.
  */
-public class AmmoDeck {
+public class AmmoDeck implements Serializable {
 
     private ArrayList<AmmoCard> ammoCards;
     private ArrayList<AmmoCard> discardedCards;

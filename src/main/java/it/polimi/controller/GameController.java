@@ -33,8 +33,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         return gameStarted;
     }
     
-    public GameModel getGameModel() {
-        
+    public GameModel getGameModel() throws RemoteException{
         
         return this.gameModel;
     }
@@ -72,9 +71,6 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         if(true) {
             //verifyObserver();
             
-            Player actualPlayer = gameModel.getActualPlayer();
-            PlayerBoard actualPlayerBoard = actualPlayer.getPlayerBoard();
-    
             //2 action and multiple power up use
             int action=0;
             while (action<2) {
@@ -147,6 +143,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     case ENDACTION:
                         break;
                     case RECHARGE:
+                        /*
                         //vedo se posso ricaricare ricarica
                         if (actualPlayerBoard.getWeaponToCharge().size() > 0) {
                     
@@ -164,6 +161,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                             }
                             gameModel.setState(State.PASSTURN);
                         }
+                        
+                         */
                         break;
                     case PASSTURN:
                         break;

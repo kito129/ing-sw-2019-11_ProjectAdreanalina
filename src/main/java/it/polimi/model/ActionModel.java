@@ -7,13 +7,14 @@ import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.*;
 
 /**
  * The type Action model.
  */
-public class ActionModel {
+public class ActionModel implements Serializable {
 
     private GameModel gameModel;
     private int action = 0;

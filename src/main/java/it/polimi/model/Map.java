@@ -5,12 +5,13 @@ import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotValidSquareException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Map of the game, contain an ArrayList of type Square, that represent the game board.
  */
-public class Map {
+public class Map implements Serializable {
     
     private ArrayList<Square> squares;
     private String name;

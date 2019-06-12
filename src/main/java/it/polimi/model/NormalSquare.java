@@ -1,11 +1,12 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Normal square.
  */
-public class NormalSquare extends Square {
+public class NormalSquare extends Square implements Serializable {
 
     private AmmoCard ammoCard;
     

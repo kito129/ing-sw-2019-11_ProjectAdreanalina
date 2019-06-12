@@ -5,13 +5,14 @@ import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * The type Power up deck.
  */
-public class PowerUpDeck {
+public class PowerUpDeck implements Serializable {
 
     private ArrayList<PowerUpCard> powerUpCards;
     private ArrayList<PowerUpCard> discardedCards;

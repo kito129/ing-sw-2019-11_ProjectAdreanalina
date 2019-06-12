@@ -1,11 +1,12 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Square, contains, color row and column and a list contain where the square is linked
  */
-public class Square{
+public class Square implements Serializable {
 
     private EnumColorSquare color;
     private int row;

@@ -1,11 +1,12 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Ammo card.
  */
-public class AmmoCard {
+public class AmmoCard implements Serializable {
 
     private ArrayList<EnumColorCardAndAmmo> ammo;
     private boolean hasPowerUpCard;

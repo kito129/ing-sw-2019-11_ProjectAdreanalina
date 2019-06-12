@@ -1,11 +1,12 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Generation square.
  */
-public class GenerationSquare extends Square{
+public class GenerationSquare extends Square implements Serializable{
 
     private ArrayList<WeaponCard> weaponList;
     

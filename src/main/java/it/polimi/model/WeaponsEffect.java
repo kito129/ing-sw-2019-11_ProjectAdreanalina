@@ -1,6 +1,8 @@
 package it.polimi.model;
 
-public enum WeaponsEffect {
+import java.io.Serializable;
+
+public enum WeaponsEffect implements Serializable {
 
     BaseEffect,BaseMode,SecondLockEffect,ReaperMode,FocusShotEffect,TurretTripodEffect,PunisherMode,ChainReactionEffect,
     HighVoltageEffect,PhaseGlideEffect,ChargedShotEffect,BlackHoleEffect,CozyFireMode,NanoTracerMode,BarbecueMode,

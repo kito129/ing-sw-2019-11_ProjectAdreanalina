@@ -13,6 +13,7 @@ public class MainPartita {
     public static void main(String args[]) {
 
 
+        /*
         Player player1 = new Player(1, "andrea", EnumColorPlayer.YELLOW);
         Player player2 = new Player(2, "marco", EnumColorPlayer.BLU);
         Player player3 = new Player(3, "simone", EnumColorPlayer.GREEN);
@@ -171,6 +172,8 @@ public class MainPartita {
         System.out.println("\n\nFINE\n\n");
         
         
+        
+         */
         
     
     }

@@ -37,6 +37,7 @@ public class GameModel implements Serializable {
         this.ammoDeck = new AmmoDeck();
         this.powerUpDeck=new PowerUpDeck();
         this.weaponDeck=new WeaponDeck();
+        players=new ArrayList<>();
     }
     
 

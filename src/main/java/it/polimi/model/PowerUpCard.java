@@ -1,11 +1,12 @@
 package it.polimi.model;
 
 
+import java.io.Serializable;
 
 /**
  * The type Power up card.
  */
-public class PowerUpCard {
+public class PowerUpCard implements Serializable {
     
 
     private String namePowerUpCard;

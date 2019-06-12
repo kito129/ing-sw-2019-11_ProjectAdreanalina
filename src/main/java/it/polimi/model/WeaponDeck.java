@@ -3,13 +3,14 @@ package it.polimi.model;
 import it.polimi.model.Exception.NoAvaibleCard;
 import it.polimi.model.Weapon.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * The type Weapon deck.
  */
-public class WeaponDeck {
+public class WeaponDeck implements Serializable {
 
     private ArrayList<WeaponCard> weaponCards;
 

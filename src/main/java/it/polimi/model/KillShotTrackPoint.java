@@ -1,9 +1,11 @@
 package it.polimi.model;
 
+import java.io.Serializable;
+
 /**
  * The type Kill shot track point.
  */
-public class KillShotTrackPoint {
+public class KillShotTrackPoint implements Serializable {
 
     private boolean skull;
     private EnumColorPlayer mark1;

@@ -2,12 +2,13 @@ package it.polimi.model;
 
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Player board.
  */
-public class PlayerBoard{
+public class PlayerBoard implements Serializable {
 
     private ArrayList<EnumColorCardAndAmmo> ammo;
     private int boardValue;

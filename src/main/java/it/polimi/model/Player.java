@@ -1,11 +1,12 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Player.
  */
-public class Player {
+public class Player implements Serializable {
     
     private int id;
     private String name;

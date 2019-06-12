@@ -59,28 +59,24 @@ public class ViewCLI implements RemoteView, Serializable {
     
 
 
-    public ViewCLI(){
+    public ViewCLI()  {
 
         connection();
         System.out.println("WELCOME TO ADRENALINA");
-
+    
+    
         try {
-            
             gameModel=gameController.getGameModel();
     
             do {
                 setUser();
             }while (verifyName(user));
-            
+    
             gameController.addObserver(this);
             gameController.update(this);
-            
-        }catch (RemoteException remoteException) {
-
-            System.out.println("NETWORK ERROR ");
-            System.exit(0);
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
-        
     }
 
     public void connection()  {
@@ -100,14 +96,18 @@ public class ViewCLI implements RemoteView, Serializable {
     }
 
     private boolean verifyName(String name){
+        
+        if (gameModel.getPlayers(true)!=null){
 
-        for(Player player:gameModel.getPlayers(true)){
-
-            if(name.equals(player.getName())){
+        for(Player player:gameModel.getPlayers(true)) {
+    
+            if (name.equals(player.getName())) {
                 System.out.println("THIS USERNAME ALREADY EXIST");
                 return true;
             }
-        }return false;
+        }
+        }
+        return false;
     }
     
     protected void setUser() {
@@ -131,8 +131,6 @@ public class ViewCLI implements RemoteView, Serializable {
 
         System.out.println(s);
     }
-
-
 
     @Override
     public int getIndex () {

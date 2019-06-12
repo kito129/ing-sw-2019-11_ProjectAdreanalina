@@ -1,11 +1,12 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The type Kill shot track, array list of killShotTrackPoint, with function to count color and skull.
  */
-public class KillShotTrack{
+public class KillShotTrack implements Serializable {
 
     private EnumColorPlayer doubleKill;
     private ArrayList<KillShotTrackPoint> track;
