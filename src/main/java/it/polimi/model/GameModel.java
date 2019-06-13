@@ -6,6 +6,7 @@ import it.polimi.view.RemoteView;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class GameModel implements Serializable {
     private WeaponState extraState;
     private WeaponsEffect weaponsEffect;
     private String errorMessage;
+    private ArrayList<EnumColorPlayer> gameColor = new ArrayList<>(5);
     
     public GameModel(){
         
@@ -38,6 +40,27 @@ public class GameModel implements Serializable {
         this.powerUpDeck=new PowerUpDeck();
         this.weaponDeck=new WeaponDeck();
         players=new ArrayList<>();
+        this.map = new Map(MapCreator.createA(),"mapp a");
+        populateColor();
+        
+    }
+    
+    public EnumColorPlayer getRandomColor(){
+    
+        Collections.shuffle(gameColor);
+        EnumColorPlayer randomColor = gameColor.get(0);
+        gameColor.remove(0);
+        return randomColor;
+        
+    }
+    
+    public void populateColor(){
+        
+        this.gameColor.add(EnumColorPlayer.BLU);
+        this.gameColor.add(EnumColorPlayer.GREEN);
+        this.gameColor.add(EnumColorPlayer.GREY);
+        this.gameColor.add(EnumColorPlayer.PINK);
+        this.gameColor.add(EnumColorPlayer.YELLOW);
     }
     
 
@@ -134,11 +157,17 @@ public class GameModel implements Serializable {
         return state;
     }
     
+    public void setPlayers(Player player){
+       
+        this.players.add(player);
+        actualPlayer = this.players.get(0);
+    }
+    
 
     public void setState (State state) throws RemoteException {
         
         this.state=state;
-        notifyObserver1();
+        notifyObserver();
     }
     
     public WeaponState getExtraState () {
@@ -249,7 +278,7 @@ public class GameModel implements Serializable {
         remoteViews.set(index, observer);
     }
 
-    public void notifyObserver1(){
+    public void notifyObserver (){
 
 
         for(RemoteView observer: getRemoteView()){
@@ -263,24 +292,6 @@ public class GameModel implements Serializable {
         }
     }
     
-    public void notifyObserver (GameModel gameModel){
-            try {
-                int tmp = 0;
-                for(RemoteView observer: getRemoteView()) {
-                    if(observer!=null) {
-                        if (true) {
-                            if (true) {
-                                observer.update(gameModel);
-                            }
-                        } else {
-                            tmp = getRemoteView().indexOf(observer);
-                        }
-                    }
-                }
-            } catch (RemoteException e) {
-                //do nothing
-            }
-    }
 
     public Player getPlayerById(int i) throws MapException {
 

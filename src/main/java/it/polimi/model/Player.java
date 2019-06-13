@@ -18,6 +18,7 @@ public class Player implements Serializable {
     private boolean alive;
     private boolean damaged;
     private boolean online;
+    private ArrayList<PowerUpCard> powerUpCardsSpawn = new ArrayList<>(2);
    
     
     /**
@@ -144,6 +145,17 @@ public class Player implements Serializable {
         return online;
     }
     
+    public ArrayList<PowerUpCard> getPowerUpCardsSpawn () {
+        
+        return powerUpCardsSpawn;
+    }
+    
+    public void setPowerUpCardsSpawn (ArrayList<PowerUpCard> powerUpCardsSpawn) {
+        
+        this.powerUpCardsSpawn.add(powerUpCardsSpawn.get(0));
+        this.powerUpCardsSpawn.add(powerUpCardsSpawn.get(1));
+    }
+    
     public void setOnline(Boolean online){
         
         this.online=online;
@@ -254,7 +266,7 @@ public class Player implements Serializable {
     @Override
     public String toString () {
 
-        return "Player: " + this.id + " name: " + this.name + " r: " + this.row + " c: " + this.column;
+        return "Player: " + this.id + " name: " + this.name + " r: " + this.row + " c: " + this.column + this.getPowerUpCardsSpawn().toString();
     }
 
     public void stampa(){

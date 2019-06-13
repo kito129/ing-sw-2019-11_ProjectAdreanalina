@@ -18,28 +18,32 @@ public class PrintPowerUp implements Serializable {
      * @param powerUpCards         list of player's poweUp.
      */
     public static void print(ArrayList<PowerUpCard> powerUpCards){
-
-        for(PowerUpCard puc : powerUpCards){
-
-            System.out.println();
+    
+    
+        for (int i = 0; i < powerUpCards.size(); i++) {
+            
+            PowerUpCard puc = powerUpCards.get(i);
+        
+            System.out.println("\n " + i +": ");
             System.out.println("POWER UP: " + puc.getNameCard());
             System.out.println("DESCRIPTION: ");
             System.out.println(puc.getNameCard());
-
-            if(puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.BLU)){
-
+        
+            if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.BLU)) {
+            
                 System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
-
-            if(puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.RED)){
-
+        
+            if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.RED)) {
+            
                 System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
-
-            if(puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.YELLOW)){
-
+        
+            if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.YELLOW)) {
+            
                 System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
+            
         }
     }
 }

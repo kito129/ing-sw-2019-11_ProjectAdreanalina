@@ -76,72 +76,51 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
             while (action<2) {
         
                 switch (gameModel.getState()) {
-                    case SETUP:
+                    case LOBBY:
+                        actionController.lobby(actionModel,view);
                         break;
-                    case PLAYERSETUP:
+                    case DRAWNPOWERUP:
+                        actionController.drawnPowerUp(actionModel);
                         break;
                     case SPAWNPLAYER:
+                        actionController.firstSpawnPlayer(actionModel,view);
                         break;
-                    case LOBBY:
+                    case CHOSEACTION:
+                       // actionController.choseAction(actionModel,view);
                         break;
-                    case STARTTURN:
-                        break;
-                    case CHOSE:
+                    case SELECTPOWERUP:
+                        actionController.selectPowerUp(actionModel,view);
                         break;
                     case USEPOWERUP:
-                        //chiedo che power up vuole usare
-                        if (gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex()) != null) {
-                    
-                            PowerUpCard usedPowerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex());
-                            try {
-                        
-                                actionController.usePowerUpController(actionModel, usedPowerUp,view);
-                            } catch (NoPowerUpAvailable noPowerUpAvailable) {
-                                beforeError = gameModel.getState();
-                                gameModel.setState(State.ERROR);
-                                System.out.println("ERROR");
-                            } catch (NotValidInput notValidInput) {
-                                beforeError = gameModel.getState();
-                                gameModel.setState(State.ERROR);
-                                System.out.println("ERROR");
-                            } catch (MapException e) {
-                                beforeError = gameModel.getState();
-                                gameModel.setState(State.ERROR);
-                                System.out.println("ERROR");
-                            }
-                        } else {
-                            beforeError = gameModel.getState();
-                            gameModel.setState(State.ERROR);
-                            System.out.println("ERROR");
-                        }
-                        break;
+                       actionController.usePowerUpController(actionModel,view);
+                       break;
                     case SELECTRUN:
                         //oggi
                         actionController.runActionController(actionModel, view);
                         action++;
-                        break;
+
                     case RUN:
-                        break;
+               
                     case SELECTGRAB:
                         actionController.grabActionController(actionModel, view);
                         action++;
-                        break;
+              
                     case GRAB:
-                        break;
+               
                     case SELECTWEAPON:
                         actionController.selectWeapon(actionModel,view);
                         action++;
-                        break;
+           
                     case SELECTEFFECT:
                         actionController.selectWeaponEffect(actionModel,view);
-                        break;
+                   
                     case SHOOT:
                         LockRifle lock = new LockRifle();
                         actionController.LockRifleweapon(gameModel,lock,view);
                         action++;
-                        break;
+           
                     case ENDACTION:
-                        break;
+                  
                     case RECHARGE:
                         /*
                         //vedo se posso ricaricare ricarica

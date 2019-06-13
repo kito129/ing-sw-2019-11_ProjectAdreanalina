@@ -5,7 +5,6 @@ import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -400,21 +399,19 @@ public class ViewCLI implements RemoteView, Serializable {
         switch (gameModel.getState()) {
            
             case LOBBY:
-                viewRun();
+                viewLobby();
                 break;
-            case SETUP:
-                break;
-            case PLAYERSETUP:
+            case DRAWNPOWERUP:
+                viewMap();
                 break;
             case SPAWNPLAYER:
+                viewSpawnPowerUp();
                 break;
-            
-            case STARTTURN:
+           case STARTTURN:
                 break;
             case USEPOWERUP:
                 break;
             case RUN:
-                viewRun();
                 break;
             case SELECTRUN:
                 viewRunSelection();
@@ -479,8 +476,38 @@ public class ViewCLI implements RemoteView, Serializable {
     //metodi di contr
 
     public void viewLobby() throws RemoteException{
-
-        PrintMenu.print();
+    
+        System.out.println("GAMERS IN THE LOBBY:");
+        for(Player a: gameModel.getPlayers(true)){
+            System.out.println("- " + a.getId() +": "+ a.getName());
+        }
+        notifyController();
+    }
+    
+    public  void viewSpawnPowerUp () throws RemoteException {
+    
+        System.out.println("CHOSE POWERUP TO MANTAIN, WHERE YOU RESPAWN, THE OTHER ONE GOES IN YOUR PLAYER BOARD:");
+        Player player = gameModel.getActualPlayer();
+    
+        System.out.println(player.toString());
+        
+        PrintPowerUp.print(player.getPowerUpCardsSpawn());
+    
+        System.out.println("YOUR CHOISE: ");
+    
+        Scanner input = new Scanner(System.in);
+    
+        int i;
+        do {
+            
+            while(!input.hasNextInt())
+                input = new Scanner(System.in);
+            i = input.nextInt();
+        } while (i<0 || i>1);
+        
+        setIndex(i);
+        notifyController();
+    
     }
     
     public void viewRunSelection() throws RemoteException {
@@ -493,9 +520,10 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     
-    public void viewRun() throws RemoteException {
+    public void viewMap () throws RemoteException {
         
         PrintMap.printMap(gameModel.getMap());
+    
     }
 
     public void  viewGrabSelection() throws RemoteException {
