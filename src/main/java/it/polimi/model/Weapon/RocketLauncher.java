@@ -27,9 +27,8 @@ public class RocketLauncher extends WeaponCard {
         rechargeCost.add(EnumColorCardAndAmmo.RED);
         setRechargeCost(rechargeCost);
         ArrayList<WeaponsEffect> weaponEffects= new ArrayList<>();
-        weaponEffects.add(WeaponsEffect.BaseEffect);
+        weaponEffects.add(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
         weaponEffects.add(WeaponsEffect.RocketJumpEffect);
-        weaponEffects.add(WeaponsEffect.FragmentingWarheadEffect);
         setWeaponEffects(weaponEffects);
         rocketJumpCost =new ArrayList<EnumColorCardAndAmmo>();
         rocketJumpCost.add(EnumColorCardAndAmmo.BLU);
@@ -100,7 +99,6 @@ public class RocketLauncher extends WeaponCard {
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         Square squareOfTarget1Player = map.findPlayer(target1);
         ArrayList<Player> playersOnTarget1Square=map.playersOnSquare(squareOfTarget1Player);
-        playersOnTarget1Square.remove(currentPlayer);//non dovrebbe servire.
         if((map.isVisible(target1,currentPlayer)) && (!(squareOfCurrentPlayer == squareOfTarget1Player))
                 &&(playersOnTarget1Square.size()!=0)){
 
