@@ -1082,7 +1082,8 @@ public class ActionController {
         Square destSquarePhaseGlide;
     
         switch (gameModel.getWeaponsEffect()) {
-            case BaseEffect:
+
+            case BaseEffectPlusChargedShotEffect:
 
             try {
 
@@ -1286,10 +1287,7 @@ public class ActionController {
    
     }
     
-    
-    
-    
-    //TODO andre
+
     public void Thor(GameModel gameModel, Thor weapon, RemoteView view) throws RemoteException {
 
         //necessary from model
@@ -1397,8 +1395,7 @@ public class ActionController {
                 break;
             }
         }
-        
-    //TODO andre
+
     public void Shockwave(GameModel gameModel, Shockwave weapon,RemoteView view) throws RemoteException{
         
         //necessary from model
@@ -1416,25 +1413,27 @@ public class ActionController {
                 
                 try {
                     
-                    target1Base = gameModel.getPlayerById(view.getTarget1());
-                    target2Base = gameModel.getPlayerById(view.getTarget2());
-                    target3Base = gameModel.getPlayerById(view.getTarget3());
-    
-    
-                    if ((target3Base == null) && (target2Base == null)) {
-        
+                    if ((view.getTarget3() == -1) && (view.getTarget2() == -1)) {
+
+                        target1Base = gameModel.getPlayerById(view.getTarget1());
                         weapon.baseMode(map, currentPlayer, target1Base);
                         
-                    } else if ((target3Base == null) && (target2Base != null)) {
-        
+                    } else if ((view.getTarget3() == -1) && (view.getTarget2() != -1)) {
+
+                        target1Base = gameModel.getPlayerById(view.getTarget1());
+                        target2Base = gameModel.getPlayerById(view.getTarget2());
                         weapon.baseMode(map, currentPlayer, target1Base, target2Base);
                     } else {
-        
+
+                        target1Base = gameModel.getPlayerById(view.getTarget1());
+                        target2Base = gameModel.getPlayerById(view.getTarget2());
+                        target3Base = gameModel.getPlayerById(view.getTarget3());
                         weapon.baseMode(map, currentPlayer, target1Base, target2Base, target3Base);
                     }
                 } catch (NotValidDistance notValidDistance) {
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET ARE NOT DIFFERENT AMONG THEM OR EACH ONE ARE NOT DISTANCE" +
+                            "EXACTLY ONE MOVE");
                 } catch (MapException e) {
     
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
@@ -1451,7 +1450,7 @@ public class ActionController {
                     weapon.tsunamiMode(map,currentPlayer,allPlayerInGame);
                 }catch (NotValidDistance notValidDistance){
 
-                    //nessun player è distante un movimento.
+                    gameModel.setErrorMessage("ERROR: NO PLAYER AT ONE MOVE FROM YOU");
                 }
                 break;
         }
@@ -1620,9 +1619,8 @@ public class ActionController {
             }
         }
     
-    
-    //TODO andre
-    /*
+
+
     public void RocketLauncher(GameModel gameModel, RocketLauncher weapon,RemoteView view) throws RemoteException {
         
         //necessary from model
@@ -1635,87 +1633,134 @@ public class ActionController {
 
         //get choise for square in basic
         boolean choice1;
-        choice1 = view.isUseSecondEffect();
+
     
         switch (gameModel.getWeaponsEffect()) {
             
-            case BaseMode:
+            case BaseEffectPlusFragmentingWarheadEffect:
                 
                 try {
-                    
                     //get input
                     targetBase = gameModel.getPlayerById(view.getTarget1());
-                    destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                    
-                    if(choice1){
-                        
-                        //TODO andre
-                        weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
-                        
-                    } else {
-                        
-                        //set the input in null f player dont want to move the player
-                        destSquareBase=null;
-                        weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
+                    choice1 = view.isUseSecondEffect();
+
+                    if(!choice1){
+
+                        if ((view.getRow() != -1) && ((view.getColumn() != -1))) {
+
+                            destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                            weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
+
+                        } else {
+
+                            //set the input in null f player dont want to move the player
+                            destSquareBase = null;
+                            weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
+                        }
+                    }else{
+
+                        if ((view.getRow() != -1) && ((view.getColumn() != -1))) {
+
+                            destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
+                            weapon.baseEffectWithFragmenting(map, targetBase, currentPlayer, destSquareBase);
+
+                        } else {
+
+                            //set the input in null f player dont want to move the player
+                            destSquareBase = null;
+                            weapon.baseEffectWithFragmenting(map, targetBase, currentPlayer, destSquareBase);
+                        }
+
+
                     }
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
-                    
-                    //target non visibile
-                    
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+
                 } catch (NotValidDistance notValidDistance) {
                     
                     //errore  di distanza,sia se il target è nella tuo stesso quadrato,sia se il movimento che gli facciamo fare al target non è validp
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS IN YOUR SQUARE OR YOU ARE NOT MOVING ONE MOVE YOUR TARGET ");
                 } catch (MapException mapExcpetion) {
     
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
+                } catch (NoTargetInSquare noTargetInSquare){
+
+                    gameModel.setErrorMessage("ERROR: NO TARGET IN CHOSEN SQUARE ");
                 }
+
                 break;
             
             case RocketJumpEffect:
                 
                 try{
-                    
-                    //get input
+
                     destSquareJump = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
-                    
-                    //effect
                     weapon.rocketJumpEffect(map,currentPlayer,destSquareJump);
                     
                 }catch (NotValidDistance notValidDistance){
-                    
-                    //errore di distanza non è 1 o 2.
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    gameModel.setErrorMessage("ERROR: YOU MOVE ONLY ONE OR TWO MOVES");
                 }catch (MapException mapException){
                     
                     //errore di mappa
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
                 break;
-                
-            case FragmentingWarheadEffect:
-            
         }
     }
     
-    
-    //TODO andre
+
     public void Shotgun(GameModel gameModel, Shotgun weapon,RemoteView view) throws RemoteException{
     
         //necessary from model
         Map map = gameModel.getMap();
         Player currentPlayer = gameModel.getActualPlayer();
+        Player targetBase;
         //necessary input
-        Player targetBase = gameModel.getPlayerById(view.getTarget1());
-        Square destSquareBase = map.getSquare(view.getRow(),view.getColumn());
+
+        Square destSquareBase;
     
         switch (gameModel.getWeaponsEffect()) {
             
             case BaseEffect:
-                
+
+                try {
+                    targetBase = gameModel.getPlayerById(view.getTarget1());
+                    if ((view.getRow() == -1) && (view.getColumn() == -1)) {
+
+                        destSquareBase = null;
+                        weapon.baseMode(map, currentPlayer,targetBase,destSquareBase);
+                    }else{
+
+                        destSquareBase = map.getSquare(view.getRow(),view.getColumn());
+                        weapon.baseMode(map, currentPlayer,targetBase,destSquareBase);
+                    }
+
+                }catch (MapException mapExcpetion){
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }catch (NotValidDistance notValidDistance){
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE NOT MOVING " +
+                            "ONE MOVE THE TARGET");
+                }
                 break;
             case LongBarrelMode:
+
+                try{
+
+                    targetBase=gameModel.getPlayerById(view.getTarget1());
+                    weapon.longBarrelMode(map,currentPlayer,targetBase);
+
+
+                }catch (MapException mapException){
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }catch (NotValidDistance notValidDistance){
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVE FROM YOU");
+                }
                 break;
         }
     }
@@ -1727,18 +1772,66 @@ public class ActionController {
         Map map = gameModel.getMap();
         Player currentPlayer = gameModel.getActualPlayer();
         //necessary input
-        Player targetBase = gameModel.getPlayerById(view.getTarget1());
-        Player target2 = gameModel.getPlayerById(view.getTarget2());
-        Square targetSquare1 = map.getSquare(view.getRow(),view.getColumn());
-        Square targetSquare2 = map.getSquare(view.getRow2(),view.getColumn2());
+        Player targetBase;
+        Player target2;
+        Square targetSquare1;
+        Square targetSquare2;
        
         switch (gameModel.getWeaponsEffect()) {
     
             case BaseEffect:
-        
+
+                try{
+
+                    targetBase=gameModel.getPlayerById(view.getTarget1());
+                    if(view.getTarget2()==-1){
+
+                        weapon.baseMode(map,currentPlayer,targetBase);
+                    }else{
+
+                        target2 = gameModel.getPlayerById(view.getTarget2());
+                        weapon.baseMode(map,currentPlayer,targetBase,target2);
+                    }
+
+                }catch (MapException mapException){
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                }catch (NotValidDistance notValidDistance){
+
+                    gameModel.setErrorMessage("ERROR: THE FIRST CHOSEN TARGET ARE NOT AT ONE MOVE FROM YOU OR" +
+                            "THE SECOND CHOSEN TARGET ARE NOT ONE MOVE FROM THE FIRST");
+
+                }catch (NotInSameDirection notInSameDirection){
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGETS ARE NOT IN THE SAME DIRECTION");
+
+                }
                 break;
             case BarbecueMode:
-    
+
+                try{
+
+                    targetSquare1 = map.getSquare(view.getRow(),view.getColumn());
+                    targetSquare2 = map.getSquare(view.getRow2(),view.getColumn2());
+                    weapon.barbecueMode(map,currentPlayer,targetSquare1,targetSquare2);
+
+                }catch(MapException mapExcpetion){
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+
+                } catch (NoTargetInSquare noTargetInSquare) {
+
+                    gameModel.setErrorMessage("ERROR: IN ONE OF SQUARES THERE ARE NOT PLAYERS");
+
+                } catch (NotInSameDirection notInSameDirection) {
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION");
+                } catch (NotValidDistance notValidDistance) {
+
+                    gameModel.setErrorMessage("ERROR: THE FIRST CHOSEN SQUARE ARE NOT AT ONE MOVE FROM YOU OR" +
+                            "THE SECOND CHOSEN SQUARE ARE NOT ONE MOVE FROM THE FIRST");
+                }
+
                 break;
         }
         
@@ -1752,18 +1845,57 @@ public class ActionController {
         Map map = gameModel.getMap();
         Player currentPlayer = gameModel.getActualPlayer();
         //necessary input
-        Player targetBase = gameModel.getPlayerById(view.getTarget1());
-        Player targetRocket1 = gameModel.getPlayerById(view.getTarget2());
-        Player targetRocket2 = gameModel.getPlayerById(view.getTarget3());
+        Player targetBase ;
+        Player targetRocket1;
+        Player targetRocket2;
     
         switch (gameModel.getWeaponsEffect()) {
         
             case BaseEffect:
-            
+
+                try {
+                    targetBase = gameModel.getPlayerById(view.getTarget1());
+                    weapon.baseMode(map,currentPlayer,targetBase);
+
+                } catch (MapException mapExcpetion) {
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+
+                } catch (NotValidDistance notValidDistance) {
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVE FROM YOU");
+                }
+
                 break;
                 
             case RocketFistMode:
-            
+
+                try{
+
+                    targetRocket1 = gameModel.getPlayerById(view.getTarget2());
+                    if(view.getTarget3()==-1){
+
+                        weapon.rocketFistMode(map,currentPlayer,targetRocket1);
+                    }else{
+
+                        targetRocket2 = gameModel.getPlayerById(view.getTarget3());
+                        weapon.rocketFistMode(map,currentPlayer,targetRocket1,targetRocket2);
+                    }
+
+                }catch (MapException mapException){
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+
+                } catch (NotValidDistance notValidDistance) {
+
+                    gameModel.setErrorMessage("ERROR: THE FIRST CHOSEN SQUARE ARE NOT AT ONE MOVE FROM YOU OR" +
+                            "THE SECOND CHOSEN SQUARE ARE NOT ONE MOVE FROM THE FIRST");
+
+                } catch (NotInSameDirection notInSameDirection) {
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION");
+                }
+
                 break;
         }
     
@@ -1777,23 +1909,56 @@ public class ActionController {
         Map map = gameModel.getMap();
         Player currentPlayer = gameModel.getActualPlayer();
         //necessary input
-        Player targetBase = gameModel.getPlayerById(view.getTarget1());
-        Square destSquare = map.getSquare(view.getRow(),view.getColumn());
+        Player targetBase ;
+        Player targetPulverize;
+        Square destSquare;
     
         switch (gameModel.getWeaponsEffect()) {
         
             case BaseEffect:
-            
+
+
+                try {
+
+                    targetBase = gameModel.getPlayerById(view.getTarget1());
+                    weapon.baseMode(map,currentPlayer,targetBase);
+                } catch (MapException e) {
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+
+                } catch (NotValidDistance notValidDistance) {
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
+                }
+
                 break;
         
             case PulverizeMode:
-            
+
+                try{
+
+                    destSquare = map.getSquare(view.getRow(),view.getColumn());
+                    targetPulverize=gameModel.getPlayerById(view.getTarget1());
+                    weapon.pulverizeMode(map,currentPlayer,targetPulverize,destSquare);
+                } catch (NotInSameDirection notInSameDirection) {
+
+                    gameModel.setErrorMessage("ERROR: YOU ARE NOT MOVING THE TARGET IN ONE DIRECTION");
+                } catch (NotValidDistance notValidDistance) {
+
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE NOT MOVING THE " +
+                            "TARGET ZERO, ONE OR TWO SQUARE");
+                } catch (MapException e) {
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+
+                }
+
                 break;
         }
     
     }
     
-     */
+
 }
 
 
