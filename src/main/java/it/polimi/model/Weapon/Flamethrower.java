@@ -20,7 +20,7 @@ public class Flamethrower extends WeaponCard {
      * Creates the list of effects setting its value to BaseMode,BarbecueMode.
      * Creates the list of barbecue mode cost (cost of alternative fire mode) settings it to YELLOW,YELLOW.
      */
-    //todo inserire tutti gli effetti
+
     public Flamethrower() {
 
         super("FLAME THROWER", EnumColorCardAndAmmo.RED);

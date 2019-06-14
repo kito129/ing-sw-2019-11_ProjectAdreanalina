@@ -162,6 +162,8 @@ public class Railgun extends WeaponCard {
 
 
 
+
+
 }
 /*non serve più
  public void piercingMode(Map map,Player currentPlayer,Player target1,Player target2,String direction)throws NotValidCardinalDirection,NotInDirection{
