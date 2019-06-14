@@ -17,10 +17,9 @@ public class MainMarcoController {
     
     public static void main (String args[]) throws RemoteException {
 
-        /*
+        
     
         System.out.println("creo killshot track" );
-        KillShotTrack killShotTrack = new KillShotTrack();
         ArrayList<Player> players = new ArrayList<>();
         
         System.out.println("creo player\n");
@@ -49,19 +48,19 @@ public class MainMarcoController {
         
         //creo oggettti di modello
         System.out.println("creo oggetti modello");
-        GameModel gameModel = new GameModel(map, killShotTrack, players); //setto lo stato in select run
+        GameModel gameModel = new GameModel(); //setto lo stato in select run
         
         
         gameModel.setActualPlayer(player1);
         ActionModel actionModel = new ActionModel(gameModel);
         ActionController actionController = new ActionController();
-        GameController gameController = new GameController(actionController,actionModel);
+        GameController gameController = new GameController();
         ViewCLI viewCLI = new ViewCLI(gameController);
     
         //metto oggetti in mappa
         System.out.println("refresh mappa");
-        actionModel.refreshMapAmmoCard();
-        actionModel.refreshMapWeaponCard();
+        //actionModel.refreshMapAmmoCard();
+        //actionModel.refreshMapWeaponCard();
     
         System.out.println("Stampa finale");
         map.print();
@@ -105,24 +104,9 @@ public class MainMarcoController {
         
         
         
-        LockRifle lock = new LockRifle();
-        player1.getPlayerBoard().getPlayerWeapons().add(lock);
-    
-        gameModel.setWeaponsEffect(WeaponsEffect.BaseEffect);
-        
        
-
         try {
-            gameModel.setState(State.SHOOT);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-       
-        
-        gameModel.setWeaponsEffect(WeaponsEffect.SecondLockEffect);
-    
-        try {
-            gameModel.setState(State.SHOOT);
+            gameModel.setState(State.DRAWNPOWERUP);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

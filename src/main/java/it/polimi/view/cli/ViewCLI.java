@@ -1,5 +1,6 @@
 package it.polimi.view.cli;
 
+import it.polimi.controller.GameController;
 import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
@@ -77,6 +78,16 @@ public class ViewCLI implements RemoteView, Serializable {
             e.printStackTrace();
         }
     }
+    
+    public  ViewCLI(GameController controller) throws RemoteException {
+        
+        
+        this.gameModel=controller.getGameModel();
+        this.gameController=controller;
+        
+    }
+    
+    
 
     public void connection()  {
 
