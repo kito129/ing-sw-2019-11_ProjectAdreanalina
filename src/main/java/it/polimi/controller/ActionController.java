@@ -992,7 +992,6 @@ public class ActionController {
                         piercingTargets.add(target1);
                         weapon.piercingMode(map, currentPlayer, piercingTargets, direction);
                     }
-                   
                 } catch (NotValidCardinalDirection notValidCardinalDirection) {
         
                     gameModel.setErrorMessage("ERROR: THE CHOSEN DIRECTION DON'T EXIST");
@@ -1055,8 +1054,8 @@ public class ActionController {
     
                                 throw new NotValidInput();
                             }
-<<<<<<< HEAD
-                    } else{
+
+                    } else {
 
                         target2 = gameModel.getPlayerById(view.getTarget2());
                         target3 = gameModel.getPlayerById(view.getTarget3());
@@ -1069,22 +1068,7 @@ public class ActionController {
                         } else {
 
                             throw new NotValidInput();
-=======
-                        } else{
-    
-                            target2 = gameModel.getPlayerById(view.getTarget2());
-                            target3 = gameModel.getPlayerById(view.getTarget3());
-                            if ((target1 != target2) && (target1 != target3) && (target2 != target3)) {
-    
-                                scannerModeTargets.add(target1);
-                                scannerModeTargets.add(target2);
-                                scannerModeTargets.add(target3);
-                                weapon.scannerMode(map, currentPlayer, scannerModeTargets);
-                             } else {
-        
-                                throw new NotValidInput();
-                            }
->>>>>>> 71d2e40ada8bba1060cbb5157972387f10e65e6f
+
                         }
                     }
                 } catch (NotVisibleTarget notVisibleTarget) {
