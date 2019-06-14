@@ -82,6 +82,9 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     case SPAWNPLAYER:
                         actionController.respawnPlayerController(actionModel,view);
                         break;
+                    case STARTTURN:
+                        actionController.startTurn(actionModel,view);
+                        break;
                     case CHOSEACTION:
                        // actionController.choseAction(actionModel,view);
                         break;

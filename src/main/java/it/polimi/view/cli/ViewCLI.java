@@ -27,6 +27,7 @@ public class ViewCLI implements RemoteView, Serializable {
     protected State state;
     protected String user;
     public GameModel gameModel;
+    public Map map;
     public RemoteGameController gameController;
     protected boolean online;
     //attribute for run
@@ -67,6 +68,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
         try {
             gameModel=gameController.getGameModel();
+            map=gameModel.getMap();
     
             do {
                 setUser();
@@ -421,6 +423,10 @@ public class ViewCLI implements RemoteView, Serializable {
                 viewSpawnPowerUp();
                 break;
            case STARTTURN:
+               viewStartTurn();
+                break;
+            case CHOSEACTION:
+                viewChoiseAction();
                 break;
             case USEPOWERUP:
                 break;
@@ -473,6 +479,90 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
+    //metodi di input e controllo
+    public int getPlayerInput(){
+    
+        PrintTarget.print();
+    
+        int i=-1;
+    
+        Scanner input = new Scanner(System.in);
+        do {
+        
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            i=input.nextInt();
+        
+        } while (i<0 || i>gameModel.getPlayers(true).size() || i==gameModel.getActualPlayer().getId());
+    
+        return i;
+    }
+    
+    public void getSquareInput(int i){
+        
+        PrintTarget.printSquare();
+        
+        Scanner input = new Scanner(System.in);
+        int tempRow;
+        int tempColumn;
+        
+        do {
+            
+            PrintSelectAction.printRow();
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            tempRow = input.nextInt();
+            
+            PrintSelectAction.printColumn();
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            tempColumn = input.nextInt();
+            
+            if(!gameModel.getMap().existInMap(tempRow,tempColumn)){
+                System.out.println("SQUARE NOT EXIST IN MAP. RE INESERT CORRECT SQUARE");
+            }
+            
+        }while (gameModel.getMap().existInMap(tempRow,tempColumn));
+        
+        if (i==1) {
+            setRow(tempRow);
+            setColumn(tempColumn);
+        } else if(i==2){
+            setRow2(tempRow);
+            setColumn2(tempColumn);
+        }
+    }
+    
+    public EnumColorSquare getRoomColor(GameModel gameModel){
+        
+        PrintTarget.printColor(gameModel);
+        
+        return gameModel.getMap().getRoomColor().get(getUserInput(0,gameModel.getMap().getRoomColor().size()));
+    }
+    
+    
+    //todo da sistemare: metodo per la scelta se si vuole spostare o meno un player dopo aver sparato (presente in molte armi)
+    public int getMoveYesNo(){
+        
+        return getUserInput(0,1);
+    }
+    
+    public int getUserInput (int min, int max){
+        
+        int i;
+        Scanner input = new Scanner(System.in);
+        
+        do {
+            
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            i = input.nextInt();
+            
+        } while (i<min || i>max);
+        
+        return i;
+    }
+    
     //metodi di rete e observer
     private void notifyController() throws RemoteException {
         
@@ -486,7 +576,7 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    //metodi di contr
+    //metodi di case
 
     public void viewLobby() throws RemoteException{
     
@@ -507,22 +597,28 @@ public class ViewCLI implements RemoteView, Serializable {
         PrintPowerUp.print(player.getPowerUpCardsSpawn());
     
         System.out.println("YOUR CHOISE: ");
-    
-        Scanner input = new Scanner(System.in);
-    
-        int i;
-        do {
-            
-            while(!input.hasNextInt())
-                input = new Scanner(System.in);
-            i = input.nextInt();
-        } while (i<0 || i>1);
         
-        setIndex(i);
+        setIndex(getUserInput(0,1));
         notifyController();
     
     }
     
+    public void viewStartTurn() throws RemoteException {
+        
+        PrintMap.printMap(map);
+        PrintPlayer.print(gameModel.getActualPlayer());
+        notifyController();
+    }
+    
+    public void viewChoiseAction() throws RemoteException {
+    
+        PrintSelectAction.print();
+        getUserInput(0,3);
+        
+        notifyController();
+        
+        
+    }
     public void viewRunSelection() throws RemoteException {
 
         PrintRunAction.print();
@@ -558,7 +654,7 @@ public class ViewCLI implements RemoteView, Serializable {
 
             PrintGrabAction.printGrabWeapon();
             PrintWeapon.print(((GenerationSquare) target).getWeaponList());
-            PrintSelectMove.printIndexWeapon();
+            PrintSelectAction.printIndexWeapon();
             Scanner input = new Scanner(System.in);
             
             while(!input.hasNextInt())
@@ -579,19 +675,10 @@ public class ViewCLI implements RemoteView, Serializable {
         ArrayList<WeaponCard> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
         PrintEffectWeapon.printSelectWeapon();
         PrintWeapon.printName(weapons);
-        int i;
 
-        Scanner input = new Scanner(System.in);
         try {
-            do {
-    
-                while (!input.hasNextInt())
-                    input = new Scanner(System.in);
-                i = input.nextInt();
-    
-            } while (i<0 || i>weapons.size());
             
-            setIndex(i);
+            setIndex(getUserInput(0,weapons.size()));
             notifyController();
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -606,17 +693,8 @@ public class ViewCLI implements RemoteView, Serializable {
         int i;
         
         try {
-            Scanner input = new Scanner(System.in);
-            do {
-    
-                while (!input.hasNextInt())
-                    input = new Scanner(System.in);
-                i=input.nextInt();
-                
-    
-            } while (input.nextInt()<0 || input.nextInt()>weaponEffects.size());
             
-            setIndex2(i);
+            setIndex2(getUserInput(0,weaponEffects.size()));
             notifyController();
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -666,7 +744,6 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewMachineGunBasicEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
-        Scanner input = new Scanner(System.in);
         //get the player target 1
         setTarget1(getPlayerInput());
         //get the player target 2
@@ -681,15 +758,7 @@ public class ViewCLI implements RemoteView, Serializable {
         Scanner input = new Scanner(System.in);
         
         PrintTarget.print();
-        
-        //do {
-        
-        while (!input.hasNextInt())
-            input = new Scanner(System.in);
-        
-        //} while (input.nextInt()<0 && input.nextInt()>gameModel.getPlayers(false).size() && input.nextInt()!=gameModel.getActualPlayer().getId());
-        
-        //la scelta del target (se il primo o il secondo)
+     
         setChoicePlayer(input.nextInt());
         //notify controller with new input
         notifyController();
@@ -889,17 +958,9 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewZX2ScannerMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printZX2ScannerMode(gameModel);
-
-        Scanner input = new Scanner(System.in);
-        do {
-
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setIndex(input.nextInt());
-
-        } while (input.nextInt()<0 || input.nextInt()>3 || input.nextInt()>gameModel.getPlayers(true).size());
-
+        setIndex(getUserInput(0,3));
         //TODO NON VA BENE
+        /*
         for(int i = 0; i < input.nextInt(); i++){
     
             //get the player target
@@ -920,7 +981,11 @@ public class ViewCLI implements RemoteView, Serializable {
         }
         //notify controller with new input
         notifyController();
+        
+         */
     }
+    
+    
 
     //GRENADE LAUNCHER
     public void viewGrenadeLauncherBasicEffect(GameModel gameModel) throws RemoteException {
@@ -930,7 +995,6 @@ public class ViewCLI implements RemoteView, Serializable {
         setTarget1(getPlayerInput());
 
         PrintTarget.printYesNo();
-        Scanner input = new Scanner(System.in);
         //get the square target
         getSquareInput(1);
         //notify controller with new input
@@ -978,7 +1042,6 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewCyberbladeShadowstep(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printCyberbladeShadowstep(gameModel);
-        Scanner input = new Scanner(System.in);
         //get the square target
         getSquareInput(1);
         //notify controller with new input
@@ -1025,16 +1088,9 @@ public class ViewCLI implements RemoteView, Serializable {
         setTarget1(getPlayerInput());
 
         PrintTarget.printYesNo();
-        Scanner input = new Scanner(System.in);
-        do {
+        int i = getUserInput(0,1);
 
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setChoicePlayer(input.nextInt());
-
-        } while (input.nextInt()<0 || input.nextInt()>1);
-
-        if(input.nextInt()==0){
+        if(i==0){
             
             //get the square target
             getSquareInput(1);
@@ -1072,19 +1128,12 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewPowerGloveRocketFirstMode(GameModel gameModel) throws RemoteException {
 
         PrintEffectWeapon.printPowerGloveRocketFirstMode(gameModel);
-        Scanner input = new Scanner(System.in);
         getSquareInput(1);
 
         PrintTarget.printYesNo();
-        do {
+        int i = getUserInput(0,1);
 
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setChoicePlayer(input.nextInt());
-
-        } while (input.nextInt()<0 || input.nextInt()>1);
-
-        if(input.nextInt()==0){
+        if(i==0){
             //get the player target 2
             setTarget2(getPlayerInput());
         }
@@ -1092,28 +1141,16 @@ public class ViewCLI implements RemoteView, Serializable {
         PrintEffectWeapon.printPowerGloveRocketFirstMode2(gameModel);
 
         PrintTarget.printYesNo();
-        do {
-
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            setChoicePlayer2(input.nextInt());
-
-        } while (input.nextInt()<0 || input.nextInt()>1);
-
-        if(input.nextInt()==0){
+        
+        int j= getUserInput(0,1);
+        if(j==0){
 
             getSquareInput(2);
 
             PrintTarget.printYesNo();
-            do {
-
-                while (!input.hasNextInt())
-                    input = new Scanner(System.in);
-                setChoicePlayer3(input.nextInt());
-
-            } while (input.nextInt()<0 || input.nextInt()>1);
-
-            if(input.nextInt()==0){
+            
+            int h = getUserInput(0,1);
+            if(h==0){
                 
                 //get the player target 3
                 setTarget3(getPlayerInput());
@@ -1138,21 +1175,23 @@ public class ViewCLI implements RemoteView, Serializable {
 
         } while (input.nextInt()<0 || input.nextInt()>3 || input.nextInt()>gameModel.getPlayers(true).size());
         
+        int j = getUserInput(0,1);
+        
         //TODO NON VA BENE
-        for(int i = 0; i < input.nextInt(); i++){
+        for(int h = 0; j < j; j++){
 
             PrintTarget.print();
-            if(i==0){
+            if(h==0){
 
                 setTarget1(getPlayerInput());
             }
 
-            if(i==1){
+            if(h==1){
 
                 setTarget2(getPlayerInput());
             }
 
-            if(i==2){
+            if(h==2){
 
                 setTarget3(getPlayerInput());
             }
@@ -1292,97 +1331,5 @@ public class ViewCLI implements RemoteView, Serializable {
 
     //FINE ARMI
     //-------------------------------------------------------------------------------------------------
-
-
     
-    public int getPlayerInput(){
-    
-        PrintTarget.print();
-        
-        int i=-1;
-       
-        Scanner input = new Scanner(System.in);
-        do {
-            
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            i=input.nextInt();
-        
-        } while (i<0 || i>gameModel.getPlayers(true).size() || i==gameModel.getActualPlayer().getId());
-        
-        return i;
-    }
-    
-    public void getSquareInput(int i){
-    
-        PrintTarget.printSquare();
-       
-        Scanner input = new Scanner(System.in);
-        int tempRow;
-        int tempColumn;
-    
-        do {
-    
-            PrintSelectMove.printRow();
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            tempRow = input.nextInt();
-    
-            PrintSelectMove.printColumn();
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            tempColumn = input.nextInt();
-            
-            if(!gameModel.getMap().existInMap(tempRow,tempColumn)){
-                System.out.println("SQUARE NOT EXIST IN MAP. RE INESERT CORRECT SQUARE");
-            }
-            
-        }while (gameModel.getMap().existInMap(tempRow,tempColumn));
-        
-        if (i==1) {
-            setRow(tempRow);
-            setColumn(tempColumn);
-        } else if(i==2){
-            setRow2(tempRow);
-            setColumn2(tempColumn);
-        }
-        
-        
-    }
-    
-    public EnumColorSquare getRoomColor(GameModel gameModel){
-    
-        PrintTarget.printColor(gameModel);
-        
-        Scanner input = new Scanner(System.in);
-    
-        //get the color room
-        do {
-        
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-        
-        }while (input.nextInt()<gameModel.getMap().getRoomColor().size() && input.nextInt()>0);
-        int i = input.nextInt();
-        
-        return gameModel.getMap().getRoomColor().get(i);
-    }
-    
-    
-    //todo da sistemare: metodo per la scelta se si vuole spostare o meno un player dopo aver sparato (presente in molte armi)
-    public int getMoveYesNo(){
-
-        int i=-1;
-
-        Scanner input = new Scanner(System.in);
-        do {
-
-            while (!input.hasNextInt())
-                input = new Scanner(System.in);
-            i=input.nextInt();
-
-        } while (i<0 || i>1);
-
-        return i;
-    }
 }

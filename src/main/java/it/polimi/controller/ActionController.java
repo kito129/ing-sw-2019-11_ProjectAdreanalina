@@ -395,8 +395,11 @@ public class ActionController {
                 model.getGameModel().getMap().addPlayerOnSquare(model.getGameModel().getMap().getGenerationSquare(colorSquare),player);
                 
                 //add the other power up to player list
-                powerUpCard = player.getPowerUpCardsSpawn().get(player.getPowerUpCardsSpawn().size()-1);
+                powerUpCard = player.getPowerUpCardsSpawn().get(0);
                 player.getPlayerBoard().getPlayerPowerUps().add(powerUpCard);
+                player.getPowerUpCardsSpawn().remove(0);
+                
+                model.getGameModel().setState(State.STARTTURN);
                 
             } else {
                 
@@ -408,6 +411,15 @@ public class ActionController {
         } catch (MapException e) {
         
         }
+    }
+    
+    public void startTurn(ActionModel actionModel, RemoteView view) throws RemoteException {
+        
+        //set the lowest id to the current player
+        actionModel.getGameModel().setActualPlayer(actionModel.getGameModel().getPlayers(true).get(0));
+        //snow game can start
+        actionModel.getGameModel().setState(State.CHOSEACTION);
+        
     }
     
     public void scoringPlayerBoardController (ActionModel actionModel){
@@ -1124,7 +1136,7 @@ public class ActionController {
                             target2 = gameModel.getPlayerById(view.getTarget2());
                             target3 = gameModel.getPlayerById(view.getTarget3());
                             if ((target1 != target2) && (target1 != target3) && (target2 != target3)) {
-
+    
                                 scannerModeTargets.add(target1);
                                 scannerModeTargets.add(target2);
                                 scannerModeTargets.add(target3);
