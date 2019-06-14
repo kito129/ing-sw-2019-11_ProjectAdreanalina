@@ -35,9 +35,7 @@ public class MainMarcoController {
         }
     
         System.out.println("creo mappa");
-
-        Map map = new Map(MapCreator.createB(), "mappa B");
-        map.print();
+        
         
         //aggiungo player
         players.add(player1);
@@ -49,25 +47,27 @@ public class MainMarcoController {
         //creo oggettti di modello
         System.out.println("creo oggetti modello");
         GameModel gameModel = new GameModel(); //setto lo stato in select run
-        
+        gameModel.getPlayers(true).addAll(players);
         
         gameModel.setActualPlayer(player1);
         ActionModel actionModel = new ActionModel(gameModel);
         ActionController actionController = new ActionController();
         GameController gameController = new GameController();
-        ViewCLI viewCLI = new ViewCLI(gameController);
+        
     
         //metto oggetti in mappa
         System.out.println("refresh mappa");
         //actionModel.refreshMapAmmoCard();
         //actionModel.refreshMapWeaponCard();
+        
+        Map map = gameModel.getMap();
     
         System.out.println("Stampa finale");
         map.print();
         
         
         //obesrver
-        gameModel.addObserver(viewCLI);
+        
         
         
         //piazza i player in mappa
@@ -101,21 +101,11 @@ public class MainMarcoController {
             
             p.stampa();
         }
-        
-        
-        
-       
-        try {
-            gameModel.setState(State.DRAWNPOWERUP);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
+    
+        ViewCLI viewCLI = new ViewCLI(gameController);
+        gameModel.addObserver(viewCLI);
         map.print();
-        for (Player p : players) {
-
-            p.stampa();
-        }
+        viewCLI.printMap();
         
        
 

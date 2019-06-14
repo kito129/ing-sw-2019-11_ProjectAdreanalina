@@ -66,14 +66,6 @@ public class ActionController {
         System.out.println(gameModel.getActualPlayer().toString());
     }
     
-    public void firstSpawnPlayer (ActionModel actionModel, RemoteView view) throws RemoteException {
-    
-        GameModel gameModel = actionModel.getGameModel();
-    
-        respawnPlayerController(actionModel,gameModel.getActualPlayer(),view);
-        
-        
-    }
     
     public void choseAction(ActionModel actionModel, RemoteView view){
     
@@ -382,16 +374,17 @@ public class ActionController {
     }
     
     
-    public void respawnPlayerController (ActionModel model,Player player, RemoteView view){
+    public void respawnPlayerController (ActionModel model, RemoteView view){
         
         int chosedPowerUp;
         EnumColorSquare colorSquare;
         PowerUpCard  powerUpCard;
+        Player player = model.getGameModel().getActualPlayer();
         
         
         try {
             
-            chosedPowerUp = view.getIndex()-1;
+            chosedPowerUp = view.getIndex();
             
             if(player.getPowerUpCardsSpawn().get(chosedPowerUp)!=null){
                 
@@ -402,7 +395,7 @@ public class ActionController {
                 model.getGameModel().getMap().addPlayerOnSquare(model.getGameModel().getMap().getGenerationSquare(colorSquare),player);
                 
                 //add the other power up to player list
-                powerUpCard = player.getPowerUpCardsSpawn().get(player.getPowerUpCardsSpawn().size());
+                powerUpCard = player.getPowerUpCardsSpawn().get(player.getPowerUpCardsSpawn().size()-1);
                 player.getPlayerBoard().getPlayerPowerUps().add(powerUpCard);
                 
             } else {

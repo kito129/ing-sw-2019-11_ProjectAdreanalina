@@ -405,15 +405,17 @@ public class ViewCLI implements RemoteView, Serializable {
         this.run();
     }
     
+    public void printMap(){
+        
+        PrintMap.printMap(gameModel.getMap());
+    }
+    
     public void run() throws RemoteException {
     
         switch (gameModel.getState()) {
            
             case LOBBY:
                 viewLobby();
-                break;
-            case DRAWNPOWERUP:
-                viewMap();
                 break;
             case SPAWNPLAYER:
                 viewSpawnPowerUp();
