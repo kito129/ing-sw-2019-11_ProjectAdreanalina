@@ -66,14 +66,6 @@ public class ActionController {
         System.out.println(gameModel.getActualPlayer().toString());
     }
     
-    public void firstSpawnPlayer (ActionModel actionModel, RemoteView view) throws RemoteException {
-    
-        GameModel gameModel = actionModel.getGameModel();
-    
-        respawnPlayerController(actionModel,gameModel.getActualPlayer(),view);
-        
-        
-    }
     
     public void choseAction(ActionModel actionModel, RemoteView view){
     
@@ -382,16 +374,17 @@ public class ActionController {
     }
     
     
-    public void respawnPlayerController (ActionModel model,Player player, RemoteView view){
+    public void respawnPlayerController (ActionModel model, RemoteView view){
         
         int chosedPowerUp;
         EnumColorSquare colorSquare;
         PowerUpCard  powerUpCard;
+        Player player = model.getGameModel().getActualPlayer();
         
         
         try {
             
-            chosedPowerUp = view.getIndex()-1;
+            chosedPowerUp = view.getIndex();
             
             if(player.getPowerUpCardsSpawn().get(chosedPowerUp)!=null){
                 
@@ -402,8 +395,11 @@ public class ActionController {
                 model.getGameModel().getMap().addPlayerOnSquare(model.getGameModel().getMap().getGenerationSquare(colorSquare),player);
                 
                 //add the other power up to player list
-                powerUpCard = player.getPowerUpCardsSpawn().get(player.getPowerUpCardsSpawn().size());
+                powerUpCard = player.getPowerUpCardsSpawn().get(0);
                 player.getPlayerBoard().getPlayerPowerUps().add(powerUpCard);
+                player.getPowerUpCardsSpawn().remove(0);
+                
+                model.getGameModel().setState(State.STARTTURN);
                 
             } else {
                 
@@ -415,6 +411,15 @@ public class ActionController {
         } catch (MapException e) {
         
         }
+    }
+    
+    public void startTurn(ActionModel actionModel, RemoteView view) throws RemoteException {
+        
+        //set the lowest id to the current player
+        actionModel.getGameModel().setActualPlayer(actionModel.getGameModel().getPlayers(true).get(0));
+        //snow game can start
+        actionModel.getGameModel().setState(State.CHOSEACTION);
+        
     }
     
     public void scoringPlayerBoardController (ActionModel actionModel){
@@ -1050,6 +1055,7 @@ public class ActionController {
     
                                 throw new NotValidInput();
                             }
+<<<<<<< HEAD
                     } else{
 
                         target2 = gameModel.getPlayerById(view.getTarget2());
@@ -1063,6 +1069,22 @@ public class ActionController {
                         } else {
 
                             throw new NotValidInput();
+=======
+                        } else{
+    
+                            target2 = gameModel.getPlayerById(view.getTarget2());
+                            target3 = gameModel.getPlayerById(view.getTarget3());
+                            if ((target1 != target2) && (target1 != target3) && (target2 != target3)) {
+    
+                                scannerModeTargets.add(target1);
+                                scannerModeTargets.add(target2);
+                                scannerModeTargets.add(target3);
+                                weapon.scannerMode(map, currentPlayer, scannerModeTargets);
+                             } else {
+        
+                                throw new NotValidInput();
+                            }
+>>>>>>> 71d2e40ada8bba1060cbb5157972387f10e65e6f
                         }
                     }
                 } catch (NotVisibleTarget notVisibleTarget) {

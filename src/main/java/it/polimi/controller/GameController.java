@@ -79,11 +79,11 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     case LOBBY:
                         actionController.lobby(actionModel,view);
                         break;
-                    case DRAWNPOWERUP:
-                        actionController.drawnPowerUp(actionModel);
-                        break;
                     case SPAWNPLAYER:
-                        actionController.firstSpawnPlayer(actionModel,view);
+                        actionController.respawnPlayerController(actionModel,view);
+                        break;
+                    case STARTTURN:
+                        actionController.startTurn(actionModel,view);
                         break;
                     case CHOSEACTION:
                        // actionController.choseAction(actionModel,view);
@@ -157,7 +157,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     case RESPWANPLAYER:
                         //fase di rianimazione
                         //creazione del player è temporanea
-                        actionController.respawnPlayerController(actionModel,new Player(),view);
+                        actionController.respawnPlayerController(actionModel,view);
                         break;
                     case ENDTURN:
                         break;

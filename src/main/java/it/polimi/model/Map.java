@@ -64,7 +64,6 @@ public class Map implements Serializable {
                 return s;
             }
         }
-        System.out.println("square non trovata");
         throw new MapException();
     }
     
@@ -632,12 +631,9 @@ public class Map implements Serializable {
     }
     
     public void print(){
+        
         for (Square a: squares){
-            if(this.isGenerationSquare(a)){
-                System.out.println(a.toString()+((GenerationSquare) a).getWeaponList().toString());
-            }else if(((NormalSquare) a).getAmmoCard()!=null){
-                System.out.println(a.toString()+((NormalSquare) a).getAmmoCard().toString());
-            }
+            System.out.println(a.toString());
         }
     }
 

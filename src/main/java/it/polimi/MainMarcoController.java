@@ -17,10 +17,9 @@ public class MainMarcoController {
     
     public static void main (String args[]) throws RemoteException {
 
-        /*
+        
     
         System.out.println("creo killshot track" );
-        KillShotTrack killShotTrack = new KillShotTrack();
         ArrayList<Player> players = new ArrayList<>();
         
         System.out.println("creo player\n");
@@ -36,9 +35,7 @@ public class MainMarcoController {
         }
     
         System.out.println("creo mappa");
-
-        Map map = new Map(MapCreator.createB(), "mappa B");
-        map.print();
+        
         
         //aggiungo player
         players.add(player1);
@@ -49,26 +46,28 @@ public class MainMarcoController {
         
         //creo oggettti di modello
         System.out.println("creo oggetti modello");
-        GameModel gameModel = new GameModel(map, killShotTrack, players); //setto lo stato in select run
-        
+        GameModel gameModel = new GameModel(); //setto lo stato in select run
+        gameModel.getPlayers(true).addAll(players);
         
         gameModel.setActualPlayer(player1);
         ActionModel actionModel = new ActionModel(gameModel);
         ActionController actionController = new ActionController();
-        GameController gameController = new GameController(actionController,actionModel);
-        ViewCLI viewCLI = new ViewCLI(gameController);
+        GameController gameController = new GameController();
+        
     
         //metto oggetti in mappa
         System.out.println("refresh mappa");
-        actionModel.refreshMapAmmoCard();
-        actionModel.refreshMapWeaponCard();
+        //actionModel.refreshMapAmmoCard();
+        //actionModel.refreshMapWeaponCard();
+        
+        Map map = gameModel.getMap();
     
         System.out.println("Stampa finale");
         map.print();
         
         
         //obesrver
-        gameModel.addObserver(viewCLI);
+        
         
         
         //piazza i player in mappa
@@ -102,36 +101,11 @@ public class MainMarcoController {
             
             p.stampa();
         }
-        
-        
-        
-        LockRifle lock = new LockRifle();
-        player1.getPlayerBoard().getPlayerWeapons().add(lock);
     
-        gameModel.setWeaponsEffect(WeaponsEffect.BaseEffect);
-        
-       
-
-        try {
-            gameModel.setState(State.SHOOT);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-       
-        
-        gameModel.setWeaponsEffect(WeaponsEffect.SecondLockEffect);
-    
-        try {
-            gameModel.setState(State.SHOOT);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
+        ViewCLI viewCLI = new ViewCLI(gameController);
+        gameModel.addObserver(viewCLI);
         map.print();
-        for (Player p : players) {
-
-            p.stampa();
-        }
+        viewCLI.printMap();
         
        
 

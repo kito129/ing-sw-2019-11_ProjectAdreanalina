@@ -2,7 +2,7 @@ package it.polimi.view.cli;
 
 import java.io.Serializable;
 
-public class PrintSelectMove implements Serializable {
+public class PrintSelectAction implements Serializable {
 
     /**
      * prints the client's possible choices
