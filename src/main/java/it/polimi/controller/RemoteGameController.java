@@ -14,15 +14,10 @@ public interface RemoteGameController extends Remote {
     void update(RemoteView view) throws RemoteException;
     
     void addObserver(RemoteView view) throws RemoteException;
-    
-<<<<<<< HEAD
-=======
-    void reAddObserver (RemoteView view) throws RemoteException;
 
     boolean isGameStarted() throws RemoteException;
 
     void pingToServer()throws RemoteException;
 
->>>>>>> origin/master
 }
 
