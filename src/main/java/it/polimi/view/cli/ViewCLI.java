@@ -71,16 +71,24 @@ public class ViewCLI implements RemoteView, Serializable {
         System.out.println("WELCOME TO ADRENALINA");
 
         try {
-
             gameModel = gameController.getGameModel();
-            if(gameModel.getState()== State.LOBBY) {
-                do {
+            if(!gameController.isGameStarted()) {
 
-                    setUser();
-                } while (verifyName(user));
+                if (gameModel.getState() == State.LOBBY) {
 
-                gameController.addObserver(this);
-                gameController.update(this);
+                    do {
+
+                        setUser();
+                    } while (verifyName(user));
+
+                    gameController.addObserver(this);
+                    gameController.update(this);
+                }else{
+
+                    //todo andare avanti
+                }
+            }else{
+                System.out.println("GAME IS ALREADY STARTED");
             }
         } catch (RemoteException e) {
 
@@ -98,8 +106,6 @@ public class ViewCLI implements RemoteView, Serializable {
         
     }
     
-    
-
     public void connection()  {
 
         try {
