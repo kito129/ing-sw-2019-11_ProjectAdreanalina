@@ -34,7 +34,6 @@ public class GameModel implements Serializable {
     public GameModel(){
         
         state=State.LOBBY;
-    
         this.killShotTrack= new KillShotTrack();
         this.ammoDeck = new AmmoDeck();
         this.powerUpDeck=new PowerUpDeck();

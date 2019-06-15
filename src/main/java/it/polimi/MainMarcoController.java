@@ -5,6 +5,7 @@ import it.polimi.controller.GameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Weapon.LockRifle;
+import it.polimi.view.cli.PrintMap;
 import it.polimi.view.cli.ViewCLI;
 
 import java.rmi.RemoteException;
@@ -106,7 +107,7 @@ public class MainMarcoController {
         gameModel.addObserver(viewCLI);
         map.print();
         viewCLI.printMap();
-        
+        PrintMap.printMap(gameModel.getMap());
        
 
         

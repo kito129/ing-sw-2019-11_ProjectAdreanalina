@@ -27,12 +27,12 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         actionModel=new ActionModel(gameModel);
 
     }
-    
-    public boolean getStaretd(){
-        
+
+    public boolean isGameStarted() {
+
         return gameStarted;
     }
-    
+
     public GameModel getGameModel() throws RemoteException{
         
         return this.gameModel;
@@ -62,9 +62,12 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         
         this.gameStarted = gameStarted;
     }
-    
-    
-    
+
+    @Override
+    public void pingToServer() throws RemoteException {
+
+    }
+
     @Override
     public void update (RemoteView view) throws RemoteException {
     
