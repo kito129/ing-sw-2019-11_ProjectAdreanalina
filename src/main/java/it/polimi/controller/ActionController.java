@@ -23,6 +23,7 @@ public class ActionController {
     WeaponsEffect beforeEffect;
     int playerDamage;
     Player playerDameged;
+    ArrayList<State> actionCurrentCompleted = new ArrayList<>();
     
     
     public void lobby(ActionModel actionModel, RemoteView view){

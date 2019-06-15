@@ -253,13 +253,7 @@ public class ViewCLI implements RemoteView, Serializable {
         
         return user;
     }
-    
-    @Override
-    public boolean getOnline () throws RemoteException {
-        
-        return false;
-    }
-    
+ 
     @Override
     public boolean isBooleanChose () {
         
@@ -570,14 +564,11 @@ public class ViewCLI implements RemoteView, Serializable {
             //this.state=gameController.getGameModel().getState();
             gameController.update(this);
         } else {
-            
-            gameController.setPlayerOnline(user, true);
-            this.setOnline(true);
+            // vedere cosa fare
         }
     }
     
     //metodi di case
-
     public void viewLobby() throws RemoteException{
     
         System.out.println("GAMERS IN THE LOBBY:");
@@ -628,12 +619,7 @@ public class ViewCLI implements RemoteView, Serializable {
         notifyController();
     }
     
-    
-    public void viewMap () throws RemoteException {
-        
-        PrintMap.printMap(gameModel.getMap());
-    
-    }
+    //action method
 
     public void  viewGrabSelection() throws RemoteException {
 
@@ -669,6 +655,8 @@ public class ViewCLI implements RemoteView, Serializable {
 
         PrintMap.printMap(gameModel.getMap());
     }
+    
+    //weapon method
     
     public void viewSelectWeapon() {
         
@@ -1297,7 +1285,6 @@ public class ViewCLI implements RemoteView, Serializable {
         //notify controller with new input
         notifyController();
     }
-
     
     //TODO NON VA BENE
     public void viewFlamethrowerBarbecueMode(GameModel gameModel) throws RemoteException {

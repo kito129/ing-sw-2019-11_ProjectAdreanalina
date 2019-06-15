@@ -86,7 +86,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                         actionController.startTurn(actionModel,view);
                         break;
                     case CHOSEACTION:
-                       // actionController.choseAction(actionModel,view);
+                       actionController.choseAction(actionModel,view);
                         break;
                     case SELECTPOWERUP:
                         actionController.selectPowerUp(actionModel,view);
@@ -171,38 +171,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
             }
         }
     }
-
-    @Override
-    public void setPlayerOnline (String user, boolean online){
-        for(Player a : gameModel.getPlayers(true)){
-            if(a.getName().equals(user)){
-                a.setOnline(online);
-            }
-        }
-    }
     
-    //metodo che per ora non serve
-    private void verifyObserver() {
-        
-        for(int i = 0; i< gameModel.getRemoteView().size(); i++){
-            try{
-                if(gameModel.getRemoteView().get(i) != null)
-                    gameModel.getRemoteView().get(i).getUser();
-            } catch(RemoteException e){
-                if(gameModel.getState().equals(State.LOBBY)) {
-                    gameModel.getPlayers(true).get(i).setOnline(false);
-                    gameModel.getPlayers(true).remove(i);
-                    gameModel.getRemoteView().remove(i);
-                }
-                else {
-                    gameModel.getPlayers(true).get(i).setOnline(false);
-                    gameModel.removeObserver(gameModel.getRemoteView().get(i));
-                }
-            }
-           
-        }
-    }
-
+    
     @Override
     public void addObserver (RemoteView view)throws RemoteException  {
 
@@ -210,12 +180,6 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
 
 
     }
-    
-    @Override
-    public void reAddObserver (RemoteView view) throws RemoteException {
-    
-    }
-
 }
 
 
