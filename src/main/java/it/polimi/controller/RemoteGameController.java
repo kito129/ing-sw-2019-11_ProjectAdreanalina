@@ -20,5 +20,9 @@ public interface RemoteGameController extends Remote {
     
     void reAddObserver (RemoteView view) throws RemoteException;
 
+    boolean isGameStarted() throws RemoteException;
+
+    void pingToServer()throws RemoteException;
+
 }
 

@@ -5,7 +5,6 @@ import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
-
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -14,6 +13,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+
+
 
 public class ViewCLI implements RemoteView, Serializable {
 
@@ -60,27 +62,34 @@ public class ViewCLI implements RemoteView, Serializable {
     
 
 
-    public ViewCLI()  {
+    public ViewCLI(){
+
+        //todo completare il caso in cui lo stato del gioco non sia lobby.
 
         connection();
+        pingToServer();
         System.out.println("WELCOME TO ADRENALINA");
-    
-    
+
         try {
-            gameModel=gameController.getGameModel();
-            map=gameModel.getMap();
-    
-            do {
-                setUser();
-            }while (verifyName(user));
-    
-            gameController.addObserver(this);
-            gameController.update(this);
+
+            gameModel = gameController.getGameModel();
+            if(gameModel.getState()== State.LOBBY) {
+                do {
+
+                    setUser();
+                } while (verifyName(user));
+
+                gameController.addObserver(this);
+                gameController.update(this);
+            }
         } catch (RemoteException e) {
-            e.printStackTrace();
+
+            System.out.println("NETWORK ERROR ");
+            System.exit(0);
         }
     }
-    
+
+    //da eliminare
     public  ViewCLI(GameController controller) throws RemoteException {
         
         
@@ -128,6 +137,13 @@ public class ViewCLI implements RemoteView, Serializable {
         input = new Scanner(System.in);
         System.out.println("ENTER YOUR USERNAME:");
         this.user = input.next().toUpperCase();
+    }
+
+    public void pingToServer(){
+
+        Timer timer=new Timer();
+        TaskPingServer taskPingServer=new TaskPingServer(gameController);
+        timer.schedule(taskPingServer,0,2000);
     }
 
     
