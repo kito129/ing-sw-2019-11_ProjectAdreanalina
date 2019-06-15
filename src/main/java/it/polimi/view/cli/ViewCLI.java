@@ -148,7 +148,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void pingToServer(){
 
         Timer timer=new Timer();
-        TaskPingServer taskPingServer=new TaskPingServer(gameController);
+        TaskPingServer taskPingServer=new TaskPingServer(gameController,timer);
         timer.schedule(taskPingServer,0,2000);
     }
 
