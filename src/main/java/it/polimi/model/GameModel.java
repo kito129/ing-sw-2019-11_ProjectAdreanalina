@@ -89,8 +89,12 @@ public class GameModel implements Serializable {
 
         return map;
     }
-    
-    
+
+    public ArrayList<RemoteView> getRemoteViews() {
+
+        return remoteViews;
+    }
+
     /**
      * Gets kill shot track .
      *
@@ -120,7 +124,9 @@ public class GameModel implements Serializable {
         }
 
     }
-    
+
+
+
     /**
      * Gets ammo deck.
      *
@@ -166,7 +172,7 @@ public class GameModel implements Serializable {
     public void setState (State state) throws RemoteException {
         
         this.state=state;
-        notifyObserver();
+        notifyObserver(this);
     }
     
     public WeaponState getExtraState () {
@@ -267,6 +273,8 @@ public class GameModel implements Serializable {
      */
 
     public void reAddObserver(RemoteView observer) throws RemoteException {
+
+        //todo da rifare
         int index = 0;
         for(Player a : players){
             if((a.getName()).equals(observer.getUser())) {
@@ -277,7 +285,7 @@ public class GameModel implements Serializable {
         remoteViews.set(index, observer);
     }
 
-    public void notifyObserver (){
+    public void notifyObserver (GameModel gameModel){
 
 
         for(RemoteView observer: getRemoteView()){
@@ -303,6 +311,7 @@ public class GameModel implements Serializable {
         }
     throw  new MapException();
     }
+
 
 
 }

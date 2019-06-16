@@ -72,23 +72,31 @@ public class ViewCLI implements RemoteView, Serializable {
 
         try {
             gameModel = gameController.getGameModel();
-            if(!gameController.isGameStarted()) {
+            if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
 
-                if (gameModel.getState() == State.LOBBY) {
+                do {
 
-                    do {
+                    setUser();
+                    } while (verifyName(user));
+                gameController.addObserver(this);
+                gameController.update(this);
+            }else{
+
+                if(canJoinAgain()){
+
+                    do{
 
                         setUser();
-                    } while (verifyName(user));
+                    }while(!tryToReadd(user));
 
-                    gameController.addObserver(this);
-                    gameController.update(this);
-                }else{
+                    gameController.reAddObserver(this);
+                    //todo manca da settare il player online
+                    System.out.println("AGAIN ONLINE");
+                }else {
 
-                    //todo andare avanti
+                    System.out.println("GAME IS ALREADY STARTED");
+                    System.exit(0);
                 }
-            }else{
-                System.out.println("GAME IS ALREADY STARTED");
             }
         } catch (RemoteException e) {
 
@@ -152,7 +160,11 @@ public class ViewCLI implements RemoteView, Serializable {
         timer.schedule(taskPingServer,0,2000);
     }
 
-    
+    @Override
+    public void pingToClient() throws RemoteException {
+
+    }
+
     @Override
     public void setOnline (boolean online){
         this.online = online;
@@ -160,7 +172,37 @@ public class ViewCLI implements RemoteView, Serializable {
             this.print("\n\nYOU ARE NOW INACTIVE! TO JOIN AGAIN THE MATCH, PLEASE PRESS 0");
         }
     }
-    
+
+    public boolean canJoinAgain(){
+
+        for(RemoteView remoteView: gameModel.getRemoteView()){
+
+            if(remoteView==null){
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean tryToReadd(String user){
+
+        for(Player player:gameModel.getPlayers(true)){
+
+            if(user.equals(player.getName())){
+
+                if(player.getOnline()){
+
+                    return false;
+                }else{
+
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void print(String s) {
 
         System.out.println(s);

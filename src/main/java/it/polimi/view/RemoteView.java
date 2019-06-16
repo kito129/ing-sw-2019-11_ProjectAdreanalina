@@ -58,5 +58,7 @@ public interface RemoteView extends Remote {
     void resetInput() throws RemoteException;
     
     void update(GameModel gameModel) throws RemoteException;
+
+    void pingToClient()throws RemoteException;
     
 }

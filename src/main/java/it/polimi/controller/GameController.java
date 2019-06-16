@@ -72,6 +72,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     public void update (RemoteView view) throws RemoteException {
     
         if(true) {
+
+            //pingClient();
             //verifyObserver();
             
             //2 action and multiple power up use
@@ -180,6 +182,33 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     public void addObserver (RemoteView view)throws RemoteException  {
 
         gameModel.addObserver(view);
+
+
+    }
+
+    @Override
+    public void reAddObserver(RemoteView view) throws RemoteException {
+
+        gameModel.reAddObserver(view);
+    }
+
+    public void pingClient(){
+
+        //todo da vedere con marco.sarebbe il verify observer
+
+        for(RemoteView remoteView:gameModel.getRemoteView()){
+            try {
+
+                if(remoteView!=null) {
+
+                    remoteView.pingToClient();
+                }
+            }catch (RemoteException remoteException){
+
+            }
+        }
+
+
 
 
     }
