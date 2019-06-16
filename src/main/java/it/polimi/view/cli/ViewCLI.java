@@ -64,8 +64,6 @@ public class ViewCLI implements RemoteView, Serializable {
 
     public ViewCLI(){
 
-        //todo completare il caso in cui lo stato del gioco non sia lobby.
-
         connection();
         pingToServer();
         System.out.println("WELCOME TO ADRENALINA");
