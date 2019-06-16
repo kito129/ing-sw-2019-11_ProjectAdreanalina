@@ -262,8 +262,9 @@ public class GameModel implements Serializable {
      */
 
     public void removeObserver(RemoteView observer){
-        
-        remoteViews.set(getRemoteView().indexOf(observer), null);
+
+        int indexOfObserver=remoteViews.indexOf(observer);
+        remoteViews.set(indexOfObserver, null);
     }
     
     /**
@@ -287,6 +288,7 @@ public class GameModel implements Serializable {
 
     public void notifyObserver (GameModel gameModel){
 
+        //todo da fare
 
         for(RemoteView observer: getRemoteView()){
 
