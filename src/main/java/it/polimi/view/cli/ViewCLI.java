@@ -77,7 +77,7 @@ public class ViewCLI implements RemoteView, Serializable {
                     setUser();
                     } while (verifyName(user));
                 gameController.addObserver(this);
-                gameController.update(this);
+                notifyController();
             }else{
 
                 if(canJoinAgain()){
@@ -635,14 +635,10 @@ public class ViewCLI implements RemoteView, Serializable {
     
     //metodi di rete e observer
     private void notifyController() throws RemoteException {
-        
-        if (true) {
-            //this.state=gameController.getGameModel().getState();
-            gameController.update(this);
-        } else {
-            // vedere cosa fare
-        }
+
+        gameController.update(this);
     }
+
     
     //metodi di case
     public void viewLobby() throws RemoteException{
