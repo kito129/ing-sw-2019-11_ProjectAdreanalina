@@ -42,6 +42,8 @@ public class ActionController {
                 
                     // game can start
                     drawnPowerUp(actionModel);
+                    actionModel.refreshMapAmmoCard();
+                    actionModel.refreshMapWeaponCard();
                     gameModel.setState(State.SPAWNPLAYER);
                     
                 } else {
@@ -74,16 +76,19 @@ public class ActionController {
         
         try {
             
-            choice = view.getChoicePlayer();
+            choice = view.getIndex();
             
             switch (choice){
                 
-                case 0:
-                    actionModel.getGameModel().setState(State.SELECTRUN);
                 case 1:
-                    actionModel.getGameModel().setState(State.SELECTGRAB);
+                    actionModel.getGameModel().setState(State.SELECTRUN);
+                    break;
                 case 2:
+                    actionModel.getGameModel().setState(State.SELECTGRAB);
+                    break;
+                case 3:
                     actionModel.getGameModel().setState(State.SELECTWEAPON);
+                    break;
             }
             
             
@@ -99,6 +104,7 @@ public class ActionController {
         System.out.println("STATO DI ERRORE, RIPARTO DAL PRECENDENTE\n");
         
         if(beforeError==State.RUN){
+            
             System.out.println("input di RUN errarti\n Ripartiamo..");
             actionModel.getGameModel().setState(State.SELECTRUN);
         }
@@ -115,30 +121,32 @@ public class ActionController {
         try {
             
             inputSquare = map.getSquare(view.getRow(),view.getColumn());
+            
             if(map.existInMap(inputSquare)) {
                 //set the state in run
                 //actionModel.getGameModel().setState(State.RUN);
     
-                actionModel.runActionModel(actionModel.getGameModel().getActualPlayer(), inputSquare);
+                actionModel.runActionModel(inputSquare);
                 view.resetInput();
+                actionModel.getGameModel().setMesssageToAllView("CURRENT PLAYER " + actionModel.getGameModel().getActualPlayer().getName().toString() +" MOVED IN SQUARE: " + inputSquare.toString());
+                actionModel.getGameModel().setState(State.RUN);
+                
             }
         } catch (MapException e) {
             e.printStackTrace();
-            this.beforeError=actionModel.getGameModel().getState();
-            actionModel.getGameModel().setState(State.ERROR);
-        } catch (NotValidSquareException e) {
-            e.printStackTrace();
-            this.beforeError=actionModel.getGameModel().getState();
+            this.beforeError = actionModel.getGameModel().getState();
             actionModel.getGameModel().setState(State.ERROR);
         } catch (RunActionMaxDistLimitException e) {
             System.out.println("massima distanza superata");
             this.beforeError=actionModel.getGameModel().getState();
             actionModel.getGameModel().setState(State.ERROR);
-        } catch (NotValidInput notValidInput) {
-            notValidInput.printStackTrace();
-            this.beforeError=actionModel.getGameModel().getState();
-            actionModel.getGameModel().setState(State.ERROR);
         }
+        
+    }
+    
+    public void run(ActionModel actionModel) throws RemoteException {
+    
+        actionModel.getGameModel().setState(State.CHOSEACTION);
         
     }
     
@@ -150,47 +158,57 @@ public class ActionController {
         
         
         //answer to view an input Square
-        Square inputSquare = null;
+        Square inputSquare;
         try {
             inputSquare = map.getSquare(view.getRow(),view.getColumn());
+        
+            int indexWeapon=-1;
+            
+            //temp variables
+            if(map.existInMap(inputSquare)) {
+        
+        
+                //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
+                if (map.isGenerationSquare(inputSquare)) {
+                    indexWeapon=view.getIndex();
+                }
+        
+                //effective catch gia con l'index giusto se è una Generation Square
+                try {
+            
+                    actionModel.grabActionModel(inputSquare, indexWeapon);
+                    actionModel.getGameModel().setState(State.GRAB);
+                    
+    
+                } catch (GrabActionMaxDistLimitException catchActionMaxDistExpetion) {
+                    System.out.println("massima distanza superata");
+                    this.beforeError=actionModel.getGameModel().getState();
+                    actionModel.getGameModel().setState(State.ERROR);
+            
+                } catch (GrabActionFullObjException e) {
+                    e.printStackTrace();
+                    this.beforeError = actionModel.getGameModel().getState();
+                    actionModel.getGameModel().setState(State.ERROR);
+        
+                } catch (MapException e) {
+                    e.printStackTrace();
+                    this.beforeError=actionModel.getGameModel().getState();
+                    actionModel.getGameModel().setState(State.ERROR);
+                }
+            }else  {
+                this.beforeError=actionModel.getGameModel().getState();
+                actionModel.getGameModel().setState(State.ERROR);
+            }
         } catch (MapException e) {
             e.printStackTrace();
         }
-        Integer indexWeapon=-1;
+    }
+    
+    public void grab(ActionModel actionModel) throws RemoteException {
+    
+        actionModel.getGameModel().setState(State.CHOSEACTION);
         
-        //temp variables
-        if(map.existInMap(inputSquare)) {
-    
-    
-            //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
-            if (map.isGenerationSquare(inputSquare)) {
-                indexWeapon=view.getIndex();
-            }
-    
-            //effective catch gia con l'index giusto se è una Generation Square
-            try {
         
-                actionModel.grabActionModel(inputSquare, indexWeapon);
-                
-            } catch (GrabActionMaxDistLimitException catchActionMaxDistExpetion) {
-                System.out.println("massima distanza superata");
-                this.beforeError=actionModel.getGameModel().getState();
-                actionModel.getGameModel().setState(State.ERROR);
-        
-            } catch (GrabActionFullObjException e) {
-                e.printStackTrace();
-                this.beforeError = actionModel.getGameModel().getState();
-                actionModel.getGameModel().setState(State.ERROR);
-    
-            } catch (MapException e) {
-                e.printStackTrace();
-                this.beforeError=actionModel.getGameModel().getState();
-                actionModel.getGameModel().setState(State.ERROR);
-            }
-        }else  {
-            this.beforeError=actionModel.getGameModel().getState();
-            actionModel.getGameModel().setState(State.ERROR);
-        }
     }
     
     public void usePowerUpController(ActionModel actionModel, RemoteView view) throws RemoteException{
