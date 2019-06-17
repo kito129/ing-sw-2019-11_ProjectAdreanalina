@@ -5,6 +5,7 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
+import it.polimi.view.RemoteView;
 
 
 import java.io.Serializable;
@@ -124,12 +125,14 @@ public class ActionModel implements Serializable {
         }
     }
     
+    
     /**
      * Check the number in the turn.
      *
      * @return true if can do action, else otherwise
      */
     public boolean checkActionCount() {
+        
         if (action == 1) {
 
             //gameModel.setState(State.ACTION1);//todo commento perchè non mi compila

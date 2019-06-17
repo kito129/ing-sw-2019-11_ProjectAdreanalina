@@ -87,7 +87,16 @@ public class ActionController {
                     actionModel.getGameModel().setState(State.SELECTGRAB);
                     break;
                 case 3:
-                    actionModel.getGameModel().setState(State.SELECTWEAPON);
+                    if(actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().size()>0) {
+                        
+                        actionModel.getGameModel().setState(State.SELECTWEAPON);
+                    } else {
+                        
+                        actionModel.getGameModel().setMessageToCurrentView("YOU HAVE NOT WEAPON TO SHOOT");
+                        beforeError= actionModel.getGameModel().getState();
+                        actionModel.getGameModel().setState(State.ERROR);
+                        
+                    }
                     break;
             }
             
@@ -102,12 +111,10 @@ public class ActionController {
     public void errorState(ActionModel actionModel) throws RemoteException {
         
         System.out.println("STATO DI ERRORE, RIPARTO DAL PRECENDENTE\n");
+        actionModel.getGameModel().setState(beforeError);
         
-        if(beforeError==State.RUN){
-            
-            System.out.println("input di RUN errarti\n Ripartiamo..");
-            actionModel.getGameModel().setState(State.SELECTRUN);
-        }
+        
+        
     }
     
     
@@ -548,6 +555,8 @@ public class ActionController {
                 
                 //errore di input, che sarà gia gestioto in view
             }
+            
+            gameModel.setState(State.SELECTEFFECT);
         } catch (RemoteException e) {
             
             e.printStackTrace();
@@ -568,6 +577,7 @@ public class ActionController {
             
             //errore di input dell'effetto
         }
+        gameModel.setState(State.SHOOT);
     }
   
     

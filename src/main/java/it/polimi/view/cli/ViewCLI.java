@@ -511,16 +511,11 @@ public class ViewCLI implements RemoteView, Serializable {
             case SELECTWEAPON:
                 viewSelectWeapon();
                 break;
-            case SHOOT:
-                switch (gameModel.getWeaponsEffect()) {
-                    
-                    case BaseEffect:
-                        viewLockRifleBasicEffect(gameModel);
-                    case SecondLockEffect:
-                        viewLockRifleSecondLock(gameModel);
-            }
-                break;
             case SELECTEFFECT:
+                viewSelectWeaponEffect();
+                break;
+            case SHOOT:
+                viewShoot();
                 break;
             case ENDACTION:
                 break;
@@ -541,9 +536,17 @@ public class ViewCLI implements RemoteView, Serializable {
             case CHECKILLSHOOT:
                 break;
             case ERROR:
+                viewError();
                 break;
         
         }
+    }
+    
+    public void viewError() throws RemoteException {
+        
+        print(gameModel.getMessageToCurrentView());
+        notifyController();
+        
     }
     
     //metodi di input e controllo
@@ -762,7 +765,6 @@ public class ViewCLI implements RemoteView, Serializable {
         ArrayList<WeaponsEffect> weaponEffects = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(index).getWeaponEffects();
         PrintEffectWeapon.printSelectWeaponEffect();
         PrintWeapon.printEffectName(weaponEffects);
-        int i;
         
         try {
             
@@ -772,6 +774,17 @@ public class ViewCLI implements RemoteView, Serializable {
             e.printStackTrace();
         }
     
+    }
+    
+    public void viewShoot() throws RemoteException {
+    
+        printMessageAll();
+    
+        printMap();
+    
+        notifyController();
+        
+        
     }
     
     //WEAPON
