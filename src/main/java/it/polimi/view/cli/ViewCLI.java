@@ -164,6 +164,8 @@ public class ViewCLI implements RemoteView, Serializable {
     }
 
     @Override
+
+    //potrebbe essere sync
     public void setOnline (boolean online){
         this.online = online;
         if(!online){
