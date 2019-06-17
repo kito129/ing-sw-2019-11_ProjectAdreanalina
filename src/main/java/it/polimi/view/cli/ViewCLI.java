@@ -205,6 +205,16 @@ public class ViewCLI implements RemoteView, Serializable {
 
         System.out.println(s);
     }
+    
+    public void printMessageCurrent(){
+    
+        System.out.println(gameModel.getMessageToCurrentView());
+    }
+    
+    public void printMessageAll(){
+        
+        System.out.println(gameModel.getMesssageToAllView());
+    }
 
     @Override
     public int getIndex () {
@@ -487,6 +497,7 @@ public class ViewCLI implements RemoteView, Serializable {
             case USEPOWERUP:
                 break;
             case RUN:
+                viewRun();
                 break;
             case SELECTRUN:
                 viewRunSelection();
@@ -578,7 +589,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 System.out.println("SQUARE NOT EXIST IN MAP. RE INESERT CORRECT SQUARE");
             }
             
-        }while (gameModel.getMap().existInMap(tempRow,tempColumn));
+        }while (!gameModel.getMap().existInMap(tempRow,tempColumn));
         
         if (i==1) {
             setRow(tempRow);
@@ -658,7 +669,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewStartTurn() throws RemoteException {
         
-        PrintMap.printMap(map);
+        PrintMap.printMap(gameModel.getMap());
         PrintPlayer.print(gameModel.getActualPlayer());
         notifyController();
     }
@@ -666,7 +677,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewChoiseAction() throws RemoteException {
     
         PrintSelectAction.print();
-        getUserInput(0,3);
+        setIndex(getUserInput(0,3));
         
         notifyController();
         
@@ -681,41 +692,52 @@ public class ViewCLI implements RemoteView, Serializable {
         notifyController();
     }
     
+    public void viewRun() throws RemoteException {
+        
+        printMessageAll();
+        
+        printMap();
+    
+        notifyController();
+        
+    }
+    
     //action method
 
     public void  viewGrabSelection() throws RemoteException {
 
         PrintGrabAction.printGrabStuff();
         getSquareInput(1);
-        Square target = null;
+        Square target;
         try {
             
             target = gameModel.getMap().getSquare(row,column);
+            
+            if(gameModel.getMap().isGenerationSquare(target)){
+    
+                PrintGrabAction.printGrabWeapon();
+                PrintWeapon.print(((GenerationSquare) target).getWeaponList());
+                PrintSelectAction.printIndexWeapon();
+                Scanner input = new Scanner(System.in);
+                
+                while(!input.hasNextInt())
+                    input = new Scanner(System.in);
+                setIndex(input.nextInt());
+            }
+            
+            notifyController();
         } catch (MapException e) {
             e.printStackTrace();
         }
-    
-    
-        System.out.println("input corretto");
-        
-        if(gameModel.getMap().isGenerationSquare(target)){
-
-            PrintGrabAction.printGrabWeapon();
-            PrintWeapon.print(((GenerationSquare) target).getWeaponList());
-            PrintSelectAction.printIndexWeapon();
-            Scanner input = new Scanner(System.in);
-            
-            while(!input.hasNextInt())
-                input = new Scanner(System.in);
-            setIndex(input.nextInt());
-        }
-        
-        notifyController();
     }
 
     public void viewGrab() throws RemoteException {
-
-        PrintMap.printMap(gameModel.getMap());
+    
+        printMessageAll();
+    
+        printMap();
+    
+        notifyController();
     }
     
     //weapon method

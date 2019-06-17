@@ -29,6 +29,8 @@ public class GameModel implements Serializable {
     private WeaponState extraState;
     private WeaponsEffect weaponsEffect;
     private String errorMessage;
+    private String messageToCurrentView;
+    private String messsageToAllView;
     private ArrayList<EnumColorPlayer> gameColor = new ArrayList<>(5);
     
     public GameModel(){
@@ -40,6 +42,7 @@ public class GameModel implements Serializable {
         this.weaponDeck=new WeaponDeck();
         players=new ArrayList<>();
         this.map = new Map(MapCreator.createA(),"mapp a");
+        map.refreshMap();
         populateColor();
         
     }
@@ -162,6 +165,16 @@ public class GameModel implements Serializable {
         return state;
     }
     
+    public String getMessageToCurrentView () {
+        
+        return messageToCurrentView;
+    }
+    
+    public String getMesssageToAllView () {
+        
+        return messsageToAllView;
+    }
+    
     public void setPlayers(Player player){
        
         this.players.add(player);
@@ -209,6 +222,16 @@ public class GameModel implements Serializable {
             }
         }
         return tempPLayers;
+    }
+    
+    public void setMessageToCurrentView (String messageToCurrentView) {
+        
+        this.messageToCurrentView = messageToCurrentView;
+    }
+    
+    public void setMesssageToAllView (String messsageToAllView) {
+        
+        this.messsageToAllView = messsageToAllView;
     }
     
     public void setExtraState (WeaponState extraState) {
