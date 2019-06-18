@@ -87,8 +87,30 @@ public class ActionController {
                     actionModel.getGameModel().setState(State.SELECTGRAB);
                     break;
                 case 3:
-                    actionModel.getGameModel().setState(State.SELECTWEAPON);
+                    
+                    if(actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().size()>0) {
+                        
+                        actionModel.getGameModel().setState(State.SELECTWEAPON);
+                    } else {
+                        
+                        actionModel.getGameModel().setMessageToCurrentView("YOU HAVE NOT WEAPON TO SHOOT");
+                        beforeError= actionModel.getGameModel().getState();
+                        actionModel.getGameModel().setState(State.ERROR);
+                        
+                    }
                     break;
+                case 4:
+                    
+                    if(actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()>0){
+    
+                        actionModel.getGameModel().setState(State.SELECTPOWERUP);
+                    } else {
+        
+                        actionModel.getGameModel().setMessageToCurrentView("YOU HAVE NOT POWER UP TO USE");
+                        beforeError= actionModel.getGameModel().getState();
+                        actionModel.getGameModel().setState(State.ERROR);
+                
+                    }
             }
             
             
@@ -102,12 +124,26 @@ public class ActionController {
     public void errorState(ActionModel actionModel) throws RemoteException {
         
         System.out.println("STATO DI ERRORE, RIPARTO DAL PRECENDENTE\n");
-        
-        if(beforeError==State.RUN){
-            
-            System.out.println("input di RUN errarti\n Ripartiamo..");
-            actionModel.getGameModel().setState(State.SELECTRUN);
+        switch (beforeError){
+            case SELECTWEAPON:
+                actionModel.getGameModel().setState(State.CHOSEACTION);
+            case SELECTPOWERUP:
+                actionModel.getGameModel().setState(State.CHOSEACTION);
+            case SELECTRUN:
+                actionModel.getGameModel().setState(State.CHOSEACTION);
+            case SELECTEFFECT:
+                actionModel.getGameModel().setState(State.SELECTEFFECT);
+            case SELECTGRAB:
+                actionModel.getGameModel().setState(State.CHOSEACTION);
+            case SELECTPOWERUPINPUT:
+                actionModel.getGameModel().setState(State.CHOSEACTION);
+            case CHOSEACTION:
         }
+        
+        actionModel.getGameModel().setState(beforeError);
+        
+        
+        
     }
     
     
@@ -133,11 +169,12 @@ public class ActionController {
                 
             }
         } catch (MapException e) {
-            e.printStackTrace();
-            this.beforeError = actionModel.getGameModel().getState();
-            actionModel.getGameModel().setState(State.ERROR);
+    
+            mapErrorGestor(actionModel);
+            
         } catch (RunActionMaxDistLimitException e) {
-            System.out.println("massima distanza superata");
+            
+            actionModel.getGameModel().setMessageToCurrentView("YOUR MOVE EXCED MAX DISTANCE LIMIT");
             this.beforeError=actionModel.getGameModel().getState();
             actionModel.getGameModel().setState(State.ERROR);
         }
@@ -160,48 +197,57 @@ public class ActionController {
         //answer to view an input Square
         Square inputSquare;
         try {
-            inputSquare = map.getSquare(view.getRow(),view.getColumn());
-        
-            int indexWeapon=-1;
-            
+            inputSquare = map.getSquare(view.getRow(), view.getColumn());
+    
+            int indexWeapon = -1;
+    
             //temp variables
-            if(map.existInMap(inputSquare)) {
+            if (map.existInMap(inputSquare)) {
         
         
                 //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma , altrimenti passo a null
                 if (map.isGenerationSquare(inputSquare)) {
-                    indexWeapon=view.getIndex();
+                    indexWeapon = view.getIndex();
                 }
         
                 //effective catch gia con l'index giusto se è una Generation Square
                 try {
-            
-                    actionModel.grabActionModel(inputSquare, indexWeapon);
-                    actionModel.getGameModel().setState(State.GRAB);
                     
-    
-                } catch (GrabActionMaxDistLimitException catchActionMaxDistExpetion) {
-                    System.out.println("massima distanza superata");
-                    this.beforeError=actionModel.getGameModel().getState();
-                    actionModel.getGameModel().setState(State.ERROR);
-            
-                } catch (GrabActionFullObjException e) {
-                    e.printStackTrace();
-                    this.beforeError = actionModel.getGameModel().getState();
-                    actionModel.getGameModel().setState(State.ERROR);
+                        actionModel.grabActionModel(inputSquare, indexWeapon);
+                        actionModel.getGameModel().setState(State.GRAB);
+                        
+                    
+                    } catch(GrabActionMaxDistLimitException catchActionMaxDistExpetion){
         
-                } catch (MapException e) {
-                    e.printStackTrace();
-                    this.beforeError=actionModel.getGameModel().getState();
-                    actionModel.getGameModel().setState(State.ERROR);
+                        actionModel.getGameModel().setMessageToCurrentView("YOUR MOVE FOR GRAB EXCED MAX DISTANCE LIMIT");
+                        this.beforeError = actionModel.getGameModel().getState();
+                        actionModel.getGameModel().setState(State.ERROR);
+        
+                    } catch(GrabActionFullObjException e){
+        
+                        actionModel.getGameModel().setMessageToCurrentView("YOU DON'T HAVE MORE SPACE FOR GRAB OBJECT");
+                        this.beforeError = actionModel.getGameModel().getState();
+                        actionModel.getGameModel().setState(State.ERROR);
+                    } catch(MapException e){
+        
+                        mapErrorGestor(actionModel);
+                    }
+                }else{
+        
+                    mapErrorGestor(actionModel);
                 }
-            }else  {
-                this.beforeError=actionModel.getGameModel().getState();
-                actionModel.getGameModel().setState(State.ERROR);
+            } catch(MapException e){
+        
+                mapErrorGestor(actionModel);
             }
-        } catch (MapException e) {
-            e.printStackTrace();
-        }
+        
+    }
+    
+    public void mapErrorGestor(ActionModel actionModel) throws RemoteException {
+    
+        actionModel.getGameModel().setMessageToCurrentView("YOUR INPUT IS NOT CORRECT");
+        this.beforeError = actionModel.getGameModel().getState();
+        actionModel.getGameModel().setState(State.ERROR);
     }
     
     public void grab(ActionModel actionModel) throws RemoteException {
@@ -231,13 +277,7 @@ public class ActionController {
 
   
             } catch (MapException e) {
-
-            
-            } catch (NotValidInput notValidInput) {
-            
-            
-            } catch (NoPowerUpAvailable noPowerUpAvailable) {
-                noPowerUpAvailable.printStackTrace();
+    
             }
             //TAGBACK GRANATE
         } else if (powerUpSelected.getClass().equals(TagBackGrenade.class)) {
@@ -261,14 +301,12 @@ public class ActionController {
     
             Square targetSquare;
             try {
-                
+    
                 //get input
                 targetSquare = actionModel.getGameModel().getMap().getSquare(view.getRow(), view.getColumn());
                 //effect
                 actionModel.usePowerUpTeleporter((Teleporter) powerUpSelected, targetSquare);
-            } catch (NotValidInput notValidInput) {
-                notValidInput.printStackTrace();
-            } catch (MapException e) {
+            }catch (MapException e) {
                 e.printStackTrace();
             }
     
@@ -548,6 +586,8 @@ public class ActionController {
                 
                 //errore di input, che sarà gia gestioto in view
             }
+            
+            gameModel.setState(State.SELECTEFFECT);
         } catch (RemoteException e) {
             
             e.printStackTrace();
@@ -568,33 +608,40 @@ public class ActionController {
             
             //errore di input dell'effetto
         }
+        gameModel.setState(State.SHOOT);
     }
   
     
-    public void selectPowerUp(ActionModel actionModel,RemoteView view) {
+    public void selectPowerUp(ActionModel actionModel,RemoteView view) throws RemoteException {
     
         PowerUpCard powerUpCard;
         
         int i;
         
-        try {
-    
-            i = view.getIndex();
-            if (actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i) != null) {
-    
-                powerUpCard = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i);
-                powerUpSelected = powerUpCard;
-                
-                actionModel.getGameModel().setState(State.USEPOWERUP);
-            } else {
-                
-                //errore di input, che sarà gia gestioto in view
-            }
-            } catch(RemoteException e){
-            
-            }
-        }
+        i = view.getIndex();
+        
+        if (actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i) != null) {
 
+            powerUpCard = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i);
+            
+            if(!powerUpCard.getNameCard().equals("TAGBACK GRENADE")) {
+    
+                powerUpSelected = powerUpCard;
+                actionModel.getGameModel().setState(State.SELECTPOWERUPINPUT);
+            } else {
+    
+                actionModel.getGameModel().setMessageToCurrentView("YOU CAN'T USE TAGBACK GRENADE IN YOUR TURN");
+                this.beforeError = actionModel.getGameModel().getState();
+                actionModel.getGameModel().setState(State.ERROR);
+            }
+        } else {
+            
+            mapErrorGestor(actionModel);
+        }
+        
+    }
+    
+    //WEAPON
     public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) throws RemoteException {
 
         Player currentPlayer = gameModel.getActualPlayer();

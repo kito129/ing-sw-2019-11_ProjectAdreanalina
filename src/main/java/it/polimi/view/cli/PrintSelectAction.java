@@ -12,6 +12,7 @@ public class PrintSelectAction implements Serializable {
         System.out.println("1) RUN AROUND");
         System.out.println("2) GRUB STUFF");
         System.out.println("3) SHOOT PEOPLE");
+        System.out.println("4) USE POWER UP");
         System.out.println("0) END YOUR TURN (before finishing your turn, if you have ammo, you can reload your weapons");
     }
 
