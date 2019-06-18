@@ -18,33 +18,44 @@ public class PrintWeapon implements Serializable {
      * Print Client's weapons.
      * @param weaponList       list of weapon.
      */
-    public static void print(ArrayList<WeaponCard> weaponList){
-
-        for(WeaponCard wc : weaponList) {
-
-            System.out.println();
-            System.out.println("NAME: " + wc.getNameWeaponCard());
-
-            if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)){
-
-                    System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+    public static void print(ArrayList<WeaponCard> weaponList, boolean wantDescription){
+        
+        if (weaponList.size()>0) {
+    
+            for (int i = 0; i < weaponList.size(); i++) {
+                WeaponCard wc = weaponList.get(i);
+        
+                System.out.println("\n" + i + "): ");
+                System.out.println("NAME: " + wc.getNameWeaponCard());
+        
+                if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)) {
+            
+                    System.out.println("    COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                }
+        
+                if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.RED)) {
+            
+                    System.out.println("    COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                }
+        
+                if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)) {
+            
+                    System.out.println("    COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                }
+        
+                System.out.print("  RECHARGE COST: ");
+                PrintEnumCardsAmmo.print(wc.getRechargeCost());
+        
+                System.out.println("\nLOADED WEAPON: " + wc.isCharge());
+        
+                if (wantDescription) {
+                    System.out.println("DESCRIPTION: ");
+                    System.out.println(wc.getDescription());
+                }
             }
-
-            if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.RED)){
-
-                System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-            }
-
-            if(wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)){
-
-                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-            }
-
-            System.out.print("RECHARGE COST: ");
-            PrintRechargeCost.print(weaponList);
-            System.out.println("LOADED WEAPON: " + wc.isCharge());
-            System.out.println("DESCRIPTION: ");
-            System.out.println(wc.getDescription());
+        } else {
+        
+            System.out.println("    WEAPON LIST EMPTY");
         }
     }
 

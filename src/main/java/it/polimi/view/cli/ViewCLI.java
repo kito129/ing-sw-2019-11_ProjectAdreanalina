@@ -677,7 +677,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
         System.out.println("\nPOWER UP TOO CHOOSE: ");
         
-        PrintPowerUp.print(player.getPowerUpCardsSpawn());
+        PrintPowerUp.print(player.getPowerUpCardsSpawn(),false);
     
         System.out.println("YOUR CHOISE: ");
         
@@ -694,8 +694,10 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     public void viewChoiseAction() throws RemoteException {
-        
-        
+    
+        System.out.println("\nYOUR INFO: \n");
+        PrintPlayer.print(gameModel.getActualPlayer());
+        System.out.println();
         PrintSelectAction.print();
         setIndex(getUserInput(-1,4));
         
@@ -745,7 +747,7 @@ public class ViewCLI implements RemoteView, Serializable {
             if(gameModel.getMap().isGenerationSquare(target)){
     
                 PrintGrabAction.printGrabWeapon();
-                PrintWeapon.print(((GenerationSquare) target).getWeaponList());
+                PrintWeapon.print(((GenerationSquare) target).getWeaponList(),false);
                 PrintSelectAction.printIndexWeapon();
                 Scanner input = new Scanner(System.in);
                 
@@ -779,7 +781,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewSelectPowerUp(){
     
         ArrayList<PowerUpCard> powerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps();
-        PrintPowerUp.print(powerUp);
+        PrintPowerUp.print(powerUp,false);
     
         try {
         

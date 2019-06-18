@@ -24,12 +24,13 @@ public class PrintEnumCardsAmmo implements Serializable {
 
                 case BLU:
                     System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
+                    break;
                 case RED:
                     System.out.print(ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
+                    break;
                 case YELLOW:
                     System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    break;
             }
         }
     }
