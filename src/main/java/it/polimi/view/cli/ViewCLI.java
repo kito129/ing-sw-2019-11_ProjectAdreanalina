@@ -208,11 +208,13 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void printMessageCurrent(){
     
+        PrintPlayer.print(gameModel.getActualPlayer());
         System.out.println(gameModel.getMessageToCurrentView());
     }
     
     public void printMessageAll(){
         
+        PrintPlayer.print(gameModel.getActualPlayer());
         System.out.println(gameModel.getMesssageToAllView());
     }
 
@@ -496,6 +498,11 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case USEPOWERUP:
                 break;
+            case SELECTPOWERUP:
+                viewSelectPowerUp();
+                break;
+            case SELECTPOWERUPINPUT:
+                viewSelectPowerUpInput();
             case RUN:
                 viewRun();
                 break;
@@ -544,7 +551,8 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewError() throws RemoteException {
         
-        print(gameModel.getMessageToCurrentView());
+        print("\nERROR!!\n ");
+        print(gameModel.getMessageToCurrentView() + "\n");
         notifyController();
         
     }
@@ -676,7 +684,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewChoiseAction() throws RemoteException {
     
         PrintSelectAction.print();
-        setIndex(getUserInput(0,3));
+        setIndex(getUserInput(-1,4));
         
         notifyController();
         
@@ -737,6 +745,31 @@ public class ViewCLI implements RemoteView, Serializable {
         printMap();
     
         notifyController();
+    }
+    
+    //powerUP method
+    
+    public void viewSelectPowerUp(){
+    
+        ArrayList<PowerUpCard> powerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps();
+        PrintPowerUp.print(powerUp);
+    
+        try {
+        
+            setIndex(getUserInput(0,powerUp.size()));
+            notifyController();
+            
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+       
+    }
+    
+    public void viewSelectPowerUpInput() throws RemoteException {
+        
+        print("here have to select power up");
+        notifyController();
+    
     }
     
     //weapon method
