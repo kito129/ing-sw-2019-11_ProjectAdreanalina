@@ -5,7 +5,6 @@ import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
-
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -14,6 +13,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+
+
 
 public class ViewCLI implements RemoteView, Serializable {
 
@@ -60,27 +62,48 @@ public class ViewCLI implements RemoteView, Serializable {
     
 
 
-    public ViewCLI()  {
+    public ViewCLI(){
 
         connection();
+        pingToServer();
         System.out.println("WELCOME TO ADRENALINA");
-    
-    
+
         try {
-            gameModel=gameController.getGameModel();
-            map=gameModel.getMap();
-    
-            do {
-                setUser();
-            }while (verifyName(user));
-    
-            gameController.addObserver(this);
-            gameController.update(this);
+            gameModel = gameController.getGameModel();
+            if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
+
+                do {
+
+                    setUser();
+                    } while (verifyName(user));
+                gameController.addObserver(this);
+                notifyController();
+            }else{
+
+                if(canJoinAgain()){
+
+                    do{
+
+                        setUser();
+                    }while(!tryToReadd(user));
+
+                    gameController.reAddObserver(this);
+                    //todo manca da settare il player online
+                    System.out.println("AGAIN ONLINE");
+                }else {
+
+                    System.out.println("GAME IS ALREADY STARTED");
+                    System.exit(0);
+                }
+            }
         } catch (RemoteException e) {
-            e.printStackTrace();
+
+            System.out.println("NETWORK ERROR ");
+            System.exit(0);
         }
     }
-    
+
+    //da eliminare
     public  ViewCLI(GameController controller) throws RemoteException {
         
         
@@ -89,8 +112,6 @@ public class ViewCLI implements RemoteView, Serializable {
         
     }
     
-    
-
     public void connection()  {
 
         try {
@@ -130,7 +151,18 @@ public class ViewCLI implements RemoteView, Serializable {
         this.user = input.next().toUpperCase();
     }
 
-    
+    public void pingToServer(){
+
+        Timer timer=new Timer();
+        TaskPingServer taskPingServer=new TaskPingServer(gameController,timer);
+        timer.schedule(taskPingServer,0,2000);
+    }
+
+    @Override
+    public void pingToClient() throws RemoteException {
+
+    }
+
     @Override
     public void setOnline (boolean online){
         this.online = online;
@@ -138,10 +170,52 @@ public class ViewCLI implements RemoteView, Serializable {
             this.print("\n\nYOU ARE NOW INACTIVE! TO JOIN AGAIN THE MATCH, PLEASE PRESS 0");
         }
     }
-    
+
+    public boolean canJoinAgain(){
+
+        for(RemoteView remoteView: gameModel.getRemoteView()){
+
+            if(remoteView==null){
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean tryToReadd(String user){
+
+        for(Player player:gameModel.getPlayers(true)){
+
+            if(user.equals(player.getName())){
+
+                if(player.getOnline()){
+
+                    return false;
+                }else{
+
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void print(String s) {
 
         System.out.println(s);
+    }
+    
+    public void printMessageCurrent(){
+    
+        PrintPlayer.print(gameModel.getActualPlayer());
+        System.out.println(gameModel.getMessageToCurrentView());
+    }
+    
+    public void printMessageAll(){
+        
+        PrintPlayer.print(gameModel.getActualPlayer());
+        System.out.println(gameModel.getMesssageToAllView());
     }
 
     @Override
@@ -253,13 +327,7 @@ public class ViewCLI implements RemoteView, Serializable {
         
         return user;
     }
-    
-    @Override
-    public boolean getOnline () throws RemoteException {
-        
-        return false;
-    }
-    
+ 
     @Override
     public boolean isBooleanChose () {
         
@@ -372,28 +440,25 @@ public class ViewCLI implements RemoteView, Serializable {
 
         this.choicePlayer3 = choicePlayer3;
     }
-
-    public void setState (State state) {
-        
-        this.state = state;
-    }
-    
-    
-    public void setGameController (RemoteGameController gameController) {
-        
-        gameController = gameController;
-    }
-    
-    public void setGameModel (GameModel gameModel) {
-        
-        this.gameModel = gameModel;
-    }
     
     @Override
-    public void resetInput() throws RemoteException {
+    public void resetInput(){
         setColumn(-1);
         setRow(-1);
-        setIndex(-1);
+        setIndex(-2);
+        setColumn2(-1);
+        setRow2(-1);
+        setTarget1(-1);
+        setTarget2(-1);
+        setTarget3(-1);
+        setTarget4(-1);
+        setBooleanChose(false);
+        setUseSecondEffect(false);
+        setUseThirdEffect(false);
+        setCardinalDirection(null);
+        setOptionWeapon(false);
+        setWeaponsEffect(null);
+        
     }
     
     /**
@@ -430,7 +495,13 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case USEPOWERUP:
                 break;
+            case SELECTPOWERUP:
+                viewSelectPowerUp();
+                break;
+            case SELECTPOWERUPINPUT:
+                viewSelectPowerUpInput();
             case RUN:
+                viewRun();
                 break;
             case SELECTRUN:
                 viewRunSelection();
@@ -444,16 +515,11 @@ public class ViewCLI implements RemoteView, Serializable {
             case SELECTWEAPON:
                 viewSelectWeapon();
                 break;
-            case SHOOT:
-                switch (gameModel.getWeaponsEffect()) {
-                    
-                    case BaseEffect:
-                        viewLockRifleBasicEffect(gameModel);
-                    case SecondLockEffect:
-                        viewLockRifleSecondLock(gameModel);
-            }
-                break;
             case SELECTEFFECT:
+                viewSelectWeaponEffect();
+                break;
+            case SHOOT:
+                viewShoot();
                 break;
             case ENDACTION:
                 break;
@@ -474,9 +540,18 @@ public class ViewCLI implements RemoteView, Serializable {
             case CHECKILLSHOOT:
                 break;
             case ERROR:
+                viewError();
                 break;
         
         }
+    }
+    
+    public void viewError() throws RemoteException {
+        
+        print("\nERROR!!\n ");
+        print(gameModel.getMessageToCurrentView() + "\n");
+        notifyController();
+        
     }
     
     //metodi di input e controllo
@@ -522,7 +597,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 System.out.println("SQUARE NOT EXIST IN MAP. RE INESERT CORRECT SQUARE");
             }
             
-        }while (gameModel.getMap().existInMap(tempRow,tempColumn));
+        }while (!gameModel.getMap().existInMap(tempRow,tempColumn));
         
         if (i==1) {
             setRow(tempRow);
@@ -547,6 +622,8 @@ public class ViewCLI implements RemoteView, Serializable {
         return getUserInput(0,1);
     }
     
+    
+    
     public int getUserInput (int min, int max){
         
         int i;
@@ -563,21 +640,25 @@ public class ViewCLI implements RemoteView, Serializable {
         return i;
     }
     
-    //metodi di rete e observer
-    private void notifyController() throws RemoteException {
+    public boolean checkCurrent(){
         
-        if (true) {
-            //this.state=gameController.getGameModel().getState();
-            gameController.update(this);
+        if(gameModel.getActualPlayer().getName().equals(this.user)){
+            
+            return true;
         } else {
             
-            gameController.setPlayerOnline(user, true);
-            this.setOnline(true);
+            return false;
         }
     }
     
-    //metodi di case
+    //metodi di rete e observer
+    private void notifyController() throws RemoteException {
 
+        gameController.update(this);
+    }
+
+    
+    //metodi di case
     public void viewLobby() throws RemoteException{
     
         System.out.println("GAMERS IN THE LOBBY:");
@@ -593,8 +674,10 @@ public class ViewCLI implements RemoteView, Serializable {
         Player player = gameModel.getActualPlayer();
     
         System.out.println(player.toString());
+    
+        System.out.println("\nPOWER UP TOO CHOOSE: ");
         
-        PrintPowerUp.print(player.getPowerUpCardsSpawn());
+        PrintPowerUp.print(player.getPowerUpCardsSpawn(),false);
     
         System.out.println("YOUR CHOISE: ");
         
@@ -605,20 +688,27 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewStartTurn() throws RemoteException {
         
-        PrintMap.printMap(map);
+        PrintMap.printMap(gameModel.getMap());
         PrintPlayer.print(gameModel.getActualPlayer());
         notifyController();
     }
     
     public void viewChoiseAction() throws RemoteException {
     
+        System.out.println("\nYOUR INFO: \n");
+        PrintPlayer.print(gameModel.getActualPlayer());
+        System.out.println();
         PrintSelectAction.print();
-        getUserInput(0,3);
+        setIndex(getUserInput(-1,4));
         
         notifyController();
         
         
     }
+    
+    
+    
+    //RUN action method
     public void viewRunSelection() throws RemoteException {
 
         PrintRunAction.print();
@@ -628,78 +718,123 @@ public class ViewCLI implements RemoteView, Serializable {
         notifyController();
     }
     
-    
-    public void viewMap () throws RemoteException {
+    public void viewRun() throws RemoteException {
         
-        PrintMap.printMap(gameModel.getMap());
+        printMessageAll();
+        
+        if(checkCurrent()){
+            
+            printMessageCurrent();
+        }
+        
+        printMap();
     
+        notifyController();
+        
     }
+    
+    //GRAB action method
 
     public void  viewGrabSelection() throws RemoteException {
 
         PrintGrabAction.printGrabStuff();
         getSquareInput(1);
-        Square target = null;
+        Square target;
         try {
             
             target = gameModel.getMap().getSquare(row,column);
+            
+            if(gameModel.getMap().isGenerationSquare(target)){
+    
+                PrintGrabAction.printGrabWeapon();
+                PrintWeapon.print(((GenerationSquare) target).getWeaponList(),false);
+                PrintSelectAction.printIndexWeapon();
+                Scanner input = new Scanner(System.in);
+                
+                while(!input.hasNextInt())
+                    input = new Scanner(System.in);
+                setIndex(input.nextInt());
+            }
+            
+            notifyController();
         } catch (MapException e) {
             e.printStackTrace();
         }
-    
-    
-        System.out.println("input corretto");
-        
-        if(gameModel.getMap().isGenerationSquare(target)){
-
-            PrintGrabAction.printGrabWeapon();
-            PrintWeapon.print(((GenerationSquare) target).getWeaponList());
-            PrintSelectAction.printIndexWeapon();
-            Scanner input = new Scanner(System.in);
-            
-            while(!input.hasNextInt())
-                input = new Scanner(System.in);
-            setIndex(input.nextInt());
-        }
-        
-        notifyController();
     }
 
     public void viewGrab() throws RemoteException {
-
-        PrintMap.printMap(gameModel.getMap());
+    
+        printMessageAll();
+    
+        if(checkCurrent()){
+        
+            printMessageCurrent();
+        }
+    
+        printMap();
+    
+        notifyController();
     }
     
-    public void viewSelectWeapon() {
+    
+    //powerUP method
+    public void viewSelectPowerUp(){
+    
+        ArrayList<PowerUpCard> powerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps();
+        PrintPowerUp.print(powerUp,false);
+    
+        try {
+        
+            setIndex(getUserInput(0,powerUp.size()));
+            notifyController();
+            
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+       
+    }
+    
+    public void viewSelectPowerUpInput() throws RemoteException {
+        
+        print("here have to select power up");
+        notifyController();
+    
+    }
+    
+    //weapon method
+    
+    public void viewSelectWeapon() throws RemoteException {
         
         ArrayList<WeaponCard> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
         PrintEffectWeapon.printSelectWeapon();
         PrintWeapon.printName(weapons);
 
-        try {
-            
-            setIndex(getUserInput(0,weapons.size()));
-            notifyController();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        setIndex(getUserInput(0,weapons.size()));
+        notifyController();
+        
     }
     
-    public void viewSelectWeaponEffect() {
+    public void viewSelectWeaponEffect() throws RemoteException {
         
         ArrayList<WeaponsEffect> weaponEffects = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(index).getWeaponEffects();
         PrintEffectWeapon.printSelectWeaponEffect();
         PrintWeapon.printEffectName(weaponEffects);
-        int i;
         
-        try {
-            
-            setIndex2(getUserInput(0,weaponEffects.size()));
-            notifyController();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        setIndex2(getUserInput(0,weaponEffects.size()));
+        notifyController();
+       
     
+    }
+    
+    public void viewShoot() throws RemoteException {
+    
+        printMessageAll();
+    
+        printMap();
+    
+        notifyController();
+        
+        
     }
     
     //WEAPON
@@ -708,8 +843,8 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewLockRifleBasicEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printLockRifleBasicEffect(gameModel);
-
-       //metodo per prender in input un player con il controllo
+    
+        //get the player target 1
         setTarget1(getPlayerInput());
         
         notifyController();
@@ -718,10 +853,10 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewLockRifleSecondLock(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printLockRifleSecondLock(gameModel);
-
-        //metodo per prender in input un player con il controllo
-        setTarget2(getPlayerInput());
     
+        //get the player target 2
+        setTarget2(getPlayerInput());
+        //notify controller with new input
         notifyController();
     }
     
@@ -729,7 +864,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewElectroscytheBasicMode() throws RemoteException{
         
         PrintEffectWeapon.printElectroscytheBasicMode();
-        
+        //notify controller with new input
         notifyController();
     }
     
@@ -1297,7 +1432,6 @@ public class ViewCLI implements RemoteView, Serializable {
         //notify controller with new input
         notifyController();
     }
-
     
     //TODO NON VA BENE
     public void viewFlamethrowerBarbecueMode(GameModel gameModel) throws RemoteException {

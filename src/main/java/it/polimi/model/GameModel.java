@@ -26,20 +26,23 @@ public class GameModel implements Serializable {
     private WeaponDeck weaponDeck;
     private Player actualPlayer;
     private State state;
-    private WeaponState extraState;
+    private WeaponState weaponState;
     private WeaponsEffect weaponsEffect;
     private String errorMessage;
+    private String messageToCurrentView;
+    private String messsageToAllView;
     private ArrayList<EnumColorPlayer> gameColor = new ArrayList<>(5);
     
     public GameModel(){
         
         state=State.LOBBY;
-    
+        //create object of the gam
         this.killShotTrack= new KillShotTrack();
         this.ammoDeck = new AmmoDeck();
         this.powerUpDeck=new PowerUpDeck();
         this.weaponDeck=new WeaponDeck();
         players=new ArrayList<>();
+        //create map and poulate list of color for the player
         this.map = new Map(MapCreator.createA(),"mapp a");
         populateColor();
         
@@ -90,8 +93,12 @@ public class GameModel implements Serializable {
 
         return map;
     }
-    
-    
+
+    public ArrayList<RemoteView> getRemoteViews() {
+
+        return remoteViews;
+    }
+
     /**
      * Gets kill shot track .
      *
@@ -121,7 +128,9 @@ public class GameModel implements Serializable {
         }
 
     }
-    
+
+
+
     /**
      * Gets ammo deck.
      *
@@ -157,6 +166,16 @@ public class GameModel implements Serializable {
         return state;
     }
     
+    public String getMessageToCurrentView () {
+        
+        return messageToCurrentView;
+    }
+    
+    public String getMesssageToAllView () {
+        
+        return messsageToAllView;
+    }
+    
     public void setPlayers(Player player){
        
         this.players.add(player);
@@ -164,15 +183,15 @@ public class GameModel implements Serializable {
     }
     
 
-    public void setState (State state) throws RemoteException {
+    public void setState (State state)  {
         
         this.state=state;
-        notifyObserver();
+        notifyObserver(this);
     }
     
-    public WeaponState getExtraState () {
+    public WeaponState getWeaponState () {
         
-        return extraState;
+        return weaponState;
     }
     
     public WeaponsEffect getWeaponsEffect () {
@@ -206,9 +225,19 @@ public class GameModel implements Serializable {
         return tempPLayers;
     }
     
-    public void setExtraState (WeaponState extraState) {
+    public void setMessageToCurrentView (String messageToCurrentView) {
         
-        this.extraState = extraState;
+        this.messageToCurrentView = messageToCurrentView;
+    }
+    
+    public void setMesssageToAllView (String messsageToAllView) {
+        
+        this.messsageToAllView = messsageToAllView;
+    }
+    
+    public void setWeaponState (WeaponState weaponState) {
+        
+        this.weaponState = weaponState;
     }
     
     public void setWeaponsEffect (WeaponsEffect weaponsEffect) {
@@ -257,8 +286,9 @@ public class GameModel implements Serializable {
      */
 
     public void removeObserver(RemoteView observer){
-        
-        remoteViews.set(getRemoteView().indexOf(observer), null);
+
+        int indexOfObserver=remoteViews.indexOf(observer);
+        remoteViews.set(indexOfObserver, null);
     }
     
     /**
@@ -268,6 +298,8 @@ public class GameModel implements Serializable {
      */
 
     public void reAddObserver(RemoteView observer) throws RemoteException {
+
+        //todo da rifare
         int index = 0;
         for(Player a : players){
             if((a.getName()).equals(observer.getUser())) {
@@ -278,8 +310,9 @@ public class GameModel implements Serializable {
         remoteViews.set(index, observer);
     }
 
-    public void notifyObserver (){
+    public void notifyObserver (GameModel gameModel){
 
+        //todo da fare
 
         for(RemoteView observer: getRemoteView()){
 
@@ -304,6 +337,7 @@ public class GameModel implements Serializable {
         }
     throw  new MapException();
     }
+
 
 
 }

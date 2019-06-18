@@ -26,18 +26,19 @@ public class PrintEnumPlayer implements Serializable {
 
                 case BLU:
                     System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
+                    break;
                 case GREEN:
                     System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
+                    break;
                 case GREY:
                     System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
+                    break;
                 case PINK:
                     System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
+                    break;
                 case YELLOW:
                     System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    break;
             }
         }
     }

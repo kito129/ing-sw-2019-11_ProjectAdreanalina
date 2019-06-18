@@ -106,9 +106,15 @@ public class MainMarcoController {
         ViewCLI viewCLI = new ViewCLI(gameController);
         gameModel.addObserver(viewCLI);
         map.print();
+<<<<<<< HEAD
         PrintMap.printMap(gameModel.getMap());
 
 
+=======
+        viewCLI.printMap();
+        PrintMap.printMap(gameModel.getMap());
+       
+>>>>>>> origin/master
 
        /*
         //prova run

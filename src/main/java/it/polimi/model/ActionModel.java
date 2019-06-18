@@ -5,6 +5,7 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
+import it.polimi.view.RemoteView;
 
 
 import java.io.Serializable;
@@ -24,6 +25,8 @@ public class ActionModel implements Serializable {
     public ActionModel(GameModel gameModel){
 
         this.gameModel = gameModel;
+        this.map=gameModel.getMap();
+        this.actualPlayer=gameModel.getActualPlayer();
 
     }
 
@@ -61,11 +64,25 @@ public class ActionModel implements Serializable {
      * @param targetSquare the target square to move
      * @throws RunActionMaxDistLimitException the run action max dist limit exception
      */
-    public void runActionModel(Player player, Square targetSquare) throws RunActionMaxDistLimitException, NotValidInput, NotValidSquareException, MapException {
+    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException, MapException {
 
-        if (map.distance(map.findPlayer(player), targetSquare) < 4) {
+        Player current = gameModel.getActualPlayer();
+        Square playerSquare = map.findPlayer(current);
+        //adrealinic distance
+        int maxDist;
+    
+        if (current.getPlayerBoard().getDamages().size() < 2) {
+        
+            maxDist = 4;
+        } else {
+        
+            maxDist = 5;
+            gameModel.setMessageToCurrentView("YOUR ARE USING ADRENALIN MODE FOR RUN");
+        }
+        
+        if (map.distance(playerSquare,targetSquare) < maxDist) {
 
-            map.movePlayer(player, targetSquare);
+            map.movePlayer(current, targetSquare);
             action++;
         } else {
 
@@ -85,26 +102,30 @@ public class ActionModel implements Serializable {
 
         //adrenalinic distance
         int maxDist;
+        Player actual = gameModel.getActualPlayer();
 
-        if (actualPlayer.getPlayerBoard().getDamages().size() < 2) {
+        if (actual.getPlayerBoard().getDamages().size() < 2) {
 
             maxDist = 1;
         } else {
 
             maxDist = 2;
+            gameModel.setMessageToCurrentView("YOUR ARE USING ADRENALIN MODE FOR GRAB");
         }
-        if (map.distance(map.findPlayer(actualPlayer), targetSquare) <= maxDist) {
+        if (map.distance(map.findPlayer(actual), targetSquare) <= maxDist) {
 
-            map.movePlayer(actualPlayer, targetSquare);
+            map.movePlayer(actual, targetSquare);
             
-            if (!map.isGenerationSquare(targetSquare) && actualPlayer.getPlayerBoard().getPlayerPowerUps().size() < 4) {
-
-                actualPlayer.catchAmmoCard(((NormalSquare) map.findPlayer(actualPlayer)).catchAmmoCard());
-                action++;
-            } else if ((map.isGenerationSquare(targetSquare)) && (actualPlayer.getPlayerBoard().getPlayerWeapons().size() < 4 )&& (weaponIndex<(((GenerationSquare) map.findPlayer(actualPlayer)).getWeaponList().size()) )){
-
-                actualPlayer.getPlayerBoard().addWeapon(((GenerationSquare) map.findPlayer(actualPlayer)).catchWeapon(weaponIndex));
-                action++;
+            if (!map.isGenerationSquare(targetSquare) && actual.getPlayerBoard().getPlayerPowerUps().size() <=3) {
+    
+                actual.catchAmmoCard(((NormalSquare) map.findPlayer(actual)).catchAmmoCard());
+                getGameModel().setMesssageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
+    
+            } else if ((map.isGenerationSquare(targetSquare)) && (actual.getPlayerBoard().getPlayerWeapons().size() <=3 )&& (weaponIndex<(((GenerationSquare) map.findPlayer(actual)).getWeaponList().size()) )){
+    
+                actual.getPlayerBoard().addWeapon(((GenerationSquare) map.findPlayer(actual)).catchWeapon(weaponIndex));
+                getGameModel().setMesssageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
+            
             } else {
 
                 throw new  GrabActionFullObjException();
@@ -115,12 +136,14 @@ public class ActionModel implements Serializable {
         }
     }
     
+    
     /**
      * Check the number in the turn.
      *
      * @return true if can do action, else otherwise
      */
     public boolean checkActionCount() {
+        
         if (action == 1) {
 
             //gameModel.setState(State.ACTION1);//todo commento perchè non mi compila
@@ -145,9 +168,8 @@ public class ActionModel implements Serializable {
      * @throws NotInSameDirection Not in same direction
      * @throws NotValidDistance   Not valid distance
      */
-    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws NoPowerUpAvailable, NotInSameDirection, NotValidDistance, NotValidInput, MapException, RemoteException {
-
-        gameModel.setState(State.USEPOWERUP);
+    public void usePowerUpNewton(Newton newton, Player targetPlayer, Square targetSquare) throws  NotInSameDirection, NotValidDistance, MapException {
+        
         newton.effect(gameModel.getMap(), targetSquare, targetPlayer);
 
     }
@@ -159,9 +181,8 @@ public class ActionModel implements Serializable {
      * @param targetSquare the target square
      * @throws NoPowerUpAvailable the no power up avaible
      */
-    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws NotValidInput, MapException, RemoteException {
-
-        gameModel.setState(State.USEPOWERUP);
+    public void usePowerUpTeleporter(Teleporter teleporter, Square targetSquare) throws  MapException {
+        
         teleporter.effect(gameModel.getActualPlayer(), gameModel.getMap(), targetSquare);
 
     }
@@ -173,10 +194,8 @@ public class ActionModel implements Serializable {
      * @param targetPlayer   the target player
      * @throws NoPowerUpAvailable NO power up available
      */
-    public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer) throws RemoteException {
-
-        gameModel.setState(State.USEPOWERUP);
-        System.out.println(gameModel.getActualPlayer().toString());
+    public void usePowerUpTargetingScope(TargetingScope targetingScope, Player targetPlayer) {
+        
         targetingScope.effect(gameModel.getActualPlayer(),targetPlayer);
 
     }
@@ -189,9 +208,8 @@ public class ActionModel implements Serializable {
      * @throws NoPowerUpAvailable No power up avaible
      * @throws NotVisibleTarget Not visible target
      */
-    public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NotVisibleTarget, RemoteException {
-
-        gameModel.setState(State.USEPOWERUP);
+    public void usePowerUpTagBackGrenade(TagBackGrenade tagBackGrenade, Player targetPlayer) throws NotVisibleTarget  {
+        
         tagBackGrenade.effect(gameModel.getMap(), gameModel.getActualPlayer(), targetPlayer);
     }
     

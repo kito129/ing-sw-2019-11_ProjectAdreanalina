@@ -75,7 +75,7 @@ public class Map implements Serializable {
      */
     public Square findPlayer(Player player) throws MapException {
 
-        for (Square s : this.squares) {
+        for (Square s : squares) {
 
             if (s.getPlayers().contains(player)) {
 
@@ -558,7 +558,6 @@ public class Map implements Serializable {
      */
     public boolean existInMap(int row, int column){
         
-        boolean found=false;
         
         for (Square a:squares) {
             if (row == a.getRow() && column == a.getColumn()) {

@@ -13,7 +13,6 @@ public interface RemoteView extends Remote {
     
     void setOnline (boolean online) throws RemoteException;
     
-    
     int getIndex () throws RemoteException;
 
     int getChoicePlayer() throws RemoteException;
@@ -52,8 +51,6 @@ public interface RemoteView extends Remote {
 
     String getUser() throws RemoteException;
     
-    boolean getOnline() throws RemoteException;
-    
     boolean isBooleanChose () throws RemoteException;
     
     int getIndex2 () throws RemoteException;
@@ -61,5 +58,7 @@ public interface RemoteView extends Remote {
     void resetInput() throws RemoteException;
     
     void update(GameModel gameModel) throws RemoteException;
+
+    void pingToClient()throws RemoteException;
     
 }

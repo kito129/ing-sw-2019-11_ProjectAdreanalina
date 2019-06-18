@@ -18,6 +18,12 @@ public class PrintPlayer implements Serializable {
         PrintCoordinate.print(player);
         PrintScore.print(player);
         System.out.println("ALIVE: " +player.isAlive());
+        PrintAmmo.print(player.getPlayerBoard().getAmmo());
+        System.out.println("\nPOWER UPS: ");
+        PrintPowerUp.print(player.getPlayerBoard().getPlayerPowerUps(),false);
+        System.out.println("WEAPONS: ");
+        PrintWeapon.print(player.getPlayerBoard().getPlayerWeapons(),false);
+        
     }
 
     /**

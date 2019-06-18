@@ -50,6 +50,7 @@ public class NormalSquare extends Square implements Serializable {
      * @return the ammo card on this square
      */
     public AmmoCard catchAmmoCard(){
+        
         AmmoCard temp = this.ammoCard;
         this.ammoCard=null;
         return temp;
