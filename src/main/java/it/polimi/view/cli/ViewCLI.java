@@ -151,6 +151,12 @@ public class ViewCLI implements RemoteView, Serializable {
         this.user = input.next().toUpperCase();
     }
 
+    @Override
+    public boolean getOnline() throws RemoteException {
+
+        return online;
+    }
+
     public void pingToServer(){
 
         Timer timer=new Timer();
@@ -175,7 +181,7 @@ public class ViewCLI implements RemoteView, Serializable {
 
     public boolean canJoinAgain(){
 
-        for(RemoteView remoteView: gameModel.getRemoteView()){
+        for(RemoteView remoteView: gameModel.getRemoteViews()){
 
             if(remoteView==null){
 

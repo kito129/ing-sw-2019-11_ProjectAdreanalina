@@ -202,7 +202,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
 
                 //gestione disconnessione del giocatore
                 //vedere anche sagrada se sono il lobby fanno robe diverse..devo aspettare marco per capire cosa istanzia.
-                //dobbiamo metterlo offline
+                int indexOfObserver=gameModel.getRemoteView().indexOf(remoteView);
+                gameModel.getPlayers(true).get(indexOfObserver).setOnline(false);
                 gameModel.removeObserver(remoteView);
 
             }

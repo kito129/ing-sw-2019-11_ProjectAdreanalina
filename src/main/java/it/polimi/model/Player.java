@@ -157,8 +157,16 @@ public class Player implements Serializable {
     }
     
     public void setOnline(Boolean online){
-        
-        this.online=online;
+
+        this.online = online;
+        if(online) {
+
+            System.out.println(name + " IS ONLINE");
+        }
+        else{
+
+            System.out.println(name+" IS OFFLINE");
+        }
     }
     
     /**

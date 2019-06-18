@@ -264,11 +264,6 @@ public class GameModel implements Serializable {
         return null;
     }
 
-
-    public List<RemoteView> getRemoteView(){
-
-        return remoteViews;
-    }
     /**
      * adds an RMI observer at the beginning
      * @param observer the observer to be added
@@ -311,16 +306,32 @@ public class GameModel implements Serializable {
 
     public void notifyObserver (GameModel gameModel){
 
-        //todo da fare
+        int indexOfObserver=-1;
 
-        for(RemoteView observer: getRemoteView()){
+        try {
 
-            try {
-                observer.update(this);
+            for(RemoteView observer: getRemoteViews()){
 
-            } catch (RemoteException e) {
+                if(observer!=null) {
+
+                    if(!(actualPlayer.getName().equals(observer.getUser()))) {
+
+                        if(observer.getOnline()) {
+
+                            observer.update(this);
+                        }
+                    }else{
+
+                        indexOfObserver=getRemoteViews().indexOf(observer);
+                    }
+                }
 
             }
+            if(indexOfObserver!=-1) {
+                getRemoteViews().get(indexOfObserver).update(gameModel);
+            }
+        }catch (RemoteException remoteExcpetion){
+
         }
     }
     
