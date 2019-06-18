@@ -14,6 +14,7 @@ public class WeaponCard implements Serializable {
     private ArrayList<WeaponsEffect> weaponEffects;
     private boolean isCharge;
     private String description;
+    private boolean isOptional;
     
     /**
      * Instantiates a new weapon card.
@@ -74,7 +75,17 @@ public class WeaponCard implements Serializable {
 
         return description;
     }
-
+    
+    public boolean isOptional () {
+        
+        return isOptional;
+    }
+    
+    public void setOptional (boolean optional) {
+        
+        isOptional = optional;
+    }
+    
     /**
      * Sets recharge cost.
      *

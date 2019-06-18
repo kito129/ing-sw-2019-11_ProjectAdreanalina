@@ -96,7 +96,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED BASIC MODE");
-        System.out.print("Who is your target? In which square do you want to move it? (enter players' ID and row and column for the square )");
+        System.out.print("Who is your target? In which square do you want to move it? (enter players' ID and row and column for the square)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 

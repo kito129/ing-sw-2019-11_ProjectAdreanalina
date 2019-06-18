@@ -161,6 +161,6 @@ public class PrintSquare implements Serializable {
 
         System.out.println();
         System.out.println("WEAPON LIST:");
-        PrintWeapon.print(generationSquare.getWeaponList());
+        PrintWeapon.print(generationSquare.getWeaponList(),false);
     }
 }

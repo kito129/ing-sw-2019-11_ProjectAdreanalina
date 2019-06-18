@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 public class PrintMap implements Serializable {
 
-    //⇅ doppia freccia verticale
-    //⇄ doppia freccia orizzontale
-
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
@@ -110,29 +107,67 @@ public class PrintMap implements Serializable {
      * Set the right string to view for CLI to the corresponding color
      * @param player      the selected player
      */
-    public static String colorString(Player player){
+    public static String colorString(Player player, ArrayList<Square> squares){
 
         String s = "";
+        String colorPlayer = player.getColor().toString();
 
-        if(player.getColor().equals(EnumColorPlayer.BLU)){
+        if(colorPlayer == "BLU"){
 
-            s = ANSI_BLUE_BACKGROUND + "B" + ANSI_BLACK_BACKGROUND;
+            colorPlayer = "B";
         }
-        else if(player.getColor().equals(EnumColorPlayer.GREEN)){
 
-            s = ANSI_GREEN_BACKGROUND + "G" + ANSI_BLACK_BACKGROUND;
+        if(colorPlayer == "GREEN"){
+
+            colorPlayer = "G";
         }
-        else if(player.getColor().equals(EnumColorPlayer.GREY)){
 
-            s = ANSI_WHITE_BACKGROUND + ANSI_BLACK + "W" + ANSI_RESET + ANSI_BLACK_BACKGROUND;
+        if(colorPlayer == "GREY"){
+
+            colorPlayer = "W";
         }
-        else if(player.getColor().equals(EnumColorPlayer.PINK)){
 
-            s = ANSI_PURPLE_BACKGROUND + "P" + ANSI_BLACK_BACKGROUND;
+        if(colorPlayer == "PINK"){
+
+            colorPlayer = "P";
         }
-        else if(player.getColor().equals(EnumColorPlayer.YELLOW)){
 
-            s = ANSI_YELLOW_BACKGROUND + ANSI_BLACK + "Y" + ANSI_RESET + ANSI_BLACK_BACKGROUND;
+        if(colorPlayer == "YELLOW"){
+
+            colorPlayer = "Y";
+        }
+
+        for(Square sq : squares){
+
+            if(sq.getColor().equals(EnumColorSquare.BLU)) {
+
+                s = ANSI_BLUE_BACKGROUND + colorPlayer + ANSI_BLACK_BACKGROUND;
+            }
+
+            if(sq.getColor().equals(EnumColorSquare.GREEN)) {
+
+                s = ANSI_GREEN_BACKGROUND + colorPlayer + ANSI_BLACK_BACKGROUND;
+            }
+
+            if(sq.getColor().equals(EnumColorSquare.PINK)) {
+
+                s = ANSI_PURPLE_BACKGROUND + colorPlayer + ANSI_BLACK_BACKGROUND;
+            }
+
+            if(sq.getColor().equals(EnumColorSquare.RED)) {
+
+                s = ANSI_RED_BACKGROUND + colorPlayer + ANSI_BLACK_BACKGROUND;
+            }
+
+            if(sq.getColor().equals(EnumColorSquare.WHITE)) {
+
+                s = ANSI_WHITE_BACKGROUND + ANSI_BLACK + colorPlayer + ANSI_RESET + ANSI_BLACK_BACKGROUND;
+            }
+
+            if(sq.getColor().equals(EnumColorSquare.YELLOW)) {
+
+                s = ANSI_YELLOW_BACKGROUND + ANSI_BLACK + colorPlayer + ANSI_RESET + ANSI_BLACK_BACKGROUND;
+            }
         }
         return s;
     }
@@ -149,33 +184,33 @@ public class PrintMap implements Serializable {
 
             if(s.getPlayers().size() == 1){
 
-                map[5*s.getRow()+3][6*s.getColumn()+3] = colorString(s.getPlayers().get(0));
+                map[5*s.getRow()+3][6*s.getColumn()+3] = colorString(s.getPlayers().get(0), squares);
             }
             else if(s.getPlayers().size() == 2){
 
-                map[5*s.getRow()+3][6*s.getColumn()+2] = colorString(s.getPlayers().get(0));
-                map[5*s.getRow()+3][6*s.getColumn()+4] = colorString(s.getPlayers().get(1));
+                map[5*s.getRow()+3][6*s.getColumn()+2] = colorString(s.getPlayers().get(0), squares);
+                map[5*s.getRow()+3][6*s.getColumn()+4] = colorString(s.getPlayers().get(1), squares);
             }
             else if(s.getPlayers().size() == 3){
 
-                map[5*s.getRow()+2][6*s.getColumn()+3] = colorString(s.getPlayers().get(0));
-                map[5*s.getRow()+3][6*s.getColumn()+2] = colorString(s.getPlayers().get(1));
-                map[5*s.getRow()+3][6*s.getColumn()+4] = colorString(s.getPlayers().get(2));
+                map[5*s.getRow()+2][6*s.getColumn()+3] = colorString(s.getPlayers().get(0), squares);
+                map[5*s.getRow()+3][6*s.getColumn()+2] = colorString(s.getPlayers().get(1), squares);
+                map[5*s.getRow()+3][6*s.getColumn()+4] = colorString(s.getPlayers().get(2), squares);
             }
             else if(s.getPlayers().size() == 4){
 
-                map[5*s.getRow()+2][6*s.getColumn()+3] = colorString(s.getPlayers().get(0));
-                map[5*s.getRow()+3][6*s.getColumn()+2] = colorString(s.getPlayers().get(1));
-                map[5*s.getRow()+3][6*s.getColumn()+4] = colorString(s.getPlayers().get(2));
-                map[5*s.getRow()+4][6*s.getColumn()+3] = colorString(s.getPlayers().get(3));
+                map[5*s.getRow()+2][6*s.getColumn()+3] = colorString(s.getPlayers().get(0), squares);
+                map[5*s.getRow()+3][6*s.getColumn()+2] = colorString(s.getPlayers().get(1), squares);
+                map[5*s.getRow()+3][6*s.getColumn()+4] = colorString(s.getPlayers().get(2), squares);
+                map[5*s.getRow()+4][6*s.getColumn()+3] = colorString(s.getPlayers().get(3), squares);
             }
             else if(s.getPlayers().size() == 5){
 
-                map[5*s.getRow()+2][6*s.getColumn()+2] = colorString(s.getPlayers().get(0));
-                map[5*s.getRow()+2][6*s.getColumn()+4] = colorString(s.getPlayers().get(1));
-                map[5*s.getRow()+3][6*s.getColumn()+3] = colorString(s.getPlayers().get(2));
-                map[5*s.getRow()+4][6*s.getColumn()+2] = colorString(s.getPlayers().get(3));
-                map[5*s.getRow()+4][6*s.getColumn()+4] = colorString(s.getPlayers().get(4));
+                map[5*s.getRow()+2][6*s.getColumn()+2] = colorString(s.getPlayers().get(0), squares);
+                map[5*s.getRow()+2][6*s.getColumn()+4] = colorString(s.getPlayers().get(1), squares);
+                map[5*s.getRow()+3][6*s.getColumn()+3] = colorString(s.getPlayers().get(2), squares);
+                map[5*s.getRow()+4][6*s.getColumn()+2] = colorString(s.getPlayers().get(3), squares);
+                map[5*s.getRow()+4][6*s.getColumn()+4] = colorString(s.getPlayers().get(4), squares);
             }
 
             //per scrivere "ammo" sopra ai normal square
@@ -197,6 +232,11 @@ public class PrintMap implements Serializable {
      */
     private static String[][] putDoors (Map m, String[][] map){
 
+        //characters for doors ??
+        char degrees = '\u00B0'; //non va ma fa vedere un cuore anziché °
+        char Hdoor = '\u21D4'; //non va (si vede ?)
+        char Vdoor = '\u21D5'; //non va (si vede ?)
+
         for (Square s : m.getSquares()){
 
             if(s.getColumn()<3 && m.isPort(s.getRow(),s.getColumn(),s.getRow(),s.getColumn()+1)){
@@ -207,7 +247,6 @@ public class PrintMap implements Serializable {
                 }
             }
 
-            //⇄⇅
             if(s.getRow()<2 && m.isPort(s.getRow(),s.getColumn(),s.getRow()+1,s.getColumn())){
 
                 for (int i = 1; i <= 5; i++){

@@ -8,7 +8,7 @@ public class PrintSelectAction implements Serializable {
      * prints the client's possible choices
      */
     public static void print(){
-        System.out.println("WHAT MOVE DO YOU WANT TO MAKE? (PRESS -1 TO ABORT)");
+        System.out.println("n\nWHAT MOVE DO YOU WANT TO MAKE? (PRESS -1 TO ABORT)");
         System.out.println("1) RUN AROUND");
         System.out.println("2) GRUB STUFF");
         System.out.println("3) SHOOT PEOPLE");

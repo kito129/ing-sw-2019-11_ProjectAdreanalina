@@ -448,28 +448,25 @@ public class ViewCLI implements RemoteView, Serializable {
 
         this.choicePlayer3 = choicePlayer3;
     }
-
-    public void setState (State state) {
-        
-        this.state = state;
-    }
-    
-    
-    public void setGameController (RemoteGameController gameController) {
-        
-        gameController = gameController;
-    }
-    
-    public void setGameModel (GameModel gameModel) {
-        
-        this.gameModel = gameModel;
-    }
     
     @Override
-    public void resetInput() throws RemoteException {
+    public void resetInput(){
         setColumn(-1);
         setRow(-1);
-        setIndex(-1);
+        setIndex(-2);
+        setColumn2(-1);
+        setRow2(-1);
+        setTarget1(-1);
+        setTarget2(-1);
+        setTarget3(-1);
+        setTarget4(-1);
+        setBooleanChose(false);
+        setUseSecondEffect(false);
+        setUseThirdEffect(false);
+        setCardinalDirection(null);
+        setOptionWeapon(false);
+        setWeaponsEffect(null);
+        
     }
     
     /**
@@ -528,6 +525,9 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case SELECTEFFECT:
                 viewSelectWeaponEffect();
+                break;
+            case SELECTSHOOTINPUT:
+                viewSelectShootInuput();
                 break;
             case SHOOT:
                 viewShoot();
@@ -633,6 +633,8 @@ public class ViewCLI implements RemoteView, Serializable {
         return getUserInput(0,1);
     }
     
+    
+    
     public int getUserInput (int min, int max){
         
         int i;
@@ -647,6 +649,17 @@ public class ViewCLI implements RemoteView, Serializable {
         } while (i<min || i>max);
         
         return i;
+    }
+    
+    public boolean checkCurrent(){
+        
+        if(gameModel.getActualPlayer().getName().equals(this.user)){
+            
+            return true;
+        } else {
+            
+            return false;
+        }
     }
     
     //metodi di rete e observer
@@ -672,8 +685,10 @@ public class ViewCLI implements RemoteView, Serializable {
         Player player = gameModel.getActualPlayer();
     
         System.out.println(player.toString());
+    
+        System.out.println("\nPOWER UP TOO CHOOSE: ");
         
-        PrintPowerUp.print(player.getPowerUpCardsSpawn());
+        PrintPowerUp.print(player.getPowerUpCardsSpawn(),false);
     
         System.out.println("YOUR CHOISE: ");
         
@@ -691,6 +706,9 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewChoiseAction() throws RemoteException {
     
+        System.out.println("\nYOUR INFO: \n");
+        PrintPlayer.print(gameModel.getActualPlayer());
+        System.out.println();
         PrintSelectAction.print();
         setIndex(getUserInput(-1,4));
         
@@ -698,6 +716,10 @@ public class ViewCLI implements RemoteView, Serializable {
         
         
     }
+    
+    
+    
+    //RUN action method
     public void viewRunSelection() throws RemoteException {
 
         PrintRunAction.print();
@@ -711,13 +733,18 @@ public class ViewCLI implements RemoteView, Serializable {
         
         printMessageAll();
         
+        if(checkCurrent()){
+            
+            printMessageCurrent();
+        }
+        
         printMap();
     
         notifyController();
         
     }
     
-    //action method
+    //GRAB action method
 
     public void  viewGrabSelection() throws RemoteException {
 
@@ -731,7 +758,7 @@ public class ViewCLI implements RemoteView, Serializable {
             if(gameModel.getMap().isGenerationSquare(target)){
     
                 PrintGrabAction.printGrabWeapon();
-                PrintWeapon.print(((GenerationSquare) target).getWeaponList());
+                PrintWeapon.print(((GenerationSquare) target).getWeaponList(),false);
                 PrintSelectAction.printIndexWeapon();
                 Scanner input = new Scanner(System.in);
                 
@@ -750,17 +777,22 @@ public class ViewCLI implements RemoteView, Serializable {
     
         printMessageAll();
     
+        if(checkCurrent()){
+        
+            printMessageCurrent();
+        }
+    
         printMap();
     
         notifyController();
     }
     
-    //powerUP method
     
+    //powerUP method
     public void viewSelectPowerUp(){
     
         ArrayList<PowerUpCard> powerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps();
-        PrintPowerUp.print(powerUp);
+        PrintPowerUp.print(powerUp,false);
     
         try {
         
@@ -782,34 +814,28 @@ public class ViewCLI implements RemoteView, Serializable {
     
     //weapon method
     
-    public void viewSelectWeapon() {
+    public void viewSelectWeapon() throws RemoteException {
         
         ArrayList<WeaponCard> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
         PrintEffectWeapon.printSelectWeapon();
         PrintWeapon.printName(weapons);
 
-        try {
-            
-            setIndex(getUserInput(0,weapons.size()));
-            notifyController();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        setIndex(getUserInput(0,weapons.size()));
+        notifyController();
+        
     }
     
-    public void viewSelectWeaponEffect() {
+    public void viewSelectWeaponEffect() throws RemoteException {
         
-        ArrayList<WeaponsEffect> weaponEffects = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(index).getWeaponEffects();
+        
+        ArrayList<WeaponsEffect> weaponEffects = gameModel.getAvailableEffect();
+        
         PrintEffectWeapon.printSelectWeaponEffect();
         PrintWeapon.printEffectName(weaponEffects);
         
-        try {
-            
-            setIndex2(getUserInput(0,weaponEffects.size()));
-            notifyController();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        setIndex2(getUserInput(0,weaponEffects.size()));
+        notifyController();
+       
     
     }
     
@@ -824,14 +850,19 @@ public class ViewCLI implements RemoteView, Serializable {
         
     }
     
+    public void viewSelectShootInuput(){
+        
+    
+        
+    }
     //WEAPON
     
     //LOCK RIFLE
     public void viewLockRifleBasicEffect(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printLockRifleBasicEffect(gameModel);
-
-       //metodo per prender in input un player con il controllo
+    
+        //get the player target 1
         setTarget1(getPlayerInput());
         
         notifyController();
@@ -840,10 +871,10 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewLockRifleSecondLock(GameModel gameModel) throws RemoteException{
         
         PrintEffectWeapon.printLockRifleSecondLock(gameModel);
-
-        //metodo per prender in input un player con il controllo
-        setTarget2(getPlayerInput());
     
+        //get the player target 2
+        setTarget2(getPlayerInput());
+        //notify controller with new input
         notifyController();
     }
     
@@ -851,7 +882,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewElectroscytheBasicMode() throws RemoteException{
         
         PrintEffectWeapon.printElectroscytheBasicMode();
-        
+        //notify controller with new input
         notifyController();
     }
     
