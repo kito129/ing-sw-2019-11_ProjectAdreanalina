@@ -277,8 +277,6 @@ public class ActionController {
     public void grab(ActionModel actionModel) throws RemoteException {
     
         actionModel.getGameModel().setState(State.CHOSEACTION);
-        
-        
     }
     
     public void selectPowerUp(ActionModel actionModel,RemoteView view) throws RemoteException {
@@ -537,6 +535,7 @@ public class ActionController {
     
     }
     
+    
     public void selectWeapon(ActionModel actionModel,RemoteView view) throws RemoteException {
     
         int i;
@@ -554,112 +553,155 @@ public class ActionController {
                 this.weaponSelected = weapon;
                 String name = weapon.getNameWeaponCard();
                 
+                
                 //set extra state
                 switch (name) {
                     case "CYBERBLADE":
                         
                         this.weaponSelected =(Cyberblade) weapon;
                         gameModel.setWeaponState(WeaponState.Cyberblade);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "ELECTOSCYTHE":
                         
                         this.weaponSelected =(Electroscythe) weapon;
                         gameModel.setWeaponState(WeaponState.Electroscythe);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "FLAME THROWER":
                         
                         this.weaponSelected =(Flamethrower) weapon;
                         gameModel.setWeaponState(WeaponState.Flamethrower);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "FURNACE":
                         
                         this.weaponSelected =(Furnace) weapon;
                         gameModel.setWeaponState(WeaponState.Furnace);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "GRENADE LAUNCHER":
                         
                         this.weaponSelected =(GrenadeLauncher) weapon;
                         gameModel.setWeaponState(WeaponState.GrenadeLauncher);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "HEAT SEEKER":
                         
                         this.weaponSelected =(Heatseeker) weapon;
                         gameModel.setWeaponState(WeaponState.Heatseeker);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "HELLION":
                         
                         this.weaponSelected =(Hellion) weapon;
                         gameModel.setWeaponState(WeaponState.Hellion);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "LOCK RIFLE":
                         
                         this.weaponSelected =(LockRifle) weapon;
                         gameModel.setWeaponState(WeaponState.LockRifle);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "MACHINE GUN":
                         
                         this.weaponSelected =(MachineGun) weapon;
                         gameModel.setWeaponState(WeaponState.MachineGun);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "PLASMA GUN":
                         
                         this.weaponSelected =(PlasmaGun) weapon;
                         gameModel.setWeaponState(WeaponState.PlasmaGun);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "POWER GLOVE":
                         
                         this.weaponSelected =(PowerGlove) weapon;
                         gameModel.setWeaponState(WeaponState.PowerGlove);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "RAILGUN":
                         
                         this.weaponSelected =(Railgun) weapon;
                         gameModel.setWeaponState(WeaponState.Railgun);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "ROCKET LAUNCHER":
                         
                         this.weaponSelected =(RocketLauncher) weapon;
                         gameModel.setWeaponState(WeaponState.RocketLauncher);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "SHOCKWAVE":
                         
                         this.weaponSelected =(Shockwave) weapon;
                         gameModel.setWeaponState(WeaponState.Shockwave);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "SHOTGUN":
                         
                         this.weaponSelected =(Shotgun) weapon;
                         gameModel.setWeaponState(WeaponState.Shotgun);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "SLADGEHAMMER":
                         
                         this.weaponSelected =(Sledgehammer) weapon;
                         gameModel.setWeaponState(WeaponState.Sledgehammer);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "T.H.O.R":
                         
                         this.weaponSelected =(Thor) weapon;
                         gameModel.setWeaponState(WeaponState.Thor);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "TRACTOR BEAM":
                         
                         this.weaponSelected =(TractorBeam) weapon;
                         gameModel.setWeaponState(WeaponState.TractorBeam);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "VORTEX CANNON":
                         
                         this.weaponSelected =(VortexCannon) weapon;
                         gameModel.setWeaponState(WeaponState.VortexCannon);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "WHISPER":
                         
                         this.weaponSelected =(Whisper) weapon;
                         gameModel.setWeaponState(WeaponState.Whisper);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                     case "ZX-2":
                         
                         this.weaponSelected =(Zx2) weapon;
                         gameModel.setWeaponState(WeaponState.Zx2);
+                        //set the effect list
+                        setListEffect(actionModel,weapon);
                         break;
                 }
                 } else {
@@ -669,6 +711,7 @@ public class ActionController {
             }
             
         gameModel.setState(State.SELECTEFFECT);
+        
         } else {
             
             
@@ -677,6 +720,21 @@ public class ActionController {
         
     }
     
+    public void setListEffect(ActionModel actionModel, WeaponCard weapon){
+        
+        GameModel gameModel = actionModel.getGameModel();
+        
+        if(weapon.isOptional()){
+            
+            gameModel.setAvailableEffect(weapon.getWeaponEffects());
+        } else {
+            
+            ArrayList<WeaponsEffect> baseArray = new ArrayList<>(weapon.getWeaponEffects());
+            gameModel.setAvailableEffect(baseArray);
+        }
+        
+        
+    }
     
     
     public void selectWeaponEffect(ActionModel actionModel,RemoteView view) throws RemoteException {
@@ -692,10 +750,8 @@ public class ActionController {
             
             //errore di input dell'effetto
         }
-        gameModel.setState(State.SHOOT);
+        gameModel.setState(State.SELECTSHOOTINPUT);
     }
-  
-    
     
     
     //WEAPON

@@ -32,6 +32,7 @@ public class GameModel implements Serializable {
     private String messageToCurrentView;
     private String messsageToAllView;
     private ArrayList<EnumColorPlayer> gameColor = new ArrayList<>(5);
+    public ArrayList<WeaponsEffect> availableEffect;
     
     public GameModel(){
         
@@ -174,6 +175,16 @@ public class GameModel implements Serializable {
     public String getMesssageToAllView () {
         
         return messsageToAllView;
+    }
+    
+    public ArrayList<WeaponsEffect> getAvailableEffect () {
+        
+        return availableEffect;
+    }
+    
+    public void setAvailableEffect (ArrayList<WeaponsEffect> availableEffect) {
+        
+        this.availableEffect = availableEffect;
     }
     
     public void setPlayers(Player player){
