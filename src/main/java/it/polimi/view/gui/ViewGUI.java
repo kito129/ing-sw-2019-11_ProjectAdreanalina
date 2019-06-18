@@ -289,7 +289,7 @@ public class ViewGUI{
      */
     void matchRejoined() throws IOException {
 
-        network.setPlayerOnline(user, true);
+        //network.setPlayerOnline(user, true);
         this.setOnline(true);
     }
 }

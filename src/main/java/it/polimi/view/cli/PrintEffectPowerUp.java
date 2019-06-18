@@ -49,11 +49,6 @@ public class PrintEffectPowerUp implements Serializable {
      */
     public static void printTeleporter(GameModel gameModel){
 
-<<<<<<< HEAD
-=======
-
-        
->>>>>>> origin/master
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE TELEPORTER");
         System.out.println("In which square do you want to move? (enter row and column for the square)");
