@@ -28,6 +28,7 @@ public class Shockwave extends WeaponCard {
         setWeaponEffects(weaponsEffects);
         tsunamiModeCost = new ArrayList<EnumColorCardAndAmmo>();
         tsunamiModeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setOptional(false);
         setDescription("modalità base: Scegli fino a 3 bersagli su quadrati differenti, ognuno distante esattamente 1 movimento.\n" +
                 "Dai 1 danno a ogni bersaglio.\n\n" +
                 "modalità tsunami: Dai 1 danno a tutt i bersagli che sono distanti esattamente 1 movimento.");

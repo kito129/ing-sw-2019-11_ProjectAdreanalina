@@ -35,6 +35,7 @@ public class MachineGun extends WeaponCard {
         focusShotCost.add(EnumColorCardAndAmmo.YELLOW);
         turretTripodCost = new ArrayList<EnumColorCardAndAmmo>();
         turretTripodCost.add(EnumColorCardAndAmmo.BLU);
+        setOptional(true);
         setDescription("effetto base: Scegli 1 o 2 bersagli che puoi vedere e dai 1 danno a entrambi.\n\n" +
                 "colpo focalizzato: Dai 1 danno aggiuntivo a uno dei due bersagli.\n\n" +
                 "tripode di supporto: Dai 1 danno aggiuntivo all'altro dei bersagli e/o dai 1 danno a un bersaglio differente che puoi vedere.\n\n" +

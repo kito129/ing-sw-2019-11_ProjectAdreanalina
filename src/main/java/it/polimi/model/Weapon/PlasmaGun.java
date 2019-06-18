@@ -33,6 +33,7 @@ public class PlasmaGun extends WeaponCard {
         phaseGlideCost.add(null);
         chargedShotCost = new ArrayList<EnumColorCardAndAmmo>();
         chargedShotCost.add(EnumColorCardAndAmmo.BLU);
+        setOptional(true);
         setDescription("effetto base: Dai 2 danni a 1 bersaglio che puoi vedere.\n\n" +
                 "slittamento di fase: Muovi di 1 o 2 quadrati.\n" +
                 "Questo effetto può essere usato prima o dopo l'effetto base.\n\n" +

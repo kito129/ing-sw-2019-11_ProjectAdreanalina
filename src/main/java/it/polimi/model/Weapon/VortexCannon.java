@@ -33,6 +33,7 @@ public class VortexCannon extends WeaponCard {
         setWeaponEffects(weaponEffects);
         blackHoleCost =new ArrayList<EnumColorCardAndAmmo>();
         blackHoleCost.add(EnumColorCardAndAmmo.RED);
+        setOptional(true);
         setDescription("effetto base: Scegli un quadrato che puoi vedere ad almeno 1 movimento di distanza.\n" +
                 "Un vortice si apre in quel punto.\n" +
                 "Scegli un bersaglio nel quadrato in cui si trova il vortice o distante 1 movimento.\n" +

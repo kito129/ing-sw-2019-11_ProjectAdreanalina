@@ -29,6 +29,7 @@ public class Zx2 extends WeaponCard {
         setWeaponEffects(weaponEffects);
         scannerModeCost = new ArrayList<EnumColorCardAndAmmo>();
         scannerModeCost.add(null);
+        setOptional(false);
         setDescription("modalità base: Dai 1 danno e 2 marchi a 1 bersaglio che puoi vedere.\n\n" +
                 "modalità scanner: Scegli fino a 3 bersagli che puoi vedere e dai 1 marchio a ciascuno.\n\n" +
                 "Nota: Ricorda che i 3 bersagli possono anche essere in 3 stanze diverse.");

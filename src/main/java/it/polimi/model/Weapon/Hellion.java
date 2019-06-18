@@ -32,6 +32,7 @@ public class Hellion extends WeaponCard {
         setWeaponEffects(weaponEffects);
         nanoTracerModeCost = new ArrayList<EnumColorCardAndAmmo>();
         nanoTracerModeCost.add(EnumColorCardAndAmmo.RED);
+        setOptional(false);
         setDescription("modalità base: Dai 1 danno a 1 bersaglio che puoi vedere e distante almeno 1 movimento.\n" +
                 "Poi dai un marchio a quel bersaglio e a chiunque altro in quel quadrato.\n\n" +
                 "modalità nano-traccianti: Dai 1 danno a 1 bersaglio che puoi vedere e distante almeno 1 movimento.\n" +

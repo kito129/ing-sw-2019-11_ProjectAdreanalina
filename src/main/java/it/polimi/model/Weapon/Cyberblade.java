@@ -38,6 +38,7 @@ public class Cyberblade extends WeaponCard {
         shadowstepCost.add(null);
         sliceAndDiceCost = new ArrayList<EnumColorCardAndAmmo>();
         sliceAndDiceCost.add(EnumColorCardAndAmmo.YELLOW);
+        setOptional(true);
         setDescription("effetto base: Dai 2 danni a 1 bersaglio nel quadrato in cui ti trovi.\n\n" +
                 "passo d'ombra: Muovi di 1 quadrato prima o dopo l'effetto base.\n\n" +
                 "modalità sminuzzare: Dai 2 danni a un bersaglio differente nel quadrato in cui ti trovi. Il passo d'ombra può essere usato prima o dopo questo effetto.\n\n" +

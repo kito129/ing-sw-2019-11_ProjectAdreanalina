@@ -29,6 +29,7 @@ public class PowerGlove extends WeaponCard {
         setWeaponEffects(weaponEffects);
         rocketFistModeCost = new ArrayList<EnumColorCardAndAmmo>();
         rocketFistModeCost.add(EnumColorCardAndAmmo.BLU);
+        setOptional(false);
         setDescription("modalità base: Scegli 1 bersaglio in un quadrato distante esattamente 1 movimento.\n" +
                 "Muovi in quel quadrato e dai al bersaglio 1 danno e 2 marchi.\n\n" +
                 "modalità cento pugni: Scegli un quadrato distante esattamente 1 movimento.\n" +

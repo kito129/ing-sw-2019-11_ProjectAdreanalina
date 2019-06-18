@@ -34,6 +34,7 @@ public class RocketLauncher extends WeaponCard {
         rocketJumpCost.add(EnumColorCardAndAmmo.BLU);
         fragmentingWarheadCost = new ArrayList<EnumColorCardAndAmmo>();
         fragmentingWarheadCost.add(EnumColorCardAndAmmo.YELLOW);
+        setOptional(true);
         setDescription("effetto base: Dai 2 danni a 1 bersaglio che puoi vedere e che non si trova nel tuo quadrato.\n" +
                 "Poi puoi muovere il bersaglio di 1 quadrato.\n\n" +
                 "razzi portatili: Muovi di 1 o 2 quadrati. Questo effetto può essere usato prima o dopo l'effetto base.\n" +

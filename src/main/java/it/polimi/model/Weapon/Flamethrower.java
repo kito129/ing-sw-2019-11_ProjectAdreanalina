@@ -34,6 +34,7 @@ public class Flamethrower extends WeaponCard {
         barbecueModeCost = new ArrayList<EnumColorCardAndAmmo>();
         barbecueModeCost.add(EnumColorCardAndAmmo.YELLOW);
         barbecueModeCost.add(EnumColorCardAndAmmo.YELLOW);
+        setOptional(false);
         setDescription("modalità base: Scegli un quadrato distante 1 movimento e possibilmente un secondo quadrato distante ancora 1 movimento nella stessa direzione.\n" +
                 "In ogni quadrato puoi scegliere 1 bersaglio e dargli 1 danno.\n\n" +
                 "modalità barbecue: Scegli 2 quadrati come prima. Dai 2 danni a chiunque sia nel primo quadrato e 1 danno a chiunque si trovi nel secondo quadrato.\n\n" +

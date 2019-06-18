@@ -30,6 +30,7 @@ public class LockRifle extends WeaponCard {
         setWeaponEffects(weaponEffects);
         secondLockCost=new ArrayList<EnumColorCardAndAmmo>();
         secondLockCost.add(EnumColorCardAndAmmo.RED);
+        setOptional(true);
         setDescription("effetto base: Dai 2 danni e 1 marchio a 1 bersaglio che puoi vedere.\n\n" +
                 "secondo aggancio: Dai 1 marchio a un altro bersaglio che puoi vedere.");
     }

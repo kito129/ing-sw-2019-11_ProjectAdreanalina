@@ -81,7 +81,7 @@ public class WeaponCard implements Serializable {
         return isOptional;
     }
     
-    public void setOptional (boolean optional) {
+    protected void setOptional (boolean optional) {
         
         isOptional = optional;
     }

@@ -31,6 +31,7 @@ public class Railgun extends WeaponCard {
         setWeaponEffects(weaponEffects);
         piercingModeCost = new ArrayList<EnumColorCardAndAmmo>();
         piercingModeCost.add(null);
+        setOptional(false);
         setDescription("modalità base : Scegli una direzione cardinale e 1 bersaglio in quella direzione.\n" +
                 "Dagli 3 danni.\n\n" +
                 "modalità perforazione: Scegli una direzione cardinale e 1 o 2 bersagli in quella direzione.\n" +
