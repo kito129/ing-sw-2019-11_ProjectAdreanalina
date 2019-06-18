@@ -68,8 +68,19 @@ public class ActionModel implements Serializable {
 
         Player current = gameModel.getActualPlayer();
         Square playerSquare = map.findPlayer(current);
+        //adrealinic distance
+        int maxDist;
+    
+        if (current.getPlayerBoard().getDamages().size() < 2) {
         
-        if (map.distance(playerSquare,targetSquare) < 4) {
+            maxDist = 4;
+        } else {
+        
+            maxDist = 5;
+            gameModel.setMessageToCurrentView("YOUR ARE USING ADRENALIN MODE FOR RUN");
+        }
+        
+        if (map.distance(playerSquare,targetSquare) < maxDist) {
 
             map.movePlayer(current, targetSquare);
             action++;
@@ -99,6 +110,7 @@ public class ActionModel implements Serializable {
         } else {
 
             maxDist = 2;
+            gameModel.setMessageToCurrentView("YOUR ARE USING ADRENALIN MODE FOR GRAB");
         }
         if (map.distance(map.findPlayer(actual), targetSquare) <= maxDist) {
 

@@ -37,13 +37,11 @@ public class ActionController {
             
             if (gameModel.getPlayers(true).size() == 3) {
              
-                    //gestione quando non ci sono abbastanza player
+                //gestione quando non ci sono abbastanza player
                 } else if (gameModel.getPlayers(true).size() == 1) {
                 
                     // game can start
                     drawnPowerUp(actionModel);
-                    actionModel.refreshMapAmmoCard();
-                    actionModel.refreshMapWeaponCard();
                     gameModel.setState(State.SPAWNPLAYER);
                     
                 } else {
@@ -123,7 +121,8 @@ public class ActionController {
     
     public void errorState(ActionModel actionModel) throws RemoteException {
         
-        System.out.println("STATO DI ERRORE, RIPARTO DAL PRECENDENTE\n");
+        System.out.println("ERROR STATE-->\nRESTART IN STATE CHOICE-->");
+        
         switch (beforeError){
             case SELECTWEAPON:
                 actionModel.getGameModel().setState(State.CHOSEACTION);
@@ -139,11 +138,43 @@ public class ActionController {
                 actionModel.getGameModel().setState(State.CHOSEACTION);
             case CHOSEACTION:
         }
+    }
+    
+    public void startTurn(ActionModel actionModel, RemoteView view) throws RemoteException {
         
-        actionModel.getGameModel().setState(beforeError);
+        //set the lowest id to the current player
+        actionModel.getGameModel().setActualPlayer(actionModel.getGameModel().getPlayers(true).get(0));
+    
+        //put ammo and weapon card
+        refreshMapEndTurn(actionModel);
         
+        //now game can start
+        actionModel.getGameModel().setState(State.CHOSEACTION);
         
+    }
+    
+    private void refreshMapEndTurn(ActionModel actionModel){
+    
+        //PUT CARD
+        actionModel.refreshMapAmmoCard();
+        actionModel.refreshMapWeaponCard();
         
+    }
+    
+    
+    //state gestor and map error gestor
+    public void setErrorState(ActionModel actionModel, String string){
+        
+        actionModel.getGameModel().setErrorMessage(string);
+        this.beforeError = actionModel.getGameModel().getState();
+        actionModel.getGameModel().setState(State.ERROR);
+    }
+    
+    public void mapErrorGestor(ActionModel actionModel) throws RemoteException {
+        
+        actionModel.getGameModel().setMessageToCurrentView("YOUR INPUT IS NOT CORRECT");
+        this.beforeError = actionModel.getGameModel().getState();
+        actionModel.getGameModel().setState(State.ERROR);
     }
     
     
@@ -151,17 +182,14 @@ public class ActionController {
         
         //take necessary
         Map map= actionModel.getGameModel().getMap();
-        
-        //answer to view an input Square
         Square inputSquare;
+        
         try {
             
             inputSquare = map.getSquare(view.getRow(),view.getColumn());
             
             if(map.existInMap(inputSquare)) {
-                //set the state in run
-                //actionModel.getGameModel().setState(State.RUN);
-    
+                
                 actionModel.runActionModel(inputSquare);
                 view.resetInput();
                 actionModel.getGameModel().setMesssageToAllView("CURRENT PLAYER " + actionModel.getGameModel().getActualPlayer().getName().toString() +" MOVED IN SQUARE: " + inputSquare.toString());
@@ -213,47 +241,72 @@ public class ActionController {
                 //effective catch gia con l'index giusto se è una Generation Square
                 try {
                     
-                        actionModel.grabActionModel(inputSquare, indexWeapon);
-                        actionModel.getGameModel().setState(State.GRAB);
+                    actionModel.grabActionModel(inputSquare, indexWeapon);
+                    view.resetInput();
+                    actionModel.getGameModel().setState(State.GRAB);
                         
                     
-                    } catch(GrabActionMaxDistLimitException catchActionMaxDistExpetion){
-        
-                        actionModel.getGameModel().setMessageToCurrentView("YOUR MOVE FOR GRAB EXCED MAX DISTANCE LIMIT");
-                        this.beforeError = actionModel.getGameModel().getState();
-                        actionModel.getGameModel().setState(State.ERROR);
-        
-                    } catch(GrabActionFullObjException e){
-        
-                        actionModel.getGameModel().setMessageToCurrentView("YOU DON'T HAVE MORE SPACE FOR GRAB OBJECT");
-                        this.beforeError = actionModel.getGameModel().getState();
-                        actionModel.getGameModel().setState(State.ERROR);
-                    } catch(MapException e){
-        
-                        mapErrorGestor(actionModel);
-                    }
-                }else{
-        
+                } catch(GrabActionMaxDistLimitException catchActionMaxDistExpetion){
+    
+                    actionModel.getGameModel().setMessageToCurrentView("YOUR MOVE FOR GRAB EXCED MAX DISTANCE LIMIT");
+                    this.beforeError = actionModel.getGameModel().getState();
+                    actionModel.getGameModel().setState(State.ERROR);
+    
+                } catch(GrabActionFullObjException e){
+    
+                    actionModel.getGameModel().setMessageToCurrentView("YOU DON'T HAVE MORE SPACE FOR GRAB OBJECT");
+                    this.beforeError = actionModel.getGameModel().getState();
+                    actionModel.getGameModel().setState(State.ERROR);
+                } catch(MapException e){
+    
                     mapErrorGestor(actionModel);
                 }
-            } catch(MapException e){
-        
+            }else{
+    
                 mapErrorGestor(actionModel);
             }
+        } catch(MapException e){
+    
+            mapErrorGestor(actionModel);
+        }
         
     }
     
-    public void mapErrorGestor(ActionModel actionModel) throws RemoteException {
     
-        actionModel.getGameModel().setMessageToCurrentView("YOUR INPUT IS NOT CORRECT");
-        this.beforeError = actionModel.getGameModel().getState();
-        actionModel.getGameModel().setState(State.ERROR);
-    }
     
     public void grab(ActionModel actionModel) throws RemoteException {
     
         actionModel.getGameModel().setState(State.CHOSEACTION);
         
+        
+    }
+    
+    public void selectPowerUp(ActionModel actionModel,RemoteView view) throws RemoteException {
+        
+        PowerUpCard powerUpCard;
+        
+        int i;
+        
+        i = view.getIndex();
+        
+        if (actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i) != null) {
+            
+            powerUpCard = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i);
+            
+            if(!powerUpCard.getNameCard().equals("TAGBACK GRENADE")) {
+                
+                powerUpSelected = powerUpCard;
+                actionModel.getGameModel().setState(State.SELECTPOWERUPINPUT);
+            } else {
+                
+                actionModel.getGameModel().setMessageToCurrentView("YOU CAN'T USE TAGBACK GRENADE IN YOUR TURN");
+                this.beforeError = actionModel.getGameModel().getState();
+                actionModel.getGameModel().setState(State.ERROR);
+            }
+        } else {
+            
+            mapErrorGestor(actionModel);
+        }
         
     }
     
@@ -470,14 +523,7 @@ public class ActionController {
         }
     }
     
-    public void startTurn(ActionModel actionModel, RemoteView view) throws RemoteException {
-        
-        //set the lowest id to the current player
-        actionModel.getGameModel().setActualPlayer(actionModel.getGameModel().getPlayers(true).get(0));
-        //snow game can start
-        actionModel.getGameModel().setState(State.CHOSEACTION);
-        
-    }
+    
     
     public void scoringPlayerBoardController (ActionModel actionModel){
         
@@ -491,109 +537,147 @@ public class ActionController {
     
     }
     
-    public void selectWeapon(ActionModel actionModel,RemoteView view){
+    public void selectWeapon(ActionModel actionModel,RemoteView view) throws RemoteException {
     
         int i;
         WeaponCard weapon;
         GameModel gameModel = actionModel.getGameModel();
         
-        try {
+        i = view.getIndex();
+        if(actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().get(i)!=null){
             
-            i = view.getIndex();
-            if(actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().get(i)!=null){
+            weapon = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().get(i);
+            
+            if(weapon.isCharge()){
                 
-                weapon = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().get(i);
+                //weapon is set controller
+                this.weaponSelected = weapon;
+                String name = weapon.getNameWeaponCard();
                 
-                if(weapon.isCharge()){
-                    
-                    //weapon is set controller
-                    weaponSelected = weapon;
-                    String name = weaponSelected.getNameWeaponCard();
-                    
-                    //set extra state
-                    switch (name) {
-                        case "CYBERBLADE":
-                            gameModel.setExtraState(WeaponState.Cyberblade);
-                            break;
-                        case "Electroscythe":
-                            gameModel.setExtraState(WeaponState.Electroscythe);
-                            break;
-                        case "Flamethrower":
-                            gameModel.setExtraState(WeaponState.Flamethrower);
-                            break;
-                        case "Furnace":
-                            gameModel.setExtraState(WeaponState.Furnace);
-                            break;
-                        case "GrenadeLauncher":
-                            gameModel.setExtraState(WeaponState.GrenadeLauncher);
-                            break;
-                        case "Heatseeker":
-                            gameModel.setExtraState(WeaponState.Heatseeker);
-                            break;
-                        case "Hellion":
-                            gameModel.setExtraState(WeaponState.Hellion);
-                            break;
-                        case "LOCK RIFLE":
-                            gameModel.setExtraState(WeaponState.LockRifle);
-                            break;
-                        case "MachineGun":
-                            gameModel.setExtraState(WeaponState.MachineGun);
-                            break;
-                        case "PlasmaGun":
-                            gameModel.setExtraState(WeaponState.PlasmaGun);
-                            break;
-                        case "PowerGlove":
-                            gameModel.setExtraState(WeaponState.PowerGlove);
-                            break;
-                        case "Railgun":
-                            gameModel.setExtraState(WeaponState.Railgun);
-                            break;
-                        case "RocketLauncher":
-                            gameModel.setExtraState(WeaponState.RocketLauncher);
-                            break;
-                        case "Shockwave":
-                            gameModel.setExtraState(WeaponState.Shockwave);
-                            break;
-                        case "Shotgun":
-                            gameModel.setExtraState(WeaponState.Shotgun);
-                            break;
-                        case "Sledgehammer":
-                            gameModel.setExtraState(WeaponState.Sledgehammer);
-                            break;
-                        case "Thor":
-                            gameModel.setExtraState(WeaponState.Thor);
-                            break;
-                        case "TractorBeam":
-                            gameModel.setExtraState(WeaponState.TractorBeam);
-                            break;
-                        case "VortexCannon":
-                            gameModel.setExtraState(WeaponState.VortexCannon);
-                            break;
-                        case "Whisper":
-                            gameModel.setExtraState(WeaponState.Whisper);
-                            break;
-                        case "Zx2":
-                            gameModel.setExtraState(WeaponState.Zx2);
-                            break;
-                    }
-                    
-                    } else {
-                    
-                    //arma scarica
-                    actionModel.getGameModel().setErrorMessage("THIS WEAPON IS NOT CHARGE: YOU CAN'T USE IT NOW");
+                //set extra state
+                switch (name) {
+                    case "CYBERBLADE":
+                        
+                        this.weaponSelected =(Cyberblade) weapon;
+                        gameModel.setWeaponState(WeaponState.Cyberblade);
+                        break;
+                    case "ELECTOSCYTHE":
+                        
+                        this.weaponSelected =(Electroscythe) weapon;
+                        gameModel.setWeaponState(WeaponState.Electroscythe);
+                        break;
+                    case "FLAME THROWER":
+                        
+                        this.weaponSelected =(Flamethrower) weapon;
+                        gameModel.setWeaponState(WeaponState.Flamethrower);
+                        break;
+                    case "FURNACE":
+                        
+                        this.weaponSelected =(Furnace) weapon;
+                        gameModel.setWeaponState(WeaponState.Furnace);
+                        break;
+                    case "GRENADE LAUNCHER":
+                        
+                        this.weaponSelected =(GrenadeLauncher) weapon;
+                        gameModel.setWeaponState(WeaponState.GrenadeLauncher);
+                        break;
+                    case "HEAT SEEKER":
+                        
+                        this.weaponSelected =(Heatseeker) weapon;
+                        gameModel.setWeaponState(WeaponState.Heatseeker);
+                        break;
+                    case "HELLION":
+                        
+                        this.weaponSelected =(Hellion) weapon;
+                        gameModel.setWeaponState(WeaponState.Hellion);
+                        break;
+                    case "LOCK RIFLE":
+                        
+                        this.weaponSelected =(LockRifle) weapon;
+                        gameModel.setWeaponState(WeaponState.LockRifle);
+                        break;
+                    case "MACHINE GUN":
+                        
+                        this.weaponSelected =(MachineGun) weapon;
+                        gameModel.setWeaponState(WeaponState.MachineGun);
+                        break;
+                    case "PLASMA GUN":
+                        
+                        this.weaponSelected =(PlasmaGun) weapon;
+                        gameModel.setWeaponState(WeaponState.PlasmaGun);
+                        break;
+                    case "POWER GLOVE":
+                        
+                        this.weaponSelected =(PowerGlove) weapon;
+                        gameModel.setWeaponState(WeaponState.PowerGlove);
+                        break;
+                    case "RAILGUN":
+                        
+                        this.weaponSelected =(Railgun) weapon;
+                        gameModel.setWeaponState(WeaponState.Railgun);
+                        break;
+                    case "ROCKET LAUNCHER":
+                        
+                        this.weaponSelected =(RocketLauncher) weapon;
+                        gameModel.setWeaponState(WeaponState.RocketLauncher);
+                        break;
+                    case "SHOCKWAVE":
+                        
+                        this.weaponSelected =(Shockwave) weapon;
+                        gameModel.setWeaponState(WeaponState.Shockwave);
+                        break;
+                    case "SHOTGUN":
+                        
+                        this.weaponSelected =(Shotgun) weapon;
+                        gameModel.setWeaponState(WeaponState.Shotgun);
+                        break;
+                    case "SLADGEHAMMER":
+                        
+                        this.weaponSelected =(Sledgehammer) weapon;
+                        gameModel.setWeaponState(WeaponState.Sledgehammer);
+                        break;
+                    case "T.H.O.R":
+                        
+                        this.weaponSelected =(Thor) weapon;
+                        gameModel.setWeaponState(WeaponState.Thor);
+                        break;
+                    case "TRACTOR BEAM":
+                        
+                        this.weaponSelected =(TractorBeam) weapon;
+                        gameModel.setWeaponState(WeaponState.TractorBeam);
+                        break;
+                    case "VORTEX CANNON":
+                        
+                        this.weaponSelected =(VortexCannon) weapon;
+                        gameModel.setWeaponState(WeaponState.VortexCannon);
+                        break;
+                    case "WHISPER":
+                        
+                        this.weaponSelected =(Whisper) weapon;
+                        gameModel.setWeaponState(WeaponState.Whisper);
+                        break;
+                    case "ZX-2":
+                        
+                        this.weaponSelected =(Zx2) weapon;
+                        gameModel.setWeaponState(WeaponState.Zx2);
+                        break;
                 }
-            } else {
+                } else {
                 
-                //errore di input, che sarà gia gestioto in view
+                //weapon not charge
+                setErrorState(actionModel,"THIS WEAPON IS NOT CHARGE: YOU CAN'T USE IT NOW");
             }
             
-            gameModel.setState(State.SELECTEFFECT);
-        } catch (RemoteException e) {
+        gameModel.setState(State.SELECTEFFECT);
+        } else {
             
-            e.printStackTrace();
+            
+            mapErrorGestor(actionModel);
         }
         
     }
+    
+    
     
     public void selectWeaponEffect(ActionModel actionModel,RemoteView view) throws RemoteException {
         
@@ -612,34 +696,7 @@ public class ActionController {
     }
   
     
-    public void selectPowerUp(ActionModel actionModel,RemoteView view) throws RemoteException {
     
-        PowerUpCard powerUpCard;
-        
-        int i;
-        
-        i = view.getIndex();
-        
-        if (actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i) != null) {
-
-            powerUpCard = actionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(i);
-            
-            if(!powerUpCard.getNameCard().equals("TAGBACK GRENADE")) {
-    
-                powerUpSelected = powerUpCard;
-                actionModel.getGameModel().setState(State.SELECTPOWERUPINPUT);
-            } else {
-    
-                actionModel.getGameModel().setMessageToCurrentView("YOU CAN'T USE TAGBACK GRENADE IN YOUR TURN");
-                this.beforeError = actionModel.getGameModel().getState();
-                actionModel.getGameModel().setState(State.ERROR);
-            }
-        } else {
-            
-            mapErrorGestor(actionModel);
-        }
-        
-    }
     
     //WEAPON
     public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) throws RemoteException {

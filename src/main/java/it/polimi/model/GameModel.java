@@ -26,7 +26,7 @@ public class GameModel implements Serializable {
     private WeaponDeck weaponDeck;
     private Player actualPlayer;
     private State state;
-    private WeaponState extraState;
+    private WeaponState weaponState;
     private WeaponsEffect weaponsEffect;
     private String errorMessage;
     private String messageToCurrentView;
@@ -36,13 +36,14 @@ public class GameModel implements Serializable {
     public GameModel(){
         
         state=State.LOBBY;
+        //create object of the gam
         this.killShotTrack= new KillShotTrack();
         this.ammoDeck = new AmmoDeck();
         this.powerUpDeck=new PowerUpDeck();
         this.weaponDeck=new WeaponDeck();
         players=new ArrayList<>();
+        //create map and poulate list of color for the player
         this.map = new Map(MapCreator.createA(),"mapp a");
-        map.refreshMap();
         populateColor();
         
     }
@@ -182,15 +183,15 @@ public class GameModel implements Serializable {
     }
     
 
-    public void setState (State state) throws RemoteException {
+    public void setState (State state)  {
         
         this.state=state;
         notifyObserver(this);
     }
     
-    public WeaponState getExtraState () {
+    public WeaponState getWeaponState () {
         
-        return extraState;
+        return weaponState;
     }
     
     public WeaponsEffect getWeaponsEffect () {
@@ -234,9 +235,9 @@ public class GameModel implements Serializable {
         this.messsageToAllView = messsageToAllView;
     }
     
-    public void setExtraState (WeaponState extraState) {
+    public void setWeaponState (WeaponState weaponState) {
         
-        this.extraState = extraState;
+        this.weaponState = weaponState;
     }
     
     public void setWeaponsEffect (WeaponsEffect weaponsEffect) {

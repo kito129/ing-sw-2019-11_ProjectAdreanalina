@@ -96,25 +96,17 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     actionController.usePowerUpController(actionModel, view);
                     break;
                 case SELECTRUN:
-                    //oggi
                     actionController.runActionController(actionModel, view);
-                    action++;
                     break;
                 case RUN:
                     actionController.run(actionModel);
                     break;
-
                 case SELECTGRAB:
                     actionController.grabActionController(actionModel, view);
-                    action++;
-
                 case GRAB:
                     actionController.grab(actionModel);
-
                 case SELECTWEAPON:
                     actionController.selectWeapon(actionModel, view);
-                    action++;
-
                 case SELECTEFFECT:
                     actionController.selectWeaponEffect(actionModel, view);
 
