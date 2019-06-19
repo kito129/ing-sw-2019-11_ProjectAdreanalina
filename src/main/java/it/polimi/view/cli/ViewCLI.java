@@ -16,7 +16,6 @@ import java.util.Scanner;
 import java.util.Timer;
 
 
-
 public class ViewCLI implements RemoteView, Serializable {
 
     //dobbiamo capire quali classi della view devono essere serializzabili
@@ -215,15 +214,13 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     public void printMessageCurrent(){
-    
-        PrintPlayer.print(gameModel.getActualPlayer());
+        
         System.out.println(gameModel.getMessageToCurrentView());
     }
     
     public void printMessageAll(){
         
-        PrintPlayer.print(gameModel.getActualPlayer());
-        System.out.println(gameModel.getMesssageToAllView());
+        System.out.println(gameModel.getMessageToAllView());
     }
 
     @Override
@@ -492,6 +489,9 @@ public class ViewCLI implements RemoteView, Serializable {
             case LOBBY:
                 viewLobby();
                 break;
+                
+            case MENU:
+                viewMenu();
             case SPAWNPLAYER:
                 viewSpawnPowerUp();
                 break;
@@ -679,6 +679,13 @@ public class ViewCLI implements RemoteView, Serializable {
         notifyController();
     }
     
+    public void viewMenu(){
+        
+        PrintMenu.print();
+        
+        
+    }
+    
     public  void viewSpawnPowerUp () throws RemoteException {
     
         System.out.println("CHOSE POWERUP TO MANTAIN, WHERE YOU RESPAWN, THE OTHER ONE GOES IN YOUR PLAYER BOARD:");
@@ -850,9 +857,323 @@ public class ViewCLI implements RemoteView, Serializable {
         
     }
     
-    public void viewSelectShootInuput(){
-        
+    public void viewSelectShootInuput() throws RemoteException {
     
+        switch (gameModel.getWeaponState()){
+            case LockRifle:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseEffect :
+                    
+                        break;
+                    //II effect
+                    case SecondLockEffect :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case Electroscythe:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case ReaperMode :
+                    
+                        break;
+                
+                }
+                break;
+        
+            case MachineGun:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseEffect :
+                    
+                        break;
+                    //II effect
+                    case FocusShotEffect :
+                    
+                        break;
+                    //III effect
+                    case TurretTripodEffect :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case TractorBeam:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case PunisherMode :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case Thor:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseEffect :
+                    
+                        break;
+                    //II effect
+                    case ChainReactionEffect :
+                    
+                        break;
+                    //III effect
+                    case HighVoltageEffect :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case VortexCannon:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseEffect :
+                    
+                        break;
+                    //II effect
+                    case BlackHoleEffect :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case Furnace:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case CozyFireMode :
+                    
+                        break;
+                
+                }
+                break;
+        
+            case PlasmaGun:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseEffect :
+                    
+                        break;
+                    //II effect
+                    case PhaseGlideEffect :
+                    
+                        break;
+                    //III effect
+                    case BaseEffectPlusChargedShotEffect :
+                    
+                        break;
+                
+                }
+                break;
+        
+            case Heatseeker:
+            
+                //only I effect
+            
+                break;
+        
+        
+            case Whisper:
+            
+                //only I effect
+            
+                break;
+        
+            case Hellion:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case NanoTracerMode :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case Flamethrower:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case BarbecueMode :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case Zx2:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case ScannerMode :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case GrenadeLauncher:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseEffect :
+                    
+                        break;
+                    //II effect
+                    case ExtraGrenadeEffect :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case Shotgun:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case LongBarrelMode :
+                    
+                        break;
+                }
+                break;
+                
+            case RocketLauncher:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseEffect :
+                    
+                        break;
+                    //II effect
+                    case BaseEffectPlusFragmentingWarheadEffect :
+                    
+                        break;
+                    //III effect
+                    case RocketJumpEffect :
+                    
+                        break;
+                }
+                break;
+                
+            case PowerGlove:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case RocketFistMode :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case Railgun:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case PiercingMode :
+                    
+                        break;
+                
+                }
+                break;
+                
+            case Shockwave:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case TsunamiMode :
+                    
+                        break;
+                }
+                break;
+                
+            case Cyberblade:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseEffect :
+                    
+                        break;
+                    //II effect
+                    case ShadowstepEffect :
+                    
+                        break;
+                    //III effect
+                    case SliceAndDiceEffect :
+                    
+                        break;
+                }
+                break;
+                
+            case Sledgehammer:
+            
+                switch(gameModel.getWeaponsEffect()){
+                    //I effect
+                    case BaseMode :
+                    
+                        break;
+                    //II effect
+                    case PulverizeMode :
+                    
+                        break;
+                }
+                break;
+        }
+        notifyController();
         
     }
     //WEAPON

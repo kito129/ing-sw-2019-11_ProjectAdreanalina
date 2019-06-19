@@ -71,11 +71,12 @@ public class PrintSquare implements Serializable {
         return s;
     }
 
-    /**
+    /*
+    
      * Set the initial letter corresponding to the player's color in the right position to view the player on the square
      * @param square   the square selected
      * @param s       the square which want to see
-     */
+     
     private static String[][] getsetPlayerOnSquare(Square square, String[][] s){
 
         if(square.getPlayers().size() == 1){
@@ -110,11 +111,14 @@ public class PrintSquare implements Serializable {
         }
         return s;
     }
+    
+    
+    
 
     /**
      * Print a single square of the map to view its attributes
      * @param normalSquare   the square selected
-     */
+     
     public static void printNormalSquare(NormalSquare normalSquare) {
 
         String[][] s = getsetSquare(normalSquare);
@@ -140,7 +144,7 @@ public class PrintSquare implements Serializable {
     /**
      * Print a single square of the map to view its attributes
      * @param generationSquare   the square selected
-     */
+     
     public static void printGenerationSquare(GenerationSquare generationSquare) {
 
         String[][] s = getsetSquare(generationSquare);
@@ -163,4 +167,5 @@ public class PrintSquare implements Serializable {
         System.out.println("WEAPON LIST:");
         PrintWeapon.print(generationSquare.getWeaponList(),false);
     }
+    */
 }

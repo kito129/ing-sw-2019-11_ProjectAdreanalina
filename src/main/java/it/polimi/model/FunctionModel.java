@@ -5,24 +5,22 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
-import it.polimi.view.RemoteView;
 
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.*;
 
 /**
  * The type Action model.
  */
-public class ActionModel implements Serializable {
+public class FunctionModel implements Serializable {
 
     private GameModel gameModel;
     private int action = 0;
     private Map map;
     private Player actualPlayer;
 
-    public ActionModel(GameModel gameModel){
+    public FunctionModel (GameModel gameModel){
 
         this.gameModel = gameModel;
         this.map=gameModel.getMap();
@@ -34,7 +32,7 @@ public class ActionModel implements Serializable {
     /**
      * Instantiates a new Action model.
      */
-    public ActionModel(){
+    public FunctionModel (){
     
     }
     
@@ -64,7 +62,7 @@ public class ActionModel implements Serializable {
      * @param targetSquare the target square to move
      * @throws RunActionMaxDistLimitException the run action max dist limit exception
      */
-    public void runActionModel(Square targetSquare) throws RunActionMaxDistLimitException, MapException {
+    public void runFunctionModel (Square targetSquare) throws RunActionMaxDistLimitException, MapException {
 
         Player current = gameModel.getActualPlayer();
         Square playerSquare = map.findPlayer(current);
@@ -119,12 +117,12 @@ public class ActionModel implements Serializable {
             if (!map.isGenerationSquare(targetSquare) && actual.getPlayerBoard().getPlayerPowerUps().size() <=3) {
     
                 actual.catchAmmoCard(((NormalSquare) map.findPlayer(actual)).catchAmmoCard());
-                getGameModel().setMesssageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
+                getGameModel().setMessageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
     
             } else if ((map.isGenerationSquare(targetSquare)) && (actual.getPlayerBoard().getPlayerWeapons().size() <=3 )&& (weaponIndex<(((GenerationSquare) map.findPlayer(actual)).getWeaponList().size()) )){
     
                 actual.getPlayerBoard().addWeapon(((GenerationSquare) map.findPlayer(actual)).catchWeapon(weaponIndex));
-                getGameModel().setMesssageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
+                getGameModel().setMessageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
             
             } else {
 

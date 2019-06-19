@@ -1,9 +1,6 @@
 package it.polimi.controller;
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NoPowerUpAvailable;
-import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
@@ -11,8 +8,8 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class GameController extends UnicastRemoteObject implements RemoteGameController {
 
-    private ActionController actionController;
-    private ActionModel actionModel;
+    private FunctionController functionController;
+    private FunctionModel functionModel;
     private GameModel gameModel;
     private boolean gameStarted;
     private State state;
@@ -22,8 +19,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     public GameController() throws RemoteException {
 
         gameModel = new GameModel();
-        actionController = new ActionController();
-        actionModel = new ActionModel(gameModel);
+        functionController = new FunctionController();
+        functionModel = new FunctionModel(gameModel);
 
     }
 
@@ -37,9 +34,9 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         return this.gameModel;
     }
 
-    public ActionModel getActionModel() {
+    public FunctionModel getFunctionModel () {
 
-        return actionModel;
+        return functionModel;
     }
 
     public void setGameModel(GameModel gameModel) {
@@ -47,14 +44,14 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         this.gameModel = gameModel;
     }
 
-    public void setActionController(ActionController actionController) {
+    public void setFunctionController (FunctionController functionController) {
 
-        this.actionController = actionController;
+        this.functionController = functionController;
     }
 
-    public void setActionModel(ActionModel actionModel) {
+    public void setFunctionModel (FunctionModel functionModel) {
 
-        this.actionModel = actionModel;
+        this.functionModel = functionModel;
     }
 
     public void setGameStarted(boolean gameStarted) {
@@ -70,7 +67,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     @Override
     public void update(RemoteView view) throws RemoteException {
 
-        pingClient();
+        //pingClient();
 
         //2 action and multiple power up use
         int action = 0;
@@ -78,43 +75,41 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
 
             switch (gameModel.getState()) {
                 case LOBBY:
-                    actionController.lobby(actionModel, view);
+                    functionController.lobby(functionModel, view);
                     break;
                 case SPAWNPLAYER:
-                    actionController.respawnPlayerController(actionModel, view);
+                    functionController.respawnPlayerController(functionModel, view);
                     break;
                 case STARTTURN:
-                    actionController.startTurn(actionModel, view);
+                    functionController.startTurn(functionModel, view);
                     break;
                 case CHOSEACTION:
-                    actionController.choseAction(actionModel, view);
+                    functionController.choseAction(functionModel, view);
                     break;
                 case SELECTPOWERUP:
-                    actionController.selectPowerUp(actionModel, view);
+                    functionController.selectPowerUp(functionModel, view);
                     break;
                 case USEPOWERUP:
-                    actionController.usePowerUpController(actionModel, view);
+                    functionController.usePowerUpController(functionModel, view);
                     break;
                 case SELECTRUN:
-                    actionController.runActionController(actionModel, view);
+                    functionController.runActionController(functionModel, view);
                     break;
                 case RUN:
-                    actionController.run(actionModel);
+                    functionController.run(functionModel);
                     break;
                 case SELECTGRAB:
-                    actionController.grabActionController(actionModel, view);
+                    functionController.grabActionController(functionModel, view);
                 case GRAB:
-                    actionController.grab(actionModel);
+                    functionController.grab(functionModel);
                 case SELECTWEAPON:
-                    actionController.selectWeapon(actionModel, view);
+                    functionController.selectWeapon(functionModel, view);
                 case SELECTEFFECT:
-                    actionController.selectWeaponEffect(actionModel, view);
-
+                    functionController.selectWeaponEffect(functionModel, view);
+                case SELECTSHOOTINPUT:
+                    functionController.selectShootInput(functionModel,view);
                 case SHOOT:
-                    LockRifle lock = new LockRifle();
-                    actionController.LockRifleweapon(gameModel, lock, view);
-                    action++;
-
+                    functionModel.getGameModel().setState(State.CHOSEACTION);
                 case ENDACTION:
 
                 case RECHARGE:
@@ -148,12 +143,12 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     //PRIMA INCASSO PLANCE DI TUTTI POI RIANIMO TUTTI
 
                     // fase incasso plancie
-                    actionController.scoringPlayerBoardController(actionModel);
+                    functionController.scoringPlayerBoardController(functionModel);
                     break;
                 case RESPWANPLAYER:
                     //fase di rianimazione
                     //creazione del player è temporanea
-                    actionController.respawnPlayerController(actionModel, view);
+                    functionController.respawnPlayerController(functionModel, view);
                     break;
                 case ENDTURN:
                     break;
@@ -162,7 +157,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case CHECKILLSHOOT:
                     break;
                 case ERROR:
-                    actionController.errorState(actionModel);
+                    functionController.errorState(functionModel);
             }
         }
     }
@@ -181,6 +176,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         gameModel.reAddObserver(view);
     }
 
+    
+    /*
     public void pingClient(){
 
         for(RemoteView remoteView:gameModel.getRemoteView()){
@@ -201,6 +198,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
             }
         }
     }
+   
+     */
 }
 
 

@@ -29,7 +29,7 @@ public class MainPartita {
         ArrayList<Player> players = new ArrayList<>();
 
         GameModel gameModel = new GameModel(map, killShotTrack, players);
-        ActionModel actionModel = new ActionModel(gameModel);
+        FunctionModel actionModel = new FunctionModel(gameModel);
 
         players.add(player1);
         players.add(player2);

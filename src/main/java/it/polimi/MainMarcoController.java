@@ -1,10 +1,9 @@
 package it.polimi;
 
-import it.polimi.controller.ActionController;
+import it.polimi.controller.FunctionController;
 import it.polimi.controller.GameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
-import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.cli.PrintMap;
 import it.polimi.view.cli.ViewCLI;
 
@@ -51,15 +50,15 @@ public class MainMarcoController {
         gameModel.getPlayers(true).addAll(players);
 
         gameModel.setActualPlayer(player1);
-        ActionModel actionModel = new ActionModel(gameModel);
-        ActionController actionController = new ActionController();
+        FunctionModel functionModel = new FunctionModel(gameModel);
+        FunctionController functionController = new FunctionController();
         GameController gameController = new GameController();
 
 
         //metto oggetti in mappa
         System.out.println("refresh mappa");
-        //actionModel.refreshMapAmmoCard();
-        //actionModel.refreshMapWeaponCard();
+        //functionModel.refreshMapAmmoCard();
+        //functionModel.refreshMapWeaponCard();
 
         Map map = gameModel.getMap();
 
@@ -106,15 +105,12 @@ public class MainMarcoController {
         ViewCLI viewCLI = new ViewCLI(gameController);
         gameModel.addObserver(viewCLI);
         map.print();
-<<<<<<< HEAD
         PrintMap.printMap(gameModel.getMap());
 
 
-=======
         viewCLI.printMap();
         PrintMap.printMap(gameModel.getMap());
        
->>>>>>> origin/master
 
        /*
         //prova run

@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * The type GameModel model.
@@ -18,21 +17,23 @@ public class GameModel implements Serializable {
     
     //observable pattern
     private ArrayList<RemoteView> remoteViews = new ArrayList<>();
+    private State state;
     private Map map;
+    private Player actualPlayer;
     private KillShotTrack killShotTrack;
     private ArrayList<Player> players;
     private AmmoDeck ammoDeck;
     private PowerUpDeck powerUpDeck;
     private WeaponDeck weaponDeck;
-    private Player actualPlayer;
-    private State state;
+    private ArrayList<EnumColorPlayer> gameColor = new ArrayList<>(5);
+    //weapon necessary
     private WeaponState weaponState;
     private WeaponsEffect weaponsEffect;
+    public ArrayList<WeaponsEffect> availableEffect;
+    //message
     private String errorMessage;
     private String messageToCurrentView;
-    private String messsageToAllView;
-    private ArrayList<EnumColorPlayer> gameColor = new ArrayList<>(5);
-    public ArrayList<WeaponsEffect> availableEffect;
+    private String messageToAllView;
     
     public GameModel(){
         
@@ -172,9 +173,9 @@ public class GameModel implements Serializable {
         return messageToCurrentView;
     }
     
-    public String getMesssageToAllView () {
+    public String getMessageToAllView () {
         
-        return messsageToAllView;
+        return messageToAllView;
     }
     
     public ArrayList<WeaponsEffect> getAvailableEffect () {
@@ -241,9 +242,9 @@ public class GameModel implements Serializable {
         this.messageToCurrentView = messageToCurrentView;
     }
     
-    public void setMesssageToAllView (String messsageToAllView) {
+    public void setMessageToAllView (String messageToAllView) {
         
-        this.messsageToAllView = messsageToAllView;
+        this.messageToAllView = messageToAllView;
     }
     
     public void setWeaponState (WeaponState weaponState) {
