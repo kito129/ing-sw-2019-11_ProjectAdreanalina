@@ -67,6 +67,9 @@ public class ViewCLI implements RemoteView, Serializable {
         connection();
         pingToServer();
         System.out.println("WELCOME TO ADRENALINA");
+        
+        
+        
 
         try {
             gameModel = gameController.getGameModel();
