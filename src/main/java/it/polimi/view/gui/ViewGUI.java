@@ -7,8 +7,7 @@ import it.polimi.model.GameModel;
 import it.polimi.model.Player;
 import it.polimi.model.State;
 import it.polimi.view.RemoteView;
-import javafx.applicationls
-        .Platform;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

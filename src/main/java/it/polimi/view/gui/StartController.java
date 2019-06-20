@@ -38,7 +38,7 @@ public class StartController {
     /**
      * initializes the first GUI screen
      */
-    void init(){
+    void init() {
 
         error.managedProperty().bind(error.visibleProperty());
         message.managedProperty().bind(message.visibleProperty());
@@ -52,6 +52,7 @@ public class StartController {
      * @param event start button event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
+    /*
     public void startButtonClicked(ActionEvent event) throws IOException {
 
         if(state == 0)
@@ -66,11 +67,14 @@ public class StartController {
             usernameInserted();
     }
 
+     */
+
     /**
      * refreshes the window based on the actual state
      * @param e input action event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
+    /*
     public void inputEnter(ActionEvent e) throws IOException {
         if(state == 2)
             ipInsertion();
@@ -78,8 +82,11 @@ public class StartController {
             usernameInserted();
     }
 
+     */
+
     /**
      * sets if the ip address inserted is wrong
+     *
      * @param wrongIP the wrongIP
      */
     public void setWrongIP(boolean wrongIP) {
@@ -89,18 +96,20 @@ public class StartController {
 
     /**
      * sets the viewGUI reference
+     *
      * @param viewGUI the viewGUI reference
      */
-    void setViewGUI(ViewGUI viewGUI){
+    void setViewGUI(ViewGUI viewGUI) {
 
         this.viewGUI = viewGUI;
     }
 
     /**
      * sets the client username
+     *
      * @param s username
      */
-    private void setUser(String s){
+    private void setUser(String s) {
 
         viewGUI.setUser(s);
         container.getChildren().removeAll(startButton, username, error);
@@ -111,7 +120,7 @@ public class StartController {
     /**
      * hides all if the game is already started
      */
-    private void gameStarted(){
+    private void gameStarted() {
 
         container.getChildren().removeAll(message, lobby, startButton, username);
         error.setVisible(true);
@@ -120,19 +129,20 @@ public class StartController {
 
     /**
      * verifies if the client can continue joining the match
+     *
      * @return true if the client can join the match, otherwise false
      * @throws RemoteException if the reference could not be accessed
      */
     private boolean checkState() throws RemoteException {
 
-        if((viewGUI.getMultiPlayer() && viewGUI.getNetwork().isGameStarted())) {
+        if ((viewGUI.getMultiPlayer() && viewGUI.getNetwork().isGameStarted())) {
 
             gameStarted();
             return false;
         }
-        if(!viewGUI.checkLobby()){
+        if (!viewGUI.checkLobby()) {
 
-            if(!viewGUI.reconnecting()) {
+            if (!viewGUI.reconnecting()) {
 
                 gameStarted();
                 return false;
@@ -143,10 +153,11 @@ public class StartController {
 
     /**
      * changes the screen scene
+     *
      * @param mainStage where the schene must be loaded
      * @throws IOException
      */
-    void changeScene(Stage mainStage) throws IOException{
+    void changeScene(Stage mainStage) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/match.fxml"));
         Parent match = loader.load();
@@ -170,25 +181,27 @@ public class StartController {
     /**
      * show a text in the lobby
      */
-    void printLobby(){
+    void printLobby() {
 
         lobby.setText("GAMERS IN THE LOBBY:\n");
     }
 
     /**
      * show the player username
+     *
      * @param s player username
      */
-    void addPrint(String s){
+    void addPrint(String s) {
 
         lobby.setText(lobby.getText() + s + "\n");
     }
 
     /**
      * show the string error
+     *
      * @param s string error
      */
-    void printError(String s){
+    void printError(String s) {
 
         container.getChildren().removeAll(startButton, message, lobby, username);
         error.setVisible(true);
@@ -198,7 +211,7 @@ public class StartController {
     /**
      * enables to insert the server ip addres
      */
-    private void setIpIndex(){
+    private void setIpIndex() {
 
         username.setVisible(true);
         username.setPromptText("IP address");
@@ -209,7 +222,7 @@ public class StartController {
     /**
      * enables to insert the username
      */
-    private void insertUsername(){
+    private void insertUsername() {
 
         username.clear();
         username.setVisible(true);
@@ -221,7 +234,7 @@ public class StartController {
     /**
      * verifies the type of match selected
      */
-    private void matchSelected(){
+    private void matchSelected() {
 
         viewGUI.setMultiPlayer(true);
         state = 1;
@@ -230,7 +243,7 @@ public class StartController {
     /**
      * verifies the type of connection selected
      */
-    private void connectionSelected(){
+    private void connectionSelected() {
 
         connectionType = 1;
         state = 2;
@@ -239,14 +252,15 @@ public class StartController {
 
     /**
      * check if the ip is correct and create/rejoin a match
+     *
      * @throws RemoteException if the reference could not be accessed
      */
     private void ipInsertion() throws RemoteException {
 
-        if(connectionType == 1)
+        if (connectionType == 1)
             viewGUI.setRMIConnection(username.getText());
 
-        if(!wrongIP) {
+        if (!wrongIP) {
 
             if (viewGUI.getMultiPlayer()) {
 
@@ -283,13 +297,14 @@ public class StartController {
 
     /**
      * verifies the difficulty selected and start/rejoin the game
+     *
      * @throws RemoteException if the reference could not be accessed
      */
     private void multiPlayerSetup() throws RemoteException {
 
         viewGUI.createMultiPlayerMatch();
 
-        if(!wrongIP) {
+        if (!wrongIP) {
 
             state = 4;
             try {
@@ -302,6 +317,7 @@ public class StartController {
             }
         }
     }
+}
 
     /**
      * verifies if the username is correct.
@@ -310,6 +326,7 @@ public class StartController {
      * If it's all verified start/rejoin the match, otherwise stop the client
      * @throws IOException any exception thrown by the underlying OutputStream
      */
+    /*
     private void usernameInserted() throws IOException {
 
         error.setVisible(false);
@@ -365,3 +382,5 @@ public class StartController {
         }
     }
 }
+
+     */
