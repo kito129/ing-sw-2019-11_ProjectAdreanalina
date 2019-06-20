@@ -4,6 +4,8 @@ import it.polimi.controller.RemoteGameController;
 import it.polimi.model.GameModel;
 import it.polimi.model.Player;
 import it.polimi.model.State;
+import it.polimi.view.RemoteView;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -27,6 +30,7 @@ public class ViewGUI{
 
     private transient Stage mainStage;
 
+    private boolean multiPlayer;
     private boolean returnOnline;
     private boolean online;
     private State state;
@@ -38,6 +42,7 @@ public class ViewGUI{
     private boolean restart;
 
     private RemoteGameController network;
+    private RemoteView remoteView;
     private GameModel gameModel;
 
     private transient MatchController matchController;
@@ -166,6 +171,22 @@ public class ViewGUI{
     }
 
     /**
+     * checks if the username inserted already exists
+     * @param s the username inserted
+     * @return true if doesn't exist the same username, false otherwise
+     * @throws RemoteException if the reference could not be accessed
+     */
+    boolean verifyUsername(String s) throws RemoteException{
+
+        for(int i=0; i<gameModel.getPlayers(true).size(); i++){
+
+            if(s.equals(gameModel.getPlayers(true).get(i).getName()))
+                return false;
+        }
+        return true;
+    }
+
+    /**
      * checks if this client is the actual player or not
      * @return true if this client is the actual player, false otherwise
      * @throws RemoteException if the reference could not be accessed
@@ -291,5 +312,138 @@ public class ViewGUI{
 
         //network.setPlayerOnline(user, true);
         this.setOnline(true);
+    }
+
+    /**
+     * gets if has started a multiplayer match
+     * @return true if the game is in multiplayer mode
+     */
+    public boolean getMultiPlayer(){
+
+        return multiPlayer;
+    }
+
+    /**
+     * sets if has started a multiplayer match
+     * @param multiPlayer the boolean to be set
+     */
+    void setMultiPlayer(boolean multiPlayer){
+
+        this.multiPlayer = multiPlayer;
+    }
+
+    /**
+     * gets the gamecontroller of the match
+     * @return the gamecontroller of the match
+     */
+    RemoteGameController getNetwork(){
+
+        return this.network;
+    }
+
+    /**
+     * creates a multiplayer match
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void createMultiPlayerMatch() throws RemoteException {
+
+        if(network.isGameStarted()){
+
+            gameModel = network.getGameModel();
+        }
+    }
+
+    /**
+     * checks if the actual state is LOBBY
+     * @return true if the actual state is LOBBY, false otherwise
+     * @throws RemoteException if the reference could not be accessed
+     */
+    boolean checkLobby() throws RemoteException {
+
+        return gameModel.getState().equals(State.LOBBY);
+    }
+
+    /**
+     * checks if the user is trying to reconnecting or not
+     * @return true if the user is reconnecting, false otherwise
+     * @throws RemoteException if the reference could not be accessed
+     */
+    boolean reconnecting() throws RemoteException {
+
+        //TODO
+        if(multiPlayer){
+
+            //return (!gameModel.getObservers().contains(null));
+            return true; //da eliminare questo return, il true sarà quello alla riga sopra
+        }
+        else {
+
+            /*for (int i = 0; i < gameModel.getObservers().size(); i++) {
+
+                if ((gameModel.getObservers() == null || gameModel.getObservers().get(i) == null) &&
+                        (gameModel.getObserverSocket() == null || gameModel.getObserverSocket().get(i) == null))
+                    return true;
+            }*/
+            return false;
+        }
+    }
+
+    /**
+     * verifies if some client has lost connection to the main server
+     * @param s the name of the client to be verified
+     * @return true if the client has lost connection, false otherwise
+     * @throws RemoteException if the reference could not be accessed
+     */
+    boolean verifyUserCrashed(String s) throws RemoteException {
+
+        for(Player x : gameModel.getPlayers(true)){
+
+            if(x.getName().equals(s)){
+
+                if(x.getOnline())
+                    return false;
+                else{
+
+                    if(multiPlayer){
+
+                        /*for(RemoteView y : gameModel.getObservers()){
+
+                            if(y!=null && y.getUser().equals(s))
+                                return false;
+                        }*/
+                        return true;
+                    }
+                    else {
+
+                        /*for (int i = 0; i < gameModel.getObservers().size(); i++) {
+
+                            if (gameModel.getObservers() != null && gameModel.getObservers().get(i) != null && gameModel.getObservers().get(i).getUser().equals(s))
+                                return false;
+                        }*/
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * adds again an RMI observer after he has lost connection
+     * @throws IOException Any exception thrown by the underlying OutputStream.
+     */
+    void reAddPlayer() throws IOException {
+
+        network.reAddObserver(remoteView);
+        //network.setPlayerOnline(user, true);
+    }
+
+    /**
+     * based on the type of connection, it calls an update to the Server
+     * @throws IOException if an I/O error occurs while reading stream header
+     */
+    void notifyNetwork() throws IOException {
+
+        network.update(remoteView);
     }
 }
