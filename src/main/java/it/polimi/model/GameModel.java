@@ -319,7 +319,7 @@ public class GameModel implements Serializable {
 
     public void notifyObserver (GameModel gameModel){
 
-        int indexOfObserver=-1;
+        int indexOfCurrentObserver=-1;
 
         try {
 
@@ -327,23 +327,24 @@ public class GameModel implements Serializable {
 
                 if(observer!=null) {
 
-                    if(!(actualPlayer.getName().equals(observer.getUser()))) {
+                    if((getPlayers(true).indexOf(actualPlayer)!=getRemoteViews().indexOf(observer))){
 
-                        if(observer.getOnline()) {
+                        int count=getRemoteViews().indexOf(observer);
+
+                        if(getPlayers(true).get(count).getOnline()) {
 
                             observer.update(this);
                         }
                     }else{
 
-                        indexOfObserver=getRemoteViews().indexOf(observer);
+                        indexOfCurrentObserver=getRemoteViews().indexOf(observer);
                     }
                 }
-
             }
-            if(indexOfObserver!=-1) {
-                getRemoteViews().get(indexOfObserver).update(gameModel);
+            if(indexOfCurrentObserver!=-1) {
+                getRemoteViews().get(indexOfCurrentObserver).update(gameModel);
             }
-        }catch (RemoteException remoteExcpetion){
+        }catch (RemoteException remoteException){
 
         }
     }

@@ -1,7 +1,6 @@
 package it.polimi.controller;
 
 import it.polimi.model.*;
-import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -189,13 +188,18 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 }
             }catch (RemoteException remoteException){
 
+                if((gameModel.getState()!=State.LOBBY)) {
 
-                //todo gestire situazione in fase di lobby
-                //gestione disconnessione del giocatore
-                //vedere anche sagrada se sono il lobby fanno robe diverse..devo aspettare marco per capire cosa istanzia.
-                int indexOfObserver=gameModel.getRemoteViews().indexOf(remoteView);
-                gameModel.getPlayers(true).get(indexOfObserver).setOnline(false);
-                gameModel.removeObserver(remoteView);
+                    int indexOfObserver = gameModel.getRemoteViews().indexOf(remoteView);
+                    gameModel.getPlayers(true).get(indexOfObserver).setOnlineModel(false);
+                    gameModel.removeObserver(remoteView);
+                }else{
+
+                    int indexOfObserver = gameModel.getRemoteViews().indexOf(remoteView);
+                    gameModel.getPlayers(true).get(indexOfObserver).setOnlineModel(false);
+                    gameModel.getPlayers(true).remove(indexOfObserver);
+                    gameModel.getRemoteViews().remove(indexOfObserver);
+                }
 
             }
         }
