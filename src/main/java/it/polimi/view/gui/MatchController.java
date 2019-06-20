@@ -7,6 +7,8 @@ import javafx.scene.layout.*;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image ;
+
+import java.awt.*;
 import java.rmi.RemoteException;
 
 public class MatchController {
@@ -16,6 +18,9 @@ public class MatchController {
 
     @FXML
     protected ImageView ActualplayerPlayerboard;
+
+    @FXML
+    protected Label answerOrMessageError;
 
     static final String PNG = ".png";
     static final String JPG = ".jpg";
@@ -158,5 +163,26 @@ public class MatchController {
         //allWindows.setVisible(false);
         //rejoin.setVisible(false);
         //text.setText("SEEMS LIKE THE SERVER HAS BEEN SHUT DOWN");
+    }
+
+    /**
+     * hides all the screen graphics and shows only the rejoin button
+     */
+    void setInactive(){
+        //TODO
+        /*buttons.setVisible(false);
+        tokens.setVisible(false);
+        windowArea.setVisible(false);
+        region2.setVisible(false);
+        draftArea.setVisible(false);
+        region1.setVisible(false);
+        roundtrackArea.setVisible(false);
+        input.setVisible(false);
+        errorMessage.setVisible(false);
+        left.setVisible(false);
+        right.setVisible(false);
+
+        message.setText("YOU ARE NOW INACTIVE!\nTO JOIN AGAIN THE MATCH, PRESS THE BUTTON");
+        rejoinButton.setVisible(true);*/
     }
 }

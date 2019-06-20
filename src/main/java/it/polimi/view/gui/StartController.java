@@ -53,7 +53,7 @@ public class StartController {
      * @throws IOException any exception thrown by the underlying OutputStream
      */
     public void startButtonClicked(ActionEvent event) throws IOException {
-        
+
         if(state == 0)
             matchSelected();
         else if(state == 1)
