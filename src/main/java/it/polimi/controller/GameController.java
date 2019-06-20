@@ -103,11 +103,11 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case GRAB:
                     functionController.grab(functionModel);
                 case SELECTWEAPON:
-                    functionController.selectWeapon(functionModel, view);
+                    functionController.weaponController.selectWeapon(functionModel, view);
                 case SELECTEFFECT:
-                    functionController.selectWeaponEffect(functionModel, view);
+                    functionController.weaponController.selectWeaponEffect(functionModel, view);
                 case SELECTSHOOTINPUT:
-                    functionController.selectShootInput(functionModel,view);
+                    functionController.weaponController.selectShootInput(functionModel,view);
                 case SHOOT:
                     functionModel.getGameModel().setState(State.CHOSEACTION);
                 case ENDACTION:

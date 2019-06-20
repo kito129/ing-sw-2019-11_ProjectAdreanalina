@@ -1,5 +1,6 @@
 package it.polimi.view.gui;
 
+import it.polimi.view.RemoteView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 public class StartController {
 
@@ -28,10 +30,53 @@ public class StartController {
     @FXML
     private Label error, lobby, message;
 
+    private ViewGUI viewGUI;
     private int state = 0;
     private boolean wrongIP = false;
-    private ViewGUI viewGUI;
+    private int connectionType = 0;
 
+    /**
+     * initializes the first GUI screen
+     */
+    void init(){
+
+        error.managedProperty().bind(error.visibleProperty());
+        message.managedProperty().bind(message.visibleProperty());
+        lobby.managedProperty().bind(lobby.visibleProperty());
+        username.managedProperty().bind(username.visibleProperty());
+        startButton.managedProperty().bind(startButton.visibleProperty());
+    }
+
+    /**
+     * refreshes the window based on the actual state
+     * @param event start button event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void startButtonClicked(ActionEvent event) throws IOException {
+
+        if(state == 0)
+            matchSelected();
+        else if(state == 1)
+            connectionSelected();
+        else if(state == 2)
+            ipInsertion();
+        else if(state == 3)
+            multiPlayerSetup();
+        else if(state == 4)
+            usernameInserted();
+    }
+
+    /**
+     * refreshes the window based on the actual state
+     * @param e input action event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void inputEnter(ActionEvent e) throws IOException {
+        if(state == 2)
+            ipInsertion();
+        else if(state == 4)
+            usernameInserted();
+    }
 
     /**
      * sets if the ip address inserted is wrong
@@ -74,26 +119,52 @@ public class StartController {
     }
 
     /**
-     * enables to insert the username
+     * verifies if the client can continue joining the match
+     * @return true if the client can join the match, otherwise false
+     * @throws RemoteException if the reference could not be accessed
      */
-    private void insertUsername(){
+    private boolean checkState() throws RemoteException {
 
-        startButton.setVisible(false);
-        message.setVisible(false);
-        username.clear();
-        username.setVisible(true);
-        username.setPromptText("username");
+        if((viewGUI.getMultiPlayer() && viewGUI.getNetwork().isGameStarted())) {
+
+            gameStarted();
+            return false;
+        }
+        if(!viewGUI.checkLobby()){
+
+            if(!viewGUI.reconnecting()) {
+
+                gameStarted();
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
-     * initializes the first GUI screen
+     * changes the screen scene
+     * @param mainStage where the schene must be loaded
+     * @throws IOException
      */
-    void init(){
+    void changeScene(Stage mainStage) throws IOException{
 
-        error.managedProperty().bind(error.visibleProperty());
-        username.managedProperty().bind(username.visibleProperty());
-        lobby.managedProperty().bind(lobby.visibleProperty());
-        startButton.managedProperty().bind(startButton.visibleProperty());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/match.fxml"));
+        Parent match = loader.load();
+
+        MatchController matchController = loader.getController();
+        matchController.setViewGUI(viewGUI);
+        viewGUI.setMatchController(matchController);
+        matchController.init();
+
+        //TODO da completare (far partire i timer)
+
+        Scene startScene;
+        startScene = new Scene(match, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
+        mainStage.setScene(startScene);
+        mainStage.setMaximized(true);
+        mainStage.setFullScreen(true);
+        mainStage.show();
+        match.requestFocus();
     }
 
     /**
@@ -125,30 +196,172 @@ public class StartController {
     }
 
     /**
-     * changes the screen scene
-     * @param mainStage where the schene must be loaded
-     * @throws IOException
+     * enables to insert the server ip addres
      */
-    void changeScene(Stage mainStage) throws IOException{
+    private void setIpIndex(){
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/match.fxml"));
-        Parent match = loader.load();
-
-        MatchController matchController = loader.getController();
-        matchController.setViewGUI(viewGUI);
-        viewGUI.setMatchController(matchController);
-        matchController.init();
-
-        //TODO da completare (far partire i timer)
-
-        Scene startScene;
-        startScene = new Scene(match, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
-        mainStage.setScene(startScene);
-        mainStage.setMaximized(true);
-        mainStage.setFullScreen(true);
-        mainStage.show();
-        match.requestFocus();
+        username.setVisible(true);
+        username.setPromptText("IP address");
+        message.setText("INSERT THE IP ADDRESS");
+        startButton.setText("OK");
     }
 
+    /**
+     * enables to insert the username
+     */
+    private void insertUsername(){
 
+        username.clear();
+        username.setVisible(true);
+        username.setPromptText("username");
+        message.setText("INSERT YOUR USERNAME");
+        startButton.setText("PLAY");
+    }
+
+    /**
+     * verifies the type of match selected
+     */
+    private void matchSelected(){
+
+        viewGUI.setMultiPlayer(true);
+        state = 1;
+    }
+
+    /**
+     * verifies the type of connection selected
+     */
+    private void connectionSelected(){
+
+        connectionType = 1;
+        state = 2;
+        setIpIndex();
+    }
+
+    /**
+     * check if the ip is correct and create/rejoin a match
+     * @throws RemoteException if the reference could not be accessed
+     */
+    private void ipInsertion() throws RemoteException {
+
+        if(connectionType == 1)
+            viewGUI.setRMIConnection(username.getText());
+
+        if(!wrongIP) {
+
+            if (viewGUI.getMultiPlayer()) {
+
+                if (connectionType == 1) {
+
+                    if (viewGUI.getNetwork().isGameStarted())
+                        gameStarted();
+                }
+                state = 3;
+            } else {
+
+                if (connectionType == 1) {
+
+                    if (viewGUI.getNetwork().isGameStarted())
+                        gameStarted();
+                    else {
+
+                        viewGUI.createMultiPlayerMatch();
+                        state = 4;
+                        try {
+                            if (checkState()) {
+
+                                insertUsername();
+                            }
+                        } catch (RemoteException e) {
+
+                            //do nothing
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * verifies the difficulty selected and start/rejoin the game
+     * @throws RemoteException if the reference could not be accessed
+     */
+    private void multiPlayerSetup() throws RemoteException {
+
+        viewGUI.createMultiPlayerMatch();
+
+        if(!wrongIP) {
+
+            state = 4;
+            try {
+
+                if (checkState())
+                    insertUsername();
+            } catch (RemoteException e) {
+
+                //do nothing
+            }
+        }
+    }
+
+    /**
+     * verifies if the username is correct.
+     * verifies if the username not already exists.
+     * verifies if the user is reconnecting.
+     * If it's all verified start/rejoin the match, otherwise stop the client
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    private void usernameInserted() throws IOException {
+
+        error.setVisible(false);
+        String user = username.getText().trim().toUpperCase();
+
+        if(!user.isEmpty()) {
+
+            if(!viewGUI.checkLobby()) {
+
+                if (viewGUI.reconnecting()) {
+
+                    if (viewGUI.verifyUserCrashed(user)) {
+
+                        setUser(user);
+                        viewGUI.reAddPlayer();
+                        container.getChildren().removeAll(startButton, lobby, username);
+                        message.setVisible(true);
+                        message.setText("JOINING AGAIN THE MATCH");
+                        if (viewGUI.getMultiPlayer()) {
+
+                            if(connectionType == 1) {
+
+                                //viewGUI.getNetwork().startTimer(viewGUI); TODO
+                                viewGUI.notifyNetwork();
+                            }
+                        }
+                    } else {
+
+                        error.setVisible(true);
+                        error.setText("INSERT A VALID NAME");
+                    }
+                }
+            }
+            else {
+
+                if (viewGUI.verifyUsername(user)) {
+
+                    setUser(user);
+                    viewGUI.getNetwork().addObserver((RemoteView) viewGUI);
+                    viewGUI.notifyNetwork();
+
+                } else {
+                    error.setVisible(true);
+                    error.setText("THIS USERNAME ALREADY EXIST");
+                    username.clear();
+                }
+            }
+        }
+        else {
+            error.setVisible(true);
+            error.setText("PLEASE INSERT A VALID USERNAME");
+            username.clear();
+        }
+    }
 }
