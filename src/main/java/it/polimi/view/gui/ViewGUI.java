@@ -362,7 +362,7 @@ public class ViewGUI{
      */
     private void verifyServerConnection(){
 
-        /*Timer t = new Timer();
+        Timer t = new Timer();
         t.schedule(new TimerTask() {
 
             @Override
@@ -370,17 +370,14 @@ public class ViewGUI{
 
                 try {
 
-                    network.getMultiPlayerStarted(); //metodo dal RemoteGameController per MultiPlayerMatch
+                    network.isGameStarted();
                     verifyServerConnection();
                 }catch (RemoteException e){
 
-                    Platform.runLater(()->{
-
-                        matchController.serverDown();
-                    });
+                    Platform.runLater(()-> matchController.serverDown());
                 }
             }
-        },2000);*/
+        },2000);
     }
 
     /**
