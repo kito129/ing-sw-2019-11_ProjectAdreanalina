@@ -1,5 +1,5 @@
 
-
+/*
 package it.polimi.view.gui;
 
 import it.polimi.controller.RemoteGameController;
@@ -54,7 +54,7 @@ public class ViewGUI{
      * gets if a player has to be set online
      * @return true if the player has to be set online
      */
-
+/*
     public boolean getReturnOnline(){
 
         return returnOnline;
@@ -75,7 +75,7 @@ public class ViewGUI{
      * Applications may create other stages, if needed, but they will not be
      * primary stages and will not be embedded in the browser.
      */
-
+/*
     public void start(Stage primaryStage) throws Exception{
 
         returnOnline = false;
@@ -109,7 +109,7 @@ public class ViewGUI{
      * updates each view in the game
      * @param gameModel the gamemodel of the match
      */
-
+/*
     public void update(GameModel gameModel) {
 
         this.gameModel = gameModel;
@@ -126,7 +126,7 @@ public class ViewGUI{
      * modifies the view based on the current state
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-
+/*
     private void run() throws IOException{
 
         returnOnline = false;
@@ -146,7 +146,7 @@ public class ViewGUI{
     /**
      * shows the players in the lobby
      */
-
+/*
     private void viewLobby(){
 
         Platform.runLater(()->{
@@ -167,7 +167,7 @@ public class ViewGUI{
      * gets if player is online or not
      * @return true if the player is online, false otherwise
      */
-
+/*
     public synchronized boolean getOnline(){
 
         return online;
@@ -177,7 +177,7 @@ public class ViewGUI{
      * gets the client's username
      * @return the client's username
      */
-
+/*
     public String getUser() {
 
         return user;
@@ -187,7 +187,7 @@ public class ViewGUI{
      * gets choose1
      * @return first choice of the client
      */
-
+/*
     public int getChoose1() {
 
         return choose1;
@@ -197,7 +197,7 @@ public class ViewGUI{
      * gets choose2
      * @return second choice of the client
      */
-
+/*
     public int getChoose2() {
 
         return choose2;
@@ -207,7 +207,7 @@ public class ViewGUI{
      * gets the list of inputs of the client
      * @return an arraylist of client's inputs
      */
-
+/*
     public ArrayList<Integer> getChoices(){
 
         return choices;
@@ -217,7 +217,7 @@ public class ViewGUI{
      * gets if this client wants to restart the game
      * @return true if the client wants to restart the game, false otherwise
      */
-
+/*
     public boolean getRestart() {
 
         return restart;
@@ -227,7 +227,7 @@ public class ViewGUI{
      * gets if has started a multiplayer match
      * @return true if the game is in multiplayer mode
      */
-
+/*
     public boolean getMultiPlayer(){
 
         return multiPlayer;
@@ -237,7 +237,7 @@ public class ViewGUI{
      * gets the gamecontroller of the match
      * @return the gamecontroller of the match
      */
-
+/*
     RemoteGameController getNetwork(){
 
         return this.network;
@@ -246,7 +246,7 @@ public class ViewGUI{
     /**
      * sets if the client is online or not
      */
-
+/*
     public synchronized void setOnline(boolean online){
 
         this.online = online;
@@ -260,7 +260,7 @@ public class ViewGUI{
      * sets if the client wants to restart the game
      * @param restart the boolean to be set
      */
-
+/*
     public void setRestart(boolean restart) {
 
         this.restart = restart;
@@ -271,7 +271,7 @@ public class ViewGUI{
      * @param i the choice of the client
      */
 
-
+/*
     void setChoose1(int i){
 
         this.choose1 = i;
@@ -281,7 +281,7 @@ public class ViewGUI{
      * sets the second choice of the client
      * @param i the choice of the client
      */
-
+/*
     void setChoose2(int i){
 
         this.choose2 = i;
@@ -291,7 +291,7 @@ public class ViewGUI{
      * sets the username of this client's view
      * @param s the name to be set
      */
-
+/*
     void setUser(String s) {
 
         this.user = s;
@@ -301,7 +301,7 @@ public class ViewGUI{
      * sets if has started a multiplayer match
      * @param multiPlayer the boolean to be set
      */
-
+/*
     void setMultiPlayer(boolean multiPlayer){
 
         this.multiPlayer = multiPlayer;
@@ -311,7 +311,7 @@ public class ViewGUI{
      * sets the matchController of the game
      * @param matchController the matchController to be set
      */
-
+/*
     void setMatchController(MatchController matchController){
 
         this.matchController = matchController;
@@ -321,7 +321,7 @@ public class ViewGUI{
      * establishes a RMI connection
      * @param ipAddress the IPaddress to connects with
      */
-
+/*
     void setRMIConnection(String ipAddress){
 
         try {
@@ -348,7 +348,7 @@ public class ViewGUI{
      * @param error the error message to be printed
      * @throws RemoteException if the reference could not be accessed
      */
-
+/*
     public void printError(String error) throws RemoteException {
 
         Platform.runLater(() -> matchController.answerOrMessageError.setText(error));
@@ -360,7 +360,6 @@ public class ViewGUI{
      * @return true if doesn't exist the same username, false otherwise
      * @throws RemoteException if the reference could not be accessed
      */
-
     boolean verifyUsername(String s) throws RemoteException{
 
         for(int i=0; i<gameModel.getPlayers(true).size(); i++){
@@ -496,21 +495,30 @@ public class ViewGUI{
         //TODO
         if(multiPlayer){
 
-            //return (!gameModel.getObservers().contains(null));
+            return (!gameModel.getObservers().contains(null));
             return true; //da eliminare questo return, il true sarà quello alla riga sopra
         }
         else {
 
-            /*for (int i = 0; i < gameModel.getObservers().size(); i++) {
+            for (int i = 0; i < gameModel.getObservers().size(); i++) {
 
                 if ((gameModel.getObservers() == null || gameModel.getObservers().get(i) == null) &&
                         (gameModel.getObserverSocket() == null || gameModel.getObserverSocket().get(i) == null))
                     return true;
-            }*/
+            }
             return false;
         }
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * verifies if some client has lost connection to the main server
+     * @param s the name of the client to be verified
+     * @return true if the client has lost connection, false otherwise
+     * @throws RemoteException if the reference could not be accessed
+     */
+>>>>>>> origin/master
     boolean verifyUserCrashed(String s) throws RemoteException {
 
         for(Player x : gameModel.getPlayers(true)){
@@ -527,8 +535,13 @@ public class ViewGUI{
 
                             if(y!=null && y.getUser().equals(s))
                                 return false;
+<<<<<<< HEAD
                         }
                         return true;*/
+=======
+                        }*/
+                        return true;
+>>>>>>> origin/master
                     }
                     else {
 
