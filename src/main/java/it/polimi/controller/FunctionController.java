@@ -805,6 +805,9 @@ public class FunctionController {
                     LockRifle lockRifle = (LockRifle) getCorrectWeapon(functionModel,this.weaponName);
                     
                     switch(functionModel.getGameModel().getWeaponsEffect()){
+                        
+                        //nothing to do
+                        
                         //I effect
                         case BaseEffect :
                             
@@ -816,7 +819,6 @@ public class FunctionController {
     
                             this.LockRifleweapon(gameModel,lockRifle,view);
     
-                            break;
                     
                     }
                     break;
@@ -825,6 +827,9 @@ public class FunctionController {
                 
                     Electroscythe electroscythe = (Electroscythe) getCorrectWeapon(functionModel,this.weaponName);
                     switch(functionModel.getGameModel().getWeaponsEffect()){
+                        
+                        //nothing to do
+                        
                         //I effect
                         case BaseMode :
                         
@@ -1075,6 +1080,12 @@ public class FunctionController {
     
                             this.GrenadeLauncher(gameModel,grenadeLauncher,view);
     
+                            break;
+                            
+                        case MoveTarget:
+                            
+                            //TODO
+                            
                             break;
                     
                     }

@@ -489,7 +489,6 @@ public class ViewCLI implements RemoteView, Serializable {
             case LOBBY:
                 viewLobby();
                 break;
-                
             case MENU:
                 viewMenu();
             case SPAWNPLAYER:
