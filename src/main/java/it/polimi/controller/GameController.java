@@ -67,7 +67,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     @Override
     public void update(RemoteView view) throws RemoteException {
 
-        //pingClient();
+        pingClient();
 
         //2 action and multiple power up use
         int action = 0;
@@ -177,10 +177,10 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     }
 
     
-    /*
+
     public void pingClient(){
 
-        for(RemoteView remoteView:gameModel.getRemoteView()){
+        for(RemoteView remoteView:gameModel.getRemoteViews()){
             try {
 
                 if(remoteView!=null) {
@@ -189,9 +189,11 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 }
             }catch (RemoteException remoteException){
 
+
+                //todo gestire situazione in fase di lobby
                 //gestione disconnessione del giocatore
                 //vedere anche sagrada se sono il lobby fanno robe diverse..devo aspettare marco per capire cosa istanzia.
-                int indexOfObserver=gameModel.getRemoteView().indexOf(remoteView);
+                int indexOfObserver=gameModel.getRemoteViews().indexOf(remoteView);
                 gameModel.getPlayers(true).get(indexOfObserver).setOnline(false);
                 gameModel.removeObserver(remoteView);
 
@@ -199,7 +201,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         }
     }
    
-     */
+
 }
 
 
