@@ -20,9 +20,9 @@ public class Client {
             //CLI
             new ViewCLI();
         
-        } else {
+        } else if(choiseView==2){
             //GUI
-            Application.launch(ViewGUI.class);
+            //Application.launch(ViewGUI.class);
         
         }
 
