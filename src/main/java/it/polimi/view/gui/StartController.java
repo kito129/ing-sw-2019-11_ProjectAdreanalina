@@ -52,7 +52,6 @@ public class StartController {
      * @param event start button event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    /*
     public void startButtonClicked(ActionEvent event) throws IOException {
 
         if(state == 0)
@@ -67,22 +66,17 @@ public class StartController {
             usernameInserted();
     }
 
-     */
-
     /**
      * refreshes the window based on the actual state
      * @param e input action event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    /*
     public void inputEnter(ActionEvent e) throws IOException {
         if(state == 2)
             ipInsertion();
         else if(state == 4)
             usernameInserted();
     }
-
-     */
 
     /**
      * sets if the ip address inserted is wrong
@@ -317,7 +311,6 @@ public class StartController {
             }
         }
     }
-}
 
     /**
      * verifies if the username is correct.
@@ -326,7 +319,6 @@ public class StartController {
      * If it's all verified start/rejoin the match, otherwise stop the client
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    /*
     private void usernameInserted() throws IOException {
 
         error.setVisible(false);
@@ -382,5 +374,3 @@ public class StartController {
         }
     }
 }
-
-     */

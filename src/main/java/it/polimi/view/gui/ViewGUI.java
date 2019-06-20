@@ -511,8 +511,6 @@ public class ViewGUI{
         }
     }
 
-
-    /*
     boolean verifyUserCrashed(String s) throws RemoteException {
 
         for(Player x : gameModel.getPlayers(true)){
@@ -525,20 +523,20 @@ public class ViewGUI{
 
                     if(multiPlayer){
 
-                        for(RemoteView y : gameModel.getObservers()){
+                        /*for(RemoteView y : gameModel.getObservers()){
 
                             if(y!=null && y.getUser().equals(s))
                                 return false;
                         }
-                        return true;
+                        return true;*/
                     }
                     else {
 
-                        for (int i = 0; i < gameModel.getObservers().size(); i++) {
+                        /*for (int i = 0; i < gameModel.getObservers().size(); i++) {
 
                             if (gameModel.getObservers() != null && gameModel.getObservers().get(i) != null && gameModel.getObservers().get(i).getUser().equals(s))
                                 return false;
-                        }
+                        }*/
                         return true;
                     }
                 }
