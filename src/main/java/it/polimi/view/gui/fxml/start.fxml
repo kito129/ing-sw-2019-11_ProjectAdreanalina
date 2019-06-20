@@ -13,22 +13,22 @@
             <Font name="FFF World Cup 2018 Adidas" size="30.0" />
          </font>
       </Button>
-      <TextField fx:id="username" alignment="CENTER" layoutX="290.0" layoutY="380.0" prefHeight="57.0" prefWidth="317.0" promptText="username" styleClass="text-field" stylesheets="@../css/style.css">
+      <TextField fx:id="username" alignment="CENTER" layoutX="290.0" layoutY="380.0" prefHeight="57.0" prefWidth="317.0" promptText="username" styleClass="text-field" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="289.0">
          <font>
             <Font name="FFF World Cup 2018 Adidas" size="30.0" />
          </font>
       </TextField>
-      <Label fx:id="error" layoutX="129.0" layoutY="535.0" prefHeight="36.0" prefWidth="639.0" styleClass="messageStart" stylesheets="@../css/style.css" textAlignment="CENTER" textFill="RED">
+      <Label fx:id="error" layoutX="129.0" layoutY="535.0" prefHeight="36.0" prefWidth="639.0" styleClass="messageStart" stylesheets="@../css/style.css" textAlignment="CENTER" textFill="RED" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="128.0">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="lobby" layoutX="290.0" layoutY="202.0" prefHeight="36.0" prefWidth="317.0" styleClass="messageStart" stylesheets="@../css/style.css" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="lobby" layoutX="290.0" layoutY="202.0" prefHeight="36.0" prefWidth="317.0" styleClass="messageStart" stylesheets="@../css/style.css" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="390.0" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="128.0">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="message" layoutX="50.0" layoutY="148.0" prefHeight="36.0" prefWidth="796.0" styleClass="messageStart" stylesheets="@../css/style.css" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="message" layoutX="50.0" layoutY="148.0" prefHeight="36.0" prefWidth="796.0" styleClass="messageStart" stylesheets="@../css/style.css" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="435.0" AnchorPane.leftAnchor="129.0" AnchorPane.rightAnchor="128.0">
          <font>
             <Font size="25.0" />
          </font>
