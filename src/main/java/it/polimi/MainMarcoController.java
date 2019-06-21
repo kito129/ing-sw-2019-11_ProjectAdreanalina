@@ -1,14 +1,6 @@
 package it.polimi;
 
-import it.polimi.controller.FunctionController;
-import it.polimi.controller.GameController;
-import it.polimi.model.*;
-import it.polimi.model.Exception.MapException;
-import it.polimi.view.cli.PrintMap;
-import it.polimi.view.cli.ViewCLI;
-
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 
 public class MainMarcoController {
@@ -109,7 +101,7 @@ public class MainMarcoController {
 
 
         viewCLI.CLIViewMap();
-        PrintMap.viewMap(gameModel.getMap());
+        CLIPrintMap.viewMap(gameModel.getMap());
        
 
        /*

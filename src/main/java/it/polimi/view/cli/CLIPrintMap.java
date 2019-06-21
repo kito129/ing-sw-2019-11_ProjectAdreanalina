@@ -5,23 +5,24 @@ import it.polimi.model.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PrintMap implements Serializable {
+public class CLIPrintMap implements Serializable {
 
-    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
-    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
-    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RESET = "\u001b[0m";
+    public  final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public  final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public  final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public  final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public  final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public  final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public  final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+    public  final String ANSI_BLUE = "\u001B[34m";
+    public  final String ANSI_RED = "\u001B[31m";
+    public  final String ANSI_YELLOW = "\u001B[33m";
+    public  final String ANSI_BLACK = "\u001B[30m";
+    public  final String ANSI_RESET = "\u001b[0m";
     public String[][] map;
 
-    public void PrintMap(){
+    
+    public  CLIPrintMap(){
 
         this.map = new String[15][24];
     }
@@ -47,6 +48,7 @@ public class PrintMap implements Serializable {
 
                 for (int j = 0; j < 24; j++) {
 
+                    //secondo me qui deve essere in or o comuqnue non tutte in and perchè andrai quasi sempre nell'if
                     if (s.getRow() == (i-1)/5 && i!=5 && i!=10 && s.getColumn() == (j-1)/6 && j!=6 && j!=12 && j!=18) {
 
                         //per colorare il generation square blu sopra
@@ -56,31 +58,31 @@ public class PrintMap implements Serializable {
                         }
 
                         //BLU SQUARE
-                        if (s.getColor().equals(EnumColorSquare.BLU)) {
+                         else if (s.getColor().equals(EnumColorSquare.BLU)) {
 
                             map[i][j] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
                         }
 
                         //GREEN SQUARE
-                        if (s.getColor().equals(EnumColorSquare.GREEN)) {
+                        else if (s.getColor().equals(EnumColorSquare.GREEN)) {
 
                             map[i][j] = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
                         }
 
                         //PINK SQUARE
-                        if (s.getColor().equals(EnumColorSquare.PINK)) {
+                        else if (s.getColor().equals(EnumColorSquare.PINK)) {
 
                             map[i][j] = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
                         }
 
                         //RED SQUARE
-                        if (s.getColor().equals(EnumColorSquare.RED)) {
+                        else if (s.getColor().equals(EnumColorSquare.RED)) {
 
                             map[i][j] = ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
                         }
 
                         //YELLOW SQUARE
-                        if (s.getColor().equals(EnumColorSquare.YELLOW)) {
+                        else if (s.getColor().equals(EnumColorSquare.YELLOW)) {
 
                             if(j < 23){
 
@@ -93,7 +95,7 @@ public class PrintMap implements Serializable {
                         }
 
                         //WHITE SQUARE
-                        if (s.getColor().equals(EnumColorSquare.WHITE)) {
+                        else if (s.getColor().equals(EnumColorSquare.WHITE)) {
 
                             map[i][j] = ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
                         }
@@ -112,7 +114,7 @@ public class PrintMap implements Serializable {
      * Set the right string to view for CLI to the corresponding color
      * @param player      the selected player
      */
-    public static String colorString(Player player, ArrayList<Square> squares){
+    public  String colorString(Player player, ArrayList<Square> squares){
 
         String s = "";
         String colorPlayer = player.getColor().toString();
@@ -270,6 +272,7 @@ public class PrintMap implements Serializable {
     public void viewMap(Map m) {
 
         String[][] map = this.map;
+        getSetMap(m.getSquares());
         putDoors(m);
         getSetPlayersOnMap(m.getSquares());
 

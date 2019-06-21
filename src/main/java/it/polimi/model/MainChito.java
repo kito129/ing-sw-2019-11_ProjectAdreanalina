@@ -1,7 +1,5 @@
 package it.polimi.model;
 
-import it.polimi.view.cli.PrintMap;
-
 public class MainChito {
     public static void main(String[] args){
 

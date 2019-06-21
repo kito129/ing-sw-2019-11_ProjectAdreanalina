@@ -59,7 +59,7 @@ public class ViewCLI implements RemoteView, Serializable {
     //attribute for direction
     private EnumCardinalDirection cardinalDirection;
     private ViewWeapon viewWeapon;
-    private PrintMap printMap;
+    private CLIPrintMap CLIPrintMap;
 
 
     public ViewCLI(){
@@ -71,7 +71,8 @@ public class ViewCLI implements RemoteView, Serializable {
         
         try {
             gameModel = gameController.getGameModel();
-            this.printMap = new PrintMap();
+            String random = new String("ciao");
+            this.CLIPrintMap = new CLIPrintMap();
             if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
 
                 do {
@@ -484,7 +485,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void CLIViewMap(){
 
-        printMap.viewMap(gameModel.getMap());
+        CLIPrintMap.viewMap(gameModel.getMap());
     }
     
     public void run() throws RemoteException {
@@ -611,7 +612,7 @@ public class ViewCLI implements RemoteView, Serializable {
             if(!gameModel.getMap().existInMap(tempRow,tempColumn)){
                 System.out.println("SQUARE NOT EXIST IN MAP. RE INESERT CORRECT SQUARE");
             }
-            
+    
         }while (!gameModel.getMap().existInMap(tempRow,tempColumn));
         
         if (i==1) {
