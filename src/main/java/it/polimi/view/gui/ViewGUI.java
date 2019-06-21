@@ -5,6 +5,7 @@ import it.polimi.model.GameModel;
 import it.polimi.model.Player;
 import it.polimi.model.State;
 import it.polimi.view.RemoteView;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ViewGUI{
+public class ViewGUI extends Application implements Serializable{
 
     private transient Stage mainStage;
 
@@ -47,16 +48,6 @@ public class ViewGUI{
     private transient MatchController matchController;
     private transient StartController startController;
 
-
-    /**
-     * gets if a player has to be set online
-     * @return true if the player has to be set online
-     */
-    public boolean getReturnOnline(){
-
-        return returnOnline;
-    }
-
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -72,6 +63,7 @@ public class ViewGUI{
      * Applications may create other stages, if needed, but they will not be
      * primary stages and will not be embedded in the browser.
      */
+    @Override
     public void start(Stage primaryStage) throws Exception{
 
         returnOnline = false;
@@ -155,6 +147,15 @@ public class ViewGUI{
     // END VIEW ---------------------------------------------------------------------------------------------
 
     // GET SET ----------------------------------------------------------------------------------------------
+
+    /**
+     * gets if a player has to be set online
+     * @return true if the player has to be set online
+     */
+    public boolean getReturnOnline(){
+
+        return returnOnline;
+    }
 
     /**
      * gets if player is online or not
@@ -394,6 +395,7 @@ public class ViewGUI{
      * creates a new match
      */
     private void showMatch(){
+
         Platform.runLater(() -> {
 
             try {

@@ -2,6 +2,7 @@ package it.polimi;
 
 import it.polimi.view.cli.ViewCLI;
 
+import it.polimi.view.gui.ViewGUI;
 import javafx.application.Application;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class Client {
         
         } else if(choiseView==2){
             //GUI
-            //Application.launch(ViewGUI.class);
+            Application.launch(ViewGUI.class);
         
         }
 

@@ -12,6 +12,6 @@ public class PrintScore implements Serializable {
      */
     public static void print(Player player){
 
-        System.out.println("SCORE: " +player.getScore());
+        System.out.println("SCORE: " + player.getScore());
     }
 }

@@ -68,10 +68,11 @@ public class StartController {
 
     /**
      * refreshes the window based on the actual state
-     * @param e input action event
+     * @param event input action event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    public void inputEnter(ActionEvent e) throws IOException {
+    public void inputEnter(ActionEvent event) throws IOException {
+
         if(state == 2)
             ipInsertion();
         else if(state == 4)

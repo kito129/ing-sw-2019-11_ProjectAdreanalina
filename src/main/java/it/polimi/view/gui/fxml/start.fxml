@@ -8,12 +8,12 @@
 
 <AnchorPane fx:id="container" prefHeight="627.0" prefWidth="896.0" styleClass="startbg" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.view.gui.StartController">
    <children>
-      <Button fx:id="startButton" alignment="CENTER" layoutX="290.0" layoutY="456.0" mnemonicParsing="false" opacity="0.95" prefHeight="57.0" prefWidth="317.0" stylesheets="@../css/startButton.css" text="PLAY" textAlignment="CENTER" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="289.0">
+      <Button fx:id="startButton" alignment="CENTER" layoutX="290.0" layoutY="456.0" mnemonicParsing="false" onAction="#startButtonClicked" opacity="0.95" prefHeight="57.0" prefWidth="317.0" stylesheets="@../css/startButton.css" text="PLAY" textAlignment="CENTER" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="289.0">
          <font>
             <Font name="FFF World Cup 2018 Adidas" size="30.0" />
          </font>
       </Button>
-      <TextField fx:id="username" alignment="CENTER" layoutX="290.0" layoutY="380.0" prefHeight="57.0" prefWidth="317.0" promptText="username" styleClass="text-field" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="289.0">
+      <TextField fx:id="username" alignment="CENTER" layoutX="290.0" layoutY="380.0" onAction="#inputEnter" prefHeight="57.0" prefWidth="317.0" promptText="username" styleClass="text-field" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="289.0">
          <font>
             <Font name="FFF World Cup 2018 Adidas" size="30.0" />
          </font>

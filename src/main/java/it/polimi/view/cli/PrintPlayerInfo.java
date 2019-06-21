@@ -21,25 +21,24 @@ public class PrintPlayerInfo implements Serializable {
     public static void print(Player player){
 
         System.out.println();
-        if(player.getColor().equals(EnumColorPlayer.BLU)){
 
-            System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
-        }
-        if(player.getColor().equals(EnumColorPlayer.GREEN)){
+        switch (player.getColor()){
 
-            System.out.println("COLOR: " + ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
-        }
-        if(player.getColor().equals(EnumColorPlayer.GREY)){
-
-            System.out.println("COLOR: " + ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
-        }
-        if(player.getColor().equals(EnumColorPlayer.PINK)){
-
-            System.out.println("COLOR: " + ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
-        }
-        if(player.getColor().equals(EnumColorPlayer.YELLOW)){
-
-            System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+            case BLU:
+                System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+                break;
+            case GREEN:
+                System.out.println("COLOR: " + ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+                break;
+            case GREY:
+                System.out.println("COLOR: " + ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+                break;
+            case PINK:
+                System.out.println("COLOR: " + ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+                break;
+            case YELLOW:
+                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
+                break;
         }
 
         System.out.println("ID: " +player.getId());
