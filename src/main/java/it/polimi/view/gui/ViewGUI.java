@@ -14,7 +14,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
@@ -47,6 +46,10 @@ public class ViewGUI extends Application implements Serializable{
 
     private transient MatchController matchController;
     private transient StartController startController;
+
+    /*public static void main(String[] args){
+        launch(args);
+    }*/
 
     /**
      * The main entry point for all JavaFX applications.
@@ -85,6 +88,7 @@ public class ViewGUI extends Application implements Serializable{
             Platform.exit();
             System.exit(0);
         });
+
         primaryStage.setTitle("ADRENALINA");
         primaryStage.setScene(new Scene(root, 896, 627));
         primaryStage.setResizable(false);

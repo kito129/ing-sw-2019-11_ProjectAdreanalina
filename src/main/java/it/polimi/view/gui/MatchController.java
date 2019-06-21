@@ -1,9 +1,12 @@
 package it.polimi.view.gui;
 
+import it.polimi.model.EnumColorPlayer;
 import it.polimi.model.Player;
+import it.polimi.model.PowerUpCard;
 import it.polimi.model.WeaponCard;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
 
 import javafx.scene.image.ImageView;
@@ -16,6 +19,9 @@ import java.util.ArrayList;
 public class MatchController {
 
     @FXML
+    protected SplitPane container;
+
+    @FXML
     protected AnchorPane APtop, APbottom;
 
     @FXML
@@ -23,6 +29,9 @@ public class MatchController {
 
     @FXML
     protected Label answerOrMessageError;
+
+    @FXML
+    protected ImageView weapon1, weapon2, weapon3, powerUp1, powerUp2, powerUp3;
 
     static final String PNG = ".png";
     static final String JPG = ".jpg";
@@ -33,7 +42,8 @@ public class MatchController {
     static final String MAPSPATH = "images/maps/";
     static final String PLAYERBOARDPATH = "images/playerboards/";
     static final String POINTSPATH = "images/points/";
-    static final String TEARSPATH = "images/tears/";
+    static final String TEARSPATH = "images/tears/";                //damage and mark
+    static final String SKULLPATH = "images/RedSkull";
 
     private ViewGUI viewGUI;
     String path = "";
@@ -71,28 +81,98 @@ public class MatchController {
         }
     }
 
-    void refreshDamagePlayerboard(Player player) throws RemoteException{
+    void colorDamageMark(ArrayList<EnumColorPlayer> damageAndMark) throws RemoteException{
 
-        int damageIndex;
-        int markIndex;
-        int valueIndex;
+        String colorPlayer = "";
 
-        for(Node damageImage : InternalgridActualplayerPlayerboar.getChildren()){
+        for (EnumColorPlayer e : damageAndMark) {
 
-            damageIndex = GridPane.getColumnIndex(damageImage);
-            if(damageIndex==0){ //devo verificare il colore dei danni di volta in volta quindi servirebbe un metodo per vedere quali danni ho subito in quel momento e non solo i danni totali
+            switch (e) {
 
+                case BLU:
+                    colorPlayer = "BLU";
+                    break;
+                case GREEN:
+                    colorPlayer = "GREEN";
+                    break;
+                case GREY:
+                    colorPlayer = "GREY";
+                    break;
+                case PINK:
+                    colorPlayer = "PINK";
+                    break;
+                case YELLOW:
+                    colorPlayer = "YELLOW";
+                    break;
             }
+
+            path = TEARSPATH + colorPlayer + PNG;
         }
+    }
+
+    void refreshMark(Player player) throws RemoteException{
+
+        int markIndex;
 
         for (Node markImage : InternalgridActualplayerPlayerboar.getChildren()){
 
             markIndex = GridPane.getColumnIndex(markImage);
+            colorDamageMark(player.getPlayerBoard().getMarks());
+            loadImage(path, 25, 47, markImage, 0);
+            InternalgridActualplayerPlayerboar.add(markImage, 0, markIndex);
         }
+    }
+
+    void refreshDamage(Player player) throws RemoteException{
+
+        int damageIndex;
+
+        for (Node damageImage : InternalgridActualplayerPlayerboar.getChildren()){
+
+            damageIndex = GridPane.getColumnIndex(damageImage);
+            colorDamageMark(player.getPlayerBoard().getDamages());
+            loadImage(path, 25, 47, damageImage, 0);
+            InternalgridActualplayerPlayerboar.add(damageImage, 1, damageIndex);
+        }
+    }
+
+    void refreshValue(Player player) throws RemoteException{
+
+        int valueIndex;
 
         for (Node valueImage : InternalgridActualplayerPlayerboar.getChildren()){
 
-            valueIndex = GridPane.getColumnIndex(valueImage);
+            path = SKULLPATH + PNG;
+
+            if(player.getPlayerBoard().getBoardValue()==8){
+
+                ((ImageView) valueImage).setImage(null);
+            }
+
+            if (player.getPlayerBoard().getBoardValue()==6){
+
+                loadImage(path, 25,47, valueImage, 0);
+                InternalgridActualplayerPlayerboar.add(valueImage, 2, 4);
+            }
+
+            if (player.getPlayerBoard().getBoardValue()==4){
+
+                loadImage(path, 25,47, valueImage, 0);
+                InternalgridActualplayerPlayerboar.add(valueImage, 2, 5);
+            }
+
+            if (player.getPlayerBoard().getBoardValue()==2){
+
+                loadImage(path, 25,47, valueImage, 0);
+                InternalgridActualplayerPlayerboar.add(valueImage, 2, 6);
+            }
+
+            //TODO completare con && numero di morti == 5 e == 6
+            if (player.getPlayerBoard().getBoardValue()==1){
+
+                loadImage(path, 25,47, valueImage, 0);
+                InternalgridActualplayerPlayerboar.add(valueImage, 2, 7);
+            }
         }
     }
 
@@ -100,20 +180,81 @@ public class MatchController {
 
     // YOUR WEAPON --------------------------------------------------------------------------------------------------
 
-    void refreshYourWeapon(Player player, ArrayList<WeaponCard> weaponCards) throws RemoteException{
+    void refreshYourWeapon(ArrayList<WeaponCard> weaponCards) throws RemoteException{
 
-        String nameWeapon = "";
-        ImageView weaponImage = new ImageView();
+        String nameWeapon;
+        ImageView weapon = new ImageView();
 
-        for (WeaponCard w : weaponCards){
+        for (int i = 0; i < weaponCards.size(); i++) {
+
+            WeaponCard w = weaponCards.get(i);
 
             nameWeapon = w.getNameWeaponCard();
             path = WEAPONPATH + nameWeapon + PNG;
-            loadImage(path, 101, 181, weaponImage, 0);
+
+            if (!w.isCharge()){
+
+                weapon.setOpacity(0.7);
+            }else {
+
+                weapon.setOpacity(1.0);
+            }
+
+            if(i==0){
+
+                weapon = weapon1;
+                loadImage(path, 101, 181, weapon1, 0);
+            }
+
+            else if(i==1){
+
+                weapon = weapon2;
+                loadImage(path, 101, 181, weapon2, 0);
+            }
+
+            else if(i==2){
+
+                weapon = weapon3;
+                loadImage(path, 101, 181, weapon3, 0);
+            }
         }
     }
 
     // END YOUR WEAPON ----------------------------------------------------------------------------------------------
+
+    // YOUR POWER UP ------------------------------------------------------------------------------------------------
+
+    void refreshYourPowerUp(ArrayList<PowerUpCard> powerUpCards) throws RemoteException{
+
+        String namePowerUp;
+        String color;
+
+        for (int i = 0; i < powerUpCards.size(); i++) {
+
+            PowerUpCard p = powerUpCards.get(i);
+
+            namePowerUp = p.getNameCard();
+            color = p.getColorPowerUpCard().toString();
+            path = WEAPONPATH + namePowerUp + "_" + color + PNG;
+
+            if(i==0){
+
+                loadImage(path,68,114, powerUp1,0);
+            }
+
+            if(i==1){
+
+                loadImage(path,68,114, powerUp2,0);
+            }
+
+            if(i==2){
+
+                loadImage(path,68,114, powerUp3,0);
+            }
+        }
+    }
+
+    // END YOUR POWER UP---------------------------------------------------------------------------------------------
 
     // AMMO ---------------------------------------------------------------------------------------------------------
 
