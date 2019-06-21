@@ -282,8 +282,9 @@ public class GameModel implements Serializable {
      * @param observer the observer to be added
      */
 
-    public void addObserver(RemoteView observer){
-        
+    public void addObserver(RemoteView observer) throws RemoteException{
+
+        setPlayers(new Player(getPlayers(true).size()+1, observer.getUser(), getRandomColor() ));
         remoteViews.add(observer);
     }
     
@@ -306,15 +307,18 @@ public class GameModel implements Serializable {
 
     public void reAddObserver(RemoteView observer) throws RemoteException {
 
-        //todo da rifare
-        int index = 0;
-        for(Player a : players){
-            if((a.getName()).equals(observer.getUser())) {
-                index = players.indexOf(a);
-                break;
+        int indexToReAdd = -1;
+        for (Player player : players) {
+
+            if (player.getName().equals(observer.getUser())) {
+
+                    indexToReAdd = players.indexOf(player);
+                    break;
             }
         }
-        remoteViews.set(index, observer);
+        if(indexToReAdd!=-1) {
+            remoteViews.set(indexToReAdd, observer);
+        }
     }
 
     public void notifyObserver (GameModel gameModel){

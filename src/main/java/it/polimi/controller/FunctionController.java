@@ -35,13 +35,13 @@ public class FunctionController {
     }
     
     
-    public void lobby(FunctionModel functionModel, RemoteView view){
+    public void lobby(FunctionModel functionModel){
     
         GameModel gameModel = functionModel.getGameModel();
     
         try {
-            gameModel.setPlayers(new Player(gameModel.getPlayers(true).size()+1, view.getUser(), gameModel.getRandomColor() ));
-            
+            //todo marco guarda che ho spostato la creazione del player dentro l'add observer del modello.
+            //ricordati di sistemare la cosa del colore
             System.out.println(gameModel.getActualPlayer().toString());
             
             if (gameModel.getPlayers(true).size() == 3) {

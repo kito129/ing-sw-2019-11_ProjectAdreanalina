@@ -74,7 +74,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
 
             switch (gameModel.getState()) {
                 case LOBBY:
-                    functionController.lobby(functionModel, view);
+                    functionController.lobby(functionModel);
                     break;
                 case SPAWNPLAYER:
                     functionController.respawnPlayerController(functionModel, view);
@@ -196,8 +196,10 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 }else{
 
                     int indexOfObserver = gameModel.getRemoteViews().indexOf(remoteView);
-                    gameModel.getPlayers(true).get(indexOfObserver).setOnlineModel(false);
-                    gameModel.getPlayers(true).remove(indexOfObserver);
+                    if(indexOfObserver!=-1) {
+                        gameModel.getPlayers(true).get(indexOfObserver).setOnlineModel(false);
+                        gameModel.getPlayers(true).remove(indexOfObserver);
+                    }
                     gameModel.getRemoteViews().remove(indexOfObserver);
                 }
 
