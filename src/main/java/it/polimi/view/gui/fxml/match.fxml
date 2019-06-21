@@ -531,7 +531,7 @@
                                        </rowConstraints>
                                        <children>
                                           <ImageView fx:id="weapon1gsB" fitHeight="102.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                                          <ImageView fx:id="weapon2gsB" fitHeight="102.0" fitWidth="67.0" layoutX="29.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                                          <ImageView fx:id="weapon2gsB" fitHeight="102.0" fitWidth="60.0" layoutX="29.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
                                        </children>
                                     </GridPane>
                                     <GridPane fx:id="weaponB2" layoutX="328.0" layoutY="45.0" prefHeight="34.0" prefWidth="121.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
