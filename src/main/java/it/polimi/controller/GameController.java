@@ -1,7 +1,6 @@
 package it.polimi.controller;
 
 import it.polimi.model.*;
-import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -67,7 +66,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     @Override
     public void update(RemoteView view) throws RemoteException {
 
-        //pingClient();
+        pingClient();
 
         //2 action and multiple power up use
         int action = 0;
@@ -75,7 +74,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
 
             switch (gameModel.getState()) {
                 case LOBBY:
-                    functionController.lobby(functionModel, view);
+                    functionController.lobby(functionModel);
                     break;
                 case SPAWNPLAYER:
                     functionController.respawnPlayerController(functionModel, view);
@@ -177,10 +176,10 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     }
 
     
-    /*
+
     public void pingClient(){
 
-        for(RemoteView remoteView:gameModel.getRemoteView()){
+        for(RemoteView remoteView:gameModel.getRemoteViews()){
             try {
 
                 if(remoteView!=null) {
@@ -189,17 +188,26 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 }
             }catch (RemoteException remoteException){
 
-                //gestione disconnessione del giocatore
-                //vedere anche sagrada se sono il lobby fanno robe diverse..devo aspettare marco per capire cosa istanzia.
-                int indexOfObserver=gameModel.getRemoteView().indexOf(remoteView);
-                gameModel.getPlayers(true).get(indexOfObserver).setOnline(false);
-                gameModel.removeObserver(remoteView);
+                if((gameModel.getState()!=State.LOBBY)) {
+
+                    int indexOfObserver = gameModel.getRemoteViews().indexOf(remoteView);
+                    gameModel.getPlayers(true).get(indexOfObserver).setOnlineModel(false);
+                    gameModel.removeObserver(remoteView);
+                }else{
+
+                    int indexOfObserver = gameModel.getRemoteViews().indexOf(remoteView);
+                    if(indexOfObserver!=-1) {
+                        gameModel.getPlayers(true).get(indexOfObserver).setOnlineModel(false);
+                        gameModel.getPlayers(true).remove(indexOfObserver);
+                    }
+                    gameModel.getRemoteViews().remove(indexOfObserver);
+                }
 
             }
         }
     }
    
-     */
+
 }
 
 

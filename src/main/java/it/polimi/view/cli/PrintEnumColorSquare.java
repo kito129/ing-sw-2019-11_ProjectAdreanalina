@@ -25,6 +25,7 @@ public class PrintEnumColorSquare implements Serializable {
         
 
         for(int i = 0; i < enumColorSquares.size(); i++){
+
             EnumColorSquare c = enumColorSquares.get(i);
 
             if(c.equals(EnumColorSquare.BLU)){

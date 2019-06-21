@@ -282,8 +282,9 @@ public class GameModel implements Serializable {
      * @param observer the observer to be added
      */
 
-    public void addObserver(RemoteView observer){
-        
+    public void addObserver(RemoteView observer) throws RemoteException{
+
+        setPlayers(new Player(getPlayers(true).size()+1, observer.getUser(), getRandomColor() ));
         remoteViews.add(observer);
     }
     
@@ -306,20 +307,23 @@ public class GameModel implements Serializable {
 
     public void reAddObserver(RemoteView observer) throws RemoteException {
 
-        //todo da rifare
-        int index = 0;
-        for(Player a : players){
-            if((a.getName()).equals(observer.getUser())) {
-                index = players.indexOf(a);
-                break;
+        int indexToReAdd = -1;
+        for (Player player : players) {
+
+            if (player.getName().equals(observer.getUser())) {
+
+                    indexToReAdd = players.indexOf(player);
+                    break;
             }
         }
-        remoteViews.set(index, observer);
+        if(indexToReAdd!=-1) {
+            remoteViews.set(indexToReAdd, observer);
+        }
     }
 
     public void notifyObserver (GameModel gameModel){
 
-        int indexOfObserver=-1;
+        int indexOfCurrentObserver=-1;
 
         try {
 
@@ -327,23 +331,24 @@ public class GameModel implements Serializable {
 
                 if(observer!=null) {
 
-                    if(!(actualPlayer.getName().equals(observer.getUser()))) {
+                    if((getPlayers(true).indexOf(actualPlayer)!=getRemoteViews().indexOf(observer))){
 
-                        if(observer.getOnline()) {
+                        int count=getRemoteViews().indexOf(observer);
+
+                        if(getPlayers(true).get(count).getOnline()) {
 
                             observer.update(this);
                         }
                     }else{
 
-                        indexOfObserver=getRemoteViews().indexOf(observer);
+                        indexOfCurrentObserver=getRemoteViews().indexOf(observer);
                     }
                 }
-
             }
-            if(indexOfObserver!=-1) {
-                getRemoteViews().get(indexOfObserver).update(gameModel);
+            if(indexOfCurrentObserver!=-1) {
+                getRemoteViews().get(indexOfCurrentObserver).update(gameModel);
             }
-        }catch (RemoteException remoteExcpetion){
+        }catch (RemoteException remoteException){
 
         }
     }

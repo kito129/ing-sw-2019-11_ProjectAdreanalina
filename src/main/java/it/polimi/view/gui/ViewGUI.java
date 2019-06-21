@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ViewGUI{
+public class ViewGUI extends Application implements Serializable{
 
     private transient Stage mainStage;
 
@@ -48,16 +48,6 @@ public class ViewGUI{
     private transient MatchController matchController;
     private transient StartController startController;
 
-
-    /**
-     * gets if a player has to be set online
-     * @return true if the player has to be set online
-     */
-    public boolean getReturnOnline(){
-
-        return returnOnline;
-    }
-
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -73,6 +63,7 @@ public class ViewGUI{
      * Applications may create other stages, if needed, but they will not be
      * primary stages and will not be embedded in the browser.
      */
+    @Override
     public void start(Stage primaryStage) throws Exception{
 
         returnOnline = false;
@@ -103,11 +94,205 @@ public class ViewGUI{
     }
 
     /**
+     * updates each view in the game
+     * @param gameModel the gamemodel of the match
+     */
+    public void update(GameModel gameModel) {
+
+        this.gameModel = gameModel;
+        try {
+
+            this.run();
+        }catch (IOException e){
+
+            //do nothing
+        }
+    }
+
+    /**
+     * modifies the view based on the current state
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    private void run() throws IOException{
+
+        returnOnline = false;
+        state = gameModel.getState();
+
+        switch (state){
+
+            case LOBBY:
+                viewLobby();
+                break;
+            default:
+                assert false;
+        }
+    }
+
+    // VIEW -------------------------------------------------------------------------------------------------
+    /**
+     * shows the players in the lobby
+     */
+    private void viewLobby(){
+
+        Platform.runLater(()->{
+
+            startController.printLobby();
+            for (Player p : gameModel.getPlayers(true)){
+
+                startController.addPrint("- " + p.getName());
+            }
+        });
+    }
+
+    // END VIEW ---------------------------------------------------------------------------------------------
+
+    // GET SET ----------------------------------------------------------------------------------------------
+
+    /**
+     * gets if a player has to be set online
+     * @return true if the player has to be set online
+     */
+    public boolean getReturnOnline(){
+
+        return returnOnline;
+    }
+
+    /**
+     * gets if player is online or not
+     * @return true if the player is online, false otherwise
+     */
+    public synchronized boolean getOnline(){
+
+        return online;
+    }
+
+    /**
+     * gets the client's username
+     * @return the client's username
+     */
+    public String getUser() {
+
+        return user;
+    }
+
+    /**
+     * gets choose1
+     * @return first choice of the client
+     */
+    public int getChoose1() {
+
+        return choose1;
+    }
+
+    /**
+     * gets choose2
+     * @return second choice of the client
+     */
+    public int getChoose2() {
+
+        return choose2;
+    }
+
+    /**
+     * gets the list of inputs of the client
+     * @return an arraylist of client's inputs
+     */
+    public ArrayList<Integer> getChoices(){
+
+        return choices;
+    }
+
+    /**
+     * gets if this client wants to restart the game
+     * @return true if the client wants to restart the game, false otherwise
+     */
+    public boolean getRestart() {
+
+        return restart;
+    }
+
+    /**
+     * gets if has started a multiplayer match
+     * @return true if the game is in multiplayer mode
+     */
+    public boolean getMultiPlayer(){
+
+        return multiPlayer;
+    }
+
+    /**
+     * gets the gamecontroller of the match
+     * @return the gamecontroller of the match
+     */
+    RemoteGameController getNetwork(){
+
+        return this.network;
+    }
+
+    /**
      * sets if the client is online or not
      */
     public synchronized void setOnline(boolean online){
 
         this.online = online;
+        if(!online){
+
+            Platform.runLater(()-> matchController.setInactive());
+        }
+    }
+
+    /**
+     * sets if the client wants to restart the game
+     * @param restart the boolean to be set
+     */
+    public void setRestart(boolean restart) {
+
+        this.restart = restart;
+    }
+
+    /**
+     * sets first choice of the client
+     * @param i the choice of the client
+     */
+    void setChoose1(int i){
+
+        this.choose1 = i;
+    }
+
+    /**
+     * sets the second choice of the client
+     * @param i the choice of the client
+     */
+    void setChoose2(int i){
+
+        this.choose2 = i;
+    }
+
+    /**
+     * sets the username of this client's view
+     * @param s the name to be set
+     */
+    void setUser(String s) {
+
+        this.user = s;
+    }
+
+    /**
+     * sets if has started a multiplayer match
+     * @param multiPlayer the boolean to be set
+     */
+    void setMultiPlayer(boolean multiPlayer){
+
+        this.multiPlayer = multiPlayer;
+    }
+
+    /**
+     * sets the matchController of the game
+     * @param matchController the matchController to be set
+     */
+    void setMatchController(MatchController matchController){
+
+        this.matchController = matchController;
     }
 
     /**
@@ -133,41 +318,16 @@ public class ViewGUI{
         }
     }
 
-    /**
-     * Only for RMI clients.
-     * Every 2 seconds verifies if the Server is up.
-     * If not, shuts down the client.
-     */
-    private void verifyServerConnection(){
-
-        /*Timer t = new Timer();
-        t.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-
-                try {
-
-                    network.getMultiPlayerStarted(); //metodo dal RemoteGameController per MultiPlayerMatch
-                    verifyServerConnection();
-                }catch (RemoteException e){
-
-                    Platform.runLater(()->{
-
-                        matchController.serverDown();
-                    });
-                }
-            }
-        },2000);*/
-    }
+    //END GET SET------------------------------------------------------------------------------------------
 
     /**
-     * sets the username of this client's view
-     * @param s the name to be set
+     * prints an error message
+     * @param error the error message to be printed
+     * @throws RemoteException if the reference could not be accessed
      */
-    void setUser(String s) {
+    public void printError(String error) throws RemoteException {
 
-        this.user = s;
+        Platform.runLater(() -> matchController.answerOrMessageError.setText(error));
     }
 
     /**
@@ -187,6 +347,41 @@ public class ViewGUI{
     }
 
     /**
+     * checks if the actual state is LOBBY
+     * @return true if the actual state is LOBBY, false otherwise
+     * @throws RemoteException if the reference could not be accessed
+     */
+    boolean checkLobby() throws RemoteException {
+
+        return gameModel.getState().equals(State.LOBBY);
+    }
+
+    /**
+     * Only for RMI clients.
+     * Every 2 seconds verifies if the Server is up.
+     * If not, shuts down the client.
+     */
+    private void verifyServerConnection(){
+
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+
+                try {
+
+                    network.isGameStarted();
+                    verifyServerConnection();
+                }catch (RemoteException e){
+
+                    Platform.runLater(()-> matchController.serverDown());
+                }
+            }
+        },2000);
+    }
+
+    /**
      * checks if this client is the actual player or not
      * @return true if this client is the actual player, false otherwise
      * @throws RemoteException if the reference could not be accessed
@@ -197,45 +392,10 @@ public class ViewGUI{
     }
 
     /**
-     * updates each view in the game
-     * @param gameModel the gamemodel of the match
-     */
-    public void update(GameModel gameModel) {
-
-        this.gameModel = gameModel;
-    }
-
-    private void run() throws IOException{
-
-        returnOnline = false;
-        state = gameModel.getState();
-
-        switch (state){
-            case LOBBY:
-                viewLobby();
-                break;
-        }
-    }
-
-    /**
-     * shows the players in the lobby
-     */
-    private void viewLobby(){
-
-        Platform.runLater(()->{
-
-            startController.printLobby();
-            for (Player p : gameModel.getPlayers(true)){
-
-                startController.addPrint("- " + p.getName());
-            }
-        });
-    }
-
-    /**
      * creates a new match
      */
     private void showMatch(){
+
         Platform.runLater(() -> {
 
             try {
@@ -268,33 +428,6 @@ public class ViewGUI{
     }
 
     /**
-     * sets the matchController of the game
-     * @param matchController the matchController to be set
-     */
-    void setMatchController(MatchController matchController){
-
-        this.matchController = matchController;
-    }
-
-    /**
-     * gets if this client wants to restart the game
-     * @return true if the client wants to restart the game, false otherwise
-     */
-    public boolean getRestart() {
-
-        return restart;
-    }
-
-    /**
-     * sets if the client wants to restart the game
-     * @param restart the boolean to be set
-     */
-    public void setRestart(boolean restart) {
-
-        this.restart = restart;
-    }
-
-    /**
      * based on the type of connection, starts a new timer on the server
      * @throws IOException Any exception thrown by the underlying OutputStream.
      */
@@ -315,33 +448,6 @@ public class ViewGUI{
     }
 
     /**
-     * gets if has started a multiplayer match
-     * @return true if the game is in multiplayer mode
-     */
-    public boolean getMultiPlayer(){
-
-        return multiPlayer;
-    }
-
-    /**
-     * sets if has started a multiplayer match
-     * @param multiPlayer the boolean to be set
-     */
-    void setMultiPlayer(boolean multiPlayer){
-
-        this.multiPlayer = multiPlayer;
-    }
-
-    /**
-     * gets the gamecontroller of the match
-     * @return the gamecontroller of the match
-     */
-    RemoteGameController getNetwork(){
-
-        return this.network;
-    }
-
-    /**
      * creates a multiplayer match
      * @throws RemoteException if the reference could not be accessed
      */
@@ -351,16 +457,6 @@ public class ViewGUI{
 
             gameModel = network.getGameModel();
         }
-    }
-
-    /**
-     * checks if the actual state is LOBBY
-     * @return true if the actual state is LOBBY, false otherwise
-     * @throws RemoteException if the reference could not be accessed
-     */
-    boolean checkLobby() throws RemoteException {
-
-        return gameModel.getState().equals(State.LOBBY);
     }
 
     /**
@@ -396,24 +492,25 @@ public class ViewGUI{
      */
     boolean verifyUserCrashed(String s) throws RemoteException {
 
-        for(Player x : gameModel.getPlayers(true)){
+        for (Player x : gameModel.getPlayers(true)) {
 
-            if(x.getName().equals(s)){
+            if (x.getName().equals(s)) {
 
-                if(x.getOnline())
+                if (x.getOnline())
                     return false;
-                else{
+                else {
 
-                    if(multiPlayer){
+                    if (multiPlayer) {
 
                         /*for(RemoteView y : gameModel.getObservers()){
 
                             if(y!=null && y.getUser().equals(s))
                                 return false;
+
                         }*/
                         return true;
-                    }
-                    else {
+
+                    } else {
 
                         /*for (int i = 0; i < gameModel.getObservers().size(); i++) {
 
@@ -445,5 +542,83 @@ public class ViewGUI{
     void notifyNetwork() throws IOException {
 
         network.update(remoteView);
+    }
+
+    /**
+     * finds the correspondence between the name of this view and the player in the model
+     * @param s the name to be searched
+     * @return the player whose name is equal to the string 's'
+     * @throws RemoteException if the reference could not be accessed
+     */
+    public Player searchPlayer(String s) throws RemoteException {
+
+        for(int i=0; i<gameModel.getPlayers(true).size(); i++) {
+
+            Player p = gameModel.getPlayers(true).get(i);
+            if(p.getName().equals(s)) {
+
+                return p;
+            }
+        }
+        return gameModel.getPlayers(true).get(0);
+    }
+
+    /**
+     * gets the username of the player at index i
+     * @param i the index of the player
+     * @return the username of the player
+     * @throws RemoteException if the reference could not be accessed
+     */
+    String getPlayerUsername(int i) throws RemoteException {
+
+        if(gameModel.getPlayers(true).get(i).getName().equals(user))
+            return "next";
+        else
+            return gameModel.getPlayers(true).get(i).getName();
+    }
+
+    /**
+     * gets the actual state of the gamemodel
+     * @return the actual state of the gamemodel
+     * @throws RemoteException if the reference could not be accessed
+     */
+    State getGameState() throws RemoteException {
+
+        return gameModel.getState();
+    }
+
+    /**
+     * checks if the player 's' is online or not
+     * @param s the username to be searched
+     * @return true if 's' is online, false otherwise
+     * @throws RemoteException if the reference could not be accessed
+     */
+    boolean checkOtherPlayerOnline(String s) throws RemoteException{
+
+        Player player = searchPlayer(s);
+        return player.getOnline();
+    }
+
+    /**
+     * checks if the player 's' is the actual player or not
+     * @param s the username to be searched
+     * @return true if 's' is the actual player, false otherwise
+     * @throws RemoteException if the reference could not be accessed
+     */
+    boolean checkOtherPlayerActual(String s) throws RemoteException{
+
+        return (gameModel.getActualPlayer().getName().equals(s));
+    }
+
+    /**
+     * gets the final score of the player 's'
+     * @param s the username to be searched
+     * @return the final score of the player found
+     * @throws RemoteException if the reference could not be accessed
+     */
+    int getPlayerScore(String s) throws RemoteException {
+
+        Player player = searchPlayer(s);
+        return player.getScore();
     }
 }

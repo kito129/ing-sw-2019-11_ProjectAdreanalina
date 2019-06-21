@@ -68,9 +68,6 @@ public class ViewCLI implements RemoteView, Serializable {
         pingToServer();
         System.out.println("WELCOME TO ADRENALINA");
         
-        
-        
-
         try {
             gameModel = gameController.getGameModel();
             if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
@@ -122,7 +119,6 @@ public class ViewCLI implements RemoteView, Serializable {
             Registry registry = LocateRegistry.getRegistry("localhost");
             gameController = (RemoteGameController) registry.lookup("gameController");
             UnicastRemoteObject.exportObject(this, 0);
-            setOnline(true);
             
         } catch (RemoteException | NotBoundException e ) {
     
@@ -172,15 +168,18 @@ public class ViewCLI implements RemoteView, Serializable {
 
     }
 
-    @Override
+
 
     //potrebbe essere sync
-    public void setOnline (boolean online){
+    /*public void setOnline (boolean online){
         this.online = online;
         if(!online){
             this.print("\n\nYOU ARE NOW INACTIVE! TO JOIN AGAIN THE MATCH, PLEASE PRESS 0");
         }
     }
+
+
+     */
 
     public boolean canJoinAgain(){
 

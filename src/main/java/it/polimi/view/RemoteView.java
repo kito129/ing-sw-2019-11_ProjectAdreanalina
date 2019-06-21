@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 public interface RemoteView extends Remote {
     
     
-    void setOnline (boolean online) throws RemoteException;
+    //void setOnline (boolean online) throws RemoteException;
     
     int getIndex () throws RemoteException;
 

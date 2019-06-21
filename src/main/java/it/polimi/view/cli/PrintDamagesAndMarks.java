@@ -23,14 +23,4 @@ public class PrintDamagesAndMarks implements Serializable {
 
         PrintEnumPlayer.print(player.getPlayerBoard().getMarks());
     }
-
-    //TODO da sistemare quando faranno il metodo
-    /**
-     * Print damages on domination board
-     * @param player      the player choosen
-     */
-    public static void printDamagesDominationBoard(Player player){
-
-        PrintEnumPlayer.print(player.getPlayerBoard().getDamages());
-    }
 }

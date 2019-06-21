@@ -40,6 +40,7 @@ public class Player implements Serializable {
         playerBoard = new PlayerBoard();
         this.row=-1;
         this.column=-1;
+        setOnlineModel(true);
 
         // TODO vedere come gestire posizione in fase di inizializzazione.io inizialmente le metterei a  null quando vengono istanziati
     
@@ -156,7 +157,7 @@ public class Player implements Serializable {
         this.powerUpCardsSpawn.add(powerUpCardsSpawn.get(1));
     }
     
-    public void setOnline(Boolean online){
+    public void setOnlineModel(Boolean online){
 
         this.online = online;
         if(online) {
