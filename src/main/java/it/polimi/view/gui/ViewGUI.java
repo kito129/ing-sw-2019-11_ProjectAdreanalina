@@ -476,8 +476,7 @@ public class ViewGUI extends Application implements Serializable{
 
             /*for (int i = 0; i < gameModel.getObservers().size(); i++) {
 
-                if ((gameModel.getObservers() == null || gameModel.getObservers().get(i) == null) &&
-                        (gameModel.getObserverSocket() == null || gameModel.getObserverSocket().get(i) == null))
+                if (gameModel.getObservers() == null || gameModel.getObservers().get(i) == null)
                     return true;
             }*/
             return false;

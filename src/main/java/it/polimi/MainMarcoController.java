@@ -16,7 +16,7 @@ public class MainMarcoController {
 
     
     public static void main (String args[]) throws RemoteException {
-
+/*
 
     
         System.out.println("creo killshot track" );
@@ -105,11 +105,11 @@ public class MainMarcoController {
         ViewCLI viewCLI = new ViewCLI(gameController);
         gameModel.addObserver(viewCLI);
         map.print();
-        PrintMap.printMap(gameModel.getMap());
 
 
-        viewCLI.printMap();
-        PrintMap.printMap(gameModel.getMap());
+
+        viewCLI.CLIViewMap();
+        PrintMap.viewMap(gameModel.getMap());
        
 
        /*

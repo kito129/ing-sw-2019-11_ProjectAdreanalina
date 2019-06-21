@@ -19,15 +19,21 @@ public class PrintMap implements Serializable {
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RESET = "\u001b[0m";
+    public String[][] map;
+
+    public void PrintMap(){
+
+        this.map = new String[15][24];
+    }
 
     /**
      * Get and set map: control if the row and column exists and set them with the corresponding color; if doesn't exists,
      * set that square with black color
      * @param squares   the map choosen for the game
      */
-    private static String[][] getSetMap (ArrayList<Square> squares) {
+    private void getSetMap (ArrayList<Square> squares) {
 
-        String[][] map = new String[15][24];
+        String[][] map = this.map;
 
         for (Square s : squares) {
 
@@ -100,7 +106,6 @@ public class PrintMap implements Serializable {
                 }
             }
         }
-        return map;
     }
 
     /**
@@ -176,9 +181,10 @@ public class PrintMap implements Serializable {
      * Set the initial letter corresponding to the player's color in the right position to view the player on the map
      * Set the string "amm" in the right position (NormalSquare)
      * @param squares   the squares of the map
-     * @param map       the map choosen for the game
      */
-    private static String[][] getSetPlayersOnMap (ArrayList<Square> squares, String[][] map){
+    private void getSetPlayersOnMap (ArrayList<Square> squares){
+
+        String[][] map = this.map;
 
         for (Square s : squares){
 
@@ -222,15 +228,15 @@ public class PrintMap implements Serializable {
                 map[5*s.getRow()+1][6*s.getColumn()+4] = "o";
             }
         }
-        return map;
     }
 
     /**
      * Set the doors on the map.
-     * @param m   the choosen for the game
-     * @param map       the map choosen for the game
+     * @param m   the map choosen for the game
      */
-    private static String[][] putDoors (Map m, String[][] map){
+    private void putDoors (Map m){
+
+        String[][] map = this.map;
 
         //characters for doors ??
         char degrees = '\u00B0'; //non va ma fa vedere un cuore anziché °
@@ -255,18 +261,17 @@ public class PrintMap implements Serializable {
                 }
             }
         }
-        return map;
     }
 
     /**
      * Print map.
      * @param m   the choosen for the game
      */
-    public static void printMap(Map m) {
+    public void viewMap(Map m) {
 
-        String[][] map = getSetMap(m.getSquares());
-        map = putDoors(m, map);
-        map = getSetPlayersOnMap(m.getSquares(), map);
+        String[][] map = this.map;
+        putDoors(m);
+        getSetPlayersOnMap(m.getSquares());
 
         System.out.println("      0     1     2     3");
 

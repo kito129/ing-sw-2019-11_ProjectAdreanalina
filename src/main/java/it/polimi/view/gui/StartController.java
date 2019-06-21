@@ -323,7 +323,7 @@ public class StartController {
     private void usernameInserted() throws IOException {
 
         error.setVisible(false);
-        String user = username.getText().trim().toUpperCase();
+        String user = username.getText();
 
         if(!user.isEmpty()) {
 

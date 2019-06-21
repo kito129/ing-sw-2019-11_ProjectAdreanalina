@@ -1,6 +1,7 @@
 package it.polimi.view.gui;
 
 import it.polimi.model.Player;
+import it.polimi.model.WeaponCard;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
@@ -10,14 +11,15 @@ import javafx.scene.image.Image ;
 
 import java.awt.*;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class MatchController {
 
     @FXML
-    protected GridPane gridActualplayerPlayerboard, InternalgridActualplayerPlayerboar, gridAmmo;
+    protected AnchorPane APtop, APbottom;
 
     @FXML
-    protected ImageView ActualplayerPlayerboard;
+    protected GridPane gridActualplayerPlayerboard, InternalgridActualplayerPlayerboar, gridAmmo;
 
     @FXML
     protected Label answerOrMessageError;
@@ -26,7 +28,8 @@ public class MatchController {
     static final String JPG = ".jpg";
     static final String AMMOPATH = "images/ammo/";
     static final String AMMOCARDSPATH = "images/ammoCards/";
-    static final String CARDSPATH = "images/cards/";
+    static final String WEAPONPATH = "images/weapon/";
+    static final String POWERUPPATH = "images/powerup/";
     static final String MAPSPATH = "images/maps/";
     static final String PLAYERBOARDPATH = "images/playerboards/";
     static final String POINTSPATH = "images/points/";
@@ -53,20 +56,66 @@ public class MatchController {
         //TODO
     }
 
+    // YOUR PLAYERBOARD ---------------------------------------------------------------------------------------------
+
     void addYourPlayerboard(Player player){
 
-        path = PLAYERBOARDPATH + player.getColor().toString() + PNG;
-        Image image = new Image (path);
+        int YPIndex;
+
+        for(Node YPimage : gridActualplayerPlayerboard.getChildren()){
+
+            YPIndex = GridPane.getColumnIndex(YPimage);
+            path = PLAYERBOARDPATH + player.getColor().toString() + PNG;
+            loadImage(path,527,138, YPimage,0);
+            gridActualplayerPlayerboard.add(YPimage, 0, 0); //node, column, row
+        }
     }
 
     void refreshDamagePlayerboard(Player player) throws RemoteException{
 
         int damageIndex;
+        int markIndex;
+        int valueIndex;
+
         for(Node damageImage : InternalgridActualplayerPlayerboar.getChildren()){
 
+            damageIndex = GridPane.getColumnIndex(damageImage);
+            if(damageIndex==0){ //devo verificare il colore dei danni di volta in volta quindi servirebbe un metodo per vedere quali danni ho subito in quel momento e non solo i danni totali
 
+            }
+        }
+
+        for (Node markImage : InternalgridActualplayerPlayerboar.getChildren()){
+
+            markIndex = GridPane.getColumnIndex(markImage);
+        }
+
+        for (Node valueImage : InternalgridActualplayerPlayerboar.getChildren()){
+
+            valueIndex = GridPane.getColumnIndex(valueImage);
         }
     }
+
+    // END YOUR PLAYERBOARD -----------------------------------------------------------------------------------------
+
+    // YOUR WEAPON --------------------------------------------------------------------------------------------------
+
+    void refreshYourWeapon(Player player, ArrayList<WeaponCard> weaponCards) throws RemoteException{
+
+        String nameWeapon = "";
+        ImageView weaponImage = new ImageView();
+
+        for (WeaponCard w : weaponCards){
+
+            nameWeapon = w.getNameWeaponCard();
+            path = WEAPONPATH + nameWeapon + PNG;
+            loadImage(path, 101, 181, weaponImage, 0);
+        }
+    }
+
+    // END YOUR WEAPON ----------------------------------------------------------------------------------------------
+
+    // AMMO ---------------------------------------------------------------------------------------------------------
 
     /**
      * refresh blue ammo
@@ -75,6 +124,7 @@ public class MatchController {
     void refreshAmmoB(Player player) throws RemoteException {
 
         int ammoIndex;
+
         for(Node ammoImage : gridAmmo.getChildren()){
 
             ammoIndex = GridPane.getColumnIndex(ammoImage);
@@ -97,6 +147,7 @@ public class MatchController {
     void refreshAmmoR(Player player) throws RemoteException {
 
         int ammoIndex;
+
         for(Node ammoImage : gridAmmo.getChildren()){
 
             ammoIndex = GridPane.getColumnIndex(ammoImage);
@@ -119,6 +170,7 @@ public class MatchController {
     void refreshAmmoY(Player player) throws RemoteException {
 
         int ammoIndex;
+
         for(Node ammoImage : gridAmmo.getChildren()){
 
             ammoIndex = GridPane.getColumnIndex(ammoImage);
@@ -133,6 +185,8 @@ public class MatchController {
             }
         }
     }
+
+    // END AMMO -----------------------------------------------------------------------------------------------------
 
     /**
      * loads the ImageView or the AnchorPane's background images

@@ -59,6 +59,7 @@ public class ViewCLI implements RemoteView, Serializable {
     //attribute for direction
     private EnumCardinalDirection cardinalDirection;
     private ViewWeapon viewWeapon;
+    private PrintMap printMap;
 
 
     public ViewCLI(){
@@ -70,6 +71,7 @@ public class ViewCLI implements RemoteView, Serializable {
         
         try {
             gameModel = gameController.getGameModel();
+            this.printMap = new PrintMap();
             if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
 
                 do {
@@ -480,9 +482,9 @@ public class ViewCLI implements RemoteView, Serializable {
         this.run();
     }
     
-    public void printMap(){
-        
-        PrintMap.printMap(gameModel.getMap());
+    public void CLIViewMap(){
+
+        printMap.viewMap(gameModel.getMap());
     }
     
     public void run() throws RemoteException {
@@ -711,7 +713,7 @@ public class ViewCLI implements RemoteView, Serializable {
         //create wepoan view controller
         viewWeapon = new ViewWeapon();
         
-        PrintMap.printMap(gameModel.getMap());
+        CLIViewMap();
         PrintPlayer.print(gameModel.getActualPlayer());
         notifyController();
     }
@@ -750,7 +752,7 @@ public class ViewCLI implements RemoteView, Serializable {
             printMessageCurrent();
         }
         
-        printMap();
+        CLIViewMap();
     
         notifyController();
         
@@ -794,7 +796,7 @@ public class ViewCLI implements RemoteView, Serializable {
             printMessageCurrent();
         }
     
-        printMap();
+        CLIViewMap();
     
         notifyController();
     }

@@ -51,7 +51,7 @@ public class ViewWeapon {
     
         viewCLI.printMessageAll();
     
-        viewCLI.printMap();
+        viewCLI.CLIViewMap();
     
         viewCLI.notifyController();
         
