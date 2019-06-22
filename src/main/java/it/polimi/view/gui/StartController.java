@@ -19,13 +19,13 @@ import java.rmi.RemoteException;
 public class StartController {
 
     @FXML
-    protected AnchorPane container;
+    private AnchorPane container;
 
     @FXML
-    protected Button startButton;
+    private Button startButton;
 
     @FXML
-    protected TextField username;
+    private TextField username;
 
     @FXML
     private Label error, lobby, message;
@@ -44,15 +44,13 @@ public class StartController {
         message.managedProperty().bind(message.visibleProperty());
         lobby.managedProperty().bind(lobby.visibleProperty());
         username.managedProperty().bind(username.visibleProperty());
-        startButton.managedProperty().bind(startButton.visibleProperty());
     }
 
     /**
      * refreshes the window based on the actual state
-     * @param event start button event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    public void startButtonClicked(ActionEvent event) throws IOException {
+    public void startButtonClicked() throws IOException {
 
         if(state == 0)
             matchSelected();
@@ -68,10 +66,9 @@ public class StartController {
 
     /**
      * refreshes the window based on the actual state
-     * @param event input action event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    public void inputEnter(ActionEvent event) throws IOException {
+    public void inputEnter() throws IOException {
 
         if(state == 2)
             ipInsertion();
