@@ -1,6 +1,7 @@
 package it.polimi.view.cli;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,67 +21,236 @@ public class CLIPrintMap implements Serializable {
     public  final String ANSI_BLACK = "\u001B[30m";
     public  final String ANSI_RESET = "\u001b[0m";
     public String[][] map;
-
+    public String[][] square;
+    public ArrayList<String[][]> squares;
     
-    public  CLIPrintMap(){
-
-        this.map = new String[15][25];
-    }
-
-    /**
-     * Get and set map: control if the row and column exists and set them with the corresponding color; if doesn't exists,
-     * set that square with black color
-     * @param squares   the map choosen for the game
-     */
-    private void getSetMap (ArrayList<Square> squares) {
-
-        String[][] map = this.map;
-
-        for (Square s : squares) {
+    public ArrayList<ArrayList<ArrayList<ArrayList<String>>>> Newmap;
     
-            for (int row = 0; row < 15; row++) {
+    
+    GameModel gameModel;
+    
+    
+    public  CLIPrintMap(GameModel gameModel){
 
-                for (int column = 0; column < 25; column++) {
+        this.gameModel = gameModel;
+        //this.Newmap = new String[15][25];
+        this.Newmap = new ArrayList<ArrayList<ArrayList<ArrayList<String>>>>();
+        this.squares = new ArrayList<String [][]>();
+        
+        for (int i =0; i<12;i++){
             
-                    //secondo me qui deve essere in or o comuqnue non tutte in and perchè andrai quasi sempre nell'if
-                    if (s.getRow() == (row - 1) / 5 && row != 5 && row != 10 || s.getColumn() == (column - 1) / 6 && column != 6 && column != 12 && column != 18) {
-
-                        //BLU SQUARE
-                        switch (s.getColor()) {
-                            case BLU:
-                                map[row][column] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                break;
-                            case GREEN:
-                                map[row][column] = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                break;
-                            case PINK:
-                                map[row][column] = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                break;
-                            case RED:
-                                map[row][column] = ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                break;
-                            case YELLOW:
-                                map[row][column] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                break;
-                            case WHITE:
-                                map[row][column] = ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                break;
-                            default:
-                                map[row][column] = ANSI_BLACK_BACKGROUND + " ";
-                                break;
-                            }
-                    } else {
-
-                        map[row][column] = ANSI_BLACK_BACKGROUND + " ";
+            squares.add(new String [5][6]);
+        }
+    }
+    
+    public ArrayList<ArrayList<String >>  createSquare(Square s){
+    
+         ArrayList<ArrayList<String >> singleSquare = new ArrayList<ArrayList<String>>();
+         String colorToWrite = createStringColor(s.getColor());
+         
+         for (int i =0;i<5;i++){
+             singleSquare.add(new ArrayList<>());
+         }
+         
+        for (int row =0;row<5;row++){
+            for (int column =0;column<5;column++){
+               singleSquare.get(row).add(colorToWrite);
+            }
+        }
+        return singleSquare;
+    }
+    
+    public ArrayList<ArrayList<String >>  createBlackSquare(){
+        
+        ArrayList<ArrayList<String >> blackSquare = new ArrayList<ArrayList<String>>();
+        String colorToWrite = ANSI_BLACK_BACKGROUND + " ";
+    
+        for (int i =0;i<5;i++){
+            blackSquare.add(new ArrayList<>());
+        }
+        
+        for (int row =0;row<5;row++){
+            for (int column =0;column<5;column++){
+                blackSquare.get(row).add(colorToWrite);
+            }
+        }
+        return blackSquare;
+    }
+    
+    
+    public void createGrid(){
+    
+        ArrayList<ArrayList<ArrayList<ArrayList<String>>>> map = this.Newmap;
+        String  test;
+    
+        for (int i =0;i<3;i++){
+            map.add(new ArrayList<>());
+        }
+    
+        try {
+        for (int row =0;row<3;row++) {
+            for (int column = 0; column < 4; column++) {
+                if (gameModel.getMap().existInMap(row, column)) {
+                    
+                    map.get(row).add(createSquare(gameModel.getMap().getSquare(row, column)));
+                } else {
+                    
+                    map.get(row).add(createBlackSquare());
+                    
+                }
+                
+            }
+        }
+        } catch (MapException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void printGrid() {
+    
+        for (int row = 0; row < 3; row++) {
+            for (int column = 0; column < 4; column++) {
+                for (int rowSquare = 0; rowSquare < 5; rowSquare++) {
+                    for (int columnSquare = 0; columnSquare < 5; columnSquare++) {
+    
+                        System.out.print(Newmap.get(row).get(column).get(rowSquare).get(columnSquare));
+    
                     }
                 }
             }
+            System.out.println();
         }
+        System.out.println();
+    }
+    
+    public void createListSquare(){
+        
+        for (int row=0;row<3;row++){
+            
+            for (int column=0;column<4;column++){
+                
+                if(gameModel.getMap().existInMap(row,column)){
+                
+                
+            }
+        }
+        }
+    }
+    
+    
+    public void viewMapNew() {
+        
+        createGrid();
+        printGrid();
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    public String createStringColor(EnumColorSquare colorSquare){
+    
+        String string = new String();
+        //BLU SQUARE
+        switch (colorSquare) {
+            case BLU:
+                string = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                break;
+            case GREEN:
+                string = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                break;
+            case PINK:
+                string = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                break;
+            case RED:
+                string= ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                break;
+            case YELLOW:
+                string= ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                break;
+            case WHITE:
+                string= ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                break;
+            default:
+                string = ANSI_BLACK_BACKGROUND + " ";
+                break;
+        }
+        return string;
+    }
+
+    
+    /**
+    public void createMap(){
+        
+        int count;
+    
+    
+        for (int row =0; row<3;row ++){
+            for (int column=0;column<4;column++) {
+                
+                Newmap[row][column] = squares.get(row+column);
+            }
+        
+    
+    
+    }
+
+    
+     * Get and set Newmap: control if the row and column exists and set them with the corresponding color; if doesn't exists,
+     * set that square with black color
+     * @param squares   the Newmap choosen for the game
+     
+    private void getSetMap (ArrayList<Square> squares) {
+
+        String[][] Newmap = this.Newmap;
+
+        
+        for (int row = 0; row < 15; row++) {
+
+            for (int column = 0; column < 25; column++) {
+        
+                //secondo me qui deve essere in or o comuqnue non tutte in and perchè andrai quasi sempre nell'if
+                if (s.getRow() == (row - 1) / 5 && row != 5 && row != 10 && row != 0 && s.getColumn() == (column - 1) / 6 && column !=  0 && column != 6 && column != 12 && column != 18) {
+
+                    //BLU SQUARE
+                    switch (s.getColor()) {
+                        case BLU:
+                            Newmap[row][column] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                            break;
+                        case GREEN:
+                            Newmap[row][column] = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                            break;
+                        case PINK:
+                            Newmap[row][column] = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                            break;
+                        case RED:
+                            Newmap[row][column] = ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                            break;
+                        case YELLOW:
+                            Newmap[row][column] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                            break;
+                        case WHITE:
+                            Newmap[row][column] = ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                            break;
+                        default:
+                            Newmap[row][column] = ANSI_BLACK_BACKGROUND + " ";
+                            break;
+                        }
+                } else {
+
+                    Newmap[row][column] = ANSI_BLACK_BACKGROUND + " ";
+                }
+            }
+        }
+        
     }
 
     public void putGenerationSquare(Map m) {
 
-        String[][] map = this.map;
+        String[][] Newmap = this.Newmap;
 
         for (Square s : m.getSquares()) {
 
@@ -93,7 +263,7 @@ public class CLIPrintMap implements Serializable {
                         //per colorare il generation square blu sopra
                         if (col >= 13 && col <= 17) {
 
-                            map[0][col] = ANSI_BLUE + "|" + ANSI_RESET;
+                            Newmap[0][col] = ANSI_BLUE + "-" + ANSI_RESET;
                         }
                     }
 
@@ -102,7 +272,7 @@ public class CLIPrintMap implements Serializable {
                         //per colorare il generation square rosso a lato
                         if (row >= 6 && row <= 9) {
 
-                            map[row][0] = ANSI_RED + "|" + ANSI_RESET;
+                            Newmap[row][0] = ANSI_RED + "|" + ANSI_RESET;
                         }
                     }
 
@@ -111,13 +281,14 @@ public class CLIPrintMap implements Serializable {
                         //per colorare il generation square giallo a lato
                         if (row >= 11 && row <= 14) {
 
-                            map[row][24] = ANSI_YELLOW + "|" + ANSI_RESET;
+                            Newmap[row][24] = ANSI_YELLOW + "|" + ANSI_RESET;
                         }
                     }
                 }
             }
         }
     }
+    */
 
     /**
      * Set the right string to view for CLI to the corresponding color
@@ -189,13 +360,13 @@ public class CLIPrintMap implements Serializable {
     }
 
     /**
-     * Set the initial letter corresponding to the player's color in the right position to view the player on the map
+     * Set the initial letter corresponding to the player's color in the right position to view the player on the Newmap
      * Set the string "amm" in the right position (NormalSquare)
-     * @param squares   the squares of the map
-     */
+     * @param squares   the squares of the Newmap
+     
     private void getSetPlayersOnMap (ArrayList<Square> squares){
 
-        String[][] map = this.map;
+        String[][] map = this.Newmap;
 
         for (Square s : squares){
 
@@ -242,12 +413,12 @@ public class CLIPrintMap implements Serializable {
     }
 
     /**
-     * Set the doors on the map.
-     * @param m   the map choosen for the game
-     */
+     * Set the doors on the Newmap.
+     * @param m   the Newmap choosen for the game
+     
     private void putDoors (Map m){
 
-        String[][] map = this.map;
+        String[][] map = this.Newmap;
 
         //characters for doors ??
         char degrees = '\u00B0'; //non va ma fa vedere un cuore anziché °
@@ -273,16 +444,18 @@ public class CLIPrintMap implements Serializable {
             }
         }
     }
-
+    
+    
+    
     /**
-     * Print map.
+     * Print Newmap.
      * @param m   the choosen for the game
-     */
+    
     public void viewMap(Map m) {
 
-        String[][] map = this.map;
-        getSetMap(m.getSquares());
-        putGenerationSquare(m);
+        String[][] map = this.Newmap;
+        //getSetMap(m.getSquares());
+        //putGenerationSquare(m);
         putDoors(m);
         getSetPlayersOnMap(m.getSquares());
 
@@ -305,4 +478,5 @@ public class CLIPrintMap implements Serializable {
             System.out.println();
         }
     }
+    */
 }
