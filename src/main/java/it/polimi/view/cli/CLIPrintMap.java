@@ -46,37 +46,31 @@ public class CLIPrintMap implements Serializable {
                     if (s.getRow() == (row - 1) / 5 && row != 5 && row != 10 || s.getColumn() == (column - 1) / 6 && column != 6 && column != 12 && column != 18) {
 
                         //BLU SQUARE
-                            switch (s.getColor()) {
-                                case BLU:
-                                    map[row][column] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                    break;
-                                case GREEN:
-                                    map[row][column] = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                    break;
-                                case PINK:
-                                    map[row][column] = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                    break;
-                                case RED:
-                                    map[row][column] = ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                    break;
-                                case YELLOW:
-                                    if (column < 23) {
-                
-                                        map[row][column] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                    } else {
-                
-                                        map[row][column] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND + ANSI_YELLOW + "|" + ANSI_RESET;
-                                    }
-                                case WHITE:
-                                    map[row][column] = ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                                    break;
-                                default:
-                                    map[row][column] = ANSI_BLACK_BACKGROUND + " ";
-                                    break;
+                        switch (s.getColor()) {
+                            case BLU:
+                                map[row][column] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                break;
+                            case GREEN:
+                                map[row][column] = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                break;
+                            case PINK:
+                                map[row][column] = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                break;
+                            case RED:
+                                map[row][column] = ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                break;
+                            case YELLOW:
+                                map[row][column] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                break;
+                            case WHITE:
+                                map[row][column] = ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                break;
+                            default:
+                                map[row][column] = ANSI_BLACK_BACKGROUND + " ";
+                                break;
                             }
-
                     } else {
-    
+
                         map[row][column] = ANSI_BLACK_BACKGROUND + " ";
                     }
                 }
