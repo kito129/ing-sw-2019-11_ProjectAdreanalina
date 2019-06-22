@@ -34,6 +34,9 @@ public class MatchController {
     private GridPane gridSkull1, gridSkull2, gridSkull3;
 
     @FXML
+    private GridPane square1, square2, square3, square4, square5, square6, square7, square8, square9, square10, square11, square12;
+
+    @FXML
     protected Label answerOrMessageError;
 
     @FXML
@@ -50,6 +53,7 @@ public class MatchController {
     static final String POINTSPATH = "images/points/";
     static final String TEARSPATH = "images/tears/";                //damage and mark
     static final String SKULLPATH = "images/RedSkull";
+    static final String PLAYERSPATH = "images/players/";
 
     private ViewGUI viewGUI;
     String path = "";
@@ -94,6 +98,11 @@ public class MatchController {
 
     // YOUR PLAYERBOARD ---------------------------------------------------------------------------------------------
 
+    /**
+     * initializes the player's playerboard
+     * @param player the player
+     * @throws RemoteException if the reference could not be accessed
+     */
     void addYourPlayerboard(Player player){
 
         for(Node YPimage : gridActualplayerPlayerboard.getChildren()){
@@ -104,6 +113,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * return the right string corresponding to the player's color
+     * @param damageAndMark arrayList of damage/mark
+     * @throws RemoteException if the reference could not be accessed
+     */
     void colorDamageMark(ArrayList<EnumColorPlayer> damageAndMark) throws RemoteException{
 
         String colorPlayer = "";
@@ -133,6 +147,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * update the mark in player's playerboard
+     * @param player the player
+     * @throws RemoteException if the reference could not be accessed
+     */
     void refreshMark(Player player) throws RemoteException{
 
         int markIndex;
@@ -146,6 +165,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * update the damage in player's playerboard
+     * @param player the player
+     * @throws RemoteException if the reference could not be accessed
+     */
     void refreshDamage(Player player) throws RemoteException{
 
         int damageIndex;
@@ -159,6 +183,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * update the value in player's playerboard
+     * @param player the player
+     * @throws RemoteException if the reference could not be accessed
+     */
     void refreshValue(Player player) throws RemoteException{
 
         ImageView valueImage = new ImageView();
@@ -199,6 +228,11 @@ public class MatchController {
 
     // YOUR WEAPON --------------------------------------------------------------------------------------------------
 
+    /**
+     * update the player's weapon
+     * @param weaponCards player's weaponList
+     * @throws RemoteException if the reference could not be accessed
+     */
     void refreshYourWeapon(ArrayList<WeaponCard> weaponCards) throws RemoteException{
 
         String nameWeapon;
@@ -254,6 +288,11 @@ public class MatchController {
 
     // YOUR POWER UP ------------------------------------------------------------------------------------------------
 
+    /**
+     * update the player's powerup
+     * @param powerUpCards player's powerupList
+     * @throws RemoteException if the reference could not be accessed
+     */
     void refreshYourPowerUp(ArrayList<PowerUpCard> powerUpCards) throws RemoteException{
 
         String namePowerUp;
@@ -290,6 +329,7 @@ public class MatchController {
 
     /**
      * refresh blue ammo
+     * @param player the player
      * @throws RemoteException if the reference could not be accessed
      */
     void refreshAmmoB(Player player) throws RemoteException {
@@ -313,6 +353,7 @@ public class MatchController {
 
     /**
      * refresh red ammo
+     * @param player the player
      * @throws RemoteException if the reference could not be accessed
      */
     void refreshAmmoR(Player player) throws RemoteException {
@@ -336,6 +377,7 @@ public class MatchController {
 
     /**
      * refresh yellow ammo
+     * @param player the player
      * @throws RemoteException if the reference could not be accessed
      */
     void refreshAmmoY(Player player) throws RemoteException {
@@ -363,7 +405,7 @@ public class MatchController {
 
     void addMapImage(GameModel gameModel) throws RemoteException{
 
-        //TODO
+        //TODO serve il nome della mappa
     }
 
     void refreshKillshotTrackPoint(GameModel gameModel, ArrayList<KillShotTrackPoint> killShotTrackPoints) throws RemoteException{
@@ -371,6 +413,11 @@ public class MatchController {
         //TODO
     }
 
+    /**
+     * update the weapons on generation square blu
+     * @param generationSquare a generationSquare
+     * @throws RemoteException if the reference could not be accessed
+     */
     void refreshWeaponGenerationBlue(GenerationSquare generationSquare) throws RemoteException{
 
         String nameWeapon;
@@ -398,6 +445,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * update the weapons on generation square yellow
+     * @param generationSquare a generationSquare
+     * @throws RemoteException if the reference could not be accessed
+     */
     void refreshWeaponGenerationYellow(GenerationSquare generationSquare) throws RemoteException{
 
         String nameWeapon;
@@ -431,6 +483,11 @@ public class MatchController {
         }
     }
 
+    /**
+     * update the weapons on generation square red
+     * @param generationSquare a generationSquare
+     * @throws RemoteException if the reference could not be accessed
+     */
     void refreshWeaponGenerationRed(GenerationSquare generationSquare) throws RemoteException{
 
         String nameWeapon;
@@ -463,6 +520,202 @@ public class MatchController {
             }
         }
     }
+
+    // SINGLE SQUARE ------------------------------------------------------------------------------------------------
+
+    /**
+     * return the right string corresponding to player's name
+     * @param player the player
+     * @throws RemoteException if the reference could not be accessed
+     */
+    String namePlayer(Player player){
+
+        String name;
+        name = player.getName();
+        return name;
+    }
+
+    /**
+     * return the right GridPane corresponding to the GridPane (a square) in map where is the player on
+     * @param player the player
+     * @throws RemoteException if the reference could not be accessed
+     */
+    GridPane knowSquare(Player player) throws RemoteException{
+
+        GridPane square = new GridPane();
+
+        if(player.getRow()==0 && player.getColumn()==0){
+
+            square = square1;
+        }
+
+        else if(player.getRow()==0 && player.getColumn()==1){
+
+            square = square2;
+        }
+
+        else if(player.getRow()==0 && player.getColumn()==2){
+
+            square = square3;
+        }
+
+        else if(player.getRow()==0 && player.getColumn()==3){
+
+            square = square4;
+        }
+
+        else if(player.getRow()==1 && player.getColumn()==0){
+
+            square = square5;
+        }
+
+        else if(player.getRow()==1 && player.getColumn()==1){
+
+            square = square6;
+        }
+
+        else if(player.getRow()==1 && player.getColumn()==2){
+
+            square = square7;
+        }
+
+        else if(player.getRow()==1 && player.getColumn()==3){
+
+            square = square8;
+        }
+
+        else if(player.getRow()==2 && player.getColumn()==0){
+
+            square = square9;
+        }
+
+        else if(player.getRow()==2 && player.getColumn()==1){
+
+            square = square10;
+        }
+
+        else if(player.getRow()==2 && player.getColumn()==2){
+
+            square = square11;
+        }
+
+        else if(player.getRow()==2 && player.getColumn()==3){
+
+            square = square12;
+        }
+
+        return square;
+    }
+
+    /**
+     * add player in right position on square in map
+     * @param path the path that need to upload the image in an ImageView
+     * @param s a square of the map
+     * @param square the right GridPane in which the image will be loaded
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void addPlayerInRightPosition(String path, Square s, GridPane square) throws RemoteException{
+
+        ImageView playerImage1 = new ImageView();
+        ImageView playerImage2 = new ImageView();
+        ImageView playerImage3 = new ImageView();
+        ImageView playerImage4 = new ImageView();
+        ImageView playerImage5 = new ImageView();
+
+        if (s.getPlayers().size()==1){
+
+            loadImage(path,36,55, playerImage1, 0);
+            square.add(playerImage1, 1, 0);
+        }
+
+        if (s.getPlayers().size()==2){
+
+            loadImage(path,36,55, playerImage1, 0);
+            square.add(playerImage1, 1, 0);
+
+            path = s.getPlayers().get(1).getName();
+            loadImage(path,36,55, playerImage2, 0);
+            square.add(playerImage2, 2, 0);
+        }
+
+        if (s.getPlayers().size()==3){
+
+            loadImage(path,36,55, playerImage1, 0);
+            square.add(playerImage1, 1, 0);
+
+            path = s.getPlayers().get(1).getName();
+            loadImage(path,36,55, playerImage2, 0);
+            square.add(playerImage2, 2, 0);
+
+            path = s.getPlayers().get(2).getName();
+            loadImage(path,36,55, playerImage3, 0);
+            square.add(playerImage3, 0, 1);
+        }
+
+        if (s.getPlayers().size()==4){
+
+            loadImage(path,36,55, playerImage1, 0);
+            square.add(playerImage1, 1, 0);
+
+            path = s.getPlayers().get(1).getName();
+            loadImage(path,36,55, playerImage2, 0);
+            square.add(playerImage2, 2, 0);
+
+            path = s.getPlayers().get(2).getName();
+            loadImage(path,36,55, playerImage3, 0);
+            square.add(playerImage3, 0, 1);
+
+            path = s.getPlayers().get(3).getName();
+            loadImage(path,36,55, playerImage4, 0);
+            square.add(playerImage4, 1, 1);
+        }
+
+        if (s.getPlayers().size()==5){
+
+            loadImage(path,36,55, playerImage1, 0);
+            square.add(playerImage1, 1, 0);
+
+            path = s.getPlayers().get(1).getName();
+            loadImage(path,36,55, playerImage2, 0);
+            square.add(playerImage2, 2, 0);
+
+            path = s.getPlayers().get(2).getName();
+            loadImage(path,36,55, playerImage3, 0);
+            square.add(playerImage3, 0, 1);
+
+            path = s.getPlayers().get(3).getName();
+            loadImage(path,36,55, playerImage4, 0);
+            square.add(playerImage4, 1, 1);
+
+            path = s.getPlayers().get(4).getName();
+            loadImage(path,36,55, playerImage5, 0);
+            square.add(playerImage5, 2, 1);
+        }
+    }
+
+    /**
+     * refresh player on the map
+     * @param squares all squares of the map
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void refreshPlayersOnSquare(ArrayList<Square> squares) throws RemoteException{
+
+        String nameSinglePlayer;
+        GridPane square;
+
+        for (Square s : squares){
+
+            for (int i = 0; i < s.getPlayers().size(); i++){
+
+                square = knowSquare(s.getPlayers().get(i));
+                nameSinglePlayer = namePlayer(s.getPlayers().get(i));
+                path = PLAYERSPATH + nameSinglePlayer + PNG;
+                addPlayerInRightPosition(path, s, square);
+            }
+        }
+    }
+
+    // END SINGLE SQUARE --------------------------------------------------------------------------------------------
 
     void addBackAmmoCardDeck() throws RemoteException{
 
