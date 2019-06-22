@@ -37,73 +37,59 @@ public class CLIPrintMap implements Serializable {
         String[][] map = this.map;
 
         for (Square s : squares) {
-
-            for (int i = 0; i < 15; i++) {
-
+    
+            for (int row = 0; row < 15; row++) {
+        
                 //per colorare il generation square rosso a lato
-                if(i >= 6 && i <= 9){
-
-                    map[i][0] = ANSI_RED + "|" + ANSI_RESET;
+                if (row >= 6 && row <= 9) {
+    
+                    map[row][0] = ANSI_RED + "|" + ANSI_RESET;
                 }
-
-                for (int j = 0; j < 24; j++) {
-
+        
+                for (int column = 0; column < 24; column++) {
+            
                     //secondo me qui deve essere in or o comuqnue non tutte in and perchè andrai quasi sempre nell'if
-                    if (s.getRow() == (i-1)/5 && i!=5 && i!=10 && s.getColumn() == (j-1)/6 && j!=6 && j!=12 && j!=18) {
-
+                    if (s.getRow() == (row - 1) / 5 && row != 5 && row != 10 || s.getColumn() == (column - 1) / 6 && column != 6 && column != 12 && column != 18) {
+    
                         //per colorare il generation square blu sopra
-                        if(i == 0 && j >= 13 && j <= 17){
-
-                            map[0][j] = ANSI_BLUE + "-" + ANSI_RESET;
+                        if (row == 0 && column >= 13 && column <= 17) {
+    
+                            map[0][column] = ANSI_BLUE + "-" + ANSI_RESET;
                         }
-
                         //BLU SQUARE
-                         else if (s.getColor().equals(EnumColorSquare.BLU)) {
-
-                            map[i][j] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                        }
-
-                        //GREEN SQUARE
-                        else if (s.getColor().equals(EnumColorSquare.GREEN)) {
-
-                            map[i][j] = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                        }
-
-                        //PINK SQUARE
-                        else if (s.getColor().equals(EnumColorSquare.PINK)) {
-
-                            map[i][j] = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                        }
-
-                        //RED SQUARE
-                        else if (s.getColor().equals(EnumColorSquare.RED)) {
-
-                            map[i][j] = ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                        }
-
-                        //YELLOW SQUARE
-                        else if (s.getColor().equals(EnumColorSquare.YELLOW)) {
-
-                            if(j < 23){
-
-                                map[i][j] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                            }
-                            else{
-
-                                map[i][j] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND + ANSI_YELLOW + "|" + ANSI_RESET;
+                        else {
+                            switch (s.getColor()) {
+                                case BLU:
+                                    map[row][column] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                    break;
+                                case GREEN:
+                                    map[row][column] = ANSI_GREEN_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                    break;
+                                case PINK:
+                                    map[row][column] = ANSI_PURPLE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                    break;
+                                case RED:
+                                    map[row][column] = ANSI_RED_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                    break;
+                                case YELLOW:
+                                    if (column < 23) {
+                
+                                        map[row][column] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                    } else {
+                
+                                        map[row][column] = ANSI_YELLOW_BACKGROUND + " " + ANSI_BLACK_BACKGROUND + ANSI_YELLOW + "|" + ANSI_RESET;
+                                    }
+                                case WHITE:
+                                    map[row][column] = ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
+                                    break;
+                                default:
+                                    map[row][column] = ANSI_BLACK_BACKGROUND + " ";
+                                    break;
                             }
                         }
-
-                        //WHITE SQUARE
-                        else if (s.getColor().equals(EnumColorSquare.WHITE)) {
-
-                            map[i][j] = ANSI_WHITE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
-                        }
-
-                        //BLACK SQUARE
                     } else {
-
-                        map[i][j] = ANSI_BLACK_BACKGROUND + " ";
+    
+                        map[row][column] = ANSI_BLACK_BACKGROUND + " ";
                     }
                 }
             }
