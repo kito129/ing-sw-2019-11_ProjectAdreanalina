@@ -24,7 +24,7 @@ public class CLIPrintMap implements Serializable {
     
     public  CLIPrintMap(){
 
-        this.map = new String[15][24];
+        this.map = new String[15][25];
     }
 
     /**
@@ -39,14 +39,8 @@ public class CLIPrintMap implements Serializable {
         for (Square s : squares) {
     
             for (int row = 0; row < 15; row++) {
-        
-                //per colorare il generation square rosso a lato
-                if (row >= 6 && row <= 9) {
-    
-                    map[row][0] = ANSI_RED + "|" + ANSI_RESET;
-                }
-        
-                for (int column = 0; column < 24; column++) {
+
+                for (int column = 0; column < 25; column++) {
             
                     //secondo me qui deve essere in or o comuqnue non tutte in and perchè andrai quasi sempre nell'if
                     if (s.getRow() == (row - 1) / 5 && row != 5 && row != 10 || s.getColumn() == (column - 1) / 6 && column != 6 && column != 12 && column != 18) {
@@ -96,11 +90,52 @@ public class CLIPrintMap implements Serializable {
         }
     }
 
+    public void putGenerationSquare(Map m) {
+
+        String[][] map = this.map;
+
+        for (Square s : m.getSquares()) {
+
+            for (int row = 0; row < 15; row++) {
+
+                for (int col = 0; col < 25; col++) {
+
+                    if (s.getRow() == 0) {
+
+                        //per colorare il generation square blu sopra
+                        if (col >= 13 && col <= 17) {
+
+                            map[0][col] = ANSI_BLUE + "|" + ANSI_RESET;
+                        }
+                    }
+
+                    if (s.getRow() == 1) {
+
+                        //per colorare il generation square rosso a lato
+                        if (row >= 6 && row <= 9) {
+
+                            map[row][0] = ANSI_RED + "|" + ANSI_RESET;
+                        }
+                    }
+
+                    if (s.getRow() == 2) {
+
+                        //per colorare il generation square giallo a lato
+                        if (row >= 11 && row <= 14) {
+
+                            map[row][24] = ANSI_YELLOW + "|" + ANSI_RESET;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Set the right string to view for CLI to the corresponding color
      * @param player      the selected player
      */
-    public  String colorString(Player player, ArrayList<Square> squares){
+    public String colorString(Player player, ArrayList<Square> squares){
 
         String s = "";
         String colorPlayer = player.getColor().toString();
@@ -259,6 +294,7 @@ public class CLIPrintMap implements Serializable {
 
         String[][] map = this.map;
         getSetMap(m.getSquares());
+        putGenerationSquare(m);
         putDoors(m);
         getSetPlayersOnMap(m.getSquares());
 
@@ -274,7 +310,7 @@ public class CLIPrintMap implements Serializable {
 
                 System.out.print("   ");
             }
-            for(int j = 0; j < 24; j++){
+            for(int j = 0; j < 25; j++){
 
                 System.out.print(map[i][j]);
             }
