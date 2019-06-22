@@ -34,6 +34,9 @@ public class MatchController {
     private GridPane gridSkull1, gridSkull2, gridSkull3;
 
     @FXML
+    private GridPane square1, square2, square3, square4, square5, square6, square7, square8, square9, square10, square11, square12;
+
+    @FXML
     protected Label answerOrMessageError;
 
     @FXML
@@ -50,6 +53,7 @@ public class MatchController {
     static final String POINTSPATH = "images/points/";
     static final String TEARSPATH = "images/tears/";                //damage and mark
     static final String SKULLPATH = "images/RedSkull";
+    static final String PLAYERSPATH = "images/players/";
 
     private ViewGUI viewGUI;
     String path = "";
@@ -463,6 +467,110 @@ public class MatchController {
             }
         }
     }
+
+    // SINGLE SQUARE ------------------------------------------------------------------------------------------------
+
+    String namePlayer(Player player){
+
+        String name;
+        name = player.getName();
+        return name;
+    }
+
+    GridPane knowSquare(Player player) throws RemoteException{
+
+        GridPane square = new GridPane();
+
+        if(player.getRow()==0 && player.getColumn()==0){
+
+            square1 = square;
+        }
+
+        if(player.getRow()==0 && player.getColumn()==1){
+
+            square2 = square;
+        }
+
+        if(player.getRow()==0 && player.getColumn()==2){
+
+            square3 = square;
+        }
+
+        if(player.getRow()==0 && player.getColumn()==3){
+
+            square4 = square;
+        }
+
+        if(player.getRow()==1 && player.getColumn()==0){
+
+            square5 = square;
+        }
+
+        if(player.getRow()==1 && player.getColumn()==1){
+
+            square6 = square;
+        }
+
+        if(player.getRow()==1 && player.getColumn()==2){
+
+            square7 = square;
+        }
+
+        if(player.getRow()==1 && player.getColumn()==3){
+
+            square8 = square;
+        }
+
+        if(player.getRow()==2 && player.getColumn()==0){
+
+            square9 = square;
+        }
+
+        if(player.getRow()==2 && player.getColumn()==1){
+
+            square10 = square;
+        }
+
+        if(player.getRow()==2 && player.getColumn()==2){
+
+            square11 = square;
+        }
+
+        if(player.getRow()==2 && player.getColumn()==3){
+
+            square12 = square;
+        }
+
+        return square;
+    }
+
+    void refreshPlayersOnSquare(ArrayList<Square> squares) throws RemoteException{
+
+        String nameSinglePlayer;
+        ImageView playerImage = new ImageView();
+        GridPane square = new GridPane();
+
+        for (Square s : squares){
+
+            for (int i = 0; i< s.getPlayers().size(); i++){
+
+                square = knowSquare(s.getPlayers().get(i));
+                nameSinglePlayer = namePlayer(s.getPlayers().get(i));
+                path = PLAYERSPATH + nameSinglePlayer + PNG;
+                loadImage(path,36,55, playerImage, 0);
+
+                for (int row=0; row<2; row++){
+
+                    for (int col=0; col<3; col++){
+
+                        square.add(playerImage, row, col);
+                    }
+                }
+            }
+        }
+    }
+
+    // END SINGLE SQUARE --------------------------------------------------------------------------------------------
 
     void addBackAmmoCardDeck() throws RemoteException{
 
