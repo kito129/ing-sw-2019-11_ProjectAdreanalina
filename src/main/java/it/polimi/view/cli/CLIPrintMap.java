@@ -44,14 +44,8 @@ public class CLIPrintMap implements Serializable {
             
                     //secondo me qui deve essere in or o comuqnue non tutte in and perchè andrai quasi sempre nell'if
                     if (s.getRow() == (row - 1) / 5 && row != 5 && row != 10 || s.getColumn() == (column - 1) / 6 && column != 6 && column != 12 && column != 18) {
-    
-                        //per colorare il generation square blu sopra
-                        if (row == 0 && column >= 13 && column <= 17) {
-    
-                            map[0][column] = ANSI_BLUE + "-" + ANSI_RESET;
-                        }
+
                         //BLU SQUARE
-                        else {
                             switch (s.getColor()) {
                                 case BLU:
                                     map[row][column] = ANSI_BLUE_BACKGROUND + " " + ANSI_BLACK_BACKGROUND;
@@ -80,7 +74,7 @@ public class CLIPrintMap implements Serializable {
                                     map[row][column] = ANSI_BLACK_BACKGROUND + " ";
                                     break;
                             }
-                        }
+
                     } else {
     
                         map[row][column] = ANSI_BLACK_BACKGROUND + " ";
