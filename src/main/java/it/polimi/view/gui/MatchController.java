@@ -715,6 +715,11 @@ public class MatchController {
         }
     }
 
+    void addAmmoImageOnSquare() throws RemoteException{
+
+        //TODO serve il nome
+    }
+
     // END SINGLE SQUARE --------------------------------------------------------------------------------------------
 
     void addBackAmmoCardDeck() throws RemoteException{
