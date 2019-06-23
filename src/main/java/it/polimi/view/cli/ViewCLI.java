@@ -72,7 +72,7 @@ public class ViewCLI implements RemoteView, Serializable {
         try {
             gameModel = gameController.getGameModel();
             String random = new String("ciao");
-            this.CLIPrintMap = new CLIPrintMap();
+            this.CLIPrintMap = new CLIPrintMap(gameModel);
             if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
 
                 do {
@@ -485,7 +485,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void CLIViewMap(){
 
-        CLIPrintMap.viewMap(gameModel.getMap());
+        CLIPrintMap.viewMapNew();
     }
     
     public void run() throws RemoteException {
