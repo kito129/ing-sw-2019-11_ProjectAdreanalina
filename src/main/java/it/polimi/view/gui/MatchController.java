@@ -1,6 +1,7 @@
 package it.polimi.view.gui;
 
 import it.polimi.model.*;
+import it.polimi.view.cli.Game;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -22,7 +23,7 @@ public class MatchController {
     private AnchorPane APtop, APbottom;
 
     @FXML
-    private GridPane gridActualplayerPlayerboard, InternalgridActualplayerPlayerboar;
+    private GridPane gridActualplayerPlayerboard, InternalgridActualplayerPlayerboar, gridPlayerboardPlayer2, gridPlayerboardPlayer3, gridPlayerboardPlayer4, gridPlayerboardPlayer5;
 
     @FXML
     private GridPane gridAmmo;
@@ -105,6 +106,36 @@ public class MatchController {
     // YOUR PLAYERBOARD ---------------------------------------------------------------------------------------------
 
     /**
+     * return the right string corresponding to the player's color
+     * @param damageAndMark a single damage/mark
+     * @throws RemoteException if the reference could not be accessed
+     */
+    String colorDamageMark(EnumColorPlayer damageAndMark) throws RemoteException{
+
+        String colorPlayer = "";
+
+        switch (damageAndMark) {
+
+            case BLU:
+                colorPlayer = "BLU";
+                break;
+            case GREEN:
+                colorPlayer = "GREEN";
+                break;
+            case GREY:
+                colorPlayer = "GREY";
+                break;
+            case PINK:
+                colorPlayer = "PINK";
+                break;
+            case YELLOW:
+                colorPlayer = "YELLOW";
+                break;
+        }
+        return colorPlayer;
+    }
+
+    /**
      * initializes the player's playerboard
      * @param player the player
      * @throws RemoteException if the reference could not be accessed
@@ -118,80 +149,53 @@ public class MatchController {
     }
 
     /**
-     * return the right string corresponding to the player's color
-     * @param damageAndMark arrayList of damage/mark
+     * update the marks in player's playerboard
+     * @param colorMark list of colors of the marks
      * @throws RemoteException if the reference could not be accessed
      */
-    void colorDamageMark(ArrayList<EnumColorPlayer> damageAndMark) throws RemoteException{
+    void refreshMark(ArrayList<EnumColorPlayer> colorMark) throws RemoteException{
 
-        String colorPlayer = "";
+        String colorM;
+        ImageView markImage = new ImageView();
 
-        for (EnumColorPlayer color : damageAndMark) {
+        for (int i = 0; i < colorMark.size(); i++) {
 
-            switch (color) {
+            EnumColorPlayer color = colorMark.get(i);
 
-                case BLU:
-                    colorPlayer = "BLU";
-                    break;
-                case GREEN:
-                    colorPlayer = "GREEN";
-                    break;
-                case GREY:
-                    colorPlayer = "GREY";
-                    break;
-                case PINK:
-                    colorPlayer = "PINK";
-                    break;
-                case YELLOW:
-                    colorPlayer = "YELLOW";
-                    break;
-            }
-            path = TEARSPATH + colorPlayer + PNG;
-        }
-    }
-
-    /**
-     * update the mark in player's playerboard
-     * @param player the player
-     * @throws RemoteException if the reference could not be accessed
-     */
-    void refreshMark(Player player) throws RemoteException{
-
-        int markIndex;
-
-        for (Node markImage : InternalgridActualplayerPlayerboar.getChildren()){
-
-            markIndex = GridPane.getColumnIndex(markImage);
-            colorDamageMark(player.getPlayerBoard().getMarks());
+            colorM = colorDamageMark(color);
+            path = TEARSPATH + colorM + PNG;
             loadImage(path, 25, 47, markImage, 0);
-            InternalgridActualplayerPlayerboar.add(markImage, 0, markIndex);
+            InternalgridActualplayerPlayerboar.add(markImage, i, 0); //node element, col, row
         }
     }
 
     /**
-     * update the damage in player's playerboard
-     * @param player the player
+     * update the damages in player's playerboard
+     * @param colorDamage list of colors of the damages
      * @throws RemoteException if the reference could not be accessed
      */
-    void refreshDamage(Player player) throws RemoteException{
+    void refreshDamage(ArrayList<EnumColorPlayer> colorDamage) throws RemoteException{
 
-        int damageIndex;
+        String colorD;
+        ImageView markDamage = new ImageView();
 
-        for (Node damageImage : InternalgridActualplayerPlayerboar.getChildren()){
+        for (int i = 0; i < colorDamage.size(); i++) {
 
-            damageIndex = GridPane.getColumnIndex(damageImage);
-            colorDamageMark(player.getPlayerBoard().getDamages());
-            loadImage(path, 25, 47, damageImage, 0);
-            InternalgridActualplayerPlayerboar.add(damageImage, 1, damageIndex);
+            EnumColorPlayer color = colorDamage.get(i);
+            colorD = colorDamageMark(color);
+            path = TEARSPATH + colorD + PNG;
+            loadImage(path,25,47, markDamage,0);
+            InternalgridActualplayerPlayerboar.add(markDamage, i,1); //node element, col, row
         }
     }
 
     /**
      * update the value in player's playerboard
      * @param player the player
+     * @param cont counter need to know if player has died 4 (cont=0) or 5 (cont=1) times and consequently set the right image (skull)
      * @throws RemoteException if the reference could not be accessed
      */
-    void refreshValue(Player player) throws RemoteException{
+    void refreshValue(Player player, int cont) throws RemoteException{
 
         ImageView valueImage = new ImageView();
         path = SKULLPATH + PNG;
@@ -219,15 +223,225 @@ public class MatchController {
             InternalgridActualplayerPlayerboar.add(valueImage, 2, 6);
         }
 
-        //TODO completare con && numero di morti == 5 e == 6
-        if (player.getPlayerBoard().getBoardValue()==1){
+        if (player.getPlayerBoard().getBoardValue()==1 && cont==0){
 
             loadImage(path, 25,47, valueImage, 0);
             InternalgridActualplayerPlayerboar.add(valueImage, 2, 7);
         }
+
+        if (player.getPlayerBoard().getBoardValue()==1 && cont==1){
+
+            loadImage(path, 25,47, valueImage, 0);
+            InternalgridActualplayerPlayerboar.add(valueImage, 2, 8);
+        }
     }
 
     // END YOUR PLAYERBOARD -----------------------------------------------------------------------------------------
+
+    // OTHERS PLAYERBOARD -------------------------------------------------------------------------------------------
+
+    /**
+     * initializes others players' playerboard
+     * @param gameModel the reference to the gamemodel
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void addOthersPlayerboardImage (GameModel gameModel){
+
+        ImageView OthersPlayerboardImage = new ImageView();
+
+        ArrayList<Player> players = gameModel.getPlayers(false);
+
+        for (int i = 0; i < players.size(); i++) {
+
+            Player p = players.get(i);
+
+            if(i==0){
+
+                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
+                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                gridOthersPlayerboard.add(OthersPlayerboardImage,0,0);
+            }
+            else if(i==1){
+
+                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
+                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                gridOthersPlayerboard.add(OthersPlayerboardImage,1,0);
+            }
+            else if(i==2){
+
+                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
+                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                gridOthersPlayerboard.add(OthersPlayerboardImage,0,1);
+            }
+            else if(i==3){
+
+                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
+                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                gridOthersPlayerboard.add(OthersPlayerboardImage,1,1);
+            }
+        }
+    }
+
+    /**
+     * update the marks in players' playerboard
+     * @param colorMark list of colors of the marks
+     * @param othersPlayer players in game except main player
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void refreshMarkOthersPlayer(ArrayList<EnumColorPlayer> colorMark, ArrayList<Player> othersPlayer) throws RemoteException{
+
+        GridPane otherPlayerboard = new GridPane();
+        String colorMarks;
+        ImageView markImage = new ImageView();
+
+        for (int i = 0; i < othersPlayer.size(); i++) {
+
+            if (i==0){
+
+                otherPlayerboard = gridPlayerboardPlayer2;
+            }
+
+            if (i==1){
+
+                otherPlayerboard = gridPlayerboardPlayer3;
+            }
+
+            if (i==2){
+
+                otherPlayerboard = gridPlayerboardPlayer3;
+            }
+
+            if (i==3){
+
+                otherPlayerboard = gridPlayerboardPlayer4;
+            }
+
+            for (int j = 0; j < colorMark.size(); j++) {
+
+                EnumColorPlayer color = colorMark.get(j);
+
+                colorMarks = colorDamageMark(color);
+                path = TEARSPATH + colorMarks + PNG;
+                loadImage(path, 21, 34, markImage, 0);
+                otherPlayerboard.add(markImage, j, 0); //node element, col, row
+            }
+        }
+    }
+
+    /**
+     * update the damages in players' playerboard
+     * @param colorDamage list of colors of the marks
+     * @param othersPlayer players in game except main player
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void refreshDamageOthersPlayer(ArrayList<EnumColorPlayer> colorDamage, ArrayList<Player> othersPlayer) throws RemoteException{
+
+        GridPane otherPlayerboard = new GridPane();
+        String colorDamages;
+        ImageView damageImage = new ImageView();
+
+        for (int i = 0; i < othersPlayer.size(); i++) {
+
+            if (i==0){
+
+                otherPlayerboard = gridPlayerboardPlayer2;
+            }
+
+            if (i==1){
+
+                otherPlayerboard = gridPlayerboardPlayer3;
+            }
+
+            if (i==2){
+
+                otherPlayerboard = gridPlayerboardPlayer3;
+            }
+
+            if (i==3){
+
+                otherPlayerboard = gridPlayerboardPlayer4;
+            }
+
+            for (int j = 0; j < colorDamage.size(); j++) {
+
+                EnumColorPlayer color = colorDamage.get(j);
+
+                colorDamages = colorDamageMark(color);
+                path = TEARSPATH + colorDamages + PNG;
+                loadImage(path, 21, 34, damageImage, 0);
+                otherPlayerboard.add(damageImage, j, 1); //node element, col, row
+            }
+        }
+    }
+
+    /**
+     * update the value in player's playerboard
+     * @param otherPlayer players in game except main player
+     * @param cont counter need to know if player has died 4 (cont=0) or 5 (cont=1) times and consequently set the right image (skull)
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void refreshOthersValue(ArrayList<Player> otherPlayer, int cont) throws RemoteException{
+
+        ImageView valueImage = new ImageView();
+        path = SKULLPATH + PNG;
+        GridPane otherPlayerboard = new GridPane();
+
+        for (int i = 0; i < otherPlayer.size(); i++){
+
+            Player player = otherPlayer.get(i);
+
+            if (i==0){
+
+                otherPlayerboard = gridPlayerboardPlayer2;
+            }else if (i==1){
+
+                otherPlayerboard = gridPlayerboardPlayer3;
+            }else if (i==2){
+
+                otherPlayerboard = gridPlayerboardPlayer3;
+            }else if (i==3){
+
+                otherPlayerboard = gridPlayerboardPlayer4;
+            }
+
+            if(player.getPlayerBoard().getBoardValue()==8){
+
+                valueImage.setImage(null);
+            }
+
+            if (player.getPlayerBoard().getBoardValue()==6){
+
+                loadImage(path, 21,34, valueImage, 0);
+                otherPlayerboard.add(valueImage, 2, 4);
+            }
+
+            if (player.getPlayerBoard().getBoardValue()==4){
+
+                loadImage(path, 21,34, valueImage, 0);
+                otherPlayerboard.add(valueImage, 2, 5);
+            }
+
+            if (player.getPlayerBoard().getBoardValue()==2){
+
+                loadImage(path, 21,34, valueImage, 0);
+                otherPlayerboard.add(valueImage, 2, 6);
+            }
+
+            if (player.getPlayerBoard().getBoardValue()==1 && cont==0){
+
+                loadImage(path, 21,34, valueImage, 0);
+                otherPlayerboard.add(valueImage, 2, 7);
+            }
+
+            if (player.getPlayerBoard().getBoardValue()==1 && cont==1){
+
+                loadImage(path, 21,34, valueImage, 0);
+                otherPlayerboard.add(valueImage, 2, 8);
+            }
+        }
+    }
+
+    // END OTHERS PLAYERBOARD ---------------------------------------------------------------------------------------
 
     // YOUR WEAPON --------------------------------------------------------------------------------------------------
 
@@ -720,11 +934,15 @@ public class MatchController {
 
     void addAmmoImageOnSquare() throws RemoteException{
 
-        //TODO serve il nome
+        //TODO serve il nome della ammoCard per creare il path e caricare l'immagine giusta
     }
 
     // END SINGLE SQUARE --------------------------------------------------------------------------------------------
 
+    /**
+     * add the back of the card on AmmoDeck
+     * @throws RemoteException if the reference could not be accessed
+     */
     void addBackAmmoCardDeck() throws RemoteException{
 
         path = "images/backAmmo.png";
@@ -733,6 +951,10 @@ public class MatchController {
         weaponR2.add(backAmmoCardImage, 1,2);
     }
 
+    /**
+     * add the back of the card on PowerUpDeck
+     * @throws RemoteException if the reference could not be accessed
+     */
     void addBackPowerUpDeck() throws RemoteException{
 
         path = "images/back_powerup.png";
@@ -741,6 +963,10 @@ public class MatchController {
         gridPowerupDeck.add(backPowerUpImage, 1,0);
     }
 
+    /**
+     * add the back of the card on WeaponDeck
+     * @throws RemoteException if the reference could not be accessed
+     */
     void addBackWeaponDeck() throws RemoteException{
 
         path = "images/back_weapon.png";
@@ -750,52 +976,6 @@ public class MatchController {
     }
 
     // END MAP ------------------------------------------------------------------------------------------------------
-
-    // OTHERS PLAYERBOARD -------------------------------------------------------------------------------------------
-
-    /**
-     * initializes others players' playerboard
-     * @param gameModel the reference to the gamemodel
-     * @throws RemoteException if the reference could not be accessed
-     */
-    void addOthersPlayerboardImage (GameModel gameModel){
-
-        ImageView OthersPlayerboardImage = new ImageView();
-
-        ArrayList<Player> players = gameModel.getPlayers(false);
-
-        for (int i = 0; i < players.size(); i++) {
-
-            Player p = players.get(i);
-
-            if(i==0){
-
-                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
-                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
-                gridOthersPlayerboard.add(OthersPlayerboardImage,0,0);
-            }
-            else if(i==1){
-
-                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
-                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
-                gridOthersPlayerboard.add(OthersPlayerboardImage,1,0);
-            }
-            else if(i==2){
-
-                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
-                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
-                gridOthersPlayerboard.add(OthersPlayerboardImage,0,1);
-            }
-            else if(i==3){
-
-                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
-                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
-                gridOthersPlayerboard.add(OthersPlayerboardImage,1,1);
-            }
-        }
-    }
-
-    // END OTHERS PLAYERBOARD ---------------------------------------------------------------------------------------
 
     /**
      * loads the ImageView or the AnchorPane's background images
