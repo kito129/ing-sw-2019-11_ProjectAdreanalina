@@ -22,7 +22,13 @@ public class MatchController {
     private AnchorPane APtop, APbottom;
 
     @FXML
-    private GridPane gridActualplayerPlayerboard, InternalgridActualplayerPlayerboar, gridAmmo;
+    private GridPane gridActualplayerPlayerboard, InternalgridActualplayerPlayerboar;
+
+    @FXML
+    private GridPane gridAmmo;
+
+    @FXML
+    private GridPane gridOthersPlayerboard;
 
     @FXML
     private GridPane esternalGridMap, internalGridMap;
@@ -103,14 +109,12 @@ public class MatchController {
      * @param player the player
      * @throws RemoteException if the reference could not be accessed
      */
-    void addYourPlayerboard(Player player){
+    void addYourPlayerboardImage(Player player){
 
-        for(Node YPimage : gridActualplayerPlayerboard.getChildren()){
-
-            path = PLAYERBOARDPATH + player.getColor().toString() + PNG;
-            loadImage(path,527,138, YPimage,0);
-            gridActualplayerPlayerboard.add(YPimage, 0, 0); //node, column, row
-        }
+        ImageView YourPlayerboardImage = new ImageView();
+        path = PLAYERBOARDPATH + player.getColor().toString() + PNG;
+        loadImage(path,527,138, YourPlayerboardImage,0);
+        gridActualplayerPlayerboard.add(YourPlayerboardImage, 0, 0); //node, column, row
     }
 
     /**
@@ -122,9 +126,9 @@ public class MatchController {
 
         String colorPlayer = "";
 
-        for (EnumColorPlayer e : damageAndMark) {
+        for (EnumColorPlayer color : damageAndMark) {
 
-            switch (e) {
+            switch (color) {
 
                 case BLU:
                     colorPlayer = "BLU";
@@ -142,7 +146,6 @@ public class MatchController {
                     colorPlayer = "YELLOW";
                     break;
             }
-
             path = TEARSPATH + colorPlayer + PNG;
         }
     }
@@ -715,6 +718,11 @@ public class MatchController {
         }
     }
 
+    void addAmmoImageOnSquare() throws RemoteException{
+
+        //TODO serve il nome
+    }
+
     // END SINGLE SQUARE --------------------------------------------------------------------------------------------
 
     void addBackAmmoCardDeck() throws RemoteException{
@@ -742,6 +750,52 @@ public class MatchController {
     }
 
     // END MAP ------------------------------------------------------------------------------------------------------
+
+    // OTHERS PLAYERBOARD -------------------------------------------------------------------------------------------
+
+    /**
+     * initializes others players' playerboard
+     * @param gameModel the reference to the gamemodel
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void addOthersPlayerboardImage (GameModel gameModel){
+
+        ImageView OthersPlayerboardImage = new ImageView();
+
+        ArrayList<Player> players = gameModel.getPlayers(false);
+
+        for (int i = 0; i < players.size(); i++) {
+
+            Player p = players.get(i);
+
+            if(i==0){
+
+                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
+                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                gridOthersPlayerboard.add(OthersPlayerboardImage,0,0);
+            }
+            else if(i==1){
+
+                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
+                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                gridOthersPlayerboard.add(OthersPlayerboardImage,1,0);
+            }
+            else if(i==2){
+
+                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
+                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                gridOthersPlayerboard.add(OthersPlayerboardImage,0,1);
+            }
+            else if(i==3){
+
+                path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
+                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                gridOthersPlayerboard.add(OthersPlayerboardImage,1,1);
+            }
+        }
+    }
+
+    // END OTHERS PLAYERBOARD ---------------------------------------------------------------------------------------
 
     /**
      * loads the ImageView or the AnchorPane's background images

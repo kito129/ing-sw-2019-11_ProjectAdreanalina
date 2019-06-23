@@ -692,10 +692,10 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ImageView fx:id="playerboardPlayer2" fitHeight="99.0" fitWidth="384.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                              <ImageView fx:id="playerboardPlayer4" fitHeight="100.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                              <ImageView fx:id="playerboardPlayer3" fitHeight="99.0" fitWidth="373.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                              <ImageView fx:id="playerboardPlayer5" fitHeight="94.0" fitWidth="372.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ImageView fx:id="playerboardPlayer2" fitHeight="100.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                              <ImageView fx:id="playerboardPlayer4" fitHeight="100.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                              <ImageView fx:id="playerboardPlayer3" fitHeight="100.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                              <ImageView fx:id="playerboardPlayer5" fitHeight="100.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <GridPane fx:id="gridPlayerboardPlayer2" prefHeight="41.0" prefWidth="377.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                 <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
