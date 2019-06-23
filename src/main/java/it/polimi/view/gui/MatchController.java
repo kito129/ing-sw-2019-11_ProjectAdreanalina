@@ -453,14 +453,15 @@ public class MatchController {
     void refreshYourWeapon(ArrayList<WeaponCard> weaponCards) throws RemoteException{
 
         String nameWeapon;
-
+        String nameWeaponNoSpace;
 
         for (int i = 0; i < weaponCards.size(); i++) {
 
             WeaponCard w = weaponCards.get(i);
 
             nameWeapon = w.getNameWeaponCard();
-            path = WEAPONPATH + nameWeapon + PNG;
+            nameWeaponNoSpace = nameWeapon.replaceAll("\\s+",""); //return string without space
+            path = WEAPONPATH + nameWeaponNoSpace + PNG;
             Image weapon = new Image(path);
 
             if(i==0){
@@ -513,6 +514,7 @@ public class MatchController {
     void refreshYourPowerUp(ArrayList<PowerUpCard> powerUpCards) throws RemoteException{
 
         String namePowerUp;
+        String namePowerUpNoSpace;
         String color;
 
         for (int i = 0; i < powerUpCards.size(); i++) {
@@ -520,22 +522,24 @@ public class MatchController {
             PowerUpCard p = powerUpCards.get(i);
 
             namePowerUp = p.getNameCard();
+            namePowerUpNoSpace = namePowerUp.replaceAll("\\s+",""); //return string without space
             color = p.getColorPowerUpCard().toString();
-            path = WEAPONPATH + namePowerUp + "_" + color + PNG;
+            path = POWERUPPATH + namePowerUpNoSpace + "_" + color + PNG;
+            Image powerup = new Image(path);
 
             if(i==0){
 
-                loadImage(path,68,114, powerUp1,0);
+                powerUp1.setImage(powerup);
             }
 
             if(i==1){
 
-                loadImage(path,68,114, powerUp2,0);
+                powerUp2.setImage(powerup);
             }
 
             if(i==2){
 
-                loadImage(path,68,114, powerUp3,0);
+                powerUp3.setImage(powerup);
             }
         }
     }
@@ -620,15 +624,144 @@ public class MatchController {
 
     // MAP ----------------------------------------------------------------------------------------------------------
 
+    /**
+     * add map image
+     * @param gameModel the reference of gamemodel
+     * @throws RemoteException if the reference could not be accessed
+     */
     void addMapImage(GameModel gameModel) throws RemoteException{
 
-        //TODO serve il nome della mappa
+        String name;
+        ImageView mapImage = new ImageView();
+
+        name = gameModel.getMap().getName();
+        path = MAPSPATH + name + PNG;
+        loadImage(path,636,509, mapImage,0);
+        esternalGridMap.add(mapImage,0,0);
     }
 
-    void refreshKillshotTrackPoint(GameModel gameModel, ArrayList<KillShotTrackPoint> killShotTrackPoints) throws RemoteException{
+    // KILL SHOT TRACK ----------------------------------------------------------------------------------------------
 
-        //TODO
+    /**
+     * add red skull image on kill shot track
+     * @param gameModel the reference of gamemodel
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void addSkullKillShotTrack(GameModel gameModel) throws RemoteException{
+
+
+        ImageView skullImage = new ImageView();
+        path = SKULLPATH + PNG;
+        for (int i = gameModel.getKillShotTrack().skullNumber(); i > 0; i--){
+
+            if(i==gameModel.getKillShotTrack().skullNumber()){                  //i=8 (al massimo, poi gli altri di conseguenza)
+
+                loadImage(path,27,37, skullImage,0);
+                gridSkull3.add(skullImage,1,0);
+            }else if(i==gameModel.getKillShotTrack().skullNumber()-1){
+
+                loadImage(path,27,37, skullImage,0);
+                gridSkull3.add(skullImage,0,0);
+            }else if(i==gameModel.getKillShotTrack().skullNumber()-2){
+
+                loadImage(path,27,37, skullImage,0);
+                gridSkull2.add(skullImage,3,0);
+            }
+            else if(i==gameModel.getKillShotTrack().skullNumber()-3){
+
+                loadImage(path,27,37, skullImage,0);
+                gridSkull2.add(skullImage,2,0);
+            }
+            else if(i==gameModel.getKillShotTrack().skullNumber()-4){
+
+                loadImage(path,27,37, skullImage,0);
+                gridSkull2.add(skullImage,1,0);
+            }else if(i==gameModel.getKillShotTrack().skullNumber()-5){
+
+                loadImage(path,27,37, skullImage,0);
+                gridSkull2.add(skullImage,0,0);
+            }else if(i==gameModel.getKillShotTrack().skullNumber()-5){
+
+                loadImage(path,27,37, skullImage,0);
+                gridSkull1.add(skullImage,3,0);
+            }else if(i==gameModel.getKillShotTrack().skullNumber()-5){
+
+                loadImage(path,27,37, skullImage,0);
+                gridSkull1.add(skullImage,2,0);
+            }
+        }
     }
+
+    /**
+     * refresh kill shot track
+     * @param killShotTrackPoints list of kill shot track point on kill shot track
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void refreshMarkKillShotTrack(ArrayList<KillShotTrackPoint> killShotTrackPoints) throws RemoteException{
+
+        String colorMark;
+        int position;
+
+        for (int i = 0; i < killShotTrackPoints.size(); i++) {
+
+            KillShotTrackPoint k = killShotTrackPoints.get(i);
+
+            if (!k.isSkull()) {
+
+                position = killShotTrackPoints.size() - i;
+                colorMark = k.getMark1().toString();
+                path = TEARSPATH + colorMark + PNG;
+                addMarkKillShotTrack(path, position);
+            }
+        }
+    }
+
+    /**
+     * add right mark image on kill shot track
+     * @param path the string for upload the right image
+     * @param position the position where add the image
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void addMarkKillShotTrack(String path, int position) throws RemoteException{
+
+        ImageView markImage = new ImageView();
+
+        if(position==8){
+
+            loadImage(path,27,37, markImage,0);
+            gridSkull1.add(markImage,2,0);
+        }else if(position==7){
+
+            loadImage(path,27,37, markImage,0);
+            gridSkull1.add(markImage,3,0);
+        }else if(position==6){
+
+            loadImage(path,27,37, markImage,0);
+            gridSkull2.add(markImage,0,0);
+        }else if(position==5){
+
+            loadImage(path,27,37, markImage,0);
+            gridSkull2.add(markImage,1,0);
+        }else if(position==4){
+
+            loadImage(path,27,37, markImage,0);
+            gridSkull2.add(markImage,2,0);
+        }else if(position==3){
+
+            loadImage(path,27,37, markImage,0);
+            gridSkull2.add(markImage,3,0);
+        }else if(position==2){
+
+            loadImage(path,27,37, markImage,0);
+            gridSkull3.add(markImage,0,0);
+        }else if(position==1){
+
+            loadImage(path,27,37, markImage,0);
+            gridSkull3.add(markImage,1,0);
+        }
+    }
+
+    // END KILL SHOT TRACK ------------------------------------------------------------------------------------------
 
     /**
      * update the weapons on generation square blu
@@ -638,6 +771,7 @@ public class MatchController {
     void refreshWeaponGenerationBlue(GenerationSquare generationSquare) throws RemoteException{
 
         String nameWeapon;
+        String nameWeaponNoSpace;
         ImageView weaponImage = new ImageView();
         ArrayList<WeaponCard> weaponList = generationSquare.getWeaponList();
 
@@ -646,12 +780,19 @@ public class MatchController {
             WeaponCard w = weaponList.get(i);
 
             nameWeapon = w.getNameWeaponCard();
-            path = WEAPONPATH + nameWeapon + PNG;
+            nameWeaponNoSpace = nameWeapon.replaceAll("\\s+",""); //return string without space
+            path = WEAPONPATH + nameWeaponNoSpace + PNG;
 
-            if(i<2){
+            if(i==0){
 
                 loadImage(path,60,102, weaponImage, 0);
-                weaponB1.add(weaponImage,i+1,0);
+                weaponB1.add(weaponImage,0,0);
+            }
+
+            if(i==1){
+
+                loadImage(path,60,102, weaponImage, 0);
+                weaponB1.add(weaponImage,1,0);
             }
 
             if(i==2){
@@ -670,6 +811,7 @@ public class MatchController {
     void refreshWeaponGenerationYellow(GenerationSquare generationSquare) throws RemoteException{
 
         String nameWeapon;
+        String nameWeaponNoSpace;
         ImageView weaponImage = new ImageView();
         ArrayList<WeaponCard> weaponList = generationSquare.getWeaponList();
 
@@ -678,7 +820,8 @@ public class MatchController {
             WeaponCard w = weaponList.get(i);
 
             nameWeapon = w.getNameWeaponCard();
-            path = WEAPONPATH + nameWeapon + PNG;
+            nameWeaponNoSpace = nameWeapon.replaceAll("\\s+",""); //return string without space
+            path = WEAPONPATH + nameWeaponNoSpace + PNG;
 
             if(i==0){
 
@@ -708,6 +851,7 @@ public class MatchController {
     void refreshWeaponGenerationRed(GenerationSquare generationSquare) throws RemoteException{
 
         String nameWeapon;
+        String nameWeaponNoSpace;
         ImageView weaponImage = new ImageView();
         ArrayList<WeaponCard> weaponList = generationSquare.getWeaponList();
 
@@ -716,7 +860,8 @@ public class MatchController {
             WeaponCard w = weaponList.get(i);
 
             nameWeapon = w.getNameWeaponCard();
-            path = WEAPONPATH + nameWeapon + PNG;
+            nameWeaponNoSpace = nameWeapon.replaceAll("\\s+",""); //return string without space
+            path = WEAPONPATH + nameWeaponNoSpace + PNG;
 
             if(i==0){
 

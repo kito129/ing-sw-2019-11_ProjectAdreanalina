@@ -15,7 +15,17 @@ public class Map implements Serializable {
     
     private ArrayList<Square> squares;
     private String name;
-    
+
+    public String getName() {
+
+        return this.name;
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+    }
+
     /**
      * Instantiates a new Map.
      *
