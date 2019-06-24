@@ -1,5 +1,6 @@
 package it.polimi.model;
 
+import it.polimi.controller.FunctionController;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
 
@@ -17,7 +18,9 @@ public class GameModel implements Serializable {
     
     //observable pattern
     private ArrayList<RemoteView> remoteViews = new ArrayList<>();
+    //objet for game model
     private State state;
+    private State beforeError;
     private Map map;
     private Player actualPlayer;
     private KillShotTrack killShotTrack;
@@ -25,11 +28,21 @@ public class GameModel implements Serializable {
     private AmmoDeck ammoDeck;
     private PowerUpDeck powerUpDeck;
     private WeaponDeck weaponDeck;
-    private ArrayList<EnumColorPlayer> gameColor = new ArrayList<>(5);
+    //color for new player
+    private ArrayList<EnumColorPlayer> gameColor;
     //weapon necessary
+    private WeaponCard weaponSelected; //current weapon for current Player
     private WeaponState weaponState;
-    private WeaponsEffect weaponsEffect;
+    private WeaponsEffect actualWeaponEffect;
     public ArrayList<WeaponsEffect> availableEffect;
+    private String weaponName;
+    private WeaponsEffect beforeEffect;
+    private ArrayList<Player> playerDamaged;
+    private int playerDamagedIndex;
+    //powerup
+    private PowerUpCard powerUpSelected; //current weapon effect for current Player
+    //controller
+    private FunctionController functionController;
     //message
     private String errorMessage;
     private String messageToCurrentView;
@@ -40,12 +53,16 @@ public class GameModel implements Serializable {
         state=State.LOBBY;
         //create object of the gam
         this.killShotTrack= new KillShotTrack();
+        this.players=new ArrayList<>();
         this.ammoDeck = new AmmoDeck();
         this.powerUpDeck=new PowerUpDeck();
         this.weaponDeck=new WeaponDeck();
-        players=new ArrayList<>();
-        //create map and poulate list of color for the player
-        this.map = new Map(MapCreator.createA(),"mapp a");
+        this.gameColor = new ArrayList<>(5);
+        this.availableEffect= new ArrayList<>();
+        this.playerDamaged = new ArrayList<>();
+        //create map
+        this.map = new Map(MapCreator.createA(),"MAPA");
+        //populate list of color for the player
         populateColor();
         
     }
@@ -68,8 +85,75 @@ public class GameModel implements Serializable {
         this.gameColor.add(EnumColorPlayer.YELLOW);
     }
     
-
+    public int getPlayerDamagedIndex () {
+        
+        return playerDamagedIndex;
+    }
     
+    public void setPlayerDamagedIndex (int playerDamagedIndex) {
+        
+        this.playerDamagedIndex = playerDamagedIndex;
+    }
+    
+    public ArrayList<Player> getPlayerDamaged () {
+        
+        return playerDamaged;
+    }
+    
+    public void setPlayerDamaged (ArrayList<Player> playerDamaged) {
+        
+        this.playerDamaged = playerDamaged;
+    }
+    
+    public State getBeforeError () {
+        
+        return beforeError;
+    }
+    
+    public void setBeforeError (State beforeError) {
+        
+        this.beforeError = beforeError;
+    }
+    
+    public WeaponCard getWeaponSelected () {
+        
+        return weaponSelected;
+    }
+    
+    public PowerUpCard getPowerUpSelected () {
+        
+        return powerUpSelected;
+    }
+    
+    public String getWeaponName () {
+        
+        return weaponName;
+    }
+    
+    public void setWeaponName (String weaponName) {
+        
+        this.weaponName = weaponName;
+    }
+    
+    public WeaponsEffect getBeforeEffect () {
+        
+        return beforeEffect;
+    }
+    
+    public void setPowerUpSelected (PowerUpCard powerUpSelected) {
+        
+        this.powerUpSelected = powerUpSelected;
+    }
+    
+    public void setWeaponSelected (WeaponCard weaponSelected) {
+        
+        this.weaponSelected = weaponSelected;
+    }
+    
+    public void setBeforeEffect (WeaponsEffect beforeEffect) {
+        
+        this.beforeEffect = beforeEffect;
+    }
     
     /**
      * Gets actual player.
@@ -206,9 +290,9 @@ public class GameModel implements Serializable {
         return weaponState;
     }
     
-    public WeaponsEffect getWeaponsEffect () {
+    public WeaponsEffect getActualWeaponEffect () {
         
-        return weaponsEffect;
+        return actualWeaponEffect;
     }
     
     public void setErrorMessage(String errorMessage) {
@@ -252,9 +336,9 @@ public class GameModel implements Serializable {
         this.weaponState = weaponState;
     }
     
-    public void setWeaponsEffect (WeaponsEffect weaponsEffect) {
+    public void setActualWeaponEffect (WeaponsEffect actualWeaponEffect) {
         
-        this.weaponsEffect = weaponsEffect;
+        this.actualWeaponEffect = actualWeaponEffect;
     }
     
     public ArrayList<EnumColorPlayer> getPlayerColor(){

@@ -21,9 +21,6 @@ public class CLIPrintMap implements Serializable {
     public  final String ANSI_BLACK = "\u001B[30m";
     public  final String ANSI_RESET = "\u001b[0m";
     public ArrayList<ArrayList<ArrayList<ArrayList<String>>>> map;
-    String [][] toStamp;
-    
-    
     GameModel gameModel;
     
     
@@ -31,7 +28,6 @@ public class CLIPrintMap implements Serializable {
 
         this.gameModel = gameModel;
         this.map = new ArrayList<ArrayList<ArrayList<ArrayList<String>>>>();
-        toStamp = new String[44][33];
 
     }
     
@@ -142,21 +138,23 @@ public class CLIPrintMap implements Serializable {
         
             temp2.addAll(arrayLists);
         }
-        max=44;
+       int limit =44;
         for (int j=0;j<11;j++) {
-            for (int c=j;c<44+(j*2);c=c+10){
+            for (int c=j;c<limit;c=c+11){
                 
                 temp3.addAll(temp2.get(c));
                 
                 
             }
+            limit=limit+2;
         }
         
         System.out.println();
         
         for (int fin =0;fin<temp3.size();fin++){
-            if (fin%176==0){
+            if (fin%44==0){
                 System.out.println();
+                System.out.print(temp3.get(fin));
             } else {
                 System.out.print(temp3.get(fin));
             }

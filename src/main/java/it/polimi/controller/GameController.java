@@ -11,9 +11,6 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     private FunctionModel functionModel;
     private GameModel gameModel;
     private boolean gameStarted;
-    private State state;
-    private State beforeError;
-
 
     public GameController() throws RemoteException {
 

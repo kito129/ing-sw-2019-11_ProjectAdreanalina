@@ -63,7 +63,7 @@ public class ViewWeapon {
         switch (gameModel.getWeaponState()){
             case LockRifle:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -78,7 +78,7 @@ public class ViewWeapon {
             
             case Electroscythe:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -93,7 +93,7 @@ public class ViewWeapon {
             
             case MachineGun:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -112,7 +112,7 @@ public class ViewWeapon {
             
             case TractorBeam:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -127,7 +127,7 @@ public class ViewWeapon {
             
             case Thor:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -146,7 +146,7 @@ public class ViewWeapon {
             
             case VortexCannon:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -161,7 +161,7 @@ public class ViewWeapon {
             
             case Furnace:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -176,7 +176,7 @@ public class ViewWeapon {
             
             case PlasmaGun:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -208,7 +208,7 @@ public class ViewWeapon {
             
             case Hellion:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -223,7 +223,7 @@ public class ViewWeapon {
             
             case Flamethrower:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -238,7 +238,7 @@ public class ViewWeapon {
             
             case Zx2:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -253,7 +253,7 @@ public class ViewWeapon {
             
             case GrenadeLauncher:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -268,7 +268,7 @@ public class ViewWeapon {
             
             case Shotgun:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -282,7 +282,7 @@ public class ViewWeapon {
             
             case RocketLauncher:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -300,7 +300,7 @@ public class ViewWeapon {
             
             case PowerGlove:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -315,7 +315,7 @@ public class ViewWeapon {
             
             case Railgun:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -330,7 +330,7 @@ public class ViewWeapon {
             
             case Shockwave:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -344,7 +344,7 @@ public class ViewWeapon {
             
             case Cyberblade:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -362,7 +362,7 @@ public class ViewWeapon {
             
             case Sledgehammer:
                 
-                switch(gameModel.getWeaponsEffect()){
+                switch(gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         

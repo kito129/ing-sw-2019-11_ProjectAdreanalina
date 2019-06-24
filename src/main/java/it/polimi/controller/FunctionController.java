@@ -8,32 +8,20 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
-import it.polimi.model.Weapon.*;
 import it.polimi.view.RemoteView;
-
 import java.rmi.RemoteException;
-import java.time.chrono.HijrahEra;
 import java.util.ArrayList;
 
 
 public class FunctionController {
     
-    private State beforeError;
-    WeaponCard weaponSelected; //current weapon for current Player
-    PowerUpCard powerUpSelected; //current weapon effect for current Player
-    String weaponName;
-    WeaponsEffect beforeEffect;
-    int playerDamage;
-    Player playerDameged;
-    ArrayList<State> actionCurrentCompleted = new ArrayList<>();
     WeaponController weaponController;
     
-    public void FunctionController(){
+    public FunctionController(){
         
-        weaponController = new WeaponController();
+        weaponController = new WeaponController(this);
         
     }
-    
     
     public void lobby(FunctionModel functionModel){
     
@@ -104,7 +92,7 @@ public class FunctionController {
                     } else {
                         
                         functionModel.getGameModel().setMessageToCurrentView("YOU HAVE NOT WEAPON TO SHOOT");
-                        beforeError= functionModel.getGameModel().getState();
+                        functionModel.getGameModel().setBeforeError(functionModel.getGameModel().getState());
                         functionModel.getGameModel().setState(State.ERROR);
                         
                     }
@@ -117,7 +105,7 @@ public class FunctionController {
                     } else {
         
                         functionModel.getGameModel().setMessageToCurrentView("YOU HAVE NOT POWER UP TO USE");
-                        beforeError= functionModel.getGameModel().getState();
+                        functionModel.getGameModel().setBeforeError(functionModel.getGameModel().getState());
                         functionModel.getGameModel().setState(State.ERROR);
                 
                     }
@@ -135,7 +123,7 @@ public class FunctionController {
         
         System.out.println("ERROR STATE-->\nRESTART IN STATE CHOICE-->");
         
-        switch (beforeError){
+        switch (functionModel.getGameModel().getBeforeError()){
             case SELECTWEAPON:
                 functionModel.getGameModel().setState(State.CHOSEACTION);
             case SELECTPOWERUP:
@@ -178,14 +166,14 @@ public class FunctionController {
     public void setErrorState(FunctionModel functionModel, String string){
         
         functionModel.getGameModel().setErrorMessage(string);
-        this.beforeError = functionModel.getGameModel().getState();
+        functionModel.getGameModel().setBeforeError(functionModel.getGameModel().getState());
         functionModel.getGameModel().setState(State.ERROR);
     }
     
     public void mapErrorGestor(FunctionModel functionModel) throws RemoteException {
         
         functionModel.getGameModel().setMessageToCurrentView("YOUR INPUT IS NOT CORRECT");
-        this.beforeError = functionModel.getGameModel().getState();
+        functionModel.getGameModel().setBeforeError(functionModel.getGameModel().getState());
         functionModel.getGameModel().setState(State.ERROR);
     }
     
@@ -215,7 +203,7 @@ public class FunctionController {
         } catch (RunActionMaxDistLimitException e) {
             
             functionModel.getGameModel().setMessageToCurrentView("YOUR MOVE EXCED MAX DISTANCE LIMIT");
-            this.beforeError= functionModel.getGameModel().getState();
+            functionModel.getGameModel().setBeforeError(functionModel.getGameModel().getState());
             functionModel.getGameModel().setState(State.ERROR);
         }
         
@@ -261,13 +249,13 @@ public class FunctionController {
                 } catch(GrabActionMaxDistLimitException catchActionMaxDistExpetion){
     
                     functionModel.getGameModel().setMessageToCurrentView("YOUR MOVE FOR GRAB EXCED MAX DISTANCE LIMIT");
-                    this.beforeError = functionModel.getGameModel().getState();
+                    functionModel.getGameModel().setBeforeError(functionModel.getGameModel().getState());
                     functionModel.getGameModel().setState(State.ERROR);
     
                 } catch(GrabActionFullObjException e){
     
                     functionModel.getGameModel().setMessageToCurrentView("YOU DON'T HAVE MORE SPACE FOR GRAB OBJECT");
-                    this.beforeError = functionModel.getGameModel().getState();
+                    functionModel.getGameModel().setBeforeError(functionModel.getGameModel().getState());
                     functionModel.getGameModel().setState(State.ERROR);
                 } catch(MapException e){
     
@@ -305,12 +293,12 @@ public class FunctionController {
             
             if(!powerUpCard.getNameCard().equals("TAGBACK GRENADE")) {
                 
-                powerUpSelected = powerUpCard;
+                functionModel.getGameModel().setPowerUpSelected(powerUpCard);
                 functionModel.getGameModel().setState(State.SELECTPOWERUPINPUT);
             } else {
                 
                 functionModel.getGameModel().setMessageToCurrentView("YOU CAN'T USE TAGBACK GRENADE IN YOUR TURN");
-                this.beforeError = functionModel.getGameModel().getState();
+                functionModel.getGameModel().setBeforeError(functionModel.getGameModel().getState());
                 functionModel.getGameModel().setState(State.ERROR);
             }
         } else {
@@ -323,7 +311,7 @@ public class FunctionController {
     public void usePowerUpController(FunctionModel functionModel, RemoteView view) throws RemoteException{
 
         //NEWTON
-        if (Newton.class.equals(powerUpSelected.getClass())) {
+        if (Newton.class.equals(functionModel.getGameModel().getPowerUpSelected().getClass())) {
             Player targetPlayer;
             Square targetSquare;
             
@@ -332,7 +320,7 @@ public class FunctionController {
                 targetPlayer = functionModel.getGameModel().getPlayerById(view.getTarget1());
                 targetSquare = functionModel.getGameModel().getMap().getSquare(view.getRow(), view.getColumn());
                 //effect
-                    functionModel.usePowerUpNewton((Newton)powerUpSelected,targetPlayer, targetSquare);
+                    functionModel.usePowerUpNewton((Newton)functionModel.getGameModel().getPowerUpSelected(),targetPlayer, targetSquare);
             } catch (NotInSameDirection notInSameDirection) {
 
 
@@ -343,7 +331,7 @@ public class FunctionController {
     
             }
             //TAGBACK GRANATE
-        } else if (powerUpSelected.getClass().equals(TagBackGrenade.class)) {
+        } else if (functionModel.getGameModel().getPowerUpSelected().getClass().equals(TagBackGrenade.class)) {
     
             Player targetPlayer;
             try {
@@ -351,7 +339,7 @@ public class FunctionController {
                 //get input
                 targetPlayer = functionModel.getGameModel().getPlayerById(view.getTarget1());
                 //effect
-                functionModel.usePowerUpTagBackGrenade((TagBackGrenade) powerUpSelected, targetPlayer);
+                functionModel.usePowerUpTagBackGrenade((TagBackGrenade) functionModel.getGameModel().getPowerUpSelected(), targetPlayer);
             } catch (NotVisibleTarget notVisibleTarget) {
 
             } catch (MapException e) {
@@ -360,7 +348,7 @@ public class FunctionController {
     
     
             //TELEPORTER
-        } else if (powerUpSelected.getClass().equals(Teleporter.class)) {
+        } else if (functionModel.getGameModel().getPowerUpSelected().getClass().equals(Teleporter.class)) {
     
             Square targetSquare;
             try {
@@ -368,13 +356,13 @@ public class FunctionController {
                 //get input
                 targetSquare = functionModel.getGameModel().getMap().getSquare(view.getRow(), view.getColumn());
                 //effect
-                functionModel.usePowerUpTeleporter((Teleporter) powerUpSelected, targetSquare);
+                functionModel.usePowerUpTeleporter((Teleporter) functionModel.getGameModel().getPowerUpSelected(), targetSquare);
             }catch (MapException e) {
                 e.printStackTrace();
             }
     
             //TARGETING SCOPE
-        } else if (powerUpSelected.getClass().equals(TargetingScope.class)) {
+        } else if (functionModel.getGameModel().getPowerUpSelected().getClass().equals(TargetingScope.class)) {
     
             Player targetPlayer;
             
@@ -383,7 +371,7 @@ public class FunctionController {
                 //get input
                 targetPlayer = functionModel.getGameModel().getPlayerById(view.getTarget1());
                 //effect
-                functionModel.usePowerUpTargetingScope((TargetingScope) powerUpSelected, targetPlayer);
+                functionModel.usePowerUpTargetingScope((TargetingScope) functionModel.getGameModel().getPowerUpSelected(), targetPlayer);
             } catch (MapException e) {
             
             }
