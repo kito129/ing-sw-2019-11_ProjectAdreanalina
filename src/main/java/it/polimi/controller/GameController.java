@@ -15,8 +15,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     public GameController() throws RemoteException {
 
         gameModel = new GameModel();
-        functionController = new FunctionController();
         functionModel = new FunctionModel(gameModel);
+        functionController = new FunctionController(functionModel);
 
     }
 
@@ -71,39 +71,39 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
 
             switch (gameModel.getState()) {
                 case LOBBY:
-                    functionController.lobby(functionModel);
+                    functionController.lobby();
                     break;
                 case SPAWNPLAYER:
-                    functionController.respawnPlayerController(functionModel, view);
+                    functionController.respawnPlayerController(view);
                     break;
                 case STARTTURN:
-                    functionController.startTurn(functionModel, view);
+                    functionController.startTurn();
                     break;
                 case CHOSEACTION:
-                    functionController.choseAction(functionModel, view);
+                    functionController.choseAction(view);
                     break;
                 case SELECTPOWERUP:
-                    functionController.selectPowerUp(functionModel, view);
+                    functionController.selectPowerUp(view);
                     break;
                 case USEPOWERUP:
-                    functionController.usePowerUpController(functionModel, view);
+                    functionController.usePowerUpController(view);
                     break;
                 case SELECTRUN:
-                    functionController.runActionController(functionModel, view);
+                    functionController.runActionController(view);
                     break;
                 case RUN:
-                    functionController.run(functionModel);
+                    functionController.run();
                     break;
                 case SELECTGRAB:
-                    functionController.grabActionController(functionModel, view);
+                    functionController.grabActionController(view);
                 case GRAB:
-                    functionController.grab(functionModel);
+                    functionController.grab();
                 case SELECTWEAPON:
-                    functionController.weaponController.selectWeapon(functionModel, view);
+                    functionController.weaponController.selectWeapon(view);
                 case SELECTEFFECT:
-                    functionController.weaponController.selectWeaponEffect(functionModel, view);
+                    functionController.weaponController.selectWeaponEffect(view);
                 case SELECTSHOOTINPUT:
-                    functionController.weaponController.selectShootInput(functionModel,view);
+                    functionController.weaponController.selectShootInput(view);
                 case SHOOT:
                     functionModel.getGameModel().setState(State.CHOSEACTION);
                 case ENDACTION:
@@ -139,12 +139,12 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     //PRIMA INCASSO PLANCE DI TUTTI POI RIANIMO TUTTI
 
                     // fase incasso plancie
-                    functionController.scoringPlayerBoardController(functionModel);
+                    functionController.scoringPlayerBoardController();
                     break;
                 case RESPWANPLAYER:
                     //fase di rianimazione
                     //creazione del player è temporanea
-                    functionController.respawnPlayerController(functionModel, view);
+                    functionController.respawnPlayerController( view);
                     break;
                 case ENDTURN:
                     break;
@@ -153,7 +153,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case CHECKILLSHOOT:
                     break;
                 case ERROR:
-                    functionController.errorState(functionModel);
+                    functionController.errorState();
             }
         }
     }

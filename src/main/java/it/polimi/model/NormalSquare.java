@@ -24,6 +24,15 @@ public class NormalSquare extends Square implements Serializable {
 
     }
     
+    public boolean containAmmoCard(){
+        
+        if (ammoCard==null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     /**
      * Get ammo card ammo card.
      *
@@ -56,6 +65,4 @@ public class NormalSquare extends Square implements Serializable {
         return temp;
         
     }
-
-
 }

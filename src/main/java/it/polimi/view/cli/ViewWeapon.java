@@ -10,12 +10,10 @@ import java.util.Scanner;
 
 public class ViewWeapon {
     
-    GameModel gameModel;
     ViewCLI viewCLI;
     
-    public void ViewWeapon(ViewCLI viewCLI){
+    public ViewWeapon(ViewCLI viewCLI){
         
-        this.gameModel = viewCLI.gameModel;
         this.viewCLI = viewCLI;
         
     }
@@ -24,7 +22,7 @@ public class ViewWeapon {
     
     public void viewSelectWeapon() throws RemoteException {
         
-        ArrayList<WeaponCard> weapons = gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
+        ArrayList<WeaponCard> weapons = viewCLI.gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
         PrintEffectWeapon.printSelectWeapon();
         PrintWeapon.printName(weapons);
         
@@ -36,7 +34,7 @@ public class ViewWeapon {
     public void viewSelectWeaponEffect() throws RemoteException {
         
         
-        ArrayList<WeaponsEffect> weaponEffects = gameModel.getAvailableEffect();
+        ArrayList<WeaponsEffect> weaponEffects = viewCLI.gameModel.getAvailableEffect();
         
         PrintEffectWeapon.printSelectWeaponEffect();
         PrintWeapon.printEffectName(weaponEffects);
@@ -60,10 +58,10 @@ public class ViewWeapon {
     
     public void viewSelectShootInuput() throws RemoteException {
         
-        switch (gameModel.getWeaponState()){
+        switch (viewCLI.gameModel.getWeaponState()){
             case LockRifle:
                 
-                switch(gameModel.getActualWeaponEffect()){
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -77,8 +75,8 @@ public class ViewWeapon {
                 break;
             
             case Electroscythe:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -92,8 +90,8 @@ public class ViewWeapon {
                 break;
             
             case MachineGun:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -111,8 +109,8 @@ public class ViewWeapon {
                 break;
             
             case TractorBeam:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -126,8 +124,8 @@ public class ViewWeapon {
                 break;
             
             case Thor:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -145,8 +143,8 @@ public class ViewWeapon {
                 break;
             
             case VortexCannon:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -160,8 +158,8 @@ public class ViewWeapon {
                 break;
             
             case Furnace:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -175,8 +173,8 @@ public class ViewWeapon {
                 break;
             
             case PlasmaGun:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -207,8 +205,8 @@ public class ViewWeapon {
                 break;
             
             case Hellion:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -222,8 +220,8 @@ public class ViewWeapon {
                 break;
             
             case Flamethrower:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -237,8 +235,8 @@ public class ViewWeapon {
                 break;
             
             case Zx2:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -252,8 +250,8 @@ public class ViewWeapon {
                 break;
             
             case GrenadeLauncher:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -267,8 +265,8 @@ public class ViewWeapon {
                 break;
             
             case Shotgun:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -281,8 +279,8 @@ public class ViewWeapon {
                 break;
             
             case RocketLauncher:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -299,8 +297,8 @@ public class ViewWeapon {
                 break;
             
             case PowerGlove:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -314,8 +312,8 @@ public class ViewWeapon {
                 break;
             
             case Railgun:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -329,8 +327,8 @@ public class ViewWeapon {
                 break;
             
             case Shockwave:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -343,8 +341,8 @@ public class ViewWeapon {
                 break;
             
             case Cyberblade:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseEffect :
                         
@@ -361,8 +359,8 @@ public class ViewWeapon {
                 break;
             
             case Sledgehammer:
-                
-                switch(gameModel.getActualWeaponEffect()){
+    
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
                     //I effect
                     case BaseMode :
                         
@@ -784,7 +782,7 @@ public class ViewWeapon {
     
     public void viewRocketLauncherFragmentingWarhead() throws RemoteException{
         
-        PrintEffectWeapon.printRocketLauncherFragmentingWarhead(gameModel);
+        PrintEffectWeapon.printRocketLauncherFragmentingWarhead(viewCLI.gameModel);
         //notify controller with new input
         //TODO vedere se è necessario
         viewCLI.notifyController();

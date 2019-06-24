@@ -117,12 +117,10 @@ public class FunctionModel implements Serializable {
             if (!map.isGenerationSquare(targetSquare) && actual.getPlayerBoard().getPlayerPowerUps().size() <=3) {
     
                 actual.catchAmmoCard(((NormalSquare) map.findPlayer(actual)).catchAmmoCard());
-                getGameModel().setMessageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
     
             } else if ((map.isGenerationSquare(targetSquare)) && (actual.getPlayerBoard().getPlayerWeapons().size() <=3 )&& (weaponIndex<(((GenerationSquare) map.findPlayer(actual)).getWeaponList().size()) )){
     
                 actual.getPlayerBoard().addWeapon(((GenerationSquare) map.findPlayer(actual)).catchWeapon(weaponIndex));
-                getGameModel().setMessageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
             
             } else {
 
@@ -132,6 +130,7 @@ public class FunctionModel implements Serializable {
 
             throw new GrabActionMaxDistLimitException();
         }
+        getGameModel().setMessageToAllView("CURRENT PLAYER " + getGameModel().getActualPlayer().getName().toString() +" GRABED IN SQUARE: " + targetSquare.toString());
     }
     
     

@@ -14,11 +14,9 @@ import java.util.Collections;
  */
 public class GameModel implements Serializable {
 
-    //capire quali classi vanno serializzate
-    
     //observable pattern
     private ArrayList<RemoteView> remoteViews = new ArrayList<>();
-    //objet for game model
+    //object for game model
     private State state;
     private State beforeError;
     private Map map;

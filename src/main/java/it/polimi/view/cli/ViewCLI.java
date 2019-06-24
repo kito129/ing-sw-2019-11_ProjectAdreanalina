@@ -25,10 +25,8 @@ public class ViewCLI implements RemoteView, Serializable {
     public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     
-    protected State state;
     protected String user;
     public GameModel gameModel;
-    public Map map;
     public RemoteGameController gameController;
     protected boolean online;
     //attribute for run
@@ -564,7 +562,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewError() throws RemoteException {
         
-        print("\nERROR!!\n ");
+        print(gameModel.getErrorMessage());
         print(gameModel.getMessageToCurrentView() + "\n");
         notifyController();
         
@@ -711,8 +709,8 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewStartTurn() throws RemoteException {
         
-        //create wepoan view controller
-        viewWeapon = new ViewWeapon();
+        //create weapon view controller
+        viewWeapon = new ViewWeapon(this);
         
         CLIViewMap();
         PrintPlayer.print(gameModel.getActualPlayer());
