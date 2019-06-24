@@ -13,6 +13,7 @@ import javafx.scene.image.Image ;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MatchController {
 
@@ -1063,23 +1064,154 @@ public class MatchController {
     void refreshPlayersOnSquare(ArrayList<Square> squares) throws RemoteException{
 
         String nameSinglePlayer;
-        GridPane square;
+        GridPane squareGrid;
 
         for (Square s : squares){
 
             for (int i = 0; i < s.getPlayers().size(); i++){
 
-                square = knowSquare(s.getPlayers().get(i));
+                squareGrid = knowSquare(s.getPlayers().get(i));
                 nameSinglePlayer = namePlayer(s.getPlayers().get(i));
                 path = PLAYERSPATH + nameSinglePlayer + PNG;
-                addPlayerInRightPosition(path, s, square);
+                addPlayerInRightPosition(path, s, squareGrid);
             }
         }
     }
 
-    void addAmmoImageOnSquare() throws RemoteException{
+    /**
+     * add the right image of ammo card in the right normal square
+     * @param normalSquares a list of normal square in map
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void addAmmoImageOnNormalSquare(ArrayList<NormalSquare> normalSquares) throws RemoteException{
 
-        //TODO serve il nome della ammoCard per creare il path e caricare l'immagine giusta
+        GridPane normalSquareGrid;
+        ImageView ammoCardImage = new ImageView();
+        String nameAmmoCard;
+
+        for (NormalSquare ns : normalSquares){
+
+            nameAmmoCard = knowAmmo(ns);
+            path = AMMOPATH + nameAmmoCard + PNG;
+            normalSquareGrid = knowNormalSquare(ns);
+            loadImage(path, 36,55, ammoCardImage,0);
+            normalSquareGrid.add(ammoCardImage, 2,1);
+        }
+    }
+
+    /**
+     * return a string corresponding to the right name of ammoCard image to add on Normal Square in map
+     * @param normalSquare a single normal square in map
+     * @throws RemoteException if the reference could not be accessed
+     */
+    String knowAmmo(NormalSquare normalSquare) throws RemoteException{
+
+        String blu = "";
+        String red = "";
+        String yellow = "";
+        String powerUp = "";
+        String ammoCard;
+
+        int contB = 0;
+        int contR = 0;
+        int contY = 0;
+
+        for (EnumColorCardAndAmmo a : normalSquare.getAmmoCard().getAmmo()){
+
+            switch (a){
+
+                case BLU:
+                    contB++;
+                    break;
+                case RED:
+                    contR++;
+                    break;
+                case YELLOW:
+                    contY++;
+                    break;
+            }
+        }
+
+        for (int i = 0; i < contB; i++){
+
+            blu = "B" + blu;
+        }
+
+        for (int i = 0; i < contR; i++){
+
+            red = "R" + red;
+        }
+
+        for (int i = 0; i < contY; i++){
+
+            yellow = "Y" + yellow;
+        }
+
+        if (normalSquare.getAmmoCard().hasPowerUpCard()){
+
+            powerUp = "P";
+        }
+
+        ammoCard = blu + red + yellow + powerUp;
+
+        return ammoCard;
+    }
+
+    /**
+     * return the right GridPane corresponding to the GridPane (a normal square) in map where is the ammoCard on
+     * @param normalSquare a single normal square of the map
+     * @throws RemoteException if the reference could not be accessed
+     */
+    GridPane knowNormalSquare(NormalSquare normalSquare) throws RemoteException{
+
+        GridPane ns = new GridPane();
+
+        if(normalSquare.getRow()==0 && normalSquare.getColumn()==0){
+
+            ns = square1;
+        }
+
+        if(normalSquare.getRow()==0 && normalSquare.getColumn()==1){
+
+            ns = square2;
+        }
+
+        if(normalSquare.getRow()==0 && normalSquare.getColumn()==3){
+
+            ns = square4;
+        }
+
+        if(normalSquare.getRow()==1 && normalSquare.getColumn()==1){
+
+            ns = square6;
+        }
+
+        if(normalSquare.getRow()==1 && normalSquare.getColumn()==2){
+
+            ns = square7;
+        }
+
+        if(normalSquare.getRow()==1 && normalSquare.getColumn()==3){
+
+            ns = square8;
+        }
+
+        if(normalSquare.getRow()==2 && normalSquare.getColumn()==0){
+
+            ns = square9;
+        }
+
+        if(normalSquare.getRow()==2 && normalSquare.getColumn()==1){
+
+            ns = square10;
+        }
+
+        if(normalSquare.getRow()==2 && normalSquare.getColumn()==2){
+
+            ns = square11;
+        }
+
+        return ns;
     }
 
     // END SINGLE SQUARE --------------------------------------------------------------------------------------------
