@@ -33,7 +33,6 @@ public class StartController {
     private ViewGUI viewGUI;
     private int state = 0;
     private boolean wrongIP = false;
-    private int connectionType = 0;
 
     /**
      * initializes the first GUI screen
@@ -121,7 +120,6 @@ public class StartController {
 
     /**
      * verifies if the client can continue joining the match
-     *
      * @return true if the client can join the match, otherwise false
      * @throws RemoteException if the reference could not be accessed
      */
@@ -180,7 +178,6 @@ public class StartController {
 
     /**
      * show the player username
-     *
      * @param s player username
      */
     void addPrint(String s) {
@@ -190,7 +187,6 @@ public class StartController {
 
     /**
      * show the string error
-     *
      * @param s string error
      */
     void printError(String s) {
@@ -233,63 +229,55 @@ public class StartController {
     }
 
     /**
-     * verifies the type of connection selected
+     * set state = 2
      */
     private void connectionSelected() {
 
-        connectionType = 1;
         state = 2;
         setIpIndex();
     }
 
     /**
      * check if the ip is correct and create/rejoin a match
-     *
      * @throws RemoteException if the reference could not be accessed
      */
     private void ipInsertion() throws RemoteException {
 
-        if (connectionType == 1)
-            viewGUI.setRMIConnection(username.getText());
+        viewGUI.setRMIConnection(username.getText());
 
         if (!wrongIP) {
 
             if (viewGUI.getMultiPlayer()) {
 
-                if (connectionType == 1) {
+                if (viewGUI.getNetwork().isGameStarted()){
 
-                    if (viewGUI.getNetwork().isGameStarted())
-                        gameStarted();
+                    gameStarted();
                 }
                 state = 3;
             } else {
 
-                if (connectionType == 1) {
-
-                    if (viewGUI.getNetwork().isGameStarted())
+                if (viewGUI.getNetwork().isGameStarted())
                         gameStarted();
                     else {
 
-                        viewGUI.createMultiPlayerMatch();
-                        state = 4;
-                        try {
-                            if (checkState()) {
+                    viewGUI.createMultiPlayerMatch();
+                    state = 4;
+                    try {
+                        if (checkState()) {
 
-                                insertUsername();
-                            }
-                        } catch (RemoteException e) {
-
-                            //do nothing
+                            insertUsername();
                         }
+                    } catch (RemoteException e) {
+
+                        //do nothing
                     }
                 }
+
             }
         }
     }
 
     /**
-     * verifies the difficulty selected and start/rejoin the game
-     *
      * @throws RemoteException if the reference could not be accessed
      */
     private void multiPlayerSetup() throws RemoteException {
@@ -337,11 +325,8 @@ public class StartController {
                         message.setText("JOINING AGAIN THE MATCH");
                         if (viewGUI.getMultiPlayer()) {
 
-                            if(connectionType == 1) {
-
-                                //viewGUI.getNetwork().startTimer(viewGUI); TODO
-                                viewGUI.notifyNetwork();
-                            }
+                            //viewGUI.getNetwork().startTimer(viewGUI);
+                            viewGUI.notifyNetwork();
                         }
                     } else {
 

@@ -21,7 +21,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,10 +33,7 @@ public class ViewGUI extends Application implements Serializable{
     private boolean online;
     private State state;
     private String user;
-    private int choose1;
-    private int choose2;
     private boolean endGame;
-    private ArrayList<Integer> choices;
     private boolean restart;
 
     private RemoteGameController network;
@@ -71,8 +67,6 @@ public class ViewGUI extends Application implements Serializable{
 
         returnOnline = false;
         setOnline(true);
-        choices = new ArrayList<>();
-        choices.add(-1);
         endGame = false;
         restart = false;
 
@@ -180,6 +174,24 @@ public class ViewGUI extends Application implements Serializable{
     // GET SET ----------------------------------------------------------------------------------------------
 
     /**
+     * gets if has started a multiplayer match
+     * @return true if the game is in multiplayer mode
+     */
+    public boolean getMultiPlayer(){
+
+        return multiPlayer;
+    }
+
+    /**
+     * sets if has started a multiPlayer match
+     * @param multiPlayer the boolean to be set
+     */
+    void setMultiPlayer(boolean multiPlayer){
+
+        this.multiPlayer = multiPlayer;
+    }
+
+    /**
      * gets if a player has to be set online
      * @return true if the player has to be set online
      */
@@ -207,48 +219,12 @@ public class ViewGUI extends Application implements Serializable{
     }
 
     /**
-     * gets choose1
-     * @return first choice of the client
-     */
-    public int getChoose1() {
-
-        return choose1;
-    }
-
-    /**
-     * gets choose2
-     * @return second choice of the client
-     */
-    public int getChoose2() {
-
-        return choose2;
-    }
-
-    /**
-     * gets the list of inputs of the client
-     * @return an arraylist of client's inputs
-     */
-    public ArrayList<Integer> getChoices(){
-
-        return choices;
-    }
-
-    /**
      * gets if this client wants to restart the game
      * @return true if the client wants to restart the game, false otherwise
      */
     public boolean getRestart() {
 
         return restart;
-    }
-
-    /**
-     * gets if has started a multiplayer match
-     * @return true if the game is in multiplayer mode
-     */
-    public boolean getMultiPlayer(){
-
-        return multiPlayer;
     }
 
     /**
@@ -282,39 +258,12 @@ public class ViewGUI extends Application implements Serializable{
     }
 
     /**
-     * sets first choice of the client
-     * @param i the choice of the client
-     */
-    void setChoose1(int i){
-
-        this.choose1 = i;
-    }
-
-    /**
-     * sets the second choice of the client
-     * @param i the choice of the client
-     */
-    void setChoose2(int i){
-
-        this.choose2 = i;
-    }
-
-    /**
      * sets the username of this client's view
      * @param s the name to be set
      */
     void setUser(String s) {
 
         this.user = s;
-    }
-
-    /**
-     * sets if has started a multiplayer match
-     * @param multiPlayer the boolean to be set
-     */
-    void setMultiPlayer(boolean multiPlayer){
-
-        this.multiPlayer = multiPlayer;
     }
 
     /**
@@ -437,7 +386,7 @@ public class ViewGUI extends Application implements Serializable{
                 matchController = loader.getController();
                 matchController.setViewGUI(this);
                 matchController.init();
-               // matchController.waitTurn();
+                matchController.waitTurn();
                 if (actualPlayer()) {
 
                     playTimer();
@@ -465,7 +414,6 @@ public class ViewGUI extends Application implements Serializable{
     void playTimer() throws IOException {
 
         // network.startTimer(this, null); //al posto di startTimer ci sarà il metodo che farà partire il Timer nel RemoteGameController
-
     }
 
     /**

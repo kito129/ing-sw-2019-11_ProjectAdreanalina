@@ -122,6 +122,7 @@ public class MatchController {
         effect3.setVisible(false);
         buttonRecharge.setVisible(false);
         buttonEndTurn.setVisible(false);
+        buttonRejoin.setVisible(false);
     }
 
     // YOUR PLAYERBOARD ---------------------------------------------------------------------------------------------
@@ -1391,5 +1392,26 @@ public class MatchController {
         buttonRejoin.setVisible(false);
         answerOrMessageError.setText("JOINING AGAIN THE MATCH...\nWAIT YOUR TURN");
         rejoined = true;
+    }
+
+    /**
+     * disables the interactive buttons to non-actual players
+     * shows a WAIT message
+     * @throws RemoteException if the reference could not be accessed
+     */
+    void waitTurn() throws RemoteException {
+
+        if(!viewGUI.actualPlayer()){
+
+            buttonRunAround.setVisible(false);
+            buttonGrubStuff.setVisible(false);
+            buttonShoot.setVisible(false);
+            buttonRecharge.setVisible(false);
+            buttonEndTurn.setVisible(false);
+            effect1.setVisible(false);
+            effect2.setVisible(false);
+            effect3.setVisible(false);
+            answerOrMessageError.setText("WAIT YOUR TURN");
+        }
     }
 }
