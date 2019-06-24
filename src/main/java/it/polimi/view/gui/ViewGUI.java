@@ -127,6 +127,17 @@ public class ViewGUI extends Application implements Serializable{
             case LOBBY:
                 viewLobby();
                 break;
+            case RUN:
+                break;
+            case GRAB:
+                break;
+            case SHOOT:
+                viewShoot();
+                break;
+            case RECHARGE:
+                break;
+            case ENDTURN:
+                break;
             default:
                 assert false;
         }
@@ -145,6 +156,22 @@ public class ViewGUI extends Application implements Serializable{
 
                 startController.addPrint("- " + p.getName());
             }
+        });
+    }
+
+    private void viewShoot(){
+
+        Platform.runLater(()->{
+
+
+        });
+    }
+
+    private void viewRecharge(){
+
+        Platform.runLater(()->{
+
+
         });
     }
 

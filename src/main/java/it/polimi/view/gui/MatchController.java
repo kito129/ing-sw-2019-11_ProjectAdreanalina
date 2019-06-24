@@ -1,24 +1,29 @@
 package it.polimi.view.gui;
 
 import it.polimi.model.*;
-import it.polimi.view.cli.Game;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image ;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MatchController {
 
     @FXML
     private SplitPane container;
+
+    @FXML
+    private Button buttonRunAround, buttonGrubStuff, buttonShoot, buttonRecharge, buttonEndTurn, buttonRejoin, effect1, effect2, effect3;
 
     @FXML
     private AnchorPane APtop, APbottom;
@@ -39,7 +44,7 @@ public class MatchController {
     private GridPane weaponB1, weaponB2, weaponY1, weaponY2, weaponY3, weaponR1, weaponR2, gridPowerupDeck, gridWeaponDeck;
 
     @FXML
-    private GridPane gridSkull1, gridSkull2, gridSkull3;
+    private GridPane gridSkull1, gridSkull2, gridSkull3, pointGrid;
 
     @FXML
     private GridPane square1, square2, square3, square4, square5, square6, square7, square8, square9, square10, square11, square12;
@@ -49,6 +54,8 @@ public class MatchController {
 
     @FXML
     private ImageView weapon1, weapon2, weapon3, powerUp1, powerUp2, powerUp3, weaponSelected;
+
+    private boolean rejoined;
 
     static final String PNG = ".png";
     static final String JPG = ".jpg";
@@ -101,7 +108,20 @@ public class MatchController {
         gridSkull2.managedProperty().bind(gridSkull2.visibleProperty());
         gridSkull3.managedProperty().bind(gridSkull3.visibleProperty());
         answerOrMessageError.managedProperty().bind(answerOrMessageError.visibleProperty());
+        buttonRunAround.managedProperty().bind(buttonRunAround.visibleProperty());
+        buttonGrubStuff.managedProperty().bind(buttonGrubStuff.visibleProperty());
+        buttonShoot.managedProperty().bind(buttonShoot.visibleProperty());
+        buttonRecharge.managedProperty().bind(buttonRecharge.visibleProperty());
+        buttonEndTurn.managedProperty().bind(buttonEndTurn.visibleProperty());
+        effect1.managedProperty().bind(effect1.visibleProperty());
+        effect2.managedProperty().bind(effect2.visibleProperty());
+        effect3.managedProperty().bind(effect3.visibleProperty());
 
+        effect1.setVisible(false);
+        effect2.setVisible(false);
+        effect3.setVisible(false);
+        buttonRecharge.setVisible(false);
+        buttonEndTurn.setVisible(false);
     }
 
     // YOUR PLAYERBOARD ---------------------------------------------------------------------------------------------
@@ -145,7 +165,7 @@ public class MatchController {
 
         ImageView YourPlayerboardImage = new ImageView();
         path = PLAYERBOARDPATH + player.getColor().toString() + PNG;
-        loadImage(path,527,138, YourPlayerboardImage,0);
+        loadImage(path,527,138, YourPlayerboardImage);
         gridActualplayerPlayerboard.add(YourPlayerboardImage, 0, 0); //node, column, row
     }
 
@@ -165,7 +185,7 @@ public class MatchController {
 
             colorM = colorDamageMark(color);
             path = TEARSPATH + colorM + PNG;
-            loadImage(path, 25, 47, markImage, 0);
+            loadImage(path, 25, 47, markImage);
             InternalgridActualplayerPlayerboar.add(markImage, i, 0); //node element, col, row
         }
     }
@@ -185,7 +205,7 @@ public class MatchController {
             EnumColorPlayer color = colorDamage.get(i);
             colorD = colorDamageMark(color);
             path = TEARSPATH + colorD + PNG;
-            loadImage(path,25,47, markDamage,0);
+            loadImage(path,25,47, markDamage);
             InternalgridActualplayerPlayerboar.add(markDamage, i,1); //node element, col, row
         }
     }
@@ -208,31 +228,31 @@ public class MatchController {
 
         if (player.getPlayerBoard().getBoardValue()==6){
 
-            loadImage(path, 25,47, valueImage, 0);
+            loadImage(path, 25,47, valueImage);
             InternalgridActualplayerPlayerboar.add(valueImage, 2, 4);
         }
 
         if (player.getPlayerBoard().getBoardValue()==4){
 
-            loadImage(path, 25,47, valueImage, 0);
+            loadImage(path, 25,47, valueImage);
             InternalgridActualplayerPlayerboar.add(valueImage, 2, 5);
         }
 
         if (player.getPlayerBoard().getBoardValue()==2){
 
-            loadImage(path, 25,47, valueImage, 0);
+            loadImage(path, 25,47, valueImage);
             InternalgridActualplayerPlayerboar.add(valueImage, 2, 6);
         }
 
         if (player.getPlayerBoard().getBoardValue()==1 && cont==0){
 
-            loadImage(path, 25,47, valueImage, 0);
+            loadImage(path, 25,47, valueImage);
             InternalgridActualplayerPlayerboar.add(valueImage, 2, 7);
         }
 
         if (player.getPlayerBoard().getBoardValue()==1 && cont==1){
 
-            loadImage(path, 25,47, valueImage, 0);
+            loadImage(path, 25,47, valueImage);
             InternalgridActualplayerPlayerboar.add(valueImage, 2, 8);
         }
     }
@@ -259,25 +279,25 @@ public class MatchController {
             if(i==0){
 
                 path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
-                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                loadImage(path, 380, 100, OthersPlayerboardImage);
                 gridOthersPlayerboard.add(OthersPlayerboardImage,0,0);
             }
             else if(i==1){
 
                 path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
-                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                loadImage(path, 380, 100, OthersPlayerboardImage);
                 gridOthersPlayerboard.add(OthersPlayerboardImage,1,0);
             }
             else if(i==2){
 
                 path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
-                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                loadImage(path, 380, 100, OthersPlayerboardImage);
                 gridOthersPlayerboard.add(OthersPlayerboardImage,0,1);
             }
             else if(i==3){
 
                 path = PLAYERBOARDPATH + p.getColor().toString() + PNG;
-                loadImage(path, 380, 100, OthersPlayerboardImage, 0);
+                loadImage(path, 380, 100, OthersPlayerboardImage);
                 gridOthersPlayerboard.add(OthersPlayerboardImage,1,1);
             }
         }
@@ -323,7 +343,7 @@ public class MatchController {
 
                 colorMarks = colorDamageMark(color);
                 path = TEARSPATH + colorMarks + PNG;
-                loadImage(path, 21, 34, markImage, 0);
+                loadImage(path, 21, 34, markImage);
                 otherPlayerboard.add(markImage, j, 0); //node element, col, row
             }
         }
@@ -369,7 +389,7 @@ public class MatchController {
 
                 colorDamages = colorDamageMark(color);
                 path = TEARSPATH + colorDamages + PNG;
-                loadImage(path, 21, 34, damageImage, 0);
+                loadImage(path, 21, 34, damageImage);
                 otherPlayerboard.add(damageImage, j, 1); //node element, col, row
             }
         }
@@ -412,31 +432,31 @@ public class MatchController {
 
             if (player.getPlayerBoard().getBoardValue()==6){
 
-                loadImage(path, 21,34, valueImage, 0);
+                loadImage(path, 21,34, valueImage);
                 otherPlayerboard.add(valueImage, 2, 4);
             }
 
             if (player.getPlayerBoard().getBoardValue()==4){
 
-                loadImage(path, 21,34, valueImage, 0);
+                loadImage(path, 21,34, valueImage);
                 otherPlayerboard.add(valueImage, 2, 5);
             }
 
             if (player.getPlayerBoard().getBoardValue()==2){
 
-                loadImage(path, 21,34, valueImage, 0);
+                loadImage(path, 21,34, valueImage);
                 otherPlayerboard.add(valueImage, 2, 6);
             }
 
             if (player.getPlayerBoard().getBoardValue()==1 && cont==0){
 
-                loadImage(path, 21,34, valueImage, 0);
+                loadImage(path, 21,34, valueImage);
                 otherPlayerboard.add(valueImage, 2, 7);
             }
 
             if (player.getPlayerBoard().getBoardValue()==1 && cont==1){
 
-                loadImage(path, 21,34, valueImage, 0);
+                loadImage(path, 21,34, valueImage);
                 otherPlayerboard.add(valueImage, 2, 8);
             }
         }
@@ -564,7 +584,7 @@ public class MatchController {
             if(ammoIndex < player.getPlayerBoard().getAmmoB().size()) {
 
                 path = AMMOPATH + "ammoB" + PNG;
-                loadImage(path, 24, 26, ammoImage, 0);
+                loadImage(path, 24, 26, ammoImage);
                 gridAmmo.add(ammoImage, ammoIndex, 0); //node, column, row
             }else{
 
@@ -588,7 +608,7 @@ public class MatchController {
             if(ammoIndex < player.getPlayerBoard().getAmmoR().size()) {
 
                 path = AMMOPATH + "ammoR" + PNG;
-                loadImage(path, 24, 26, ammoImage, 0);
+                loadImage(path, 24, 26, ammoImage);
                 gridAmmo.add(ammoImage, ammoIndex, 1); //node, column, row
             }else{
 
@@ -612,7 +632,7 @@ public class MatchController {
             if(ammoIndex < player.getPlayerBoard().getAmmoY().size()) {
 
                 path = AMMOPATH + "ammoY" + PNG;
-                loadImage(path, 24, 26, ammoImage, 0);
+                loadImage(path, 24, 26, ammoImage);
                 gridAmmo.add(ammoImage, ammoIndex, 2); //node, column, row
             }else{
 
@@ -637,7 +657,7 @@ public class MatchController {
 
         name = gameModel.getMap().getName();
         path = MAPSPATH + name + PNG;
-        loadImage(path,636,509, mapImage,0);
+        loadImage(path,636,509, mapImage);
         esternalGridMap.add(mapImage,0,0);
     }
 
@@ -657,37 +677,37 @@ public class MatchController {
 
             if(i==gameModel.getKillShotTrack().skullNumber()){                  //i=8 (al massimo, poi gli altri di conseguenza)
 
-                loadImage(path,27,37, skullImage,0);
+                loadImage(path,27,37, skullImage);
                 gridSkull3.add(skullImage,1,0);
             }else if(i==gameModel.getKillShotTrack().skullNumber()-1){
 
-                loadImage(path,27,37, skullImage,0);
+                loadImage(path,27,37, skullImage);
                 gridSkull3.add(skullImage,0,0);
             }else if(i==gameModel.getKillShotTrack().skullNumber()-2){
 
-                loadImage(path,27,37, skullImage,0);
+                loadImage(path,27,37, skullImage);
                 gridSkull2.add(skullImage,3,0);
             }
             else if(i==gameModel.getKillShotTrack().skullNumber()-3){
 
-                loadImage(path,27,37, skullImage,0);
+                loadImage(path,27,37, skullImage);
                 gridSkull2.add(skullImage,2,0);
             }
             else if(i==gameModel.getKillShotTrack().skullNumber()-4){
 
-                loadImage(path,27,37, skullImage,0);
+                loadImage(path,27,37, skullImage);
                 gridSkull2.add(skullImage,1,0);
             }else if(i==gameModel.getKillShotTrack().skullNumber()-5){
 
-                loadImage(path,27,37, skullImage,0);
+                loadImage(path,27,37, skullImage);
                 gridSkull2.add(skullImage,0,0);
             }else if(i==gameModel.getKillShotTrack().skullNumber()-5){
 
-                loadImage(path,27,37, skullImage,0);
+                loadImage(path,27,37, skullImage);
                 gridSkull1.add(skullImage,3,0);
             }else if(i==gameModel.getKillShotTrack().skullNumber()-5){
 
-                loadImage(path,27,37, skullImage,0);
+                loadImage(path,27,37, skullImage);
                 gridSkull1.add(skullImage,2,0);
             }
         }
@@ -729,35 +749,35 @@ public class MatchController {
 
         if(position==8){
 
-            loadImage(path,27,37, markImage,0);
+            loadImage(path,27,37, markImage);
             gridSkull1.add(markImage,2,0);
         }else if(position==7){
 
-            loadImage(path,27,37, markImage,0);
+            loadImage(path,27,37, markImage);
             gridSkull1.add(markImage,3,0);
         }else if(position==6){
 
-            loadImage(path,27,37, markImage,0);
+            loadImage(path,27,37, markImage);
             gridSkull2.add(markImage,0,0);
         }else if(position==5){
 
-            loadImage(path,27,37, markImage,0);
+            loadImage(path,27,37, markImage);
             gridSkull2.add(markImage,1,0);
         }else if(position==4){
 
-            loadImage(path,27,37, markImage,0);
+            loadImage(path,27,37, markImage);
             gridSkull2.add(markImage,2,0);
         }else if(position==3){
 
-            loadImage(path,27,37, markImage,0);
+            loadImage(path,27,37, markImage);
             gridSkull2.add(markImage,3,0);
         }else if(position==2){
 
-            loadImage(path,27,37, markImage,0);
+            loadImage(path,27,37, markImage);
             gridSkull3.add(markImage,0,0);
         }else if(position==1){
 
-            loadImage(path,27,37, markImage,0);
+            loadImage(path,27,37, markImage);
             gridSkull3.add(markImage,1,0);
         }
     }
@@ -786,19 +806,19 @@ public class MatchController {
 
             if(i==0){
 
-                loadImage(path,60,102, weaponImage, 0);
+                loadImage(path,60,102, weaponImage);
                 weaponB1.add(weaponImage,0,0);
             }
 
             if(i==1){
 
-                loadImage(path,60,102, weaponImage, 0);
+                loadImage(path,60,102, weaponImage);
                 weaponB1.add(weaponImage,1,0);
             }
 
             if(i==2){
 
-                loadImage(path, 60,102, weaponImage,0);
+                loadImage(path, 60,102, weaponImage);
                 weaponB2.add(weaponImage,1,0);
             }
         }
@@ -826,19 +846,19 @@ public class MatchController {
 
             if(i==0){
 
-                loadImage(path, 71,216, weaponImage,0);
+                loadImage(path, 71,216, weaponImage);
                 weaponY1.add(weaponImage,1,1);
             }
 
             if(i==1){
 
-                loadImage(path,71,210, weaponImage, 0);
+                loadImage(path,71,210, weaponImage);
                 weaponY2.add(weaponImage,1,1);
             }
 
             if(i==2){
 
-                loadImage(path, 76,215, weaponImage,0);
+                loadImage(path, 76,215, weaponImage);
                 weaponY3.add(weaponImage,1,0);
             }
         }
@@ -866,19 +886,19 @@ public class MatchController {
 
             if(i==0){
 
-                loadImage(path, 72,106, weaponImage,0);
+                loadImage(path, 72,106, weaponImage);
                 weaponR1.add(weaponImage,1,0);
             }
 
             if(i==1){
 
-                loadImage(path, 66,112, weaponImage,0);
+                loadImage(path, 66,112, weaponImage);
                 weaponR1.add(weaponImage,1,2);
             }
 
             if(i==2){
 
-                loadImage(path, 67,106, weaponImage,0);
+                loadImage(path, 67,106, weaponImage);
                 weaponR2.add(weaponImage,1,0);
             }
         }
@@ -987,71 +1007,71 @@ public class MatchController {
 
         if (s.getPlayers().size()==1){
 
-            loadImage(path,36,55, playerImage1, 0);
+            loadImage(path,36,55, playerImage1);
             square.add(playerImage1, 1, 0);
         }
 
         if (s.getPlayers().size()==2){
 
-            loadImage(path,36,55, playerImage1, 0);
+            loadImage(path,36,55, playerImage1);
             square.add(playerImage1, 1, 0);
 
             path = s.getPlayers().get(1).getName();
-            loadImage(path,36,55, playerImage2, 0);
+            loadImage(path,36,55, playerImage2);
             square.add(playerImage2, 2, 0);
         }
 
         if (s.getPlayers().size()==3){
 
-            loadImage(path,36,55, playerImage1, 0);
+            loadImage(path,36,55, playerImage1);
             square.add(playerImage1, 1, 0);
 
             path = s.getPlayers().get(1).getName();
-            loadImage(path,36,55, playerImage2, 0);
+            loadImage(path,36,55, playerImage2);
             square.add(playerImage2, 2, 0);
 
             path = s.getPlayers().get(2).getName();
-            loadImage(path,36,55, playerImage3, 0);
+            loadImage(path,36,55, playerImage3);
             square.add(playerImage3, 0, 1);
         }
 
         if (s.getPlayers().size()==4){
 
-            loadImage(path,36,55, playerImage1, 0);
+            loadImage(path,36,55, playerImage1);
             square.add(playerImage1, 1, 0);
 
             path = s.getPlayers().get(1).getName();
-            loadImage(path,36,55, playerImage2, 0);
+            loadImage(path,36,55, playerImage2);
             square.add(playerImage2, 2, 0);
 
             path = s.getPlayers().get(2).getName();
-            loadImage(path,36,55, playerImage3, 0);
+            loadImage(path,36,55, playerImage3);
             square.add(playerImage3, 0, 1);
 
             path = s.getPlayers().get(3).getName();
-            loadImage(path,36,55, playerImage4, 0);
+            loadImage(path,36,55, playerImage4);
             square.add(playerImage4, 1, 1);
         }
 
         if (s.getPlayers().size()==5){
 
-            loadImage(path,36,55, playerImage1, 0);
+            loadImage(path,36,55, playerImage1);
             square.add(playerImage1, 1, 0);
 
             path = s.getPlayers().get(1).getName();
-            loadImage(path,36,55, playerImage2, 0);
+            loadImage(path,36,55, playerImage2);
             square.add(playerImage2, 2, 0);
 
             path = s.getPlayers().get(2).getName();
-            loadImage(path,36,55, playerImage3, 0);
+            loadImage(path,36,55, playerImage3);
             square.add(playerImage3, 0, 1);
 
             path = s.getPlayers().get(3).getName();
-            loadImage(path,36,55, playerImage4, 0);
+            loadImage(path,36,55, playerImage4);
             square.add(playerImage4, 1, 1);
 
             path = s.getPlayers().get(4).getName();
-            loadImage(path,36,55, playerImage5, 0);
+            loadImage(path,36,55, playerImage5);
             square.add(playerImage5, 2, 1);
         }
     }
@@ -1092,10 +1112,10 @@ public class MatchController {
         for (NormalSquare ns : normalSquares){
 
             nameAmmoCard = knowAmmo(ns);
-            path = AMMOPATH + nameAmmoCard + PNG;
+            path = AMMOCARDSPATH + nameAmmoCard + PNG;
             normalSquareGrid = knowNormalSquare(ns);
-            loadImage(path, 36,55, ammoCardImage,0);
-            normalSquareGrid.add(ammoCardImage, 2,1);
+            loadImage(path, 36,55, ammoCardImage);
+            normalSquareGrid.add(ammoCardImage, 0,0);
         }
     }
 
@@ -1224,7 +1244,7 @@ public class MatchController {
 
         path = "images/backAmmo.png";
         ImageView backAmmoCardImage = new ImageView();
-        loadImage(path, 70,72, backAmmoCardImage,0);
+        loadImage(path, 70,72, backAmmoCardImage);
         weaponR2.add(backAmmoCardImage, 1,2);
     }
 
@@ -1236,7 +1256,7 @@ public class MatchController {
 
         path = "images/back_powerup.png";
         ImageView backPowerUpImage = new ImageView();
-        loadImage(path, 49,88, backPowerUpImage,0);
+        loadImage(path, 49,88, backPowerUpImage);
         gridPowerupDeck.add(backPowerUpImage, 1,0);
     }
 
@@ -1248,8 +1268,13 @@ public class MatchController {
 
         path = "images/back_weapon.png";
         ImageView backWeaponImage = new ImageView();
-        loadImage(path, 82,129, backWeaponImage,0);
+        loadImage(path, 82,129, backWeaponImage);
         gridWeaponDeck.add(backWeaponImage, 0,1);
+    }
+
+    void addPoints(Player player) throws RemoteException{
+
+        //TODO
     }
 
     // END MAP ------------------------------------------------------------------------------------------------------
@@ -1260,49 +1285,111 @@ public class MatchController {
      * @param width the width of the image that has to be loaded
      * @param height the height of the image that has to be loaded
      * @param element the Node where the image will be loaded
-     * @param type the type of Node passed
      */
-    void loadImage(String path, int width, int height, Node element, int type){//type 0: imageView, type 1: anchorpane
+    void loadImage(String path, int width, int height, Node element){//type 0: imageView, type 1: anchorpane
 
         Image image = new Image(getClass().getResourceAsStream(path), width, height, false, true);
 
-        if(type == 0){
-
-            ((javafx.scene.image.ImageView)element).setImage(image);
-        }else if(type == 1) {
-
-            BackgroundImage bg = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-            ((AnchorPane) element).setBackground(new Background(bg));
-        }
+        ((javafx.scene.image.ImageView)element).setImage(image);
     }
 
     /**
-     * removes all the center graphics and show a message
+     * decides what to do when the shootButton is clicked
+     * @param e shoot button event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void shootButtonClicked(ActionEvent e) throws IOException {
+
+        buttonRejoin.setVisible(false);
+        answerOrMessageError.setText("SELECT A WEAPON FROM YOURS");
+
+        //TODO selezionare l'arma che si vuole usare e dopo l'immagine del giocatore
+    }
+
+    /**
+     * decides what to do when the runAroundButton is clicked
+     * @param e shoot button event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void runAroundButtonClicked(ActionEvent e) throws IOException {
+
+        buttonRejoin.setVisible(false);
+        answerOrMessageError.setText("WHERE DO YOU WANT TO GO?");
+
+        //TODO cliccare sull'immagine delle munizioni sulla mappa su cui ci si vuole spostare (il quadratino in alto a sinistra in ogni square)
+    }
+
+    /**
+     * decides what to do when the grubStuffButton is clicked
+     * @param e shoot button event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void grubStuffButtonClicked(ActionEvent e) throws IOException {
+
+        buttonRejoin.setVisible(false);
+        answerOrMessageError.setText("WHERE DO YOU WANT TO GO TO GRUB A STUFF?");
+
+        //TODO cliccare sull'immagine delle munizioni sulla mappa su cui ci si vuole spostare
+    }
+
+    /**
+     * decides what to do when the grubStuffButton is clicked
+     * @param e shoot button event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void rechargeButtonClicked(ActionEvent e) throws IOException {
+
+        buttonRejoin.setVisible(false);
+        answerOrMessageError.setText("SELECT WEAPON FROM YOURS THAT YOU WANT TO RELOAD");
+
+        //TODO selezionare un'arma e restituire l'arma/armi scelte
+    }
+
+    public void selectEffect() throws RemoteException{
+
+        effect1.setVisible(true);
+        effect2.setVisible(true);
+        effect3.setVisible(true);
+    }
+
+    public void rechargeWeapon() throws RemoteException{
+
+        buttonRecharge.setVisible(true);
+    }
+
+    /**
+     * view a message
      */
     void serverDown(){
-        //allWindows.setVisible(false);
-        //rejoin.setVisible(false);
-        //text.setText("SEEMS LIKE THE SERVER HAS BEEN SHUT DOWN");
+
+        buttonShoot.setVisible(false);
+        buttonGrubStuff.setVisible(false);
+        buttonRunAround.setVisible(false);
+        buttonRecharge.setVisible(false);
+        buttonEndTurn.setVisible(false);
+        buttonRejoin.setVisible(false);
+        answerOrMessageError.setText("SEEMS LIKE THE SERVER HAS BEEN SHUT DOWN");
     }
 
     /**
-     * hides all the screen graphics and shows only the rejoin button
+     * view a message and a button for rejoin the match
      */
     void setInactive(){
-        //TODO
-        /*buttons.setVisible(false);
-        tokens.setVisible(false);
-        windowArea.setVisible(false);
-        region2.setVisible(false);
-        draftArea.setVisible(false);
-        region1.setVisible(false);
-        roundtrackArea.setVisible(false);
-        input.setVisible(false);
-        errorMessage.setVisible(false);
-        left.setVisible(false);
-        right.setVisible(false);
 
-        message.setText("YOU ARE NOW INACTIVE!\nTO JOIN AGAIN THE MATCH, PRESS THE BUTTON");
-        rejoinButton.setVisible(true);*/
+        answerOrMessageError.setText("TO REJOIN AGAIN THE MATCH PRESS THE BUTTON");
+        buttonRejoin.setVisible(true);
+    }
+
+    /**
+     * hide the rejoin button and add again the player to the match
+     * @param e rejoin button event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void rejoinButtonClicked(ActionEvent e) throws IOException {
+
+        viewGUI.matchRejoined();
+        buttonRejoin.setVisible(false);
+        answerOrMessageError.setText("JOINING AGAIN THE MATCH...\nWAIT YOUR TURN");
+        rejoined = true;
     }
 }
