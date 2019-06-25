@@ -17,5 +17,6 @@ public class Server {
         System.out.println("ready to start, waiting for players");
 
 
+
     }
 }
