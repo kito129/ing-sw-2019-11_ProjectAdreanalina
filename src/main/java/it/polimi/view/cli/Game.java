@@ -9,7 +9,10 @@ public class Game implements Serializable {
      */
     public static void print(){
 
-        System.out.println("\n--------------------------------------------------------");
+        System.out.println();
+        System.out.println("--------------------------------------------------------");
         System.out.println("WELCOME TO ADRENALINA!!!");
-        }
+        System.out.println("--------------------------------------------------------");
+        System.out.println();
+    }
 }

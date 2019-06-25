@@ -1295,6 +1295,32 @@ public class MatchController {
     }
 
     /**
+     * return the path of image
+     * @param image an image
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public String pathImage(Image image){
+
+        String path;
+        path = image.getUrl();
+
+        return path;
+    }
+
+    /**
+     * decides what to do when an image is clicked
+     * @param image shoot button event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void mousePressed(Image image){
+
+        String path;
+        path = pathImage(image);
+        loadImage(path,143,244, weaponSelected);
+        weaponSelected.setImage(image);                         //non so se serve questa riga, magari basta quella sopra
+    }
+
+    /**
      * decides what to do when the shootButton is clicked
      * @param e shoot button event
      * @throws IOException any exception thrown by the underlying OutputStream

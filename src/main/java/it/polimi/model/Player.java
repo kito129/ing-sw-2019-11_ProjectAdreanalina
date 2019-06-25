@@ -275,7 +275,7 @@ public class Player implements Serializable {
     @Override
     public String toString () {
 
-        return "Player: " + this.id + " name: " + this.name + " r: " + this.row + " c: " + this.column + this.getPowerUpCardsSpawn().toString();
+        return "\nPlayer:\t" + this.id + "\nname:\t" + this.name + "\nr:\t" + this.row + "\nc:\t" + this.column + "\n" + this.getPowerUpCardsSpawn().toString();
     }
 
     public void stampa(){

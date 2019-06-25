@@ -66,7 +66,7 @@ public class ViewCLI implements RemoteView, Serializable {
         
         connection();
         pingToServer();
-        System.out.println("WELCOME TO ADRENALINA");
+        Game.print();
         
         try {
             gameModel = gameController.getGameModel();
@@ -705,22 +705,23 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewMenu(){
         
         PrintMenu.print();
-        
-        
     }
     
     public  void viewSpawnPowerUp () throws RemoteException {
-    
-        System.out.println("CHOSE POWERUP TO MANTAIN, WHERE YOU RESPAWN, THE OTHER ONE GOES IN YOUR PLAYER BOARD:");
+
+        System.out.println();
+        System.out.println("CHOOSE A POWER UP TO KEEP BETWEEN THESE TWO!");
+        System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP NOT CHOSEN");
+        System.out.println();
         Player player = gameModel.getActualPlayer();
     
         System.out.println(player.toString());
     
-        System.out.println("\nPOWER UP TOO CHOOSE: ");
+        System.out.println("\nPOWER UP TO CHOOSE:");
         
         PrintPowerUp.print(player.getPowerUpCardsSpawn(),false);
     
-        System.out.println("YOUR CHOISE: ");
+        System.out.println("\nMAKE YOUR CHOICE!");
         
         setIndex(getUserInput(0,1));
         notifyController();
