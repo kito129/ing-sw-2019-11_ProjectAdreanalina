@@ -636,7 +636,7 @@ public class ViewCLI implements RemoteView, Serializable {
             while (!input.hasNextInt())
                 input = new Scanner(System.in);
             temp = input.nextInt();
-        }while (temp!=0 || temp!=1);
+        }while (temp<0 || temp>1);
         
         if (temp==0){
             setBooleanChose(true);

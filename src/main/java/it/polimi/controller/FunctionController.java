@@ -8,6 +8,7 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
+import it.polimi.model.Weapon.PlasmaGun;
 import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -41,6 +42,25 @@ public class FunctionController {
                 
                     // game can start
                     drawnPowerUp();
+                    //for the moment add another player for testing army
+                    Player player1 = new Player(2,"andrea",EnumColorPlayer.PINK);
+                    Player player2 = new Player(3,"simone",EnumColorPlayer.BLU);
+                    Player player3 = new Player(4,"niko",EnumColorPlayer.YELLOW);
+                    Player player4 = new Player(5,"teo",EnumColorPlayer.GREEN);
+                    //add on square
+                    try {
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,0),player1);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,1),player2);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,0),player3);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(0,0),player4);
+                        gameModel.getPlayers(true).add(player1);
+                        gameModel.getPlayers(true).add(player2);
+                        gameModel.getPlayers(true).add(player3);
+                        gameModel.getPlayers(true).add(player4);
+                    } catch (MapException e) {
+                        e.printStackTrace();
+                    }
+                    
                     gameModel.setState(State.SPAWNPLAYER);
                     
                 } else {
@@ -128,17 +148,29 @@ public class FunctionController {
         switch (this.functionModel.getGameModel().getBeforeError()){
             case SELECTWEAPON:
                 this.functionModel.getGameModel().setState(State.CHOSEACTION);
+                break;
             case SELECTPOWERUP:
                 this.functionModel.getGameModel().setState(State.CHOSEACTION);
+                break;
             case SELECTRUN:
                 this.functionModel.getGameModel().setState(State.CHOSEACTION);
+                break;
             case SELECTEFFECT:
                 this.functionModel.getGameModel().setState(State.SELECTEFFECT);
+                break;
             case SELECTGRAB:
                 this.functionModel.getGameModel().setState(State.CHOSEACTION);
+                break;
             case SELECTPOWERUPINPUT:
                 this.functionModel.getGameModel().setState(State.CHOSEACTION);
             case CHOSEACTION:
+                this.functionModel.getGameModel().setState(State.CHOSEACTION);
+                break;
+            default:
+                this.functionModel.getGameModel().setState(State.CHOSEACTION);
+                break;
+                
+            
         }
     }
     
