@@ -24,38 +24,41 @@ public class PrintWeapon implements Serializable {
     
             for (int i = 0; i < weaponList.size(); i++) {
                 WeaponCard wc = weaponList.get(i);
-        
-                System.out.println("\n" + i + "): ");
-                System.out.println("NAME: " + wc.getNameWeaponCard());
+
+                System.out.println();
+                System.out.println(i + "): ");
+                System.out.println("NAME:\t\t" + wc.getNameWeaponCard());
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)) {
             
-                    System.out.println("    COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.RED)) {
             
-                    System.out.println("    COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)) {
             
-                    System.out.println("    COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
                 }
         
-                System.out.print("  RECHARGE COST: ");
+                System.out.print("RECHARGE COST:\t");
                 PrintEnumCardsAmmo.print(wc.getRechargeCost());
         
-                System.out.println("\nLOADED WEAPON: " + wc.isCharge());
+                System.out.println("\nLOADED:\t\t" + wc.isCharge());
         
                 if (wantDescription) {
+
                     System.out.println("DESCRIPTION: ");
                     System.out.println(wc.getDescription());
                 }
             }
         } else {
-        
-            System.out.println("    WEAPON LIST EMPTY");
+
+            System.out.println();
+            System.out.println("WEAPON LIST EMPTY");
         }
     }
 
@@ -69,7 +72,7 @@ public class PrintWeapon implements Serializable {
         for (int i = 0; i < weaponList.size(); i++) {
 
             WeaponCard wc = weaponList.get(i);
-            System.out.println(i + ")" + wc.getNameWeaponCard());
+            System.out.println(i + ") " + wc.getNameWeaponCard());
         }
     }
 
