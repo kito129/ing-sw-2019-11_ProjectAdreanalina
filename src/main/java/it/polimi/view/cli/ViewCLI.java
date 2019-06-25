@@ -39,6 +39,7 @@ public class ViewCLI implements RemoteView, Serializable {
     private int index2;
     //attribute yes or no
     private boolean booleanChose;
+    private boolean booleanChose2;
     //scelta arma
     private int choicePlayer;
     private int choicePlayer2;
@@ -587,7 +588,7 @@ public class ViewCLI implements RemoteView, Serializable {
         return i;
     }
     
-    public void getSquareInput(int i){
+    public void setSquareInput (int i){
         
         PrintTarget.printSquare();
         
@@ -622,19 +623,38 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    public EnumColorSquare getRoomColor(GameModel gameModel){
+    public void setYesNoBooleanChoise(){
+    
+        Scanner input = new Scanner(System.in);
+        int temp;
+        
+        System.out.println("Your Choise?");
+        System.out.println("0) YES");
+        System.out.println("1) NO");
+    
+        do {
+            while (!input.hasNextInt())
+                input = new Scanner(System.in);
+            temp = input.nextInt();
+        }while (temp!=0 || temp!=1);
+        
+        if (temp==0){
+            setBooleanChose(true);
+        } else {
+            setBooleanChose(false);
+        }
+        
+        
+    }
+    
+    
+    public EnumColorSquare setRoomColorInput (GameModel gameModel){
         
         PrintTarget.printColor(gameModel);
         
         return gameModel.getMap().getRoomColor().get(getUserInput(0,gameModel.getMap().getRoomColor().size()));
     }
     
-    
-    //todo da sistemare: metodo per la scelta se si vuole spostare o meno un player dopo aver sparato (presente in molte armi)
-    public int getMoveYesNo(){
-        
-        return getUserInput(0,1);
-    }
     
     
     
@@ -736,7 +756,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewRunSelection() throws RemoteException {
 
         PrintRunAction.print();
-        getSquareInput(1);
+        setSquareInput(1);
         
         //notifica che hai preso i valori
         notifyController();
@@ -762,7 +782,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void  viewGrabSelection() throws RemoteException {
 
         PrintGrabAction.printGrabStuff();
-        getSquareInput(1);
+        setSquareInput(1);
         Square target;
         try {
             

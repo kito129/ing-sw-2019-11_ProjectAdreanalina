@@ -174,7 +174,7 @@ public class FunctionController {
     
     public void mapErrorGestor() throws RemoteException {
         
-        this.functionModel.getGameModel().setMessageToCurrentView("YOUR INPUT IS NOT CORRECT");
+        this.functionModel.getGameModel().setMessageToCurrentView("YOUR INPUT IS NOT VALID");
         this.functionModel.getGameModel().setBeforeError(this.functionModel.getGameModel().getState());
         this.functionModel.getGameModel().setState(State.ERROR);
     }
