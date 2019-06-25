@@ -17,6 +17,8 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("BASIC EFFECT");
         System.out.println("Who is your target? (enter player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
+        
+        
     }
 
     /**
@@ -449,7 +451,7 @@ public class PrintEffectWeapon implements Serializable {
      * Print the effect of this weapon
      * @param gameModel   the reference to the GameModel
      */
-    public static void printRocketLauncherRocketJump(GameModel gameModel){
+    public static void printRocketLauncherRocketJump(){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE ROCKET JUMP");
@@ -460,7 +462,7 @@ public class PrintEffectWeapon implements Serializable {
      * Print the effect of this weapon
      * @param gameModel   the reference to the GameModel
      */
-    public static void printRocketLauncherFragmentingWarhead(GameModel gameModel){
+    public static void printRocketLauncherFragmentingWarhead(){
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE FRAGMENTING WARHEAD");

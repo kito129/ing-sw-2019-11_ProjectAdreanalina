@@ -29,27 +29,13 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
 
         return this.gameModel;
     }
-
-    public FunctionModel getFunctionModel () {
-
-        return functionModel;
-    }
+    
 
     public void setGameModel(GameModel gameModel) {
 
         this.gameModel = gameModel;
     }
-
-    public void setFunctionController (FunctionController functionController) {
-
-        this.functionController = functionController;
-    }
-
-    public void setFunctionModel (FunctionModel functionModel) {
-
-        this.functionModel = functionModel;
-    }
-
+    
     public void setGameStarted(boolean gameStarted) {
 
         this.gameStarted = gameStarted;
@@ -105,7 +91,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case SELECTSHOOTINPUT:
                     functionController.weaponController.selectShootInput(view);
                 case SHOOT:
-                    functionModel.getGameModel().setState(State.CHOSEACTION);
+                    functionController.weaponController.afterShoot(view);
                 case ENDACTION:
 
                 case RECHARGE:
@@ -203,8 +189,6 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
             }
         }
     }
-   
-
 }
 
 

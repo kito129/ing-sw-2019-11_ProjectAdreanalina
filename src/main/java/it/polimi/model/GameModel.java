@@ -301,7 +301,7 @@ public class GameModel implements Serializable {
     /**
      * Sets actual player.
      *
-     * @param actualPlayer the actual player
+     * @param actualPlayer the actual playerf
      */
     public void setActualPlayer(Player actualPlayer) {
         
