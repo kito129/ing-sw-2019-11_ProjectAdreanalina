@@ -38,7 +38,7 @@ public class ViewWeapon {
         ArrayList<WeaponsEffect> weaponEffects = viewCLI.gameModel.getAvailableEffect();
         
         PrintEffectWeapon.printSelectWeaponEffect();
-        PrintWeapon.printEffectName(weaponEffects);
+        PrintWeapon.printEffectName(viewCLI.gameModel.getAvailableEffect());
     
         viewCLI.setIndex2(viewCLI.getUserInput(0,weaponEffects.size()));
         viewCLI.notifyController();

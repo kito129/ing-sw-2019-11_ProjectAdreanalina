@@ -257,6 +257,7 @@ public class WeaponController {
         i = view.getIndex2();
         if (gameModel.getAvailableEffect().get(i)!=null) {
             
+            //TODO SIstemare , la prima volta lo prendi dalla list dell'arma mentre la seconda volta (se c'è un before effect ) lo prendi dalla lista degli avaible nel gamemodel
             gameModel.setActualWeaponEffect(gameModel.getWeaponSelected().getWeaponEffects().get(i));
         } else {
             

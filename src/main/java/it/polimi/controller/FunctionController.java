@@ -8,8 +8,11 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
+import it.polimi.model.Weapon.LockRifle;
 import it.polimi.model.Weapon.PlasmaGun;
 import it.polimi.view.RemoteView;
+import sun.util.resources.ja.LocaleNames_ja;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -47,6 +50,7 @@ public class FunctionController {
                     Player player2 = new Player(3,"simone",EnumColorPlayer.BLU);
                     Player player3 = new Player(4,"niko",EnumColorPlayer.YELLOW);
                     Player player4 = new Player(5,"teo",EnumColorPlayer.GREEN);
+                    
                     //add on square
                     try {
                         gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,0),player1);
@@ -60,6 +64,8 @@ public class FunctionController {
                     } catch (MapException e) {
                         e.printStackTrace();
                     }
+                    
+                    gameModel.getPlayers(true).get(0).getPlayerBoard().addWeapon(new LockRifle());
                     
                     gameModel.setState(State.SPAWNPLAYER);
                     
