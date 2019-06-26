@@ -1295,29 +1295,18 @@ public class MatchController {
     }
 
     /**
-     * return the path of image
-     * @param image an image
+     * add to weaponSelected (ImageView) the image selected with a mouse click
+     * @param e image selected event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    public String pathImage(Image image){
+    public void imageClick(MouseEvent e){
 
         String path;
-        path = image.getUrl();
 
-        return path;
-    }
-
-    /**
-     * decides what to do when an image is clicked
-     * @param image shoot button event
-     * @throws IOException any exception thrown by the underlying OutputStream
-     */
-    public void mousePressed(Image image){
-
-        String path;
-        path = pathImage(image);
-        loadImage(path,143,244, weaponSelected);
-        weaponSelected.setImage(image);                         //non so se serve questa riga, magari basta quella sopra
+        ImageView selected = (ImageView) e.getSource();
+        path = selected.getImage().getUrl();
+        Image weaponClicked = new Image(path);
+        weaponSelected.setImage(weaponClicked);
     }
 
     /**
@@ -1327,7 +1316,6 @@ public class MatchController {
      */
     public void shootButtonClicked(ActionEvent e) throws IOException {
 
-        buttonRejoin.setVisible(false);
         answerOrMessageError.setText("SELECT A WEAPON FROM YOURS");
 
         //TODO selezionare l'arma che si vuole usare e dopo l'immagine del giocatore
@@ -1340,7 +1328,6 @@ public class MatchController {
      */
     public void runAroundButtonClicked(ActionEvent e) throws IOException {
 
-        buttonRejoin.setVisible(false);
         answerOrMessageError.setText("WHERE DO YOU WANT TO GO?");
 
         //TODO cliccare sull'immagine delle munizioni sulla mappa su cui ci si vuole spostare (il quadratino in alto a sinistra in ogni square)
@@ -1353,7 +1340,6 @@ public class MatchController {
      */
     public void grubStuffButtonClicked(ActionEvent e) throws IOException {
 
-        buttonRejoin.setVisible(false);
         answerOrMessageError.setText("WHERE DO YOU WANT TO GO TO GRUB A STUFF?");
 
         //TODO cliccare sull'immagine delle munizioni sulla mappa su cui ci si vuole spostare
@@ -1366,7 +1352,6 @@ public class MatchController {
      */
     public void rechargeButtonClicked(ActionEvent e) throws IOException {
 
-        buttonRejoin.setVisible(false);
         answerOrMessageError.setText("SELECT WEAPON FROM YOURS THAT YOU WANT TO RELOAD");
 
         //TODO selezionare un'arma e restituire l'arma/armi scelte
