@@ -81,7 +81,8 @@ public class PrintWeapon implements Serializable {
      * @param weaponEffects       list of weapon effects.
      */
     public static void printEffectName(ArrayList<WeaponsEffect> weaponEffects){
-
+        
+        
         System.out.println();
         for (int i = 0; i < weaponEffects.size(); i++) {
 

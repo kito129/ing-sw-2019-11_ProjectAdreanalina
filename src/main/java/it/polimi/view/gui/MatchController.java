@@ -1301,7 +1301,12 @@ public class MatchController {
      */
     public void imageClick(MouseEvent e){
 
+<<<<<<< HEAD
         String path;
+=======
+        String path="";
+        //path = image.getUrl();
+>>>>>>> origin/master
 
         ImageView selected = (ImageView) e.getSource();
         path = selected.getImage().getUrl();
