@@ -113,11 +113,11 @@
                               <Region fx:id="region4" prefHeight="192.0" prefWidth="16.0" />
                               <HBox prefHeight="192.0" prefWidth="316.0">
                                  <children>
-                                    <ImageView fx:id="weapon1" fitHeight="181.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="weapon1" fitHeight="181.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#weaponClick"/>
                                     <Region fx:id="region5" prefHeight="192.0" prefWidth="5.0" />
-                                    <ImageView fx:id="weapon2" fitHeight="181.0" fitWidth="101.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="weapon2" fitHeight="181.0" fitWidth="101.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#weaponClick"/>
                                     <Region fx:id="region6" layoutX="111.0" layoutY="10.0" prefHeight="192.0" prefWidth="5.0" />
-                                    <ImageView fx:id="weapon3" fitHeight="181.0" fitWidth="101.0" layoutX="116.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="weapon3" fitHeight="181.0" fitWidth="101.0" layoutX="116.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#weaponClick"/>
                                  </children>
                               </HBox>
                               <Region fx:id="region7" prefHeight="192.0" prefWidth="8.0" />
@@ -125,11 +125,11 @@
                                  <children>
                                     <HBox prefHeight="116.0" prefWidth="219.0">
                                        <children>
-                                          <ImageView fx:id="powerUp1" fitHeight="114.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="powerUp1" fitHeight="114.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#weaponClick"/>
                                           <Region fx:id="region8" prefHeight="114.0" prefWidth="4.0" />
-                                          <ImageView fx:id="powerUp2" fitHeight="114.0" fitWidth="68.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="powerUp2" fitHeight="114.0" fitWidth="68.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#weaponClick"/>
                                           <Region fx:id="region9" layoutX="78.0" layoutY="10.0" prefHeight="114.0" prefWidth="4.0" />
-                                          <ImageView fx:id="powerUp3" fitHeight="114.0" fitWidth="68.0" layoutX="82.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="powerUp3" fitHeight="114.0" fitWidth="68.0" layoutX="82.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#weaponClick"/>
                                           <Region fx:id="region10" layoutX="150.0" layoutY="10.0" prefHeight="114.0" prefWidth="7.0" />
                                        </children>
                                     </HBox>
@@ -550,8 +550,8 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ImageView fx:id="weapon1gsB" fitHeight="102.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                                          <ImageView fx:id="weapon2gsB" fitHeight="102.0" fitWidth="60.0" layoutX="29.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                                          <ImageView fx:id="weapon1gsB" fitHeight="102.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0" onMouseClicked="#weaponClick"/>
+                                          <ImageView fx:id="weapon2gsB" fitHeight="102.0" fitWidth="60.0" layoutX="29.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0" onMouseClicked="#weaponClick"/>
                                        </children>
                                     </GridPane>
                                     <GridPane fx:id="weaponB2" layoutX="328.0" layoutY="45.0" prefHeight="34.0" prefWidth="121.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
@@ -564,7 +564,7 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ImageView fx:id="weapon3gsB" fitHeight="102.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                                          <ImageView fx:id="weapon3gsB" fitHeight="102.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0" onMouseClicked="#weaponClick"/>
                                        </children>
                                     </GridPane>
                                     <GridPane fx:id="gridPowerupDeck" layoutX="434.0" layoutY="45.0" prefHeight="34.0" prefWidth="121.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
@@ -603,7 +603,7 @@
                                           <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ImageView fx:id="weapon1gsY" fitHeight="216.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ImageView fx:id="weapon1gsY" fitHeight="216.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1" onMouseClicked="#weaponClick"/>
                                        </children>
                                     </GridPane>
                                     <GridPane fx:id="weaponY2" layoutX="540.0" layoutY="223.0" prefHeight="111.0" prefWidth="105.0" GridPane.columnIndex="5" GridPane.rowIndex="5">
@@ -617,7 +617,7 @@
                                           <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ImageView fx:id="weapon2gsY" fitHeight="210.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ImageView fx:id="weapon2gsY" fitHeight="210.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="1" onMouseClicked="#weaponClick"/>
                                        </children>
                                     </GridPane>
                                     <GridPane fx:id="weaponY3" layoutX="540.0" layoutY="340.0" prefHeight="34.0" prefWidth="82.0" GridPane.columnIndex="5" GridPane.rowIndex="6">
@@ -629,7 +629,7 @@
                                           <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ImageView fx:id="weapon3gsY" fitHeight="215.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                                          <ImageView fx:id="weapon3gsY" fitHeight="215.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.rowIndex="0" onMouseClicked="#weaponClick"/>
                                        </children>
                                     </GridPane>
                                     <GridPane fx:id="weaponR1" layoutX="540.0" layoutY="451.0" prefHeight="121.0" prefWidth="106.0" GridPane.rowIndex="4">
@@ -643,8 +643,8 @@
                                           <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ImageView fx:id="weapon1gsR" fitHeight="106.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                                          <ImageView fx:id="weapon2gsR" fitHeight="112.0" fitWidth="66.0" layoutX="31.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ImageView fx:id="weapon1gsR" fitHeight="106.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" GridPane.columnIndex="1" GridPane.rowIndex="0" onMouseClicked="#weaponClick"/>
+                                          <ImageView fx:id="weapon2gsR" fitHeight="112.0" fitWidth="66.0" layoutX="31.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" GridPane.columnIndex="1" GridPane.rowIndex="2" onMouseClicked="#weaponClick"/>
                                        </children>
                                     </GridPane>
                                     <GridPane fx:id="weaponR2" layoutX="10.0" layoutY="223.0" prefHeight="121.0" prefWidth="106.0" GridPane.rowIndex="5">
@@ -658,7 +658,7 @@
                                           <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ImageView fx:id="weapon3gsR" fitHeight="106.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                                          <ImageView fx:id="weapon3gsR" fitHeight="106.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" GridPane.columnIndex="1" GridPane.rowIndex="0" onMouseClicked="#weaponClick"/>
                                           <ImageView fx:id="ammoDeck" fitHeight="72.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                        </children>
                                     </GridPane>

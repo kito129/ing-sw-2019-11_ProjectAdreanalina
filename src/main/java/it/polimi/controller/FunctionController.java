@@ -11,7 +11,6 @@ import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.model.Weapon.PlasmaGun;
 import it.polimi.view.RemoteView;
-import sun.util.resources.ja.LocaleNames_ja;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
