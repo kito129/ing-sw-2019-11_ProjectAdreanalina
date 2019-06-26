@@ -1295,18 +1295,13 @@ public class MatchController {
     }
 
     /**
-     * add to weaponSelected (ImageView) the image selected with a mouse click
+     * add to weaponSelected (ImageView) the weapon selected with a mouse click
      * @param e image selected event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    public void imageClick(MouseEvent e){
+    public void weaponClick(MouseEvent e){
 
-<<<<<<< HEAD
         String path;
-=======
-        String path="";
-        //path = image.getUrl();
->>>>>>> origin/master
 
         ImageView selected = (ImageView) e.getSource();
         path = selected.getImage().getUrl();
