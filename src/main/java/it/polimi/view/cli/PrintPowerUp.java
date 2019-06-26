@@ -25,27 +25,26 @@ public class PrintPowerUp implements Serializable {
             PowerUpCard puc = powerUpCards.get(i);
         
             System.out.println("\n" + i +"): ");
-            System.out.println("POWER UP: " + puc.getNameCard());
+            System.out.println("POWER UP:\t\t" + puc.getNameCard());
             if(wantDescription) {
-                System.out.println("    DESCRIPTION: ");
-                System.out.println("    " + puc.getDescription());
+                System.out.println("DESCRIPTION:");
+                System.out.println("\t" + puc.getDescription());
             }
         
             if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.BLU)) {
             
-                System.out.println("    COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
         
             if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.RED)) {
             
-                System.out.println("    COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
         
             if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.YELLOW)) {
             
-                System.out.println("    COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
             }
-            
         }
     }
 }
