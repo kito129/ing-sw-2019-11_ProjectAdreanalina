@@ -43,5 +43,7 @@ public class PrintPlayerInfo implements Serializable {
 
         System.out.println("ID: " +player.getId());
         System.out.println("NAME: " +player.getName());
+        System.out.println("ROW: " +player.getRow());
+        System.out.println("COLUMN: " +player.getColumn());
     }
 }

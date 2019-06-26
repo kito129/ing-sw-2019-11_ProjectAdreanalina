@@ -718,12 +718,14 @@ public class ViewCLI implements RemoteView, Serializable {
         Player player = gameModel.getActualPlayer();
     
         System.out.println(player.toString());
-    
-        System.out.println("\nPOWER UP TO CHOOSE:");
+
+        System.out.println();
+        System.out.println("POWER UP TO CHOOSE:");
         
         PrintPowerUp.print(player.getPowerUpCardsSpawn(),false);
-    
-        System.out.println("\nMAKE YOUR CHOICE!");
+
+        System.out.println();
+        System.out.println("MAKE YOUR CHOICE!");
         
         setIndex(getUserInput(0,1));
         notifyController();
