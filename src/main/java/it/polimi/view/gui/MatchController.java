@@ -16,6 +16,7 @@ import javafx.scene.image.Image ;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.lang.String;
 
 public class MatchController {
 
@@ -50,7 +51,7 @@ public class MatchController {
     private GridPane square1, square2, square3, square4, square5, square6, square7, square8, square9, square10, square11, square12;
 
     @FXML
-    protected Label answerOrMessageError;
+    protected Label answerOrMessageError, weaponInfo;
 
     @FXML
     private ImageView weapon1, weapon2, weapon3, powerUp1, powerUp2, powerUp3, weaponSelected;
@@ -108,6 +109,7 @@ public class MatchController {
         gridSkull2.managedProperty().bind(gridSkull2.visibleProperty());
         gridSkull3.managedProperty().bind(gridSkull3.visibleProperty());
         answerOrMessageError.managedProperty().bind(answerOrMessageError.visibleProperty());
+        weaponInfo.managedProperty().bind(weaponInfo.visibleProperty());
         buttonRunAround.managedProperty().bind(buttonRunAround.visibleProperty());
         buttonGrubStuff.managedProperty().bind(buttonGrubStuff.visibleProperty());
         buttonShoot.managedProperty().bind(buttonShoot.visibleProperty());
@@ -1307,6 +1309,22 @@ public class MatchController {
         path = selected.getImage().getUrl();
         Image weaponClicked = new Image(path);
         weaponSelected.setImage(weaponClicked);
+        controlPathWeapon(path);
+    }
+
+    /**
+     * control if the name of weapon is contains in the path of image and set a tha weaponInfo (Label) with the corresponding description
+     * @param path the path of weapon image
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void controlPathWeapon(String path){
+
+        //TODO prendere la descrizione da ogni arma
+
+        if (path.contains("CYBERBLADE")){
+
+            weaponInfo.setText("");
+        }
     }
 
     /**
