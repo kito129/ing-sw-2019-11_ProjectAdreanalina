@@ -1328,6 +1328,81 @@ public class MatchController {
     }
 
     /**
+     * control the coordinates of the square selected and set the corresponding index
+     * @param e square selected event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void takeIndexSquare(MouseEvent e){
+
+        //TODO settare row e col
+
+        int row;
+        int col;
+
+        GridPane selected = (GridPane) e.getSource();
+
+        if (selected == square1){
+
+            row = 0;
+            col = 0;
+        }else if (selected == square2){
+
+            row = 0;
+            col = 1;
+        }else if (selected == square3){
+
+            row = 0;
+            col = 2;
+        }else if (selected == square4){
+
+            row = 0;
+            col = 3;
+        }else if (selected == square5){
+
+            row = 1;
+            col = 0;
+        }else if (selected == square6){
+
+            row = 1;
+            col = 1;
+        }else if (selected == square7){
+
+            row = 1;
+            col = 2;
+        }else if (selected == square8){
+
+            row = 1;
+            col = 3;
+        }else if (selected == square9){
+
+            row = 2;
+            col = 0;
+        }else if (selected == square10){
+
+            row = 2;
+            col = 1;
+        }else if (selected == square11){
+
+            row = 2;
+            col = 2;
+        }else if (selected == square12){
+
+            row = 2;
+            col = 3;
+        }
+    }
+
+    private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
+    }
+
+    /**
      * decides what to do when the shootButton is clicked
      * @param e shoot button event
      * @throws IOException any exception thrown by the underlying OutputStream
