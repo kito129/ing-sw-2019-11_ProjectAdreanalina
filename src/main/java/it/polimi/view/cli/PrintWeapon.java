@@ -9,10 +9,11 @@ import java.util.ArrayList;
 
 public class PrintWeapon implements Serializable {
 
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RESET = "\u001b[0m";
 
     /**
      * Print Client's weapons.
@@ -31,17 +32,17 @@ public class PrintWeapon implements Serializable {
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)) {
             
-                    System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t" + ANSI_BLUE + "BLUE" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.RED)) {
             
-                    System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t" + ANSI_RED + "RED" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)) {
             
-                    System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t" + ANSI_YELLOW + "YELLOW" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 System.out.print("RECHARGE COST:\t");

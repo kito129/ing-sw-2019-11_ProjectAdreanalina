@@ -8,10 +8,11 @@ import java.util.ArrayList;
 
 public class PrintPowerUp implements Serializable {
 
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RESET = "\u001b[0m";
 
     /**
      * Print Client's powerup.
@@ -25,7 +26,7 @@ public class PrintPowerUp implements Serializable {
             PowerUpCard puc = powerUpCards.get(i);
         
             System.out.println("\n" + i +"): ");
-            System.out.println("POWER UP:\t\t" + puc.getNameCard());
+            System.out.println("POWER UP:" + puc.getNameCard());
             if(wantDescription) {
                 System.out.println("DESCRIPTION:");
                 System.out.println("\t" + puc.getDescription());
@@ -33,17 +34,17 @@ public class PrintPowerUp implements Serializable {
         
             if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.BLU)) {
             
-                System.out.println("COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                System.out.println("COLOR:\t" + ANSI_BLUE + "BLUE" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
             }
         
             if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.RED)) {
             
-                System.out.println("COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                System.out.println("COLOR:\t" + ANSI_RED + "RED" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
             }
         
             if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.YELLOW)) {
             
-                System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                System.out.println("COLOR:\t" + ANSI_YELLOW + "YELLOW" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
             }
         }
     }

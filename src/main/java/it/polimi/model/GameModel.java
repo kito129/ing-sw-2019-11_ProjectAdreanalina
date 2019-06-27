@@ -1,6 +1,5 @@
 package it.polimi.model;
 
-import com.sun.jmx.snmp.EnumRowStatus;
 import it.polimi.controller.FunctionController;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
