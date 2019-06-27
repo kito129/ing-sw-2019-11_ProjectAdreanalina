@@ -28,27 +28,27 @@ public class PrintWeapon implements Serializable {
 
                 System.out.println();
                 System.out.println(i + "): ");
-                System.out.println("NAME:\t\t" + wc.getNameWeaponCard());
+                System.out.println("NAME:\t\t    " + wc.getNameWeaponCard());
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)) {
             
-                    System.out.println("COLOR:\t\t" + ANSI_BLUE + "BLUE" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t    " + ANSI_BLUE + "BLUE" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.RED)) {
             
-                    System.out.println("COLOR:\t\t" + ANSI_RED + "RED" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t    " + ANSI_RED + "RED" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)) {
             
-                    System.out.println("COLOR:\t\t" + ANSI_YELLOW + "YELLOW" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t    " + ANSI_YELLOW + "YELLOW" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 System.out.print("RECHARGE COST:\t");
                 PrintEnumCardsAmmo.print(wc.getRechargeCost());
         
-                System.out.println("\nLOADED:\t\t" + wc.isCharge());
+                System.out.println("\nLOADED:\t\t    " + wc.isCharge());
         
                 if (wantDescription) {
 
