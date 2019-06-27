@@ -40,7 +40,7 @@ public class ViewWeapon {
         PrintEffectWeapon.printSelectWeaponEffect();
         PrintWeapon.printEffectName(viewCLI.gameModel.getAvailableEffect());
     
-        viewCLI.setIndex2(viewCLI.getUserInput(0,weaponEffects.size()));
+        viewCLI.setIndex2(viewCLI.getUserInput(-2,weaponEffects.size()));
         viewCLI.notifyController();
         
         
@@ -48,9 +48,10 @@ public class ViewWeapon {
     
     public void viewShoot() throws RemoteException {
     
+        System.out.println(viewCLI.gameModel.getState().toString());
         viewCLI.printMessageAll();
     
-        viewCLI.CLIViewMap();
+        //viewCLI.CLIViewMap();
     
         viewCLI.notifyController();
         

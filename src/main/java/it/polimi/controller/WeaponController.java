@@ -40,125 +40,167 @@ public class WeaponController {
                 
                 //set extra state
                 switch (name) {
+                    case "LOCK RIFLE":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.LockRifle);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        break;
+                    case "ELECTOSCYTHE":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Electroscythe);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                        //TODO
+                    case "MACHINE GUN":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.MachineGun);
+                        //set the effect list
+                        //TODO
+                        break;
+                    case "TRACTOR BEAM":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.TractorBeam);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "VORTEX CANNON":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.VortexCannon);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        break;
+                    case "T.H.O.R":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Thor);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        break;
+                    case "FURNACE":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Furnace);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "PLASMA GUN":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.PlasmaGun);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "HEAT SEEKER":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Heatseeker);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        break;
+                    case "WHISPER":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Whisper);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        break;
+                    case "HELLION":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Hellion);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "FLAME THROWER":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Flamethrower);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "ZX-2":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Zx2);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "GRENADE LAUNCHER":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.GrenadeLauncher);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        break;
+                    case "SHOTGUN":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Shotgun);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "ROCKET LAUNCHER":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.RocketLauncher);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().add(weapon.getWeaponEffects().get(0));
+                        break;
+                    case "POWER GLOVE":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.PowerGlove);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "RAILGUN":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Railgun);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
+                    case "SHOCKWAVE":
+        
+                        this.functionModel.getGameModel().setWeaponSelected(weapon);
+                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
+                        gameModel.setWeaponState(WeaponState.Shockwave);
+                        //set the effect list
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        break;
                     case "CYBERBLADE":
     
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Cyberblade);
                         //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "ELECTOSCYTHE":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Electroscythe);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "FLAME THROWER":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Flamethrower);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "FURNACE":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Furnace);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "GRENADE LAUNCHER":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.GrenadeLauncher);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "HEAT SEEKER":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Heatseeker);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "HELLION":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Hellion);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "LOCK RIFLE":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.LockRifle);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "MACHINE GUN":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.MachineGun);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "PLASMA GUN":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.PlasmaGun);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "POWER GLOVE":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.PowerGlove);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "RAILGUN":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Railgun);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "ROCKET LAUNCHER":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.RocketLauncher);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "SHOCKWAVE":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Shockwave);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "SHOTGUN":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Shotgun);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
+                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.ShadowstepEffect);
                         break;
                     case "SLADGEHAMMER":
     
@@ -166,47 +208,7 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Sledgehammer);
                         //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "T.H.O.R":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Thor);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "TRACTOR BEAM":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.TractorBeam);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "VORTEX CANNON":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.VortexCannon);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "WHISPER":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Whisper);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
-                        break;
-                    case "ZX-2":
-    
-                        this.functionModel.getGameModel().setWeaponSelected(weapon);
-                        this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
-                        gameModel.setWeaponState(WeaponState.Zx2);
-                        //set the effect list
-                        functionController.weaponController.setListEffect(weapon);
+                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
                         break;
                 }
             } else {
@@ -225,29 +227,6 @@ public class WeaponController {
         
     }
     
-    public void setListEffect(WeaponCard weapon){
-        
-        GameModel gameModel = this.functionModel.getGameModel();
-        
-        switch (gameModel.getWeaponState()){
-            
-            
-            //here add different start effect configuration for particular army
-        
-            default:
-                if(!weapon.isOptional()){
-                    
-                    gameModel.setAvailableEffect(weapon.getWeaponEffects());
-                } else {
-                    
-                    //for the moment take the first, for complex weapon, switch with list of avaible effect
-                    ArrayList<WeaponsEffect> baseArray = new ArrayList<>();
-                    baseArray.add(weapon.getWeaponEffects().get(0));
-                    gameModel.setAvailableEffect(baseArray);
-                }
-                break;
-        }
-    }
     
     public void selectWeaponEffect(RemoteView view) throws RemoteException {
         
@@ -255,15 +234,22 @@ public class WeaponController {
         int i;
         
         i = view.getIndex2();
-        if (gameModel.getAvailableEffect().get(i)!=null) {
+        if (i == -1) {
             
-            //TODO SIstemare , la prima volta lo prendi dalla list dell'arma mentre la seconda volta (se c'è un before effect ) lo prendi dalla lista degli avaible nel gamemodel
-            gameModel.setActualWeaponEffect(gameModel.getWeaponSelected().getWeaponEffects().get(i));
+            gameModel.setState(State.CHOSEACTION);
+            
         } else {
-            
-            functionController.setErrorState("NOT VALID INPUT");
+    
+            if (gameModel.getAvailableEffect().get(i) != null) {
+        
+        
+                gameModel.setActualWeaponEffect(gameModel.getAvailableEffect().get(i));
+            } else {
+        
+                functionController.setErrorState("NOT VALID INPUT");
+            }
+            gameModel.setState(State.SELECTSHOOTINPUT);
         }
-        gameModel.setState(State.SELECTSHOOTINPUT);
     }
     
     public WeaponCard getCorrectWeapon(String weaponName) throws NotValidInput {
@@ -293,6 +279,11 @@ public class WeaponController {
         if(functionModel.getGameModel().getAvailableEffect().size()==0){
             
             //there are no more effect avaible
+            functionModel.getGameModel().getAvailableEffect().removeAll( functionModel.getGameModel().getAvailableEffect());
+            functionModel.getGameModel().setBeforeEffect(null);
+            functionModel.getGameModel().setWeaponName(null);
+            functionModel.getGameModel().setWeaponSelected(null);
+            functionModel.getGameModel().setActualWeaponEffect(null);
             functionModel.getGameModel().setState(State.CHOSEACTION);
         } else {
             
@@ -759,6 +750,7 @@ public class WeaponController {
         } catch (NotValidInput notValidInput) {
             notValidInput.printStackTrace();
         }
+        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED:" + gameModel.getWeaponName() +"CORRECTLY");
         this.functionModel.getGameModel().setState(State.SHOOT);
         
     }
@@ -781,10 +773,7 @@ public class WeaponController {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    //Remove used effect
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
-                    //add next effect
-                    gameModel.getAvailableEffect().add(WeaponsEffect.SecondLockEffect);
+                   
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
@@ -792,6 +781,10 @@ public class WeaponController {
                     
                     functionController.mapErrorGestor();
                 }
+                //Remove used effect
+                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                //add next effect
+                gameModel.getAvailableEffect().add(WeaponsEffect.SecondLockEffect);
                 break;
             
             case SecondLockEffect:
@@ -1094,9 +1087,7 @@ public class WeaponController {
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     //set before effect as base and remove
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
-                    //add next effect
-                    gameModel.getAvailableEffect().add(WeaponsEffect.HighVoltageEffect);
+                   
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
@@ -1104,6 +1095,10 @@ public class WeaponController {
                     
                     functionController.mapErrorGestor();
                 }
+                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                //add next effect
+                gameModel.getAvailableEffect().add(WeaponsEffect.HighVoltageEffect);
+                break;
             case ChainReactionEffect:
                 
                 if(gameModel.getBeforeEffect() == WeaponsEffect.BaseEffect) {
@@ -1116,10 +1111,7 @@ public class WeaponController {
                             
                             weapon.chainReactionEffect(currentPlayer, targetChainReaction);
                             gameModel.setBeforeEffect(WeaponsEffect.ChainReactionEffect);
-                            //remove
-                            gameModel.getAvailableEffect().remove(WeaponsEffect.ChainReactionEffect);
-                            //add next effect
-                            gameModel.getAvailableEffect().add(WeaponsEffect.HighVoltageEffect);
+                            
                         } else {
                             
                             throw new NotValidInput();
@@ -1132,6 +1124,10 @@ public class WeaponController {
                         
                         functionController.mapErrorGestor();
                     }
+                    //remove
+                    gameModel.getAvailableEffect().remove(WeaponsEffect.ChainReactionEffect);
+                    //add next effect
+                    gameModel.getAvailableEffect().add(WeaponsEffect.HighVoltageEffect);
                 }else {
                     
                     functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
@@ -1194,10 +1190,7 @@ public class WeaponController {
                     vortexSquare = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.baseEffect(map, vortexSquare, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    //remove
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
-                    //add next effect
-                    gameModel.getAvailableEffect().add(WeaponsEffect.BlackHoleEffect);
+                   
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE FROM YOUR POSITION");
@@ -1209,6 +1202,10 @@ public class WeaponController {
                     
                     functionController.setErrorState("ERROR: MAP ERROR");
                 }
+                //remove
+                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                //add next effect
+                gameModel.getAvailableEffect().add(WeaponsEffect.BlackHoleEffect);
                 break;
             
             case BlackHoleEffect:
@@ -1256,6 +1253,8 @@ public class WeaponController {
                         
                         functionController.mapErrorGestor();
                     }
+                    //empty list
+                    gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
                 } else {
                     
                     functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
@@ -1332,7 +1331,7 @@ public class WeaponController {
                         weapon.chargedShotEffect(currentPlayer, targetBase);
                     }
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffectPlusChargedShotEffect);
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusChargedShotEffect);
+                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
@@ -1340,6 +1339,7 @@ public class WeaponController {
                     
                     functionController.setErrorState("ERROR: MAP ERROR");
                 }
+                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusChargedShotEffect);
                 break;
             
             case PhaseGlideEffect:
@@ -1349,8 +1349,7 @@ public class WeaponController {
                     
                     destSquarePhaseGlide = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.phaseGlideEffect(map, destSquarePhaseGlide, currentPlayer);
-                    //remove effect
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.PhaseGlideEffect);
+                   
                 } catch (MapException e) {
                     
                     functionController.setErrorState("ERROR: MAP ERROR");
@@ -1358,6 +1357,8 @@ public class WeaponController {
                     
                     functionController.setErrorState("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVES");
                 }
+                //remove effect
+                gameModel.getAvailableEffect().remove(WeaponsEffect.PhaseGlideEffect);
                 break;
             
         }
@@ -1678,14 +1679,6 @@ public class WeaponController {
     }
     
     
-   
-    
-    
-    
-   
-    
-   
-    
     public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon, RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -1703,7 +1696,7 @@ public class WeaponController {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, targetBase, currentPlayer);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
                     gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
@@ -1711,6 +1704,7 @@ public class WeaponController {
                     
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
+                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
                 break;
             
             case MoveTarget:
@@ -1834,7 +1828,7 @@ public class WeaponController {
                         
                         destSquareBase = null;
                         weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
-                        gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
+                      
                         
                     }else{
                         
@@ -1861,7 +1855,7 @@ public class WeaponController {
                     
                     functionController.setErrorState("ERROR: NO TARGET IN CHOSEN SQUARE ");
                 }
-                
+                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
                 break;
             
             case RocketJumpEffect:
@@ -1877,6 +1871,7 @@ public class WeaponController {
                     
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
+                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
                 break;
         }
     }
@@ -2008,7 +2003,7 @@ public class WeaponController {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                   
                     
                 } catch (NotValidDistance notValidDistance) {
     
@@ -2031,6 +2026,7 @@ public class WeaponController {
                     
                     functionController.mapErrorGestor();
                 }
+                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
             case SliceAndDiceEffect:
                 
                 if(gameModel.getBeforeEffect()==WeaponsEffect.BaseEffect || gameModel.getBeforeEffect()==WeaponsEffect.ShadowstepEffect) {
@@ -2042,7 +2038,7 @@ public class WeaponController {
                         if (targetBase != targetSliceAndDice) {
                             
                             weapon.sliceAndDiceEffect(map, currentPlayer, targetSliceAndDice);
-                            gameModel.getAvailableEffect().remove(WeaponsEffect.SliceAndDiceEffect);
+                            
                         } else {
                             
                             throw new NotValidInput();
@@ -2057,6 +2053,7 @@ public class WeaponController {
                         
                         functionController.mapErrorGestor();
                     }
+                    gameModel.getAvailableEffect().remove(WeaponsEffect.SliceAndDiceEffect);
                 } else {
     
                     functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");

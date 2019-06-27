@@ -1303,7 +1303,7 @@ public class MatchController {
      * @throws IOException any exception thrown by the underlying OutputStream
      */
     public void weaponClick(MouseEvent e){
-
+/*
         String path;
 
         ImageView selected = (ImageView) e.getSource();
@@ -1311,6 +1311,8 @@ public class MatchController {
         Image weaponClicked = new Image(path);
         weaponSelected.setImage(weaponClicked);
         controlPathWeapon(path);
+        
+ */
     }
 
     /**

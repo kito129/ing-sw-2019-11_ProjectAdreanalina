@@ -80,13 +80,13 @@ public class FunctionController {
     public void drawnPowerUp () throws RemoteException {
         
         GameModel gameModel = this.functionModel.getGameModel();
-        Player a = gameModel.getActualPlayer();
+        Player actual = gameModel.getActualPlayer();
             
         ArrayList<PowerUpCard> tempPowerUp = new ArrayList<>();
         tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
         tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
         System.out.println(tempPowerUp.toString());
-        a.setPowerUpCardsSpawn(tempPowerUp);
+        actual.setPowerUpCardsSpawn(tempPowerUp);
         
         System.out.println(gameModel.getActualPlayer().toString());
     }
@@ -149,28 +149,16 @@ public class FunctionController {
     public void errorState() throws RemoteException {
         
         System.out.println("ERROR STATE-->\n"+"ERROR MESSAGE: "+ functionModel.getGameModel().getErrorMessage() +"\nRESTART IN STATE CHOICE STATE-->");
-        
+       
         switch (this.functionModel.getGameModel().getBeforeError()){
-            case SELECTWEAPON:
-                this.functionModel.getGameModel().setState(State.CHOSEACTION);
-                break;
-            case SELECTPOWERUP:
-                this.functionModel.getGameModel().setState(State.CHOSEACTION);
-                break;
-            case SELECTRUN:
-                this.functionModel.getGameModel().setState(State.CHOSEACTION);
-                break;
+            
             case SELECTEFFECT:
                 this.functionModel.getGameModel().setState(State.SELECTEFFECT);
                 break;
-            case SELECTGRAB:
-                this.functionModel.getGameModel().setState(State.CHOSEACTION);
+            case SHOOT:
+                this.functionModel.getGameModel().setState(State.SELECTEFFECT);
                 break;
-            case SELECTPOWERUPINPUT:
-                this.functionModel.getGameModel().setState(State.CHOSEACTION);
-            case CHOSEACTION:
-                this.functionModel.getGameModel().setState(State.CHOSEACTION);
-                break;
+                
             default:
                 this.functionModel.getGameModel().setState(State.CHOSEACTION);
                 break;
@@ -204,6 +192,9 @@ public class FunctionController {
     //state gestor and map error gestor
     public void setErrorState(String string){
         
+        if (functionModel.getGameModel().getAvailableEffect().contains(WeaponsEffect.BaseEffect) ||functionModel.getGameModel().getAvailableEffect().contains(WeaponsEffect.BaseMode)){
+            functionModel.getGameModel().getAvailableEffect().removeAll(functionModel.getGameModel().getAvailableEffect());
+        }
         this.functionModel.getGameModel().setErrorMessage(string);
         this.functionModel.getGameModel().setBeforeError(this.functionModel.getGameModel().getState());
         this.functionModel.getGameModel().setState(State.ERROR);

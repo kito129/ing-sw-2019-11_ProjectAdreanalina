@@ -1,5 +1,6 @@
 package it.polimi.model;
 
+import com.sun.jmx.snmp.EnumRowStatus;
 import it.polimi.controller.FunctionController;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
@@ -280,6 +281,9 @@ public class GameModel implements Serializable {
     public void setState (State state)  {
         
         this.state=state;
+        if(state!= State.ERROR) {
+            this.setBeforeError(getState());
+        }
         notifyObserver(this);
     }
     

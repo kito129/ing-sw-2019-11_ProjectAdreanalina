@@ -600,5 +600,6 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("WHICH WEAPON EFFECT DO YOU WANT TO USE?");
+        System.out.println("-1 TO EXIT");
     }
 }
