@@ -4,6 +4,7 @@ import it.polimi.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -1335,6 +1336,10 @@ public class MatchController {
     public void takeIndexSquare(MouseEvent e){
 
         //TODO settare row e col
+
+        //potrei lavorare direttamente sulla ImageView
+        //ImageView select = (ImageView) e.getSource();
+        //select.getParent();
 
         int row;
         int col;
