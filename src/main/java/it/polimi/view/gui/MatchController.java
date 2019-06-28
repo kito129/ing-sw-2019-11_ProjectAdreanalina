@@ -1302,16 +1302,16 @@ public class MatchController {
      * @param e image selected event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-<<<<<<< HEAD
+
     public String pathImage(Image image){
 
         String path="";
        // path = image.getUrl();
-=======
+
     public void weaponClick(MouseEvent e){
 /*
         String path;
->>>>>>> 93f7583d18b1c8caaa0823f850945f67e4754ebc
+
 
         ImageView selected = (ImageView) e.getSource();
         path = selected.getImage().getUrl();
