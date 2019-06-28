@@ -1301,7 +1301,7 @@ public class MatchController {
      * add to weaponSelected (ImageView) the weapon (also power up) selected with a mouse click
      * @param e image selected event
      * @throws IOException any exception thrown by the underlying OutputStream
-     */
+     
 
     public String pathImage(Image image){
 
@@ -1309,7 +1309,7 @@ public class MatchController {
        // path = image.getUrl();
 
     public void weaponClick(MouseEvent e){
-/*
+
         String path;
 
 
@@ -1319,10 +1319,9 @@ public class MatchController {
         weaponSelected.setImage(weaponClicked);
         controlPathWeapon(path);
         
- */
-    }
+ }
 
-    /**
+    
      * control if the name of weapon is contains in the path of image and set a tha weaponInfo (Label) with the corresponding description
      * @param path the path of weapon image
      * @throws IOException any exception thrown by the underlying OutputStream
