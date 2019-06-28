@@ -1301,8 +1301,8 @@ public class MatchController {
      */
     public String pathImage(Image image){
 
-        String path;
-        path = image.getUrl();
+        String path="";
+       // path = image.getUrl();
 
         return path;
     }
