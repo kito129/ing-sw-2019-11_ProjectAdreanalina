@@ -45,7 +45,7 @@ public class PrintWeapon implements Serializable {
                     System.out.println("COLOR:\t\t    " + ANSI_YELLOW + "YELLOW" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
-                System.out.print("RECHARGE COST:\t");
+                System.out.print("RECHARGE COST:\t    ");
                 PrintEnumCardsAmmo.print(wc.getRechargeCost());
         
                 System.out.println("\nLOADED:\t\t    " + wc.isCharge());

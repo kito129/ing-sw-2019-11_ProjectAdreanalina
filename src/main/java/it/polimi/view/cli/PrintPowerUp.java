@@ -26,7 +26,7 @@ public class PrintPowerUp implements Serializable {
             PowerUpCard puc = powerUpCards.get(i);
         
             System.out.println("\n" + i +"): ");
-            System.out.println("POWER UP:\t\t" + puc.getNameCard());
+            System.out.println("POWER UP:\t    " + puc.getNameCard());
             if(wantDescription) {
                 System.out.println("DESCRIPTION:");
                 System.out.println("\t" + puc.getDescription());
