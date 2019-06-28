@@ -71,7 +71,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case SELECTPOWERUP:
                     functionController.selectPowerUp(view);
                     break;
-                case USEPOWERUP:
+                case SELECTPOWERUPINPUT:
                     functionController.usePowerUpController(view);
                     break;
                 case SELECTRUN:
