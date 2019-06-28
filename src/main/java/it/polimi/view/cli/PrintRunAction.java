@@ -7,7 +7,7 @@ public class PrintRunAction {
      */
     public static void print(){
 
-        System.out.println("CHOOSE YOUR MOVE! (-1 TO ABORT)");
-        System.out.println("Put row and column where you want to move.");
+        System.out.println();
+        System.out.println("Put row and column where you want to move. (-1 TO ABORT)");
     }
 }

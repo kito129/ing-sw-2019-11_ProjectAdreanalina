@@ -19,6 +19,8 @@ public class Player implements Serializable {
     private boolean damaged;
     private boolean online;
     private ArrayList<PowerUpCard> powerUpCardsSpawn = new ArrayList<>(2);
+    private ArrayList<Player> damagedGameModel;
+    private ArrayList<Player> markedGameModel;
    
     
     /**
@@ -29,7 +31,7 @@ public class Player implements Serializable {
      * @param name  the name of the player
      * @param color the color of the player
      */
-    public Player (int id, String name, EnumColorPlayer color) {
+    public Player (int id, String name, EnumColorPlayer color,GameModel gameModel) {
     
         this.id = id;
         this.name = name;
@@ -41,6 +43,9 @@ public class Player implements Serializable {
         this.row=-1;
         this.column=-1;
         setOnlineModel(true);
+        //test
+        this.damagedGameModel = gameModel.getPlayerDamaged();
+        this.markedGameModel = gameModel.getPlayerMarked();
 
         // TODO vedere come gestire posizione in fase di inizializzazione.io inizialmente le metterei a  null quando vengono istanziati
     
@@ -233,12 +238,16 @@ public class Player implements Serializable {
     public void singleMark(EnumColorPlayer mark){
 
         this.playerBoard.increaseMarks(mark);
+        //test
+        this.markedGameModel.add(this);
 
     }
 
     public void multipleMarks(ArrayList<EnumColorPlayer> marks){
 
         this.playerBoard.increaseMarks(marks);
+        //test
+        this.markedGameModel.add(this);
     }
 
     public void singleDamage(EnumColorPlayer damage){
@@ -246,6 +255,8 @@ public class Player implements Serializable {
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);
         this.damaged=true;
+        //test
+        this.damagedGameModel.add(this);
 
     }
 
@@ -254,6 +265,9 @@ public class Player implements Serializable {
         this.playerBoard.increaseDamages(damages);
         this.playerBoard.shiftMarks(damages.get(0));
         this.damaged=true;
+        //test
+        this.damagedGameModel.add(this);
+        
     }
 
     public void multipleDamagesSingleMark(ArrayList<EnumColorPlayer> damages, EnumColorPlayer mark){
@@ -262,6 +276,9 @@ public class Player implements Serializable {
         this.playerBoard.shiftMarks(mark);
         this.playerBoard.increaseMarks(mark);
         this.damaged=true;
+        //test
+        this.damagedGameModel.add(this);
+        this.markedGameModel.add(this);
     }
 
     public void singleDamageMultipleMarks(EnumColorPlayer damage, ArrayList<EnumColorPlayer> marks) {
@@ -270,6 +287,9 @@ public class Player implements Serializable {
         this.playerBoard.shiftMarks(damage);
         this.playerBoard.increaseMarks(marks);
         this.damaged=true;
+        //test
+        this.damagedGameModel.add(this);
+        this.markedGameModel.add(this);
     }
 
     @Override

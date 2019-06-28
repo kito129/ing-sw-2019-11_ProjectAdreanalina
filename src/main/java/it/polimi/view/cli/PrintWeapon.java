@@ -9,10 +9,11 @@ import java.util.ArrayList;
 
 public class PrintWeapon implements Serializable {
 
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RESET = "\u001b[0m";
 
     /**
      * Print Client's weapons.
@@ -24,38 +25,41 @@ public class PrintWeapon implements Serializable {
     
             for (int i = 0; i < weaponList.size(); i++) {
                 WeaponCard wc = weaponList.get(i);
-        
-                System.out.println("\n" + i + "): ");
-                System.out.println("NAME: " + wc.getNameWeaponCard());
+
+                System.out.println();
+                System.out.println(i + "): ");
+                System.out.println("NAME:\t\t    " + wc.getNameWeaponCard());
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)) {
             
-                    System.out.println("    COLOR: " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t    " + ANSI_BLUE + "BLUE" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.RED)) {
             
-                    System.out.println("    COLOR: " + ANSI_RED_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t    " + ANSI_RED + "RED" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.YELLOW)) {
             
-                    System.out.println("    COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    System.out.println("COLOR:\t\t    " + ANSI_YELLOW + "YELLOW" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
                 }
         
-                System.out.print("  RECHARGE COST: ");
+                System.out.print("RECHARGE COST:\t    ");
                 PrintEnumCardsAmmo.print(wc.getRechargeCost());
         
-                System.out.println("\nLOADED WEAPON: " + wc.isCharge());
+                System.out.println("\nLOADED:\t\t    " + wc.isCharge());
         
                 if (wantDescription) {
+
                     System.out.println("DESCRIPTION: ");
                     System.out.println(wc.getDescription());
                 }
             }
         } else {
-        
-            System.out.println("    WEAPON LIST EMPTY");
+
+            System.out.println();
+            System.out.println("WEAPON LIST EMPTY");
         }
     }
 
@@ -69,7 +73,7 @@ public class PrintWeapon implements Serializable {
         for (int i = 0; i < weaponList.size(); i++) {
 
             WeaponCard wc = weaponList.get(i);
-            System.out.println(i + ")" + wc.getNameWeaponCard());
+            System.out.println(i + ") " + wc.getNameWeaponCard());
         }
     }
 
@@ -78,7 +82,8 @@ public class PrintWeapon implements Serializable {
      * @param weaponEffects       list of weapon effects.
      */
     public static void printEffectName(ArrayList<WeaponsEffect> weaponEffects){
-
+        
+        
         System.out.println();
         for (int i = 0; i < weaponEffects.size(); i++) {
 

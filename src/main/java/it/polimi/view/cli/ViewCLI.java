@@ -18,12 +18,10 @@ import java.util.Timer;
 
 public class ViewCLI implements RemoteView, Serializable {
 
-    //dobbiamo capire quali classi della view devono essere serializzabili
+    //TODO controllare se inserisco -1 che si torna indietro
 
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    //dobbiamo capire quali classi della view devono essere serializzabili
+    
     
     protected String user;
     public GameModel gameModel;
@@ -716,12 +714,14 @@ public class ViewCLI implements RemoteView, Serializable {
         Player player = gameModel.getActualPlayer();
     
         System.out.println(player.toString());
-    
-        System.out.println("\nPOWER UP TO CHOOSE:");
+
+        System.out.println();
+        System.out.println("POWER UP TO CHOOSE:");
         
         PrintPowerUp.print(player.getPowerUpCardsSpawn(),false);
-    
-        System.out.println("\nMAKE YOUR CHOICE!");
+
+        System.out.println();
+        System.out.println("MAKE YOUR CHOICE!");
         
         setIndex(getUserInput(0,1));
         notifyController();
@@ -740,7 +740,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewChoiseAction() throws RemoteException {
     
-        System.out.println("\nYOUR INFO: \n");
+        System.out.println("\nYOUR INFO:\n");
         PrintPlayer.print(gameModel.getActualPlayer());
         System.out.println();
         PrintSelectAction.print();

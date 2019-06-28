@@ -1,9 +1,6 @@
 package it.polimi.view.cli;
 
-import it.polimi.model.EnumCardinalDirection;
-import it.polimi.model.GameModel;
-import it.polimi.model.WeaponCard;
-import it.polimi.model.WeaponsEffect;
+import it.polimi.model.*;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -35,12 +32,11 @@ public class ViewWeapon {
     public void viewSelectWeaponEffect() throws RemoteException {
         
         
-        ArrayList<WeaponsEffect> weaponEffects = viewCLI.gameModel.getAvailableEffect();
         
         PrintEffectWeapon.printSelectWeaponEffect();
-        PrintWeapon.printEffectName(weaponEffects);
+        PrintWeapon.printEffectName(viewCLI.gameModel.getAvailableEffect());
     
-        viewCLI.setIndex2(viewCLI.getUserInput(0,weaponEffects.size()));
+        viewCLI.setIndex2(viewCLI.getUserInput(-2,viewCLI.gameModel.getAvailableEffect().size()));
         viewCLI.notifyController();
         
         
@@ -48,9 +44,33 @@ public class ViewWeapon {
     
     public void viewShoot() throws RemoteException {
     
+        System.out.println("\n\n\n\n");
+        
+        System.out.println(viewCLI.gameModel.getState().toString());
+        
         viewCLI.printMessageAll();
     
-        viewCLI.CLIViewMap();
+        if (viewCLI.gameModel.getPlayerDamaged().size()>0) {
+        
+            System.out.println("\n DAMAGED PLAYER IN THIS SHOOT:\n");
+        
+            for (Player a : viewCLI.gameModel.getPlayerDamaged()) {
+            
+                PrintPlayerBoard.print(a);
+            }
+        }
+        
+        if (viewCLI.gameModel.getPlayerMarked().size()>0) {
+            
+            System.out.println("\n MARKED PLAYER IN THIS SHOOT:\n");
+    
+            for (Player a : viewCLI.gameModel.getPlayerMarked()) {
+        
+                PrintPlayerBoard.print(a);
+            }
+        }
+    
+        //viewCLI.CLIViewMap();
     
         viewCLI.notifyController();
         

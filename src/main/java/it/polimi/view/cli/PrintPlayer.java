@@ -19,7 +19,7 @@ public class PrintPlayer implements Serializable {
         PrintScore.print(player);
         System.out.println("ALIVE: " +player.isAlive());
         PrintAmmo.print(player.getPlayerBoard().getAmmo());
-        System.out.println("\nPOWER UPS: ");
+        System.out.println("\nPOWER UPs: ");
         PrintPowerUp.print(player.getPlayerBoard().getPlayerPowerUps(),false);
         System.out.println("WEAPONS: ");
         PrintWeapon.print(player.getPlayerBoard().getPlayerWeapons(),false);

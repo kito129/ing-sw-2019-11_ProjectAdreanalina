@@ -4,6 +4,7 @@ import it.polimi.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -16,6 +17,7 @@ import javafx.scene.image.Image ;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.lang.String;
 
 public class MatchController {
 
@@ -50,7 +52,7 @@ public class MatchController {
     private GridPane square1, square2, square3, square4, square5, square6, square7, square8, square9, square10, square11, square12;
 
     @FXML
-    protected Label answerOrMessageError;
+    protected Label answerOrMessageError, weaponInfo;
 
     @FXML
     private ImageView weapon1, weapon2, weapon3, powerUp1, powerUp2, powerUp3, weaponSelected;
@@ -108,6 +110,7 @@ public class MatchController {
         gridSkull2.managedProperty().bind(gridSkull2.visibleProperty());
         gridSkull3.managedProperty().bind(gridSkull3.visibleProperty());
         answerOrMessageError.managedProperty().bind(answerOrMessageError.visibleProperty());
+        weaponInfo.managedProperty().bind(weaponInfo.visibleProperty());
         buttonRunAround.managedProperty().bind(buttonRunAround.visibleProperty());
         buttonGrubStuff.managedProperty().bind(buttonGrubStuff.visibleProperty());
         buttonShoot.managedProperty().bind(buttonShoot.visibleProperty());
@@ -1295,29 +1298,122 @@ public class MatchController {
     }
 
     /**
-     * return the path of image
-     * @param image an image
+     * add to weaponSelected (ImageView) the weapon (also power up) selected with a mouse click
+     * @param e image selected event
      * @throws IOException any exception thrown by the underlying OutputStream
      */
+<<<<<<< HEAD
     public String pathImage(Image image){
 
         String path="";
        // path = image.getUrl();
+=======
+    public void weaponClick(MouseEvent e){
+/*
+        String path;
+>>>>>>> 93f7583d18b1c8caaa0823f850945f67e4754ebc
 
-        return path;
+        ImageView selected = (ImageView) e.getSource();
+        path = selected.getImage().getUrl();
+        Image weaponClicked = new Image(path);
+        weaponSelected.setImage(weaponClicked);
+        controlPathWeapon(path);
+        
+ */
     }
 
     /**
-     * decides what to do when an image is clicked
-     * @param image shoot button event
+     * control if the name of weapon is contains in the path of image and set a tha weaponInfo (Label) with the corresponding description
+     * @param path the path of weapon image
      * @throws IOException any exception thrown by the underlying OutputStream
      */
-    public void mousePressed(Image image){
+    public void controlPathWeapon(String path){
 
-        String path;
-        path = pathImage(image);
-        loadImage(path,143,244, weaponSelected);
-        weaponSelected.setImage(image);                         //non so se serve questa riga, magari basta quella sopra
+        //TODO prendere la descrizione da ogni arma
+
+        if (path.contains("CYBERBLADE")){
+
+            weaponInfo.setText("");
+        }
+    }
+
+    /**
+     * control the coordinates of the square selected and set the corresponding index
+     * @param e square selected event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void takeIndexSquare(MouseEvent e){
+
+        //TODO settare row e col
+
+        //potrei lavorare direttamente sulla ImageView
+        //ImageView select = (ImageView) e.getSource();
+        //select.getParent();
+
+        int row;
+        int col;
+
+        GridPane selected = (GridPane) e.getSource();
+
+        if (selected == square1){
+
+            row = 0;
+            col = 0;
+        }else if (selected == square2){
+
+            row = 0;
+            col = 1;
+        }else if (selected == square3){
+
+            row = 0;
+            col = 2;
+        }else if (selected == square4){
+
+            row = 0;
+            col = 3;
+        }else if (selected == square5){
+
+            row = 1;
+            col = 0;
+        }else if (selected == square6){
+
+            row = 1;
+            col = 1;
+        }else if (selected == square7){
+
+            row = 1;
+            col = 2;
+        }else if (selected == square8){
+
+            row = 1;
+            col = 3;
+        }else if (selected == square9){
+
+            row = 2;
+            col = 0;
+        }else if (selected == square10){
+
+            row = 2;
+            col = 1;
+        }else if (selected == square11){
+
+            row = 2;
+            col = 2;
+        }else if (selected == square12){
+
+            row = 2;
+            col = 3;
+        }
+    }
+
+    private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
+
+        for (Node node : gridPane.getChildren()) {
+            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                return node;
+            }
+        }
+        return null;
     }
 
     /**
@@ -1327,7 +1423,6 @@ public class MatchController {
      */
     public void shootButtonClicked(ActionEvent e) throws IOException {
 
-        buttonRejoin.setVisible(false);
         answerOrMessageError.setText("SELECT A WEAPON FROM YOURS");
 
         //TODO selezionare l'arma che si vuole usare e dopo l'immagine del giocatore
@@ -1340,7 +1435,6 @@ public class MatchController {
      */
     public void runAroundButtonClicked(ActionEvent e) throws IOException {
 
-        buttonRejoin.setVisible(false);
         answerOrMessageError.setText("WHERE DO YOU WANT TO GO?");
 
         //TODO cliccare sull'immagine delle munizioni sulla mappa su cui ci si vuole spostare (il quadratino in alto a sinistra in ogni square)
@@ -1353,7 +1447,6 @@ public class MatchController {
      */
     public void grubStuffButtonClicked(ActionEvent e) throws IOException {
 
-        buttonRejoin.setVisible(false);
         answerOrMessageError.setText("WHERE DO YOU WANT TO GO TO GRUB A STUFF?");
 
         //TODO cliccare sull'immagine delle munizioni sulla mappa su cui ci si vuole spostare
@@ -1366,7 +1459,6 @@ public class MatchController {
      */
     public void rechargeButtonClicked(ActionEvent e) throws IOException {
 
-        buttonRejoin.setVisible(false);
         answerOrMessageError.setText("SELECT WEAPON FROM YOURS THAT YOU WANT TO RELOAD");
 
         //TODO selezionare un'arma e restituire l'arma/armi scelte

@@ -36,6 +36,7 @@ public class GameModel implements Serializable {
     private String weaponName;
     private WeaponsEffect beforeEffect;
     private ArrayList<Player> playerDamaged;
+    private ArrayList<Player> playerMarked;
     private int playerDamagedIndex;
     //powerup
     private PowerUpCard powerUpSelected; //current weapon effect for current Player
@@ -58,6 +59,7 @@ public class GameModel implements Serializable {
         this.gameColor = new ArrayList<>(5);
         this.availableEffect= new ArrayList<>();
         this.playerDamaged = new ArrayList<>();
+        this.playerMarked = new ArrayList<>();
         //create map
         this.map = new Map(MapCreator.createA(),"MAPA");
         //populate list of color for the player
@@ -265,6 +267,11 @@ public class GameModel implements Serializable {
         return availableEffect;
     }
     
+    public ArrayList<Player> getPlayerMarked () {
+        
+        return playerMarked;
+    }
+    
     public void setAvailableEffect (ArrayList<WeaponsEffect> availableEffect) {
         
         this.availableEffect = availableEffect;
@@ -280,6 +287,9 @@ public class GameModel implements Serializable {
     public void setState (State state)  {
         
         this.state=state;
+        if(state!= State.ERROR) {
+            this.setBeforeError(getState());
+        }
         notifyObserver(this);
     }
     
@@ -366,7 +376,7 @@ public class GameModel implements Serializable {
 
     public void addObserver(RemoteView observer) throws RemoteException{
 
-        setPlayers(new Player(getPlayers(true).size()+1, observer.getUser(), getRandomColor() ));
+        setPlayers(new Player(getPlayers(true).size()+1, observer.getUser(), getRandomColor(),this));
         remoteViews.add(observer);
     }
     

@@ -98,7 +98,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED BASIC MODE");
-        System.out.print("Who is your target? In which square do you want to move it? (enter players' ID and row and column for the square)");
+        System.out.print("Who is your target? In which square do you want to move it? (enter players' ID and then row and column for the square)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -449,7 +449,6 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the GameModel
      */
     public static void printRocketLauncherRocketJump(){
 
@@ -460,7 +459,6 @@ public class PrintEffectWeapon implements Serializable {
 
     /**
      * Print the effect of this weapon
-     * @param gameModel   the reference to the GameModel
      */
     public static void printRocketLauncherFragmentingWarhead(){
 
@@ -491,7 +489,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("YOU HAVE SELECTED THE ROCKET FIRST MODE");
         System.out.println("In which square do you want to move? (exactly 1 movement) (enter row and column)");
         System.out.println("Do you want to shoot a target after your movement? (max 1 movement)");
-        System.out.println("(first enter row and column, then 0 to say YES or 1 to say NO and finally player's ID)");
+        System.out.println("(first enter player's ID, then 0 to say YES or 1 to say NO and finally the second target player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -517,7 +515,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BASIC MODE");
         System.out.println("How many of these targets do you want to shoot? (max 3 and they must be in a square exactly 1 movement from you)");
-        System.out.println("(first enter the number of targets and then the players' ID)");
+        System.out.println("(enter first player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -553,7 +551,7 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE PIERCING MODE");
         System.out.println("Who is/are your target/s? (you can choose who you want, but max 2");
-        System.out.println("(first enter the cardinal direction, than the number of targets and finally the players' ID)");
+        System.out.println("(first enter the cardinal direction, then say if you want to shoot another target, and finally the players' ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -602,5 +600,6 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("WHICH WEAPON EFFECT DO YOU WANT TO USE?");
+        System.out.println("-1 TO EXIT");
     }
 }
