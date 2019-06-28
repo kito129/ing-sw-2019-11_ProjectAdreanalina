@@ -1,6 +1,7 @@
 package it.polimi.model;
 
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotValidSquareException;
@@ -338,7 +339,9 @@ public class Map implements Serializable {
             Square currSquare = getSquare(r0,c0);
             Square destSquare = getSquare(r1,c1);
     
-            if(currSquare.getColor()==destSquare.getColor()){
+            if (currSquare==destSquare){
+                return true;
+            } else if(currSquare.getColor()==destSquare.getColor()){
         
                 return true;
             }else {
@@ -624,8 +627,6 @@ public class Map implements Serializable {
     
     /**
      * Calculate if there is a port from SquareA to SquareB.
-     * @param squareA Square A
-     * @param squareB Square B
      * @return true if there is a port, false otherwise
      * */
     public boolean isPort(int row1,int col1, int row2,int col2){

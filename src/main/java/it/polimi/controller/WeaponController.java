@@ -46,7 +46,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.LockRifle);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        }
                         break;
                     case "ELECTOSCYTHE":
         
@@ -54,7 +56,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Electroscythe);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                         //TODO
                     case "MACHINE GUN":
@@ -71,7 +75,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.TractorBeam);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "VORTEX CANNON":
         
@@ -79,7 +85,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.VortexCannon);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        }
                         break;
                     case "T.H.O.R":
         
@@ -87,7 +95,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Thor);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        }
                         break;
                     case "FURNACE":
         
@@ -95,7 +105,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Furnace);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "PLASMA GUN":
         
@@ -103,7 +115,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.PlasmaGun);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "HEAT SEEKER":
         
@@ -111,7 +125,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Heatseeker);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        }
                         break;
                     case "WHISPER":
         
@@ -119,7 +135,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Whisper);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        }
                         break;
                     case "HELLION":
         
@@ -127,7 +145,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Hellion);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "FLAME THROWER":
         
@@ -135,7 +155,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Flamethrower);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "ZX-2":
         
@@ -143,7 +165,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Zx2);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "GRENADE LAUNCHER":
         
@@ -151,7 +175,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.GrenadeLauncher);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                        }
                         break;
                     case "SHOTGUN":
         
@@ -159,7 +185,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Shotgun);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "ROCKET LAUNCHER":
         
@@ -167,7 +195,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.RocketLauncher);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().add(weapon.getWeaponEffects().get(0));
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().add(weapon.getWeaponEffects().get(0));
+                        }
                         break;
                     case "POWER GLOVE":
         
@@ -175,7 +205,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.PowerGlove);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "RAILGUN":
         
@@ -183,7 +215,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Railgun);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "SHOCKWAVE":
         
@@ -191,7 +225,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Shockwave);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                     case "CYBERBLADE":
     
@@ -199,8 +235,10 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Cyberblade);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
-                        this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.ShadowstepEffect);
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.BaseEffect);
+                            this.functionModel.getGameModel().getAvailableEffect().add(WeaponsEffect.ShadowstepEffect);
+                        }
                         break;
                     case "SLADGEHAMMER":
     
@@ -208,7 +246,9 @@ public class WeaponController {
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Sledgehammer);
                         //set the effect list
-                        this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        if (functionModel.getGameModel().getAvailableEffect().size()==0) {
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
+                        }
                         break;
                 }
             } else {
@@ -236,13 +276,21 @@ public class WeaponController {
         i = view.getIndex2();
         if (i == -1) {
             
+            functionModel.getGameModel().getAvailableEffect().removeAll( functionModel.getGameModel().getAvailableEffect());
+            functionModel.getGameModel().setBeforeEffect(null);
+            functionModel.getGameModel().setWeaponName(null);
+            functionModel.getGameModel().setWeaponSelected(null);
+            functionModel.getGameModel().setActualWeaponEffect(null);
+            functionModel.getGameModel().getPlayerMarked().removeAll(functionModel.getGameModel().getPlayerMarked());
+            functionModel.getGameModel().getPlayerDamaged().removeAll(functionModel.getGameModel().getPlayerDamaged());
             gameModel.setState(State.CHOSEACTION);
             
         } else {
     
             if (gameModel.getAvailableEffect().get(i) != null) {
-        
-        
+    
+                functionModel.getGameModel().getPlayerMarked().removeAll(functionModel.getGameModel().getPlayerMarked());
+                functionModel.getGameModel().getPlayerDamaged().removeAll(functionModel.getGameModel().getPlayerDamaged());
                 gameModel.setActualWeaponEffect(gameModel.getAvailableEffect().get(i));
             } else {
         
@@ -284,6 +332,8 @@ public class WeaponController {
             functionModel.getGameModel().setWeaponName(null);
             functionModel.getGameModel().setWeaponSelected(null);
             functionModel.getGameModel().setActualWeaponEffect(null);
+            functionModel.getGameModel().getPlayerMarked().removeAll(functionModel.getGameModel().getPlayerMarked());
+            functionModel.getGameModel().getPlayerDamaged().removeAll(functionModel.getGameModel().getPlayerDamaged());
             functionModel.getGameModel().setState(State.CHOSEACTION);
         } else {
             
@@ -773,6 +823,7 @@ public class WeaponController {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
+                    gameModel.getPlayerDamaged().add(targetBase);
                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     

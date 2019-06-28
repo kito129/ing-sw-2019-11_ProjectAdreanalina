@@ -8,8 +8,7 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
-import it.polimi.model.Weapon.LockRifle;
-import it.polimi.model.Weapon.PlasmaGun;
+import it.polimi.model.Weapon.*;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
@@ -45,26 +44,71 @@ public class FunctionController {
                     // game can start
                     drawnPowerUp();
                     //for the moment add another player for testing army
-                    Player player1 = new Player(2,"andrea",EnumColorPlayer.PINK);
-                    Player player2 = new Player(3,"simone",EnumColorPlayer.BLU);
-                    Player player3 = new Player(4,"niko",EnumColorPlayer.YELLOW);
-                    Player player4 = new Player(5,"teo",EnumColorPlayer.GREEN);
+                    Player player1 = new Player(2,"AA",EnumColorPlayer.PINK,gameModel);
+                    Player player2 = new Player(3,"BB",EnumColorPlayer.BLU,gameModel);
+                    Player player3 = new Player(4,"CC",EnumColorPlayer.YELLOW,gameModel);
+                    Player player4 = new Player(5,"DD",EnumColorPlayer.GREEN,gameModel);
+                    Player player5 = new Player(6,"EE",EnumColorPlayer.PINK,gameModel);
+                    Player player6 = new Player(7,"FF",EnumColorPlayer.BLU,gameModel);
+                    Player player7 = new Player(8,"GG",EnumColorPlayer.YELLOW,gameModel);
+                    Player player8 = new Player(9,"HH",EnumColorPlayer.GREEN,gameModel);
+                    Player player9 = new Player(10,"II",EnumColorPlayer.GREEN,gameModel);
+                    Player player10 = new Player(11,"LL",EnumColorPlayer.GREEN,gameModel);
+                    Player player11 = new Player(12,"M",EnumColorPlayer.GREEN,gameModel);
+                
                     
                     //add on square
                     try {
-                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,0),player1);
-                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,1),player2);
-                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,0),player3);
-                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(0,0),player4);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(0,0),player1);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(0,1),player2);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(0,2),player3);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(0,3),player4);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,0),player5);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,1),player6);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,2),player7);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(1,3),player8);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,1),player9);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,2),player10);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,3),player11);
+ 
                         gameModel.getPlayers(true).add(player1);
                         gameModel.getPlayers(true).add(player2);
                         gameModel.getPlayers(true).add(player3);
                         gameModel.getPlayers(true).add(player4);
+                        gameModel.getPlayers(true).add(player5);
+                        gameModel.getPlayers(true).add(player6);
+                        gameModel.getPlayers(true).add(player7);
+                        gameModel.getPlayers(true).add(player8);
+                        gameModel.getPlayers(true).add(player9);
+                        gameModel.getPlayers(true).add(player10);
+                        gameModel.getPlayers(true).add(player11);
                     } catch (MapException e) {
                         e.printStackTrace();
                     }
                     
-                    gameModel.getPlayers(true).get(0).getPlayerBoard().addWeapon(new LockRifle());
+                    //TEST ARMY
+                
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new LockRifle());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Electroscythe());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new TractorBeam());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Thor());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new VortexCannon());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Furnace());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new PlasmaGun());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Heatseeker());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Whisper());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Hellion());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Flamethrower());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Zx2());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new GrenadeLauncher());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Shotgun());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new RocketLauncher());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new PowerGlove());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Railgun());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Shockwave());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Cyberblade());
+                    gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Sledgehammer());
+                    
                     
                     gameModel.setState(State.SPAWNPLAYER);
                     

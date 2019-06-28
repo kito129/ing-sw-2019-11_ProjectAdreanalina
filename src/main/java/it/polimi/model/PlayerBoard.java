@@ -33,6 +33,7 @@ public class PlayerBoard implements Serializable {
         marks = new ArrayList<EnumColorPlayer>();
         playerWeapons = new ArrayList<WeaponCard>();
         playerPowerUps = new ArrayList<PowerUpCard>();
+        
     }
     
     /**
@@ -307,6 +308,7 @@ public class PlayerBoard implements Serializable {
                 this.damages.add(color);
             }
         }
+        
     }
     
     /**

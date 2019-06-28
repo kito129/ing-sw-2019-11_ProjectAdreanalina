@@ -21,11 +21,7 @@ public class ViewCLI implements RemoteView, Serializable {
     //TODO controllare se inserisco -1 che si torna indietro
 
     //dobbiamo capire quali classi della view devono essere serializzabili
-
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    
     
     protected String user;
     public GameModel gameModel;
