@@ -800,7 +800,7 @@ public class WeaponController {
         } catch (NotValidInput notValidInput) {
             notValidInput.printStackTrace();
         }
-        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED:" + gameModel.getWeaponName() +"CORRECTLY");
+        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED: " + gameModel.getWeaponName() +" CORRECTLY");
         this.functionModel.getGameModel().setState(State.SHOOT);
         
     }

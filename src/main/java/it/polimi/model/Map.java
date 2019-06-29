@@ -1,7 +1,6 @@
 package it.polimi.model;
 
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidInput;
 import it.polimi.model.Exception.NotValidSquareException;

@@ -15,7 +15,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("BASIC EFFECT");
-        System.out.println("Who is your target? (enter player's ID)");
+        System.out.println("Who is your target? It must be visible. (enter player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
         
         
@@ -29,7 +29,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE SECOND LOCK");
-        System.out.println("Select a different target you can see. (enter player's ID)");
+        System.out.println("Select a different target. It must be visible. (enter player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 

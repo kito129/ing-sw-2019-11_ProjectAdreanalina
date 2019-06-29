@@ -4,7 +4,6 @@ import it.polimi.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -68,9 +67,14 @@ public class MatchController {
     static final String MAPSPATH = "images/maps/";
     static final String PLAYERBOARDPATH = "images/playerboards/";
     static final String POINTSPATH = "images/points/";
-    static final String TEARSPATH = "images/tears/";                //damage and mark
+    static final String TEARSPATH = "images/tears/";                //for damages and marks
     static final String SKULLPATH = "images/RedSkull";
     static final String PLAYERSPATH = "images/players/";
+
+    static final String targetingScope = "You may play this card when you are dealing damage to one or more targets. Pay 1 ammo cube of any color. Choose 1 of those targets and give it an extra point of damage.   NOTE: You cannot use this to do 1 damage to a target that is receiving only marks.";
+    static final String newton = "You may play this card on your turn before or after any action. Choose any other player's figure and move it 1 or 2 squares in one direction. (You can't use this to move a figure after it respawns at the end of your turn. That would be too late.)";
+    static final String tagbackGrenade = "You may play this card when you receive damage from a player you can see. Give that player 1 mark.";
+    static final String teleporter = "You may play this card on your turn before or after any action. Pick up your figure and set it down on any square of the board. (You can't use this after you see where someone respawns at the end of your turn. By then it is too late.)";
 
     private ViewGUI viewGUI;
     String path = "";
@@ -1300,17 +1304,9 @@ public class MatchController {
     /**
      * add to weaponSelected (ImageView) the weapon (also power up) selected with a mouse click
      * @throws IOException any exception thrown by the underlying OutputStream
-     
-
-    public String pathImage(Image image){
-
-        String path="";
-       // path = image.getUrl();
-
     public void weaponClick(MouseEvent e){
 
         String path;
-
 
         ImageView selected = (ImageView) e.getSource();
         path = selected.getImage().getUrl();
@@ -1327,11 +1323,138 @@ public class MatchController {
      */
     public void controlPathWeapon(String path){
 
-        //TODO prendere la descrizione da ogni arma
+        if (path.contains("LOCKRIFLE")){
 
-        if (path.contains("CYBERBLADE")){
+            weaponInfo.setText("BASIC EFFECT: Deal 2 damage and 1 mark to 1 target you can see.   WITH SECOND LOCK: Deal 1 mark to a different target you can see.");
 
-            weaponInfo.setText("");
+        }else if (path.contains("MACHINEGUN")) {
+
+            weaponInfo.setText("BASIC EFFECT: Choose 1 or 2 targets you can see and deal 1 damage to each.   WITH FOCUS SHOT: Deal 1 additional damage to one of those targets.   WITH TURRET TRIPOD: Deal 1 additional damage to the other of those targets and/or deal 1 damage to a different target you can see.   NOTES: If you deal both additional points of damage, they must be dealt to 2 different targets. If you see only 2 targets, you deal 2 to each if you use both optional effects. If you use the basic effect on only 1 target, you can still use the the turret tripod to give it 1 additional damage.");
+
+        }else if (path.contains("T.H.O.R")) {
+
+            weaponInfo.setText("BASIC EFFECT: Deal 2 damage to 1 target you can see.   WITH CHAIN REACTION: Deal 1 damage to a second target that your first target can see.with high voltage: Deal 2 damage to a third target that your second target can see. You cannot use this effect unless you first use the chain reaction.   NOTES: This card constrains the order in which you can use its effects. (Most cards don't.) Also note that each target must be a different player");
+
+        }else if (path.contains("PLASMAGUN")) {
+
+            weaponInfo.setText("BASIC EFFECT: Deal 2 damage to 1 target you can see.   WITH PHASE GLIDE: Move 1 or 2 squares. This effect can be used either before or after the basic effect.   WITH CHARGED SHOT: Deal 1 additional damage to your target.   NOTES: The two moves have no ammo cost. You don't have to be able to see your target when you play the card. For example, you can move 2 squares and shoot a target you now see. You cannot use 1 move before shooting and 1 move after");
+
+        }else if (path.contains("WHISPER")) {
+
+            weaponInfo.setText("EFFECT: Deal 3 damage and 1 mark to 1 target you can see. Your target must be at least 2 moves away from you.   NOTES: For example, in the 2-by-2 room, you cannot shoot a target on an adjacent square, but you can shoot a target on the diagonal. If you are beside a door, you can't shoot a target on the other side of the door, but you can shoot a target on a different square of that room");
+
+        }else if (path.contains("ELECTOSCYTHE")) {
+
+            weaponInfo.setText("BASIC MODE: Deal 1 damage to every other player on your square.   IN REAPER MODE: Deal 2 damage to every other player on your square.");
+
+        }else if (path.contains("TRACTORBEAM")) {
+
+            weaponInfo.setText("BASI MODE: Move a target 0, 1, or 2 squares to a square you can see, and give it 1 damage.   IN PUNISHER MODE: Choose a target 0, 1, or 2 moves away from you. Move the target to your square and deal 3 damage to it.   NOTES: You can move a target even if you can't see it. The target ends up in a place where you can see and damage it. The moves do not have to be in the same direction.");
+
+        }else if (path.contains("VORTEXCANNON")) {
+
+            weaponInfo.setText("BASIC EFFECT: Choose a square you can see, but not your square. Call it ''the vortex''. Choose a target on the vortex or 1 move away from it. Move it onto the vortex and give it 2 damage.   WITH BLACK HOLE: Choose up to 2 other targets on the vortex or 1 move away from it. Move them onto the vortex and give them each 1 damage.   NOTES: The 3 targets must be different, but some might start on the same square. It is legal to choose targets on your square, on the vortex, or even on squares you can't see. They all end up on the vortex.");
+
+        }else if (path.contains("FURNACE")) {
+
+            weaponInfo.setText("BASIC MODE: Choose a room you can see, but not the room you are in. Deal 1 damage to everyone in that room.   IN COZY FIRE MODE: Choose a square exactly one move away. Deal 1 damage and 1 mark to everyone on that square.");
+
+        }else if (path.contains("HEATSEEKER")) {
+
+            weaponInfo.setText("EFFECT: Choose 1 target you cannot see and deal 3 damage to it.   NOTES: Yes, this can only hit targets you cannot see");
+
+        }else if (path.contains("HELLION")) {
+
+            weaponInfo.setText("BASIC MODE: Deal 1 damage to 1 target you can see at least 1 move away. Then give 1 mark to that target and everyone else on that square.   IN NANO-TRACER MODE: Deal 1 damage to 1 target you can see at least 1 move away. Then give 2 marks to that target and everyone else on that square.");
+
+        }else if (path.contains("FLAMETHROWER")) {
+
+            weaponInfo.setText("BASIC MODE: Choose a square 1 move away and possibly a second square 1 more move away in the same direction. On each square, you may choose 1 target and give it 1 damage.   IN BARBECUE MODE: Choose 2 squares as above. Deal 2 damage to everyone on the first square and 1 damage to everyone on the second square.   NOTES: This weapon cannot damage anyone in your square. However, it can sometimes damage a target you can't see – the flame won't go through walls, but it will go through doors. Think of it as a straight-line blast of flame that can travel 2 squares in a cardinal direction");
+
+        }else if (path.contains("GRENADELAUNCHER")) {
+
+            weaponInfo.setText("BASIC EFFECT: Deal 1 damage to 1 target you can see. Then you may move the target 1 square.   WITH EXTRA GRENADE: Deal 1 damage to every player on a square you can see. You can use this before or after the basic effect's move.   NOTES: For example, you can shoot a target, move it onto a square with other targets, then damage everyone including the first target. Or you can deal 2 to a main target, 1 to everyone else on that square, then move the main target. Or you can deal 1 to an isolated target and 1 to everyone on a different square. If you target your own square, you will not be moved or damaged.");
+
+        }else if (path.contains("ROCKET LAUNCHER")) {
+
+            weaponInfo.setText("BASIC EFFECT: Deal 2 damage to 1 target you can see that is not on your square. Then you may move the target 1 square.   WHIT ROCKET JUMP: Move 1 or 2 squares. This effect can be used either before or after the basic effect.   WHIT FRAGMENTING WARHEAD: During the basic effect, deal 1 damage to every player on your target's original square – including the target, even if you move it.   NOTES: If you use the rocket jump before the basic effect, you consider only your new square when determining if a target is legal. You can even move off a square so you can shoot someone on it. If you use the fragmenting warhead, you deal damage to everyone on the target's square before you move the target – your target will take 3 damage total.");
+
+        }else if (path.contains("RAILGUN")) {
+
+            weaponInfo.setText("BASIC MODE: Choose a cardinal direction and 1 target in that direction. Deal 3 damage to it.   IN PIERCING MODE: Choose a cardinal direction and 1 or 2 targets in that direction. Deal 2 damage to each.   NOTES: Basically, you're shooting in a straight line and ignoring walls. You don't have to pick a target on the other side of a wall – it could even be someone on your own square – but shooting through walls sure is fun. There are only 4 cardinal directions. You imagine facing one wall or door, square-on, and firing in that direction. Anyone on a square in that direction (including yours) is a valid target. In piercing mode, the 2 targets can be on the same square or on different squares");
+
+        }else if (path.contains("CYBERBLADE")) {
+
+            weaponInfo.setText("BASIC EFFECT: Deal 2 damage to 1 target on your square.   WITH SHADOWSTEP: Move 1 square before or after the basic effect.   WITH SLICE AND DICE: Deal 2 damage to a different target on your square. The shadowstep may be used before or after this effect.   NOTES: Combining all effects allows you to move onto a square and whack 2 people; or whack somebody, move, and whack somebody else; or whack 2 people and then move.");
+
+        }else if (path.contains("ZX-2")) {
+
+            weaponInfo.setText("BASIC MODE: Deal 1 damage and 2 marks to 1 target you can see.   IN SCANNER MODE: Choose up to 3 targets you can see and deal 1 mark to each.   NOTES: Remember that the 3 targets can be in 3 different rooms");
+
+        }else if (path.contains("SHOTGUN")) {
+
+            weaponInfo.setText("BASIC MODE: Deal 3 damage to 1 target on your square. If you want, you may then move the target 1 square.   IN LONG BARREL MODE: Deal 2 damage to 1 target on any square exactly one move away.");
+
+        }else if (path.contains("POWERGLOVE")) {
+
+            weaponInfo.setText("BASIC MODE: Choose 1 target on any square exactly 1 move away. Move onto that square and give the target 1 damage and 2 marks.   IN ROCKET FIST MODE: Choose a square exactly 1 move away. Move onto that square. You may deal 2 damage to 1 target there. If you want, you may move 1 more square in that same direction (but only if it is a legal move). You may deal 2 damage to 1 target there, as well.   NOTES: In rocket fist mode, you're flying 2 squares in a straight line, punching 1 person per square.");
+
+        }else if (path.contains("SHOCKWAVE")) {
+
+            weaponInfo.setText("BASIC MODE: Choose up to 3 targets on different squares, each exactly 1 move away. Deal 1 damage to each target.   IN TSUNAMI MODE: Deal 1 damage to all targets that are exactly 1 move away.");
+
+        }else if (path.contains("SLADGEHAMMER")) {
+
+            weaponInfo.setText("BASIC MODE: Deal 2 damage to 1 target on your square.   IN PULVERIZE MODE: Deal 3 damage to 1 target on your square, then move that target 0, 1, or 2 squares in one direction.   NOTES: Remember that moves go through doors, but not walls.");
+
+        }else if (path.contains("TARGETINGSCOPE_BLU")) {
+
+            weaponInfo.setText(targetingScope);
+
+        }else if (path.contains("TARGETINGSCOPE_RED")) {
+
+            weaponInfo.setText(targetingScope);
+
+        }else if (path.contains("TARGETINGSCOPE_YELLOW")) {
+
+            weaponInfo.setText(targetingScope);
+
+        }else if (path.contains("NEWTON_BLU")) {
+
+            weaponInfo.setText(newton);
+
+        }else if (path.contains("NEWTON_RED")) {
+
+            weaponInfo.setText(newton);
+
+        }else if (path.contains("NEWTON_YELLOW")) {
+
+            weaponInfo.setText(newton);
+
+        }else if (path.contains("TAGBACKGRENADE_BLU")) {
+
+            weaponInfo.setText(tagbackGrenade);
+
+        }else if (path.contains("TAGBACKGRENADE_RED")) {
+
+            weaponInfo.setText(tagbackGrenade);
+
+        }else if (path.contains("TAGBACKGRENADE_YELLOW")) {
+
+            weaponInfo.setText(tagbackGrenade);
+
+        }else if (path.contains("TELEPORTER_BLU")) {
+
+            weaponInfo.setText(teleporter);
+
+        }else if (path.contains("TELEPORTER_RED")) {
+
+            weaponInfo.setText(teleporter);
+
+        }else if (path.contains("TELEPORTER_YELLOW")) {
+
+            weaponInfo.setText(teleporter);
+
         }
     }
 
@@ -1344,9 +1467,7 @@ public class MatchController {
 
         //TODO settare row e col
 
-        //potrei lavorare direttamente sulla ImageView
-        //ImageView select = (ImageView) e.getSource();
-        //select.getParent();
+        //potrei lavorare direttamente sulla ImageView con .getParent();
 
         int row;
         int col;
