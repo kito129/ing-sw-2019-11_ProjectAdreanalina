@@ -1299,7 +1299,6 @@ public class MatchController {
 
     /**
      * add to weaponSelected (ImageView) the weapon (also power up) selected with a mouse click
-     * @param e image selected event
      * @throws IOException any exception thrown by the underlying OutputStream
      
 

@@ -1,8 +1,7 @@
 package it.polimi.model;
 
-import it.polimi.model.Exception.NoAvaibleCard;
-import it.polimi.model.Weapon.*;
 
+import it.polimi.model.Weapon.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,6 +61,7 @@ public class WeaponDeck implements Serializable {
         Collections.shuffle(weaponCards);
 
     }
+
 
     public WeaponCard drawWeaponCard(){
 
