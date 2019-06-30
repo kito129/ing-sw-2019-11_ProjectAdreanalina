@@ -1583,6 +1583,19 @@ public class MatchController {
         //TODO selezionare un'arma e restituire l'arma/armi scelte
     }
 
+    /**
+     * decides what to do when the grubStuffButton is clicked
+     * @param e shoot button event
+     * @throws IOException any exception thrown by the underlying OutputStream
+     */
+    public void endTurnButtonClicked(ActionEvent e) throws IOException {
+
+        answerOrMessageError.setText("DO YOU WANT TO RELOAD SOME WEAPON?");
+        buttonRecharge.setVisible(true);
+
+        //TODO selezionare le armi che si vogliono ricaricare
+    }
+
     public void selectEffect() throws RemoteException{
 
         effect1.setVisible(true);
