@@ -460,9 +460,11 @@ public class PlayerBoard implements Serializable {
 
 
 
-
+/*
 
 //todo metodi non più utili
+
+
     
     
     /**
@@ -470,7 +472,7 @@ public class PlayerBoard implements Serializable {
      *
      * @param color color we want to know if is present.
      * @return true if the color is present, false otherwise.
-     */
+
     public boolean isColorInMarks(EnumColorPlayer color) {
 
         for (EnumColorPlayer c : marks) {
@@ -499,6 +501,9 @@ public class PlayerBoard implements Serializable {
         }
         return marksRemoved;
     }
+
+ */
+
     
 }
 

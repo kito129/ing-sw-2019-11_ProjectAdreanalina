@@ -231,9 +231,74 @@ public class PlayerBoardTest {
 
     }
 
-    //ripartire da qui
+    @Test
+
+    public void shiftMarksTest() {
+
+        assertEquals(0,playerBoard.getDamages().size());
+        playerBoard.increaseMarks(EnumColorPlayer.BLU);
+        playerBoard.increaseMarks(EnumColorPlayer.BLU);
+        playerBoard.increaseMarks(EnumColorPlayer.BLU);
+        playerBoard.increaseMarks(EnumColorPlayer.YELLOW);
+        assertTrue(playerBoard.getMarks().size()==4&&playerBoard.getMarks().contains(EnumColorPlayer.BLU)&&
+                playerBoard.getMarks().contains(EnumColorPlayer.YELLOW)&&!playerBoard.getMarks().contains(EnumColorPlayer.PINK));
+        playerBoard.shiftMarks(EnumColorPlayer.BLU);
+        assertTrue(playerBoard.getMarks().size()==1&&playerBoard.getMarks().contains(EnumColorPlayer.YELLOW)&&
+                !playerBoard.getMarks().contains(EnumColorPlayer.BLU));
+        assertTrue(playerBoard.getDamages().size()==3&&playerBoard.getDamages().contains(EnumColorPlayer.BLU)&&
+                !playerBoard.getDamages().contains(EnumColorPlayer.YELLOW));
+        playerBoard.shiftMarks(EnumColorPlayer.YELLOW);
+        assertTrue(playerBoard.getMarks().size()==0&&playerBoard.getDamages().size()==4&&
+                playerBoard.getDamages().contains(EnumColorPlayer.BLU)&&playerBoard.getDamages().contains(EnumColorPlayer.YELLOW));
+
+    }
+
+    @Test
+
+    public void colorOccurenceInDamages(){
+
+        assertEquals(0,playerBoard.getDamages().size());
+        playerBoard.increaseDamages(EnumColorPlayer.BLU);
+        playerBoard.increaseDamages(EnumColorPlayer.BLU);
+        playerBoard.increaseDamages(EnumColorPlayer.YELLOW);
+        playerBoard.increaseDamages(EnumColorPlayer.YELLOW);
+        playerBoard.increaseDamages(EnumColorPlayer.YELLOW);
+        playerBoard.increaseDamages(EnumColorPlayer.PINK);
+        playerBoard.increaseDamages(EnumColorPlayer.GREEN);
+        playerBoard.increaseDamages(EnumColorPlayer.GREEN);
+        playerBoard.increaseDamages(EnumColorPlayer.GREEN);
+        playerBoard.increaseDamages(EnumColorPlayer.GREEN);
+        assertTrue(playerBoard.colorOccurrenceInDamages(EnumColorPlayer.BLU)==2
+                &&playerBoard.colorOccurrenceInDamages(EnumColorPlayer.YELLOW)==3&&
+                playerBoard.colorOccurrenceInDamages(EnumColorPlayer.PINK)==1&&playerBoard.colorOccurrenceInDamages(EnumColorPlayer.GREEN)==4
+        &&playerBoard.colorOccurrenceInDamages(EnumColorPlayer.GREY)==0);
+        assertEquals(10,playerBoard.getDamages().size());
+
+    }
+
+   @Test
+
+   public void getFirstOccurenceInDamages(){
+
+       assertEquals(0,playerBoard.getDamages().size());
+       playerBoard.increaseDamages(EnumColorPlayer.BLU);
+       playerBoard.increaseDamages(EnumColorPlayer.BLU);
+       playerBoard.increaseDamages(EnumColorPlayer.YELLOW);
+       playerBoard.increaseDamages(EnumColorPlayer.YELLOW);
+       playerBoard.increaseDamages(EnumColorPlayer.YELLOW);
+       playerBoard.increaseDamages(EnumColorPlayer.PINK);
+       playerBoard.increaseDamages(EnumColorPlayer.GREEN);
+       assertEquals(0,(int)playerBoard.getFirstOccurrenceInDamage(EnumColorPlayer.BLU));
+       assertEquals(2,(int)playerBoard.getFirstOccurrenceInDamage(EnumColorPlayer.YELLOW));
+       assertEquals(5,(int)playerBoard.getFirstOccurrenceInDamage(EnumColorPlayer.PINK));
+       assertEquals(6,(int)playerBoard.getFirstOccurrenceInDamage(EnumColorPlayer.GREEN));
+       assertEquals(-1,(int)playerBoard.getFirstOccurrenceInDamage(EnumColorPlayer.GREY));
 
 
+
+
+
+   }
 
 
 }

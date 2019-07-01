@@ -32,7 +32,7 @@ public class Player implements Serializable {
      * @param color the color of the player
      */
     public Player (int id, String name, EnumColorPlayer color,GameModel gameModel) {
-    
+
         this.id = id;
         this.name = name;
         this.color = color;
@@ -40,15 +40,12 @@ public class Player implements Serializable {
         alive = true;
         damaged = false;
         playerBoard = new PlayerBoard();
-        this.row=-1;
-        this.column=-1;
+        this.row = -1;
+        this.column = -1;
         setOnlineModel(true);
-        //test
-        //this.damagedGameModel = gameModel.getPlayerDamaged();
-        //this.markedGameModel = gameModel.getPlayerMarked();
 
-        // TODO vedere come gestire posizione in fase di inizializzazione.io inizialmente le metterei a  null quando vengono istanziati
-    
+
+
     }
 
     public Player(){
@@ -228,7 +225,6 @@ public class Player implements Serializable {
         this.score += scoreToAdd;
     }
 
-    //todo metodo forse da rifare per gestire il powerUP come boolean
 
     public void catchAmmoCard(AmmoCard ammoCard){
 
