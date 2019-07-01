@@ -157,10 +157,8 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("BASIC EFFECT");
-        System.out.println("Who is your target? (it must be visible) (enter player's ID)");
+        System.out.println("Who is your target? (it must be visible) (enter player's ID and then 0 to say YES or 1 to say NO for choose to add a damage to the target selected)");
         PrintPlayer.print(gameModel.getPlayers(false));
-        System.out.println();
-        System.out.println("Do you want to use also Charged Shoot");
     }
 
     /**
@@ -220,8 +218,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BLACK HOLE");
-        System.out.println("Choose up to 2 other targets in the square in where the vortex is located or 1 movement away (enter row and column for the square and player's ID)");
-        System.out.println("if you want to choose only one player enter -1 as the ID of the second");
+        System.out.println("Choose up to 2 other targets in the square in where the vortex is located or 1 movement away (enter first player's ID, then 0 to say YES or 1 to say NO for choose to continue shooting and finally the last player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
