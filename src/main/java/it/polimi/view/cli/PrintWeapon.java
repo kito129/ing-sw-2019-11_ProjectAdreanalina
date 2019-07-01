@@ -28,7 +28,7 @@ public class PrintWeapon implements Serializable {
 
                 System.out.println();
                 System.out.println(i + "): ");
-                System.out.println("WEAPON:\t\t  " + wc.getNameWeaponCard());
+                System.out.println("WEAPON:\t\t    " + wc.getNameWeaponCard());
         
                 if (wc.getColorWeaponCard().equals(EnumColorCardAndAmmo.BLU)) {
             
