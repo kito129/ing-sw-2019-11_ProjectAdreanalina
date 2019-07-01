@@ -88,10 +88,7 @@ public class GameModel implements Serializable {
         return playerDamaged;
     }
     
-<<<<<<< HEAD
-=======
-    
->>>>>>> 705d8c805261d04574f316cbd80dbeeee77f3ccf
+
     public State getBeforeError () {
         
         return beforeError;
