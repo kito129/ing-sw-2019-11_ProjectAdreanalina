@@ -43,7 +43,8 @@ public class Player implements Serializable {
         this.row = -1;
         this.column = -1;
         setOnlineModel(true);
-
+        this.damagedGameModel = gameModel.getPlayerDamaged();
+        this.markedGameModel = gameModel.getPlayerMarked();
 
 
     }
@@ -133,16 +134,6 @@ public class Player implements Serializable {
         return alive;
     }
 
-    /**
-     * Gets the value of the field damaged.
-     *
-     * @return true if the player it was damaged, false otherwise.
-     */
-    public boolean isDamaged(){
-
-        return damaged;
-    }
-    
     public boolean getOnline(){
         
         return online;
@@ -234,7 +225,6 @@ public class Player implements Serializable {
     public void singleMark(EnumColorPlayer mark){
 
         this.playerBoard.increaseMarks(mark);
-        //test
         this.markedGameModel.add(this);
 
     }
@@ -242,7 +232,6 @@ public class Player implements Serializable {
     public void multipleMarks(ArrayList<EnumColorPlayer> marks){
 
         this.playerBoard.increaseMarks(marks);
-        //test
         this.markedGameModel.add(this);
     }
 
@@ -250,20 +239,14 @@ public class Player implements Serializable {
 
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);
-        this.damaged=true;
-        //test
         this.damagedGameModel.add(this);
-
     }
 
     public void multipleDamages(ArrayList<EnumColorPlayer> damages){
 
         this.playerBoard.increaseDamages(damages);
         this.playerBoard.shiftMarks(damages.get(0));
-        this.damaged=true;
-        //test
         this.damagedGameModel.add(this);
-        
     }
 
     public void multipleDamagesSingleMark(ArrayList<EnumColorPlayer> damages, EnumColorPlayer mark){
@@ -271,8 +254,6 @@ public class Player implements Serializable {
         this.playerBoard.increaseDamages(damages);
         this.playerBoard.shiftMarks(mark);
         this.playerBoard.increaseMarks(mark);
-        this.damaged=true;
-        //test
         this.damagedGameModel.add(this);
         this.markedGameModel.add(this);
     }
@@ -282,8 +263,6 @@ public class Player implements Serializable {
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);
         this.playerBoard.increaseMarks(marks);
-        this.damaged=true;
-        //test
         this.damagedGameModel.add(this);
         this.markedGameModel.add(this);
     }

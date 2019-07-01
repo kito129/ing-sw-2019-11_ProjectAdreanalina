@@ -2,7 +2,6 @@ package it.polimi.controller;
 
 import it.polimi.model.*;
 import it.polimi.view.RemoteView;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -15,11 +14,11 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     private boolean gameStarted;
 
     public GameController() throws RemoteException {
-
-        gameModel = new GameModel();
-        functionModel = new FunctionModel(gameModel);
-        functionController = new FunctionController(functionModel);
-
+        
+        this.functionModel = new FunctionModel();
+        this.gameModel=functionModel.getGameModel();
+        this.functionController= new FunctionController(functionModel);
+        
     }
 
     public boolean isGameStarted() {
@@ -77,18 +76,18 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.selectPowerUpInput(view);
                     break;
                 case USEPOWERUP:
-                    functionController.usePowerUp();
+                    functionController.usePowerUp(view);
                     break;
                 case SELECTRUN:
                     functionController.runActionController(view);
                     break;
                 case RUN:
-                    functionController.run();
+                    functionController.run(view);
                     break;
                 case SELECTGRAB:
                     functionController.grabActionController(view);
                 case GRAB:
-                    functionController.grab();
+                    functionController.grab(view);
                 case SELECTWEAPON:
                     functionController.weaponController.selectWeapon(view);
                 case SELECTEFFECT:
@@ -100,10 +99,10 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case ENDACTION:
                     //TODO
                 case SELECTRECHARGE:
-                    functionController.rechargeController(view);
+                    functionController.selectRecharge(view);
                     break;
                 case RECHARGE:
-                    System.out.println("all ok");
+                    functionController.recharge(view);
                     break;
                 case PASSTURN:
                     //TODO
@@ -124,7 +123,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case CHECKILLSHOOT:
                     break;
                 case ERROR:
-                    functionController.errorState();
+                    functionController.errorState(view);
             }
         }
     }

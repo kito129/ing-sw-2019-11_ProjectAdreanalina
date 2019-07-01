@@ -83,8 +83,8 @@ public class Flamethrower extends WeaponCard {
         if((map.sameDirection(squareOfCurrentPlayer,targetSquare1,targetSquare2))&&(map.distance(squareOfCurrentPlayer,targetSquare1)==1)
         &&(map.distance(targetSquare1,targetSquare2)==1)) {
 
-            ArrayList<Player> playersOnTarget1Square = map.playersOnSquare(targetSquare1);
-            ArrayList<Player> playersOnTarget2Square = map.playersOnSquare(targetSquare2);
+            ArrayList<Player> playersOnTarget1Square = new ArrayList<>(map.playersOnSquare(targetSquare1));
+            ArrayList<Player> playersOnTarget2Square = new ArrayList<>(map.playersOnSquare(targetSquare2));
             if ((playersOnTarget1Square.size() != 0) && (playersOnTarget2Square.size() != 0)) {
 
                 for (Player p : playersOnTarget1Square) {

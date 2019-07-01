@@ -3,6 +3,7 @@ package it.polimi.model.Weapon;
 import it.polimi.model.*;
 import it.polimi.model.Exception.*;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 public class RocketLauncher extends WeaponCard {
@@ -99,7 +100,7 @@ public class RocketLauncher extends WeaponCard {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         Square squareOfTarget1Player = map.findPlayer(target1);
-        ArrayList<Player> playersOnTarget1Square=map.playersOnSquare(squareOfTarget1Player);
+        ArrayList<Player> playersOnTarget1Square= new ArrayList<>(map.playersOnSquare(squareOfTarget1Player));
         if((map.isVisible(target1,currentPlayer)) && (!(squareOfCurrentPlayer == squareOfTarget1Player))
                 &&(playersOnTarget1Square.size()!=0)){
 

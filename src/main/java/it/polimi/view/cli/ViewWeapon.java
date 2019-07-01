@@ -652,8 +652,16 @@ public class ViewWeapon {
         PrintEffectWeapon.printCannonVortexBlackHole(gameModel);
         //get the player target 2
         viewCLI.setTarget2(viewCLI.getPlayerInput());
-        //get the player target 3
-        viewCLI.setTarget3(viewCLI.getPlayerInput());
+        System.out.println("Want to chose anohter Target?");
+        viewCLI.setYesNoBooleanChoise();
+        if(viewCLI.isBooleanChose()){
+        
+            System.out.println("Target 2: ");
+            viewCLI.setTarget3(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        } else {
+        
+            viewCLI.setTarget3(-1);
+        }
         //notify controller with new input
         viewCLI.notifyController();
     }

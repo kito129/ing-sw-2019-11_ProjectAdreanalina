@@ -11,24 +11,12 @@ public class KillShotTrackPoint implements Serializable {
     private EnumColorPlayer mark1;
     private EnumColorPlayer mark2;
     
-    /**
-     * Instantiates a new Kill shot track point.
-     *
-     * @param skull the skull
-     * @param mark1 the mark 1
-     * @param mark2 the mark 2
-     */
-    public KillShotTrackPoint(boolean skull, EnumColorPlayer mark1, EnumColorPlayer mark2){
 
-        if(!skull){
 
-            this.mark1=mark1;
-            this.mark2=mark2;
-        } else {
-            this.skull=true;
-            this.mark1=null;
-            this.mark2=null;
-        }
+    public KillShotTrackPoint() {
+
+        skull = true;
+
     }
     
     /**

@@ -19,7 +19,7 @@ public class KillShotTrack implements Serializable {
         this.track = new ArrayList<KillShotTrackPoint>();
         for (int i = 0; i < 8; i++) {
 
-            track.add(new KillShotTrackPoint(true, null, null));
+            track.add(new KillShotTrackPoint());
         }
         this.doubleKill=null;
     }
@@ -55,6 +55,7 @@ public class KillShotTrack implements Serializable {
      * @param color the color to add, an array if there are to color to add
      */
     public void updateTrack(ArrayList<EnumColorPlayer> color){
+        
         for (KillShotTrackPoint a : track) {
 
             if (a.isSkull()) {
@@ -65,6 +66,7 @@ public class KillShotTrack implements Serializable {
                     
                     a.setMark2((color.get(1)));
                 }
+                return;
             }
         }
     }
