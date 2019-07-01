@@ -19,7 +19,7 @@ public class KillShotTrack implements Serializable {
         this.track = new ArrayList<KillShotTrackPoint>();
         for (int i = 0; i < 8; i++) {
 
-            track.add(new KillShotTrackPoint(true, null, null));
+            track.add(new KillShotTrackPoint());
         }
         this.doubleKill=null;
     }
