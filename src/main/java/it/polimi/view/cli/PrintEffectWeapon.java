@@ -560,8 +560,8 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE BARBECUE MODE");
-        System.out.println("Who are your targets? (2; they must be in different square and the squares must be 1 movement from your square and from first square selected and also in the same direction");
-        System.out.println("(enter players' ID)");
+        System.out.println("Where are your targets? (they must be in different square and the squares must be 1 movement from your square and from first square selected and also in the same direction");
+        System.out.println("(enter row and column for the squares)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
