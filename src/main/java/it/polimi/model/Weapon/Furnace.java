@@ -69,7 +69,7 @@ public class Furnace extends WeaponCard {
         if(map.distance(currentPlayerSquare,targetSquare)==1){
 
             ArrayList<Player> playersInTargetSquare;
-            playersInTargetSquare=map.playersOnSquare(targetSquare);
+            playersInTargetSquare= new ArrayList<>(map.playersOnSquare(targetSquare));
             for(Player p:playersInTargetSquare){
 
                 p.singleDamage(currentPlayer.getColor());

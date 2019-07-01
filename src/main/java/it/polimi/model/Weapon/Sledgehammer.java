@@ -74,10 +74,5 @@ public class Sledgehammer extends WeaponCard {
 
             throw new NotInSameDirection();
         }
-
-
-
-
-
     }
 }

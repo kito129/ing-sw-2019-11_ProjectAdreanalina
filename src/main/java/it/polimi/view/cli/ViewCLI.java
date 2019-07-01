@@ -70,7 +70,7 @@ public class ViewCLI implements RemoteView, Serializable {
         Game.print();
         
         try {
-            gameModel = gameController.getGameModel();
+            this.gameModel = gameController.getGameModel();
             this.CLIPrintMap = new CLIPrintMap(gameModel);
             if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
 
@@ -78,7 +78,7 @@ public class ViewCLI implements RemoteView, Serializable {
 
                     setUser();
                     } while (verifyName(user));
-                gameController.addObserver(this);
+                this.gameController.addObserver(this);
                 notifyController();
             }else{
 
@@ -104,22 +104,14 @@ public class ViewCLI implements RemoteView, Serializable {
             System.exit(0);
         }
     }
-
-    //da eliminare
-    public  ViewCLI(GameController controller) throws RemoteException {
-        
-        
-        this.gameModel=controller.getGameModel();
-        this.gameController=controller;
-        
-    }
+    
     
     public void connection()  {
 
         try {
 
             Registry registry = LocateRegistry.getRegistry("localhost");
-            gameController = (RemoteGameController) registry.lookup("gameController");
+            this.gameController = (RemoteGameController) registry.lookup("gameController");
             UnicastRemoteObject.exportObject(this, 0);
             
         } catch (RemoteException | NotBoundException e ) {
@@ -132,7 +124,7 @@ public class ViewCLI implements RemoteView, Serializable {
 
     private boolean verifyName(String name){
         
-        if (gameModel.getPlayers(true)!=null){
+        if (this.gameModel.getPlayers(true)!=null){
 
         for(Player player:gameModel.getPlayers(true)) {
     
@@ -485,15 +477,23 @@ public class ViewCLI implements RemoteView, Serializable {
     
     @Override
     public void resetInput(){
+        //reset square
         setColumn(-1);
         setRow(-1);
-        setIndex(-2);
         setColumn2(-1);
         setRow2(-1);
+        //reset index
+        setIndex(-2);
+        setIndex2(-2);
+        setIndex3(-2);
+        setIndex4(-2);
+        setIndex5(-2);
+        //reset Target
         setTarget1(-1);
         setTarget2(-1);
         setTarget3(-1);
         setTarget4(-1);
+        //reset choise
         setBooleanChose(false);
         setUseSecondEffect(false);
         setUseThirdEffect(false);

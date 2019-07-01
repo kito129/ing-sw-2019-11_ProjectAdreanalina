@@ -43,7 +43,8 @@ public class Player implements Serializable {
         this.row = -1;
         this.column = -1;
         setOnlineModel(true);
-
+        this.damagedGameModel = gameModel.getPlayerDamaged();
+        this.markedGameModel = gameModel.getPlayerMarked();
 
 
     }

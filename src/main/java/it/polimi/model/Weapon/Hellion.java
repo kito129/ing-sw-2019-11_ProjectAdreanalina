@@ -50,7 +50,7 @@ public class Hellion extends WeaponCard {
 
             Square targetSquare = map.findPlayer(targetPlayer);
             ArrayList<Player> playersInTargetSquare;
-            playersInTargetSquare=map.playersOnSquare(targetSquare);
+            playersInTargetSquare= new ArrayList<>(map.playersOnSquare(targetSquare));
             targetPlayer.singleDamage(currentPlayer.getColor());
             for(Player p:playersInTargetSquare){
 
@@ -71,7 +71,7 @@ public class Hellion extends WeaponCard {
 
             Square targetSquare = map.findPlayer(targetPlayer);
             ArrayList<Player> playersInTargetSquare;
-            playersInTargetSquare=map.playersOnSquare(targetSquare);
+            playersInTargetSquare= new ArrayList<>(map.playersOnSquare(targetSquare));
             targetPlayer.singleDamage(currentPlayer.getColor());
             ArrayList<EnumColorPlayer> hellionMarks= new ArrayList<>();
             hellionMarks.add(currentPlayer.getColor());

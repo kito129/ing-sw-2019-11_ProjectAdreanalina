@@ -33,7 +33,7 @@ public class GameModel implements Serializable {
     private WeaponCard weaponSelected; //current weapon for current Player
     private WeaponState weaponState;
     private WeaponsEffect actualWeaponEffect;
-    public ArrayList<WeaponsEffect> availableEffect = new ArrayList<>();
+    private ArrayList<WeaponsEffect> availableEffect = new ArrayList<>();
     private String weaponName;
     private WeaponsEffect beforeEffect;
     private ArrayList<Player> playerDamaged= new ArrayList<>();

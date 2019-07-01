@@ -1,7 +1,6 @@
 package it.polimi.controller;
 
 
-import com.sun.javafx.collections.ElementObservableListDecorator;
 import it.polimi.model.*;
 //chiedere perche devo importare tutto
 import it.polimi.model.Exception.*;
@@ -12,7 +11,6 @@ import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.*;
 import it.polimi.view.RemoteView;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +24,7 @@ public class FunctionController {
     public FunctionController(FunctionModel functionModel){
         
         this.functionModel=functionModel;
-        weaponController = new WeaponController(this);
+        this.weaponController = new WeaponController(this);
         
     }
     
@@ -116,8 +114,6 @@ public class FunctionController {
                     gameModel.getActualPlayer().getPlayerBoard().addPowerUp(new Newton(EnumColorCardAndAmmo.RED));
                     gameModel.getActualPlayer().getPlayerBoard().addPowerUp(new TargetingScope(EnumColorCardAndAmmo.BLU));
                     
-                    gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(0).setCharge(false);
-                    gameModel.getWeaponToCharge().add(gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons().get(0));
                 
                 
                 gameModel.setState(State.SPAWNPLAYER);
@@ -200,10 +196,11 @@ public class FunctionController {
     }
     
     
-    public void errorState() throws RemoteException {
+    public void errorState(RemoteView view) throws RemoteException {
         
         System.out.println("ERROR STATE-->\n"+"ERROR MESSAGE: "+ functionModel.getGameModel().getErrorMessage() +"\nRESTART IN STATE CHOICE STATE-->");
-       
+        view.resetInput();
+        resetParameterWeapon();
         switch (this.functionModel.getGameModel().getBeforeError()){
             
             case SELECTEFFECT:
@@ -230,7 +227,7 @@ public class FunctionController {
         refreshMapEndTurn();
         
         //now game can start
-        this.functionModel.getGameModel().setState(State.SELECTRECHARGE);
+        this.functionModel.getGameModel().setState(State.CHOSEACTION);
         
     }
     
@@ -240,6 +237,17 @@ public class FunctionController {
         this.functionModel.refreshMapAmmoCard();
         this.functionModel.refreshMapWeaponCard();
         
+    }
+    
+    public void resetParameterWeapon (){
+    
+        functionModel.getGameModel().setWeaponSelected(null);
+        functionModel.getGameModel().setWeaponState(null);
+        functionModel.getGameModel().setActualWeaponEffect(null);
+        functionModel.getGameModel().setWeaponName(null);
+        functionModel.getGameModel().setBeforeEffect(null);
+        functionModel.getGameModel().getAvailableEffect().removeAll(functionModel.getGameModel().getAvailableEffect());
+        functionModel.getGameModel().getWeaponToCharge().removeAll(functionModel.getGameModel().getWeaponToCharge());
     }
     
     
@@ -275,7 +283,6 @@ public class FunctionController {
             if(map.existInMap(inputSquare)) {
                 
                 this.functionModel.runFunctionModel(inputSquare);
-                view.resetInput();
                 this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + this.functionModel.getGameModel().getActualPlayer().getName().toString() +" MOVED IN SQUARE: " + inputSquare.toString());
                 this.functionModel.getGameModel().setState(State.RUN);
                 
@@ -293,18 +300,17 @@ public class FunctionController {
         
     }
     
-    public void run() throws RemoteException {
-    
-        this.functionModel.getGameModel().setState(State.CHOSEACTION);
+    public void run(RemoteView view) throws RemoteException {
         
+        view.resetInput();
+        this.functionModel.getGameModel().setState(State.CHOSEACTION);
+       
     }
-    
     
     public void grabActionController (RemoteView view) throws RemoteException{
     
         //take necessary
         Map map = this.functionModel.getGameModel().getMap();
-        
         
         //answer to view an input Square
         Square inputSquare;
@@ -325,7 +331,6 @@ public class FunctionController {
                     //effective catch gia con l'index giusto se è una Generation Square
                     indexWeapon = view.getIndex();
                     this.functionModel.grabActionModel(inputSquare, indexWeapon);
-                    view.resetInput();
                     this.functionModel.getGameModel().setState(State.GRAB);
                     
                 } else {
@@ -334,7 +339,6 @@ public class FunctionController {
                     if (asNormal.containAmmoCard()) {
     
                         this.functionModel.grabActionModel(inputSquare, indexWeapon);
-                        view.resetInput();
                         this.functionModel.getGameModel().setState(State.GRAB);
                     } else {
                         
@@ -371,9 +375,11 @@ public class FunctionController {
     
     
     
-    public void grab() throws RemoteException {
+    public void grab(RemoteView view) throws RemoteException {
     
+        view.resetInput();
         this.functionModel.getGameModel().setState(State.CHOSEACTION);
+        
     }
     
     public void selectPowerUp(RemoteView view) throws RemoteException {
@@ -486,14 +492,15 @@ public class FunctionController {
         }
     }
     
-    public void usePowerUp(){
+    public void usePowerUp(RemoteView view) throws RemoteException {
     
+        view.resetInput();
         this.functionModel.getGameModel().setState(State.CHOSEACTION);
     }
     
     
     
-    public void rechargeController(RemoteView view) throws RemoteException {
+    public void selectRecharge (RemoteView view) throws RemoteException {
     
         WeaponCard weaponToCharge = functionModel.getGameModel().getWeaponToCharge().get(view.getIndex());
         ArrayList<PowerUpCard> powerUpToPay = new ArrayList<>();
@@ -533,9 +540,7 @@ public class FunctionController {
         
                 functionModel.getGameModel().setErrorMessage("YOU HAVE NOT AMMO TO PAY THIS AMMO, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
             }
-            
         }
-        
     }
     
     public void payAmmoController (WeaponCard weaponCard, ArrayList<PowerUpCard> powerUpToPay) throws NotValidAmmoException {
@@ -621,6 +626,13 @@ public class FunctionController {
             
             throw new NotValidAmmoException();
         }
+    }
+    
+    
+    public void recharge(RemoteView view) throws RemoteException {
+        
+        view.resetInput();
+        functionModel.getGameModel().setState(State.CHOSEACTION);
     }
        
     

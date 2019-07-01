@@ -103,6 +103,7 @@ public class Map implements Serializable {
      */
     public ArrayList<Player> playersOnSquare(Square s){
 
+        
         for (Square a:squares){
 
             if(a==s) {
@@ -435,22 +436,6 @@ public class Map implements Serializable {
     public boolean sameDirection(Square a, Square b){
 
         return ((a.getRow() == b.getRow()) || ((a.getColumn() == b.getColumn())));
-    }
-    
-    /**
-     * Calculate if Player A is in the same Square of the Player B.
-     *
-     * @param actualPlayer the actual player
-     * @param otherPlayer  the other player
-     * @return tru if if Player A is in the same Square of the Player B
-     */
-    public boolean isInMySquare(Player actualPlayer,Player otherPlayer){
-    
-        try {
-            return this.playersOnSquare(this.getSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
-        } catch (MapException e) {
-            return false;
-        }
     }
     
     /**

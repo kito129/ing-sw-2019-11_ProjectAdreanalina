@@ -18,13 +18,11 @@ public class FunctionModel implements Serializable {
     private GameModel gameModel;
     private int action = 0;
     private Map map;
-    private Player actualPlayer;
 
-    public FunctionModel (GameModel gameModel){
+    public FunctionModel (){
 
-        this.gameModel = gameModel;
+        this.gameModel = new GameModel();
         this.map=gameModel.getMap();
-        this.actualPlayer=gameModel.getActualPlayer();
 
     }
     
