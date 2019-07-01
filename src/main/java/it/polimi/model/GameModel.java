@@ -61,15 +61,19 @@ public class GameModel implements Serializable {
     }
     
     public EnumColorPlayer getRandomColor(){
-    
-        Collections.shuffle(gameColor);
-        EnumColorPlayer randomColor = gameColor.get(0);
-        gameColor.remove(0);
-        return randomColor;
+
+        if(gameColor.size()!=0) {
+
+            Collections.shuffle(gameColor);
+            EnumColorPlayer randomColor = gameColor.get(0);
+            gameColor.remove(0);
+            return randomColor;
+        }
+        return null;
         
     }
     
-    public void populateColor(){
+    private void populateColor(){
         
         this.gameColor.add(EnumColorPlayer.BLU);
         this.gameColor.add(EnumColorPlayer.GREEN);
@@ -84,7 +88,10 @@ public class GameModel implements Serializable {
         return playerDamaged;
     }
     
+<<<<<<< HEAD
+=======
     
+>>>>>>> 705d8c805261d04574f316cbd80dbeeee77f3ccf
     public State getBeforeError () {
         
         return beforeError;

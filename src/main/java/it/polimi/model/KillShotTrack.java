@@ -23,7 +23,12 @@ public class KillShotTrack implements Serializable {
         }
         this.doubleKill=null;
     }
-    
+
+    public EnumColorPlayer getDoubleKill() {
+
+        return doubleKill;
+    }
+
     /**
      * Gets track.
      *
