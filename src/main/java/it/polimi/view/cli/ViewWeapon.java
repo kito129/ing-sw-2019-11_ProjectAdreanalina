@@ -605,11 +605,11 @@ public class ViewWeapon {
     public void viewPlasmaGunBasicEffectPlusChergedShoot (GameModel gameModel) throws RemoteException{
     
         PrintEffectWeapon.printPlasmaGunBasicEffect(gameModel);
-        //get the player target
-        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
-        //get the choise of the player
         PrintEffectWeapon.printPlasmaGunChargedShot();
         viewCLI.setYesNoBooleanChoise();
+        //get the player target
+        System.out.println("Put the target");
+        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
         //notify controller with new input
         viewCLI.notifyController();
     }

@@ -82,21 +82,16 @@ public class GameModel implements Serializable {
         this.gameColor.add(EnumColorPlayer.YELLOW);
     }
     
-    public int getPlayerDamagedIndex () {
-        
-        return playerDamagedIndex;
-    }
-    
-    public void setPlayerDamagedIndex (int playerDamagedIndex) {
-        
-        this.playerDamagedIndex = playerDamagedIndex;
-    }
     
     public ArrayList<Player> getPlayerDamaged () {
         
         return playerDamaged;
     }
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 705d8c805261d04574f316cbd80dbeeee77f3ccf
     public State getBeforeError () {
         
         return beforeError;
@@ -107,10 +102,6 @@ public class GameModel implements Serializable {
         this.beforeError = beforeError;
     }
     
-    public WeaponCard getWeaponSelected () {
-        
-        return weaponSelected;
-    }
     
     public PowerUpCard getPowerUpSelected () {
         
@@ -268,10 +259,6 @@ public class GameModel implements Serializable {
         return playerMarked;
     }
     
-    public void setAvailableEffect (ArrayList<WeaponsEffect> availableEffect) {
-        
-        this.availableEffect = availableEffect;
-    }
     
     public void setPlayers(Player player){
        
@@ -453,7 +440,5 @@ public class GameModel implements Serializable {
         }
     throw  new MapException();
     }
-
-
-
+    
 }
