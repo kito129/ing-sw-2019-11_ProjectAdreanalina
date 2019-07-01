@@ -196,7 +196,7 @@ public class WeaponController {
                         gameModel.setWeaponState(WeaponState.RocketLauncher);
                         //set the effect list
                         if (functionModel.getGameModel().getAvailableEffect().size()==0) {
-                            this.functionModel.getGameModel().getAvailableEffect().add(weapon.getWeaponEffects().get(0));
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
                         }
                         break;
                     case "POWER GLOVE":
@@ -326,7 +326,6 @@ public class WeaponController {
             
             functionModel.getGameModel().setState(State.SELECTEFFECT);
         }
-        
         
     }
     
@@ -1424,10 +1423,10 @@ public class WeaponController {
                     weapon.BaseEffect(map, currentPlayer, targetBase);
                 } catch (VisibleTarget visibleTarget) {
                     
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS VISIBLE");
                 } catch (MapException e) {
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    functionController.setErrorState("ERROR: MAP ERROR");
                 }
                 break;
         }
@@ -1521,7 +1520,7 @@ public class WeaponController {
         
         switch (gameModel.getActualWeaponEffect()) {
             
-            case BaseEffect:
+            case BaseMode:
                 
                 try{
                     
@@ -1750,6 +1749,8 @@ public class WeaponController {
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                gameModel.getAvailableEffect().add(WeaponsEffect.MoveTarget);
+                gameModel.getAvailableEffect().add(WeaponsEffect.ExtraGrenadeEffect);
                 break;
             
             case MoveTarget:
@@ -1761,6 +1762,7 @@ public class WeaponController {
                         destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                         targetBase = gameModel.getPlayerById(view.getTarget1());
                         weapon.moveTarget(map, targetBase, destSquareBase);
+                        gameModel.getAvailableEffect().remove(WeaponsEffect.MoveTarget);
                     } catch (NotValidDistance notValidDistance) {
     
                         functionController.setErrorState("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE MOVES");
@@ -1782,6 +1784,7 @@ public class WeaponController {
                         
                         targetSquareExtra = gameModel.getMap().getSquare(view.getRow2(), view.getColumn2());
                         weapon.extraGrenadeEffect(map, currentPlayer, targetSquareExtra);
+                        gameModel.getAvailableEffect().remove(WeaponsEffect.ExtraGrenadeEffect);
                     } catch (NotVisibleTarget notVisibleTarget) {
                         
                         gameModel.setErrorMessage("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE");
@@ -1886,6 +1889,7 @@ public class WeaponController {
                             functionController.mapErrorGestor();
                         }
                     }
+                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
@@ -1900,7 +1904,6 @@ public class WeaponController {
                     
                     functionController.setErrorState("ERROR: NO TARGET IN CHOSEN SQUARE ");
                 }
-                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
                 break;
             
             case RocketJumpEffect:
@@ -1916,7 +1919,7 @@ public class WeaponController {
                     
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
-                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
+                gameModel.getAvailableEffect().remove(WeaponsEffect.RocketJumpEffect);
                 break;
         }
     }

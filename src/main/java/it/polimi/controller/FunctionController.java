@@ -55,6 +55,7 @@ public class FunctionController {
                     Player player9 = new Player(10,"II",EnumColorPlayer.GREEN,gameModel);
                     Player player10 = new Player(11,"LL",EnumColorPlayer.GREEN,gameModel);
                     Player player11 = new Player(12,"MM",EnumColorPlayer.GREEN,gameModel);
+                    Player player12 = new Player(13,"NN",EnumColorPlayer.GREEN,gameModel);
                 
                     
                     //add on square
@@ -70,6 +71,7 @@ public class FunctionController {
                         gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,1),player9);
                         gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,2),player10);
                         gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,3),player11);
+                        gameModel.getMap().addPlayerOnSquare(gameModel.getMap().getSquare(2,2),player12);
  
                         gameModel.getPlayers(true).add(player1);
                         gameModel.getPlayers(true).add(player2);
@@ -82,6 +84,7 @@ public class FunctionController {
                         gameModel.getPlayers(true).add(player9);
                         gameModel.getPlayers(true).add(player10);
                         gameModel.getPlayers(true).add(player11);
+                        gameModel.getPlayers(true).add(player12);
                     } catch (MapException e) {
                         e.printStackTrace();
                     }

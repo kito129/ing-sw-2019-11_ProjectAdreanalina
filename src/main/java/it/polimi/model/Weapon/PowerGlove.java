@@ -79,7 +79,7 @@ public class PowerGlove extends WeaponCard {
     public void rocketFistMode(Map map,Player currentPlayer,Player target1,Player target2)throws NotValidDistance,MapException,NotInSameDirection{
 
         if (((map.distance(currentPlayer, target1) == 1))&&(map.distance(target1,target2)==1)&&
-                (map.sameDirection(currentPlayer,target1,target2))){
+                (map.sameDirection(currentPlayer,target1,target2))&& map.findPlayer(target2)!=map.findPlayer(currentPlayer)){
 
             ArrayList<EnumColorPlayer> powerGloveDamages=new ArrayList<>();
             powerGloveDamages.add(currentPlayer.getColor());
@@ -94,11 +94,8 @@ public class PowerGlove extends WeaponCard {
         }else if(!(map.sameDirection(currentPlayer,target1,target2))){
 
             throw new NotInSameDirection();
+        }else {
+            throw new NotValidDistance();
         }
-
-
-
-
-
     }
 }

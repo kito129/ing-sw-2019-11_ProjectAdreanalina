@@ -333,12 +333,15 @@ public class ViewWeapon {
                     case ExtraGrenadeEffect :
     
                         PrintEffectWeapon.printGrenadeLauncherExtraGrenade(gameModel);
-                        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+                        viewCLI.setSquareInput(2);
                         viewCLI.notifyController();
                         break;
                         
                     case MoveTarget:
-    
+                        
+                        System.out.println("Move player");
+                        viewCLI.setSquareInput(1);
+                        viewCLI.notifyController();
                         break;
     
                 }
@@ -783,8 +786,19 @@ public class ViewWeapon {
     public void viewShotGunBasicMode(GameModel gameModel) throws RemoteException {
         
         PrintEffectWeapon.printShotGunBasicMode(gameModel);
-        //get the square target
-        viewCLI.setSquareInput(1);
+        System.out.println("target 1");
+        viewCLI.setTarget1(viewCLI.getPlayerInput());
+        System.out.println("Do you want to move the target in another square?");
+        viewCLI.setYesNoBooleanChoise();
+        if(viewCLI.isBooleanChose()){
+            System.out.println("Destination Square: ");
+            viewCLI.setSquareInput(1);
+        
+        } else {
+        
+            viewCLI.setRow(-1);
+            viewCLI.setColumn(-1);
+        }
         //notify controller with new input
         viewCLI.notifyController();
     }
@@ -865,7 +879,10 @@ public class ViewWeapon {
             viewCLI.setColumn(-1);
         }
         System.out.println("Do you want to use fragment?");
-        PrintEffectWeapon.printRocketLauncherFragmentingWarhead();
+        viewCLI.setYesNoBooleanChoise();
+        if(viewCLI.isBooleanChose()) {
+            PrintEffectWeapon.printRocketLauncherFragmentingWarhead();
+        }
     
         viewCLI.notifyController();
     }
@@ -1038,14 +1055,13 @@ public class ViewWeapon {
     public void viewFlamethrowerBarbecueMode(GameModel gameModel) throws RemoteException {
     
         PrintEffectWeapon.printFlamethrowerBarbecueMode(gameModel);
-        System.out.println("Target 1: ");
-        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
-        System.out.println("Target 2: ");
-        viewCLI.setTarget2(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        System.out.println("Square 1: ");
+        viewCLI.setSquareInput(1);
+        System.out.println("Square 2: ");
+        viewCLI.setSquareInput(2);
         viewCLI.notifyController();
     }
     
     //FINE ARMI
     //-------------------------------------------------------------------------------------------------
-    
 }

@@ -35,7 +35,7 @@ public class Whisper extends WeaponCard {
 
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotValidDistance, NotVisibleTarget {
 
-        if((map.distance(currentPlayer,target1)>1) && (map.isVisible(target1,currentPlayer))){
+        if((map.distance(currentPlayer,target1)>1) && (map.isVisible(currentPlayer,target1))){
 
             ArrayList<EnumColorPlayer> whisperDamages= new ArrayList<>();
             whisperDamages.add(currentPlayer.getColor());
@@ -45,7 +45,7 @@ public class Whisper extends WeaponCard {
         }else if(!(map.distance(currentPlayer,target1)>1)){
 
             throw new NotValidDistance();
-        }else if(!(map.isVisible(target1,currentPlayer))){
+        }else if(!(map.isVisible(currentPlayer,target1))){
 
             throw new NotVisibleTarget();
         }
