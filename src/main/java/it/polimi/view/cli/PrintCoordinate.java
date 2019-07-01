@@ -8,7 +8,7 @@ public class PrintCoordinate implements Serializable {
 
     /**
      * Print Player's coordinates.
-     * @param player   the player to print
+     * @param player   the player to printList
      */
     public static void print(Player player){
 

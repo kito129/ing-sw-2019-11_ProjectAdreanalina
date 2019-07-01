@@ -2,6 +2,8 @@ package it.polimi.controller;
 
 import it.polimi.model.*;
 import it.polimi.view.RemoteView;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -72,7 +74,10 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.selectPowerUp(view);
                     break;
                 case SELECTPOWERUPINPUT:
-                    functionController.usePowerUpController(view);
+                    functionController.selectPowerUpInput(view);
+                    break;
+                case USEPOWERUP:
+                    functionController.usePowerUp();
                     break;
                 case SELECTRUN:
                     functionController.runActionController(view);
@@ -93,43 +98,23 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case SHOOT:
                     functionController.weaponController.afterShoot(view);
                 case ENDACTION:
-
+                    //TODO
+                case SELECTRECHARGE:
+                    functionController.rechargeController(view);
+                    break;
                 case RECHARGE:
-                    /*
-                    //vedo se posso ricaricare ricarica
-                    if (actualPlayerBoard.getWeaponToCharge().size() > 0) {
-
-                        //chiedi alla view se vuoi ricaricare??
-                        State recharge = State.RECHARGE;
-                        //nel caso la view voglia ricaricare
-
-                        gameModel.setState(State.RECHARGE);
-                        // se si chiama metodo che verfica se puoi ricarcaire, lui ricaciehraà
-
-                        if (recharge == State.RECHARGE) {
-
-                            //chiamo la ricarica
-                            actionController.rechargeController(actualPlayer, actualPlayerBoard.getWeaponToCharge(),view);
-                        }
-                        gameModel.setState(State.PASSTURN);
-                    }
-
-                     */
+                    System.out.println("all ok");
                     break;
                 case PASSTURN:
+                    //TODO
                     break;
                 case DEADPLAYER:
+                    //TODO
                     break;
                 case SCORINGPLAYERBOARD:
-                    gameModel.setState(State.SCORINGPLAYERBOARD);
-                    //PRIMA INCASSO PLANCE DI TUTTI POI RIANIMO TUTTI
-
-                    // fase incasso plancie
                     functionController.scoringPlayerBoardController();
                     break;
                 case RESPWANPLAYER:
-                    //fase di rianimazione
-                    //creazione del player è temporanea
                     functionController.respawnPlayerController( view);
                     break;
                 case ENDTURN:

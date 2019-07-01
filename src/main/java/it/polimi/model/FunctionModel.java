@@ -27,14 +27,7 @@ public class FunctionModel implements Serializable {
         this.actualPlayer=gameModel.getActualPlayer();
 
     }
-
     
-    /**
-     * Instantiates a new Action model.
-     */
-    public FunctionModel (){
-    
-    }
     
     /**
      * Gets action number.
@@ -484,11 +477,6 @@ public class FunctionModel implements Serializable {
         }
     }
     
-
-    // TODO FINE 18/05
-
-    //metodo per refresh delle ammoCard in map (NO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
-    //non lancia eccezioni perchè è tuto gestito
     public void refreshMapAmmoCard(){
 
         for(Square s:map.getSquares()){
@@ -501,9 +489,7 @@ public class FunctionModel implements Serializable {
         }
     
     }
-
-    //metodo per refresh delle WeaponCard in map (SOLO GENRETIONSAQUARE, C'E METODO isGenerationSuare)
-    //non lancia eccezioni perchè è tuto gestito
+    
     public void refreshMapWeaponCard(){
 
         for (Square s : map.getSquares()) {

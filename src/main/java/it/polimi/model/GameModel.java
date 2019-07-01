@@ -21,23 +21,26 @@ public class GameModel implements Serializable {
     private State beforeError;
     private Map map;
     private Player actualPlayer;
-    private KillShotTrack killShotTrack;
-    private ArrayList<Player> players;
-    private AmmoDeck ammoDeck;
-    private PowerUpDeck powerUpDeck;
-    private WeaponDeck weaponDeck;
+    private KillShotTrack killShotTrack= new KillShotTrack();
+    private ArrayList<Player> players = new ArrayList<>();
+    //deck
+    private AmmoDeck ammoDeck = new AmmoDeck();
+    private PowerUpDeck powerUpDeck = new PowerUpDeck();
+    private WeaponDeck weaponDeck = new WeaponDeck();
     //color for new player
-    private ArrayList<EnumColorPlayer> gameColor;
+    private ArrayList<EnumColorPlayer> gameColor = new ArrayList<>(5);
     //weapon necessary
     private WeaponCard weaponSelected; //current weapon for current Player
     private WeaponState weaponState;
     private WeaponsEffect actualWeaponEffect;
-    public ArrayList<WeaponsEffect> availableEffect;
+    public ArrayList<WeaponsEffect> availableEffect = new ArrayList<>();
     private String weaponName;
     private WeaponsEffect beforeEffect;
-    private ArrayList<Player> playerDamaged;
-    private ArrayList<Player> playerMarked;
+    private ArrayList<Player> playerDamaged= new ArrayList<>();
+    private ArrayList<Player> playerMarked = new ArrayList<>();
     private int playerDamagedIndex;
+    //weapon to charge
+    private ArrayList<WeaponCard> weaponToCharge = new ArrayList<>();
     //powerup
     private PowerUpCard powerUpSelected; //current weapon effect for current Player
     //controller
@@ -50,16 +53,6 @@ public class GameModel implements Serializable {
     public GameModel(){
         
         state=State.LOBBY;
-        //create object of the gam
-        this.killShotTrack= new KillShotTrack();
-        this.players=new ArrayList<>();
-        this.ammoDeck = new AmmoDeck();
-        this.powerUpDeck=new PowerUpDeck();
-        this.weaponDeck=new WeaponDeck();
-        this.gameColor = new ArrayList<>(5);
-        this.availableEffect= new ArrayList<>();
-        this.playerDamaged = new ArrayList<>();
-        this.playerMarked = new ArrayList<>();
         //create map
         this.map = new Map(MapCreator.createA(),"MAPA");
         //populate list of color for the player
@@ -179,7 +172,12 @@ public class GameModel implements Serializable {
 
         return map;
     }
-
+    
+    public ArrayList<WeaponCard> getWeaponToCharge () {
+        
+        return weaponToCharge;
+    }
+    
     public ArrayList<RemoteView> getRemoteViews() {
 
         return remoteViews;
@@ -215,8 +213,7 @@ public class GameModel implements Serializable {
 
     }
 
-
-
+    
     /**
      * Gets ammo deck.
      *
@@ -286,10 +283,10 @@ public class GameModel implements Serializable {
 
     public void setState (State state)  {
         
-        this.state=state;
         if(state!= State.ERROR) {
             this.setBeforeError(getState());
         }
+        this.state=state;
         notifyObserver(this);
     }
     

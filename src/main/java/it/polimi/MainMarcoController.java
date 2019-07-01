@@ -55,7 +55,7 @@ public class MainMarcoController {
         Map map = gameModel.getMap();
 
         System.out.println("Stampa finale");
-        map.print();
+        map.printList();
 
 
         //obesrver
@@ -96,7 +96,7 @@ public class MainMarcoController {
 
         ViewCLI viewCLI = new ViewCLI(gameController);
         gameModel.addObserver(viewCLI);
-        map.print();
+        map.printList();
 
 
 
@@ -125,7 +125,7 @@ public class MainMarcoController {
       
 
     
-        map.print();
+        map.printList();
         
         //prova grab
         try {

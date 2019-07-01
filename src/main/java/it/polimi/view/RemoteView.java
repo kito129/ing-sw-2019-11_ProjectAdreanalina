@@ -14,7 +14,13 @@ public interface RemoteView extends Remote {
     //void setOnline (boolean online) throws RemoteException;
     
     int getIndex () throws RemoteException;
-
+    
+    int getIndex3 ()throws RemoteException;;
+    
+    int getIndex4 ()throws RemoteException;;
+    
+    int getIndex5 ()throws RemoteException;;
+    
     int getChoicePlayer() throws RemoteException;
 
     int getChoicePlayer2() throws RemoteException;

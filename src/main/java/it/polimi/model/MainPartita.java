@@ -22,7 +22,7 @@ public class MainPartita {
 
 
         Map map = new Map(MapCreator.createB(), "mappa a");
-        map.print();
+        map.printList();
 
 
         KillShotTrack killShotTrack = new KillShotTrack();
@@ -75,7 +75,7 @@ public class MainPartita {
             p.stampa();
         }
 
-        map.print();
+        map.printList();
 
 
         System.out.println(map.isVisible(player1, player2));

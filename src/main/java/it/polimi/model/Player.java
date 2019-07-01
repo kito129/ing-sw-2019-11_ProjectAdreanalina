@@ -44,8 +44,8 @@ public class Player implements Serializable {
         this.column=-1;
         setOnlineModel(true);
         //test
-        this.damagedGameModel = gameModel.getPlayerDamaged();
-        this.markedGameModel = gameModel.getPlayerMarked();
+        //this.damagedGameModel = gameModel.getPlayerDamaged();
+        //this.markedGameModel = gameModel.getPlayerMarked();
 
         // TODO vedere come gestire posizione in fase di inizializzazione.io inizialmente le metterei a  null quando vengono istanziati
     
