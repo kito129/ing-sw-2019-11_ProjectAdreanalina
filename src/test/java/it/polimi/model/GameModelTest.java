@@ -37,7 +37,10 @@ public class GameModelTest {
 
    @Test
 
-    public void
+    public void test(){
+
+        
+   }
 
 
 }
