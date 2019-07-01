@@ -1,7 +1,6 @@
 package it.polimi.model.PowerUp;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NotValidInput;
 
 /**
  * The poweup Teleporter.

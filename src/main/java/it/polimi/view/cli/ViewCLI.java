@@ -503,13 +503,13 @@ public class ViewCLI implements RemoteView, Serializable {
             case CHOSEACTION:
                 viewChoiseAction();
                 break;
-            case USEPOWERUP:
-                break;
             case SELECTPOWERUP:
                 viewSelectPowerUp();
                 break;
             case SELECTPOWERUPINPUT:
                 viewSelectPowerUpInput();
+            case USEPOWERUP:
+                break;
             case RUN:
                 viewRun();
                 break;
@@ -841,9 +841,26 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewSelectPowerUpInput() throws RemoteException {
         
-        print("here have to select power up");
+        switch (gameModel.getPowerUpSelected().getNameCard()){
+            case "NEWTON":
+                PrintEffectPowerUp.printNewton(gameModel);
+                setTarget1(getUserInput(0,gameModel.getPlayers(true).size()));
+                break;
+            case "TARGETING SCOPE":
+                PrintEffectPowerUp.printTargetingScope(gameModel);
+                setTarget1(getUserInput(0,gameModel.getPlayers(true).size()));
+                break;
+            case "TELEPORTER":
+                PrintEffectPowerUp.printTeleporter(gameModel);
+                setSquareInput(1);
+                break;
+            case "TAGBACK GRENADE":
+                PrintEffectPowerUp.printTagbackGrenade();
+                setTarget1(getUserInput(0,gameModel.getPlayers(true).size()));
+                break;
+        }
+    
         notifyController();
-    
+        
     }
-    
 }

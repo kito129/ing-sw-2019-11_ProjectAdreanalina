@@ -52,6 +52,5 @@ public class PrintEffectPowerUp implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE TELEPORTER");
         System.out.println("In which square do you want to move? (enter row and column for the square)");
-        PrintPlayer.print(gameModel.getPlayers(false));
     }
 }
