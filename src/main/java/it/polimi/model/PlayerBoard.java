@@ -28,6 +28,7 @@ public class PlayerBoard implements Serializable {
         ammo.add(EnumColorCardAndAmmo.YELLOW);
         ammo.add(EnumColorCardAndAmmo.RED);
         ammo.add(EnumColorCardAndAmmo.BLU);
+        ammo.add(EnumColorCardAndAmmo.BLU);
         boardValue = 8;
         damages = new ArrayList<EnumColorPlayer>();
         marks = new ArrayList<EnumColorPlayer>();

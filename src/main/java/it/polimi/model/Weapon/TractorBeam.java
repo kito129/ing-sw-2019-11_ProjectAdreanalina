@@ -51,12 +51,12 @@ public class TractorBeam extends WeaponCard {
 
         Square currentPlayerSquare = map.findPlayer(currentPlayer);
         Square target1Square = map.findPlayer(target1);
-        if((map.isVisible(destSquare,currentPlayerSquare)) && (map.distance(target1Square,destSquare)<3)
+        if((map.isVisible(currentPlayerSquare,destSquare)) && (map.distance(target1Square,destSquare)<3)
                 &&(map.distance(target1Square,destSquare)>=0)){
 
             map.movePlayer(target1,destSquare);
             target1.singleDamage(currentPlayer.getColor());
-        }else if(!map.isVisible(destSquare, currentPlayerSquare)){
+        }else if(!map.isVisible(currentPlayerSquare,destSquare)){
 
             throw new NotVisibleTarget();
         }else if((map.distance(target1Square,destSquare)>2)&&(map.distance(target1Square,destSquare)==-1)){

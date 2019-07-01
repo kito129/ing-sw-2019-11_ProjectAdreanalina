@@ -45,7 +45,7 @@ public class Electroscythe extends WeaponCard {
     public void baseMode(Map map, Player currentPlayer) throws NoTargetInSquare, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
-        ArrayList<Player> playersOnSquare = map.playersOnSquare(squareOfCurrentPlayer);
+        ArrayList<Player> playersOnSquare = new ArrayList<>(map.playersOnSquare(squareOfCurrentPlayer));
         playersOnSquare.remove(currentPlayer);
         if(playersOnSquare.size()>0){
 
@@ -62,8 +62,9 @@ public class Electroscythe extends WeaponCard {
     public void reaperMode(Map map,Player currentPlayer) throws NoTargetInSquare, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
-        ArrayList<Player> playersOnSquare = map.playersOnSquare(squareOfCurrentPlayer);
+        ArrayList<Player> playersOnSquare = new ArrayList<>(map.playersOnSquare(squareOfCurrentPlayer));
         playersOnSquare.remove(currentPlayer);
+        
         if(playersOnSquare.size()>0){
 
             ArrayList<EnumColorPlayer> electroscytheDamages=new ArrayList<>();

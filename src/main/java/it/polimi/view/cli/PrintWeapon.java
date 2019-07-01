@@ -19,7 +19,7 @@ public class PrintWeapon implements Serializable {
      * Print Client's weapons.
      * @param weaponList       list of weapon.
      */
-    public static void print(ArrayList<WeaponCard> weaponList, boolean wantDescription){
+    public static void printList (ArrayList<WeaponCard> weaponList, boolean wantDescription){
         
         if (weaponList.size()>0) {
     
@@ -62,6 +62,7 @@ public class PrintWeapon implements Serializable {
             System.out.println("WEAPON LIST EMPTY");
         }
     }
+    
 
     /**
      * Print Client's weapons.

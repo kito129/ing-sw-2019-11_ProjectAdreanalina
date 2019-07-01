@@ -57,7 +57,7 @@ public class Thor extends WeaponCard {
 
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
 
-        if(map.isVisible(target1,currentPlayer)){
+        if(map.isVisible(currentPlayer,target1)){
 
             ArrayList<EnumColorPlayer> thorDamages=new ArrayList<>();
             thorDamages.add(currentPlayer.getColor());

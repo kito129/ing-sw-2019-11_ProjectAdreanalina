@@ -16,7 +16,7 @@ public class PrintEffectPowerUp implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE TARGETING SCOPE");
         System.out.println("Who is your target? He must have received at least one damage during this turn (enter player's ID)");
-        PrintPlayer.print(gameModel.getPlayers(false));
+        PrintPlayer.print(gameModel.getPlayerDamaged());
     }
 
     //NEWTON

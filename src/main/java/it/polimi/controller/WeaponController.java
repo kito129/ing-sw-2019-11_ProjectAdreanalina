@@ -276,13 +276,8 @@ public class WeaponController {
         i = view.getIndex2();
         if (i == -1) {
             
-            functionModel.getGameModel().getAvailableEffect().removeAll( functionModel.getGameModel().getAvailableEffect());
-            functionModel.getGameModel().setBeforeEffect(null);
-            functionModel.getGameModel().setWeaponName(null);
-            functionModel.getGameModel().setWeaponSelected(null);
-            functionModel.getGameModel().setActualWeaponEffect(null);
-            functionModel.getGameModel().getPlayerMarked().removeAll(functionModel.getGameModel().getPlayerMarked());
-            functionModel.getGameModel().getPlayerDamaged().removeAll(functionModel.getGameModel().getPlayerDamaged());
+            functionController.resetParameterWeapon();
+            view.resetInput();
             gameModel.setState(State.CHOSEACTION);
             
         } else {
@@ -327,13 +322,7 @@ public class WeaponController {
         if(functionModel.getGameModel().getAvailableEffect().size()==0){
             
             //there are no more effect avaible
-            functionModel.getGameModel().getAvailableEffect().removeAll( functionModel.getGameModel().getAvailableEffect());
-            functionModel.getGameModel().setBeforeEffect(null);
-            functionModel.getGameModel().setWeaponName(null);
-            functionModel.getGameModel().setWeaponSelected(null);
-            functionModel.getGameModel().setActualWeaponEffect(null);
-            functionModel.getGameModel().getPlayerMarked().removeAll(functionModel.getGameModel().getPlayerMarked());
-            functionModel.getGameModel().getPlayerDamaged().removeAll(functionModel.getGameModel().getPlayerDamaged());
+            functionController.resetParameterWeapon();
             functionModel.getGameModel().setState(State.CHOSEACTION);
         } else {
             
@@ -898,10 +887,10 @@ public class WeaponController {
     
                     weapon.reaperMode(map, currentPlayer);
                 } catch (NoTargetInSquare noTargetInSquare) {
-
+                    noTargetInSquare.printStackTrace();
                     functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE");
                 } catch (MapException mapException) {
-    
+                    mapException.printStackTrace();
                     functionController.mapErrorGestor();
                 }
             
@@ -1109,11 +1098,11 @@ public class WeaponController {
                     targetBaseOrPunisher = gameModel.getPlayerById(view.getTarget1());
                     weapon.punisherMode(map, currentPlayer, targetBaseOrPunisher);
                 } catch (NotValidDistance notValidDistance) {
-                    
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS MORE THAN THO MOVES FROM YOU");
+    
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS MORE THAN THO MOVES FROM YOU");
                 } catch (MapException mapException) {
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    functionController.mapErrorGestor();
                 }
                 break;
         }
@@ -1148,7 +1137,7 @@ public class WeaponController {
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
                 //add next effect
-                gameModel.getAvailableEffect().add(WeaponsEffect.HighVoltageEffect);
+                gameModel.getAvailableEffect().add(WeaponsEffect.ChainReactionEffect);
                 break;
             case ChainReactionEffect:
                 
@@ -1288,6 +1277,8 @@ public class WeaponController {
                                 targetsBlackHole.add(target1BlackHole);
                                 targetsBlackHole.add(target2BlackHole);
                                 weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
+                                //empty list
+                                gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
                             } else {
                                 
                                 throw new NotValidInput();
@@ -1312,8 +1303,7 @@ public class WeaponController {
                 }
                 break;
         }
-        //empty list
-        gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
+       
     }
     
     public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) throws RemoteException {

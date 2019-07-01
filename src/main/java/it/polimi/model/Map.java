@@ -103,6 +103,7 @@ public class Map implements Serializable {
      */
     public ArrayList<Player> playersOnSquare(Square s){
 
+        
         for (Square a:squares){
 
             if(a==s) {
@@ -279,6 +280,19 @@ public class Map implements Serializable {
         return false;
     }
     
+    
+    
+    public boolean isNotVisible(Player a, Player b) {
+        
+        try {
+            return !isVisible(findPlayer(a),findPlayer(b));
+        } catch (MapException e) {
+            
+            return false;
+            
+        }
+    }
+    
     /**
      * Public interface to private is visible. Calculate if PLayerA see PlayerB.
      *
@@ -291,23 +305,10 @@ public class Map implements Serializable {
         try {
             return isVisible(findPlayer(a),findPlayer(b));
         } catch (MapException e) {
-            System.out.println("is visible down");
-            return false;
             
+            return false;
         }
     }
-    
-    public boolean isNotVisible(Player a, Player b) {
-        
-        try {
-            return !isVisible(findPlayer(a),findPlayer(b));
-        } catch (MapException e) {
-            System.out.println("is visible down");
-            return false;
-            
-        }
-    }
-    
     
     
     /**
@@ -332,31 +333,33 @@ public class Map implements Serializable {
      * @param c1 column of search square
      * @return true if A(c0,r0) see B(c1,r1)
      */
+    
+    //TODO FIX
     public boolean isVisible(int r0, int c0,int r1, int c1) {
         
         try {
             Square currSquare = getSquare(r0,c0);
             Square destSquare = getSquare(r1,c1);
     
-            if (currSquare==destSquare){
-                return true;
-            } else if(currSquare.getColor()==destSquare.getColor()){
-        
+            if (currSquare==destSquare || currSquare.getColor()==destSquare.getColor()){
+                
                 return true;
             }else {
-        
+                
                 for (Square a:currSquare.getLink()){
             
-                    if(a.getColor()==destSquare.getColor()) return true;
+                    if(a.getColor()==destSquare.getColor()) {
+                       
+                        return true;
+                    }
                 }
             }
             return false;
             
         } catch (MapException e) {
+            
             return false;
         }
-    
-    
     }
     
     /**
@@ -367,9 +370,9 @@ public class Map implements Serializable {
      */
     public void movePlayer(Player player, Square square) throws MapException {
   
-    removePlayerFromSquare(player);
-    addPlayerOnSquare(square,player);
-}
+        removePlayerFromSquare(player);
+        addPlayerOnSquare(square,player);
+    }
     
     /**
      * Add player on square.
@@ -433,22 +436,6 @@ public class Map implements Serializable {
     public boolean sameDirection(Square a, Square b){
 
         return ((a.getRow() == b.getRow()) || ((a.getColumn() == b.getColumn())));
-    }
-    
-    /**
-     * Calculate if Player A is in the same Square of the Player B.
-     *
-     * @param actualPlayer the actual player
-     * @param otherPlayer  the other player
-     * @return tru if if Player A is in the same Square of the Player B
-     */
-    public boolean isInMySquare(Player actualPlayer,Player otherPlayer){
-    
-        try {
-            return this.playersOnSquare(this.getSquare(actualPlayer.getRow(), actualPlayer.getColumn())).contains(otherPlayer);
-        } catch (MapException e) {
-            return false;
-        }
     }
     
     /**

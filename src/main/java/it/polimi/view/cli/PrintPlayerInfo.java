@@ -16,7 +16,7 @@ public class PrintPlayerInfo implements Serializable {
 
     /**
      * Print Player's info.
-     * @param player   the player to print
+     * @param player   the player to printList
      */
     public static void print(Player player){
 

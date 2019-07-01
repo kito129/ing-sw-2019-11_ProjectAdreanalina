@@ -8,7 +8,7 @@ public class PrintScore implements Serializable {
 
     /**
      * Print Player's score.
-     * @param player   the player to print
+     * @param player   the player to printList
      */
     public static void print(Player player){
 
