@@ -608,6 +608,7 @@ public class ViewWeapon {
         PrintEffectWeapon.printPlasmaGunChargedShot();
         viewCLI.setYesNoBooleanChoise();
         //get the player target
+        System.out.println("Put the target");
         viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
         //notify controller with new input
         viewCLI.notifyController();

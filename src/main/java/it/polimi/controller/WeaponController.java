@@ -313,8 +313,6 @@ public class WeaponController {
         
         ArrayList<EnumColorCardAndAmmo> toPay = weaponCard.getRechargeCost();
         
-
-        
     }
     
     public void afterShoot(RemoteView view){
@@ -1429,6 +1427,8 @@ public class WeaponController {
                 }
                 break;
         }
+        //empty list
+        gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
     public void Whisper(GameModel gameModel, Whisper weapon, RemoteView view) throws RemoteException {

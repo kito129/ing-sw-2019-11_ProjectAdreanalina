@@ -679,8 +679,6 @@ public class ViewCLI implements RemoteView, Serializable {
         } else {
             setBooleanChose(false);
         }
-        
-        
     }
     
     
