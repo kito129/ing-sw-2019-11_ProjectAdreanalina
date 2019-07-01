@@ -916,7 +916,7 @@ public class WeaponController {
         boolean choice2;
         choice1 = view.isUseSecondEffect();
         choice2 = view.isUseThirdEffect();
-        
+        /*
         //array for target
         ArrayList<Player> targetBase = new ArrayList<>();
         
@@ -1056,7 +1056,11 @@ public class WeaponController {
                     gameModel.setErrorMessage("ERROR!");
                 }
                 break;
+                
+         
         }
+        
+         */
     }
     
     
