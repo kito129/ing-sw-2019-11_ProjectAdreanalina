@@ -299,7 +299,6 @@ public class MapCreator {
         linkS5.add(s9);
         s5.setLink(linkS5);
         ArrayList<Square> linkS6 = new ArrayList<>();
-        linkS6.add(s7);
         linkS6.add(s2);
         linkS6.add(s10);
         s6.setLink(linkS6);
@@ -307,7 +306,6 @@ public class MapCreator {
         linkS7.add(s3);
         linkS7.add(s11);
         linkS7.add(s8);
-        linkS7.add(s6);
         s7.setLink(linkS7);
         ArrayList<Square> linkS8 = new ArrayList<>();
         linkS8.add(s4);
