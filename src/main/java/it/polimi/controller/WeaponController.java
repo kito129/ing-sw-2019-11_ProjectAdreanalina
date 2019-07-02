@@ -1365,7 +1365,7 @@ public class WeaponController {
                         functionController.mapErrorGestor();
                     }
                 }else{
-                    
+                   
                    functionController.mapErrorGestor();
                 }
                 break;

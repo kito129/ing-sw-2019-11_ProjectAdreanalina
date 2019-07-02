@@ -164,6 +164,8 @@ public class ViewWeapon {
                     //II effect
                     case ReaperMode :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Reaper Mode");
                         cost.add(EnumColorCardAndAmmo.BLU);
                         cost.add(EnumColorCardAndAmmo.RED);
                         PrintAmmo.print(cost,2);
@@ -253,6 +255,8 @@ public class ViewWeapon {
                     //II effect
                     case PunisherMode :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Punisher Mode");
                         cost.add(EnumColorCardAndAmmo.RED);
                         cost.add(EnumColorCardAndAmmo.YELLOW);
                         PrintAmmo.print(cost,2);
@@ -320,6 +324,8 @@ public class ViewWeapon {
                     //II effect
                     case ChainReactionEffect :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Chain Reaction Effect");
                         cost.add(EnumColorCardAndAmmo.BLU);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -374,6 +380,8 @@ public class ViewWeapon {
                     //III effect
                     case HighVoltageEffect :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("High Voltage Effect");
                         cost.add(EnumColorCardAndAmmo.BLU);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -439,6 +447,8 @@ public class ViewWeapon {
                     //II effect
                     case BlackHoleEffect :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Black Hole Effect");
                         cost.add(EnumColorCardAndAmmo.RED);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -515,6 +525,8 @@ public class ViewWeapon {
                     //I effect
                     case BaseEffectPlusChargedShotEffect :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Charged Shot Effect");
                         cost.add(EnumColorCardAndAmmo.BLU);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -596,6 +608,8 @@ public class ViewWeapon {
                     //II effect
                     case NanoTracerMode :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Nano-Tracer Mode");
                         cost.add(EnumColorCardAndAmmo.RED);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -661,6 +675,8 @@ public class ViewWeapon {
                     //II effect
                     case BarbecueMode :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Barbecue Mode");
                         cost.add(EnumColorCardAndAmmo.YELLOW);
                         cost.add(EnumColorCardAndAmmo.YELLOW);
                         PrintAmmo.print(cost,2);
@@ -744,6 +760,8 @@ public class ViewWeapon {
                     //II effect
                     case ExtraGrenadeEffect :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Extra Grenade Effect");
                         cost.add(EnumColorCardAndAmmo.RED);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -827,6 +845,8 @@ public class ViewWeapon {
                     //I effect
                     case BaseEffectPlusFragmentingWarheadEffect :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Fragmenting Warhead Effect");
                         cost.add(EnumColorCardAndAmmo.YELLOW);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -881,6 +901,8 @@ public class ViewWeapon {
                     //III effect
                     case RocketJumpEffect :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Rocket Jump Effect");
                         cost.add(EnumColorCardAndAmmo.BLU);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -946,6 +968,8 @@ public class ViewWeapon {
                     //II effect
                     case RocketFistMode :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Rocket Fist Mode");
                         cost.add(EnumColorCardAndAmmo.BLU);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -1028,6 +1052,8 @@ public class ViewWeapon {
                     //II effect
                     case TsunamiMode :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Tsunami Mode");
                         cost.add(EnumColorCardAndAmmo.YELLOW);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -1099,6 +1125,8 @@ public class ViewWeapon {
                     //III effect
                     case SliceAndDiceEffect :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Slice and Dice Effect");
                         cost.add(EnumColorCardAndAmmo.YELLOW);
                         PrintAmmo.print(cost,2);
                         System.out.println();
@@ -1164,6 +1192,8 @@ public class ViewWeapon {
                     //II effect
                     case PulverizeMode :
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Pulverize Mode");
                         cost.add(EnumColorCardAndAmmo.RED);
                         PrintAmmo.print(cost,2);
                         System.out.println();
