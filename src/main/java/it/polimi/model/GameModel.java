@@ -51,7 +51,7 @@ public class GameModel implements Serializable {
         
         state=State.LOBBY;
         //create map
-        this.map = new Map(MapCreator.createD(),"MAPA");
+        this.map = new Map(MapCreator.createA(),"MAPA");
         //populate list of color for the player
         populateColor();
         
