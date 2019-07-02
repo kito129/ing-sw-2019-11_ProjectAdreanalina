@@ -37,11 +37,10 @@ public class Cyberblade extends WeaponCard {
         sliceAndDiceCost = new ArrayList<EnumColorCardAndAmmo>();
         sliceAndDiceCost.add(EnumColorCardAndAmmo.YELLOW);
         setOptional(true);
-        setDescription("effetto base: Dai 2 danni a 1 bersaglio nel quadrato in cui ti trovi.\n\n" +
-                "passo d'ombra: Muovi di 1 quadrato prima o dopo l'effetto base.\n\n" +
-                "modalità sminuzzare: Dai 2 danni a un bersaglio differente nel quadrato in cui ti trovi. Il passo d'ombra può essere usato prima o dopo questo effetto.\n\n" +
-                "Nota: Combinare tutti gli effetti permette di muoversi in un quadrato e colpire 2 persone; oppure di colpire qualcuno, muovere e colpire qualcun altro.\n" +
-                "Oppure ancora colpire 2 persone e poi andare via.");
+        setDescription("Basic Effect: Deal 2 damage to 1 target on your square.\n" +
+                "with Shadowstep: Move 1 square before or after the basic effect.\n" +
+                "with Slice and Dice: Deal 2 damage to a different target on your square. The shadowstep may be used before or after this effect.\n" +
+                "Notes: Combining all effects allows you to move onto a square and whack 2 people; or whack somebody, move, and whack somebody else; or whack 2 people and then move.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getShadowstepCost() {

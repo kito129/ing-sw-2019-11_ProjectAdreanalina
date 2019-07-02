@@ -36,12 +36,10 @@ public class MachineGun extends WeaponCard {
         turretTripodCost = new ArrayList<EnumColorCardAndAmmo>();
         turretTripodCost.add(EnumColorCardAndAmmo.BLU);
         setOptional(true);
-        setDescription("effetto base: Scegli 1 o 2 bersagli che puoi vedere e dai 1 danno a entrambi.\n\n" +
-                "colpo focalizzato: Dai 1 danno aggiuntivo a uno dei due bersagli.\n\n" +
-                "tripode di supporto: Dai 1 danno aggiuntivo all'altro dei bersagli e/o dai 1 danno a un bersaglio differente che puoi vedere.\n\n" +
-                "Nota: Se hai dato entrambi i punti aggiuntivi di danno, devono essere dati a 2 bersagli diversi.\n" +
-                "Se puoi vedere solo 2 bersagli, dai 2 danni a entrambi se usi entrambi gli effetti opzionali.\n" +
-                "Se usi l'effetto base solo su 1 bersaglio, puoi comunque usare il tripode di supporto per dare 1 danno aggiuntivo.");
+        setDescription("Basic Effect: Choose 1 or 2 targets you can see and deal 1 damage to each.\n" +
+                "with Focus Shot: Deal 1 additional damage to one of those targets.\n" +
+                "with Turret Tripod: Deal 1 additional damage to the other of those targets and/or deal 1 damage to a different target you can see.\n" +
+                "Notes: If you deal both additional points of damage, they must be dealt to 2 different targets. If you see only 2 targets, you deal 2 to each if you use both optional effects. If you use the basic effect on only 1 target, you can still use the the turret tripod to give it 1 additional damage.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getFocusShotCost() {

@@ -35,12 +35,9 @@ public class Flamethrower extends WeaponCard {
         barbecueModeCost.add(EnumColorCardAndAmmo.YELLOW);
         barbecueModeCost.add(EnumColorCardAndAmmo.YELLOW);
         setOptional(false);
-        setDescription("modalità base: Scegli un quadrato distante 1 movimento e possibilmente un secondo quadrato distante ancora 1 movimento nella stessa direzione.\n" +
-                "In ogni quadrato puoi scegliere 1 bersaglio e dargli 1 danno.\n\n" +
-                "modalità barbecue: Scegli 2 quadrati come prima. Dai 2 danni a chiunque sia nel primo quadrato e 1 danno a chiunque si trovi nel secondo quadrato.\n\n" +
-                "Nota: Quest'arma non può danneggiare nessuno nel tuo quadrato.\n" +
-                "Tuttavia può a volte danneggiare un bersaglio che non vedi, le fiamme non passano attraverso i muri ma passano attraverso le porte.\n" +
-                "Immaginatelo come una esplosione di fuoco in linea retta che si muove di 2 quadrati in una direzione cardinale.");
+        setDescription("Basic Mode: Choose a square 1 move away and possibly a second square 1 more move away in the same direction. On each square, you may choose 1 target and give it 1 damage.\n" +
+                "in Barbecue Mode: Choose 2 squares as above. Deal 2 damage to everyone on the first square and 1 damage to everyone on the second square.\n" +
+                "Notes: This weapon cannot damage anyone in your square. However, it can sometimes damage a target you can't see – the flame won't go through walls, but it will go through doors. Think of it as a straight-line blast of flame that can travel 2 squares in a cardinal direction.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getBarbecueModeCost() {

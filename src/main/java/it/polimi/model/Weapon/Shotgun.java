@@ -32,9 +32,8 @@ public class Shotgun extends WeaponCard {
         longBarrelModeCost = new ArrayList<EnumColorCardAndAmmo>();
         longBarrelModeCost.add(null);
         setOptional(false);
-        setDescription("modalità base: Dai 3 danni a 1 bersaglio nel quadrato in cui ti trovi.\n" +
-                "Se vuoi puoi muovere quel bersaglio di 1 quadrato.\n\n" +
-                "modalità canna lunga: Dai 2 danni a 1 bersaglio in un quadrato distante esattamente 1 movimento.");
+        setDescription("Basic Mode: Deal 3 damage to 1 target on your square. If you want, you may then move the target 1 square.\n" +
+                "in Long Barrel Mode: Deal 2 damage to 1 target on any square exactly one move away.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getLongBarrelModeCost() {

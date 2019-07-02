@@ -34,14 +34,10 @@ public class PlasmaGun extends WeaponCard {
         chargedShotCost = new ArrayList<EnumColorCardAndAmmo>();
         chargedShotCost.add(EnumColorCardAndAmmo.BLU);
         setOptional(true);
-        setDescription("effetto base: Dai 2 danni a 1 bersaglio che puoi vedere.\n\n" +
-                "slittamento di fase: Muovi di 1 o 2 quadrati.\n" +
-                "Questo effetto può essere usato prima o dopo l'effetto base.\n\n" +
-                "colpo sovraccarico: Dai 1 danno aggiuntivo al tuo bersaglio.\n\n" +
-                "Nota: I due movimenti non hanno costo in munizioni.\n" +
-                "Non hai bisogno di vedere il tuo bersaglio quando giochi la carta.\n" +
-                "Per esempio puoi muovere di 2 quadrati e sparare al bersaglio che ora puoi vedere.\n" +
-                "Non puoi usare 1 movimento prima di sparare e 1 dopo aver sparato.");
+        setDescription("Basic Effect: Deal 2 damage to 1 target you can see.\n" +
+                "with Phase Glide: Move 1 or 2 squares. This effect can be used either before or after the basic effect.\n" +
+                "with Charged Shot: Deal 1 additional damage to your target.\n" +
+                "Notes: The two moves have no ammo cost. You don't have to be able to see your target when you play the card. For example, you can move 2 squares and shoot a target you now see. You cannot use 1 move before shooting and 1 move after");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getPhaseGlideCost() {
