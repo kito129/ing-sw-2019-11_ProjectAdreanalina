@@ -1269,7 +1269,7 @@ public class WeaponController {
                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1301,7 +1301,7 @@ public class WeaponController {
                         functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
                     } catch (NotVisibleTarget notVisibleTarget) {
     
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                     } catch (MapException e) {
                         
                         functionController.mapErrorGestor();
@@ -1587,7 +1587,7 @@ public class WeaponController {
                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1690,7 +1690,7 @@ public class WeaponController {
                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE FROM YOUR POSITION");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (NotValidDistance notValidDistance) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN SQUARE IN NOT AT LEAST ONE MOVE FROM YOU OR THE CHOSEN TARGET IS NOT " +
@@ -1783,7 +1783,7 @@ public class WeaponController {
                     functionController.setErrorState("ERROR: CHOOSE A DIFFERENT ROOM THAN YOURS ");
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN ROOM IS NOT VISIBLE ");
+                    functionController.setErrorState("ERROR: THE CHOSEN ROOM IS NOT VISIBLE!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1832,7 +1832,7 @@ public class WeaponController {
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException e) {
                     
                     functionController.setErrorState("ERROR: MAP ERROR");
@@ -1879,7 +1879,7 @@ public class WeaponController {
                     weapon.BaseEffect(map, currentPlayer, targetBase);
                 } catch (VisibleTarget visibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException e) {
                     
                     functionController.setErrorState("ERROR: MAP ERROR");
@@ -1908,7 +1908,7 @@ public class WeaponController {
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT AT LEAST 2 MOVES FROM YOU");
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NON VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1936,7 +1936,7 @@ public class WeaponController {
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVE FROM YOU" );
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1954,7 +1954,7 @@ public class WeaponController {
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVE FROM YOU" );
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -2052,7 +2052,7 @@ public class WeaponController {
                     weapon.baseMode(map, currentPlayer, target1);
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -2100,7 +2100,7 @@ public class WeaponController {
                     }
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGETS IS NOT VISIBLE!!!");
                 } catch (NotValidInput notValidInput) {
                     
                     functionController.setErrorState("TWO OR THREE TARGETS ARE EQUAL BETWEEN THEM");
@@ -2199,7 +2199,7 @@ public class WeaponController {
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                 } catch (MapException e) {
                     
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
@@ -2243,7 +2243,7 @@ public class WeaponController {
                         gameModel.getAvailableEffect().remove(WeaponsEffect.ExtraGrenadeEffect);
                     } catch (NotVisibleTarget notVisibleTarget) {
                         
-                        gameModel.setErrorMessage("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE");
+                        gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                     } catch (MapException mapExcpetion) {
                         
                         gameModel.setErrorMessage("ERROR: MAP ERROR");
@@ -2348,7 +2348,7 @@ public class WeaponController {
                     gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
                     
                 } catch (NotValidDistance notValidDistance) {
                     
