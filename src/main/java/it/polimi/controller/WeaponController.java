@@ -1,6 +1,5 @@
 package it.polimi.controller;
 
-import com.sun.org.apache.regexp.internal.RE;
 import it.polimi.model.*;
 import it.polimi.model.Exception.*;
 import it.polimi.model.Weapon.*;

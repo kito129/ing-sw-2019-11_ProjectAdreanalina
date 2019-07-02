@@ -97,6 +97,8 @@ public class ViewWeapon {
                     //II effect
                     case SecondLockEffect:
 
+                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                        System.out.println("Second Lock Effect");
                         cost.add(EnumColorCardAndAmmo.RED);
                         PrintAmmo.print(cost,2);
                         System.out.println();
