@@ -38,23 +38,180 @@ public class CLIPrintMap implements Serializable {
         String black = ANSI_BLACK_BACKGROUND + " ";
         int row;
         int column;
-    
+        // H door ⇄
+        // V door ⇅
+
         //create row
-        for (row =0;row<11;row++){
+        for (row = 0; row < 11; row++){
+
             squares.add(new ArrayList<>());
         }
         
         //fill row with array list size 11 (column)
-        
-        for (row =0;row<11;row++){
-            for (column =0;column<11;column++){
+        for (row = 0; row < 11; row++){
+
+            for (column = 0; column < 11; column++){
                 
-                if(((column>-1 && column<3) || (column>7 )) || (((row>-1 && row<3) || (row>7)))){
+                if(((column > -1 && column < 3) || (column > 7 )) || (((row < 3) || (row > 7)))){
+
+
+                    //put vertical door
+                    if(row == 1 || row == 9){
+
+                        for(Square sq : s.getLink()){
+
+                            if ((sq.getRow() == s.getRow()-1) || (sq.getRow() == s.getRow()+1)){
+
+                                squares.get(row).add("⇅");
+                            }
+                        }
+                    }
+
+                    //put horizontal door
+                    if(column == 1 || column == 9){
+
+                        for(Square sq : s.getLink()){
+
+                            if ((sq.getColumn() == s.getColumn()-1) || (sq.getColumn() == s.getColumn()+1)){
+
+                                squares.get(row).add("⇄");
+                            }
+                        }
+                    }
+
                     //black border limit
-                    squares.get(row).add(new String(black));
+                    squares.get(row).add(black);
                 } else {
+
+                    //put player
+                    if(s.getPlayers().size() == 1){
+
+                        if(row == 5 && column == 5){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                        }
+                    }
+
+                    if(s.getPlayers().size() == 2){
+
+                        if(row == 5 && column == 4){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                        }
+                        if(row == 5 && column == 6){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(1), s.getColor()));
+                        }
+                    }
+
+                    if(s.getPlayers().size() == 3){
+
+                        if(row == 4 && column == 5){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                        }
+                        if(row == 6 && column == 4){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(1), s.getColor()));
+                        }
+                        if(row == 6 && column == 6){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(2), s.getColor()));
+                        }
+                    }
+
+                    if(s.getPlayers().size() == 4){
+
+                        if(row == 4 && column == 5){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                        }
+                        if(row == 5 && column == 4){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(1), s.getColor()));
+                        }
+                        if(row == 5 && column == 6){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(2), s.getColor()));
+                        }
+                        if(row == 6 && column == 5){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(3), s.getColor()));
+                        }
+                    }
+
+                    if(s.getPlayers().size() == 5){
+
+                        if(row == 4 && column == 5){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                        }
+                        if(row == 5 && column == 4){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(1), s.getColor()));
+                        }
+                        if(row == 5 && column == 6){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(2), s.getColor()));
+                        }
+                        if(row == 6 && column == 5){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(3), s.getColor()));
+                        }
+                        if(row == 5 && column == 5){
+
+                            squares.get(row).add(colorString(s.getPlayers().get(4), s.getColor()));
+                        }
+                    }
+
+                    //put a string in right position for generation square
+                    if (s.getClass().equals(GenerationSquare.class)){
+
+                        switch (s.getColor()){
+
+                            case BLU:
+                                if(row == 3 && (column > 2)){
+
+                                    squares.get(row).add(colorStringAmmo(s.getColor(), "-"));
+                                }
+                                break;
+                            case RED:
+                                if(column == 3){
+
+                                    squares.get(row).add(colorStringAmmo(s.getColor(), "|"));
+                                }
+                                break;
+                            case YELLOW:
+                                if(column == 7){
+
+                                    squares.get(row).add(colorStringAmmo(s.getColor(), "|"));
+                                }
+                                break;
+                        }
+
+                    }else {
+
+                        //put string ammo in right position
+                        if (row == 3 && column == 3){
+
+                            squares.get(row).add(colorStringAmmo(s.getColor(), "a"));
+                        }
+                        if (row == 3 && column == 4){
+
+                            squares.get(row).add(colorStringAmmo(s.getColor(), "m"));
+                        }
+                        if (row == 3 && column == 5){
+
+                            squares.get(row).add(colorStringAmmo(s.getColor(), "m"));
+                        }
+                        if (row == 3 && column == 6){
+
+                            squares.get(row).add(colorStringAmmo(s.getColor(), "o"));
+                        }
+                    }
+
                     //color
-                    squares.get(row).add(new String(colorToWrite));
+                    squares.get(row).add(colorToWrite);
                 }
             }
         }
@@ -201,15 +358,49 @@ public class CLIPrintMap implements Serializable {
         return string;
     }
 
-    
+    /**
+     * Set the right string to view for CLI to the corresponding color
+     * @param c           the color of square
+     * @param letter      a letter of string 'ammo'
+     */
+    public String colorStringAmmo(EnumColorSquare c, String letter){
+
+        String s = "";
+
+        switch (c){
+
+            case BLU:
+                s = ANSI_BLUE_BACKGROUND + letter + ANSI_BLACK_BACKGROUND;
+                break;
+            case GREEN:
+                s = ANSI_GREEN_BACKGROUND + letter + ANSI_BLACK_BACKGROUND;
+                break;
+            case PINK:
+                s = ANSI_PURPLE_BACKGROUND + letter + ANSI_BLACK_BACKGROUND;
+                break;
+            case RED:
+                s = ANSI_RED_BACKGROUND + letter + ANSI_BLACK_BACKGROUND;
+                break;
+            case WHITE:
+                s = ANSI_WHITE_BACKGROUND + ANSI_BLACK + letter + ANSI_RESET + ANSI_BLACK_BACKGROUND;
+                break;
+            case YELLOW:
+                s = ANSI_YELLOW_BACKGROUND + ANSI_BLACK + letter + ANSI_RESET + ANSI_BLACK_BACKGROUND;
+                break;
+            default:
+                break;
+        }
+
+        return s;
+    }
    
     /**
      * Set the right string to view for CLI to the corresponding color
      * @param player      the selected player
+     * @param c           the color of square
      */
-    public String colorString(Player player, ArrayList<Square> squares){
+    public String colorString(Player player, EnumColorSquare c){
 
-        String s = "";
         String colorPlayer = player.getColor().toString();
 
         if(colorPlayer == "BLU"){
@@ -237,39 +428,7 @@ public class CLIPrintMap implements Serializable {
             colorPlayer = "Y";
         }
 
-        for(Square sq : squares){
-
-            if(sq.getColor().equals(EnumColorSquare.BLU)) {
-
-                s = ANSI_BLUE_BACKGROUND + colorPlayer + ANSI_BLACK_BACKGROUND;
-            }
-
-            if(sq.getColor().equals(EnumColorSquare.GREEN)) {
-
-                s = ANSI_GREEN_BACKGROUND + colorPlayer + ANSI_BLACK_BACKGROUND;
-            }
-
-            if(sq.getColor().equals(EnumColorSquare.PINK)) {
-
-                s = ANSI_PURPLE_BACKGROUND + colorPlayer + ANSI_BLACK_BACKGROUND;
-            }
-
-            if(sq.getColor().equals(EnumColorSquare.RED)) {
-
-                s = ANSI_RED_BACKGROUND + colorPlayer + ANSI_BLACK_BACKGROUND;
-            }
-
-            if(sq.getColor().equals(EnumColorSquare.WHITE)) {
-
-                s = ANSI_WHITE_BACKGROUND + ANSI_BLACK + colorPlayer + ANSI_RESET + ANSI_BLACK_BACKGROUND;
-            }
-
-            if(sq.getColor().equals(EnumColorSquare.YELLOW)) {
-
-                s = ANSI_YELLOW_BACKGROUND + ANSI_BLACK + colorPlayer + ANSI_RESET + ANSI_BLACK_BACKGROUND;
-            }
-        }
-        return s;
+      return colorStringAmmo(c, colorPlayer);
     }
 }
 
