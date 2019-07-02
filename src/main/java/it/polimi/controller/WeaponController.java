@@ -1,5 +1,6 @@
 package it.polimi.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
 import it.polimi.model.*;
 import it.polimi.model.Exception.*;
 import it.polimi.model.Weapon.*;
@@ -291,7 +292,38 @@ public class WeaponController {
         
                 functionController.setErrorState("NOT VALID INPUT");
             }
-            gameModel.setState(State.SELECTSHOOTINPUT);
+            switch (gameModel.getActualWeaponEffect()){
+                
+                case BaseEffect:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case BaseMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case CozyFireMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case PhaseGlideEffect:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case ScannerMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case LongBarrelMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case PiercingMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case ShadowstepEffect:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                
+                default:
+                    gameModel.setState(State.PAYEFFECT);
+                    break;
+            }
+            
         }
     }
     
@@ -326,6 +358,7 @@ public class WeaponController {
     public void payWeaponExtraCost(RemoteView view) throws RemoteException {
         
         GameModel gameModel = this.functionModel.getGameModel();
+        ArrayList<EnumColorCardAndAmmo> cost = new ArrayList<>();
         
         try {
             switch (this.functionModel.getGameModel().getWeaponState()){
@@ -341,15 +374,16 @@ public class WeaponController {
                         //I effect
                         case BaseEffect :
                             
-                            this.LockRifleweapon(gameModel,lockRifle,view);
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case SecondLockEffect :
-                            
+    
                             //TO PAY AMMO
-                            this.LockRifleweapon(gameModel,lockRifle,view);
-                        
+                            cost.addAll(lockRifle.getSecondLockCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
                         
                     }
                     break;
@@ -363,16 +397,16 @@ public class WeaponController {
                         
                         //I effect
                         case BaseMode :
-                            
-                            this.ElectroscytheWeapon(gameModel,electroscythe,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case ReaperMode :
-                            
-                            //TO PAY
-                            this.ElectroscytheWeapon(gameModel,electroscythe,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(electroscythe.getReaperModeCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                         
                     }
@@ -385,21 +419,24 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseEffect :
-                            
-                            this.MachineGun(gameModel,machineGun,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case FocusShotEffect :
-                            
-                            this.MachineGun(gameModel,machineGun,view);
+    
+                            //TO PAY AMMO
+                            cost.addAll(machineGun.getFocusShotCost());
+                            functionController.selectRecharge(view,2,cost);
                             
                             break;
                         //III effect
                         case TurretTripodEffect :
-                            
-                            this.MachineGun(gameModel,machineGun,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(machineGun.getTurretTripodCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                         
                     }
@@ -411,16 +448,16 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.TractorBeam(gameModel,tractorBeam,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case PunisherMode :
-                            
-                            //TO PAY
-                            this.TractorBeam(gameModel,tractorBeam,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(tractorBeam.getPunisherModeCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                         
                     }
@@ -432,23 +469,24 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseEffect :
-                            
-                            this.Thor(gameModel,thor,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case ChainReactionEffect :
-                            
-                            //TO PAY
-                            this.Thor(gameModel,thor,view);
+    
+                            //TO PAY AMMO
+                            cost.addAll(thor.getChainReactionCost());
+                            functionController.selectRecharge(view,2,cost);
                             
                             break;
                         //III effect
                         case HighVoltageEffect :
     
-                            //TO PAY
-                            this.Thor(gameModel,thor,view);
-                            
+                            //TO PAY AMMO
+                            cost.addAll(thor.getHighVoltageCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                         
                     }
@@ -460,17 +498,18 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseEffect :
-                            
-                            this.VortexCannon(gameModel,vortexCannon,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case BlackHoleEffect :
-                            
-                            //TO PAY
-                            this.VortexCannon(gameModel,vortexCannon,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(vortexCannon.getBlackHoleCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
+                            
                         
                     }
                     break;
@@ -481,15 +520,14 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.Furnace(gameModel,furnace,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case CozyFireMode :
-                            
-                            //NO to pay
-                            this.Furnace(gameModel,furnace,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         
@@ -503,17 +541,28 @@ public class WeaponController {
                         
                         //II effect
                         case PhaseGlideEffect :
-                            
-                            this.PlasmaGun(gameModel,plasmaGun,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(plasmaGun.getPhaseGlideCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
+                            
+                     
                         //III effect
                         case BaseEffectPlusChargedShotEffect :
                             
                             //to pay if boolean choise is true
-                            this.PlasmaGun(gameModel,plasmaGun,view);
-                            
+                            //TO PAY AMMO
+                            if (view.isBooleanChose()) {
+                                
+                                cost.addAll(plasmaGun.getChargedShotCost());
+                                functionController.selectRecharge(view, 2, cost);
+                            } else {
+    
+                                functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            }
                             break;
+                            
                         
                     }
                     break;
@@ -522,7 +571,8 @@ public class WeaponController {
                     
                     Heatseeker heatseeker = (Heatseeker) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
                     
-                    this.HeatSeeker(gameModel,heatseeker,view);
+                    //nothing
+                    functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                     
                     break;
                 
@@ -531,7 +581,8 @@ public class WeaponController {
                     
                     Whisper whisper = (Whisper) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
                     
-                    this.Whisper(gameModel,whisper,view);
+                    //nothing
+                    functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                     
                     break;
                 
@@ -541,17 +592,18 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.Hellion(gameModel,hellion,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case NanoTracerMode :
                             
-                            //TO PAY
-                            this.Hellion(gameModel,hellion,view);
-                            
+                            //TO PAY AMMO
+                            cost.addAll(hellion.getNanoTracerModeCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
+                            
                         
                     }
                     break;
@@ -562,19 +614,17 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.Flamethrower(gameModel,flamethrower,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case BarbecueMode :
                             
-                            
-                            //TO PAY
-                            this.Flamethrower(gameModel,flamethrower,view);
-                            
+                            //TO PAY AMMO
+                            cost.addAll(flamethrower.getBarbecueModeCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
-                        
                     }
                     break;
                 
@@ -584,8 +634,8 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.Zx2(gameModel,zx2,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
@@ -593,7 +643,7 @@ public class WeaponController {
                             
                             
                             //NO TO PAY
-                            this.Zx2(gameModel,zx2,view);
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         
@@ -606,20 +656,21 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseEffect :
-                            
-                            this.GrenadeLauncher(gameModel,grenadeLauncher,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case ExtraGrenadeEffect :
-                            
-                            this.GrenadeLauncher(gameModel,grenadeLauncher,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(grenadeLauncher.getExtraGrenadeCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                         
                         case MoveTarget:
     
-                            this.GrenadeLauncher(gameModel,grenadeLauncher,view);
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         
@@ -632,15 +683,15 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.Shotgun(gameModel,shotgun,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case LongBarrelMode :
                             
                             //NO TO PAY
-                            this.Shotgun(gameModel,shotgun,view);
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                     }
@@ -652,17 +703,23 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseEffectPlusFragmentingWarheadEffect :
-                            
-                            //TO PAY if BOOLEAN CHOISE
-                            this.RocketLauncher(gameModel,rocketLauncher,view);
-        
+    
+                            if(view.isBooleanChose()) {
+                                //TO PAY AMMO
+                                cost.addAll(rocketLauncher.getFragmentingWarheadCost());
+                                functionController.selectRecharge(view, 2, cost);
+                            } else {
+    
+                                functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            }
                             break;
+                            
                         //II effect
                         case RocketJumpEffect :
-                            
-                            //TO PAY
-                            this.RocketLauncher(gameModel,rocketLauncher,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(rocketLauncher.getRocketJumpCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                     }
                     break;
@@ -673,16 +730,16 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.PowerGlove(gameModel,powerGlove,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case RocketFistMode :
-                            
-                            //TOPAY
-                            this.PowerGlove(gameModel,powerGlove,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(powerGlove.getRocketFistModeCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                         
                     }
@@ -694,8 +751,8 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.RailGun(gameModel,railGun,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
@@ -703,7 +760,7 @@ public class WeaponController {
                             
                             
                             //NO TO PAY
-                            this.RailGun(gameModel,railGun,view);
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         
@@ -716,16 +773,16 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.Shockwave(gameModel,shockwave,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case TsunamiMode :
-                            
-                            //TO PAY
-                            this.Shockwave(gameModel,shockwave,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(shockwave.getTsunamiModeCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                     }
                     break;
@@ -736,23 +793,23 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseEffect :
-                            
-                            this.Cyberblade(gameModel,cyberblade,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case ShadowstepEffect :
                             
                             //NO TO PAY
-                            this.Cyberblade(gameModel,cyberblade,view);
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //III effect
                         case SliceAndDiceEffect :
-                            
-                            //TO PAY
-                            this.Cyberblade(gameModel,cyberblade,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(cyberblade.getSliceAndDiceCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                     }
                     break;
@@ -763,16 +820,16 @@ public class WeaponController {
                     switch(this.functionModel.getGameModel().getActualWeaponEffect()){
                         //I effect
                         case BaseMode :
-                            
-                            this.Sledgehammer(gameModel,sledgehammer,view);
+    
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
                             
                             break;
                         //II effect
                         case PulverizeMode :
-                            
-                            //TO PAY
-                            this.Sledgehammer(gameModel,sledgehammer,view);
-                            
+    
+                            //TO PAY AMMO
+                            cost.addAll(sledgehammer.getPulverizeModeCost());
+                            functionController.selectRecharge(view,2,cost);
                             break;
                     }
                     break;
@@ -780,8 +837,8 @@ public class WeaponController {
         } catch (NotValidInput notValidInput) {
             notValidInput.printStackTrace();
         }
-        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED: " + gameModel.getWeaponName() +" CORRECTLY");
-        this.functionModel.getGameModel().setState(State.SHOOT);
+        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER PAY EXTRA COST FOR : " + gameModel.getWeaponName() +" " +gameModel.getActualWeaponEffect() +" CORRECTLY");
+        this.functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
         
     }
     
