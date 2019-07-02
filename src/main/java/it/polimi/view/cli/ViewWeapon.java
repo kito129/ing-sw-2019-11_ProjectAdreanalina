@@ -98,7 +98,7 @@ public class ViewWeapon {
                     case SecondLockEffect:
 
                         cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -164,7 +164,7 @@ public class ViewWeapon {
 
                         cost.add(EnumColorCardAndAmmo.BLU);
                         cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -253,7 +253,7 @@ public class ViewWeapon {
 
                         cost.add(EnumColorCardAndAmmo.RED);
                         cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -319,7 +319,7 @@ public class ViewWeapon {
                     case ChainReactionEffect :
 
                         cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -373,7 +373,7 @@ public class ViewWeapon {
                     case HighVoltageEffect :
 
                         cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -438,7 +438,7 @@ public class ViewWeapon {
                     case BlackHoleEffect :
 
                         cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -514,7 +514,7 @@ public class ViewWeapon {
                     case BaseEffectPlusChargedShotEffect :
 
                         cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -595,7 +595,7 @@ public class ViewWeapon {
                     case NanoTracerMode :
 
                         cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -661,7 +661,7 @@ public class ViewWeapon {
 
                         cost.add(EnumColorCardAndAmmo.YELLOW);
                         cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -743,7 +743,7 @@ public class ViewWeapon {
                     case ExtraGrenadeEffect :
 
                         cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -826,7 +826,7 @@ public class ViewWeapon {
                     case BaseEffectPlusFragmentingWarheadEffect :
 
                         cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -880,7 +880,7 @@ public class ViewWeapon {
                     case RocketJumpEffect :
 
                         cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -945,7 +945,7 @@ public class ViewWeapon {
                     case RocketFistMode :
 
                         cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -1027,7 +1027,7 @@ public class ViewWeapon {
                     case TsunamiMode :
 
                         cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -1098,7 +1098,7 @@ public class ViewWeapon {
                     case SliceAndDiceEffect :
 
                         cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);
@@ -1163,7 +1163,7 @@ public class ViewWeapon {
                     case PulverizeMode :
 
                         cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost);
+                        PrintAmmo.print(cost,2);
                         System.out.println();
                         System.out.println("Do you want to use your power up to pay this effect?");
                         viewCLI.setYesNoBooleanChoise(2);

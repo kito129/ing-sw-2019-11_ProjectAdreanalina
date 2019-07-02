@@ -7,10 +7,14 @@ import java.util.ArrayList;
 
 public class PrintAmmo implements Serializable {
 
-    public static void print(ArrayList<EnumColorCardAndAmmo> enumColorCardAndAmmos){
+    public static void print(ArrayList<EnumColorCardAndAmmo> enumColorCardAndAmmos,int i){
 
         System.out.println();
-        System.out.println("YOUR AMMO:");
+        if (i==1) {
+            System.out.println("YOUR AMMO:");
+        } else if (i==2){
+            System.out.println("COST EFFECT:");
+        }
         PrintEnumCardsAmmo.print(enumColorCardAndAmmos);
     }
 }

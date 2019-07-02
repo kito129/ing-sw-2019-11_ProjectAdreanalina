@@ -117,7 +117,7 @@ public class ViewCLI implements RemoteView, Serializable {
             
         } catch (RemoteException | NotBoundException e ) {
     
-            //e.printStackTrace();
+            e.printStackTrace();
             System.out.println("NETWORK ERROR ");
             System.exit(0);
         }

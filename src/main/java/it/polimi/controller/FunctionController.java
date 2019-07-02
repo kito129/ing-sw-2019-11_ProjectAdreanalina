@@ -505,9 +505,9 @@ public class FunctionController {
     
     public void selectRecharge (RemoteView view,int i,ArrayList<EnumColorCardAndAmmo> payExtra ) throws RemoteException {
     
-        WeaponCard weaponToCharge = functionModel.getGameModel().getWeaponToCharge().get(view.getIndex());
+       
         ArrayList<PowerUpCard> powerUpToPay = new ArrayList<>();
-    
+        if (i==1) {
         if (view.getIndex2() != -1) {
     
             powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
@@ -528,21 +528,21 @@ public class FunctionController {
                 }
             }
         }
-        if (i==1) {
+        
             try {
+                WeaponCard weaponToCharge = functionModel.getGameModel().getWeaponToCharge().get(view.getIndex());
                 payAmmoController(weaponToCharge.getRechargeCost(), powerUpToPay);
             } catch (NotValidAmmoException e) {
         
-                functionModel.getGameModel().setErrorMessage("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
+                setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
             }
         } else  if(i==2){
     
             try {
                 payAmmoController(payExtra, powerUpToPay);
-                weaponToCharge.setCharge(true);
             } catch (NotValidAmmoException e) {
-        
-                functionModel.getGameModel().setErrorMessage("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
+    
+                setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
             }
         }
         
