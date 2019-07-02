@@ -1865,6 +1865,9 @@ public class WeaponController {
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
+                } catch (NoTargetInSquare noTargetInSquare) {
+
+                    //todo no target in selected room
                 }
                 break;
             
@@ -1880,6 +1883,9 @@ public class WeaponController {
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
+                } catch (NoTargetInSquare noTargetInSquare) {
+
+                    //todo no target in targetsquare.
                 }
                 break;
         }

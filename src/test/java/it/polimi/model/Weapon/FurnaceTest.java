@@ -43,7 +43,7 @@ public class FurnaceTest {
 
    @Test
 
-   public void baseModeTest() throws MapException, NotVisibleTarget, NotValidDistance {
+   public void baseModeTest() throws MapException, NotVisibleTarget, NotValidDistance, NoTargetInSquare {
 
        map.addPlayerOnSquare(map.getSquare(2, 1), currentPlayer);
        map.addPlayerOnSquare(map.getSquare(1, 2), player1);
@@ -78,17 +78,55 @@ public class FurnaceTest {
                player1.getPlayerBoard().getDamages().contains(currentPlayer.getColor()) &&
                player2.getPlayerBoard().getDamages().contains(currentPlayer.getColor()) &&
                player3.getPlayerBoard().getDamages().contains(currentPlayer.getColor()));
+       map.movePlayer(currentPlayer,map.getSquare(2,1));
+       assertThrows(NoTargetInSquare.class, () -> {
+           furnace.baseMode(map, currentPlayer, EnumColorSquare.PINK);
+       });
+       assertTrue(player1.getPlayerBoard().getDamages().size() == 1 && player2.getPlayerBoard().getDamages().size() == 1
+               && player3.getPlayerBoard().getDamages().size() == 1 &&
+               currentPlayer.getPlayerBoard().getDamages().size() == 0 &&
+               player1.getPlayerBoard().getDamages().contains(currentPlayer.getColor()) &&
+               player2.getPlayerBoard().getDamages().contains(currentPlayer.getColor()) &&
+               player3.getPlayerBoard().getDamages().contains(currentPlayer.getColor()));
+
    }
 
    @Test
 
-    public void t() throws MapException {
+    public void cozyFireMode() throws MapException, NotValidDistance, NoTargetInSquare {
 
        map.addPlayerOnSquare(map.getSquare(1, 1), currentPlayer);
-       assertFalse(map.isVisibleRoom(currentPlayer,EnumColorSquare.YELLOW));
+       map.addPlayerOnSquare(map.getSquare(2, 1), player1);
+       map.addPlayerOnSquare(map.getSquare(2, 1), player2);
+       assertTrue(player1.getPlayerBoard().getDamages().size() == 0 && player2.getPlayerBoard().getDamages().size() == 0&&
+               player1.getPlayerBoard().getMarks().size()==0&&player2.getPlayerBoard().getMarks().size()==0);
+       furnace.cozyFireMode(map,currentPlayer,map.getSquare(2,1));
+       assertTrue(player1.getPlayerBoard().getDamages().size() == 1 && player2.getPlayerBoard().getDamages().size() == 1&&
+               player1.getPlayerBoard().getMarks().size()==1&&player2.getPlayerBoard().getMarks().size()==1&&
+               player2.getPlayerBoard().getMarks().contains(currentPlayer.getColor())&&
+               player1.getPlayerBoard().getMarks().contains(currentPlayer.getColor()));
+       map.movePlayer(player1,map.getSquare(1,2));
+       map.movePlayer(player2,map.getSquare(1,2));
+       assertThrows(NotValidDistance.class, () -> {
+           furnace.cozyFireMode(map, currentPlayer,map.getSquare(1,2));
+       });
+       assertTrue(player1.getPlayerBoard().getDamages().size() == 1 && player2.getPlayerBoard().getDamages().size() == 1&&
+               player1.getPlayerBoard().getMarks().size()==1&&player2.getPlayerBoard().getMarks().size()==1&&
+               player2.getPlayerBoard().getMarks().contains(currentPlayer.getColor())&&
+               player1.getPlayerBoard().getMarks().contains(currentPlayer.getColor()));
+       assertThrows(NoTargetInSquare.class, () -> {
+           furnace.cozyFireMode(map, currentPlayer,map.getSquare(0,1));
+       });
+       assertTrue(player1.getPlayerBoard().getDamages().size() == 1 && player2.getPlayerBoard().getDamages().size() == 1&&
+               player1.getPlayerBoard().getMarks().size()==1&&player2.getPlayerBoard().getMarks().size()==1&&
+               player2.getPlayerBoard().getMarks().contains(currentPlayer.getColor())&&
+               player1.getPlayerBoard().getMarks().contains(currentPlayer.getColor()));
 
 
-   }
+
+    }
+
+
 
 
 }

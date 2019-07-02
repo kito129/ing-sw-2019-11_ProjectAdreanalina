@@ -2,10 +2,7 @@ package it.polimi.model.Weapon;
 
 
 import it.polimi.model.*;
-import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotVisibleTarget;
+import it.polimi.model.Exception.*;
 
 import java.util.ArrayList;
 
@@ -44,15 +41,20 @@ public class Furnace extends WeaponCard {
     }
 
 
-    public void baseMode(Map map, Player currentPlayer,EnumColorSquare targetRoomColor) throws NotVisibleTarget, NotValidDistance, MapException {
+    public void baseMode(Map map, Player currentPlayer,EnumColorSquare targetRoomColor) throws NotVisibleTarget, NotValidDistance, MapException ,NoTargetInSquare{
 
         Square currentPlayerSquare= map.findPlayer(currentPlayer);
         if((map.isVisibleRoom(currentPlayer,targetRoomColor))&& (currentPlayerSquare.getColor()!=targetRoomColor)){
 
             ArrayList<Player> targetPlayers=map.playerInRoom(targetRoomColor);
-            for(Player p:targetPlayers){
+            if(targetPlayers.size()!=0) {
+                for (Player p : targetPlayers) {
 
-                p.singleDamage(currentPlayer.getColor());
+                    p.singleDamage(currentPlayer.getColor());
+                }
+            }else{
+
+                throw new NoTargetInSquare();
             }
         }else if(!(map.isVisibleRoom(currentPlayer,targetRoomColor))){
 
@@ -63,17 +65,22 @@ public class Furnace extends WeaponCard {
         }
     }
 
-    public void cozyFireMode(Map map,Player currentPlayer,Square targetSquare) throws NotValidDistance,MapException {
+    public void cozyFireMode(Map map,Player currentPlayer,Square targetSquare) throws NotValidDistance,MapException, NoTargetInSquare {
 
         Square currentPlayerSquare = map.findPlayer(currentPlayer);
         if(map.distance(currentPlayerSquare,targetSquare)==1){
 
             ArrayList<Player> playersInTargetSquare;
             playersInTargetSquare= new ArrayList<>(map.playersOnSquare(targetSquare));
-            for(Player p:playersInTargetSquare){
+            if(playersInTargetSquare.size()!=0) {
 
-                p.singleDamage(currentPlayer.getColor());
-                p.singleMark(currentPlayer.getColor());
+                for (Player p : playersInTargetSquare) {
+
+                    p.singleDamage(currentPlayer.getColor());
+                    p.singleMark(currentPlayer.getColor());
+                }
+            }else {
+                throw new NoTargetInSquare();
             }
         }else{
 
