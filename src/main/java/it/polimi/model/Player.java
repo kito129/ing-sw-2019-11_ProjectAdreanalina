@@ -49,10 +49,7 @@ public class Player implements Serializable {
 
     }
 
-    public Player(){
 
-        //todo metodo da cancellare
-    }
 
     /**
      * Gets id.

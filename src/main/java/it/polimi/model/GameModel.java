@@ -38,13 +38,10 @@ public class GameModel implements Serializable {
     private WeaponsEffect beforeEffect;
     private ArrayList<Player> playerDamaged= new ArrayList<>();
     private ArrayList<Player> playerMarked = new ArrayList<>();
-    private int playerDamagedIndex;
     //weapon to charge
     private ArrayList<WeaponCard> weaponToCharge = new ArrayList<>();
     //powerup
     private PowerUpCard powerUpSelected; //current weapon effect for current Player
-    //controller
-    private FunctionController functionController;
     //message
     private String errorMessage;
     private String messageToCurrentView;
@@ -119,22 +116,25 @@ public class GameModel implements Serializable {
         
         return beforeEffect;
     }
+
+    public void setBeforeEffect (WeaponsEffect beforeEffect) {
+
+        this.beforeEffect = beforeEffect;
+    }
     
     public void setPowerUpSelected (PowerUpCard powerUpSelected) {
         
         this.powerUpSelected = powerUpSelected;
     }
-    
+
+    //todo da eliminare
     public void setWeaponSelected (WeaponCard weaponSelected) {
         
         this.weaponSelected = weaponSelected;
     }
     
-    public void setBeforeEffect (WeaponsEffect beforeEffect) {
-        
-        this.beforeEffect = beforeEffect;
-    }
-    
+
+
     /**
      * Gets actual player.
      *
