@@ -82,13 +82,13 @@ public class FurnaceTest {
 
    @Test
 
-    public void test() throws MapException {
+    public void t() throws MapException {
 
-       map.addPlayerOnSquare(map.getSquare(2, 1), currentPlayer);
-
-       assertTrue(map.isVisibleRoom(currentPlayer,EnumColorSquare.YELLOW));
+       map.addPlayerOnSquare(map.getSquare(1, 1), currentPlayer);
+       assertFalse(map.isVisibleRoom(currentPlayer,EnumColorSquare.YELLOW));
 
 
    }
+
 
 }
