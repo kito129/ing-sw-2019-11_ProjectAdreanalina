@@ -25,8 +25,8 @@ public class Heatseeker extends WeaponCard {
         ArrayList<WeaponsEffect> weaponEffects=new ArrayList<>();
         weaponEffects.add(WeaponsEffect.BaseEffect);
         setOptional(true);
-        setDescription("effetto: Scegli 1 bersaglio che non puoi vedere e dagli 3 danni.\n\n" +
-                "Nota: Si, può colpire solo bersagli che non puoi vedere.");
+        setDescription("Effect: Choose 1 target you cannot see and deal 3 damage to it.\n" +
+                "Notes: Yes, this can only hit targets you cannot see.");
     }
 
 

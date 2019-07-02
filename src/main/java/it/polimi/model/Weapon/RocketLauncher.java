@@ -36,14 +36,10 @@ public class RocketLauncher extends WeaponCard {
         fragmentingWarheadCost = new ArrayList<EnumColorCardAndAmmo>();
         fragmentingWarheadCost.add(EnumColorCardAndAmmo.YELLOW);
         setOptional(true);
-        setDescription("effetto base: Dai 2 danni a 1 bersaglio che puoi vedere e che non si trova nel tuo quadrato.\n" +
-                "Poi puoi muovere il bersaglio di 1 quadrato.\n\n" +
-                "razzi portatili: Muovi di 1 o 2 quadrati. Questo effetto può essere usato prima o dopo l'effetto base.\n" +
-                "testata a frammentazione: Durante l'effetto base, dai 1 danno a ogni giocatore presente nel quadrato in cui si trovava originariamente il bersaglio, incluso il bersaglio, anche se lo hai mosso.\n\n" +
-                "Nota: Se usi i razzi portatili prima dell'effetto base considera solo il tuo nuovo quadrato per determinare se il bersaglio è valido.\n" +
-                "Puoi anche spostarti di 1 quadrato per potergli sparare.\n" +
-                "Usando la testata a frammentazione dai danno a chiunque si trovi nel quadrato in cui il bersaglio si trovava prima di muoversi.\n" +
-                "Il bersaglio riceve così 3 danni in totale.");
+        setDescription("Basic Effect: Deal 2 damage to 1 target you can see that is not on your square. Then you may move the target 1 square.\n" +
+                "with Rocket Jump: Move 1 or 2 squares. This effect can be used either before or after the basic effect.\n" +
+                "with Fragmenting Warhead: During the basic effect, deal 1 damage to every player on your target's original square – including the target, even if you move it.\n" +
+                "Notes: If you use the rocket jump before the basic effect, you consider only your new square when determining if a target is legal. You can even move off a square so you can shoot someone on it. If you use the fragmenting warhead, you deal damage to everyone on the target's square before you move the target – your target will take 3 damage total.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getRocketJumpCost() {

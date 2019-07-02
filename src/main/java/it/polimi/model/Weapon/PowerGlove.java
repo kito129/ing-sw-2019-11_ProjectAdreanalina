@@ -30,14 +30,9 @@ public class PowerGlove extends WeaponCard {
         rocketFistModeCost = new ArrayList<EnumColorCardAndAmmo>();
         rocketFistModeCost.add(EnumColorCardAndAmmo.BLU);
         setOptional(false);
-        setDescription("modalità base: Scegli 1 bersaglio in un quadrato distante esattamente 1 movimento.\n" +
-                "Muovi in quel quadrato e dai al bersaglio 1 danno e 2 marchi.\n\n" +
-                "modalità cento pugni: Scegli un quadrato distante esattamente 1 movimento.\n" +
-                "Muovi in quel quadrato.\n" +
-                "Puoi dare 2 danni a 1 bersaglio in quel quadrato.\n" +
-                "Se vuoi puoi muovere ancora di 1 quadrato nella stessa direzione (ma solo se è un movimento valido).\n" +
-                "Puoi dare 2 danni a un bersaglio anche in quel quadrato.\n\n" +
-                "Nota: Nella modalità cento pugni stai volando per 2 quadrati in linea retta, prendendo a pugni 1 persona per quadrato.");
+        setDescription("Basic Mode: Choose 1 target on any square exactly 1 move away. Move onto that square and give the target 1 damage and 2 marks.\n" +
+                "in Rocket Fist Mode: Choose a square exactly 1 move away. Move onto that square. You may deal 2 damage to 1 target there. If you want, you may move 1 more square in that same direction (but only if it is a legal move). You may deal 2 damage to 1 target there, as well.\n" +
+                "Notes: In rocket fist mode, you're flying 2 squares in a straight line, punching 1 person per square.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getRocketFistModeCost() {

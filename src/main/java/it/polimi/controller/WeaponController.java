@@ -2229,10 +2229,10 @@ public class WeaponController {
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                   functionController.mapErrorGestor();
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
                 gameModel.getAvailableEffect().add(WeaponsEffect.MoveTarget);
@@ -2423,11 +2423,11 @@ public class WeaponController {
                 }catch (NotValidDistance notValidDistance){
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getRocketJumpCost());
-                    gameModel.setErrorMessage("ERROR: YOU CAN MOVE ONLY ONE OR TWO MOVEMENTS!!!");
+                   functionController.setErrorState("ERROR: YOU CAN MOVE ONLY ONE OR TWO MOVEMENTS!!!");
                 }catch (MapException mapException){
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getRocketJumpCost());
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    functionController.mapErrorGestor();
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.RocketJumpEffect);
                 break;

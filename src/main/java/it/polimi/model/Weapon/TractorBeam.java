@@ -34,12 +34,9 @@ public class TractorBeam extends WeaponCard {
         punisherModeCost.add(EnumColorCardAndAmmo.RED);
         punisherModeCost.add(EnumColorCardAndAmmo.YELLOW);
         setOptional(false);
-        setDescription("modalità base: Muovi un bersaglio di 0, 1 o 2 quadrati fino a un quadrato che puoi vedere e dagli 1 danno.\n\n" +
-                "modalità punitore: Scegli un bersaglio 0, 1, o 2 movimenti da te.\n" +
-                "Muovi quel bersaglio nel quadrato in cui ti trovi edagli 3 danni.\n\n" +
-                "Nota: Puoi muovere un bersaglio anche se non puoi vederlo.\n" +
-                "Il bersaglio finisce in una posizione in cui puoi vederlo e danneggiarlo.\n" +
-                "I movimenti possono non essere nella stessa direzione.");
+        setDescription("Basic Mode: Move a target 0, 1, or 2 squares to a square you can see, and give it 1 damage.\n" +
+                "in Punisher Mode: Choose a target 0, 1, or 2 moves away from you. Move the target to your square and deal 3 damage to it.\n" +
+                "Notes: You can move a target even if you can't see it. The target ends up in a place where you can see and damage it. The moves do not have to be in the same direction.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getPunisherModeCost() {

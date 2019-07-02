@@ -33,10 +33,8 @@ public class Hellion extends WeaponCard {
         nanoTracerModeCost = new ArrayList<EnumColorCardAndAmmo>();
         nanoTracerModeCost.add(EnumColorCardAndAmmo.RED);
         setOptional(false);
-        setDescription("modalità base: Dai 1 danno a 1 bersaglio che puoi vedere e distante almeno 1 movimento.\n" +
-                "Poi dai un marchio a quel bersaglio e a chiunque altro in quel quadrato.\n\n" +
-                "modalità nano-traccianti: Dai 1 danno a 1 bersaglio che puoi vedere e distante almeno 1 movimento.\n" +
-                "Poi dai 2 marchi a quel bersaglio e a chiunque altro in quel quadrato.");
+        setDescription("Basic Mode: Deal 1 damage to 1 target you can see at least 1 move away. Then give 1 mark to that target and everyone else on that square.\n" +
+                "in Nano-Tracer Mode: Deal 1 damage to 1 target you can see at least 1 move away. Then give 2 marks to that target and everyone else on that square.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getNanoTracerModeCost() {

@@ -32,16 +32,9 @@ public class Railgun extends WeaponCard {
         piercingModeCost = new ArrayList<EnumColorCardAndAmmo>();
         piercingModeCost.add(null);
         setOptional(false);
-        setDescription("modalità base : Scegli una direzione cardinale e 1 bersaglio in quella direzione.\n" +
-                "Dagli 3 danni.\n\n" +
-                "modalità perforazione: Scegli una direzione cardinale e 1 o 2 bersagli in quella direzione.\n" +
-                "Dai 2 danni a ciascuno.\n\n" +
-                "Nota: In pratica spari in linea retta ignorando i muri.\n" +
-                "Non hai bisogno di scegliere un bersaglio dall'altro lato del muro, potrebbe anche essere qualcuno nel tuo stesso quadrato, ma sparare attraverso i muri è sicuramente divertente.\n" +
-                "Ci sono solo 4 direzioni cardinali.\n" +
-                "Immagina di essere di fronte a un muro o una porta, imbracciare il fucile e sparare in quella direzione.\n" +
-                "Chiunque si trovi su un quadrato in quella direzione (incluso il tuo) è un bersaglio valido.\n" +
-                "In modalità perforazione i 2 bersagli possono essere nello stesso quadrato o in quadrati diversi.");
+        setDescription("Basic Mode: Choose a cardinal direction and 1 target in that direction. Deal 3 damage to it.\n" +
+                "in Piercing Mode: Choose a cardinal direction and 1 or 2 targets in that direction. Deal 2 damage to each.\n" +
+                "Notes: Basically, you're shooting in a straight line and ignoring walls. You don't have to pick a target on the other side of a wall – it could even be someone on your own square – but shooting through walls sure is fun. There are only 4 cardinal directions. You imagine facing one wall or door, square-on, and firing in that direction. Anyone on a square in that direction (including yours) is a valid target. In piercing mode, the 2 targets can be on the same square or on different squares.");
     }
 
     public ArrayList<EnumColorCardAndAmmo> getPiercingModeCost() {
