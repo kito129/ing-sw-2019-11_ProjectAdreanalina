@@ -34,6 +34,8 @@ public class Cyberblade extends WeaponCard {
         weaponEffects.add(WeaponsEffect.ShadowstepEffect);
         weaponEffects.add(WeaponsEffect.SliceAndDiceEffect);
         setWeaponEffects(weaponEffects);
+        shadowstepCost=new ArrayList<>();
+        shadowstepCost.add(null);
         sliceAndDiceCost = new ArrayList<EnumColorCardAndAmmo>();
         sliceAndDiceCost.add(EnumColorCardAndAmmo.YELLOW);
         setOptional(true);
