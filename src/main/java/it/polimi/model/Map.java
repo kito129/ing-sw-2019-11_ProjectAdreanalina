@@ -422,8 +422,10 @@ public class Map implements Serializable {
      * @return true if A is in the same cardinal direction of B, and PlayerC.
      */
     public boolean sameDirection(Square a, Square b, Square c){
-
-        return (((a.getRow() == b.getRow()) && (b.getRow() == c.getRow())) || ((a.getColumn() == b.getColumn()) && (b.getColumn() == c.getColumn())));
+        
+        return ((((a.getRow() == b.getRow()) && (b.getRow() == c.getRow())) || ((a.getColumn() == b.getColumn()) && (b.getColumn() == c.getColumn()))) &&
+                b.getLink().contains(a) && b.getLink().contains(c) && c.getLink().contains(b) && !c.getLink().contains(a));
+        
     }
     
     /**

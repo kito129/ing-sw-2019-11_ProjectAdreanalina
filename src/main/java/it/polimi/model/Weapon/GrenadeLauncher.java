@@ -68,7 +68,7 @@ public class GrenadeLauncher extends WeaponCard {
 
     public void extraGrenadeEffect(Map map, Player currentPlayer,Square targetSquare) throws NoTargetInSquare, NotVisibleTarget, MapException {
 
-        Square squareOfCurrentPlayer =map.findPlayer(currentPlayer);
+        Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
         if(map.isVisible(squareOfCurrentPlayer,targetSquare)){
 
             ArrayList<Player> playersOnTargetSquare= new ArrayList<>(map.playersOnSquare(targetSquare));

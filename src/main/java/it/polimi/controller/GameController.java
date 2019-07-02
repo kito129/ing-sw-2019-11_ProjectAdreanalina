@@ -1,6 +1,7 @@
 package it.polimi.controller;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
@@ -61,6 +62,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.lobby();
                     break;
                 case SPAWNPLAYER:
+                    functionController.drawnPowerUp();
                     functionController.respawnPlayerController(view);
                     break;
                 case STARTTURN:
@@ -92,6 +94,9 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.weaponController.selectWeapon(view);
                 case SELECTEFFECT:
                     functionController.weaponController.selectWeaponEffect(view);
+                case PAYEFFECT:
+                    functionController.weaponController.payWeaponExtraCost(view);
+                    break;
                 case SELECTSHOOTINPUT:
                     functionController.weaponController.selectShootInput(view);
                 case SHOOT:
@@ -99,7 +104,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case ENDACTION:
                     //TODO
                 case SELECTRECHARGE:
-                    functionController.selectRecharge(view);
+                    functionController.selectRecharge(view,1,null);
                     break;
                 case RECHARGE:
                     functionController.recharge(view);

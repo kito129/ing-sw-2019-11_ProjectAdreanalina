@@ -107,9 +107,6 @@ public class Flamethrower extends WeaponCard {
 
             throw new NotInSameDirection();
         }
-
-
-
     }
 
 

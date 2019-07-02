@@ -17,7 +17,7 @@ public class WeaponController {
         
         this.functionController = functionController;
         this.functionModel = functionController.functionModel;
-
+        
     }
     
     public void selectWeapon(RemoteView view) throws RemoteException {
@@ -37,11 +37,10 @@ public class WeaponController {
                 this.functionModel.getGameModel().setWeaponSelected(weapon);
                 String name = weapon.getNameWeaponCard();
                 
-                
                 //set extra state
                 switch (name) {
                     case "LOCK RIFLE":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.LockRifle);
@@ -51,7 +50,7 @@ public class WeaponController {
                         }
                         break;
                     case "ELECTOSCYTHE":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Electroscythe);
@@ -60,9 +59,9 @@ public class WeaponController {
                             this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
                         }
                         break;
-                        //TODO
+                    //TODO
                     case "MACHINE GUN":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.MachineGun);
@@ -70,7 +69,7 @@ public class WeaponController {
                         //TODO
                         break;
                     case "TRACTOR BEAM":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.TractorBeam);
@@ -80,7 +79,7 @@ public class WeaponController {
                         }
                         break;
                     case "VORTEX CANNON":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.VortexCannon);
@@ -90,7 +89,7 @@ public class WeaponController {
                         }
                         break;
                     case "T.H.O.R":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Thor);
@@ -100,7 +99,7 @@ public class WeaponController {
                         }
                         break;
                     case "FURNACE":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Furnace);
@@ -110,7 +109,7 @@ public class WeaponController {
                         }
                         break;
                     case "PLASMA GUN":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.PlasmaGun);
@@ -120,7 +119,7 @@ public class WeaponController {
                         }
                         break;
                     case "HEAT SEEKER":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Heatseeker);
@@ -130,7 +129,7 @@ public class WeaponController {
                         }
                         break;
                     case "WHISPER":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Whisper);
@@ -140,7 +139,7 @@ public class WeaponController {
                         }
                         break;
                     case "HELLION":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Hellion);
@@ -150,7 +149,7 @@ public class WeaponController {
                         }
                         break;
                     case "FLAME THROWER":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Flamethrower);
@@ -160,7 +159,7 @@ public class WeaponController {
                         }
                         break;
                     case "ZX-2":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Zx2);
@@ -170,7 +169,7 @@ public class WeaponController {
                         }
                         break;
                     case "GRENADE LAUNCHER":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.GrenadeLauncher);
@@ -180,7 +179,7 @@ public class WeaponController {
                         }
                         break;
                     case "SHOTGUN":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Shotgun);
@@ -190,17 +189,17 @@ public class WeaponController {
                         }
                         break;
                     case "ROCKET LAUNCHER":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.RocketLauncher);
                         //set the effect list
                         if (functionModel.getGameModel().getAvailableEffect().size()==0) {
-                            this.functionModel.getGameModel().getAvailableEffect().add(weapon.getWeaponEffects().get(0));
+                            this.functionModel.getGameModel().getAvailableEffect().addAll(weapon.getWeaponEffects());
                         }
                         break;
                     case "POWER GLOVE":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.PowerGlove);
@@ -210,7 +209,7 @@ public class WeaponController {
                         }
                         break;
                     case "RAILGUN":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Railgun);
@@ -220,7 +219,7 @@ public class WeaponController {
                         }
                         break;
                     case "SHOCKWAVE":
-        
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Shockwave);
@@ -230,7 +229,7 @@ public class WeaponController {
                         }
                         break;
                     case "CYBERBLADE":
-    
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Cyberblade);
@@ -241,7 +240,7 @@ public class WeaponController {
                         }
                         break;
                     case "SLADGEHAMMER":
-    
+                        
                         this.functionModel.getGameModel().setWeaponSelected(weapon);
                         this.functionModel.getGameModel().setWeaponName(weapon.getNameWeaponCard());
                         gameModel.setWeaponState(WeaponState.Sledgehammer);
@@ -260,8 +259,8 @@ public class WeaponController {
             gameModel.setState(State.SELECTEFFECT);
             
         } else {
-    
-    
+            
+            
             functionController.mapErrorGestor();
         }
         
@@ -281,17 +280,48 @@ public class WeaponController {
             gameModel.setState(State.CHOSEACTION);
             
         } else {
-    
+            
             if (gameModel.getAvailableEffect().get(i) != null) {
-    
+                
                 functionModel.getGameModel().getPlayerMarked().removeAll(functionModel.getGameModel().getPlayerMarked());
                 functionModel.getGameModel().getPlayerDamaged().removeAll(functionModel.getGameModel().getPlayerDamaged());
                 gameModel.setActualWeaponEffect(gameModel.getAvailableEffect().get(i));
             } else {
-        
+                
                 functionController.setErrorState("NOT VALID INPUT");
             }
-            gameModel.setState(State.SELECTSHOOTINPUT);
+            switch (gameModel.getActualWeaponEffect()){
+                
+                case BaseEffect:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case BaseMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case CozyFireMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case PhaseGlideEffect:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case ScannerMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case LongBarrelMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case PiercingMode:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                case ShadowstepEffect:
+                    gameModel.setState(State.SELECTSHOOTINPUT);
+                    break;
+                
+                default:
+                    gameModel.setState(State.PAYEFFECT);
+                    break;
+            }
+            
         }
     }
     
@@ -308,12 +338,6 @@ public class WeaponController {
     }
     
     
-    //TODO
-    public void payWeaponExtraCost(WeaponCard weaponCard){
-        
-        ArrayList<EnumColorCardAndAmmo> toPay = weaponCard.getRechargeCost();
-        
-    }
     
     public void afterShoot(RemoteView view){
         
@@ -327,6 +351,492 @@ public class WeaponController {
             functionModel.getGameModel().setState(State.SELECTEFFECT);
         }
         
+    }
+    
+    public void payWeaponExtraCost(RemoteView view) throws RemoteException {
+        
+        GameModel gameModel = this.functionModel.getGameModel();
+        ArrayList<EnumColorCardAndAmmo> cost = new ArrayList<>();
+        
+        try {
+            switch (this.functionModel.getGameModel().getWeaponState()){
+                
+                case LockRifle:
+                    
+                    LockRifle lockRifle = (LockRifle) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        
+                        //nothing to do
+                        
+                        //I effect
+                        case BaseEffect :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case SecondLockEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(lockRifle.getSecondLockCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                    }
+                    break;
+                
+                case Electroscythe:
+                    
+                    Electroscythe electroscythe = (Electroscythe) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        
+                        //nothing to do
+                        
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case ReaperMode :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(electroscythe.getReaperModeCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                    }
+                    break;
+                
+                //TODO
+                case MachineGun:
+                    
+                    MachineGun machineGun = (MachineGun) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case FocusShotEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(machineGun.getFocusShotCost());
+                            functionController.selectRecharge(view,2,cost);
+                            
+                            break;
+                        //III effect
+                        case TurretTripodEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(machineGun.getTurretTripodCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                    }
+                    break;
+                
+                case TractorBeam:
+                    
+                    TractorBeam tractorBeam = (TractorBeam) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case PunisherMode :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(tractorBeam.getPunisherModeCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                    }
+                    break;
+                
+                case Thor:
+                    
+                    Thor thor =(Thor) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case ChainReactionEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(thor.getChainReactionCost());
+                            functionController.selectRecharge(view,2,cost);
+                            
+                            break;
+                        //III effect
+                        case HighVoltageEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(thor.getHighVoltageCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                    }
+                    break;
+                
+                case VortexCannon:
+                    
+                    VortexCannon vortexCannon = (VortexCannon) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case BlackHoleEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(vortexCannon.getBlackHoleCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                        
+                    }
+                    break;
+                
+                case Furnace:
+                    
+                    Furnace furnace = (Furnace) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case CozyFireMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case PlasmaGun:
+                    
+                    PlasmaGun plasmaGun = (PlasmaGun) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        
+                        //II effect
+                        case PhaseGlideEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(plasmaGun.getPhaseGlideCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                        
+                        //III effect
+                        case BaseEffectPlusChargedShotEffect :
+                            
+                            //to pay if boolean choise is true
+                            //TO PAY AMMO
+                            if (view.isBooleanChose()) {
+                                
+                                cost.addAll(plasmaGun.getChargedShotCost());
+                                functionController.selectRecharge(view, 2, cost);
+                            } else {
+                                
+                                functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            }
+                            break;
+                        
+                        
+                    }
+                    break;
+                
+                case Heatseeker:
+                    
+                    Heatseeker heatseeker = (Heatseeker) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    
+                    //nothing
+                    functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                    
+                    break;
+                
+                
+                case Whisper:
+                    
+                    Whisper whisper = (Whisper) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    
+                    //nothing
+                    functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                    
+                    break;
+                
+                case Hellion:
+                    
+                    Hellion hellion = (Hellion) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case NanoTracerMode :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(hellion.getNanoTracerModeCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                        
+                    }
+                    break;
+                
+                case Flamethrower:
+                    
+                    Flamethrower flamethrower = (Flamethrower) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case BarbecueMode :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(flamethrower.getBarbecueModeCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                    }
+                    break;
+                
+                case Zx2:
+                    
+                    Zx2 zx2 = (Zx2) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case ScannerMode :
+                            
+                            
+                            //NO TO PAY
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case GrenadeLauncher:
+                    
+                    GrenadeLauncher grenadeLauncher = (GrenadeLauncher) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case ExtraGrenadeEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(grenadeLauncher.getExtraGrenadeCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                        case MoveTarget:
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Shotgun:
+                    
+                    Shotgun shotgun = (Shotgun) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case LongBarrelMode :
+                            
+                            //NO TO PAY
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                    }
+                    break;
+                
+                case RocketLauncher:
+                    
+                    RocketLauncher rocketLauncher = (RocketLauncher) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffectPlusFragmentingWarheadEffect :
+                            
+                            if(view.isBooleanChose()) {
+                                //TO PAY AMMO
+                                cost.addAll(rocketLauncher.getFragmentingWarheadCost());
+                                functionController.selectRecharge(view, 2, cost);
+                            } else {
+                                
+                                functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            }
+                            break;
+                        
+                        //II effect
+                        case RocketJumpEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(rocketLauncher.getRocketJumpCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                    }
+                    break;
+                
+                case PowerGlove:
+                    
+                    PowerGlove powerGlove = (PowerGlove) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case RocketFistMode :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(powerGlove.getRocketFistModeCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                        
+                    }
+                    break;
+                
+                case Railgun:
+                    
+                    Railgun railGun = (Railgun) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case PiercingMode :
+                            
+                            
+                            //NO TO PAY
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Shockwave:
+                    
+                    Shockwave shockwave = (Shockwave) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case TsunamiMode :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(shockwave.getTsunamiModeCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                    }
+                    break;
+                
+                case Cyberblade:
+                    
+                    Cyberblade cyberblade = (Cyberblade) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case ShadowstepEffect :
+                            
+                            //NO TO PAY
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //III effect
+                        case SliceAndDiceEffect :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(cyberblade.getSliceAndDiceCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                    }
+                    break;
+                
+                case Sledgehammer:
+                    
+                    Sledgehammer sledgehammer = (Sledgehammer) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+                            
+                            break;
+                        //II effect
+                        case PulverizeMode :
+                            
+                            //TO PAY AMMO
+                            cost.addAll(sledgehammer.getPulverizeModeCost());
+                            functionController.selectRecharge(view,2,cost);
+                            break;
+                    }
+                    break;
+            }
+        } catch (NotValidInput notValidInput) {
+            notValidInput.printStackTrace();
+        }
+        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER PAY EXTRA COST FOR : " + gameModel.getWeaponName() +" " +gameModel.getActualWeaponEffect() +" CORRECTLY");
+        this.functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
         
     }
     
@@ -452,7 +962,7 @@ public class WeaponController {
                             break;
                         //III effect
                         case HighVoltageEffect :
-    
+                            
                             //TO PAY
                             this.Thor(gameModel,thor,view);
                             
@@ -625,7 +1135,7 @@ public class WeaponController {
                             break;
                         
                         case MoveTarget:
-    
+                            
                             this.GrenadeLauncher(gameModel,grenadeLauncher,view);
                             
                             break;
@@ -662,7 +1172,7 @@ public class WeaponController {
                             
                             //TO PAY if BOOLEAN CHOISE
                             this.RocketLauncher(gameModel,rocketLauncher,view);
-        
+                            
                             break;
                         //II effect
                         case RocketJumpEffect :
@@ -811,10 +1321,10 @@ public class WeaponController {
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
                     gameModel.getPlayerDamaged().add(targetBase);
-                   
+                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -842,18 +1352,21 @@ public class WeaponController {
                             throw new NotValidInput();
                         }
                     } catch (NotValidInput notValidInput) {
-    
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
+                        
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getSecondLockCost());
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME AS THE BASE EFFECT!!!");
                     } catch (NotVisibleTarget notVisibleTarget) {
-    
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                        
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getSecondLockCost());
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                     } catch (MapException e) {
                         
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getSecondLockCost());
                         functionController.mapErrorGestor();
                     }
                 }else{
                     
-                   functionController.mapErrorGestor();
+                    functionController.mapErrorGestor();
                 }
                 break;
         }
@@ -872,26 +1385,28 @@ public class WeaponController {
                     
                     weapon.baseMode(map,currentPlayer);
                 } catch (NoTargetInSquare noTargetInSquare) {
-    
-                    functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE");
+                    
+                    functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE!!!");
                 } catch (MapException mapException){
-    
+                    
                     functionController.setErrorState("ERROR: MAP ERROR");
                 }
                 break;
             case ReaperMode:
-    
+                
                 try {
-    
+                    
                     weapon.reaperMode(map, currentPlayer);
                 } catch (NoTargetInSquare noTargetInSquare) {
-                    noTargetInSquare.printStackTrace();
-                    functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE");
+                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getReaperModeCost());
+                    functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE!!!");
                 } catch (MapException mapException) {
-                    mapException.printStackTrace();
+                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getReaperModeCost());
                     functionController.mapErrorGestor();
                 }
-            
+                
                 break;
         }
         //empty list
@@ -1082,11 +1597,11 @@ public class WeaponController {
                     weapon.baseMode(map, destSquareBase, currentPlayer, targetBaseOrPunisher);
                     
                 }catch (NotVisibleTarget notVisibleTarget) {
-    
-                    functionController.setErrorState("ERROR: THE DESTINATION SQUARE IS NOT VISIBLE FROM YOUR POSITION");
+                    
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (NotValidDistance notValidDistance) {
-    
-                    functionController.setErrorState("ERROR: YOU CAN'T MOVE YOUR TARGET MORE THAN TWO MOVES");
+                    
+                    functionController.setErrorState("ERROR: YOU CAN'T MOVE YOUR TARGET FOR MORE THAN TWO MOVEMENTS!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1100,10 +1615,12 @@ public class WeaponController {
                     targetBaseOrPunisher = gameModel.getPlayerById(view.getTarget1());
                     weapon.punisherMode(map, currentPlayer, targetBaseOrPunisher);
                 } catch (NotValidDistance notValidDistance) {
-    
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS MORE THAN THO MOVES FROM YOU");
+                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPunisherModeCost());
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS MORE THAN TWO MOVEMENTS FROM YOU!!!");
                 } catch (MapException mapException) {
                     
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPunisherModeCost());
                     functionController.mapErrorGestor();
                 }
                 break;
@@ -1129,10 +1646,10 @@ public class WeaponController {
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     //set before effect as base and remove
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                   
+                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1156,14 +1673,17 @@ public class WeaponController {
                             
                         } else {
                             
+                            functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getChainReactionCost());
                             throw new NotValidInput();
                         }
                     } catch (NotValidInput notValidInput) {
                         
-                        functionController.setErrorState("ERROR: THE TARGET OF BASE EFFECT DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT " +
-                                "FROM THE TARGET OF BASE EFFECT ");
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getChainReactionCost());
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM THE TARGET CHOSEN IN THE " +
+                                "BASE EFFECT OR THE CHOSEN TARGET IS THE SAME OF BASE EFFECT!!!");
                     } catch (MapException e) {
                         
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getChainReactionCost());
                         functionController.mapErrorGestor();
                     }
                     //remove
@@ -1172,7 +1692,8 @@ public class WeaponController {
                     gameModel.getAvailableEffect().add(WeaponsEffect.HighVoltageEffect);
                 }else {
                     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getChainReactionCost());
+                    functionController.setErrorState("ERROR: YOU CAN'T USE CHAIN REACTION EFFECT IF YOU DON'T USE THE BASE MODE!!!");
                 }
                 break;
             
@@ -1193,19 +1714,23 @@ public class WeaponController {
                             gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
                         } else {
                             
+                            functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getHighVoltageCost());
                             throw new NotValidInput();
                         }
                     } catch (NotValidInput notValidInput) {
                         
-                        functionController.setErrorState("ERROR: THE TARGET OF CHAIN REACTION DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT" +
-                                "FROM THE TARGET OF BASE EFFECT AND FROM THE TARGET OF CHAIN REACTION");
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getHighVoltageCost());
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM THE TARGET CHOSEN IN " +
+                                "CHAIN REACTION EFFECT OR THE CHOSEN TARGET IS THE SAME OF BASE/CHAIN REACTION EFFECT!!!");
                     } catch (MapException e) {
                         
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getHighVoltageCost());
                         functionController.mapErrorGestor();
                     }
                 } else {
                     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getHighVoltageCost());
+                    functionController.setErrorState("ERROR: YOU CAN'T USE HIGH VOLTAGE EFFECT IF YOU DON'T USE CHAIN REACTION EFFECT!!!");
                 }
                 break;
         }
@@ -1232,14 +1757,14 @@ public class WeaponController {
                     vortexSquare = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.baseEffect(map, vortexSquare, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                   
+                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE FROM YOUR POSITION");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IN NOT AT LEAST ONE MOVE FROM YOU OR THE CHOSEN TARGET IS NOT " +
-                            "ON VORTEX SQUARE OR IS NOT DISTANCE ONE MOVE FROM THE VORTEX SQUARE");
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IN NOT AT LEAST ONE MOVEMENT FROM YOU " +
+                            "OR THE CHOSEN TARGET IS NOT IN THE VORTEX SQUARE OR HE IS NOT DISTANCE ONE MOVEMENT FROM THE VORTEX SQUARE!!!");
                 } catch (MapException mapException) {
                     
                     functionController.setErrorState("ERROR: MAP ERROR");
@@ -1268,6 +1793,7 @@ public class WeaponController {
                                 weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
                             } else {
                                 
+                                functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBlackHoleCost());
                                 throw new NotValidInput();
                             }
                         } else {
@@ -1283,29 +1809,36 @@ public class WeaponController {
                                 gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
                             } else {
                                 
+                                functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBlackHoleCost());
                                 throw new NotValidInput();
                             }
                         }
                         
                     } catch (NotValidDistance notValidDistance) {
                         
-                        functionController.setErrorState("THE CHOSEN TARGET IS NOT ON VORTEX SQUARE OR IS NOT DISTANCE ONE MOVE FROM THE VORTEX SQUARE");
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBlackHoleCost());
+                        functionController.setErrorState("THE CHOSEN TARGET IS NOT IN THE VORTEX SQUARE OR HE IS NOT " +
+                                "DISTANCE ONE MOVEMENT FROM THE VORTEX SQUARE!!!");
                     } catch (NotValidInput notValidInput) {
                         
-                        functionController.setErrorState("ONE OR TWO BLACK HOLE TARGET ARE THE SAME OF BASE EFFECT OR ARE EQUAL BETWEEN THEM");
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBlackHoleCost());
+                        functionController.setErrorState("ONE OR TWO OF THE CHOSEN TARGETS ARE THE SAME OF THE BASE EFFECT " +
+                                "OR THEY ARE EQUAL BETWEEN THEM!!!");
                     } catch (MapException e) {
                         
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBlackHoleCost());
                         functionController.mapErrorGestor();
                     }
                     //empty list
                     gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
                 } else {
                     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBlackHoleCost());
+                    functionController.setErrorState("ERROR: YOU CAN'T USE BLACK HOLE EFFECT IF YOU DON'T USE THE BASE EFFECT!!!");
                 }
                 break;
         }
-       
+        
     }
     
     public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) throws RemoteException {
@@ -1325,10 +1858,10 @@ public class WeaponController {
                     weapon.baseMode(map, currentPlayer, roomTarget);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: CHOOSE A DIFFERENT ROOM THAN YOURS ");
+                    functionController.setErrorState("ERROR: YOU CAN'T CHOOSE YOUR ROOM!!!");
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN ROOM IS NOT VISIBLE ");
+                    functionController.setErrorState("ERROR: THE CHOSEN ROOM IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1343,7 +1876,7 @@ public class WeaponController {
                     weapon.cozyFireMode(map, currentPlayer, targetSquareCozy);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IS NOT DISTANCE ONE MOVE");
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IN NOT EXACTLY ONE MOVEMENT FROM YOU!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1376,10 +1909,15 @@ public class WeaponController {
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffectPlusChargedShotEffect);
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
-                    
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    if(view.isBooleanChose()) {
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getChargedShotCost());
+                    }
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
+                    if(view.isBooleanChose()) {
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getChargedShotCost());
+                    }
                     functionController.setErrorState("ERROR: MAP ERROR");
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusChargedShotEffect);
@@ -1392,20 +1930,20 @@ public class WeaponController {
                     
                     destSquarePhaseGlide = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.phaseGlideEffect(map, destSquarePhaseGlide, currentPlayer);
-                   
+                    
                 } catch (MapException e) {
                     
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPhaseGlideCost());
                     functionController.setErrorState("ERROR: MAP ERROR");
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVES");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPhaseGlideCost());
+                    functionController.setErrorState("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVEMENTS!!!");
                 }
                 //remove effect
                 gameModel.getAvailableEffect().remove(WeaponsEffect.PhaseGlideEffect);
                 break;
-            
         }
-        
     }
     
     public void HeatSeeker(GameModel gameModel, Heatseeker weapon, RemoteView view) throws RemoteException{
@@ -1424,10 +1962,10 @@ public class WeaponController {
                     weapon.BaseEffect(map, currentPlayer, targetBase);
                 } catch (VisibleTarget visibleTarget) {
                     
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    functionController.setErrorState("ERROR: MAP ERROR");
                 }
                 break;
         }
@@ -1450,10 +1988,10 @@ public class WeaponController {
                     weapon.baseEffect(map, currentPlayer, targetBase);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT AT LEAST 2 MOVES FROM YOU");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT AT LEAST TWO MOVEMENTS FROM YOUR POSITION!!!");
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NON VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1478,10 +2016,10 @@ public class WeaponController {
                     weapon.baseMode(map, currentPlayer, targetBaseOrTracer);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVE FROM YOU" );
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVEMENT FROM YOUR POSITION!!!" );
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1496,12 +2034,15 @@ public class WeaponController {
                     weapon.nanoTracerMode(map, currentPlayer, targetBaseOrTracer);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVE FROM YOU" );
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getNanoTracerModeCost());
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVEMENT FROM YOUR POSITION!!!" );
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getNanoTracerModeCost());
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException mapException) {
                     
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getNanoTracerModeCost());
                     functionController.mapErrorGestor();
                 }
                 break;
@@ -1521,7 +2062,7 @@ public class WeaponController {
         
         switch (gameModel.getActualWeaponEffect()) {
             
-            case BaseEffect:
+            case BaseMode:
                 
                 try{
                     
@@ -1540,12 +2081,12 @@ public class WeaponController {
                     functionController.mapErrorGestor();
                 }catch (NotValidDistance notValidDistance){
                     
-                    functionController.setErrorState("ERROR: THE FIRST CHOSEN TARGET ARE NOT AT ONE MOVE FROM YOU OR" +
-                            "THE SECOND CHOSEN TARGET ARE NOT ONE MOVE FROM THE FIRST");
+                    functionController.setErrorState("ERROR: THE FIRST CHOSEN TARGET IS NOT A DISTANCE MOVEMENT " +
+                            "FROM YOU OR THE SECOND CHOSEN TARGET IS NOT A DISTANCE MOVEMENT FROM THE FIRST TARGET!!!");
                     
                 }catch (NotInSameDirection notInSameDirection){
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGETS ARE NOT IN THE SAME DIRECTION");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGETS ARE NOT IN THE SAME DIRECTION!!!");
                     
                 }
                 break;
@@ -1558,19 +2099,21 @@ public class WeaponController {
                     weapon.barbecueMode(map,currentPlayer,targetSquare1,targetSquare2);
                 }catch(MapException mapExcpetion){
                     
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBarbecueModeCost());
                     functionController.mapErrorGestor();
-                    
                 } catch (NoTargetInSquare noTargetInSquare) {
                     
-                    functionController.setErrorState("ERROR: IN ONE OF SQUARES THERE ARE NOT PLAYERS");
-                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBarbecueModeCost());
+                    functionController.setErrorState("ERROR: IN ONE OF CHOSEN SQUARES THERE ARE NOT PLAYERS!!!");
                 } catch (NotInSameDirection notInSameDirection) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBarbecueModeCost());
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION!!!");
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE FIRST CHOSEN SQUARE ARE NOT AT ONE MOVE FROM YOU OR" +
-                            "THE SECOND CHOSEN SQUARE ARE NOT ONE MOVE FROM THE FIRST");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBarbecueModeCost());
+                    functionController.setErrorState("ERROR: THE FIRST CHOSEN SQUARE IS NOT A DISTANCE MOVEMENT FROM YOU OR " +
+                            "THE SECOND CHOSEN SQUARE IS NOT A DISTANCE MOVEMENT FROM THE FIRST SQUARE!!!");
                 }
                 break;
         }
@@ -1597,7 +2140,7 @@ public class WeaponController {
                     weapon.baseMode(map, currentPlayer, target1);
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1645,74 +2188,10 @@ public class WeaponController {
                     }
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGET IS NOT VISIBLE");
+                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGETS IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (NotValidInput notValidInput) {
                     
-                    functionController.setErrorState("TWO OR THREE TARGETS ARE EQUAL BETWEEN THEM");
-                } catch (MapException e) {
-                    
-                    functionController.mapErrorGestor();
-                }
-                break;
-        }
-        //empty list
-        gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
-    }
-    
-    public void RailGun(GameModel gameModel, Railgun weapon,RemoteView view) throws RemoteException{
-        
-        Map map = gameModel.getMap();
-        Player currentPlayer = gameModel.getActualPlayer();
-        Player target1;
-        Player target2;
-        EnumCardinalDirection direction;
-        ArrayList<Player> piercingTargets = new ArrayList<>();
-        
-        switch (gameModel.getActualWeaponEffect()) {
-            
-            case BaseMode:
-                
-                try {
-                    
-                    target1 = gameModel.getPlayerById(view.getTarget1());
-                    direction = view.getCardinalDirection();
-                    weapon.baseMode(map, currentPlayer, target1, direction);
-                } catch (NotValidCardinalDirection notValidCardinalDirection) {
-                    
-                    functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DOESN'T EXIST");
-                    
-                } catch (NotInDirection notInDirection) {
-                    
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION");
-                } catch (MapException e) {
-                    
-                    functionController.mapErrorGestor();
-                }
-                break;
-            
-            case PiercingMode:
-                
-                try {
-                    
-                    target1 = gameModel.getPlayerById(view.getTarget1());
-                    direction = view.getCardinalDirection();
-                    if (view.getTarget2() != -1) {
-                        
-                        target2 = gameModel.getPlayerById(view.getTarget2());
-                        piercingTargets.add(target1);
-                        piercingTargets.add(target2);
-                        weapon.piercingMode(map, currentPlayer, piercingTargets, direction);
-                    } else {
-                        
-                        piercingTargets.add(target1);
-                        weapon.piercingMode(map, currentPlayer, piercingTargets, direction);
-                    }
-                } catch (NotValidCardinalDirection notValidCardinalDirection) {
-                    
-                    functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DON'T EXIST");
-                } catch (NotInDirection notInDirection) {
-                    
-                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION");
+                    functionController.setErrorState("ERROR: TWO OR THREE OF THE CHOSEN TARGETS ARE EQUAL BETWEEN THEM!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1744,33 +2223,36 @@ public class WeaponController {
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                gameModel.getAvailableEffect().add(WeaponsEffect.MoveTarget);
+                gameModel.getAvailableEffect().add(WeaponsEffect.ExtraGrenadeEffect);
                 break;
             
             case MoveTarget:
                 
                 if(gameModel.getBeforeEffect()==WeaponsEffect.BaseEffect) {
-    
+                    
                     try {
-        
+                        
                         destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                         targetBase = gameModel.getPlayerById(view.getTarget1());
                         weapon.moveTarget(map, targetBase, destSquareBase);
+                        gameModel.getAvailableEffect().remove(WeaponsEffect.MoveTarget);
                     } catch (NotValidDistance notValidDistance) {
-    
-                        functionController.setErrorState("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE MOVES");
+                        
+                        functionController.setErrorState("ERROR: YOU CAN MOVE THE CHOSEN TARGET ONLY ONE MOVEMENT!!!");
                     } catch (MapException mapException) {
-        
+                        
                         functionController.mapErrorGestor();
                     }
                 } else {
-    
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    
+                    functionController.setErrorState("ERROR: YOU CAN'T MOVE THE CHOSEN TARGET IF YOU DON'T USE THE BASE EFFECT!!!");
                 }
                 break;
             
@@ -1782,19 +2264,24 @@ public class WeaponController {
                         
                         targetSquareExtra = gameModel.getMap().getSquare(view.getRow2(), view.getColumn2());
                         weapon.extraGrenadeEffect(map, currentPlayer, targetSquareExtra);
+                        gameModel.getAvailableEffect().remove(WeaponsEffect.ExtraGrenadeEffect);
                     } catch (NotVisibleTarget notVisibleTarget) {
                         
-                        gameModel.setErrorMessage("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE");
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getExtraGrenadeCost());
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                     } catch (MapException mapExcpetion) {
                         
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getExtraGrenadeCost());
+                        functionController.mapErrorGestor();
                     } catch (NoTargetInSquare noTargetInSquare) {
                         
-                        gameModel.setErrorMessage("ERROR: NO TARGET IN THE CHOSEN SQUARE");
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getExtraGrenadeCost());
+                        functionController.setErrorState("ERROR: NO TARGET IN THE CHOSEN SQUARE!!!");
                     }
                 } else {
-    
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getExtraGrenadeCost());
+                    functionController.setErrorState("ERROR: YOU CAN'T USE THE EXTRA GRENADE EFFECT IF YOU DON'T USE THE BASE EFFECT!!!");
                 }
                 break;
         }
@@ -1828,8 +2315,8 @@ public class WeaponController {
                     functionController.mapErrorGestor();
                 }catch (NotValidDistance notValidDistance){
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE NOT MOVING " +
-                            "ONE MOVE THE TARGET");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE NOT " +
+                            "MOVING EXACTLY ONE MOVEMENT THE TARGET!!!");
                 }
                 break;
             case LongBarrelMode:
@@ -1843,7 +2330,7 @@ public class WeaponController {
                     functionController.mapErrorGestor();
                 }catch (NotValidDistance notValidDistance){
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVE FROM YOU");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVEMENT FROM YOUR POSITION!!!");
                 }
                 break;
         }
@@ -1873,7 +2360,7 @@ public class WeaponController {
                         
                         destSquareBase = null;
                         weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
-                      
+                        
                         
                     }else{
                         
@@ -1886,21 +2373,38 @@ public class WeaponController {
                             functionController.mapErrorGestor();
                         }
                     }
+                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
+                    choice1 = view.isBooleanChose();
+                    if(!choice1){
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getFragmentingWarheadCost());
+                    }
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                     
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS IN YOUR SQUARE OR YOU ARE NOT MOVING ONE MOVE YOUR TARGET ");
+                    choice1 = view.isBooleanChose();
+                    if(!choice1){
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getFragmentingWarheadCost());
+                    }
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS IN YOUR SQUARE OR YOU ARE NOT MOVING " +
+                            "EXACTLY ONE MOVEMENT THE TARGET!!!");
                 } catch (MapException mapExcpetion) {
                     
+                    choice1 = view.isBooleanChose();
+                    if(!choice1){
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getFragmentingWarheadCost());
+                    }
                     functionController.mapErrorGestor();
                 } catch (NoTargetInSquare noTargetInSquare){
                     
-                    functionController.setErrorState("ERROR: NO TARGET IN CHOSEN SQUARE ");
+                    choice1 = view.isBooleanChose();
+                    if(!choice1){
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getFragmentingWarheadCost());
+                    }
+                    functionController.setErrorState("ERROR: NO TARGET IN CHOSEN SQUARE!!!");
                 }
-                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
                 break;
             
             case RocketJumpEffect:
@@ -1911,12 +2415,15 @@ public class WeaponController {
                     weapon.rocketJumpEffect(map,currentPlayer,destSquareJump);
                     gameModel.getAvailableEffect().remove(WeaponsEffect.RocketJumpEffect);
                 }catch (NotValidDistance notValidDistance){
-                    gameModel.setErrorMessage("ERROR: YOU MOVE ONLY ONE OR TWO MOVES");
+                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getRocketJumpCost());
+                    gameModel.setErrorMessage("ERROR: YOU CAN MOVE ONLY ONE OR TWO MOVEMENTS!!!");
                 }catch (MapException mapException){
                     
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getRocketJumpCost());
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
-                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
+                gameModel.getAvailableEffect().remove(WeaponsEffect.RocketJumpEffect);
                 break;
         }
     }
@@ -1943,7 +2450,7 @@ public class WeaponController {
                     
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVE FROM YOU");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVEMENT FROM YOUR POSITION!!!");
                 }
                 break;
             case RocketFistMode:
@@ -1961,14 +2468,81 @@ public class WeaponController {
                     }
                 }catch (MapException mapException){
                     
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getRocketFistModeCost());
                     functionController.mapErrorGestor();
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE FIRST CHOSEN SQUARE ARE NOT AT ONE MOVE FROM YOU OR" +
-                            "THE SECOND CHOSEN SQUARE ARE NOT ONE MOVE FROM THE FIRST");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getRocketFistModeCost());
+                    functionController.setErrorState("ERROR: THE FIRST CHOSEN SQUARE IS NOT AT ONE MOVEMENT FROM YOUR " +
+                            "POSITION OR THE SECOND CHOSEN SQUARE IS NOT AT ONE MOVEMENT FROM THE FIRST CHOSEN SQUARE!!!");
                 } catch (NotInSameDirection notInSameDirection) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getRocketFistModeCost());
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION!!!");
+                }
+                break;
+        }
+        //empty list
+        gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
+    }
+    
+    public void RailGun(GameModel gameModel, Railgun weapon,RemoteView view) throws RemoteException{
+        
+        Map map = gameModel.getMap();
+        Player currentPlayer = gameModel.getActualPlayer();
+        Player target1;
+        Player target2;
+        EnumCardinalDirection direction;
+        ArrayList<Player> piercingTargets = new ArrayList<>();
+        
+        switch (gameModel.getActualWeaponEffect()) {
+            
+            case BaseMode:
+                
+                try {
+                    
+                    target1 = gameModel.getPlayerById(view.getTarget1());
+                    direction = view.getCardinalDirection();
+                    weapon.baseMode(map, currentPlayer, target1, direction);
+                } catch (NotValidCardinalDirection notValidCardinalDirection) {
+                    
+                    functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DOES NOT EXIST!!!");
+                    
+                } catch (NotInDirection notInDirection) {
+                    
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION!!!");
+                } catch (MapException e) {
+                    
+                    functionController.mapErrorGestor();
+                }
+                break;
+            
+            case PiercingMode:
+                
+                try {
+                    
+                    target1 = gameModel.getPlayerById(view.getTarget1());
+                    direction = view.getCardinalDirection();
+                    if (view.getTarget2() != -1) {
+                        
+                        target2 = gameModel.getPlayerById(view.getTarget2());
+                        piercingTargets.add(target1);
+                        piercingTargets.add(target2);
+                        weapon.piercingMode(map, currentPlayer, piercingTargets, direction);
+                    } else {
+                        
+                        piercingTargets.add(target1);
+                        weapon.piercingMode(map, currentPlayer, piercingTargets, direction);
+                    }
+                } catch (NotValidCardinalDirection notValidCardinalDirection) {
+                    
+                    functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DOES NOT EXIST!!!");
+                } catch (NotInDirection notInDirection) {
+                    
+                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION!!!");
+                } catch (MapException e) {
+                    
+                    functionController.mapErrorGestor();
                 }
                 break;
         }
@@ -2007,8 +2581,8 @@ public class WeaponController {
                     }
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET ARE NOT DIFFERENT AMONG THEM OR EACH ONE ARE NOT DISTANCE" +
-                            "EXACTLY ONE MOVE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGETS ARE NOT ALL DIFFERENT BETWEEN THEM OR " +
+                            "EACH ONE ARE NOT IN A SQUARE EXACTLY AT ONE MOVEMENT FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -2023,7 +2597,8 @@ public class WeaponController {
                     weapon.tsunamiMode(map,currentPlayer,allPlayerInGame);
                 }catch (NotValidDistance notValidDistance){
                     
-                    functionController.setErrorState("ERROR: NO PLAYER AT ONE MOVE FROM YOU");
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getTsunamiModeCost());
+                    functionController.setErrorState("ERROR: NO PLAYER AT ONE MOVEMENT FROM YOUR POSITION!!!");
                 }
                 break;
         }
@@ -2048,15 +2623,18 @@ public class WeaponController {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                   
+                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                    gameModel.getAvailableEffect().add(WeaponsEffect.SliceAndDiceEffect);
+                    
                     
                 } catch (NotValidDistance notValidDistance) {
-    
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
+                    
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
                 }
+                break;
             case ShadowstepEffect:
                 
                 try{
@@ -2065,16 +2643,17 @@ public class WeaponController {
                     weapon.shadowstepEffect(map,currentPlayer,destSquareShadow);
                     gameModel.getAvailableEffect().remove(WeaponsEffect.ShadowstepEffect);
                 }catch(NotValidDistance notValidDistance){
-    
-                    functionController.setErrorState("ERROR: YOU CAN MOVE YOURSELF ONLY ONE MOVES");
+                    
+                    functionController.setErrorState("ERROR: YOU CAN ONLY MOVE ONE MOVEMENT!!!");
                 }catch (MapException mapException){
                     
                     functionController.mapErrorGestor();
                 }
-                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                
+                break;
             case SliceAndDiceEffect:
                 
-                if(gameModel.getBeforeEffect()==WeaponsEffect.BaseEffect || gameModel.getBeforeEffect()==WeaponsEffect.ShadowstepEffect) {
+                if(gameModel.getBeforeEffect()==WeaponsEffect.BaseEffect) {
                     
                     try {
                         
@@ -2083,30 +2662,36 @@ public class WeaponController {
                         if (targetBase != targetSliceAndDice) {
                             
                             weapon.sliceAndDiceEffect(map, currentPlayer, targetSliceAndDice);
+                            gameModel.getAvailableEffect().remove(WeaponsEffect.SliceAndDiceEffect);
                             
                         } else {
                             
+                            functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getSliceAndDiceCost());
                             throw new NotValidInput();
                         }
                     } catch (NotValidInput notValidInput) {
-    
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
+                        
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getSliceAndDiceCost());
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME OF THE BASE EFFECT!!!");
                     } catch (NotValidDistance notValidDistance) {
                         
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getSliceAndDiceCost());
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE!!!");
                     } catch (MapException mapException) {
                         
+                        functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getSliceAndDiceCost());
                         functionController.mapErrorGestor();
                     }
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.SliceAndDiceEffect);
+                    
+                    break;
                 } else {
-    
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getSliceAndDiceCost());
+                    functionController.setErrorState("ERROR: YOU CAN'T USE SLICE AND DICE EFFECT IF YOU DON'T USE THE BASE EFFECT!!!");
                 }
         }
     }
-    
-    
+
     public void Sledgehammer(GameModel gameModel, Sledgehammer weapon,RemoteView view) throws RemoteException{
         
         
@@ -2130,7 +2715,7 @@ public class WeaponController {
                     
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE!!!");
                 }
                 
                 break;
@@ -2140,19 +2725,21 @@ public class WeaponController {
                 try{
                     
                     destSquare = map.getSquare(view.getRow(),view.getColumn());
-                    targetPulverize=gameModel.getPlayerById(view.getTarget1());
+                    targetPulverize=gameModel.getPlayerById(view.getTarget2());
                     weapon.pulverizeMode(map,currentPlayer,targetPulverize,destSquare);
                 } catch (NotInSameDirection notInSameDirection) {
-    
-                    functionController.setErrorState("ERROR: YOU ARE NOT MOVING THE TARGET IN ONE DIRECTION");
+                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPulverizeModeCost());
+                    functionController.setErrorState("ERROR: YOU ARE NOT MOVING THE CHOSEN TARGET IN ONE CARDINAL DIRECTION!!!");
                 } catch (NotValidDistance notValidDistance) {
-    
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE NOT MOVING THE " +
-                            "TARGET ZERO, ONE OR TWO SQUARE");
+                    
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPulverizeModeCost());
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE MOVING THE " +
+                            "CHOSEN TARGET OF MORE THAN TWO MOVEMENTS!!!");
                 } catch (MapException e) {
                     
+                    functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPulverizeModeCost());
                     functionController.mapErrorGestor();
-                    
                 }
                 
                 break;
@@ -2160,5 +2747,4 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
 }

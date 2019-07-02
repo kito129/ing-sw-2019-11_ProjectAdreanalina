@@ -47,11 +47,11 @@ public class GameModel implements Serializable {
     private String messageToCurrentView;
     private String messageToAllView;
     
-    public GameModel(){
+    public GameModel() {
         
         state=State.LOBBY;
         //create map
-        this.map = new Map(MapCreator.createA(),"MAPA");
+        this.map = new Map(MapCreator.createD(),"MAPA");
         //populate list of color for the player
         populateColor();
         

@@ -9,9 +9,9 @@ import it.polimi.model.Exception.NotValidInput;
 import java.util.ArrayList;
 
 public class Sledgehammer extends WeaponCard {
-
+    
     private ArrayList<EnumColorCardAndAmmo> pulverizeModeCost;
-
+    
     /**
      * Instantiates a new Sladgehammer card.
      * Sets the field color to YELLOW calling the constructor of weapon card (the super class).
@@ -19,13 +19,13 @@ public class Sledgehammer extends WeaponCard {
      * Creates the list of effects setting its value to BaseMode,PulverizeMode.
      * Creates the list of pulverize mode cost (cost of alternative fire mode) settings it to RED.
      */
-    public Sledgehammer() {
-
+    public Sledgehammer () {
+    
         super("SLADGEHAMMER", EnumColorCardAndAmmo.YELLOW);
-        ArrayList<EnumColorCardAndAmmo>rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
+        ArrayList<EnumColorCardAndAmmo> rechargeCost = new ArrayList<EnumColorCardAndAmmo>();
         rechargeCost.add(EnumColorCardAndAmmo.YELLOW);
         setRechargeCost(rechargeCost);
-        ArrayList<WeaponsEffect> weaponsEffects= new ArrayList<>();
+        ArrayList<WeaponsEffect> weaponsEffects = new ArrayList<>();
         weaponsEffects.add(WeaponsEffect.BaseMode);
         weaponsEffects.add(WeaponsEffect.PulverizeMode);
         setWeaponEffects(weaponsEffects);
@@ -36,43 +36,46 @@ public class Sledgehammer extends WeaponCard {
                 "modalità polverizzare: Dai 3 danni a 1 bersaglio nel quadrato in cui ti trovi, poi muovi quel bersaglio di 0, 1 o 2 quadrati in una direzione.\n\n" +
                 "Nota: Ricordati che i movimenti passano attraverso le porte ma non attraverso le pareti.");
     }
-
-    public ArrayList<EnumColorCardAndAmmo> getPulverizeModeCost() {
-
+    
+    public ArrayList<EnumColorCardAndAmmo> getPulverizeModeCost () {
+        
         return pulverizeModeCost;
     }
-
-    public void baseMode(Map map, Player currentPlayer,Player target1)throws NotValidDistance {
-
-        if (map.distance(currentPlayer,target1)==0){
-
-            ArrayList<EnumColorPlayer> sledgehammerDamages=new ArrayList<>();
+    
+    public void baseMode (Map map, Player currentPlayer, Player target1) throws NotValidDistance {
+        
+        if (map.distance(currentPlayer, target1) == 0) {
+            
+            ArrayList<EnumColorPlayer> sledgehammerDamages = new ArrayList<>();
             sledgehammerDamages.add(currentPlayer.getColor());
             sledgehammerDamages.add(currentPlayer.getColor());
             target1.multipleDamages(sledgehammerDamages);
-        }else{
-
+        } else {
+            
             throw new NotValidDistance();
         }
     }
-
-    public void pulverizeMode(Map map, Player currentPlayer,Player target1,Square destSquare) throws NotValidDistance, NotInSameDirection, MapException {
-
-        Square target1Square= map.findPlayer(target1);
-
-        if ((map.distance(currentPlayer,target1)==0)&&(map.distance(target1Square,destSquare)<3)&&(map.sameDirection(target1Square,destSquare))){
-
-            ArrayList<EnumColorPlayer> sledgehammerDamages=new ArrayList<>();
+    
+    public void pulverizeMode (Map map, Player currentPlayer, Player target1, Square destSquare) throws NotValidDistance, NotInSameDirection, MapException {
+        
+        Square target1Square = map.findPlayer(target1);
+        
+        if ((map.distance(currentPlayer, target1) == 0) && (map.distance(target1Square, destSquare) < 3) && (map.sameDirection(target1Square, destSquare))) {
+            
+            ArrayList<EnumColorPlayer> sledgehammerDamages = new ArrayList<>();
             sledgehammerDamages.add(currentPlayer.getColor());
             sledgehammerDamages.add(currentPlayer.getColor());
             sledgehammerDamages.add(currentPlayer.getColor());
             target1.multipleDamages(sledgehammerDamages);
-        }else if((map.distance(currentPlayer,target1)!=0)||(map.distance(target1Square,destSquare)>=3)){
-
-            throw new NotValidDistance();
-        }else if(!(map.sameDirection(target1Square,destSquare))){
-
+            map.movePlayer(target1, destSquare);
+        } else if (!(map.sameDirection(target1Square, destSquare))) {
+            
             throw new NotInSameDirection();
+        } else if ((map.distance(currentPlayer, target1) != 0) || (map.distance(target1Square, destSquare) >= 3)) {
+            
+            throw new NotValidDistance();
+            
         }
     }
 }
+

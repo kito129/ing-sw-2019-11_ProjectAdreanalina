@@ -20,8 +20,10 @@ public class FunctionModel implements Serializable {
     private Map map;
 
     public FunctionModel (){
-
+    
+        
         this.gameModel = new GameModel();
+      
         this.map=gameModel.getMap();
 
     }
