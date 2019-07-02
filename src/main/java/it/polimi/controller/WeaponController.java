@@ -1325,7 +1325,7 @@ public class WeaponController {
                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1354,10 +1354,10 @@ public class WeaponController {
                         }
                     } catch (NotValidInput notValidInput) {
     
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME AS THE BASE EFFECT!!!");
                     } catch (NotVisibleTarget notVisibleTarget) {
     
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                     } catch (MapException e) {
                         
                         functionController.mapErrorGestor();
@@ -1384,10 +1384,10 @@ public class WeaponController {
                     weapon.baseMode(map,currentPlayer);
                 } catch (NoTargetInSquare noTargetInSquare) {
     
-                    functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE");
+                    functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE!!!");
                 } catch (MapException mapException){
     
-                    functionController.setErrorState("ERROR: MAP ERROR");
+                    functionController.setErrorState("MAP ERROR!!!");
                 }
                 break;
             case ReaperMode:
@@ -1397,7 +1397,7 @@ public class WeaponController {
                     weapon.reaperMode(map, currentPlayer);
                 } catch (NoTargetInSquare noTargetInSquare) {
                     noTargetInSquare.printStackTrace();
-                    functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE");
+                    functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE!!!");
                 } catch (MapException mapException) {
                     mapException.printStackTrace();
                     functionController.mapErrorGestor();
@@ -1471,7 +1471,7 @@ public class WeaponController {
                     //gestione target 1==target 2 effetto base
                 } catch (MapException e) {
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    gameModel.setErrorMessage("MAP ERROR!!!");
                 }
                 break;
             
@@ -1514,7 +1514,7 @@ public class WeaponController {
                         //gestione se target focus shot dovesse essere diverso sia da target 1 sia target 2 effetto base
                     } catch (MapException e) {
                         
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                        gameModel.setErrorMessage("MAP ERROR!!!");
                     }
                 } else {
                     
@@ -1541,7 +1541,7 @@ public class WeaponController {
                                 
                             } catch (MapException e) {
                                 
-                                gameModel.setErrorMessage("ERROR: MAP ERROR");
+                                gameModel.setErrorMessage("MAP ERROR!!!");
                             }
                         }
                         
@@ -1558,7 +1558,7 @@ public class WeaponController {
                             targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
                         } catch (MapException e) {
                             
-                            gameModel.setErrorMessage("ERROR: MAP ERROR");
+                            gameModel.setErrorMessage("MAP ERROR!!!");
                         }
                         
                     }
@@ -1587,17 +1587,17 @@ public class WeaponController {
             case BaseMode:
                 
                 try {
-                    
+
                     destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     targetBaseOrPunisher = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseMode(map, destSquareBase, currentPlayer, targetBaseOrPunisher);
                     
                 }catch (NotVisibleTarget notVisibleTarget) {
     
-                    functionController.setErrorState("ERROR: THE DESTINATION SQUARE IS NOT VISIBLE FROM YOUR POSITION");
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (NotValidDistance notValidDistance) {
     
-                    functionController.setErrorState("ERROR: YOU CAN'T MOVE YOUR TARGET MORE THAN TWO MOVES");
+                    functionController.setErrorState("ERROR: YOU CAN'T MOVE YOUR TARGET FOR MORE THAN TWO MOVEMENTS!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1612,7 +1612,7 @@ public class WeaponController {
                     weapon.punisherMode(map, currentPlayer, targetBaseOrPunisher);
                 } catch (NotValidDistance notValidDistance) {
     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS MORE THAN THO MOVES FROM YOU");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS MORE THAN TWO MOVEMENTS FROM YOU!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1643,7 +1643,7 @@ public class WeaponController {
                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1671,8 +1671,8 @@ public class WeaponController {
                         }
                     } catch (NotValidInput notValidInput) {
                         
-                        functionController.setErrorState("ERROR: THE TARGET OF BASE EFFECT DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT " +
-                                "FROM THE TARGET OF BASE EFFECT ");
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM THE TARGET CHOSEN IN THE " +
+                                "BASE EFFECT OR THE CHOSEN TARGET IS THE SAME OF BASE EFFECT!!!");
                     } catch (MapException e) {
                         
                         functionController.mapErrorGestor();
@@ -1683,7 +1683,7 @@ public class WeaponController {
                     gameModel.getAvailableEffect().add(WeaponsEffect.HighVoltageEffect);
                 }else {
                     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionController.setErrorState("ERROR: YOU CAN'T USE CHAIN REACTION EFFECT IF YOU DON'T USE THE BASE MODE!!!");
                 }
                 break;
             
@@ -1708,15 +1708,15 @@ public class WeaponController {
                         }
                     } catch (NotValidInput notValidInput) {
                         
-                        functionController.setErrorState("ERROR: THE TARGET OF CHAIN REACTION DON'T SEE THE CHOSEN TARGET OR THE CHOSEN TARGET IS NOT DIFFERENT" +
-                                "FROM THE TARGET OF BASE EFFECT AND FROM THE TARGET OF CHAIN REACTION");
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM THE TARGET CHOSEN IN " +
+                                "CHAIN REACTION EFFECT OR THE CHOSEN TARGET IS THE SAME OF BASE EFFECT/CHAIN REACTION EFFECT!!!");
                     } catch (MapException e) {
                         
                         functionController.mapErrorGestor();
                     }
                 } else {
                     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionController.setErrorState("ERROR: YOU CAN'T USE HIGH VOLTAGE EFFECT IF YOU DON'T USE CHAIN REACTION EFFECT!!!");
                 }
                 break;
         }
@@ -1746,14 +1746,14 @@ public class WeaponController {
                    
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IN NOT AT LEAST ONE MOVE FROM YOU OR THE CHOSEN TARGET IS NOT " +
-                            "ON VORTEX SQUARE OR IS NOT DISTANCE ONE MOVE FROM THE VORTEX SQUARE");
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IN NOT AT LEAST ONE MOVEMENT FROM YOU OR THE CHOSEN TARGET IS NOT " +
+                            "IN THE VORTEX SQUARE OR HE IS NOT DISTANCE ONE MOVEMENT FROM THE VORTEX SQUARE!!!");
                 } catch (MapException mapException) {
                     
-                    functionController.setErrorState("ERROR: MAP ERROR");
+                    functionController.setErrorState("MAP ERROR!!!");
                 }
                 //remove
                 gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
@@ -1800,10 +1800,10 @@ public class WeaponController {
                         
                     } catch (NotValidDistance notValidDistance) {
                         
-                        functionController.setErrorState("THE CHOSEN TARGET IS NOT ON VORTEX SQUARE OR IS NOT DISTANCE ONE MOVE FROM THE VORTEX SQUARE");
+                        functionController.setErrorState("THE CHOSEN TARGET IS NOT IN THE VORTEX SQUARE OR HE IS NOT DISTANCE ONE MOVEMENT FROM THE VORTEX SQUARE!!!");
                     } catch (NotValidInput notValidInput) {
                         
-                        functionController.setErrorState("ONE OR TWO BLACK HOLE TARGET ARE THE SAME OF BASE EFFECT OR ARE EQUAL BETWEEN THEM");
+                        functionController.setErrorState("ONE OR TWO OF THE CHOSEN TARGETS ARE THE SAME OF THE BASE EFFECT OR THEY ARE EQUAL BETWEEN THEM!!!");
                     } catch (MapException e) {
                         
                         functionController.mapErrorGestor();
@@ -1812,7 +1812,7 @@ public class WeaponController {
                     gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
                 } else {
                     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionController.setErrorState("ERROR: YOU CAN'T USE BLACK HOLE EFFECT IF YOU DON'T USE THE BASE EFFECT!!!");
                 }
                 break;
         }
@@ -1836,10 +1836,10 @@ public class WeaponController {
                     weapon.baseMode(map, currentPlayer, roomTarget);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: CHOOSE A DIFFERENT ROOM THAN YOURS ");
+                    functionController.setErrorState("ERROR: YOU CAN'T CHOOSE YOUR ROOM!!!");
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN ROOM IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN ROOM IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1854,7 +1854,7 @@ public class WeaponController {
                     weapon.cozyFireMode(map, currentPlayer, targetSquareCozy);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IS NOT DISTANCE ONE MOVE");
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARE IN NOT EXACTLY ONE MOVEMENT FROM YOU!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -1888,10 +1888,10 @@ public class WeaponController {
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
-                    functionController.setErrorState("ERROR: MAP ERROR");
+                    functionController.setErrorState("MAP ERROR!!!");
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusChargedShotEffect);
                 break;
@@ -1906,10 +1906,10 @@ public class WeaponController {
                    
                 } catch (MapException e) {
                     
-                    functionController.setErrorState("ERROR: MAP ERROR");
+                    functionController.setErrorState("MAP ERROR!!!");
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVES");
+                    functionController.setErrorState("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE OR TWO MOVEMENTS!!!");
                 }
                 //remove effect
                 gameModel.getAvailableEffect().remove(WeaponsEffect.PhaseGlideEffect);
@@ -1935,10 +1935,10 @@ public class WeaponController {
                     weapon.BaseEffect(map, currentPlayer, targetBase);
                 } catch (VisibleTarget visibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
-                    functionController.setErrorState("ERROR: MAP ERROR");
+                    functionController.setErrorState("MAP ERROR!!!");
                 }
                 break;
         }
@@ -1961,10 +1961,10 @@ public class WeaponController {
                     weapon.baseEffect(map, currentPlayer, targetBase);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT AT LEAST 2 MOVES FROM YOU");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT AT LEAST TWO MOVEMENTS FROM YOU!!!");
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -1989,10 +1989,10 @@ public class WeaponController {
                     weapon.baseMode(map, currentPlayer, targetBaseOrTracer);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVE FROM YOU" );
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVEMENT FROM YOU!!!" );
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -2007,10 +2007,10 @@ public class WeaponController {
                     weapon.nanoTracerMode(map, currentPlayer, targetBaseOrTracer);
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVE FROM YOU" );
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVEMENT FROM YOU!!!" );
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -2051,12 +2051,12 @@ public class WeaponController {
                     functionController.mapErrorGestor();
                 }catch (NotValidDistance notValidDistance){
                     
-                    functionController.setErrorState("ERROR: THE FIRST CHOSEN TARGET ARE NOT AT ONE MOVE FROM YOU OR" +
-                            "THE SECOND CHOSEN TARGET ARE NOT ONE MOVE FROM THE FIRST");
+                    functionController.setErrorState("ERROR: THE FIRST CHOSEN TARGET IS NOT A DISTANCE MOVEMENT " +
+                            "FROM YOU OR THE SECOND CHOSEN TARGET IS NOT A DISTANCE MOVEMENT FROM THE FIRST TARGET!!!");
                     
                 }catch (NotInSameDirection notInSameDirection){
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGETS ARE NOT IN THE SAME DIRECTION");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGETS ARE NOT IN THE SAME DIRECTION!!!");
                     
                 }
                 break;
@@ -2073,15 +2073,15 @@ public class WeaponController {
                     
                 } catch (NoTargetInSquare noTargetInSquare) {
                     
-                    functionController.setErrorState("ERROR: IN ONE OF SQUARES THERE ARE NOT PLAYERS");
+                    functionController.setErrorState("ERROR: IN ONE OF CHOSEN SQUARES THERE ARE NOT PLAYERS!!!");
                     
                 } catch (NotInSameDirection notInSameDirection) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION");
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION!!!");
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE FIRST CHOSEN SQUARE ARE NOT AT ONE MOVE FROM YOU OR" +
-                            "THE SECOND CHOSEN SQUARE ARE NOT ONE MOVE FROM THE FIRST");
+                    functionController.setErrorState("ERROR: THE FIRST CHOSEN SQUARE IS NOT A DISTANCE MOVEMENT FROM YOU OR" +
+                            "THE SECOND CHOSEN SQUARE IS NOT A DISTANCE MOVEMENT FROM THE FIRST SQUARE!!!");
                 }
                 break;
         }
@@ -2108,7 +2108,7 @@ public class WeaponController {
                     weapon.baseMode(map, currentPlayer, target1);
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -2156,10 +2156,10 @@ public class WeaponController {
                     }
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGETS IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGETS IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (NotValidInput notValidInput) {
                     
-                    functionController.setErrorState("TWO OR THREE TARGETS ARE EQUAL BETWEEN THEM");
+                    functionController.setErrorState("ERROR: TWO OR THREE OF THE CHOSEN TARGETS ARE EQUAL BETWEEN THEM!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -2190,11 +2190,11 @@ public class WeaponController {
                     weapon.baseMode(map, currentPlayer, target1, direction);
                 } catch (NotValidCardinalDirection notValidCardinalDirection) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DOESN'T EXIST");
+                    functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DOES NOT EXIST!!!");
                     
                 } catch (NotInDirection notInDirection) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -2220,10 +2220,10 @@ public class WeaponController {
                     }
                 } catch (NotValidCardinalDirection notValidCardinalDirection) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DON'T EXIST");
+                    functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DOES NOT EXIST!!!");
                 } catch (NotInDirection notInDirection) {
                     
-                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION");
+                    functionController.setErrorState("ERROR: ONE OF CHOSEN TARGET IS NOT IN CHOSEN CARDINAL DIRECTION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -2255,10 +2255,10 @@ public class WeaponController {
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    gameModel.setErrorMessage("MAP ERROR!!!");
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
                 gameModel.getAvailableEffect().add(WeaponsEffect.MoveTarget);
@@ -2277,14 +2277,14 @@ public class WeaponController {
                         gameModel.getAvailableEffect().remove(WeaponsEffect.MoveTarget);
                     } catch (NotValidDistance notValidDistance) {
     
-                        functionController.setErrorState("ERROR: YOU CAN MOVE YOUR TARGET ONLY ONE MOVES");
+                        functionController.setErrorState("ERROR: YOU CAN MOVE THE CHOSEN TARGET ONLY ONE MOVEMENT!!!");
                     } catch (MapException mapException) {
         
                         functionController.mapErrorGestor();
                     }
                 } else {
     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionController.setErrorState("ERROR: YOU CAN'T MOVE THE CHOSEN TARGET IF YOU DON'T USE THE BASE EFFECT!!!");
                 }
                 break;
             
@@ -2299,17 +2299,17 @@ public class WeaponController {
                         gameModel.getAvailableEffect().remove(WeaponsEffect.ExtraGrenadeEffect);
                     } catch (NotVisibleTarget notVisibleTarget) {
                         
-                        gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                        gameModel.setErrorMessage("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                     } catch (MapException mapExcpetion) {
                         
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+                        gameModel.setErrorMessage("MAP ERROR!!!");
                     } catch (NoTargetInSquare noTargetInSquare) {
                         
                         gameModel.setErrorMessage("ERROR: NO TARGET IN THE CHOSEN SQUARE");
                     }
                 } else {
     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionController.setErrorState("ERROR: YOU CAN'T USE THE EXTRA GRENADE EFFECT IF YOU DON'T USE THE BASE EFFECT!!!");
                 }
                 break;
         }
@@ -2344,7 +2344,7 @@ public class WeaponController {
                 }catch (NotValidDistance notValidDistance){
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE NOT MOVING " +
-                            "ONE MOVE THE TARGET");
+                            "EXACTLY ONE MOVEMENT THE TARGET!!!");
                 }
                 break;
             case LongBarrelMode:
@@ -2358,7 +2358,7 @@ public class WeaponController {
                     functionController.mapErrorGestor();
                 }catch (NotValidDistance notValidDistance){
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVE FROM YOU");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVEMENT FROM YOUR POSITION!!!");
                 }
                 break;
         }
@@ -2404,17 +2404,18 @@ public class WeaponController {
                     gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffectPlusFragmentingWarheadEffect);
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE!!!");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
                     
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS IN YOUR SQUARE OR YOU ARE NOT MOVING ONE MOVE YOUR TARGET ");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS IN YOUR SQUARE OR YOU ARE NOT MOVING " +
+                            "EXACTLY ONE MOVEMENT THE TARGET!!!");
                 } catch (MapException mapExcpetion) {
                     
                     functionController.mapErrorGestor();
                 } catch (NoTargetInSquare noTargetInSquare){
                     
-                    functionController.setErrorState("ERROR: NO TARGET IN CHOSEN SQUARE ");
+                    functionController.setErrorState("ERROR: NO TARGET IN CHOSEN SQUARE!!!");
                 }
                 break;
             
@@ -2426,10 +2427,10 @@ public class WeaponController {
                     weapon.rocketJumpEffect(map,currentPlayer,destSquareJump);
                     gameModel.getAvailableEffect().remove(WeaponsEffect.RocketJumpEffect);
                 }catch (NotValidDistance notValidDistance){
-                    gameModel.setErrorMessage("ERROR: YOU MOVE ONLY ONE OR TWO MOVES");
+                    gameModel.setErrorMessage("ERROR: YOU CAN MOVE ONLY ONE OR TWO MOVEMENTS!!!");
                 }catch (MapException mapException){
                     
-                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                    gameModel.setErrorMessage("MAP ERROR!!!");
                 }
                 gameModel.getAvailableEffect().remove(WeaponsEffect.RocketJumpEffect);
                 break;
@@ -2458,7 +2459,7 @@ public class WeaponController {
                     
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVE FROM YOU");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT EXACTLY AT ONE MOVEMENT FROM YOUR POSITION!!!");
                 }
                 break;
             case RocketFistMode:
@@ -2479,11 +2480,11 @@ public class WeaponController {
                     functionController.mapErrorGestor();
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE FIRST CHOSEN SQUARE ARE NOT AT ONE MOVE FROM YOU OR" +
-                            "THE SECOND CHOSEN SQUARE ARE NOT ONE MOVE FROM THE FIRST");
+                    functionController.setErrorState("ERROR: THE FIRST CHOSEN SQUARE IS NOT AT ONE MOVEMENT FROM " +
+                            "YOUR POSITION OR THE SECOND CHOSEN SQUARE IS NOT AT ONE MOVEMENT FROM THE FIRST CHOSEN SQUARE!!!");
                 } catch (NotInSameDirection notInSameDirection) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION");
+                    functionController.setErrorState("ERROR: THE CHOSEN SQUARES ARE NOT IN THE SAME DIRECTION!!!");
                 }
                 break;
         }
@@ -2522,8 +2523,8 @@ public class WeaponController {
                     }
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET ARE NOT DIFFERENT AMONG THEM OR EACH ONE ARE NOT DISTANCE" +
-                            "EXACTLY ONE MOVE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGETS ARE NOT ALL DIFFERENT BETWEEN THEM OR " +
+                            "EACH ONE ARE NOT IN A SQUARE EXACTLY AT ONE MOVEMENT FROM YOUR POSITION!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -2538,7 +2539,7 @@ public class WeaponController {
                     weapon.tsunamiMode(map,currentPlayer,allPlayerInGame);
                 }catch (NotValidDistance notValidDistance){
                     
-                    functionController.setErrorState("ERROR: NO PLAYER AT ONE MOVE FROM YOU");
+                    functionController.setErrorState("ERROR: NO PLAYER AT ONE MOVEMENT FROM YOUR POSITION!!!");
                 }
                 break;
         }
@@ -2569,7 +2570,7 @@ public class WeaponController {
                     
                 } catch (NotValidDistance notValidDistance) {
     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE!!!");
                 } catch (MapException mapException) {
                     
                     functionController.mapErrorGestor();
@@ -2584,7 +2585,7 @@ public class WeaponController {
                     gameModel.getAvailableEffect().remove(WeaponsEffect.ShadowstepEffect);
                 }catch(NotValidDistance notValidDistance){
     
-                    functionController.setErrorState("ERROR: YOU CAN MOVE YOURSELF ONLY ONE MOVES");
+                    functionController.setErrorState("ERROR: YOU CAN ONLY MOVE ONE MOVEMENT!!!");
                 }catch (MapException mapException){
                     
                     functionController.mapErrorGestor();
@@ -2610,10 +2611,10 @@ public class WeaponController {
                         }
                     } catch (NotValidInput notValidInput) {
     
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME OF BASE EFFECT");
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS THE SAME OF THE BASE EFFECT!!!");
                     } catch (NotValidDistance notValidDistance) {
                         
-                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
+                        functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE!!!");
                     } catch (MapException mapException) {
                         
                         functionController.mapErrorGestor();
@@ -2622,7 +2623,7 @@ public class WeaponController {
                     break;
                 } else {
     
-                    functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
+                    functionController.setErrorState("ERROR: YOU CAN'T USE SLICE AND DICE EFFECT IF YOU DON'T USE THE BASE EFFECT!!!");
                 }
         }
     }
@@ -2651,7 +2652,7 @@ public class WeaponController {
                     
                 } catch (NotValidDistance notValidDistance) {
                     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE!!!");
                 }
                 
                 break;
@@ -2665,11 +2666,11 @@ public class WeaponController {
                     weapon.pulverizeMode(map,currentPlayer,targetPulverize,destSquare);
                 } catch (NotInSameDirection notInSameDirection) {
     
-                    functionController.setErrorState("ERROR: YOU ARE NOT MOVING THE TARGET IN ONE DIRECTION");
+                    functionController.setErrorState("ERROR: YOU ARE NOT MOVING THE CHOSEN TARGET IN ONE CARDINAL DIRECTION!!!");
                 } catch (NotValidDistance notValidDistance) {
     
-                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE NOT MOVING THE " +
-                            "TARGET ZERO, ONE OR TWO SQUARE");
+                    functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT IN YOUR SQUARE OR YOU ARE MOVING THE " +
+                            "CHOSEN TARGET OF MORE THAN TWO MOVEMENTS!!!");
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
