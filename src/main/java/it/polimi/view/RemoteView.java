@@ -47,6 +47,8 @@ public interface RemoteView extends Remote {
     
     boolean isUseThirdEffect () throws RemoteException;
     
+    boolean isBooleanChose2 ();
+    
     WeaponsEffect getWeaponsEffect () throws RemoteException;
     
     boolean isOptionWeapon () throws RemoteException;
@@ -60,6 +62,8 @@ public interface RemoteView extends Remote {
     boolean isBooleanChose () throws RemoteException;
     
     int getIndex2 () throws RemoteException;
+    
+    int getIndexPay ();
     
     void resetInput() throws RemoteException;
     

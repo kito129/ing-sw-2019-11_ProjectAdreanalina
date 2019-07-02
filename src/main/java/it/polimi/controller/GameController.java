@@ -92,6 +92,9 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.weaponController.selectWeapon(view);
                 case SELECTEFFECT:
                     functionController.weaponController.selectWeaponEffect(view);
+                case PAYEFFECT:
+                    functionController.weaponController.payWeaponExtraCost(view);
+                    break;
                 case SELECTSHOOTINPUT:
                     functionController.weaponController.selectShootInput(view);
                 case SHOOT:

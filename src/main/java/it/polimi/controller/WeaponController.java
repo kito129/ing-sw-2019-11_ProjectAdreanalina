@@ -308,12 +308,6 @@ public class WeaponController {
     }
     
     
-    //TODO
-    public void payWeaponExtraCost(WeaponCard weaponCard){
-        
-        ArrayList<EnumColorCardAndAmmo> toPay = weaponCard.getRechargeCost();
-        
-    }
     
     public void afterShoot(RemoteView view){
         
@@ -329,7 +323,7 @@ public class WeaponController {
         
     }
     
-    public void selectShootInput(RemoteView view) throws RemoteException {
+    public void payWeaponExtraCost(RemoteView view) throws RemoteException {
         
         GameModel gameModel = this.functionModel.getGameModel();
         
@@ -662,6 +656,468 @@ public class WeaponController {
                             //TO PAY if BOOLEAN CHOISE
                             this.RocketLauncher(gameModel,rocketLauncher,view);
         
+                            break;
+                        //II effect
+                        case RocketJumpEffect :
+                            
+                            //TO PAY
+                            this.RocketLauncher(gameModel,rocketLauncher,view);
+                            
+                            break;
+                    }
+                    break;
+                
+                case PowerGlove:
+                    
+                    PowerGlove powerGlove = (PowerGlove) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.PowerGlove(gameModel,powerGlove,view);
+                            
+                            break;
+                        //II effect
+                        case RocketFistMode :
+                            
+                            //TOPAY
+                            this.PowerGlove(gameModel,powerGlove,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Railgun:
+                    
+                    Railgun railGun = (Railgun) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.RailGun(gameModel,railGun,view);
+                            
+                            break;
+                        //II effect
+                        case PiercingMode :
+                            
+                            
+                            //NO TO PAY
+                            this.RailGun(gameModel,railGun,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Shockwave:
+                    
+                    Shockwave shockwave = (Shockwave) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.Shockwave(gameModel,shockwave,view);
+                            
+                            break;
+                        //II effect
+                        case TsunamiMode :
+                            
+                            //TO PAY
+                            this.Shockwave(gameModel,shockwave,view);
+                            
+                            break;
+                    }
+                    break;
+                
+                case Cyberblade:
+                    
+                    Cyberblade cyberblade = (Cyberblade) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            this.Cyberblade(gameModel,cyberblade,view);
+                            
+                            break;
+                        //II effect
+                        case ShadowstepEffect :
+                            
+                            //NO TO PAY
+                            this.Cyberblade(gameModel,cyberblade,view);
+                            
+                            break;
+                        //III effect
+                        case SliceAndDiceEffect :
+                            
+                            //TO PAY
+                            this.Cyberblade(gameModel,cyberblade,view);
+                            
+                            break;
+                    }
+                    break;
+                
+                case Sledgehammer:
+                    
+                    Sledgehammer sledgehammer = (Sledgehammer) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.Sledgehammer(gameModel,sledgehammer,view);
+                            
+                            break;
+                        //II effect
+                        case PulverizeMode :
+                            
+                            //TO PAY
+                            this.Sledgehammer(gameModel,sledgehammer,view);
+                            
+                            break;
+                    }
+                    break;
+            }
+        } catch (NotValidInput notValidInput) {
+            notValidInput.printStackTrace();
+        }
+        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED: " + gameModel.getWeaponName() +" CORRECTLY");
+        this.functionModel.getGameModel().setState(State.SHOOT);
+        
+    }
+    
+    public void selectShootInput(RemoteView view) throws RemoteException {
+        
+        GameModel gameModel = this.functionModel.getGameModel();
+        
+        try {
+            switch (this.functionModel.getGameModel().getWeaponState()){
+                
+                case LockRifle:
+                    
+                    LockRifle lockRifle = (LockRifle) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        
+                        //nothing to do
+                        
+                        //I effect
+                        case BaseEffect :
+                            
+                            this.LockRifleweapon(gameModel,lockRifle,view);
+                            
+                            break;
+                        //II effect
+                        case SecondLockEffect :
+                            
+                            //TO PAY AMMO
+                            this.LockRifleweapon(gameModel,lockRifle,view);
+                        
+                        
+                    }
+                    break;
+                
+                case Electroscythe:
+                    
+                    Electroscythe electroscythe = (Electroscythe) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        
+                        //nothing to do
+                        
+                        //I effect
+                        case BaseMode :
+                            
+                            this.ElectroscytheWeapon(gameModel,electroscythe,view);
+                            
+                            break;
+                        //II effect
+                        case ReaperMode :
+                            
+                            //TO PAY
+                            this.ElectroscytheWeapon(gameModel,electroscythe,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                //TODO
+                case MachineGun:
+                    
+                    MachineGun machineGun = (MachineGun) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            this.MachineGun(gameModel,machineGun,view);
+                            
+                            break;
+                        //II effect
+                        case FocusShotEffect :
+                            
+                            this.MachineGun(gameModel,machineGun,view);
+                            
+                            break;
+                        //III effect
+                        case TurretTripodEffect :
+                            
+                            this.MachineGun(gameModel,machineGun,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case TractorBeam:
+                    
+                    TractorBeam tractorBeam = (TractorBeam) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.TractorBeam(gameModel,tractorBeam,view);
+                            
+                            break;
+                        //II effect
+                        case PunisherMode :
+                            
+                            //TO PAY
+                            this.TractorBeam(gameModel,tractorBeam,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Thor:
+                    
+                    Thor thor =(Thor) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            this.Thor(gameModel,thor,view);
+                            
+                            break;
+                        //II effect
+                        case ChainReactionEffect :
+                            
+                            //TO PAY
+                            this.Thor(gameModel,thor,view);
+                            
+                            break;
+                        //III effect
+                        case HighVoltageEffect :
+                            
+                            //TO PAY
+                            this.Thor(gameModel,thor,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case VortexCannon:
+                    
+                    VortexCannon vortexCannon = (VortexCannon) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            this.VortexCannon(gameModel,vortexCannon,view);
+                            
+                            break;
+                        //II effect
+                        case BlackHoleEffect :
+                            
+                            //TO PAY
+                            this.VortexCannon(gameModel,vortexCannon,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Furnace:
+                    
+                    Furnace furnace = (Furnace) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.Furnace(gameModel,furnace,view);
+                            
+                            break;
+                        //II effect
+                        case CozyFireMode :
+                            
+                            //NO to pay
+                            this.Furnace(gameModel,furnace,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case PlasmaGun:
+                    
+                    PlasmaGun plasmaGun = (PlasmaGun) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        
+                        //II effect
+                        case PhaseGlideEffect :
+                            
+                            this.PlasmaGun(gameModel,plasmaGun,view);
+                            
+                            break;
+                        //III effect
+                        case BaseEffectPlusChargedShotEffect :
+                            
+                            //to pay if boolean choise is true
+                            this.PlasmaGun(gameModel,plasmaGun,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Heatseeker:
+                    
+                    Heatseeker heatseeker = (Heatseeker) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    
+                    this.HeatSeeker(gameModel,heatseeker,view);
+                    
+                    break;
+                
+                
+                case Whisper:
+                    
+                    Whisper whisper = (Whisper) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    
+                    this.Whisper(gameModel,whisper,view);
+                    
+                    break;
+                
+                case Hellion:
+                    
+                    Hellion hellion = (Hellion) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.Hellion(gameModel,hellion,view);
+                            
+                            break;
+                        //II effect
+                        case NanoTracerMode :
+                            
+                            //TO PAY
+                            this.Hellion(gameModel,hellion,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Flamethrower:
+                    
+                    Flamethrower flamethrower = (Flamethrower) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.Flamethrower(gameModel,flamethrower,view);
+                            
+                            break;
+                        //II effect
+                        case BarbecueMode :
+                            
+                            
+                            //TO PAY
+                            this.Flamethrower(gameModel,flamethrower,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Zx2:
+                    
+                    Zx2 zx2 = (Zx2) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.Zx2(gameModel,zx2,view);
+                            
+                            break;
+                        //II effect
+                        case ScannerMode :
+                            
+                            
+                            //NO TO PAY
+                            this.Zx2(gameModel,zx2,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case GrenadeLauncher:
+                    
+                    GrenadeLauncher grenadeLauncher = (GrenadeLauncher) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            this.GrenadeLauncher(gameModel,grenadeLauncher,view);
+                            
+                            break;
+                        //II effect
+                        case ExtraGrenadeEffect :
+                            
+                            this.GrenadeLauncher(gameModel,grenadeLauncher,view);
+                            
+                            break;
+                        
+                        case MoveTarget:
+                            
+                            this.GrenadeLauncher(gameModel,grenadeLauncher,view);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Shotgun:
+                    
+                    Shotgun shotgun = (Shotgun) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            this.Shotgun(gameModel,shotgun,view);
+                            
+                            break;
+                        //II effect
+                        case LongBarrelMode :
+                            
+                            //NO TO PAY
+                            this.Shotgun(gameModel,shotgun,view);
+                            
+                            break;
+                    }
+                    break;
+                
+                case RocketLauncher:
+                    
+                    RocketLauncher rocketLauncher = (RocketLauncher) functionController.weaponController.getCorrectWeapon(gameModel.getWeaponName());
+                    switch(this.functionModel.getGameModel().getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffectPlusFragmentingWarheadEffect :
+                            
+                            //TO PAY if BOOLEAN CHOISE
+                            this.RocketLauncher(gameModel,rocketLauncher,view);
+                            
                             break;
                         //II effect
                         case RocketJumpEffect :
@@ -2051,6 +2507,8 @@ public class WeaponController {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
+                    gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+                    gameModel.getAvailableEffect().add(WeaponsEffect.SliceAndDiceEffect);
                    
                     
                 } catch (NotValidDistance notValidDistance) {
@@ -2060,6 +2518,7 @@ public class WeaponController {
                     
                     functionController.mapErrorGestor();
                 }
+                break;
             case ShadowstepEffect:
                 
                 try{
@@ -2074,10 +2533,11 @@ public class WeaponController {
                     
                     functionController.mapErrorGestor();
                 }
-                gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
+              
+                break;
             case SliceAndDiceEffect:
                 
-                if(gameModel.getBeforeEffect()==WeaponsEffect.BaseEffect || gameModel.getBeforeEffect()==WeaponsEffect.ShadowstepEffect) {
+                if(gameModel.getBeforeEffect()==WeaponsEffect.BaseEffect) {
                     
                     try {
                         
@@ -2086,6 +2546,7 @@ public class WeaponController {
                         if (targetBase != targetSliceAndDice) {
                             
                             weapon.sliceAndDiceEffect(map, currentPlayer, targetSliceAndDice);
+                            gameModel.getAvailableEffect().remove(WeaponsEffect.SliceAndDiceEffect);
                             
                         } else {
                             
@@ -2101,7 +2562,8 @@ public class WeaponController {
                         
                         functionController.mapErrorGestor();
                     }
-                    gameModel.getAvailableEffect().remove(WeaponsEffect.SliceAndDiceEffect);
+                   
+                    break;
                 } else {
     
                     functionController.setErrorState("CAN'T USE ALTERNATIVE MODE IF NOT USED BASE MODE");
@@ -2143,7 +2605,7 @@ public class WeaponController {
                 try{
                     
                     destSquare = map.getSquare(view.getRow(),view.getColumn());
-                    targetPulverize=gameModel.getPlayerById(view.getTarget1());
+                    targetPulverize=gameModel.getPlayerById(view.getTarget2());
                     weapon.pulverizeMode(map,currentPlayer,targetPulverize,destSquare);
                 } catch (NotInSameDirection notInSameDirection) {
     

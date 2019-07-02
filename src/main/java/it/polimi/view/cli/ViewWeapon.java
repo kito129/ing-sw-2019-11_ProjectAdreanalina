@@ -77,6 +77,462 @@ public class ViewWeapon {
         
     }
     
+    public void viewPayEffect() throws RemoteException {
+        
+        GameModel gameModel = viewCLI.gameModel;
+        
+        switch (viewCLI.gameModel.getWeaponState()){
+            case LockRifle:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()) {
+                    //I effect
+                    case BaseEffect:
+    
+                        viewCLI.notifyController();
+    
+                        break;
+                    //II effect
+                    case SecondLockEffect:
+    
+                        int i3;
+                        int i4;
+    
+                        ArrayList<EnumColorCardAndAmmo> cost = new ArrayList<>();
+                        cost.add(EnumColorCardAndAmmo.RED);
+                        cost.add(EnumColorCardAndAmmo.YELLOW);
+                        PrintAmmo.print(cost);
+                        System.out.println("vuoi usare power up");
+                        viewCLI.setYesNoBooleanChoise(2);
+                        if (viewCLI.isBooleanChose2()) {
+    
+                            System.out.println("Select what power up want to use to pay");
+                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
+                            System.out.println("How Much power up wan to use?");
+                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+    
+                            switch (number) {
+                                case 1:
+                                    System.out.println("First:");
+                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                                    break;
+                                case 2:
+                                    System.out.println("First:");
+                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                                    System.out.println("Second:");
+                                    do {
+    
+                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                                    } while (i3 != viewCLI.getIndex2());
+                                    viewCLI.setIndex3(i3);
+    
+    
+                                    break;
+                                case 3:
+                                    System.out.println("First:");
+                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                                    System.out.println("Second:");
+                                    do {
+    
+                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                                    } while (i3 != viewCLI.getIndex2());
+                                    viewCLI.setIndex3(i3);
+                                    System.out.println("Third:");
+                                    do {
+    
+                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
+                                    viewCLI.setIndex4(i3);
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                viewCLI.notifyController();
+                break;
+                
+            case Electroscythe:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewElectroscytheBasicMode();
+                        
+                        break;
+                    //II effect
+                    case ReaperMode :
+                        
+                        viewElectroscytheReaperMode();
+                        
+                        break;
+                    
+                }
+                break;
+            
+            //TODO
+            case MachineGun:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseEffect :
+                        
+                        PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
+                        
+                        
+                        break;
+                    //II effect
+                    case FocusShotEffect :
+                        
+                        break;
+                    //III effect
+                    case TurretTripodEffect :
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case TractorBeam:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewTractorBeamBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case PunisherMode :
+                        
+                        viewTractorBeamPunisherMode(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case Thor:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseEffect :
+                        
+                        viewThorBasicEffect(gameModel);
+                        
+                        break;
+                    //II effect
+                    case ChainReactionEffect :
+                        
+                        viewThorChainReaction(gameModel);
+                        
+                        break;
+                    //III effect
+                    case HighVoltageEffect :
+                        
+                        viewThorHighVoltage(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case VortexCannon:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseEffect :
+                        
+                        viewVortexCannonBasicEffect(gameModel);
+                        
+                        break;
+                    //II effect
+                    case BlackHoleEffect :
+                        
+                        viewCannonVortexBlackHole(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case Furnace:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewFurnaceBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case CozyFireMode :
+                        
+                        viewFurnaceCozyFireMode(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case PlasmaGun:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseEffectPlusChargedShotEffect :
+                        
+                        viewPlasmaGunBasicEffectPlusChergedShoot(gameModel);
+                        
+                        break;
+                    //II effect
+                    case PhaseGlideEffect :
+                        
+                        viewPlasmaGunPhaseGlide(gameModel);
+                        
+                        break;
+                    //III effect
+                    
+                    
+                }
+                break;
+            
+            case Heatseeker:
+                
+                viewHeatseekerEffect(gameModel);
+                
+                break;
+            
+            
+            case Whisper:
+                
+                viewWhisperEffect(gameModel);
+                
+                break;
+            
+            case Hellion:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewHellionBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case NanoTracerMode :
+                        
+                        viewHellionNanoTracerMode(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case Flamethrower:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewFlamethrowerBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case BarbecueMode :
+                        
+                        viewFlamethrowerBarbecueMode(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case Zx2:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewZX2BasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case ScannerMode :
+                        
+                        viewZX2ScannerMode(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case GrenadeLauncher:
+                
+                //TODO
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseEffect :
+                        
+                        PrintEffectWeapon.printGrenadeLauncherBasicEffect(gameModel);
+                        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+                        viewCLI.notifyController();
+                        
+                        break;
+                    //II effect
+                    case ExtraGrenadeEffect :
+                        
+                        PrintEffectWeapon.printGrenadeLauncherExtraGrenade(gameModel);
+                        viewCLI.setSquareInput(2);
+                        viewCLI.notifyController();
+                        break;
+                    
+                    case MoveTarget:
+                        
+                        System.out.println("Move player");
+                        viewCLI.setSquareInput(1);
+                        viewCLI.notifyController();
+                        break;
+                    
+                }
+                break;
+            
+            case Shotgun:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewShotGunBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case LongBarrelMode :
+                        
+                        viewShotgunLongBarrelMode(gameModel);
+                        
+                        break;
+                }
+                break;
+            
+            case RocketLauncher:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    
+                    //I effect
+                    case BaseEffectPlusFragmentingWarheadEffect :
+                        
+                        viewRocketLauncherBaseEffectPlusFragmentingWarheadEffect(gameModel);
+                        
+                        break;
+                    
+                    //III effect
+                    case RocketJumpEffect :
+                        
+                        viewRocketLauncherRocketJump(gameModel);
+                        
+                        break;
+                }
+                break;
+            
+            case PowerGlove:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewPowerGloveBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case RocketFistMode :
+                        
+                        viewPowerGloveRocketFirstMode(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case Railgun:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewRailgunBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case PiercingMode :
+                        
+                        viewRailgunPiercingMode(gameModel);
+                        
+                        break;
+                    
+                }
+                break;
+            
+            case Shockwave:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewShockwaveBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case TsunamiMode :
+                        
+                        viewShockwaveTsunamiMode();
+                        
+                        break;
+                }
+                break;
+            
+            case Cyberblade:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseEffect :
+                        
+                        viewCyberbladeBasicEffect(gameModel);
+                        
+                        break;
+                    //II effect
+                    case ShadowstepEffect :
+                        
+                        viewCyberbladeShadowstep(gameModel);
+                        break;
+                    //III effect
+                    case SliceAndDiceEffect :
+                        
+                        viewCyberbladeSliceAndDice(gameModel);
+                        break;
+                }
+                break;
+            
+            case Sledgehammer:
+                
+                switch(viewCLI.gameModel.getActualWeaponEffect()){
+                    //I effect
+                    case BaseMode :
+                        
+                        viewSledgehammerBasicMode(gameModel);
+                        
+                        break;
+                    //II effect
+                    case PulverizeMode :
+                        
+                        viewSledgehammerPulverizeMode(gameModel);
+                        break;
+                }
+                break;
+        }
+        viewCLI.notifyController();
+        
+    }
+    //WEAPON
+    
     public void viewSelectShootInuput() throws RemoteException {
         
         GameModel gameModel = viewCLI.gameModel;
@@ -609,7 +1065,7 @@ public class ViewWeapon {
     
         PrintEffectWeapon.printPlasmaGunBasicEffect(gameModel);
         PrintEffectWeapon.printPlasmaGunChargedShot();
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         //get the player target
         System.out.println("Put the target");
         viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
@@ -656,7 +1112,7 @@ public class ViewWeapon {
         //get the player target 2
         viewCLI.setTarget2(viewCLI.getPlayerInput());
         System.out.println("Want to chose anohter Target?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
@@ -735,7 +1191,7 @@ public class ViewWeapon {
         System.out.println("Target 1: ");
         viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
         System.out.println("Want to chose anohter Target?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
@@ -745,7 +1201,7 @@ public class ViewWeapon {
             viewCLI.setTarget2(-1);
         }
         System.out.println("Want to chose anohter Target?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 3: ");
@@ -789,7 +1245,7 @@ public class ViewWeapon {
         System.out.println("target 1");
         viewCLI.setTarget1(viewCLI.getPlayerInput());
         System.out.println("Do you want to move the target in another square?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
             System.out.println("Destination Square: ");
             viewCLI.setSquareInput(1);
@@ -868,7 +1324,7 @@ public class ViewWeapon {
         PrintEffectWeapon.printRocketLauncherBasicEffect(gameModel);
         viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
         System.out.println("Do you want to move the target in anoher square?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
             System.out.println("Destination Square: ");
             viewCLI.setSquareInput(1);
@@ -879,7 +1335,7 @@ public class ViewWeapon {
             viewCLI.setColumn(-1);
         }
         System.out.println("Do you want to use fragment?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()) {
             PrintEffectWeapon.printRocketLauncherFragmentingWarhead();
         }
@@ -913,7 +1369,7 @@ public class ViewWeapon {
         System.out.println("Target 1: ");
         viewCLI.setTarget2(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
         System.out.println("Want to chose anohter Target?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
@@ -933,7 +1389,7 @@ public class ViewWeapon {
         System.out.println("Target 1: ");
         viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
         System.out.println("Want to chose anohter Target?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
@@ -943,7 +1399,7 @@ public class ViewWeapon {
             viewCLI.setTarget2(-1);
         }
         System.out.println("Want to chose anohter Target?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 3: ");
@@ -1018,7 +1474,7 @@ public class ViewWeapon {
         System.out.println("Target 1: ");
         viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
         System.out.println("Want to chose anohter Target?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
@@ -1039,7 +1495,7 @@ public class ViewWeapon {
         System.out.println("Target 1: ");
         viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
         System.out.println("Want to chose anohter Target?");
-        viewCLI.setYesNoBooleanChoise();
+        viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");

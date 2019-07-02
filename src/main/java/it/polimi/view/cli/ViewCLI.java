@@ -38,6 +38,7 @@ public class ViewCLI implements RemoteView, Serializable {
     private int index3=-1;
     private int index4=-1;
     private int index5=-1;
+    private int indexPay=-1;
     //attribute yes or no
     private boolean booleanChose;
     private boolean booleanChose2;
@@ -323,6 +324,17 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     @Override
+    public boolean isBooleanChose2 () {
+        
+        return booleanChose2;
+    }
+    
+    public void setBooleanChose2 (boolean booleanChose2) {
+        
+        this.booleanChose2 = booleanChose2;
+    }
+    
+    @Override
     public WeaponsEffect getWeaponsEffect () {
         
         return weaponsEffect;
@@ -357,7 +369,16 @@ public class ViewCLI implements RemoteView, Serializable {
         return booleanChose;
     }
     
+    @Override
+    public int getIndexPay () {
+        
+        return indexPay;
+    }
     
+    public void setIndexPay (int indexPay) {
+        
+        this.indexPay = indexPay;
+    }
     
     public void setBooleanChose (boolean booleanChose) {
         
@@ -563,6 +584,9 @@ public class ViewCLI implements RemoteView, Serializable {
             case SELECTEFFECT:
                 viewWeapon.viewSelectWeaponEffect();
                 break;
+            case PAYEFFECT:
+                viewWeapon.viewPayEffect();
+                break;
             case SELECTSHOOTINPUT:
                 viewWeapon.viewSelectShootInuput();
                 break;
@@ -659,7 +683,7 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    public void setYesNoBooleanChoise(){
+    public void setYesNoBooleanChoise(int i){
     
         Scanner input = new Scanner(System.in);
         int temp;
@@ -675,9 +699,17 @@ public class ViewCLI implements RemoteView, Serializable {
         }while (temp<0 || temp>1);
         
         if (temp==0){
-            setBooleanChose(true);
+            if (i==1) {
+                setBooleanChose(true);
+            } else if(i==2){
+                setBooleanChose2(true);
+            }
         } else {
-            setBooleanChose(false);
+            if (i==1) {
+                setBooleanChose(false);
+            } else if(i==2){
+                setBooleanChose2(false);
+            }
         }
     }
     
@@ -929,7 +961,7 @@ public class ViewCLI implements RemoteView, Serializable {
         setIndex(getUserInput(-1,gameModel.getWeaponToCharge().size()));
         
         System.out.println("Want to pay with ammo (NO) or also power up (YES)?");
-        setYesNoBooleanChoise();
+        setYesNoBooleanChoise(1);
         
         if (booleanChose){
             
