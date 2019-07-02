@@ -60,13 +60,12 @@ public class FunctionController {
                 new TimerTask() {
                     @Override
                     public void run() {
-                        int numb = functionModel.getGameModel().getPlayers(true).size();
-                       //here o the verify observe
+                       //here go the verify observer
                         if (functionModel.getGameModel().getPlayers(true).size() < 3)
                             timer.cancel();
                         else
                             startTimerCheckLobby();
-                        if (numb > functionModel.getGameModel().getPlayers(true).size())
+                        if (functionModel.getGameModel().getPlayers(true).size() > functionModel.getGameModel().getPlayers(true).size())
                             functionModel.getGameModel().setState(State.LOBBY);
                     }
                 }, 2000
@@ -161,15 +160,15 @@ public class FunctionController {
         System.out.println(gameModel.getActualPlayer().toString());
         
         
-          if (gameModel.getPlayers(true).size() < 2) {
+          if (gameModel.getPlayers(true).size() == 3) {
     
                 startTimerLobby();
                 startTimerCheckLobby();
             
             }else if(gameModel.getPlayers(true).size() == 5){
             
-                timer.cancel();
-                timerLobby.cancel();
+                //timer.cancel();
+                //timerLobby.cancel();
                 //now game can start
                 gameModel.setState(State.SPAWNPLAYER);
             
