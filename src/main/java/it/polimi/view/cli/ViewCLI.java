@@ -221,7 +221,12 @@ public class ViewCLI implements RemoteView, Serializable {
         
         System.out.println(gameModel.getMessageToAllView());
     }
-
+    
+    public it.polimi.view.cli.CLIPrintMap getCLIPrintMap () {
+        
+        return CLIPrintMap;
+    }
+    
     @Override
     public int getIndex () {
         
@@ -542,8 +547,9 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void run() throws RemoteException {
     
+        
         switch (gameModel.getState()) {
-           
+    
             case LOBBY:
                 viewLobby();
                 break;
@@ -552,8 +558,8 @@ public class ViewCLI implements RemoteView, Serializable {
             case SPAWNPLAYER:
                 viewSpawnPowerUp();
                 break;
-           case STARTTURN:
-               viewStartTurn();
+            case STARTTURN:
+                viewStartTurn();
                 break;
             case CHOSEACTION:
                 viewChoiseAction();
@@ -617,7 +623,7 @@ public class ViewCLI implements RemoteView, Serializable {
             case ERROR:
                 viewError();
                 break;
-        
+    
         }
     }
     
@@ -765,16 +771,21 @@ public class ViewCLI implements RemoteView, Serializable {
         for(Player a: gameModel.getPlayers(true)){
             System.out.println("- " + a.getId() +": "+ a.getName());
         }
-        notifyController();
+       
     }
     
     public void viewMenu(){
-        
-        PrintMenu.print();
+        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+            
+            PrintMenu.print();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
+        }
     }
     
     public  void viewSpawnPowerUp () throws RemoteException {
-
+        
         System.out.println();
         System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
         System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP NOT CHOSEN");
@@ -793,6 +804,7 @@ public class ViewCLI implements RemoteView, Serializable {
         
         setIndex(getUserInput(0,1));
         notifyController();
+
     
     }
     
@@ -801,20 +813,32 @@ public class ViewCLI implements RemoteView, Serializable {
         //create weapon view controller
         viewWeapon = new ViewWeapon(this);
         
-        CLIViewMap();
-        PrintPlayer.print(gameModel.getActualPlayer());
-        notifyController();
+        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+            
+            CLIViewMap();
+            PrintPlayer.print(gameModel.getActualPlayer());
+            notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
+        }
     }
     
     public void viewChoiseAction() throws RemoteException {
     
-        System.out.println("\nYOUR INFO:\n");
-        PrintPlayer.print(gameModel.getActualPlayer());
-        System.out.println();
-        PrintSelectAction.print();
-        setIndex(getUserInput(-1,4));
-        
-        notifyController();
+        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+            
+            System.out.println("\nYOUR INFO:\n");
+            PrintPlayer.print(gameModel.getActualPlayer());
+            System.out.println();
+            PrintSelectAction.print();
+            setIndex(getUserInput(-1,4));
+            
+            notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
+        }
         
         
     }
@@ -823,12 +847,18 @@ public class ViewCLI implements RemoteView, Serializable {
     
     //RUN action method
     public void viewRunSelection() throws RemoteException {
-
-        PrintRunAction.print();
-        setSquareInput(1);
-        
-        //notifica che hai preso i valori
-        notifyController();
+    
+        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+            
+            PrintRunAction.print();
+            setSquareInput(1);
+            
+            //notifica che hai preso i valori
+            notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
+        }
     }
     
     public void viewRun() throws RemoteException {

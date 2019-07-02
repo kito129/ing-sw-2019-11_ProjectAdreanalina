@@ -61,6 +61,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.lobby();
                     break;
                 case SPAWNPLAYER:
+                    functionController.drawnPowerUp();
                     functionController.respawnPlayerController(view);
                     break;
                 case STARTTURN:
