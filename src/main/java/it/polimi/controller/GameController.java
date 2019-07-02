@@ -55,7 +55,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
 
         //2 action and multiple power up use
         int action = 0;
-        while (action < 2) {
+        //while (action < 2) {
 
             switch (gameModel.getState()) {
                 case LOBBY:
@@ -130,7 +130,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case ERROR:
                     functionController.errorState(view);
             }
-        }
+        //}
     }
 
     @Override

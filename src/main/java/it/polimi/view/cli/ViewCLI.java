@@ -767,7 +767,7 @@ public class ViewCLI implements RemoteView, Serializable {
     //metodi di case
     public void viewLobby() throws RemoteException{
     
-        System.out.println("GAMERS IN THE LOBBY:");
+        System.out.println("GAMERS WAINTING IN THE LOBBY:");
         for(Player a: gameModel.getPlayers(true)){
             System.out.println("- " + a.getId() +": "+ a.getName());
         }
