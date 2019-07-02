@@ -1,6 +1,7 @@
 package it.polimi.controller;
 
 import it.polimi.model.*;
+import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
