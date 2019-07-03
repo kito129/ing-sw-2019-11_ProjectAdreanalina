@@ -23,6 +23,9 @@ public class GameModel implements Serializable {
     private Player actualPlayer;
     private KillShotTrack killShotTrack= new KillShotTrack();
     private ArrayList<Player> players = new ArrayList<>();
+    //first spawn
+    Player spawnPlayer;
+    int spawnedPlayer;
     //deck
     private AmmoDeck ammoDeck = new AmmoDeck();
     private PowerUpDeck powerUpDeck = new PowerUpDeck();
@@ -96,6 +99,15 @@ public class GameModel implements Serializable {
         this.beforeError = beforeError;
     }
     
+    public int getSpawnedPlayer () {
+        
+        return spawnedPlayer;
+    }
+    
+   public void incrementgetSpawnedPlayer(){
+        
+        spawnedPlayer++;
+   }
     
     public PowerUpCard getPowerUpSelected () {
         
@@ -116,7 +128,17 @@ public class GameModel implements Serializable {
         
         return beforeEffect;
     }
-
+    
+    public Player getSpawnPlayer () {
+        
+        return spawnPlayer;
+    }
+    
+    public void setSpawnPlayer (Player spawnPlayer) {
+        
+        this.spawnPlayer = spawnPlayer;
+    }
+    
     public void setBeforeEffect (WeaponsEffect beforeEffect) {
 
         this.beforeEffect = beforeEffect;

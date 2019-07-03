@@ -555,7 +555,8 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case MENU:
                 viewMenu();
-            case SPAWNPLAYER:
+                break;
+            case SELECTSPAWN:
                 viewSpawnPowerUp();
                 break;
             case STARTTURN:
@@ -786,24 +787,29 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public  void viewSpawnPowerUp () throws RemoteException {
         
-        System.out.println();
-        System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
-        System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP NOT CHOSEN");
-        System.out.println();
-        Player player = gameModel.getActualPlayer();
+        if (user.equals(gameModel.getSpawnPlayer().getName())) {
+            System.out.println();
+            System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
+            System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP NOT CHOSEN");
+            System.out.println();
+            Player player = gameModel.getActualPlayer();
     
-        System.out.println(player.toString());
-
-        System.out.println();
-        System.out.println("POWER UP TO CHOOSE:");
-        
-        PrintPowerUp.print(player.getPowerUpCardsSpawn(),false);
-
-        System.out.println();
-        System.out.println("MAKE YOUR CHOICE!");
-        
-        setIndex(getUserInput(0,1));
-        notifyController();
+            System.out.println(player.toString());
+    
+            System.out.println();
+            System.out.println("POWER UP TO CHOOSE:");
+    
+            PrintPowerUp.print(player.getPowerUpCardsSpawn(), false);
+    
+            System.out.println();
+            System.out.println("MAKE YOUR CHOICE!");
+    
+            setIndex(getUserInput(0, 1));
+            notifyController();
+        } else {
+            
+            System.out.println("WAITING FOR SPAWING OTHER PLAYER IN MAP");
+        }
 
     
     }

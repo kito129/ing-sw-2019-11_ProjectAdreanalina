@@ -45,7 +45,7 @@ public class FunctionController {
                     @Override
                     public void run() {
                         timerLobby.cancel();
-                        functionModel.getGameModel().setState(State.SPAWNPLAYER);
+                        functionModel.getGameModel().setState(State.PUTSPAWN);
                     }
                 }, delay
         );
@@ -61,12 +61,12 @@ public class FunctionController {
                     @Override
                     public void run() {
                        //here go the verify observer
-                        if (functionModel.getGameModel().getPlayers(true).size() < 3)
+                        if (functionModel.getGameModel().getPlayers(true).size() == 3)
                             timer.cancel();
                         else
                             startTimerCheckLobby();
-                        if (functionModel.getGameModel().getPlayers(true).size() > functionModel.getGameModel().getPlayers(true).size())
-                            functionModel.getGameModel().setState(State.LOBBY);
+                        if ( functionModel.getGameModel().getPlayers(true).size() ==5)
+                            functionModel.getGameModel().setState(State.PUTSPAWN);
                     }
                 }, 2000
         );
@@ -152,13 +152,9 @@ public class FunctionController {
         gameModel.getActualPlayer().getPlayerBoard().addPowerUp(new Teleporter(EnumColorCardAndAmmo.BLU));
         gameModel.getActualPlayer().getPlayerBoard().addPowerUp(new Newton(EnumColorCardAndAmmo.RED));
         gameModel.getActualPlayer().getPlayerBoard().addPowerUp(new TargetingScope(EnumColorCardAndAmmo.BLU));
-    
- 
- 
+   
+         
          */
-        //ricordati di sistemare la cosa del colore
-        System.out.println(gameModel.getActualPlayer().toString());
-        
         
           if (gameModel.getPlayers(true).size() == 3) {
     
@@ -170,27 +166,13 @@ public class FunctionController {
                 //timer.cancel();
                 //timerLobby.cancel();
                 //now game can start
-                gameModel.setState(State.SPAWNPLAYER);
+                gameModel.setState(State.PUTSPAWN);
             
             } else {
             
                 gameModel.setState(State.LOBBY);
             }
    
-    }
-    
-    public void drawnPowerUp () throws RemoteException {
-        
-        GameModel gameModel = this.functionModel.getGameModel();
-        Player actual = gameModel.getActualPlayer();
-            
-        ArrayList<PowerUpCard> tempPowerUp = new ArrayList<>();
-        tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
-        tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
-        System.out.println(tempPowerUp.toString());
-        actual.setPowerUpCardsSpawn(tempPowerUp);
-        
-        System.out.println(gameModel.getActualPlayer().toString());
     }
     
     
@@ -685,17 +667,59 @@ public class FunctionController {
         view.resetInput();
         functionModel.getGameModel().setState(State.CHOSEACTION);
     }
-       
     
+    public void drawnPowerUp () throws RemoteException {
+        
+        GameModel gameModel = this.functionModel.getGameModel();
+        
+        for(Player a :gameModel.getPlayers(true)){
+            ArrayList<PowerUpCard> tempPowerUp = new ArrayList<>();
+            tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
+            tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
+            System.out.println(tempPowerUp.toString());
+            a.setPowerUpCardsSpawn(tempPowerUp);
+        }
+        gameModel.setState(State.FIRSTSPAWN);
+    }
     
+    public void firstSpawn(RemoteView view) throws RemoteException {
+        
+        //put 2 power up for all palyer in game
+        
+        if (functionModel.getGameModel().getSpawnedPlayer()==functionModel.getGameModel().getPlayers(true).size()){
+            
+            //all player are spawned correctly. Now can start the turn.
+            functionModel.getGameModel().setState(State.STARTTURN);
+        } else {
+            
+            for (Player a : functionModel.getGameModel().getPlayers(true)) {
+        
+                if (a.getRow() == -1 && a.getColumn() == -1) {
+            
+                    functionModel.getGameModel().setSpawnPlayer(a);
+                }
+            }
+            functionModel.getGameModel().setState(State.SELECTSPAWN);
+        }
+    }
     
-    public void respawnPlayerController ( RemoteView view){
+    public void selectSpawn(RemoteView view) throws RemoteException {
+        
+        if(view.getUser().equals(functionModel.getGameModel().getSpawnPlayer().getName())){
+            
+            respawnPlayerController(functionModel.getGameModel().getSpawnPlayer(),view);
+            
+        } else {
+            //vedere cosa gare
+        }
+        
+    }
+    
+    public void respawnPlayerController (Player player, RemoteView view) throws RemoteException {
         
         int chosedPowerUp;
         EnumColorSquare colorSquare;
         PowerUpCard  powerUpCard;
-        Player player = this.functionModel.getGameModel().getActualPlayer();
-        
         
         try {
             
@@ -718,12 +742,12 @@ public class FunctionController {
                 
             } else {
                 
-                //errore di input
+                setErrorState("INPUT FOR SPAWN NOT CORRECT");
             }
             
-        } catch (RemoteException e) {
-        
         } catch (MapException e) {
+            
+            mapErrorGestor();
         
         }
     }
