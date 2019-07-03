@@ -20,14 +20,13 @@ public class CLIPrintMap implements Serializable {
     public  final String ANSI_YELLOW = "\u001B[33m";
     public  final String ANSI_BLACK = "\u001B[30m";
     public  final String ANSI_RESET = "\u001b[0m";
-    public ArrayList<ArrayList<ArrayList<ArrayList<String>>>> map;
+    public ArrayList<ArrayList<ArrayList<ArrayList<String>>>> mappa = new ArrayList<ArrayList<ArrayList<ArrayList<String>>>>();
     GameModel gameModel;
     
     
     public  CLIPrintMap(GameModel gameModel){
 
         this.gameModel = gameModel;
-        this.map = new ArrayList<ArrayList<ArrayList<ArrayList<String>>>>();
 
     }
     
@@ -38,6 +37,8 @@ public class CLIPrintMap implements Serializable {
         String black = ANSI_BLACK_BACKGROUND + " ";
         int row;
         int column;
+        boolean check1;
+        boolean check2;
         // H door ⇄
         // V door ⇅
 
@@ -52,43 +53,77 @@ public class CLIPrintMap implements Serializable {
 
             for (column = 0; column < 11; column++){
                 
-                if(((column > -1 && column < 3) || (column > 7 )) || (((row < 3) || (row > 7)))){
+                if(((column < 3) || (column > 7 )) || ((row < 3) || (row > 7))){
 
-
-                    //put vertical door
-                    if(row == 1 || row == 9){
+                    check1 = false;
+                    //put vertical door (top)
+                    if(row == 1 && (column > 3 && column < 7)){
 
                         for(Square sq : s.getLink()){
 
-                            if ((sq.getRow() == s.getRow()-1) || (sq.getRow() == s.getRow()+1)){
+                            if (sq.getRow() == s.getRow()-1){
 
                                 squares.get(row).add("⇅");
+                                check1 = true;
                             }
                         }
                     }
 
-                    //put horizontal door
-                    if(column == 1 || column == 9){
+                    //put vertical door (bottom)
+                    if(row == 9 && (column > 3 && column < 7)){
 
                         for(Square sq : s.getLink()){
 
-                            if ((sq.getColumn() == s.getColumn()-1) || (sq.getColumn() == s.getColumn()+1)){
+                            if (sq.getRow() == s.getRow()+1){
 
-                                squares.get(row).add("⇄");
+                                squares.get(row).add("⇅");
+                                check1 = true;
                             }
                         }
                     }
 
-                    //black border limit
-                    squares.get(row).add(black);
+                    //put horizontal door (left)
+                    if((row > 3 && row < 7) && column == 1){
+
+                        for(Square sq : s.getLink()){
+
+                            if (sq.getColumn() == s.getColumn()-1){
+
+                                squares.get(row).add("⇄");
+                                check1 = true;
+                            }
+                        }
+                    }
+
+                    //put horizontal door (right)
+                    if((row > 3 && row < 7) && column == 9){
+
+                        for(Square sq : s.getLink()){
+
+                            if (sq.getColumn() == s.getColumn()+1){
+
+                                squares.get(row).add("⇄");
+                                check1 = true;
+                            }
+                        }
+                    }
+
+                    if (!check1){
+
+                        //black border limit
+                        squares.get(row).add(black);
+                    }
+
                 } else {
 
+                    check2 = false;
                     //put player
                     if(s.getPlayers().size() == 1){
 
                         if(row == 5 && column == 5){
 
                             squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                            check2 = true;
                         }
                     }
 
@@ -97,10 +132,12 @@ public class CLIPrintMap implements Serializable {
                         if(row == 5 && column == 4){
 
                             squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 5 && column == 6){
 
                             squares.get(row).add(colorString(s.getPlayers().get(1), s.getColor()));
+                            check2 = true;
                         }
                     }
 
@@ -109,14 +146,17 @@ public class CLIPrintMap implements Serializable {
                         if(row == 4 && column == 5){
 
                             squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 6 && column == 4){
 
                             squares.get(row).add(colorString(s.getPlayers().get(1), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 6 && column == 6){
 
                             squares.get(row).add(colorString(s.getPlayers().get(2), s.getColor()));
+                            check2 = true;
                         }
                     }
 
@@ -125,18 +165,22 @@ public class CLIPrintMap implements Serializable {
                         if(row == 4 && column == 5){
 
                             squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 5 && column == 4){
 
                             squares.get(row).add(colorString(s.getPlayers().get(1), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 5 && column == 6){
 
                             squares.get(row).add(colorString(s.getPlayers().get(2), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 6 && column == 5){
 
                             squares.get(row).add(colorString(s.getPlayers().get(3), s.getColor()));
+                            check2 = true;
                         }
                     }
 
@@ -145,22 +189,27 @@ public class CLIPrintMap implements Serializable {
                         if(row == 4 && column == 5){
 
                             squares.get(row).add(colorString(s.getPlayers().get(0), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 5 && column == 4){
 
                             squares.get(row).add(colorString(s.getPlayers().get(1), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 5 && column == 6){
 
                             squares.get(row).add(colorString(s.getPlayers().get(2), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 6 && column == 5){
 
                             squares.get(row).add(colorString(s.getPlayers().get(3), s.getColor()));
+                            check2 = true;
                         }
                         if(row == 5 && column == 5){
 
                             squares.get(row).add(colorString(s.getPlayers().get(4), s.getColor()));
+                            check2 = true;
                         }
                     }
 
@@ -170,21 +219,24 @@ public class CLIPrintMap implements Serializable {
                         switch (s.getColor()){
 
                             case BLU:
-                                if(row == 3 && (column > 2)){
+                                if(row == 3){
 
                                     squares.get(row).add(colorStringAmmo(s.getColor(), "-"));
+                                    check2 = true;
                                 }
                                 break;
                             case RED:
                                 if(column == 3){
 
                                     squares.get(row).add(colorStringAmmo(s.getColor(), "|"));
+                                    check2 = true;
                                 }
                                 break;
                             case YELLOW:
                                 if(column == 7){
 
                                     squares.get(row).add(colorStringAmmo(s.getColor(), "|"));
+                                    check2 = true;
                                 }
                                 break;
                         }
@@ -195,25 +247,40 @@ public class CLIPrintMap implements Serializable {
                         if (row == 3 && column == 3){
 
                             squares.get(row).add(colorStringAmmo(s.getColor(), "a"));
+                            check2 = true;
                         }
                         if (row == 3 && column == 4){
 
                             squares.get(row).add(colorStringAmmo(s.getColor(), "m"));
+                            check2 = true;
                         }
                         if (row == 3 && column == 5){
 
                             squares.get(row).add(colorStringAmmo(s.getColor(), "m"));
+                            check2 = true;
                         }
                         if (row == 3 && column == 6){
 
                             squares.get(row).add(colorStringAmmo(s.getColor(), "o"));
+                            check2 = true;
                         }
                     }
+                    if(!check2){
 
-                    //color
-                    squares.get(row).add(colorToWrite);
+                        //color
+                        squares.get(row).add(colorToWrite);
+                    }
                 }
             }
+        }
+
+        for (int r = 0; r < 11; r++){
+
+            for(int c =0; c<11; c++){
+
+                System.out.print(squares.get(r).get(c));
+            }
+            System.out.println();
         }
         return squares;
     }
@@ -244,10 +311,10 @@ public class CLIPrintMap implements Serializable {
     
     public void createGrid(){
     
-        ArrayList<ArrayList<ArrayList<ArrayList<String>>>> map = this.map;
+        ArrayList<ArrayList<ArrayList<ArrayList<String>>>> mappa = this.mappa;
     
         for (int i =0;i<3;i++){
-            map.add(new ArrayList<>());
+            mappa.add(new ArrayList<>());
         }
     
         try {
@@ -255,10 +322,10 @@ public class CLIPrintMap implements Serializable {
             for (int column = 0; column < 4; column++) {
                 if (gameModel.getMap().existInMap(row, column)) {
                     
-                    map.get(row).add(createSquareBG(gameModel.getMap().getSquare(row, column)));
+                    mappa.get(row).add(createSquareBG(gameModel.getMap().getSquare(row, column)));
                 } else {
         
-                    map.get(row).add(createBlackSquare());
+                    mappa.get(row).add(createBlackSquare());
         
                 }
     
@@ -274,10 +341,10 @@ public class CLIPrintMap implements Serializable {
     
     public void printGrid() {
     
-        System.out.println(map.size());
-        System.out.println(map.get(0).size());
-        System.out.println(map.get(0).get(0).size());
-        System.out.println(map.get(0).get(0).get(0).size());
+        System.out.println(mappa.size());
+        System.out.println(mappa.get(0).size());
+        System.out.println(mappa.get(0).get(0).size());
+        System.out.println(mappa.get(0).get(0).get(0).size());
         int row;
         int column;
         int extRow;
@@ -287,7 +354,7 @@ public class CLIPrintMap implements Serializable {
         ArrayList<ArrayList<String>> temp2 = new ArrayList<>();
         ArrayList<String> temp3 = new ArrayList<>();
     
-        for (ArrayList<ArrayList<ArrayList<String>>> lists : map) {
+        for (ArrayList<ArrayList<ArrayList<String>>> lists : mappa) {
             temp1.addAll(lists);
         }
     

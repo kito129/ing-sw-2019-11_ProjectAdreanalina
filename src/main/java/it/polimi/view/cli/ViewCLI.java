@@ -72,7 +72,7 @@ public class ViewCLI implements RemoteView, Serializable {
         
         try {
             this.gameModel = gameController.getGameModel();
-            this.CLIPrintMap = new CLIPrintMap(gameModel);
+            this.CLIPrintMap = new CLIPrintMap(this.gameModel);
             if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
 
                 do {
@@ -537,6 +537,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void update(GameModel gameModel) throws RemoteException {
         
         this.gameModel = gameModel;
+        this.getCLIPrintMap().gameModel=gameModel;
         this.run();
     }
     
@@ -815,7 +816,7 @@ public class ViewCLI implements RemoteView, Serializable {
         
         if(gameModel.getActualPlayer().getName().equals(this.user)) {
             
-            CLIViewMap();
+            //CLIViewMap();
             PrintPlayer.print(gameModel.getActualPlayer());
             notifyController();
         } else {
@@ -870,7 +871,7 @@ public class ViewCLI implements RemoteView, Serializable {
             printMessageCurrent();
         }
         
-        //CLIViewMap();
+        CLIViewMap();
     
         notifyController();
         
