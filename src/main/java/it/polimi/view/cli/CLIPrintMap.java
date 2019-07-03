@@ -15,9 +15,6 @@ public class CLIPrintMap implements Serializable {
     public  final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     public  final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
     public  final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-    public  final String ANSI_BLUE = "\u001B[34m";
-    public  final String ANSI_RED = "\u001B[31m";
-    public  final String ANSI_YELLOW = "\u001B[33m";
     public  final String ANSI_BLACK = "\u001B[30m";
     public  final String ANSI_RESET = "\u001b[0m";
     public ArrayList<ArrayList<ArrayList<ArrayList<String>>>> mappa = new ArrayList<ArrayList<ArrayList<ArrayList<String>>>>();
@@ -396,38 +393,73 @@ public class CLIPrintMap implements Serializable {
      * print the map
      */
     public void printGrid() {
-        
-        ArrayList<ArrayList<ArrayList<String>>> temp1 = new ArrayList<>();
-        ArrayList<ArrayList<String>> temp2 = new ArrayList<>();
-        ArrayList<String> temp3 = new ArrayList<>();
-    
-        /*
-        for (ArrayList<ArrayList<ArrayList<String>>> a : mappa) {
 
-            temp1.addAll(a);
-        }
-    
-        for (ArrayList<ArrayList<String>> b : temp1) {
-        
-            temp2.addAll(b);
-        }
-    
-        for (ArrayList<String> c : temp2) {
-        
-            temp3.addAll(c);
-        }
-        System.out.println("end");
-        
-         */
-       
-        for (int sqRow=0;sqRow<3;sqRow++){
-            for (int intRow=0;intRow<11;intRow++) {
+        printLegendMap(gameModel.getPlayers(true));
+
+        for (int sqRow = 0; sqRow < 3; sqRow++){
+
+            for (int intRow = 0; intRow < 11; intRow++) {
+
                 for (int sqCol = 0; sqCol < 4; sqCol++) {
+
                     for (int intCol = 0; intCol < 11; intCol++) {
+
                         System.out.print(mappa.get(sqRow).get(sqCol).get(intRow).get(intCol));
                     }
                 }
                 System.out.println();
+            }
+        }
+    }
+
+    /**
+     * print legend of the map
+     */
+    public void printLegendMap(ArrayList<Player> players){
+
+        System.out.println();
+        System.out.println("LEGEND");
+        System.out.println("--------------------------------------------------------");
+        System.out.println();
+        System.out.println("ON A NORMAL SQUARE YOU CAN GRAB AN AMMO CARD:");
+        System.out.println("ON A GENERATIONS SQUARE YOU CAN GRAB A WEAPON CARD");
+        System.out.println("PLAYERS:");
+        printLegendPlayers(players);
+        System.out.println();
+        System.out.println("'ammo' MEANS THAT THERE IS AN AMMO CARD ON THAT SQUARE");
+        System.out.println("- BETWEEN TWO SQUARES MEANS THAT THERE IS A DOOR");
+        System.out.println("| BETWEEN TWO SQUARES MEANS THAT THERE IS A DOOR");
+        System.out.println("| ON A SQUARE MEANS THAT THAT IS A GENERATIONS SQUARE");
+        System.out.println();
+        System.out.println("--------------------------------------------------------");
+        System.out.println();
+    }
+
+    /**
+     * print legend of players
+     */
+    public void printLegendPlayers(ArrayList<Player> players){
+
+        for (Player p : players){
+
+            switch (p.getColor()){
+                case BLU:
+                    System.out.println("\tB = " + p.getName());
+                    break;
+                case GREEN:
+                    System.out.println("\tG = " + p.getName());
+                    break;
+                case GREY:
+                    System.out.println("\tW = " + p.getName());
+                    break;
+                case PINK:
+                    System.out.println("\tP = " + p.getName());
+                    break;
+                case YELLOW:
+                    System.out.println("\tY = " + p.getName());
+                    break;
+                default:
+                     break;
             }
         }
     }

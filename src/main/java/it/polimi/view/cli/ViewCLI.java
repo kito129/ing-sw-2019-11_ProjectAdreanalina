@@ -65,7 +65,6 @@ public class ViewCLI implements RemoteView, Serializable {
 
     public ViewCLI(){
 
-        
         connection();
         pingToServer();
         Game.print();
@@ -797,19 +796,6 @@ public class ViewCLI implements RemoteView, Serializable {
             
             PrintMenu.print();
             int choise = getUserInput(0,10);
-    
-    
-            System.out.println("WHAT MOVE DO YOU WANT TO MAKE? ");
-            System.out.println("1) CHOSE AN ACTION TO DO (RUN, GRAB OR SHOOT)!"); //printSelectMove
-            System.out.println("2) VIEW YOUR ATTRIBUTES"); //id, name, position and score (printPlayer)
-            System.out.println("3) VIEW YOUR PLAYERBOARD"); //damages, marks and ammo (printPlayerBoard)
-            System.out.println("4) VIEW YOUR WEAPONS"); //take weapons from ActualPlayer (printWeapon)
-            System.out.println("5) VIEW YOUR POWERUP"); //printPowerUp
-            System.out.println("6) VIEW YOUR AMMO"); //only ammo (printAmmo)
-            System.out.println("7) VIEW ANOTHER PLAYER'S ATTRIBUTES"); //id, name, position and score (printPlayer)
-            System.out.println("8) VIEW ANOTHER PLAYER'S PLAYERBOARD"); //damages, marks and ammo (printPlayerBoard)
-            System.out.println("9) VIEW OTHER WEAPONS ON THE MAP"); //take weapons from generation square (printWeapon)
-            System.out.println("10) VIEW THE MAP");
             
             switch (choise){
                 case 1:
@@ -847,7 +833,7 @@ public class ViewCLI implements RemoteView, Serializable {
                         
                         if (a.getClass().equals(GenerationSquare.class)){
                         
-                            System.out.println("Weapon in Square: " + a.getRow()+","+a.getColumn());
+                            System.out.println("WEAPONS IN SQUARE: " + a.getRow()+","+a.getColumn());
                             GenerationSquare b = (GenerationSquare) a;
                             PrintWeapon.printList(b.getWeaponList(),true);
                         }
