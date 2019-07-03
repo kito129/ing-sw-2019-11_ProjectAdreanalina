@@ -44,6 +44,16 @@ public class Shotgun extends WeaponCard {
         return longBarrelModeCost;
     }
 
+    /**
+     * Shoot a player who is on current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player you want to shoot.
+     * @param destSquare the square where shot player is moved
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void baseMode(Map map, Player currentPlayer, Player target1,Square destSquare)throws NotValidDistance, MapException {
 
         Square squareOfTargetPlayer=map.findPlayer(target1);
