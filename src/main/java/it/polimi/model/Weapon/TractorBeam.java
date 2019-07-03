@@ -56,7 +56,7 @@ public class TractorBeam extends WeaponCard {
         }else if(!map.isVisible(currentPlayerSquare,destSquare)){
 
             throw new NotVisibleTarget();
-        }else if((map.distance(target1Square,destSquare)>2)&&(map.distance(target1Square,destSquare)==-1)){
+        }else if((map.distance(target1Square,destSquare)>2)||(map.distance(target1Square,destSquare)==-1)){
 
             throw new NotValidDistance();
         }

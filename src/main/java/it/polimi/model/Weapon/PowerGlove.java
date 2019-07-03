@@ -83,14 +83,13 @@ public class PowerGlove extends WeaponCard {
             map.movePlayer(currentPlayer,squareOfTarget2Player);
             target1.multipleDamages(powerGloveDamages);
             target2.multipleDamages(powerGloveDamages);
-        } else if ((!(map.distance(currentPlayer, target1) == 1))||(!(map.distance(target1,target2)==1))){
+        } else if ((!(map.distance(currentPlayer, target1) == 1))||(!(map.distance(target1,target2)==1))||
+                (map.findPlayer(target2)==map.findPlayer(currentPlayer))){
 
             throw new NotValidDistance();
         }else if(!(map.sameDirection(currentPlayer,target1,target2))){
 
             throw new NotInSameDirection();
-        }else {
-            throw new NotValidDistance();
         }
     }
 }
