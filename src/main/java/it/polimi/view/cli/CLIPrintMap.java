@@ -40,6 +40,21 @@ public class CLIPrintMap implements Serializable {
         ArrayList<ArrayList<String >> squares = new ArrayList<ArrayList<String>>();
         String colorToWrite = createStringColor(s.getColor());
         String black = ANSI_BLACK_BACKGROUND + " ";
+        String hDoors= "-";
+        String vDoors= "|";
+        //for ammo and gen
+        boolean checkWeapon=false;
+        boolean checkAmmo=false;
+        if (s.getClass().equals(GenerationSquare.class)) {
+            
+            GenerationSquare gen = (GenerationSquare) s;
+             checkWeapon = gen.getWeaponList().size()>0;
+        } else if (s.getClass().equals(NormalSquare.class)) {
+            
+            NormalSquare nor = (NormalSquare) s;
+             checkAmmo = nor.containAmmoCard();
+        }
+       
         int row;
         int column;
         boolean check1;
@@ -68,7 +83,7 @@ public class CLIPrintMap implements Serializable {
 
                             if (sq.getRow() == s.getRow()-1){
 
-                                squares.get(row).add("⇅");
+                                squares.get(row).add(vDoors);
                                 check1 = true;
                             }
                         }
@@ -81,7 +96,7 @@ public class CLIPrintMap implements Serializable {
 
                             if (sq.getRow() == s.getRow()+1){
 
-                                squares.get(row).add("⇅");
+                                squares.get(row).add(vDoors);
                                 check1 = true;
                             }
                         }
@@ -94,7 +109,7 @@ public class CLIPrintMap implements Serializable {
 
                             if (sq.getColumn() == s.getColumn()-1){
 
-                                squares.get(row).add("⇄");
+                                squares.get(row).add(hDoors);
                                 check1 = true;
                             }
                         }
@@ -107,7 +122,7 @@ public class CLIPrintMap implements Serializable {
 
                             if (sq.getColumn() == s.getColumn()+1){
 
-                                squares.get(row).add("⇄");
+                                squares.get(row).add(hDoors);
                                 check1 = true;
                             }
                         }
@@ -220,54 +235,78 @@ public class CLIPrintMap implements Serializable {
 
                     //put a string in right position for generation square
                     if (s.getClass().equals(GenerationSquare.class)){
-
+                       
                         switch (s.getColor()){
 
                             case BLU:
                                 if(row == 3){
-
-                                    squares.get(row).add(colorStringAmmo(s.getColor(), "-"));
-                                    check2 = true;
+                                    
+                                    if (checkWeapon) {
+                                        
+                                        squares.get(row).add(colorStringAmmo(s.getColor(), "-"));
+                                        check2 = true;
+                                    }
                                 }
                                 break;
                             case RED:
                                 if(column == 3){
-
-                                    squares.get(row).add(colorStringAmmo(s.getColor(), "|"));
-                                    check2 = true;
+                                    
+                                    if (checkWeapon) {
+                                        
+                                        squares.get(row).add(colorStringAmmo(s.getColor(), "|"));
+                                        check2 = true;
+                                    }
                                 }
                                 break;
                             case YELLOW:
                                 if(column == 7){
-
-                                    squares.get(row).add(colorStringAmmo(s.getColor(), "|"));
-                                    check2 = true;
+                                    
+                                    if (checkWeapon) {
+                                        
+                                        squares.get(row).add(colorStringAmmo(s.getColor(), "|"));
+                                        check2 = true;
+                                    }
                                 }
                                 break;
                         }
 
                     }else {
-
+                       
+                        
                         //put string ammo in right position
                         if (row == 3 && column == 3){
-
-                            squares.get(row).add(colorStringAmmo(s.getColor(), "a"));
-                            check2 = true;
+    
+                            if (checkAmmo) {
+                                
+                                squares.get(row).add(colorStringAmmo(s.getColor(), "a"));
+                                check2 = true;
+                            }
                         }
-                        if (row == 3 && column == 4){
-
-                            squares.get(row).add(colorStringAmmo(s.getColor(), "m"));
-                            check2 = true;
+                        if (row == 3 && column == 4) {
+    
+                            if (checkAmmo) {
+                                
+                                squares.get(row).add(colorStringAmmo(s.getColor(), "m"));
+                                check2 = true;
+                            }
                         }
                         if (row == 3 && column == 5){
-
-                            squares.get(row).add(colorStringAmmo(s.getColor(), "m"));
-                            check2 = true;
+    
+                            if (checkAmmo) {
+    
+    
+                                squares.get(row).add(colorStringAmmo(s.getColor(), "m"));
+                                check2 = true;
+                            }
                         }
                         if (row == 3 && column == 6){
-
-                            squares.get(row).add(colorStringAmmo(s.getColor(), "o"));
-                            check2 = true;
+                            
+                        
+                            if (checkAmmo) {
+    
+                                squares.get(row).add(colorStringAmmo(s.getColor(), "o"));
+                                check2 = true;
+                            }
                         }
                     }
                     if(!check2){
@@ -357,55 +396,40 @@ public class CLIPrintMap implements Serializable {
      * print the map
      */
     public void printGrid() {
-    
-        System.out.println(mappa.size());
-        System.out.println(mappa.get(0).size());
-        System.out.println(mappa.get(0).get(0).size());
-        System.out.println(mappa.get(0).get(0).get(0).size());
-        int row;
-        int column;
-        int extRow;
-        int extColumn;
-        int max;
+        
         ArrayList<ArrayList<ArrayList<String>>> temp1 = new ArrayList<>();
         ArrayList<ArrayList<String>> temp2 = new ArrayList<>();
         ArrayList<String> temp3 = new ArrayList<>();
     
-        for (ArrayList<ArrayList<ArrayList<String>>> lists : mappa) {
+        /*
+        for (ArrayList<ArrayList<ArrayList<String>>> a : mappa) {
 
-            temp1.addAll(lists);
+            temp1.addAll(a);
         }
     
-        for (ArrayList<ArrayList<String>> arrayLists : temp1) {
+        for (ArrayList<ArrayList<String>> b : temp1) {
         
-            temp2.addAll(arrayLists);
+            temp2.addAll(b);
         }
-
-        int limit = 44;
-
-        for (int j = 0; j < 11; j++) {
-
-            for (int c = j; c < limit; c = c + 11){
-                
-                temp3.addAll(temp2.get(c));
-            }
-            limit = limit + 2;
+    
+        for (ArrayList<String> c : temp2) {
+        
+            temp3.addAll(c);
         }
+        System.out.println("end");
         
-        System.out.println();
-        
-        for (int fin = 0; fin < temp3.size(); fin++){
-
-            if (fin % 44 == 0){
-
+         */
+       
+        for (int sqRow=0;sqRow<3;sqRow++){
+            for (int intRow=0;intRow<11;intRow++) {
+                for (int sqCol = 0; sqCol < 4; sqCol++) {
+                    for (int intCol = 0; intCol < 11; intCol++) {
+                        System.out.print(mappa.get(sqRow).get(sqCol).get(intRow).get(intCol));
+                    }
+                }
                 System.out.println();
-                System.out.print(temp3.get(fin));
-            } else {
-
-                System.out.print(temp3.get(fin));
             }
         }
-        System.out.println();
     }
 
     /**

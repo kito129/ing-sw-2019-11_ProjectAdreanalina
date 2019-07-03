@@ -1363,17 +1363,17 @@ public class WeaponController {
         this.functionModel.getGameModel().setState(State.SHOOT);
         
     }
-    
-    
+
+    //WEAPON
+
     /**
-     * Lock rifleweapon.
+     * control Lock Rifle effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Lock Rifle.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
-    //WEAPON
     public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) throws RemoteException {
         
         Player currentPlayer = gameModel.getActualPlayer();
@@ -1441,13 +1441,13 @@ public class WeaponController {
                 break;
         }
     }
-    
+
     /**
-     * Electroscythe weapon.
+     * control Electroscythe effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Electroscythe.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon, RemoteView view) throws RemoteException{
@@ -1490,13 +1490,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Machine gun.
+     * control Machine Gun effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Machine Gun.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     //TODO andre
@@ -1663,14 +1663,14 @@ public class WeaponController {
         
          */
     }
-    
-    
+
+
     /**
-     * Tractor beam.
+     * control Tractor Beam effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Tractor Beam.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void TractorBeam(GameModel gameModel, TractorBeam weapon, RemoteView view) throws RemoteException {
@@ -1722,13 +1722,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Thor.
+     * control T.H.O.R. effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the T.H.O.R.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Thor(GameModel gameModel, Thor weapon, RemoteView view) throws RemoteException {
@@ -1837,13 +1837,13 @@ public class WeaponController {
                 break;
         }
     }
-    
+
     /**
-     * Vortex cannon.
+     * control Vortex Cannon effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Vortex Cannon.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) throws RemoteException {
@@ -1950,13 +1950,13 @@ public class WeaponController {
         }
         
     }
-    
+
     /**
-     * Furnace.
+     * control Furnace effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Furnace.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) throws RemoteException {
@@ -2010,13 +2010,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Plasma gun.
+     * control Plasma Gun effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Plasma Gun.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view) throws RemoteException  {
@@ -2077,13 +2077,13 @@ public class WeaponController {
                 break;
         }
     }
-    
+
     /**
-     * Heat seeker.
+     * control Heatseeker effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Heatseeker.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void HeatSeeker(GameModel gameModel, Heatseeker weapon, RemoteView view) throws RemoteException{
@@ -2112,13 +2112,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Whisper.
+     * control Whisper effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Whisper.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Whisper(GameModel gameModel, Whisper weapon, RemoteView view) throws RemoteException {
@@ -2147,13 +2147,13 @@ public class WeaponController {
                 break;
         }
     }
-    
+
     /**
-     * Hellion.
+     * control Hellion effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Hellion.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Hellion(GameModel gameModel, Hellion weapon, RemoteView view) throws RemoteException{
@@ -2206,13 +2206,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Flamethrower.
+     * control Flamethrower effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Flamethrower.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Flamethrower(GameModel gameModel, Flamethrower weapon,RemoteView view) throws RemoteException{
@@ -2284,13 +2284,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Zx 2.
+     * control ZX-2 effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the ZX-2.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Zx2(GameModel gameModel, Zx2 weapon,RemoteView view) throws RemoteException {
@@ -2373,14 +2373,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
-    
+
     /**
-     * Grenade launcher.
+     * control Grenade Launcher effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Grenade Launcher.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon, RemoteView view) throws RemoteException{
@@ -2466,13 +2465,13 @@ public class WeaponController {
                 break;
         }
     }
-    
+
     /**
-     * Shotgun.
+     * control Shotgun effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Shotgun.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Shotgun(GameModel gameModel, Shotgun weapon,RemoteView view) throws RemoteException{
@@ -2525,13 +2524,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Rocket launcher.
+     * control Rocket Launcher effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Rocket Launcher.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void RocketLauncher(GameModel gameModel, RocketLauncher weapon,RemoteView view) throws RemoteException {
@@ -2623,13 +2622,13 @@ public class WeaponController {
                 break;
         }
     }
-    
+
     /**
-     * Power glove.
+     * control Power Glove effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Power Glove.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void PowerGlove(GameModel gameModel, PowerGlove weapon,RemoteView view) throws RemoteException{
@@ -2689,13 +2688,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Rail gun.
+     * control Rail Gun effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Rail Gun.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void RailGun(GameModel gameModel, Railgun weapon,RemoteView view) throws RemoteException{
@@ -2761,13 +2760,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Shockwave.
+     * control Shockwave effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Shockwave.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Shockwave(GameModel gameModel, Shockwave weapon,RemoteView view) throws RemoteException{
@@ -2825,13 +2824,13 @@ public class WeaponController {
         //empty list
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
-    
+
     /**
-     * Cyberblade.
+     * control Cyberblade effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Cyberblade.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Cyberblade(GameModel gameModel, Cyberblade weapon,RemoteView view) throws RemoteException{
@@ -2919,13 +2918,13 @@ public class WeaponController {
                 }
         }
     }
-    
+
     /**
-     * Sledgehammer.
+     * control Sledgehammer effect and set right parameters.
      *
-     * @param gameModel the game model
-     * @param weapon    the weapon
-     * @param view      the view
+     * @param gameModel the game model of the game.
+     * @param weapon    the Sledgehammer.
+     * @param view      the view.
      * @throws RemoteException the remote exception
      */
     public void Sledgehammer(GameModel gameModel, Sledgehammer weapon,RemoteView view) throws RemoteException{

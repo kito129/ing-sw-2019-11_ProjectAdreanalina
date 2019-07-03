@@ -62,6 +62,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.lobby();
                     break;
                 case PUTSPAWN:
+                    functionModel.refreshMapAmmoCard();
+                    functionModel.refreshMapWeaponCard();
                     functionController.drawnPowerUp();
                     break;
                 case MENU:
