@@ -33,6 +33,9 @@ public class Shockwave extends WeaponCard {
                 "in Tsunami Mode: Deal 1 damage to all targets that are exactly 1 move away");
     }
 
+    /**
+     * get tsunamiModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getTsunamiModeCost() {
 
         return tsunamiModeCost;

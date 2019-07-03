@@ -36,6 +36,9 @@ public class Shotgun extends WeaponCard {
                 "in Long Barrel Mode: Deal 2 damage to 1 target on any square exactly one move away.");
     }
 
+    /**
+     * get longBarrelModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getLongBarrelModeCost() {
 
         return longBarrelModeCost;

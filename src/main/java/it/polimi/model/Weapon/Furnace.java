@@ -35,12 +35,25 @@ public class Furnace extends WeaponCard {
                 "in Cozy Fire Mode: Choose a square exactly one move away. Deal 1 damage and 1 mark to everyone on that square.");
     }
 
+    /**
+     * get cozyFireModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getCozyFireModeCost() {
 
         return cozyFireModeCost;
     }
 
-
+    /**
+     * Shoot all players on a room that current player can see (not his).
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param targetRoomColor the color of room chosen.
+     * @throws NotVisibleTarget
+     * @throws NotValidDistance
+     * @throws MapException
+     * @throws NoTargetInSquare
+     */
     public void baseMode(Map map, Player currentPlayer,EnumColorSquare targetRoomColor) throws NotVisibleTarget, NotValidDistance, MapException ,NoTargetInSquare{
 
         Square currentPlayerSquare= map.findPlayer(currentPlayer);
@@ -65,6 +78,16 @@ public class Furnace extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot all players on a square exactly one movement away from current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param targetSquare the square chosen.
+     * @throws NotValidDistance
+     * @throws MapException
+     * @throws NoTargetInSquare
+     */
     public void cozyFireMode(Map map,Player currentPlayer,Square targetSquare) throws NotValidDistance,MapException, NoTargetInSquare {
 
         Square currentPlayerSquare = map.findPlayer(currentPlayer);

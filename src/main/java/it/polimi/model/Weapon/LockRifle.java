@@ -35,11 +35,22 @@ public class LockRifle extends WeaponCard {
                 "with Second Lock: Deal 1 mark to a different target you can see.");
     }
 
+    /**
+     * get secondLockCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getSecondLockCost() {
 
         return secondLockCost;
     }
 
+    /**
+     * Shoot and mark a player who current player can see.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the first player you want to shoot.
+     * @throws NotVisibleTarget
+     */
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
 
         if(map.isVisible(currentPlayer,target1)){
@@ -54,6 +65,14 @@ public class LockRifle extends WeaponCard {
         }
     }
 
+    /**
+     * Mark a second player (different by the first) who current player can see.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target2 the second player you want to shoot.
+     * @throws NotVisibleTarget
+     */
     public void secondLockEffect(Map map, Player currentPlayer, Player target2) throws NotVisibleTarget {
 
         if (map.isVisible(currentPlayer, target2)){

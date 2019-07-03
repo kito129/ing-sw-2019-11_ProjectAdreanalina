@@ -39,6 +39,9 @@ public class TractorBeam extends WeaponCard {
                 "Notes: You can move a target even if you can't see it. The target ends up in a place where you can see and damage it. The moves do not have to be in the same direction.");
     }
 
+    /**
+     * get punisherModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getPunisherModeCost() {
 
         return punisherModeCost;

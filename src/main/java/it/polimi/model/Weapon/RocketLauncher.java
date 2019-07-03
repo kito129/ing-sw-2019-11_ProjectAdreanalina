@@ -42,11 +42,17 @@ public class RocketLauncher extends WeaponCard {
                 "Notes: If you use the rocket jump before the basic effect, you consider only your new square when determining if a target is legal. You can even move off a square so you can shoot someone on it. If you use the fragmenting warhead, you deal damage to everyone on the target's square before you move the target – your target will take 3 damage total.");
     }
 
+    /**
+     * get rocketJumpCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getRocketJumpCost() {
 
         return rocketJumpCost;
     }
 
+    /**
+     * get fragmentingWarheadCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getFragmentingWarheadCost() {
 
         return fragmentingWarheadCost;

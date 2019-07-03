@@ -37,11 +37,25 @@ public class Hellion extends WeaponCard {
                 "in Nano-Tracer Mode: Deal 1 damage to 1 target you can see at least 1 move away. Then give 2 marks to that target and everyone else on that square.");
     }
 
+    /**
+     * get nanoTracerModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getNanoTracerModeCost() {
 
         return nanoTracerModeCost;
     }
 
+    /**
+     * Shoot a player who current player can see and distant exactly one movement from his square and mark all player
+     * on the square just chosen.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param targetPlayer the player you want to shoot.
+     * @throws NotVisibleTarget
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void baseMode(Map map, Player currentPlayer,Player targetPlayer) throws NotVisibleTarget, NotValidDistance, MapException {
 
         if((map.isVisible(currentPlayer,targetPlayer)) && (map.distance(currentPlayer,targetPlayer)>0)){
@@ -63,6 +77,17 @@ public class Hellion extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot a player who current player can see and distant exactly one movement from his square and mark all player
+     * on the square just chosen.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param targetPlayer the player you want to shoot.
+     * @throws NotVisibleTarget
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void nanoTracerMode(Map map, Player currentPlayer,Player targetPlayer) throws NotVisibleTarget, NotValidDistance, MapException {
 
         if((map.isVisible(currentPlayer,targetPlayer)) && (map.distance(currentPlayer,targetPlayer)>0)){
@@ -86,12 +111,6 @@ public class Hellion extends WeaponCard {
             throw new NotValidDistance();
         }
     }
-
-
-
-
-
-
 }
 
 
