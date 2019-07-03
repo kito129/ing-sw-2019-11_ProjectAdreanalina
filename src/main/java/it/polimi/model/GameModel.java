@@ -282,7 +282,6 @@ public class GameModel implements Serializable {
     public void setPlayers(Player player){
        
         this.players.add(player);
-        actualPlayer = this.players.get(0);
     }
     
 

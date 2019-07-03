@@ -30,7 +30,7 @@ public class FunctionController {
         
         this.functionModel=functionModel;
         this.weaponController = new WeaponController(this);
-        this.delay=9000;
+        this.delay=100;
         
     }
     
@@ -156,16 +156,18 @@ public class FunctionController {
          
          */
         
-          if (gameModel.getPlayers(true).size() == 3) {
+          //if (gameModel.getPlayers(true).size() == 3) {
     
-                startTimerLobby();
-                startTimerCheckLobby();
+            //    startTimerLobby();
+              //  startTimerCheckLobby();
             
-            }else if(gameModel.getPlayers(true).size() == 5){
+            //}else
+                if(gameModel.getPlayers(true).size() == 5){
             
                 //timer.cancel();
                 //timerLobby.cancel();
                 //now game can start
+                gameModel.setActualPlayer(gameModel.getPlayers(true).get(0));
                 gameModel.setState(State.PUTSPAWN);
             
             } else {
@@ -284,6 +286,17 @@ public class FunctionController {
         functionModel.getGameModel().getWeaponToCharge().removeAll(functionModel.getGameModel().getWeaponToCharge());
     }
     
+    public void menu(RemoteView view) throws RemoteException {
+        
+        if (view.getIndex()==1){
+            
+            functionModel.getGameModel().setState(State.CHOSEACTION);
+            
+        } else {
+            
+            functionModel.getGameModel().setState(State.MENU);
+        }
+    }
     
     //state gestor and map error gestor
     public void setErrorState(String string){
@@ -676,7 +689,7 @@ public class FunctionController {
             ArrayList<PowerUpCard> tempPowerUp = new ArrayList<>();
             tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
             tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
-            System.out.println(tempPowerUp.toString());
+            //System.out.println(tempPowerUp.toString());
             a.setPowerUpCardsSpawn(tempPowerUp);
         }
         gameModel.setState(State.FIRSTSPAWN);
@@ -697,9 +710,9 @@ public class FunctionController {
                 if (a.getRow() == -1 && a.getColumn() == -1) {
             
                     functionModel.getGameModel().setSpawnPlayer(a);
+                    functionModel.getGameModel().setState(State.SELECTSPAWN);
                 }
             }
-            functionModel.getGameModel().setState(State.SELECTSPAWN);
         }
     }
     
@@ -708,6 +721,8 @@ public class FunctionController {
         if(view.getUser().equals(functionModel.getGameModel().getSpawnPlayer().getName())){
             
             respawnPlayerController(functionModel.getGameModel().getSpawnPlayer(),view);
+            functionModel.getGameModel().incrementgetSpawnedPlayer();
+            functionModel.getGameModel().setState(State.FIRSTSPAWN);
             
         } else {
             //vedere cosa gare
@@ -717,19 +732,19 @@ public class FunctionController {
     
     public void respawnPlayerController (Player player, RemoteView view) throws RemoteException {
         
-        int chosedPowerUp;
+        int chosenPowerUp;
         EnumColorSquare colorSquare;
         PowerUpCard  powerUpCard;
         
         try {
             
-            chosedPowerUp = view.getIndex();
+            chosenPowerUp = view.getIndex();
             
-            if(player.getPowerUpCardsSpawn().get(chosedPowerUp)!=null){
+            if(player.getPowerUpCardsSpawn().get(chosenPowerUp)!=null){
                 
                 //get the color to respawn
-                colorSquare = player.getPowerUpCardsSpawn().get(chosedPowerUp).getColorRespawn();
-                player.getPowerUpCardsSpawn().remove(chosedPowerUp);
+                colorSquare = player.getPowerUpCardsSpawn().get(chosenPowerUp).getColorRespawn();
+                player.getPowerUpCardsSpawn().remove(chosenPowerUp);
                 //add player on generation square of the color chosed
                 this.functionModel.getGameModel().getMap().addPlayerOnSquare(this.functionModel.getGameModel().getMap().getGenerationSquare(colorSquare),player);
                 
@@ -737,8 +752,6 @@ public class FunctionController {
                 powerUpCard = player.getPowerUpCardsSpawn().get(0);
                 player.getPlayerBoard().getPlayerPowerUps().add(powerUpCard);
                 player.getPowerUpCardsSpawn().remove(0);
-    
-                this.functionModel.getGameModel().setState(State.STARTTURN);
                 
             } else {
                 
