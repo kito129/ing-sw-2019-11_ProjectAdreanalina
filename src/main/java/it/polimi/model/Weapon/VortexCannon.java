@@ -9,10 +9,13 @@ import it.polimi.model.Exception.NotVisibleTarget;
 import java.util.ArrayList;
 
 
+/**
+ * The type Vortex cannon.
+ */
 public class VortexCannon extends WeaponCard {
 
     private ArrayList<EnumColorCardAndAmmo> blackHoleCost;
-
+    
     /**
      * Instantiates a new Vortex Cannon card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
@@ -38,12 +41,29 @@ public class VortexCannon extends WeaponCard {
                 "with Black Hole: Choose up to 2 other targets on the vortex or 1 move away from it. Move them onto the vortex and give them each 1 damage.\n" +
                 "Notes: The 3 targets must be different, but some might start on the same square. It is legal to choose targets on your square, on the vortex, or even on squares you can't see. They all end up on the vortex.");
     }
-
+    
+    /**
+     * get blackHoleCost
+     *
+     * @return the black hole cost
+     */
     public ArrayList<EnumColorCardAndAmmo> getBlackHoleCost() {
 
         return blackHoleCost;
     }
-
+    
+    /**
+     * Choose a square that current player can see (not his) where locate the vortex. Choose a player on vortex square or
+     * distant one movement by it, move him on it and shoot him.
+     *
+     * @param map           the map of the game.
+     * @param vortexSquare  the square where vortex is located.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotVisibleTarget
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void baseEffect(Map map,Square vortexSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance,MapException {
 
         Square currentPlayerSquare= map.findPlayer(currentPlayer);
@@ -75,7 +95,17 @@ public class VortexCannon extends WeaponCard {
             throw new NotValidDistance();
         }
     }
-
+    
+    /**
+     * Choose another one or two players on vortex square or distant one movement by it, move him on it and shoot him.
+     *
+     * @param map             the map of the game.
+     * @param vortexSquare    the square where vortex is located.
+     * @param currentPlayer   the current player.
+     * @param targetBlackHole the list of player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void blackHoleEffect(Map map,Square vortexSquare,Player currentPlayer,ArrayList<Player> targetBlackHole) throws NotValidDistance,MapException {
 
         Square targetSquare;

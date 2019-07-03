@@ -25,5 +25,5 @@ public class PrintPlayerBoard implements Serializable {
         System.out.println();
         System.out.print("AMMO: ");
         PrintEnumCardsAmmo.print(player.getPlayerBoard().getAmmo());
-        }
+    }
 }

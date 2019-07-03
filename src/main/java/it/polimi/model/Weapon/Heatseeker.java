@@ -29,7 +29,14 @@ public class Heatseeker extends WeaponCard {
                 "Notes: Yes, this can only hit targets you cannot see.");
     }
 
-
+    /**
+     * Shoot a player who current player can't see.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param targetPlayer the player you want to shoot.
+     * @throws VisibleTarget
+     */
     public void BaseEffect(Map map,Player currentPlayer,Player targetPlayer) throws VisibleTarget {
 
         if((map.isNotVisible(currentPlayer,targetPlayer))){

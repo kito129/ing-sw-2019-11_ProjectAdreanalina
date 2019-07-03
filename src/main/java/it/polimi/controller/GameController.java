@@ -57,13 +57,21 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
         int action = 0;
         //while (action < 2) {
 
-            switch (gameModel.getState()) {
+         switch (gameModel.getState()) {
                 case LOBBY:
                     functionController.lobby();
                     break;
-                case SPAWNPLAYER:
+                case PUTSPAWN:
                     functionController.drawnPowerUp();
-                    functionController.respawnPlayerController(view);
+                    break;
+                case MENU:
+                    functionController.menu(view);
+                    break;
+                case FIRSTSPAWN:
+                    functionController.firstSpawn(view);
+                    break;
+                case SELECTSPAWN:
+                    functionController.selectSpawn(view);
                     break;
                 case STARTTURN:
                     functionController.startTurn();
@@ -88,21 +96,28 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     break;
                 case SELECTGRAB:
                     functionController.grabActionController(view);
+                    break;
                 case GRAB:
                     functionController.grab(view);
+                    break;
                 case SELECTWEAPON:
                     functionController.weaponController.selectWeapon(view);
+                    break;
                 case SELECTEFFECT:
                     functionController.weaponController.selectWeaponEffect(view);
+                    break;
                 case PAYEFFECT:
                     functionController.weaponController.payWeaponExtraCost(view);
                     break;
                 case SELECTSHOOTINPUT:
                     functionController.weaponController.selectShootInput(view);
+                    break;
                 case SHOOT:
                     functionController.weaponController.afterShoot(view);
+                    break;
                 case ENDACTION:
-                    //TODO
+                    functionController.endActionSelect(view);
+                    break;
                 case SELECTRECHARGE:
                     functionController.selectRecharge(view,1,null);
                     break;
@@ -119,7 +134,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.scoringPlayerBoardController();
                     break;
                 case RESPWANPLAYER:
-                    functionController.respawnPlayerController( view);
+                    //
                     break;
                 case ENDTURN:
                     break;
@@ -129,8 +144,10 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     break;
                 case ERROR:
                     functionController.errorState(view);
+                default:
+                    break;
             }
-        //}
+       // }
     }
 
     @Override

@@ -3,8 +3,6 @@ package it.polimi.model.Weapon;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.model.Exception.NotValidDistance;
-import it.polimi.model.Exception.NotValidInput;
-import it.polimi.model.Exception.NotValidSquareException;
 
 
 import java.util.ArrayList;
@@ -45,16 +43,31 @@ public class Cyberblade extends WeaponCard {
                 "Notes: Combining all effects allows you to move onto a square and whack 2 people; or whack somebody, move, and whack somebody else; or whack 2 people and then move.");
     }
 
+    /**
+     * get shadowstepCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getShadowstepCost() {
 
         return shadowstepCost;
     }
 
+    /**
+     * get sliceAndDiceCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getSliceAndDiceCost() {
 
         return sliceAndDiceCost;
     }
 
+    /**
+     * Shoot a player who is on current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void baseEffect(Map map,Player currentPlayer,Player target1) throws NotValidDistance, MapException {
 
         if(map.findPlayer(currentPlayer)==map.findPlayer(target1)){
@@ -69,6 +82,15 @@ public class Cyberblade extends WeaponCard {
         }
     }
 
+    /**
+     * Moves the current player by one movement.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param destSquare the square where current player want to move on.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void shadowstepEffect(Map map, Player currentPlayer, Square destSquare) throws NotValidDistance, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
@@ -81,17 +103,17 @@ public class Cyberblade extends WeaponCard {
         }
     }
 
-
+    /**
+     * Shoot a second player (different by the first) that is on current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target2 the second player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void sliceAndDiceEffect(Map map,Player currentPlayer,Player target2)throws NotValidDistance,MapException{
 
         baseEffect(map,currentPlayer,target2);
-
     }
-
-
-
-
-
-
-
 }

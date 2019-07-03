@@ -34,14 +34,24 @@ public class Electroscythe extends WeaponCard {
         setOptional(false);
         setDescription("Basic Mode: Deal 1 damage to every other player on your square.\n" +
                 "in Reaper Mode: Deal 2 damage to every other player on your square");
-
     }
 
+    /**
+     * get reaperModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getReaperModeCost() {
 
         return reaperModeCost;
     }
 
+    /**
+     * Shoot all players that are on current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @throws NoTargetInSquare
+     * @throws MapException
+     */
     public void baseMode(Map map, Player currentPlayer) throws NoTargetInSquare, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
@@ -59,6 +69,14 @@ public class Electroscythe extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot all players that are on current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @throws NoTargetInSquare
+     * @throws MapException
+     */
     public void reaperMode(Map map,Player currentPlayer) throws NoTargetInSquare, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);

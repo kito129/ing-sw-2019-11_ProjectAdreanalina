@@ -9,10 +9,13 @@ import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
 
+/**
+ * The type Tractor beam.
+ */
 public class TractorBeam extends WeaponCard {
 
     private ArrayList<EnumColorCardAndAmmo> punisherModeCost;
-
+    
     /**
      * Instantiates a new Tractor Beam card.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
@@ -38,12 +41,28 @@ public class TractorBeam extends WeaponCard {
                 "in Punisher Mode: Choose a target 0, 1, or 2 moves away from you. Move the target to your square and deal 3 damage to it.\n" +
                 "Notes: You can move a target even if you can't see it. The target ends up in a place where you can see and damage it. The moves do not have to be in the same direction.");
     }
-
+    
+    /**
+     * get punisherModeCost
+     *
+     * @return the punisher mode cost
+     */
     public ArrayList<EnumColorCardAndAmmo> getPunisherModeCost() {
 
         return punisherModeCost;
     }
-
+    
+    /**
+     * Move a player by zero, one or two movements in a square that current player can see and shoot him.
+     *
+     * @param map           the map of the game.
+     * @param destSquare    the square where shot player is moved.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotVisibleTarget
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void baseMode(Map map,Square destSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance,MapException{
 
         Square currentPlayerSquare = map.findPlayer(currentPlayer);
@@ -61,7 +80,17 @@ public class TractorBeam extends WeaponCard {
             throw new NotValidDistance();
         }
     }
-
+    
+    /**
+     * Move a player who is in a square distant zero, one or two movements from current player's square on the current
+     * player's square and shoot him.
+     *
+     * @param map           the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void punisherMode(Map map,Player currentPlayer,Player target1) throws NotValidDistance, MapException {
 
         if((map.distance(currentPlayer,target1)<3)&&(map.distance(currentPlayer,target1)!=-1)){
@@ -77,14 +106,7 @@ public class TractorBeam extends WeaponCard {
 
             throw new NotValidDistance();
         }
-
-
-
-
-
     }
-
-
 }
 
 

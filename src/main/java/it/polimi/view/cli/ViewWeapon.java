@@ -19,31 +19,42 @@ public class ViewWeapon {
     //weapon method
     
     public void viewSelectWeapon() throws RemoteException {
-        
-        ArrayList<WeaponCard> weapons = viewCLI.gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
-        PrintEffectWeapon.printSelectWeapon();
-        PrintWeapon.printName(weapons);
-        
-        viewCLI.setIndex(viewCLI.getUserInput(0,weapons.size()));
-        viewCLI.notifyController();
+    
+        if(viewCLI.gameModel.getActualPlayer().getName().equals(viewCLI.user)) {
+            
+            ArrayList<WeaponCard> weapons = viewCLI.gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
+            PrintEffectWeapon.printSelectWeapon();
+            PrintWeapon.printName(weapons);
+            
+            viewCLI.setIndex(viewCLI.getUserInput(0,weapons.size()));
+            viewCLI.notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(viewCLI.gameModel,viewCLI);
+        }
         
     }
     
     public void viewSelectWeaponEffect() throws RemoteException {
-        
-        
-        
-        PrintEffectWeapon.printSelectWeaponEffect();
-        PrintWeapon.printEffectName(viewCLI.gameModel.getAvailableEffect());
     
-        viewCLI.setIndex2(viewCLI.getUserInput(-2,viewCLI.gameModel.getAvailableEffect().size()));
-        viewCLI.notifyController();
+        if(viewCLI.gameModel.getActualPlayer().getName().equals(viewCLI.user)) {
+        
+            PrintEffectWeapon.printSelectWeaponEffect();
+            PrintWeapon.printEffectName(viewCLI.gameModel.getAvailableEffect());
+        
+            viewCLI.setIndex2(viewCLI.getUserInput(-2,viewCLI.gameModel.getAvailableEffect().size()));
+            viewCLI.notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(viewCLI.gameModel,viewCLI);
+        }
         
         
     }
     
     public void viewShoot() throws RemoteException {
     
+        
         System.out.println("\n\n\n\n");
         
         System.out.println(viewCLI.gameModel.getState().toString());
@@ -77,1584 +88,930 @@ public class ViewWeapon {
         
     }
     
-    public void viewPayEffect() throws RemoteException {
-        
-        GameModel gameModel = viewCLI.gameModel;
+    public void payExtraEffect(GameModel gameModel){
+    
         int i3;
         int i4;
-        ArrayList<EnumColorCardAndAmmo> cost = new ArrayList<>();
-
-        switch (viewCLI.gameModel.getWeaponState()){
-            case LockRifle:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()) {
-                    //I effect
-                    case BaseEffect:
-    
-                        viewCLI.notifyController();
-    
-                        break;
-                    //II effect
-                    case SecondLockEffect:
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Second Lock Effect");
-                        cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-    
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-    
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-    
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-    
-    
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-    
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-    
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-                
-            case Electroscythe:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-
-                        viewCLI.notifyController();
-                        
-                        break;
-                    //II effect
-                    case ReaperMode :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Reaper Mode");
-                        cost.add(EnumColorCardAndAmmo.BLU);
-                        cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            //TODO
-            case MachineGun:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
-                        
-                        
-                        break;
-                    //II effect
-                    case FocusShotEffect :
-                        
-                        break;
-                    //III effect
-                    case TurretTripodEffect :
-                        
-                        break;
+        
+        System.out.println("\nDo you want to use your power up to pay this effect?");
+        viewCLI.setYesNoBooleanChoise(2);
+        if (viewCLI.isBooleanChose2()) {
+        
+            System.out.println("Select the power up you want to use to pay");
+            System.out.println();
+            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
+            System.out.println("How many power ups do you want to use?");
+            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+        
+            switch (number) {
+                case 1:
+                    System.out.println("First:");
+                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                    break;
+                case 2:
+                    System.out.println("First:");
+                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                    System.out.println("Second:");
+                    do {
                     
-                }
-                break;
-            
-            case TractorBeam:
+                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                    } while (i3 != viewCLI.getIndex2());
+                    viewCLI.setIndex3(i3);
                 
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-
-                        viewCLI.notifyController();
-                        
-                        break;
-                    //II effect
-                    case PunisherMode :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Punisher Mode");
-                        cost.add(EnumColorCardAndAmmo.RED);
-                        cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Thor:
                 
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-
-                    //I effect
-                    case BaseEffect :
-                        
-                        viewCLI.notifyController();
-                        
-                        break;
-                    //II effect
-                    case ChainReactionEffect :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Chain Reaction Effect");
-                        cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-
-                    //III effect
-                    case HighVoltageEffect :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("High Voltage Effect");
-                        cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case VortexCannon:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        viewCLI.notifyController();
-                        
-                        break;
-                    //II effect
-                    case BlackHoleEffect :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Black Hole Effect");
-                        cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Furnace:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case CozyFireMode :
-
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case PlasmaGun:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffectPlusChargedShotEffect :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Charged Shot Effect");
-                        cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case PhaseGlideEffect :
-
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Heatseeker:
-                
-                viewCLI.notifyController();
-                break;
-
-            case Whisper:
-                
-                viewCLI.notifyController();
-                break;
-            
-            case Hellion:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case NanoTracerMode :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Nano-Tracer Mode");
-                        cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Flamethrower:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case BarbecueMode :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Barbecue Mode");
-                        cost.add(EnumColorCardAndAmmo.YELLOW);
-                        cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Zx2:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case ScannerMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case GrenadeLauncher:
-
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case ExtraGrenadeEffect :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Extra Grenade Effect");
-                        cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
+                    break;
+                case 3:
+                    System.out.println("First:");
+                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                    System.out.println("Second:");
+                    do {
                     
-                    case MoveTarget:
-                        
-                        viewCLI.notifyController();
-                        break;
+                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                    } while (i3 != viewCLI.getIndex2());
+                    viewCLI.setIndex3(i3);
+                    System.out.println("Third:");
+                    do {
                     
-                }
-                break;
-            
-            case Shotgun:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case LongBarrelMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case RocketLauncher:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    
-                    //I effect
-                    case BaseEffectPlusFragmentingWarheadEffect :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Fragmenting Warhead Effect");
-                        cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                    
-                    //III effect
-                    case RocketJumpEffect :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Rocket Jump Effect");
-                        cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case PowerGlove:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case RocketFistMode :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Rocket Fist Mode");
-                        cost.add(EnumColorCardAndAmmo.BLU);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Railgun:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case PiercingMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Shockwave:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case TsunamiMode :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Tsunami Mode");
-                        cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Cyberblade:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case ShadowstepEffect :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //III effect
-                    case SliceAndDiceEffect :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Slice and Dice Effect");
-                        cost.add(EnumColorCardAndAmmo.YELLOW);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
-            
-            case Sledgehammer:
-                
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewCLI.notifyController();
-                        break;
-
-                    //II effect
-                    case PulverizeMode :
-
-                        PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
-                        System.out.println("Pulverize Mode");
-                        cost.add(EnumColorCardAndAmmo.RED);
-                        PrintAmmo.print(cost,2);
-                        System.out.println();
-                        System.out.println("Do you want to use your power up to pay this effect?");
-                        viewCLI.setYesNoBooleanChoise(2);
-                        if (viewCLI.isBooleanChose2()) {
-
-                            System.out.println("Select the power up you want to use to pay");
-                            System.out.println();
-                            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                            System.out.println("How many power ups do you want to use?");
-                            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-
-                            switch (number) {
-                                case 1:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    break;
-                                case 2:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-
-
-                                    break;
-                                case 3:
-                                    System.out.println("First:");
-                                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                                    System.out.println("Second:");
-                                    do {
-
-                                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i3 != viewCLI.getIndex2());
-                                    viewCLI.setIndex3(i3);
-                                    System.out.println("Third:");
-                                    do {
-
-                                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                                    viewCLI.setIndex4(i3);
-                                    break;
-                            }
-                        }
-                        viewCLI.notifyController();
-                        break;
-                }
-                break;
+                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
+                    viewCLI.setIndex4(i3);
+                    break;
+            }
         }
-        viewCLI.notifyController();
+    }
+    
+    public void viewPayEffect() throws RemoteException {
+    
+        if(viewCLI.gameModel.getActualPlayer().getName().equals(viewCLI.user)) {
+            
+            GameModel gameModel = viewCLI.gameModel;
+           
+            ArrayList<EnumColorCardAndAmmo> cost = new ArrayList<>();
+    
+            switch (viewCLI.gameModel.getWeaponState()){
+                case LockRifle:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()) {
+                        //I effect
+                        case BaseEffect:
+        
+                            viewCLI.notifyController();
+        
+                            break;
+                        //II effect
+                        case SecondLockEffect:
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Second Lock Effect");
+                            cost.add(EnumColorCardAndAmmo.RED);
+                            PrintAmmo.print(cost,2);
+                            System.out.println();
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                    
+                case Electroscythe:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+    
+                            viewCLI.notifyController();
+                            
+                            break;
+                        //II effect
+                        case ReaperMode :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Reaper Mode");
+                            cost.add(EnumColorCardAndAmmo.BLU);
+                            cost.add(EnumColorCardAndAmmo.RED);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                //TODO
+                case MachineGun:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
+                            
+                            
+                            break;
+                        //II effect
+                        case FocusShotEffect :
+                            
+                            break;
+                        //III effect
+                        case TurretTripodEffect :
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case TractorBeam:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+    
+                            viewCLI.notifyController();
+                            
+                            break;
+                        //II effect
+                        case PunisherMode :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Punisher Mode");
+                            cost.add(EnumColorCardAndAmmo.RED);
+                            cost.add(EnumColorCardAndAmmo.YELLOW);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Thor:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+    
+                        //I effect
+                        case BaseEffect :
+                            
+                            viewCLI.notifyController();
+                            
+                            break;
+                        //II effect
+                        case ChainReactionEffect :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Chain Reaction Effect");
+                            cost.add(EnumColorCardAndAmmo.BLU);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+    
+                        //III effect
+                        case HighVoltageEffect :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("High Voltage Effect");
+                            cost.add(EnumColorCardAndAmmo.BLU);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case VortexCannon:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            viewCLI.notifyController();
+                            
+                            break;
+                        //II effect
+                        case BlackHoleEffect :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Black Hole Effect");
+                            cost.add(EnumColorCardAndAmmo.RED);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Furnace:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case CozyFireMode :
+    
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case PlasmaGun:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffectPlusChargedShotEffect :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Charged Shot Effect");
+                            cost.add(EnumColorCardAndAmmo.BLU);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case PhaseGlideEffect :
+    
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Heatseeker:
+                    
+                    viewCLI.notifyController();
+                    break;
+    
+                case Whisper:
+                    
+                    viewCLI.notifyController();
+                    break;
+                
+                case Hellion:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case NanoTracerMode :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Nano-Tracer Mode");
+                            cost.add(EnumColorCardAndAmmo.RED);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Flamethrower:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case BarbecueMode :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Barbecue Mode");
+                            cost.add(EnumColorCardAndAmmo.YELLOW);
+                            cost.add(EnumColorCardAndAmmo.YELLOW);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Zx2:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case ScannerMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case GrenadeLauncher:
+    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+    
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case ExtraGrenadeEffect :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Extra Grenade Effect");
+                            cost.add(EnumColorCardAndAmmo.RED);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                        
+                        case MoveTarget:
+                            
+                            viewCLI.notifyController();
+                            break;
+                        
+                    }
+                    break;
+                
+                case Shotgun:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case LongBarrelMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case RocketLauncher:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        
+                        //I effect
+                        case BaseEffectPlusFragmentingWarheadEffect :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Fragmenting Warhead Effect");
+                            cost.add(EnumColorCardAndAmmo.YELLOW);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                        
+                        //III effect
+                        case RocketJumpEffect :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Rocket Jump Effect");
+                            cost.add(EnumColorCardAndAmmo.BLU);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case PowerGlove:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case RocketFistMode :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Rocket Fist Mode");
+                            cost.add(EnumColorCardAndAmmo.BLU);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Railgun:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case PiercingMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Shockwave:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case TsunamiMode :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Tsunami Mode");
+                            cost.add(EnumColorCardAndAmmo.YELLOW);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Cyberblade:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case ShadowstepEffect :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //III effect
+                        case SliceAndDiceEffect :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Slice and Dice Effect");
+                            cost.add(EnumColorCardAndAmmo.YELLOW);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+                
+                case Sledgehammer:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewCLI.notifyController();
+                            break;
+    
+                        //II effect
+                        case PulverizeMode :
+    
+                            PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
+                            System.out.println("Pulverize Mode");
+                            cost.add(EnumColorCardAndAmmo.RED);
+                            PrintAmmo.print(cost,2);
+                            payExtraEffect(gameModel);
+                            viewCLI.notifyController();
+                            break;
+                    }
+                    break;
+            }
+            viewCLI.notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(viewCLI.gameModel,viewCLI);
+        }
         
     }
     //WEAPON
     
     public void viewSelectShootInuput() throws RemoteException {
+    
+        if (viewCLI.gameModel.getActualPlayer().getName().equals(viewCLI.user)){
+           
         
-        GameModel gameModel = viewCLI.gameModel;
+            GameModel gameModel = viewCLI.gameModel;
+            
+            switch (viewCLI.gameModel.getWeaponState()){
+                case LockRifle:
+                    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            viewLockRifleBasicEffect(gameModel);
+                            
+                            
+                            break;
+                        //II effect
+                        case SecondLockEffect :
+                            
+                            viewLockRifleSecondLock(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Electroscythe:
         
-        switch (viewCLI.gameModel.getWeaponState()){
-            case LockRifle:
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewElectroscytheBasicMode();
+                            
+                            break;
+                        //II effect
+                        case ReaperMode :
+                            
+                            viewElectroscytheReaperMode();
+                            
+                            break;
+                        
+                    }
+                    break;
                 
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        viewLockRifleBasicEffect(gameModel);
-                        
-                        
-                        break;
-                    //II effect
-                    case SecondLockEffect :
-                        
-                        viewLockRifleSecondLock(gameModel);
-                        
-                        break;
-                    
-                }
-                break;
-            
-            case Electroscythe:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewElectroscytheBasicMode();
-                        
-                        break;
-                    //II effect
-                    case ReaperMode :
-                        
-                        viewElectroscytheReaperMode();
-                        
-                        break;
-                    
-                }
-                break;
-            
-            //TODO
-            case MachineGun:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
-                        
-                        
-                        break;
-                    //II effect
-                    case FocusShotEffect :
-                        
-                        break;
-                    //III effect
-                    case TurretTripodEffect :
-                        
-                        break;
-                    
-                }
-                break;
-            
-            case TractorBeam:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewTractorBeamBasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case PunisherMode :
-                        
-                        viewTractorBeamPunisherMode(gameModel);
-                        
-                        break;
-                    
-                }
-                break;
-            
-            case Thor:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        viewThorBasicEffect(gameModel);
-                        
-                        break;
-                    //II effect
-                    case ChainReactionEffect :
-                        
-                        viewThorChainReaction(gameModel);
-                        
-                        break;
-                    //III effect
-                    case HighVoltageEffect :
-                        
-                        viewThorHighVoltage(gameModel);
-                        
-                        break;
-                    
-                }
-                break;
-            
-            case VortexCannon:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        viewVortexCannonBasicEffect(gameModel);
-                        
-                        break;
-                    //II effect
-                    case BlackHoleEffect :
-                        
-                        viewCannonVortexBlackHole(gameModel);
-                        
-                        break;
-                    
-                }
-                break;
-            
-            case Furnace:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewFurnaceBasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case CozyFireMode :
-                        
-                        viewFurnaceCozyFireMode(gameModel);
-    
-                        break;
-                    
-                }
-                break;
-            
-            case PlasmaGun:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffectPlusChargedShotEffect :
-                        
-                        viewPlasmaGunBasicEffectPlusChergedShoot(gameModel);
+                //TODO
+                case MachineGun:
         
-                        break;
-                    //II effect
-                    case PhaseGlideEffect :
-                       
-                       viewPlasmaGunPhaseGlide(gameModel);
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            PrintEffectWeapon.printMachineGunBasicEffect(gameModel);
+                            
+                            
+                            break;
+                        //II effect
+                        case FocusShotEffect :
+                            
+                            break;
+                        //III effect
+                        case TurretTripodEffect :
+                            
+                            break;
                         
-                        break;
-                    //III effect
-                    
-                    
-                }
-                break;
-            
-            case Heatseeker:
+                    }
+                    break;
                 
-                viewHeatseekerEffect(gameModel);
-    
-                break;
-            
-            
-            case Whisper:
+                case TractorBeam:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewTractorBeamBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case PunisherMode :
+                            
+                            viewTractorBeamPunisherMode(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
                 
-                viewWhisperEffect(gameModel);
+                case Thor:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            viewThorBasicEffect(gameModel);
+                            
+                            break;
+                        //II effect
+                        case ChainReactionEffect :
+                            
+                            viewThorChainReaction(gameModel);
+                            
+                            break;
+                        //III effect
+                        case HighVoltageEffect :
+                            
+                            viewThorHighVoltage(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
                 
-                break;
+                case VortexCannon:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            viewVortexCannonBasicEffect(gameModel);
+                            
+                            break;
+                        //II effect
+                        case BlackHoleEffect :
+                            
+                            viewCannonVortexBlackHole(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Furnace:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewFurnaceBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case CozyFireMode :
+                            
+                            viewFurnaceCozyFireMode(gameModel);
+        
+                            break;
+                        
+                    }
+                    break;
+                
+                case PlasmaGun:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffectPlusChargedShotEffect :
+                            
+                            viewPlasmaGunBasicEffectPlusChergedShoot(gameModel);
             
-            case Hellion:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                       
-                       viewHellionBasicMode(gameModel);
+                            break;
+                        //II effect
+                        case PhaseGlideEffect :
+                           
+                           viewPlasmaGunPhaseGlide(gameModel);
+                            
+                            break;
+                        //III effect
                         
-                        break;
-                    //II effect
-                    case NanoTracerMode :
-    
-                        viewHellionNanoTracerMode(gameModel);
                         
-                        break;
+                    }
+                    break;
+                
+                case Heatseeker:
                     
-                }
-                break;
-            
-            case Flamethrower:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewFlamethrowerBasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case BarbecueMode :
-                        
-                        viewFlamethrowerBarbecueMode(gameModel);
-                        
-                        break;
+                    viewHeatseekerEffect(gameModel);
+        
+                    break;
+                
+                
+                case Whisper:
                     
-                }
-                break;
-            
-            case Zx2:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewZX2BasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case ScannerMode :
-                        
-                        viewZX2ScannerMode(gameModel);
-                        
-                        break;
+                    viewWhisperEffect(gameModel);
                     
-                }
-                break;
+                    break;
+                
+                case Hellion:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                           
+                           viewHellionBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case NanoTracerMode :
+        
+                            viewHellionNanoTracerMode(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Flamethrower:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewFlamethrowerBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case BarbecueMode :
+                            
+                            viewFlamethrowerBarbecueMode(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Zx2:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewZX2BasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case ScannerMode :
+                            
+                            viewZX2ScannerMode(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case GrenadeLauncher:
+    
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            PrintEffectWeapon.printGrenadeLauncherBasicEffect(gameModel);
+                            viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+                            viewCLI.notifyController();
+                            
+                            break;
+                        //II effect
+                        case ExtraGrenadeEffect :
+        
+                            PrintEffectWeapon.printGrenadeLauncherExtraGrenade(gameModel);
+                            viewCLI.setSquareInput(2);
+                            viewCLI.notifyController();
+                            break;
+                            
+                        case MoveTarget:
+                            
+                            System.out.println("Move player");
+                            viewCLI.setSquareInput(1);
+                            viewCLI.notifyController();
+                            break;
+        
+                    }
+                    break;
+                
+                case Shotgun:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewShotGunBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case LongBarrelMode :
+        
+                            viewShotgunLongBarrelMode(gameModel);
+                            
+                            break;
+                    }
+                    break;
+                
+                case RocketLauncher:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        
+                        //I effect
+                        case BaseEffectPlusFragmentingWarheadEffect :
+        
+                            viewRocketLauncherBaseEffectPlusFragmentingWarheadEffect(gameModel);
+        
+                            break;
+                            
+                        //III effect
+                        case RocketJumpEffect :
+                            
+                            viewRocketLauncherRocketJump(gameModel);
+                            
+                            break;
+                    }
+                    break;
+                
+                case PowerGlove:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewPowerGloveBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case RocketFistMode :
+                            
+                            viewPowerGloveRocketFirstMode(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Railgun:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewRailgunBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case PiercingMode :
+                            
+                            viewRailgunPiercingMode(gameModel);
+                            
+                            break;
+                        
+                    }
+                    break;
+                
+                case Shockwave:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewShockwaveBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case TsunamiMode :
+        
+                            viewShockwaveTsunamiMode();
+                            
+                            break;
+                    }
+                    break;
+                
+                case Cyberblade:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseEffect :
+                            
+                            viewCyberbladeBasicEffect(gameModel);
+                            
+                            break;
+                        //II effect
+                        case ShadowstepEffect :
+        
+                            viewCyberbladeShadowstep(gameModel);
+                            break;
+                        //III effect
+                        case SliceAndDiceEffect :
+        
+                            viewCyberbladeSliceAndDice(gameModel);
+                            break;
+                    }
+                    break;
+                
+                case Sledgehammer:
+        
+                    switch(viewCLI.gameModel.getActualWeaponEffect()){
+                        //I effect
+                        case BaseMode :
+                            
+                            viewSledgehammerBasicMode(gameModel);
+                            
+                            break;
+                        //II effect
+                        case PulverizeMode :
+        
+                            viewSledgehammerPulverizeMode(gameModel);
+                            break;
+                    }
+                    break;
+            }
+            viewCLI.notifyController();
             
-            case GrenadeLauncher:
-
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        PrintEffectWeapon.printGrenadeLauncherBasicEffect(gameModel);
-                        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
-                        viewCLI.notifyController();
-                        
-                        break;
-                    //II effect
-                    case ExtraGrenadeEffect :
+        } else {
     
-                        PrintEffectWeapon.printGrenadeLauncherExtraGrenade(gameModel);
-                        viewCLI.setSquareInput(2);
-                        viewCLI.notifyController();
-                        break;
-                        
-                    case MoveTarget:
-                        
-                        System.out.println("Move player");
-                        viewCLI.setSquareInput(1);
-                        viewCLI.notifyController();
-                        break;
-    
-                }
-                break;
-            
-            case Shotgun:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewShotGunBasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case LongBarrelMode :
-    
-                        viewShotgunLongBarrelMode(gameModel);
-                        
-                        break;
-                }
-                break;
-            
-            case RocketLauncher:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    
-                    //I effect
-                    case BaseEffectPlusFragmentingWarheadEffect :
-    
-                        viewRocketLauncherBaseEffectPlusFragmentingWarheadEffect(gameModel);
-    
-                        break;
-                        
-                    //III effect
-                    case RocketJumpEffect :
-                        
-                        viewRocketLauncherRocketJump(gameModel);
-                        
-                        break;
-                }
-                break;
-            
-            case PowerGlove:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewPowerGloveBasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case RocketFistMode :
-                        
-                        viewPowerGloveRocketFirstMode(gameModel);
-                        
-                        break;
-                    
-                }
-                break;
-            
-            case Railgun:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewRailgunBasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case PiercingMode :
-                        
-                        viewRailgunPiercingMode(gameModel);
-                        
-                        break;
-                    
-                }
-                break;
-            
-            case Shockwave:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewShockwaveBasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case TsunamiMode :
-    
-                        viewShockwaveTsunamiMode();
-                        
-                        break;
-                }
-                break;
-            
-            case Cyberblade:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseEffect :
-                        
-                        viewCyberbladeBasicEffect(gameModel);
-                        
-                        break;
-                    //II effect
-                    case ShadowstepEffect :
-    
-                        viewCyberbladeShadowstep(gameModel);
-                        break;
-                    //III effect
-                    case SliceAndDiceEffect :
-    
-                        viewCyberbladeSliceAndDice(gameModel);
-                        break;
-                }
-                break;
-            
-            case Sledgehammer:
-    
-                switch(viewCLI.gameModel.getActualWeaponEffect()){
-                    //I effect
-                    case BaseMode :
-                        
-                        viewSledgehammerBasicMode(gameModel);
-                        
-                        break;
-                    //II effect
-                    case PulverizeMode :
-    
-                        viewSledgehammerPulverizeMode(gameModel);
-                        break;
-                }
-                break;
+            PrintNotActualMenu.printMenu(viewCLI.gameModel,viewCLI);
         }
-        viewCLI.notifyController();
         
     }
     //WEAPON

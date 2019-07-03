@@ -33,12 +33,22 @@ public class Shockwave extends WeaponCard {
                 "in Tsunami Mode: Deal 1 damage to all targets that are exactly 1 move away");
     }
 
+    /**
+     * get tsunamiModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getTsunamiModeCost() {
 
         return tsunamiModeCost;
     }
 
-
+    /**
+     * Shoot a player distant exactly one movement by current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player you want to shoot.
+     * @throws NotValidDistance
+     */
     public void baseMode(Map map, Player currentPlayer,Player target1)throws NotValidDistance {
 
         if(map.distance(currentPlayer,target1)==1){
@@ -50,6 +60,15 @@ public class Shockwave extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot two players distant exactly one movement by current player's square and on different squares.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the first player you want to shoot.
+     * @param target2 the second player you want to shoot.
+     * @throws NotValidDistance
+     */
     public void baseMode(Map map, Player currentPlayer,Player target1,Player target2)throws NotValidDistance{
 
         if((map.distance(currentPlayer,target1)==1)&&(map.distance(currentPlayer,target2)==1)&&(map.distance(target1,target2)!=0)){
@@ -62,6 +81,16 @@ public class Shockwave extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot three players distant exactly one movement by current player's square and on different squares.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the first player you want to shoot.
+     * @param target2 the second player you want to shoot.
+     * @param target3 the thirs player you want to shoot.
+     * @throws NotValidDistance
+     */
     public void baseMode(Map map, Player currentPlayer,Player target1,Player target2,Player target3)throws NotValidDistance{
 
         if((map.distance(currentPlayer,target1)==1)&&(map.distance(currentPlayer,target2)==1)&&(map.distance(currentPlayer,target3)==1)
@@ -76,6 +105,14 @@ public class Shockwave extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot all players distant exactly one movement by current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param allPlayers the list of players you want to shoot.
+     * @throws NotValidDistance
+     */
     public void tsunamiMode(Map map,Player currentPlayer,ArrayList<Player> allPlayers) throws NotValidDistance{
 
         allPlayers.remove(currentPlayer);
@@ -93,5 +130,4 @@ public class Shockwave extends WeaponCard {
             throw new NotValidDistance();
         }
     }
-
 }

@@ -8,11 +8,19 @@ import it.polimi.view.RemoteView;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+/**
+ * The type Weapon controller.
+ */
 public class WeaponController {
     
     private FunctionController functionController;
     private FunctionModel functionModel;
     
+    /**
+     * Instantiates a new Weapon controller.
+     *
+     * @param functionController the function controller
+     */
     public WeaponController(FunctionController functionController){
         
         this.functionController = functionController;
@@ -20,6 +28,12 @@ public class WeaponController {
         
     }
     
+    /**
+     * Select weapon.
+     *
+     * @param view the view
+     * @throws RemoteException the remote exception
+     */
     public void selectWeapon(RemoteView view) throws RemoteException {
         
         int i;
@@ -267,6 +281,12 @@ public class WeaponController {
     }
     
     
+    /**
+     * Select weapon effect.
+     *
+     * @param view the view
+     * @throws RemoteException the remote exception
+     */
     public void selectWeaponEffect(RemoteView view) throws RemoteException {
         
         GameModel gameModel= this.functionModel.getGameModel();
@@ -275,8 +295,17 @@ public class WeaponController {
         i = view.getIndex2();
         if (i == -1) {
             
-            functionController.resetParameterWeapon();
+           
+            
+            try {
+                getCorrectWeapon(gameModel.getWeaponName()).setCharge(false);
+                
+            } catch (NotValidInput notValidInput) {
+               
+                functionController.setErrorState("UNABLE TO SET ARMY TO UN-CHARGE");
+            }
             view.resetInput();
+            functionController.resetParameterWeapon();
             gameModel.setState(State.CHOSEACTION);
             
         } else {
@@ -325,6 +354,13 @@ public class WeaponController {
         }
     }
     
+    /**
+     * Gets correct weapon.
+     *
+     * @param weaponName the weapon name
+     * @return the correct weapon
+     * @throws NotValidInput the not valid input
+     */
     public WeaponCard getCorrectWeapon(String weaponName) throws NotValidInput {
         
         for (WeaponCard a: this.functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons()){
@@ -338,13 +374,26 @@ public class WeaponController {
     }
     
     
-    
-    public void afterShoot(RemoteView view){
+    /**
+     * After shoot.
+     *
+     * @param view the view
+     * @throws RemoteException the remote exception
+     */
+    public void afterShoot(RemoteView view) throws RemoteException {
         
         if(functionModel.getGameModel().getAvailableEffect().size()==0){
             
+            try {
+                getCorrectWeapon(functionModel.getGameModel().getWeaponName()).setCharge(false);
+        
+            } catch (NotValidInput notValidInput) {
+        
+                functionController.setErrorState("UNABLE TO SET ARMY TO UN-CHARGE");
+            }
             //there are no more effect avaible
             functionController.resetParameterWeapon();
+            view.resetInput();
             functionModel.getGameModel().setState(State.CHOSEACTION);
         } else {
             
@@ -353,6 +402,12 @@ public class WeaponController {
         
     }
     
+    /**
+     * Pay weapon extra cost.
+     *
+     * @param view the view
+     * @throws RemoteException the remote exception
+     */
     public void payWeaponExtraCost(RemoteView view) throws RemoteException {
         
         GameModel gameModel = this.functionModel.getGameModel();
@@ -840,6 +895,12 @@ public class WeaponController {
         
     }
     
+    /**
+     * Select shoot input.
+     *
+     * @param view the view
+     * @throws RemoteException the remote exception
+     */
     public void selectShootInput(RemoteView view) throws RemoteException {
         
         GameModel gameModel = this.functionModel.getGameModel();
@@ -1297,12 +1358,21 @@ public class WeaponController {
         } catch (NotValidInput notValidInput) {
             notValidInput.printStackTrace();
         }
+        
         this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED: " + gameModel.getWeaponName() +" CORRECTLY");
         this.functionModel.getGameModel().setState(State.SHOOT);
         
     }
     
     
+    /**
+     * Lock rifleweapon.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     //WEAPON
     public void LockRifleweapon(GameModel gameModel, LockRifle weapon, RemoteView view) throws RemoteException {
         
@@ -1372,6 +1442,14 @@ public class WeaponController {
         }
     }
     
+    /**
+     * Electroscythe weapon.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void ElectroscytheWeapon(GameModel gameModel, Electroscythe weapon, RemoteView view) throws RemoteException{
         
         Map map= gameModel.getMap();
@@ -1413,6 +1491,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Machine gun.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     //TODO andre
     public void MachineGun(GameModel gameModel, MachineGun weapon, RemoteView view) throws RemoteException{
         
@@ -1579,6 +1665,14 @@ public class WeaponController {
     }
     
     
+    /**
+     * Tractor beam.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void TractorBeam(GameModel gameModel, TractorBeam weapon, RemoteView view) throws RemoteException {
         
         Map map= gameModel.getMap();
@@ -1629,6 +1723,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Thor.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Thor(GameModel gameModel, Thor weapon, RemoteView view) throws RemoteException {
         
         Map map= gameModel.getMap();
@@ -1736,6 +1838,14 @@ public class WeaponController {
         }
     }
     
+    /**
+     * Vortex cannon.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void VortexCannon (GameModel gameModel, VortexCannon weapon, RemoteView view) throws RemoteException {
         
         
@@ -1841,6 +1951,14 @@ public class WeaponController {
         
     }
     
+    /**
+     * Furnace.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Furnace(GameModel gameModel, Furnace weapon, RemoteView view) throws RemoteException {
         
         Map map = gameModel.getMap();
@@ -1893,6 +2011,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Plasma gun.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void PlasmaGun (GameModel gameModel, PlasmaGun weapon, RemoteView view) throws RemoteException  {
         
         Map map= gameModel.getMap();
@@ -1952,6 +2078,14 @@ public class WeaponController {
         }
     }
     
+    /**
+     * Heat seeker.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void HeatSeeker(GameModel gameModel, Heatseeker weapon, RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -1979,6 +2113,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Whisper.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Whisper(GameModel gameModel, Whisper weapon, RemoteView view) throws RemoteException {
         
         Map map = gameModel.getMap();
@@ -2006,6 +2148,14 @@ public class WeaponController {
         }
     }
     
+    /**
+     * Hellion.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Hellion(GameModel gameModel, Hellion weapon, RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -2057,6 +2207,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Flamethrower.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Flamethrower(GameModel gameModel, Flamethrower weapon,RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -2127,6 +2285,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Zx 2.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Zx2(GameModel gameModel, Zx2 weapon,RemoteView view) throws RemoteException {
         
         Map map = gameModel.getMap();
@@ -2209,6 +2375,14 @@ public class WeaponController {
     }
     
     
+    /**
+     * Grenade launcher.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void GrenadeLauncher(GameModel gameModel, GrenadeLauncher weapon, RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -2293,6 +2467,14 @@ public class WeaponController {
         }
     }
     
+    /**
+     * Shotgun.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Shotgun(GameModel gameModel, Shotgun weapon,RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -2344,6 +2526,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Rocket launcher.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void RocketLauncher(GameModel gameModel, RocketLauncher weapon,RemoteView view) throws RemoteException {
         
         Map map = gameModel.getMap();
@@ -2434,6 +2624,14 @@ public class WeaponController {
         }
     }
     
+    /**
+     * Power glove.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void PowerGlove(GameModel gameModel, PowerGlove weapon,RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -2492,6 +2690,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Rail gun.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void RailGun(GameModel gameModel, Railgun weapon,RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -2556,6 +2762,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Shockwave.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Shockwave(GameModel gameModel, Shockwave weapon,RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -2612,6 +2826,14 @@ public class WeaponController {
         gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
     
+    /**
+     * Cyberblade.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Cyberblade(GameModel gameModel, Cyberblade weapon,RemoteView view) throws RemoteException{
         
         Map map = gameModel.getMap();
@@ -2697,7 +2919,15 @@ public class WeaponController {
                 }
         }
     }
-
+    
+    /**
+     * Sledgehammer.
+     *
+     * @param gameModel the game model
+     * @param weapon    the weapon
+     * @param view      the view
+     * @throws RemoteException the remote exception
+     */
     public void Sledgehammer(GameModel gameModel, Sledgehammer weapon,RemoteView view) throws RemoteException{
         
         

@@ -36,11 +36,24 @@ public class Shotgun extends WeaponCard {
                 "in Long Barrel Mode: Deal 2 damage to 1 target on any square exactly one move away.");
     }
 
+    /**
+     * get longBarrelModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getLongBarrelModeCost() {
 
         return longBarrelModeCost;
     }
 
+    /**
+     * Shoot a player who is on current player's square and move he on a square distant exactly one movement by current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player you want to shoot.
+     * @param destSquare the square where shot player is moved.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void baseMode(Map map, Player currentPlayer, Player target1,Square destSquare)throws NotValidDistance, MapException {
 
         Square squareOfTargetPlayer=map.findPlayer(target1);
@@ -64,6 +77,14 @@ public class Shotgun extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot a player distant exactly one movement by current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player you want to shoot.
+     * @throws NotValidDistance
+     */
     public void longBarrelMode(Map map, Player currentPlayer, Player target1) throws NotValidDistance {
 
         if(map.distance(currentPlayer,target1)==1){

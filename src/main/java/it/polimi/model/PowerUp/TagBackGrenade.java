@@ -15,17 +15,16 @@ public class TagBackGrenade extends PowerUpCard {
     public TagBackGrenade(EnumColorCardAndAmmo colorCard) {
 
         super("TAGBACK GRENADE", colorCard);
-        setDescription("Puoi giocare questa carta quando ricevi un danno da un giocatore che puoi vedere.\n" +
-                "Dai 1 marchio a quel giocatore.");
+        setDescription("You may play this card when you receive damage from a player you can see. Give that player 1 mark.");
     }
 
     /**
-     * Gives to the current player who did damage, one mark of the damaged player's color.
+     * Give one mark to the player who shot before.
      *
      * @param map the map of the game.
-     * @param currentPlayer the player who did damage.
-     * @param targetPlayer the player who made the mark.
-     * @throws NotVisibleTarget if the damaged player can't see the current player who did the damage
+     * @param currentPlayer the current player who shoot before.
+     * @param targetPlayer the player you want to mark.
+     * @throws NotVisibleTarget
      */
     public void effect(Map map, Player currentPlayer, Player targetPlayer) throws NotVisibleTarget {
 
