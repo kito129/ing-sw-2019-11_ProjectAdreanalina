@@ -35,6 +35,9 @@ public class Zx2 extends WeaponCard {
                 "Notes: Remember that the 3 targets can be in 3 different rooms.");
     }
 
+    /**
+     * get scannerModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getScannerModeCost() {
 
         return scannerModeCost;

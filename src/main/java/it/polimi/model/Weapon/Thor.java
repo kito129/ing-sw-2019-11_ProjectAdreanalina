@@ -41,11 +41,17 @@ public class Thor extends WeaponCard {
                 "Notes: This card constrains the order in which you can use its effects. (Most cards don't.) Also note that each target must be a different player.");
     }
 
+    /**
+     * get chainReactionCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getChainReactionCost() {
 
         return chainReactionCost;
     }
 
+    /**
+     * get highVoltageCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getHighVoltageCost() {
 
         return highVoltageCost;

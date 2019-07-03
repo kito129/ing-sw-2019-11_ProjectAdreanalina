@@ -35,11 +35,23 @@ public class PowerGlove extends WeaponCard {
                 "Notes: In rocket fist mode, you're flying 2 squares in a straight line, punching 1 person per square.");
     }
 
+    /**
+     * get rocketFistModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getRocketFistModeCost() {
 
         return rocketFistModeCost;
     }
 
+    /**
+     * Shoot and mark a player on square distant exactly a movement from current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void baseMode(Map map, Player currentPlayer,Player target1) throws NotValidDistance, MapException {
 
         if(map.distance(currentPlayer,target1)==1){
@@ -56,6 +68,15 @@ public class PowerGlove extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot a player on square distant exactly a movement from current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void rocketFistMode(Map map,Player currentPlayer,Player target1)throws NotValidDistance,MapException {
 
         if ((map.distance(currentPlayer, target1) == 1)) {
@@ -71,6 +92,17 @@ public class PowerGlove extends WeaponCard {
 
     }
 
+    /**
+     * Shoot a second player (different by the first) on square distant exactly a movement from first shot player.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player just shot.
+     * @param target2 the second player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
+     * @throws NotInSameDirection
+     */
     public void rocketFistMode(Map map,Player currentPlayer,Player target1,Player target2)throws NotValidDistance,MapException,NotInSameDirection{
 
         if (((map.distance(currentPlayer, target1) == 1))&&(map.distance(target1,target2)==1)&&

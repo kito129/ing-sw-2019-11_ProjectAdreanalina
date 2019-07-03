@@ -27,9 +27,14 @@ public class CLIPrintMap implements Serializable {
     public  CLIPrintMap(GameModel gameModel){
 
         this.gameModel = gameModel;
-
     }
-    
+
+    /**
+     * Create the map for the view like an array of array of array of array: set in right position
+     * the color background, the players (initial letter), the doors, a sign corresponing to the generation
+     * square and the string ammo
+     * @param s     a square of the map
+     */
     public ArrayList<ArrayList<String >> createSquareBG (Square s){
         
         ArrayList<ArrayList<String >> squares = new ArrayList<ArrayList<String>>();
@@ -284,7 +289,10 @@ public class CLIPrintMap implements Serializable {
         }
         return squares;
     }
-    
+
+    /**
+     * Create a black square
+     */
     public ArrayList<ArrayList<String >> createBlackSquare (){
         
         ArrayList<ArrayList<String >> blackSquares = new ArrayList<ArrayList<String>>();
@@ -293,13 +301,15 @@ public class CLIPrintMap implements Serializable {
         int column;
     
         //create row
-        for (row =0;row<11;row++){
+        for (row = 0; row < 11; row++){
+
             blackSquares.add(new ArrayList<>());
         }
         
         //fill row with array list size 11 (column)
         
-        for (row =0;row<11;row++) {
+        for (row = 0; row < 11; row++) {
+
             for (column = 0; column < 11; column++) {
                 //all black square
                 blackSquares.get(row).add(new String(black));
@@ -307,19 +317,25 @@ public class CLIPrintMap implements Serializable {
         }
         return blackSquares;
     }
-    
-    
+
+    /**
+     * create the grid for the map
+     */
     public void createGrid(){
     
         ArrayList<ArrayList<ArrayList<ArrayList<String>>>> mappa = this.mappa;
     
-        for (int i =0;i<3;i++){
+        for (int i = 0; i < 3; i++){
+
             mappa.add(new ArrayList<>());
         }
     
         try {
-        for (int row =0;row<3;row++) {
+
+        for (int row = 0; row < 3; row++) {
+
             for (int column = 0; column < 4; column++) {
+
                 if (gameModel.getMap().existInMap(row, column)) {
                     
                     mappa.get(row).add(createSquareBG(gameModel.getMap().getSquare(row, column)));
@@ -332,13 +348,14 @@ public class CLIPrintMap implements Serializable {
             }
         }
         } catch (MapException e) {
+
             e.printStackTrace();
         }
-        
-        
     }
 
-    
+    /**
+     * print the map
+     */
     public void printGrid() {
     
         System.out.println(mappa.size());
@@ -355,6 +372,7 @@ public class CLIPrintMap implements Serializable {
         ArrayList<String> temp3 = new ArrayList<>();
     
         for (ArrayList<ArrayList<ArrayList<String>>> lists : mappa) {
+
             temp1.addAll(lists);
         }
     
@@ -362,44 +380,53 @@ public class CLIPrintMap implements Serializable {
         
             temp2.addAll(arrayLists);
         }
-       int limit =44;
-        for (int j=0;j<11;j++) {
-            for (int c=j;c<limit;c=c+11){
+
+        int limit = 44;
+
+        for (int j = 0; j < 11; j++) {
+
+            for (int c = j; c < limit; c = c + 11){
                 
                 temp3.addAll(temp2.get(c));
-                
-                
             }
-            limit=limit+2;
+            limit = limit + 2;
         }
         
         System.out.println();
         
-        for (int fin =0;fin<temp3.size();fin++){
-            if (fin%44==0){
+        for (int fin = 0; fin < temp3.size(); fin++){
+
+            if (fin % 44 == 0){
+
                 System.out.println();
                 System.out.print(temp3.get(fin));
             } else {
+
                 System.out.print(temp3.get(fin));
             }
         }
         System.out.println();
     }
 
-    
+    /**
+     * create and print the map
+     */
     public void viewMapNew() {
         
         createGrid();
         printGrid();
-        
-        
     }
-    
+
+    /**
+     * Set the right string color for background
+     * @param colorSquare           the color of square
+     */
     public String createStringColor(EnumColorSquare colorSquare){
     
-        String string = new String();
-        //BLU SQUARE
+        String string;
+
         switch (colorSquare) {
+
             case BLU:
                 string = ANSI_BLUE_BACKGROUND + " " ;
                 break;
@@ -457,7 +484,6 @@ public class CLIPrintMap implements Serializable {
             default:
                 break;
         }
-
         return s;
     }
    

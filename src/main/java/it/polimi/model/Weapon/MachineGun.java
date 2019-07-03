@@ -42,11 +42,17 @@ public class MachineGun extends WeaponCard {
                 "Notes: If you deal both additional points of damage, they must be dealt to 2 different targets. If you see only 2 targets, you deal 2 to each if you use both optional effects. If you use the basic effect on only 1 target, you can still use the the turret tripod to give it 1 additional damage.");
     }
 
+    /**
+     * get focusShotCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getFocusShotCost() {
 
         return focusShotCost;
     }
 
+    /**
+     * get turretTripodCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getTurretTripodCost() {
 
         return turretTripodCost;

@@ -35,11 +35,22 @@ public class GrenadeLauncher extends WeaponCard {
                 "Notes: For example, you can shoot a target, move it onto a square with other targets, then damage everyone including the first target. Or you can deal 2 to a main target, 1 to everyone else on that square, then move the main target. Or you can deal 1 to an isolated target and 1 to everyone on a different square. If you target your own square, you will not be moved or damaged.");
     }
 
+    /**
+     * get extraGrenadeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getExtraGrenadeCost() {
 
         return extraGrenadeCost;
     }
 
+    /**
+     * Shoot a player who current player can see.
+     *
+     * @param map the map of the game.
+     * @param target1 the player you want to shoot.
+     * @param currentPlayer the current player.
+     * @throws NotVisibleTarget
+     */
     public void baseEffect(Map map,Player target1,Player currentPlayer)throws NotVisibleTarget{
 
         if(map.isVisible(currentPlayer,target1)){
@@ -51,6 +62,15 @@ public class GrenadeLauncher extends WeaponCard {
         }
     }
 
+    /**
+     * Moves the shot player by one movement.
+     *
+     * @param map the map of the game.
+     * @param target1 the shot player.
+     * @param destSquare the square where shot player is moved.
+     * @throws MapException
+     * @throws NotValidDistance
+     */
     public void moveTarget(Map map,Player target1,Square destSquare)throws MapException,NotValidDistance{
 
         Square squareOfTarget=map.findPlayer(target1);
@@ -63,6 +83,16 @@ public class GrenadeLauncher extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot all players on a square that current player's can see.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param targetSquare the square chosen.
+     * @throws NoTargetInSquare
+     * @throws NotVisibleTarget
+     * @throws MapException
+     */
     public void extraGrenadeEffect(Map map, Player currentPlayer,Square targetSquare) throws NoTargetInSquare, NotVisibleTarget, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);

@@ -36,7 +36,10 @@ public class Sledgehammer extends WeaponCard {
                 "in Pulverize Mode: Deal 3 damage to 1 target on your square, then move that target 0, 1, or 2 squares in one direction.\n" +
                 "Notes: Remember that moves go through doors, but not walls.");
     }
-    
+
+    /**
+     * get pulverizeModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getPulverizeModeCost () {
         
         return pulverizeModeCost;

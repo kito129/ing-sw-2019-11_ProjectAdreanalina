@@ -39,6 +39,9 @@ public class VortexCannon extends WeaponCard {
                 "Notes: The 3 targets must be different, but some might start on the same square. It is legal to choose targets on your square, on the vortex, or even on squares you can't see. They all end up on the vortex.");
     }
 
+    /**
+     * get blackHoleCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getBlackHoleCost() {
 
         return blackHoleCost;

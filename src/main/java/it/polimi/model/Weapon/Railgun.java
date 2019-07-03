@@ -37,12 +37,24 @@ public class Railgun extends WeaponCard {
                 "Notes: Basically, you're shooting in a straight line and ignoring walls. You don't have to pick a target on the other side of a wall – it could even be someone on your own square – but shooting through walls sure is fun. There are only 4 cardinal directions. You imagine facing one wall or door, square-on, and firing in that direction. Anyone on a square in that direction (including yours) is a valid target. In piercing mode, the 2 targets can be on the same square or on different squares.");
     }
 
+    /**
+     * get piercingModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getPiercingModeCost() {
 
         return piercingModeCost;
     }
 
-
+    /**
+     * Shoot a player on a cardinal direction.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the player you want to shoot.
+     * @param direction the direction chosen for shoot the target.
+     * @throws NotInDirection
+     * @throws NotValidCardinalDirection
+     */
     public void baseMode(Map map, Player currentPlayer, Player target1, EnumCardinalDirection direction) throws NotInDirection, NotValidCardinalDirection {
 
         if((direction==EnumCardinalDirection.N)||(direction==EnumCardinalDirection.E)||(direction==EnumCardinalDirection.S)

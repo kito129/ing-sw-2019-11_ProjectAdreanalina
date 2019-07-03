@@ -172,17 +172,14 @@ public class PrintEffectWeapon implements Serializable {
         System.out.println("In which square do you want to move? (1 or 2 movements) (enter row and column)");
     }
 
-
-/**
+    /**
      * Print the effect of this weapon
-   
- */
+     */
     public static void printPlasmaGunChargedShot(){
 
         System.out.println();
         System.out.println("Do you want to use also Charged Shoot");
     }
-    
 
     //WHISPER
     /**

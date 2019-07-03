@@ -22,7 +22,6 @@ public class PrintPlayer implements Serializable {
         PrintPowerUp.print(player.getPlayerBoard().getPlayerPowerUps(),false);
         System.out.println("WEAPONS: ");
         PrintWeapon.printList(player.getPlayerBoard().getPlayerWeapons(),false);
-        
     }
 
     /**

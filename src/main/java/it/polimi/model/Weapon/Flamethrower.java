@@ -40,13 +40,24 @@ public class Flamethrower extends WeaponCard {
                 "Notes: This weapon cannot damage anyone in your square. However, it can sometimes damage a target you can't see – the flame won't go through walls, but it will go through doors. Think of it as a straight-line blast of flame that can travel 2 squares in a cardinal direction.");
     }
 
+    /**
+     * get barbecueModeCost
+     */
     public ArrayList<EnumColorCardAndAmmo> getBarbecueModeCost() {
 
         return barbecueModeCost;
     }
 
-
-
+    /**
+     * Shoot one or two players on square distant a movement from current player's square and first target square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the first player you want to shoot.
+     * @param target2 the second player you want to shoot.
+     * @throws NotValidDistance
+     * @throws NotInSameDirection
+     */
     public void baseMode(Map map, Player currentPlayer,Player target1,Player target2) throws NotValidDistance, NotInSameDirection {
 
         if((map.distance(currentPlayer,target1)==1)&&(map.distance(target1,target2)==1)
@@ -63,6 +74,14 @@ public class Flamethrower extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot one player on square distant a movement from current player's square.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1 the first player you want to shoot.
+     * @throws NotValidDistance
+     */
     public void baseMode(Map map,Player currentPlayer,Player target1)throws NotValidDistance{
 
         if ((map.distance(currentPlayer, target1) == 1)) {
@@ -74,6 +93,18 @@ public class Flamethrower extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot all players on chosen squares.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param targetSquare1 the first square chosen.
+     * @param targetSquare2 the second square chosen.
+     * @throws MapException
+     * @throws NoTargetInSquare
+     * @throws NotValidDistance
+     * @throws NotInSameDirection
+     */
     public void barbecueMode(Map map,Player currentPlayer,Square targetSquare1,Square targetSquare2) throws MapException,NoTargetInSquare,NotValidDistance, NotInSameDirection{
 
         Square squareOfCurrentPlayer=map.findPlayer(currentPlayer);
@@ -105,9 +136,6 @@ public class Flamethrower extends WeaponCard {
             throw new NotInSameDirection();
         }
     }
-
-
-
 }
 
 
