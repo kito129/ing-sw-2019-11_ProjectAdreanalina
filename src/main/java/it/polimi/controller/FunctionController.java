@@ -802,8 +802,8 @@ public class FunctionController {
     
     public void endTurnGestor(){
     
-    
-    
+        //get all dead player
+        
     
     }
     
