@@ -23,6 +23,8 @@ public class GameModel implements Serializable {
     private Player actualPlayer;
     private KillShotTrack killShotTrack= new KillShotTrack();
     private ArrayList<Player> players = new ArrayList<>();
+    //action count
+    int actionCount;
     //first spawn
     Player spawnPlayer;
     int spawnedPlayer;
@@ -71,6 +73,21 @@ public class GameModel implements Serializable {
         }
         return null;
         
+    }
+    
+    public int getActionCount () {
+        
+        return actionCount;
+    }
+    
+    public void incrementActionCount(){
+        
+        this.actionCount++;
+    }
+    
+    public void resetActionCount(){
+        
+        this.actionCount=0;
     }
     
     private void populateColor(){

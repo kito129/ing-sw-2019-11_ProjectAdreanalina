@@ -9,10 +9,13 @@ import it.polimi.model.Exception.NotVisibleTarget;
 import java.util.ArrayList;
 
 
+/**
+ * The type Vortex cannon.
+ */
 public class VortexCannon extends WeaponCard {
 
     private ArrayList<EnumColorCardAndAmmo> blackHoleCost;
-
+    
     /**
      * Instantiates a new Vortex Cannon card.
      * Sets the field color to RED calling the constructor of weapon card (the super class).
@@ -38,15 +41,28 @@ public class VortexCannon extends WeaponCard {
                 "with Black Hole: Choose up to 2 other targets on the vortex or 1 move away from it. Move them onto the vortex and give them each 1 damage.\n" +
                 "Notes: The 3 targets must be different, but some might start on the same square. It is legal to choose targets on your square, on the vortex, or even on squares you can't see. They all end up on the vortex.");
     }
-
+    
     /**
      * get blackHoleCost
+     *
+     * @return the black hole cost
      */
     public ArrayList<EnumColorCardAndAmmo> getBlackHoleCost() {
 
         return blackHoleCost;
     }
-
+    
+    /**
+     * Base effect.
+     *
+     * @param map           the map
+     * @param vortexSquare  the vortex square
+     * @param currentPlayer the current player
+     * @param target1       the target 1
+     * @throws NotVisibleTarget the not visible target
+     * @throws NotValidDistance the not valid distance
+     * @throws MapException     the map exception
+     */
     public void baseEffect(Map map,Square vortexSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance,MapException {
 
         Square currentPlayerSquare= map.findPlayer(currentPlayer);
@@ -78,7 +94,17 @@ public class VortexCannon extends WeaponCard {
             throw new NotValidDistance();
         }
     }
-
+    
+    /**
+     * Black hole effect.
+     *
+     * @param map             the map
+     * @param vortexSquare    the vortex square
+     * @param currentPlayer   the current player
+     * @param targetBlackHole the target black hole
+     * @throws NotValidDistance the not valid distance
+     * @throws MapException     the map exception
+     */
     public void blackHoleEffect(Map map,Square vortexSquare,Player currentPlayer,ArrayList<Player> targetBlackHole) throws NotValidDistance,MapException {
 
         Square targetSquare;

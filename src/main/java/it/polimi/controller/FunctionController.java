@@ -350,6 +350,7 @@ public class FunctionController {
     public void run(RemoteView view) throws RemoteException {
         
         view.resetInput();
+        functionModel.getGameModel().incrementgetSpawnedPlayer();
         this.functionModel.getGameModel().setState(State.CHOSEACTION);
        
     }
@@ -425,6 +426,7 @@ public class FunctionController {
     public void grab(RemoteView view) throws RemoteException {
     
         view.resetInput();
+        functionModel.getGameModel().incrementActionCount();
         this.functionModel.getGameModel().setState(State.CHOSEACTION);
         
     }
@@ -542,6 +544,7 @@ public class FunctionController {
     public void usePowerUp(RemoteView view) throws RemoteException {
     
         view.resetInput();
+        functionModel.getGameModel().incrementActionCount();
         this.functionModel.getGameModel().setState(State.CHOSEACTION);
     }
     
