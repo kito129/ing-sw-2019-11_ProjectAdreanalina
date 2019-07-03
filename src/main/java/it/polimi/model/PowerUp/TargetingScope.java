@@ -19,10 +19,10 @@ public class TargetingScope extends PowerUpCard {
     }
 
     /**
-     * Gives to the target one damage of the color of current player.
+     * Give to the target one plus damage.
      *
-     * @param currentPlayer the player who gives the damage and uses this power up.
-     * @param target the player who gets one damage.
+     * @param currentPlayer the current player.
+     * @param target the player you want to shoot.
      */
     public void effect(Player currentPlayer, Player target){
 

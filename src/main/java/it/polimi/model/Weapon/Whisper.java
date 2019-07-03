@@ -35,13 +35,13 @@ public class Whisper extends WeaponCard {
     }
     
     /**
-     * Base effect.
+     * Shoot and mark a player who current player can see. He must be at least two movements by current player's square.
      *
-     * @param map           the map
-     * @param currentPlayer the current player
-     * @param target1       the target 1
-     * @throws NotValidDistance the not valid distance
-     * @throws NotVisibleTarget the not visible target
+     * @param map           the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotValidDistance
+     * @throws NotVisibleTarget
      */
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotValidDistance, NotVisibleTarget {
 

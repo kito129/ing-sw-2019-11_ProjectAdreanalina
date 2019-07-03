@@ -51,12 +51,12 @@ public class Sledgehammer extends WeaponCard {
     }
     
     /**
-     * Base mode.
+     * Shoot a player who is on current player's square.
      *
-     * @param map           the map
-     * @param currentPlayer the current player
-     * @param target1       the target 1
-     * @throws NotValidDistance the not valid distance
+     * @param map           the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotValidDistance
      */
     public void baseMode (Map map, Player currentPlayer, Player target1) throws NotValidDistance {
         
@@ -73,15 +73,15 @@ public class Sledgehammer extends WeaponCard {
     }
     
     /**
-     * Pulverize mode.
+     * Shoot a player who is on current player's square and move he by one or two movements in the same direction.
      *
-     * @param map           the map
-     * @param currentPlayer the current player
-     * @param target1       the target 1
-     * @param destSquare    the dest square
-     * @throws NotValidDistance   the not valid distance
-     * @throws NotInSameDirection the not in same direction
-     * @throws MapException       the map exception
+     * @param map           the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @param destSquare    the square where shot player is moved.
+     * @throws NotValidDistance
+     * @throws NotInSameDirection
+     * @throws MapException
      */
     public void pulverizeMode (Map map, Player currentPlayer, Player target1, Square destSquare) throws NotValidDistance, NotInSameDirection, MapException {
         

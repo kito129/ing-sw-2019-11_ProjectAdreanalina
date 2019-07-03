@@ -53,15 +53,16 @@ public class VortexCannon extends WeaponCard {
     }
     
     /**
-     * Base effect.
+     * Choose a square that current player can see (not his) where locate the vortex. Choose a player on vortex square or
+     * distant one movement by it, move him on it and shoot him.
      *
-     * @param map           the map
-     * @param vortexSquare  the vortex square
-     * @param currentPlayer the current player
-     * @param target1       the target 1
-     * @throws NotVisibleTarget the not visible target
-     * @throws NotValidDistance the not valid distance
-     * @throws MapException     the map exception
+     * @param map           the map of the game.
+     * @param vortexSquare  the square where vortex is located.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotVisibleTarget
+     * @throws NotValidDistance
+     * @throws MapException
      */
     public void baseEffect(Map map,Square vortexSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance,MapException {
 
@@ -96,14 +97,14 @@ public class VortexCannon extends WeaponCard {
     }
     
     /**
-     * Black hole effect.
+     * Choose another one or two players on vortex square or distant one movement by it, move him on it and shoot him.
      *
-     * @param map             the map
-     * @param vortexSquare    the vortex square
-     * @param currentPlayer   the current player
-     * @param targetBlackHole the target black hole
-     * @throws NotValidDistance the not valid distance
-     * @throws MapException     the map exception
+     * @param map             the map of the game.
+     * @param vortexSquare    the square where vortex is located.
+     * @param currentPlayer   the current player.
+     * @param targetBlackHole the list of player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
      */
     public void blackHoleEffect(Map map,Square vortexSquare,Player currentPlayer,ArrayList<Player> targetBlackHole) throws NotValidDistance,MapException {
 

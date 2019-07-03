@@ -19,9 +19,9 @@ public class Teleporter extends PowerUpCard {
     }
 
     /**
-     * Moves the current player to any square of the map
+     * Move where you want on the map.
      *
-     * @param currentPlayer the current player that uses this power up.
+     * @param currentPlayer the current player.
      * @param map           the map of the game.
      * @param destSquare    the square where the player wants to go.
      */

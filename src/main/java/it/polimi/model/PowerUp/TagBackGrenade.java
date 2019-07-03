@@ -19,12 +19,12 @@ public class TagBackGrenade extends PowerUpCard {
     }
 
     /**
-     * Gives to the current player who did damage, one mark of the damaged player's color.
+     * Give one mark to the player who shot before.
      *
      * @param map the map of the game.
-     * @param currentPlayer the player who did damage.
-     * @param targetPlayer the player who made the mark.
-     * @throws NotVisibleTarget if the damaged player can't see the current player who did the damage
+     * @param currentPlayer the current player who shoot before.
+     * @param targetPlayer the player you want to mark.
+     * @throws NotVisibleTarget
      */
     public void effect(Map map, Player currentPlayer, Player targetPlayer) throws NotVisibleTarget {
 

@@ -21,13 +21,13 @@ public class Newton extends PowerUpCard {
     }
 
     /**
-     * Moves the target by one or two square in the same direction.
+     * Move a player by one or two square in the same direction.
      *
      * @param map the map of the game.
      * @param destSquare the destination square of the target.
-     * @param target player you want to move.
-     * @throws NotInSameDirection if the destination square in not in the same direction with the actual target's square.
-     * @throws NotValidDistance if the destination square is more than two squares away from the actual target's square.
+     * @param target the player you want to move.
+     * @throws NotInSameDirection
+     * @throws NotValidDistance
      */
     public void effect(Map map, Square destSquare, Player target) throws NotInSameDirection, NotValidDistance, MapException {
 
