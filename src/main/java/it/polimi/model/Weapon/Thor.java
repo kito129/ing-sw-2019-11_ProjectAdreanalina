@@ -5,11 +5,14 @@ import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
 
+/**
+ * The type Thor.
+ */
 public class Thor extends WeaponCard {
 
     private ArrayList<EnumColorCardAndAmmo> chainReactionCost;
     private ArrayList<EnumColorCardAndAmmo> highVoltageCost;
-
+    
     /**
      * Instantiates a new Thor card.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
@@ -40,24 +43,36 @@ public class Thor extends WeaponCard {
                 "with High Voltage: Deal 2 damage to a third target that your second target can see. You cannot use this effect unless you first use the chain reaction.\n" +
                 "Notes: This card constrains the order in which you can use its effects. (Most cards don't.) Also note that each target must be a different player.");
     }
-
+    
     /**
      * get chainReactionCost
+     *
+     * @return the chain reaction cost
      */
     public ArrayList<EnumColorCardAndAmmo> getChainReactionCost() {
 
         return chainReactionCost;
     }
-
+    
     /**
      * get highVoltageCost
+     *
+     * @return the high voltage cost
      */
     public ArrayList<EnumColorCardAndAmmo> getHighVoltageCost() {
 
         return highVoltageCost;
     }
-
-
+    
+    
+    /**
+     * Base effect.
+     *
+     * @param map           the map
+     * @param currentPlayer the current player
+     * @param target1       the target 1
+     * @throws NotVisibleTarget the not visible target
+     */
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
 
         if(map.isVisible(currentPlayer,target1)){
@@ -71,12 +86,24 @@ public class Thor extends WeaponCard {
             throw new NotVisibleTarget();
         }
     }
-
+    
+    /**
+     * Chain reaction effect.
+     *
+     * @param currentPlayer the current player
+     * @param target2       the target 2
+     */
     public void chainReactionEffect(Player currentPlayer, Player target2){
 
         target2.singleDamage(currentPlayer.getColor());
     }
-
+    
+    /**
+     * High voltage effect.
+     *
+     * @param currentPlayer the current player
+     * @param target3       the target 3
+     */
     public void highVoltageEffect(Player currentPlayer, Player target3) {
 
         ArrayList<EnumColorPlayer> highVoltageDamages=new ArrayList<>();

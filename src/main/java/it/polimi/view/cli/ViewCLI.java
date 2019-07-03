@@ -866,6 +866,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public  void viewSpawnPowerUp () throws RemoteException {
         
         if (user.equals(gameModel.getSpawnPlayer().getName())) {
+            
             System.out.println();
             System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
             System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP NOT CHOSEN");

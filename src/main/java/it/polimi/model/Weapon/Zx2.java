@@ -5,10 +5,13 @@ import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
 
+/**
+ * The type Zx 2.
+ */
 public class Zx2 extends WeaponCard {
 
     private ArrayList<EnumColorCardAndAmmo> scannerModeCost;
-
+    
     /**
      * Instantiates a new Zx2 card.
      * Sets the field color to YELLOW calling the constructor of weapon card (the super class).
@@ -34,15 +37,25 @@ public class Zx2 extends WeaponCard {
                 "in Scanner Mode: Choose up to 3 targets you can see and deal 1 mark to each.\n" +
                 "Notes: Remember that the 3 targets can be in 3 different rooms.");
     }
-
+    
     /**
      * get scannerModeCost
+     *
+     * @return the scanner mode cost
      */
     public ArrayList<EnumColorCardAndAmmo> getScannerModeCost() {
 
         return scannerModeCost;
     }
-
+    
+    /**
+     * Base mode.
+     *
+     * @param map           the map
+     * @param currentPlayer the current player
+     * @param target1       the target 1
+     * @throws NotVisibleTarget the not visible target
+     */
     public void baseMode(Map map, Player currentPlayer,Player target1) throws NotVisibleTarget{
 
         if(map.isVisible(currentPlayer,target1)){
@@ -56,7 +69,15 @@ public class Zx2 extends WeaponCard {
             throw new NotVisibleTarget();
         }
     }
-
+    
+    /**
+     * Scanner mode.
+     *
+     * @param map           the map
+     * @param currentPLayer the current p layer
+     * @param targets       the targets
+     * @throws NotVisibleTarget the not visible target
+     */
     public void scannerMode(Map map,Player currentPLayer,ArrayList<Player> targets)throws NotVisibleTarget{
 
         for(Player player:targets){

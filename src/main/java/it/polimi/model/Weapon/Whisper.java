@@ -7,8 +7,11 @@ import it.polimi.model.Exception.NotVisibleTarget;
 
 import java.util.ArrayList;
 
+/**
+ * The type Whisper.
+ */
 public class Whisper extends WeaponCard {
-
+    
     /**
      * Instantiates a new Whisper card.
      * Sets the field color to BLU calling the constructor of weapon card (the super class).
@@ -30,7 +33,16 @@ public class Whisper extends WeaponCard {
         setDescription("Effect: Deal 3 damage and 1 mark to 1 target you can see. Your target must be at least 2 moves away from you.\n" +
                 "Notes: For example, in the 2-by-2 room, you cannot shoot a target on an adjacent square, but you can shoot a target on the diagonal. If you are beside a door, you can't shoot a target on the other side of the door, but you can shoot a target on a different square of that room.");
     }
-
+    
+    /**
+     * Base effect.
+     *
+     * @param map           the map
+     * @param currentPlayer the current player
+     * @param target1       the target 1
+     * @throws NotValidDistance the not valid distance
+     * @throws NotVisibleTarget the not visible target
+     */
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotValidDistance, NotVisibleTarget {
 
         if((map.distance(currentPlayer,target1)>1) && (map.isVisible(currentPlayer,target1))){

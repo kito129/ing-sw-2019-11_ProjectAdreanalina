@@ -8,6 +8,9 @@ import it.polimi.model.Exception.NotValidInput;
 
 import java.util.ArrayList;
 
+/**
+ * The type Sledgehammer.
+ */
 public class Sledgehammer extends WeaponCard {
     
     private ArrayList<EnumColorCardAndAmmo> pulverizeModeCost;
@@ -36,15 +39,25 @@ public class Sledgehammer extends WeaponCard {
                 "in Pulverize Mode: Deal 3 damage to 1 target on your square, then move that target 0, 1, or 2 squares in one direction.\n" +
                 "Notes: Remember that moves go through doors, but not walls.");
     }
-
+    
     /**
      * get pulverizeModeCost
+     *
+     * @return the pulverize mode cost
      */
     public ArrayList<EnumColorCardAndAmmo> getPulverizeModeCost () {
         
         return pulverizeModeCost;
     }
     
+    /**
+     * Base mode.
+     *
+     * @param map           the map
+     * @param currentPlayer the current player
+     * @param target1       the target 1
+     * @throws NotValidDistance the not valid distance
+     */
     public void baseMode (Map map, Player currentPlayer, Player target1) throws NotValidDistance {
         
         if (map.distance(currentPlayer, target1) == 0) {
@@ -59,6 +72,17 @@ public class Sledgehammer extends WeaponCard {
         }
     }
     
+    /**
+     * Pulverize mode.
+     *
+     * @param map           the map
+     * @param currentPlayer the current player
+     * @param target1       the target 1
+     * @param destSquare    the dest square
+     * @throws NotValidDistance   the not valid distance
+     * @throws NotInSameDirection the not in same direction
+     * @throws MapException       the map exception
+     */
     public void pulverizeMode (Map map, Player currentPlayer, Player target1, Square destSquare) throws NotValidDistance, NotInSameDirection, MapException {
         
         Square target1Square = map.findPlayer(target1);
