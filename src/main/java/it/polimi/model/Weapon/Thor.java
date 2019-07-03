@@ -63,15 +63,14 @@ public class Thor extends WeaponCard {
 
         return highVoltageCost;
     }
-    
-    
+
     /**
-     * Base effect.
+     * Shoot a player who current player can see.
      *
      * @param map           the map
-     * @param currentPlayer the current player
-     * @param target1       the target 1
-     * @throws NotVisibleTarget the not visible target
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotVisibleTarget
      */
     public void baseEffect(Map map, Player currentPlayer, Player target1) throws NotVisibleTarget {
 
@@ -88,10 +87,10 @@ public class Thor extends WeaponCard {
     }
     
     /**
-     * Chain reaction effect.
+     * Shoot a player who first shot player can see.
      *
-     * @param currentPlayer the current player
-     * @param target2       the target 2
+     * @param currentPlayer the current player.
+     * @param target2       the second player you want to shoot.
      */
     public void chainReactionEffect(Player currentPlayer, Player target2){
 
@@ -99,10 +98,10 @@ public class Thor extends WeaponCard {
     }
     
     /**
-     * High voltage effect.
+     * Shoot a player who second shot player can see.
      *
-     * @param currentPlayer the current player
-     * @param target3       the target 3
+     * @param currentPlayer the current player.
+     * @param target3       the third player you want to shoot.
      */
     public void highVoltageEffect(Player currentPlayer, Player target3) {
 

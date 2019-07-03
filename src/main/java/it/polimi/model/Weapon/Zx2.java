@@ -49,12 +49,12 @@ public class Zx2 extends WeaponCard {
     }
     
     /**
-     * Base mode.
+     * Shoot and mark a player who current player can see.
      *
-     * @param map           the map
-     * @param currentPlayer the current player
-     * @param target1       the target 1
-     * @throws NotVisibleTarget the not visible target
+     * @param map           the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotVisibleTarget
      */
     public void baseMode(Map map, Player currentPlayer,Player target1) throws NotVisibleTarget{
 
@@ -71,12 +71,12 @@ public class Zx2 extends WeaponCard {
     }
     
     /**
-     * Scanner mode.
+     * Shoot and mark one, two or three players that current player can see.
      *
-     * @param map           the map
-     * @param currentPLayer the current p layer
-     * @param targets       the targets
-     * @throws NotVisibleTarget the not visible target
+     * @param map           the map of the game.
+     * @param currentPLayer the current player.
+     * @param targets       the list of player you want to shoot.
+     * @throws NotVisibleTarget
      */
     public void scannerMode(Map map,Player currentPLayer,ArrayList<Player> targets)throws NotVisibleTarget{
 

@@ -58,6 +58,17 @@ public class RocketLauncher extends WeaponCard {
         return fragmentingWarheadCost;
     }
 
+    /**
+     * Shoot a player who current player can see and who is on a different square from current player's square.
+     *
+     * @param map the map of the game.
+     * @param target1 the player you want to shoot.
+     * @param currentPlayer the current player.
+     * @param destSquare the square where shot player is moved.
+     * @throws NotVisibleTarget
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void baseEffect(Map map, Player target1, Player currentPlayer,Square destSquare) throws NotVisibleTarget, NotValidDistance, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);
@@ -84,6 +95,15 @@ public class RocketLauncher extends WeaponCard {
         }
     }
 
+    /**
+     * Moves the current player by one movement.
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param destSquare the square where current player want to move on.
+     * @throws NotValidDistance
+     * @throws MapException
+     */
     public void rocketJumpEffect(Map map, Player currentPlayer,Square destSquare) throws NotValidDistance, MapException {
 
         Square squareOfCurrentPlayer=map.findPlayer(currentPlayer);
@@ -97,7 +117,17 @@ public class RocketLauncher extends WeaponCard {
         }
     }
 
-
+    /**
+     * Shoot all players on the square where the previous shot player was.
+     *
+     * @param map the map of the game.
+     * @param target1 the player you want to shoot.
+     * @param currentPlayer the current player.
+     * @param destSquare the square where current player want to move on.
+     * @throws NoTargetInSquare
+     * @throws NotVisibleTarget
+     * @throws MapException
+     */
     public void baseEffectWithFragmenting(Map map, Player target1, Player currentPlayer,Square destSquare) throws NoTargetInSquare,NotVisibleTarget, NotValidDistance, MapException {
 
         Square squareOfCurrentPlayer = map.findPlayer(currentPlayer);

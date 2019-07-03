@@ -53,15 +53,15 @@ public class TractorBeam extends WeaponCard {
     }
     
     /**
-     * Base mode.
+     * Move a player by zero, one or two movements in a square that current player can see and shoot him.
      *
-     * @param map           the map
-     * @param destSquare    the dest square
-     * @param currentPlayer the current player
-     * @param target1       the target 1
-     * @throws NotVisibleTarget the not visible target
-     * @throws NotValidDistance the not valid distance
-     * @throws MapException     the map exception
+     * @param map           the map of the game.
+     * @param destSquare    the square where shot player is moved.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotVisibleTarget
+     * @throws NotValidDistance
+     * @throws MapException
      */
     public void baseMode(Map map,Square destSquare,Player currentPlayer,Player target1) throws NotVisibleTarget, NotValidDistance,MapException{
 
@@ -82,13 +82,14 @@ public class TractorBeam extends WeaponCard {
     }
     
     /**
-     * Punisher mode.
+     * Move a player who is in a square distant zero, one or two movements from current player's square on the current
+     * player's square and shoot him.
      *
-     * @param map           the map
-     * @param currentPlayer the current player
-     * @param target1       the target 1
-     * @throws NotValidDistance the not valid distance
-     * @throws MapException     the map exception
+     * @param map           the map of the game.
+     * @param currentPlayer the current player.
+     * @param target1       the player you want to shoot.
+     * @throws NotValidDistance
+     * @throws MapException
      */
     public void punisherMode(Map map,Player currentPlayer,Player target1) throws NotValidDistance, MapException {
 
@@ -105,14 +106,7 @@ public class TractorBeam extends WeaponCard {
 
             throw new NotValidDistance();
         }
-
-
-
-
-
     }
-
-
 }
 
 

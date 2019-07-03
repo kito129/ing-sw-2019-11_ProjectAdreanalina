@@ -104,6 +104,16 @@ public class Railgun extends WeaponCard {
         }
     }
 
+    /**
+     * Shoot one or two player on a cardinal direction (the same for both of them).
+     *
+     * @param map the map of the game.
+     * @param currentPlayer the current player.
+     * @param targets a list of player you want to shoot.
+     * @param direction the direction chosen for shoot the target.
+     * @throws NotValidCardinalDirection
+     * @throws NotInDirection
+     */
     public void piercingMode(Map map,Player currentPlayer,ArrayList<Player> targets,EnumCardinalDirection direction)throws NotValidCardinalDirection,NotInDirection{
 
         if((direction==EnumCardinalDirection.N)||(direction==EnumCardinalDirection.E)||(direction==EnumCardinalDirection.S)
