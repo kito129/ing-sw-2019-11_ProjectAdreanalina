@@ -38,7 +38,7 @@ public class Newton extends PowerUpCard {
         }else if (!(map.sameDirection(destSquare, map.findPlayer(target)))) {
 
             throw new NotInSameDirection();
-        }else if ((map.distance(destSquare, map.findPlayer(target)) > 3)&&(map.distance(destSquare, map.findPlayer(target))==0) ){
+        }else if ((map.distance(destSquare, map.findPlayer(target)) > 3)||(map.distance(destSquare, map.findPlayer(target))==0) ){
 
             throw new NotValidDistance();
         }
