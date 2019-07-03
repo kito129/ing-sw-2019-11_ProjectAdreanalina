@@ -4,6 +4,7 @@ package it.polimi.controller;
 import it.polimi.model.*;
 //chiedere perche devo importare tutto
 import it.polimi.model.Exception.*;
+import it.polimi.model.Map;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
@@ -11,11 +12,7 @@ import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Timer;
-import java.util.TimerTask;
-
+import java.util.*;
 
 
 public class FunctionController {
@@ -177,6 +174,15 @@ public class FunctionController {
    
     }
     
+    public void checkActionCount(){
+        
+        if (functionModel.getGameModel().getActionCount()==3){
+           
+           setErrorState("YOU ALREADY USE 3 ACTION. YOU CAN ONLY GO ON MENU OR PASS TURN (HERE YOU CAN RECHARGE YOUR WEAPON)");
+        }
+        
+    }
+    
     
     public void choseAction(RemoteView view){
     
@@ -192,43 +198,59 @@ public class FunctionController {
                     this.functionModel.getGameModel().setState(State.MENU);
                     break;
                 case 1:
+                    checkActionCount();
                     this.functionModel.getGameModel().setState(State.SELECTRUN);
                     break;
                 case 2:
+                    checkActionCount();
                     this.functionModel.getGameModel().setState(State.SELECTGRAB);
                     break;
                 case 3:
                     
+                    checkActionCount();
                     if(this.functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().size()>0) {
                         
                         this.functionModel.getGameModel().setState(State.SELECTWEAPON);
                     } else {
                         
-                        this.functionModel.getGameModel().setMessageToCurrentView("YOU HAVE NOT WEAPON TO SHOOT");
-                        this.functionModel.getGameModel().setBeforeError(this.functionModel.getGameModel().getState());
-                        this.functionModel.getGameModel().setState(State.ERROR);
+                        setErrorState("YOU HAVE NOT WEAPON TO SHOOT");
                         
                     }
                     break;
                 case 4:
-        
+    
+                    checkActionCount();
                     if(this.functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()>0){
             
                         this.functionModel.getGameModel().setState(State.SELECTPOWERUP);
                     } else {
-            
-                        this.functionModel.getGameModel().setMessageToCurrentView("YOU HAVE NOT POWER UP TO USE");
-                        this.functionModel.getGameModel().setBeforeError(this.functionModel.getGameModel().getState());
-                        this.functionModel.getGameModel().setState(State.ERROR);
-            
+                        
+                        setErrorState("YOU HAVE NOT POWER UP TO USE");
                     }
+                    break;
+                case 0:
+                    
+                    //pass turn
+                    setWeaponToCharge();
+                    this.functionModel.getGameModel().setState(State.ENDACTION);
+                    
             }
-            
-            
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     
+    }
+    
+    public void setWeaponToCharge(){
+        
+        for (WeaponCard a: functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons()){
+            
+            if (!a.isCharge()){
+                
+                functionModel.getGameModel().getWeaponToCharge().add(a);
+            }
+        }
+        
     }
     
     
@@ -592,7 +614,6 @@ public class FunctionController {
                 setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
             }
         }
-        
     }
     
     public void payAmmoController (ArrayList<EnumColorCardAndAmmo> toPay , ArrayList<PowerUpCard> powerUpToPay) throws NotValidAmmoException {
@@ -766,6 +787,24 @@ public class FunctionController {
             mapErrorGestor();
         
         }
+    }
+    
+    public void endActionSelect(RemoteView view) throws RemoteException {
+        
+        if (view.isBooleanChose()){
+            
+            functionModel.getGameModel().setState(State.SELECTRECHARGE);
+        } else {
+            
+            endTurnGestor();
+        }
+    }
+    
+    public void endTurnGestor(){
+    
+    
+    
+    
     }
     
     

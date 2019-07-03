@@ -116,7 +116,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.weaponController.afterShoot(view);
                     break;
                 case ENDACTION:
-                    //TODO
+                    functionController.endActionSelect(view);
                     break;
                 case SELECTRECHARGE:
                     functionController.selectRecharge(view,1,null);

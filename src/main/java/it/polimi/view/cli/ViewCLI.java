@@ -620,6 +620,7 @@ public class ViewCLI implements RemoteView, Serializable {
             case RECHARGE:
                 break;
             case ENDACTION:
+                viewEndAction();
                 break;
             case PASSTURN:
                 break;
@@ -1081,59 +1082,81 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     public void viewSelectRecharge() throws RemoteException {
-        
+    
         int i3;
         int i4;
         
-        
-        System.out.println("HERE IS THE UNLOADED WEAPON, SELECT WEAPON TO RECHARGE");
-        PrintWeapon.printList(gameModel.getWeaponToCharge(),false);
-        setIndex(getUserInput(-1,gameModel.getWeaponToCharge().size()));
-        
-        System.out.println("Want to pay with ammo (NO) or also power up (YES)?");
-        setYesNoBooleanChoise(1);
-        
-        if (booleanChose){
+        if (booleanChose) {
             
-            System.out.println("Select what power up want to use to pay");
-            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(),false);
-            System.out.println("How Much power up wan to use?");
-            int number = getUserInput(-1,gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-            switch (number){
-                case 1:
-                    System.out.println("First:");
-                    setIndex2(getUserInput(-1,gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                    break;
-                case 2:
-                    System.out.println("First:");
-                    setIndex2(getUserInput(-1,gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                    System.out.println("Second:");
-                    do {
-                        
-                        i3= getUserInput(-1,gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                    }while (i3!=getIndex2());
-                    setIndex3(i3);
-                   
-                   
-                    break;
-                case 3:
-                    System.out.println("First:");
-                    setIndex2(getUserInput(-1,gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                    System.out.println("Second:");
-                    do {
-                        
-                        i3= getUserInput(-1,gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                    }while (i3!=getIndex2());
-                    setIndex3(i3);
-                    System.out.println("Third:");
-                    do {
-                        
-                        i4= getUserInput(-1,gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                    }while (i4!=getIndex2() && i4!=getIndex3());
-                    setIndex4(i3);
-                    break;
+            System.out.println("HERE IS THE UNLOADED WEAPON, SELECT WEAPON TO RECHARGE");
+            PrintWeapon.printList(gameModel.getWeaponToCharge(), false);
+            setIndex(getUserInput(-1, gameModel.getWeaponToCharge().size()));
+    
+            System.out.println("Want to pay with ammo (NO) or also power up (YES)?");
+            setYesNoBooleanChoise(1);
+    
+            if (booleanChose) {
+        
+                System.out.println("Select what power up want to use to pay");
+                PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
+                System.out.println("How Much power up wan to use?");
+                int number = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                switch (number) {
+                    case 1:
+                        System.out.println("First:");
+                        setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                        break;
+                    case 2:
+                        System.out.println("First:");
+                        setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                        System.out.println("Second:");
+                        do {
+                    
+                            i3 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                        } while (i3 != getIndex2());
+                        setIndex3(i3);
+                
+                
+                        break;
+                    case 3:
+                        System.out.println("First:");
+                        setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                        System.out.println("Second:");
+                        do {
+                    
+                            i3 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                        } while (i3 != getIndex2());
+                        setIndex3(i3);
+                        System.out.println("Third:");
+                        do {
+                    
+                            i4 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                        } while (i4 != getIndex2() && i4 != getIndex3());
+                        setIndex4(i3);
+                        break;
+                }
+            } else {
+                
+                System.out.println("YOUR TURN IS END");
             }
+            notifyController();
+        }
+    }
+    
+    public void viewEndAction() throws RemoteException {
+    
+        if (gameModel.getWeaponToCharge().size()>0) {
+            
+            System.out.println("DO YOU WANT TO RECHARGE YOUR UNLOADED WEAPON?");
+            setYesNoBooleanChoise(1);
+          
+        } else {
+            
+            setBooleanChose(false);
+            System.out.println("YOUR TURN IS ENDED");
+            
         }
         notifyController();
     }
+    
 }
