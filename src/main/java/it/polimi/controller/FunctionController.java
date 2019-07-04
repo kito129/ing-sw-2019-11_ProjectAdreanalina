@@ -230,9 +230,8 @@ public class FunctionController {
                     break;
                 case 0:
                     
-                    //pass turn
-                    setWeaponToCharge();
-                    this.functionModel.getGameModel().setState(State.ENDACTION);
+                    endActionGestor();
+                    this.functionModel.getGameModel().setState(State.ENDACTIONSELECTION);
                     
             }
         } catch (RemoteException e) {
@@ -241,17 +240,7 @@ public class FunctionController {
     
     }
     
-    public void setWeaponToCharge(){
-        
-        for (WeaponCard a: functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons()){
-            
-            if (!a.isCharge()){
-                
-                functionModel.getGameModel().getWeaponToCharge().add(a);
-            }
-        }
-        
-    }
+    
     
     
     public void errorState(RemoteView view) throws RemoteException {
@@ -701,8 +690,15 @@ public class FunctionController {
     
     public void recharge(RemoteView view) throws RemoteException {
         
+        
         view.resetInput();
-        functionModel.getGameModel().setState(State.CHOSEACTION);
+        if (functionModel.getGameModel().isEndTurn()) {
+            
+            functionModel.getGameModel().setState(State.CHOSEACTION);
+        } else {
+    
+            functionModel.getGameModel().setState(State.ENDACTIONSELECTION);
+        }
     }
     
     public void drawnPowerUp () throws RemoteException {
@@ -789,24 +785,37 @@ public class FunctionController {
         }
     }
     
+    public void setWeaponToCharge(){
+        
+        for (WeaponCard a: functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons()){
+            
+            if (!a.isCharge()){
+                
+                functionModel.getGameModel().getWeaponToCharge().add(a);
+            }
+        }
+        
+    }
+    
     public void endActionSelect(RemoteView view) throws RemoteException {
         
         if (view.isBooleanChose()){
             
+            functionModel.getGameModel().setEndTurn(true);
             functionModel.getGameModel().setState(State.SELECTRECHARGE);
         } else {
             
-            endTurnGestor();
+            functionModel.getGameModel().setState(State.RESPWANPLAYERSELECTION);
         }
     }
     
-    public void endTurnGestor(){
+    public void endActionGestor (){
     
-        //get all dead player
+        setWeaponToCharge();
+        functionModel.getGameModel().setDeadPlayer();
         
     
     }
-    
     
     public void scoringPlayerBoardController (){
         

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PrintAmmo implements Serializable {
 
     /**
-     * print player's ammo or cost effect
+     * printString player's ammo or cost effect
      * @param enumColorCardAndAmmos     a square of the map
      * @param i                         to know if is for player's ammo or for cost effect of a weapon
      */

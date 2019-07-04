@@ -43,6 +43,9 @@ public class GameModel implements Serializable {
     private WeaponsEffect beforeEffect;
     private ArrayList<Player> playerDamaged= new ArrayList<>();
     private ArrayList<Player> playerMarked = new ArrayList<>();
+    //end turn
+    private ArrayList<Player> deadPlayer= new ArrayList<>();
+    private boolean endTurn;
     //weapon to charge
     private ArrayList<WeaponCard> weaponToCharge = new ArrayList<>();
     //powerup
@@ -149,6 +152,16 @@ public class GameModel implements Serializable {
     public Player getSpawnPlayer () {
         
         return spawnPlayer;
+    }
+    
+    public boolean isEndTurn () {
+        
+        return endTurn;
+    }
+    
+    public void setEndTurn (boolean endTurn) {
+        
+        this.endTurn = endTurn;
     }
     
     public void setSpawnPlayer (Player spawnPlayer) {
@@ -336,15 +349,20 @@ public class GameModel implements Serializable {
         this.actualPlayer = actualPlayer;
     }
     
+    public void setDeadPlayer () {
     
-    public ArrayList<Player> getDeadPlayers(){
         ArrayList<Player> tempPLayers = new ArrayList<>();
         for (Player a:players){
             if(!a.isAlive()){
                 tempPLayers.add(a);
             }
         }
-        return tempPLayers;
+        this.deadPlayer=tempPLayers;
+    }
+    
+    public ArrayList<Player> getDeadPlayers(){
+       
+        return deadPlayer;
     }
     
     public void setMessageToCurrentView (String messageToCurrentView) {

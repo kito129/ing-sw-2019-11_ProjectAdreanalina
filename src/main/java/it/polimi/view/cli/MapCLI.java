@@ -6,7 +6,7 @@ import it.polimi.model.Exception.MapException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CLIPrintMap implements Serializable {
+public class MapCLI implements Serializable {
 
     public  final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
     public  final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
@@ -21,11 +21,76 @@ public class CLIPrintMap implements Serializable {
     GameModel gameModel;
     
     
-    public  CLIPrintMap(GameModel gameModel){
+    public MapCLI (GameModel gameModel){
 
         this.gameModel = gameModel;
     }
-
+    
+    /**
+     * create and printString the map
+     */
+    public void viewMapCLI () {
+        
+        createGrid();
+        printGrid();
+    }
+    
+    /**
+     * create the grid for the map
+     */
+    public void createGrid(){
+        
+        //generate row
+        for (int i = 0; i < 3; i++){
+            
+            mappa.add(new ArrayList<>());
+        }
+        
+        try {
+            
+            for (int row = 0; row < 3; row++) {
+                
+                for (int column = 0; column < 4; column++) {
+                    
+                    if (gameModel.getMap().existInMap(row, column)) {
+                        
+                        mappa.get(row).add(createSquareBG(gameModel.getMap().getSquare(row, column)));
+                    } else {
+                        
+                        mappa.get(row).add(createBlackSquare());
+                        
+                    }
+                    
+                }
+            }
+        } catch (MapException e) {
+            
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * printString the map
+     */
+    public void printGrid() {
+        
+        printLegendMap(gameModel.getPlayers(true));
+        
+        for (int sqRow = 0; sqRow < 3; sqRow++){
+            
+            for (int intRow = 0; intRow < 11; intRow++) {
+                
+                for (int sqCol = 0; sqCol < 4; sqCol++) {
+                    
+                    for (int intCol = 0; intCol < 11; intCol++) {
+                        
+                        System.out.print(mappa.get(sqRow).get(sqCol).get(intRow).get(intCol));
+                    }
+                }
+                System.out.println();
+            }
+        }
+    }
     /**
      * Create the map for the view like an array of array of array of array: set in right position
      * the color background, the players (initial letter), the doors, a sign corresponing to the generation
@@ -345,66 +410,12 @@ public class CLIPrintMap implements Serializable {
         return blackSquares;
     }
 
-    /**
-     * create the grid for the map
-     */
-    public void createGrid(){
-    
-        ArrayList<ArrayList<ArrayList<ArrayList<String>>>> mappa = this.mappa;
-    
-        for (int i = 0; i < 3; i++){
+   
 
-            mappa.add(new ArrayList<>());
-        }
-    
-        try {
-
-        for (int row = 0; row < 3; row++) {
-
-            for (int column = 0; column < 4; column++) {
-
-                if (gameModel.getMap().existInMap(row, column)) {
-                    
-                    mappa.get(row).add(createSquareBG(gameModel.getMap().getSquare(row, column)));
-                } else {
-        
-                    mappa.get(row).add(createBlackSquare());
-        
-                }
-    
-            }
-        }
-        } catch (MapException e) {
-
-            e.printStackTrace();
-        }
-    }
+   
 
     /**
-     * print the map
-     */
-    public void printGrid() {
-
-        printLegendMap(gameModel.getPlayers(true));
-
-        for (int sqRow = 0; sqRow < 3; sqRow++){
-
-            for (int intRow = 0; intRow < 11; intRow++) {
-
-                for (int sqCol = 0; sqCol < 4; sqCol++) {
-
-                    for (int intCol = 0; intCol < 11; intCol++) {
-
-                        System.out.print(mappa.get(sqRow).get(sqCol).get(intRow).get(intCol));
-                    }
-                }
-                System.out.println();
-            }
-        }
-    }
-
-    /**
-     * print legend of the map
+     * printString legend of the map
      */
     public void printLegendMap(ArrayList<Player> players){
 
@@ -427,7 +438,7 @@ public class CLIPrintMap implements Serializable {
     }
 
     /**
-     * print legend of players
+     * printString legend of players
      */
     public void printLegendPlayers(ArrayList<Player> players){
 
@@ -454,15 +465,7 @@ public class CLIPrintMap implements Serializable {
             }
         }
     }
-
-    /**
-     * create and print the map
-     */
-    public void viewMapNew() {
-        
-        createGrid();
-        printGrid();
-    }
+    
 
     /**
      * Set the right string color for background

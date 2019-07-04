@@ -100,8 +100,8 @@ public class MainMarcoController {
 
 
 
-        viewCLI.CLIViewMap();
-        CLIPrintMap.viewMap(gameModel.getMap());
+        viewCLI.printMap();
+        MapCLI.viewMap(gameModel.getMap());
        
 
        /*
