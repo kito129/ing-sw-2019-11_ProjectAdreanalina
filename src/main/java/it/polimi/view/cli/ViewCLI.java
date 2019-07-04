@@ -810,7 +810,7 @@ public class ViewCLI implements RemoteView, Serializable {
         if(checkCurrent()) {
             
             PrintMenu.print();
-            int choise = getUserInput(0,10);
+            int choise = getUserInput(0,11);
             
             switch (choise){
                 case 1:

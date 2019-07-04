@@ -24,69 +24,72 @@ public class PrintKillShotTrack implements Serializable {
     public static void print(ArrayList<KillShotTrackPoint> killShotTrackPoints){
 
         System.out.println("KILL SHOT TRACK: ");
-
-        for(KillShotTrackPoint k : killShotTrackPoints){
-
-            int i = 0;
+        int i = 0;
+        
+        for(KillShotTrackPoint k : killShotTrackPoints) {
+            
             i++;
-
+    
             System.out.println();
             System.out.print("KST POINT " + i + ": ");
-
-            if(k.isSkull()){
-
+    
+            if (k.isSkull()) {
+        
                 System.out.println(ANSI_RED + "SKULL" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
             }
-
-            switch (k.getMark1()){
-
-                case BLU:
-                    System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                    if (k.getMark2().equals(EnumColorPlayer.BLU)){
-
+    
+            if (k.getMark1() != null) {
+                
+                switch (k.getMark1()) {
+            
+                    case BLU:
                         System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                    }
-                    System.out.println();
-                    break;
-                case GREEN:
-                    System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                    if (k.getMark2().equals(EnumColorPlayer.GREEN)) {
-
+                
+                        if (k.getMark2()!=null) {
+                    
+                            System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                        }
+                        System.out.println();
+                        break;
+                    case GREEN:
                         System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                    }
-                    System.out.println();
-                    break;
-                case GREY:
-                    System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                    if (k.getMark2().equals(EnumColorPlayer.GREY)) {
-
+                
+                        if (k.getMark2()!=null) {
+                    
+                            System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                        }
+                        System.out.println();
+                        break;
+                    case GREY:
                         System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                    }
-                    System.out.println();
-                    break;
-                case PINK:
-                    System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                    if (k.getMark2().equals(EnumColorPlayer.PINK)) {
-
+                
+                        if (k.getMark2()!=null) {
+                    
+                            System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                        }
+                        System.out.println();
+                        break;
+                    case PINK:
                         System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                    }
-                    System.out.println();
-                    break;
-                case YELLOW:
-                    System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                    if (k.getMark2().equals(EnumColorPlayer.YELLOW)) {
-
+                
+                        if (k.getMark2()!=null) {
+                    
+                            System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                        }
+                        System.out.println();
+                        break;
+                    case YELLOW:
                         System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                    }
-                    System.out.println();
-                    break;
-                default:
-                    break;
+                
+                        if (k.getMark2()!=null) {
+                    
+                            System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                        }
+                        System.out.println();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

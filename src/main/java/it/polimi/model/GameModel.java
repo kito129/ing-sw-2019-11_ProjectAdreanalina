@@ -67,7 +67,7 @@ public class GameModel implements Serializable {
         
         state=State.LOBBY;
         //create map
-        this.map = new Map(MapCreator.createA(),"MAPA");
+        this.map = new Map(MapCreator.createB(),"MAPB");
         //populate list of color for the player
         populateColor();
         
@@ -83,7 +83,6 @@ public class GameModel implements Serializable {
             return randomColor;
         }
         return null;
-        
     }
     
     public ArrayList<Player> getUsedGrenade () {
