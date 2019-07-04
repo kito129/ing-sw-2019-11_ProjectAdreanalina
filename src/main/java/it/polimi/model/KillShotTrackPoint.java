@@ -16,6 +16,8 @@ public class KillShotTrackPoint implements Serializable {
     public KillShotTrackPoint() {
 
         skull = true;
+        mark1=null;
+        mark2=null;
 
     }
     

@@ -19,7 +19,7 @@ public class Player implements Serializable {
     private boolean alive;
     private boolean damaged;
     private boolean online;
-    private ArrayList<PowerUpCard> powerUpCardsSpawn = new ArrayList<>(2);
+    private ArrayList<PowerUpCard> powerUpCardsSpawn = new ArrayList<>();
     private ArrayList<Player> damagedGameModel;
     private ArrayList<Player> markedGameModel;
    

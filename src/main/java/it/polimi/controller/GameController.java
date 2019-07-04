@@ -61,7 +61,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.lobby();
                     break;
                 case PUTSPAWN:
-                    functionController.drawnPowerUp();
+                    functionController.drawnPowerUp(1);
                     break;
                 case MENU:
                     functionController.menu(view);
@@ -118,7 +118,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.endActionSelect(view);
                     break;
                 case ENDACTION:
-                    //sono qui per respawn iocatori
+                    functionController.deadPlayerGestor();
                     break;
                 case SELECTRECHARGE:
                     functionController.selectRechargeGestor(view);
@@ -126,11 +126,17 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case RECHARGE:
                     functionController.recharge(view);
                     break;
+                case GRENADESELECTION:
+                     functionController.grendadeSelection(view);
+                 break;
+                case GRENADE:
+                    functionController.grenade();
+                    break;
                 case PASSTURN:
                     //TODO
                     break;
-                case DEADPLAYER:
-                    //TODO
+                case DEADPLAYERSELECT:
+                    functionController.deadPLayerSelect(view);
                     break;
                 case SCORINGPLAYERBOARD:
                     functionController.scoringPlayerBoardController();
@@ -139,6 +145,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     //
                     break;
                 case ENDTURN:
+                    functionController.endTurn();
                     break;
                 case FINALSCORING:
                     break;

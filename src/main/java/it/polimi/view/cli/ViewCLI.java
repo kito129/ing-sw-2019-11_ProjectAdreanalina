@@ -1,9 +1,11 @@
 package it.polimi.view.cli;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
+
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -533,7 +535,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 viewMenu();
                 break;
             case SELECTSPAWN:
-                viewSpawnPowerUp();
+                viewSpawnPowerUp(1);
                 break;
             case STARTTURN:
                 viewStartTurn();
@@ -546,6 +548,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case SELECTPOWERUPINPUT:
                 viewSelectPowerUpInput();
+                break;
             case USEPOWERUP:
                 viewUsePowerUp();
                 break;
@@ -590,15 +593,19 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case PASSTURN:
                 break;
-            case DEADPLAYER:
+            case DEADPLAYERSELECT:
+                deadPlayerSelect();
                 break;
             case SCORINGPLAYERBOARD:
+                callRun();
                 break;
-            case RESPWANPLAYERSELECTION:
-                System.out.print("respan other player");
+            case GRENADESELECTION:
+                viewGrenadeSelection();
                 break;
+            case GRENADE:
+                viewGrenade();
             case ENDTURN:
-                break;
+                callRun();
             case FINALSCORING:
                 break;
             case CHECKILLSHOOT:
@@ -805,7 +812,7 @@ public class ViewCLI implements RemoteView, Serializable {
         if(checkCurrent()) {
             
             PrintMenu.print();
-            int choise = getUserInput(0,10);
+            int choise = getUserInput(0,11);
             
             switch (choise){
                 case 1:
@@ -852,6 +859,10 @@ public class ViewCLI implements RemoteView, Serializable {
                     }
                     break;
                 case 10:
+                    
+                    PrintKillShotTrack.print(gameModel.getKillShotTrack().getTrack());
+                    break;
+                case 11:
                     printMap();
                     break;
             }
@@ -862,12 +873,18 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    public  void viewSpawnPowerUp () throws RemoteException {
+    public  void viewSpawnPowerUp (int i) throws RemoteException {
         
         if (gameModel.getSpawnPlayer().getName().equals(user)) {
-            
+    
             System.out.println();
-            System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
+            if (i==1) {
+                
+                System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
+            } else if (i==2){
+                
+                System.out.println("CHOOSE A POWER UP TO WHERE RESPAWN AFTER DEAD");
+            }
             System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP NOT CHOSEN");
             System.out.println();
             Player player = gameModel.getSpawnPlayer();
@@ -886,11 +903,15 @@ public class ViewCLI implements RemoteView, Serializable {
             setIndex(getUserInput(0, 1));
             notifyController();
         } else {
-            
-            System.out.println("WAITING FOR SPAWNING OTHER PLAYER IN MAP");
-        }
-
     
+            if (i==1) {
+                
+                System.out.println("WAITING FOR SPAWNING OTHER PLAYER IN MAP");
+            } else if(i==2) {
+    
+                System.out.println("WAITING FOR DEAD PLAYER RESPAWNING");
+            }
+        }
     }
     
     public void viewStartTurn() throws RemoteException {
@@ -931,6 +952,9 @@ public class ViewCLI implements RemoteView, Serializable {
     
         if(checkCurrent()) {
             
+            System.out.print("MAP: ");
+            printMap();
+            
             PrintRunAction.print();
             setSquareInput(1);
             
@@ -967,6 +991,9 @@ public class ViewCLI implements RemoteView, Serializable {
     public void  viewGrabSelection() throws RemoteException {
     
         if(checkCurrent()) {
+    
+            System.out.print("MAP: ");
+            printMap();
             
             PrintGrabAction.printGrabStuff();
             setSquareInput(1);
@@ -975,16 +1002,24 @@ public class ViewCLI implements RemoteView, Serializable {
                 
                 target = gameModel.getMap().getSquare(row,column);
                 
-                if(gameModel.getMap().isGenerationSquare(target)){
+                
+                if(gameModel.getMap().isGenerationSquare(target) ) {
+    
+                    GenerationSquare gen = (GenerationSquare) target;
+    
+                    if (gen.getWeaponList().size() > 0) {
+                        PrintGrabAction.printGrabWeapon();
+                        PrintWeapon.printList(((GenerationSquare) target).getWeaponList(), false);
+                        PrintSelectAction.printIndexWeapon();
+                        Scanner input = new Scanner(System.in);
         
-                    PrintGrabAction.printGrabWeapon();
-                    PrintWeapon.printList(((GenerationSquare) target).getWeaponList(),false);
-                    PrintSelectAction.printIndexWeapon();
-                    Scanner input = new Scanner(System.in);
-                    
-                    while(!input.hasNextInt())
-                        input = new Scanner(System.in);
-                    setIndex(input.nextInt());
+                        while (!input.hasNextInt())
+                            input = new Scanner(System.in);
+                        setIndex(input.nextInt());
+                    }else {
+                        
+                        System.out.print("THIS GENERATION SQUARE IS EMPTY");
+                    }
                 }
                 
                 notifyController();
@@ -1103,6 +1138,7 @@ public class ViewCLI implements RemoteView, Serializable {
             
             if (booleanChose) {
                 
+                PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
                 System.out.println("HERE IS THE UNLOADED WEAPON, SELECT WEAPON TO RECHARGE");
                 PrintWeapon.printList(gameModel.getWeaponToCharge(), false);
                 setIndex(getUserInput(-1, gameModel.getWeaponToCharge().size()));
@@ -1204,4 +1240,45 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
+    
+    //grenade
+    public void viewGrenadeSelection() throws RemoteException {
+        
+        if(gameModel.getUserGrenade().getName().equals(user)){
+    
+            System.out.print("DO YOU WANT TO USE TAG BACK GRENADE ON CURRENT PLAYER?");
+            setYesNoBooleanChoise(1);
+            notifyController();
+            
+        } else {
+            
+            System.out.print("WAINTING FOR THE PLAYER THAT USING TAG BACK GRENADE");
+        }
+        
+    }
+    
+    public void viewGrenade() throws RemoteException {
+    
+        if(gameModel.getUserGrenade().getName().equals(user)){
+            
+            //view grenade
+            printMessageAll();
+            notifyController();
+        } else {
+    
+           printMessageAll();
+        }
+    }
+    
+    public void deadPlayerSelect() throws RemoteException {
+        
+        if (gameModel.getActualDeadPLayer().getName().equals(user)){
+            
+            viewSpawnPowerUp(2);
+            
+        } else {}
+        
+        System.out.println("WAINTING FOR DEAD PLAYERS RESPAWNING");
+        
+    }
 }

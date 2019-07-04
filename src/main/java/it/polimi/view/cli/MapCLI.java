@@ -33,6 +33,7 @@ public class MapCLI implements Serializable {
         
         createGrid();
         printGrid();
+        mappa.clear();
     }
     
     /**

@@ -88,63 +88,69 @@ public class ViewWeapon {
         
     }
     
-    public void payExtraEffect(GameModel gameModel){
+    public void payExtraEffect(GameModel gameModel) throws RemoteException {
     
-        int i3;
-        int i4;
-
-        System.out.println();
-        System.out.println("Do you want to use your power up to pay this effect?");
-        viewCLI.setYesNoBooleanChoise(2);
-        if (viewCLI.isBooleanChose2()) {
-
+        if (viewCLI.checkCurrent()) {
+            int i3;
+            int i4;
+    
             System.out.println();
-            System.out.println("Select the power up you want to use to pay");
-            System.out.println();
-            PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-            System.out.println("How many power ups do you want to use?");
-            int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+            System.out.println("Do you want to use your power up to pay this effect?");
+            viewCLI.setYesNoBooleanChoise(2);
+            if (viewCLI.isBooleanChose2()) {
         
-            switch (number) {
-                case 1:
-                    System.out.println("First:");
-                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                    break;
-                case 2:
-                    System.out.println("First:");
-                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                    System.out.println("Second:");
-                    do {
+                System.out.println();
+                System.out.println("Select the power up you want to use to pay");
+                System.out.println();
+                PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
+                System.out.println("How many power ups do you want to use?");
+                int number = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+        
+                switch (number) {
+                    case 1:
+                        System.out.println("First:");
+                        viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                        break;
+                    case 2:
+                        System.out.println("First:");
+                        viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                        System.out.println("Second:");
+                        do {
                     
-                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                    } while (i3 != viewCLI.getIndex2());
-                    viewCLI.setIndex3(i3);
+                            i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                        } while (i3 != viewCLI.getIndex2());
+                        viewCLI.setIndex3(i3);
                 
                 
-                    break;
-                case 3:
-                    System.out.println("First:");
-                    viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                    System.out.println("Second:");
-                    do {
+                        break;
+                    case 3:
+                        System.out.println("First:");
+                        viewCLI.setIndex2(viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                        System.out.println("Second:");
+                        do {
                     
-                        i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                    } while (i3 != viewCLI.getIndex2());
-                    viewCLI.setIndex3(i3);
-                    System.out.println("Third:");
-                    do {
+                            i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                        } while (i3 != viewCLI.getIndex2());
+                        viewCLI.setIndex3(i3);
+                        System.out.println("Third:");
+                        do {
                     
-                        i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                    } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
-                    viewCLI.setIndex4(i3);
-                    break;
+                            i4 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                        } while (i4 != viewCLI.getIndex2() && i4 != viewCLI.getIndex3());
+                        viewCLI.setIndex4(i3);
+                        break;
+                }
             }
+            viewCLI.notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(viewCLI.gameModel,viewCLI);
         }
     }
     
     public void viewPayEffect() throws RemoteException {
     
-        if(viewCLI.gameModel.getActualPlayer().getName().equals(viewCLI.user)) {
+        if(viewCLI.checkCurrent()) {
             
             GameModel gameModel = viewCLI.gameModel;
            
@@ -605,9 +611,12 @@ public class ViewWeapon {
     
     public void viewSelectShootInuput() throws RemoteException {
     
-        if (viewCLI.gameModel.getActualPlayer().getName().equals(viewCLI.user)){
-           
-        
+        if (viewCLI.checkCurrent()){
+    
+    
+            System.out.print("MAP: ");
+            viewCLI.printMap();
+            
             GameModel gameModel = viewCLI.gameModel;
             
             switch (viewCLI.gameModel.getWeaponState()){
