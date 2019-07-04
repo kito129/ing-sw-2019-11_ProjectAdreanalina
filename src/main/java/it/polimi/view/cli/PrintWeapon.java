@@ -76,6 +76,7 @@ public class PrintWeapon implements Serializable {
             WeaponCard wc = weaponList.get(i);
             System.out.println(i + ") " + wc.getNameWeaponCard());
         }
+        System.out.println();
     }
 
     /**
@@ -91,5 +92,6 @@ public class PrintWeapon implements Serializable {
             WeaponsEffect we = weaponEffects.get(i);
             System.out.println(i + ")" + we.toString());
         }
+        System.out.println();
     }
 }
