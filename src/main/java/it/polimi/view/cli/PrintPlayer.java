@@ -22,10 +22,10 @@ public class PrintPlayer implements Serializable {
         PrintAmmo.print(player.getPlayerBoard().getAmmo(),1);
         System.out.println();
         System.out.println();
-        System.out.println("\tPOWER UP: ");
+        System.out.println("   POWER UP: ");
         PrintPowerUp.print(player.getPlayerBoard().getPlayerPowerUps(),false);
         System.out.println();
-        System.out.println("\tWEAPONS: ");
+        System.out.println("   WEAPONS: ");
         PrintWeapon.printList(player.getPlayerBoard().getPlayerWeapons(),false);
         System.out.println();
         System.out.println("********************************");
