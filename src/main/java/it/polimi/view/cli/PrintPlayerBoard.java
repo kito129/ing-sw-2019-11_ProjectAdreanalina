@@ -12,13 +12,13 @@ public class PrintPlayerBoard implements Serializable {
     public static void print(Player player){
 
         System.out.println();
-        System.out.print("PLAYER BOARD: ");
-        PrintPlayerInfo.printColorPlayer(player);
+        System.out.println("********************************");
+        System.out.println("PLAYER BOARD:");
         System.out.println();
+        PrintPlayerInfo.printColorPlayer(player);
         System.out.println("PLAYER NAME : " +player.getName());
         System.out.println("ID : " +player.getId());
         System.out.println("BOARD VALUE: " +player.getPlayerBoard().getBoardValue());
-        System.out.println();
         System.out.print("DAMAGES: ");
         PrintDamagesAndMarks.printDamages(player);
         System.out.println();
@@ -27,5 +27,7 @@ public class PrintPlayerBoard implements Serializable {
         System.out.println();
         System.out.print("AMMO: ");
         PrintEnumCardsAmmo.print(player.getPlayerBoard().getAmmo());
+        System.out.println();
+        System.out.println("********************************");
     }
 }

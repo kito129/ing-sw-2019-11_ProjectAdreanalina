@@ -833,8 +833,10 @@ public class ViewCLI implements RemoteView, Serializable {
                     for (Square a: gameModel.getMap().getSquares()){
                         
                         if (a.getClass().equals(GenerationSquare.class)){
-                        
-                            System.out.println("WEAPONS IN SQUARE: " + a.getRow()+","+a.getColumn());
+
+                            System.out.println();
+                            System.out.println("********************************");
+                            System.out.println("WEAPONS IN SQUARE: (" + a.getRow()+","+a.getColumn() +")");
                             GenerationSquare b = (GenerationSquare) a;
                             PrintWeapon.printList(b.getWeaponList(),true);
                         }
