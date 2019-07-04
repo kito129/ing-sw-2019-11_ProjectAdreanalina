@@ -57,7 +57,7 @@ public class MapCLI implements Serializable {
                         mappa.get(row).add(createSquareBG(gameModel.getMap().getSquare(row, column)));
                     } else {
                         
-                        mappa.get(row).add(createBlackSquare());
+                        mappa.get(row).add(createBlackSquare(row, column));
                         
                     }
                     
@@ -139,10 +139,32 @@ public class MapCLI implements Serializable {
 
                     check1 = false;
 
-                    //put coordinates
-                    if(s.getRow()==0){
+                    //put coordinates for columns
+                    for (int c = 0; c < 4; c++){
 
-                        //
+                        if(s.getRow()==0 && s.getColumn()==c){
+
+                            if(row == 1 && column == 5){
+
+                                Integer cc = c;
+                                squares.get(row).add(cc.toString());
+                                check1 = true;
+                            }
+                        }
+                    }
+
+                    //put coordinates for rows
+                    for (int r = 0; r < 3; r++){
+
+                        if(s.getRow()==r && s.getColumn()==0){
+
+                            if(row == 5 && column == 1){
+
+                                Integer rr = r;
+                                squares.get(row).add(rr.toString());
+                                check1 = true;
+                            }
+                        }
                     }
 
                     //put vertical door (top)
@@ -392,12 +414,13 @@ public class MapCLI implements Serializable {
     /**
      * Create a black square
      */
-    public ArrayList<ArrayList<String >> createBlackSquare (){
+    public ArrayList<ArrayList<String >> createBlackSquare (int rowSquare, int colSquare){
         
         ArrayList<ArrayList<String >> blackSquares = new ArrayList<ArrayList<String>>();
         String black = ANSI_BLACK_BACKGROUND + " ";
         int row;
         int column;
+        boolean check = false;
     
         //create row
         for (row = 0; row < 11; row++){
@@ -406,12 +429,41 @@ public class MapCLI implements Serializable {
         }
         
         //fill row with array list size 11 (column)
-        
+
         for (row = 0; row < 11; row++) {
 
             for (column = 0; column < 11; column++) {
-                //all black square
-                blackSquares.get(row).add(new String(black));
+
+                //coordinate for columns
+                if(rowSquare==0 && colSquare==3){
+
+                    check = false;
+                    if (row == 1 && column == 5){
+
+                        Integer rr = rowSquare;
+                        blackSquares.get(row).add(rr.toString());
+                        check = true;
+                    }
+                }
+
+                //coordinate for columns
+                if(rowSquare==2 && colSquare==0){
+
+                    check = false;
+                    if (row == 5 && column == 1){
+
+                        Integer rr = rowSquare;
+                        blackSquares.get(row).add(rr.toString());
+                        check = true;
+                    }
+                }
+
+                if(!check){
+
+                    //all black square
+                    blackSquares.get(row).add(new String(black));
+                }
+
             }
         }
         return blackSquares;
