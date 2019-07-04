@@ -588,6 +588,7 @@ public class ViewCLI implements RemoteView, Serializable {
             case SCORINGPLAYERBOARD:
                 break;
             case RESPWANPLAYERSELECTION:
+                //TODO
                 break;
             case ENDTURN:
                 break;
@@ -857,7 +858,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public  void viewSpawnPowerUp () throws RemoteException {
         
-        if (checkCurrent()) {
+        if (gameModel.getSpawnPlayer().getName().equals(user)) {
             
             System.out.println();
             System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
