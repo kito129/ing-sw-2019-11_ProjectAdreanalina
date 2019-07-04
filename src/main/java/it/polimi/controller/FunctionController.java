@@ -218,7 +218,6 @@ public class FunctionController {
     
         //put ammo and weapon card
         refreshMapEndTurn();
-        functionModel.getGameModel().getActualPlayer().getPlayerBoard().addWeapon(new Electroscythe());
         
         //now game can start
         this.functionModel.getGameModel().setState(State.MENU);
@@ -403,10 +402,17 @@ public class FunctionController {
                 //guardo se la square è di generation, se si devo chidere alla view l'index dell'arma
                 if (map.isGenerationSquare(inputSquare)) {
                     
-                    //effective catch gia con l'index giusto se è una Generation Square
-                    indexWeapon = view.getIndex();
-                    this.functionModel.grabActionModel(inputSquare, indexWeapon);
-                    this.functionModel.getGameModel().setState(State.GRAB);
+                    GenerationSquare gen = (GenerationSquare) inputSquare;
+                    if (gen.getWeaponList().size()>0) {
+    
+                        //effective catch gia con l'index giusto se è una Generation Square
+                        indexWeapon = view.getIndex();
+                        this.functionModel.grabActionModel(inputSquare, indexWeapon);
+                        this.functionModel.getGameModel().setState(State.GRAB);
+                    } else {
+    
+                        setErrorState("THIS GENERATION SQUARE IS EMPTY");
+                    }
                     
                 } else {
     
@@ -494,6 +500,7 @@ public class FunctionController {
                 //effect
                 this.functionModel.usePowerUpNewton((Newton)this.functionModel.getGameModel().getPowerUpSelected(),targetPlayer, targetSquare);
                 functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() +" USE POWER UP NEWTON");
+                functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().remove(this.functionModel.getGameModel().getPowerUpSelected());
                 functionModel.getGameModel().setState(State.USEPOWERUP);
             } catch (NotInSameDirection notInSameDirection) {
                 
@@ -504,26 +511,6 @@ public class FunctionController {
             } catch (MapException e) {
                 mapErrorGestor();
             }
-            //TAGBACK GRANATE
-        } else if (this.functionModel.getGameModel().getPowerUpSelected().getClass().equals(TagBackGrenade.class)) {
-    
-            Player targetPlayer;
-            try {
-                
-                //get input
-                targetPlayer = this.functionModel.getGameModel().getPlayerById(view.getTarget1());
-                //effect
-                this.functionModel.usePowerUpTagBackGrenade((TagBackGrenade) this.functionModel.getGameModel().getPowerUpSelected(), targetPlayer);
-                functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() +" USE POWER UP TAGBACK GRENADE");
-                functionModel.getGameModel().setState(State.USEPOWERUP);
-            } catch (NotVisibleTarget notVisibleTarget) {
-    
-                setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE");
-            } catch (MapException e) {
-                mapErrorGestor();
-            }
-    
-    
             //TELEPORTER
         } else if (this.functionModel.getGameModel().getPowerUpSelected().getClass().equals(Teleporter.class)) {
     
@@ -535,6 +522,7 @@ public class FunctionController {
                 //effect
                 this.functionModel.usePowerUpTeleporter((Teleporter) this.functionModel.getGameModel().getPowerUpSelected(), targetSquare);
                 functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() +" USE POWER UP TELEPORTER");
+                functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().remove(this.functionModel.getGameModel().getPowerUpSelected());
                 functionModel.getGameModel().setState(State.USEPOWERUP);
             
             }catch (MapException e) {
@@ -554,6 +542,7 @@ public class FunctionController {
                 //effect
                 this.functionModel.usePowerUpTargetingScope((TargetingScope) this.functionModel.getGameModel().getPowerUpSelected(), targetPlayer);
                 functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() +" USE POWER UP TARGETING SCOPE");
+                functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().remove(this.functionModel.getGameModel().getPowerUpSelected());
                 functionModel.getGameModel().setState(State.USEPOWERUP);
             } catch (MapException e) {
                 

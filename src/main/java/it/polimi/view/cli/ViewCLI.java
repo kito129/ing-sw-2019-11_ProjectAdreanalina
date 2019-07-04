@@ -548,6 +548,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case SELECTPOWERUPINPUT:
                 viewSelectPowerUpInput();
+                break;
             case USEPOWERUP:
                 viewUsePowerUp();
                 break;
@@ -856,6 +857,10 @@ public class ViewCLI implements RemoteView, Serializable {
                     }
                     break;
                 case 10:
+                    
+                    PrintKillShotTrack.print(gameModel.getKillShotTrack().getTrack());
+                    break;
+                case 11:
                     printMap();
                     break;
             }
@@ -935,6 +940,9 @@ public class ViewCLI implements RemoteView, Serializable {
     
         if(checkCurrent()) {
             
+            System.out.print("MAP: ");
+            printMap();
+            
             PrintRunAction.print();
             setSquareInput(1);
             
@@ -971,6 +979,9 @@ public class ViewCLI implements RemoteView, Serializable {
     public void  viewGrabSelection() throws RemoteException {
     
         if(checkCurrent()) {
+    
+            System.out.print("MAP: ");
+            printMap();
             
             PrintGrabAction.printGrabStuff();
             setSquareInput(1);
@@ -978,17 +989,23 @@ public class ViewCLI implements RemoteView, Serializable {
             try {
                 
                 target = gameModel.getMap().getSquare(row,column);
+                GenerationSquare gen = (GenerationSquare) target;
                 
-                if(gameModel.getMap().isGenerationSquare(target)){
+                if(gameModel.getMap().isGenerationSquare(target) ) {
+    
+                    if (gen.getWeaponList().size() > 0) {
+                        PrintGrabAction.printGrabWeapon();
+                        PrintWeapon.printList(((GenerationSquare) target).getWeaponList(), false);
+                        PrintSelectAction.printIndexWeapon();
+                        Scanner input = new Scanner(System.in);
         
-                    PrintGrabAction.printGrabWeapon();
-                    PrintWeapon.printList(((GenerationSquare) target).getWeaponList(),false);
-                    PrintSelectAction.printIndexWeapon();
-                    Scanner input = new Scanner(System.in);
-                    
-                    while(!input.hasNextInt())
-                        input = new Scanner(System.in);
-                    setIndex(input.nextInt());
+                        while (!input.hasNextInt())
+                            input = new Scanner(System.in);
+                        setIndex(input.nextInt());
+                    }else {
+                        
+                        System.out.print("THIS GENERATION SQUARE IS EMPTY");
+                    }
                 }
                 
                 notifyController();
@@ -1107,6 +1124,7 @@ public class ViewCLI implements RemoteView, Serializable {
             
             if (booleanChose) {
                 
+                PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
                 System.out.println("HERE IS THE UNLOADED WEAPON, SELECT WEAPON TO RECHARGE");
                 PrintWeapon.printList(gameModel.getWeaponToCharge(), false);
                 setIndex(getUserInput(-1, gameModel.getWeaponToCharge().size()));
