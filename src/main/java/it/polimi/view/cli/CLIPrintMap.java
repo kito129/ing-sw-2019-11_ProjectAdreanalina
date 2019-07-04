@@ -314,15 +314,6 @@ public class CLIPrintMap implements Serializable {
                 }
             }
         }
-
-        for (int r = 0; r < 11; r++){
-
-            for(int c =0; c<11; c++){
-
-                System.out.print(squares.get(r).get(c));
-            }
-            System.out.println();
-        }
         return squares;
     }
 

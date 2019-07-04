@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
 
-
 public class ViewCLI implements RemoteView, Serializable {
 
     //TODO controllare se inserisco -1 che si torna indietro
@@ -711,7 +710,7 @@ public class ViewCLI implements RemoteView, Serializable {
         Scanner input = new Scanner(System.in);
         int temp;
         
-        System.out.println("Your Choise?");
+        System.out.println("Your Choice?");
         System.out.println("0) YES");
         System.out.println("1) NO");
     
