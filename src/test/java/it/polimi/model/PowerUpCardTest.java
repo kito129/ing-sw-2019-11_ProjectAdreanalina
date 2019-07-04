@@ -9,6 +9,8 @@ public class PowerUpCardTest {
 
 
     PowerUpCard powerUpCard;
+    PowerUpCard powerUpCard1;
+    PowerUpCard powerUpCard2;
 
 
     @Before
@@ -16,6 +18,8 @@ public class PowerUpCardTest {
     public void setUp(){
 
         powerUpCard=new Newton(EnumColorCardAndAmmo.BLU);
+        powerUpCard1=new Newton(EnumColorCardAndAmmo.RED);
+        powerUpCard2=new Newton(EnumColorCardAndAmmo.YELLOW);
     }
 
     @Test
@@ -41,6 +45,8 @@ public class PowerUpCardTest {
     public void getColorRespawnTest(){
 
         assertEquals(EnumColorSquare.BLU,powerUpCard.getColorRespawn());
+        assertEquals(EnumColorSquare.RED,powerUpCard1.getColorRespawn());
+        assertEquals(EnumColorSquare.YELLOW,powerUpCard2.getColorRespawn());
     }
 
     @Test
