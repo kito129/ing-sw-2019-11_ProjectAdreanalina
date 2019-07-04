@@ -126,6 +126,12 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case RECHARGE:
                     functionController.recharge(view);
                     break;
+                case GRENADESELECTION:
+                     functionController.grendadeSelection(view);
+                 break;
+                case GRENADE:
+                    functionController.grenade();
+                    break;
                 case PASSTURN:
                     //TODO
                     break;

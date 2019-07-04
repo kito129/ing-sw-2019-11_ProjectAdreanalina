@@ -5,6 +5,7 @@ import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
 
 import java.io.Serializable;
+import java.lang.management.PlatformLoggingMXBean;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +49,13 @@ public class GameModel implements Serializable {
     private boolean endTurn;
     //weapon to charge
     private ArrayList<WeaponCard> weaponToCharge = new ArrayList<>();
+    //grenade
+    private Player userGrenade;
+    private ArrayList<Player> playerDamagedWithGrenade = new ArrayList<>();
+    private ArrayList<Boolean> playerDamagedWithGrenadeVisibility = new ArrayList<>();
+    private int userGrenadeCount;
+    private  ArrayList<Player> usedGrenade = new ArrayList<>();
+    
     //powerup
     private PowerUpCard powerUpSelected; //current weapon effect for current Player
     //message
@@ -76,6 +84,46 @@ public class GameModel implements Serializable {
         }
         return null;
         
+    }
+    
+    public ArrayList<Player> getUsedGrenade () {
+        
+        return usedGrenade;
+    }
+    
+    public ArrayList<Boolean> getPlayerDamagedWithGrenadeVisibility () {
+        
+        return playerDamagedWithGrenadeVisibility;
+    }
+    
+    public ArrayList<Player> getPlayerDamagedWithGrenade () {
+        
+        return playerDamagedWithGrenade;
+    }
+    
+    public Player getUserGrenade () {
+        
+        return userGrenade;
+    }
+    
+    public int getUserGrenadeCount () {
+        
+        return userGrenadeCount;
+    }
+    
+    public void incremanetGrenade(){
+        
+        this.userGrenadeCount++;
+    }
+    
+    public void resetUserGrenadeCount(){
+        
+        this.userGrenadeCount=0;
+    }
+    
+    public void setUserGrenade (Player userGrenade) {
+        
+        this.userGrenade = userGrenade;
     }
     
     public int getActionCount () {

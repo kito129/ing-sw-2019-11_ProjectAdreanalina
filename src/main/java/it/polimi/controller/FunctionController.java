@@ -181,6 +181,8 @@ public class FunctionController {
                     this.functionModel.getGameModel().setState(State.RESPWANPLAYERSELECTION);
                     
                 }
+            case GRENADESELECTION:
+                this.functionModel.getGameModel().setState(State.GRENADESELECTION);
                 
             default:
                 this.functionModel.getGameModel().setState(State.MENU);
@@ -755,8 +757,13 @@ public class FunctionController {
             functionModel.getGameModel().setState(State.SELECTRECHARGE);
         } else {
             
-            //settare chi deve respawnare in ordine in base alla lista dei giocatori morti
-            functionModel.getGameModel().setState(State.RESPWANPLAYERSELECTION);
+            //use grenade
+            grenadeGestor();
+            if (functionModel.getGameModel().getPlayerDamagedWithGrenade().size()>0){
+                
+                functionModel.getGameModel().setUserGrenade(functionModel.getGameModel().getPlayerDamagedWithGrenade().get(0));
+            }
+            functionModel.getGameModel().setState(State.GRENADESELECTION);
         }
     }
     
@@ -765,6 +772,67 @@ public class FunctionController {
         setWeaponToCharge();
         functionModel.getGameModel().setDeadPlayer();
         
+    }
+    
+    public void grendadeSelection (RemoteView view) throws RemoteException {
+    
+        if (view.isBooleanChose()) {
+        
+            Player targetPlayer = functionModel.getGameModel().getActualPlayer();
+            try {
+    
+                //effect
+                this.functionModel.usePowerUpTagBackGrenade((TagBackGrenade) this.functionModel.getGameModel().getPowerUpSelected(), targetPlayer);
+                functionModel.getGameModel().setMessageToAllView("PLAYER " + functionModel.getGameModel().getUserGrenade() + " USE POWER UP TAGBACK GRENADE ON CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName());
+                functionModel.getGameModel().setState(State.GRENADE);
+              
+            } catch (NotVisibleTarget notVisibleTarget) {
+    
+                setErrorState("ERROR: THE CURRENT PLAYER IS NOT VISIBLE WHEN DAMAGED YOU");
+    
+            }
+        
+        }
+    }
+    
+    public void grenade(){
+    
+        if (functionModel.getGameModel().getUserGrenadeCount()<functionModel.getGameModel().getPlayerDamagedWithGrenade().size()) {
+        
+            functionModel.getGameModel().getPlayerDamagedWithGrenadeVisibility().remove(functionModel.getGameModel().getUsedGrenade().indexOf(functionModel.getGameModel().getUsedGrenade()));
+            functionModel.getGameModel().getPlayerDamagedWithGrenade().remove(functionModel.getGameModel().getUserGrenade());
+            functionModel.getGameModel().incremanetGrenade();
+            functionModel.getGameModel().setUserGrenade(functionModel.getGameModel().getPlayerDamagedWithGrenade().get(functionModel.getGameModel().getUserGrenadeCount()));
+        } else {
+            //finish to use grenade now can respawn dead player
+            deadPlayerGestor();
+            functionModel.getGameModel().setState(State.DEADPLAYER);
+        }
+        
+    }
+    
+    public void grenadeGestor(){
+    
+        ArrayList<Player> playerDamaged = functionModel.getGameModel().getPlayerDamaged();
+        ArrayList<Boolean> playerDamagedVisibility = functionModel.getGameModel().getPlayerDamagedWithGrenadeVisibility();
+        
+        for (int i = 0; i < playerDamaged.size(); i++) {
+            Player a = playerDamaged.get(i);
+            Boolean b =  playerDamagedVisibility.get(i);
+        
+            for (PowerUpCard c : a.getPlayerBoard().getPlayerPowerUps()) {
+            
+                if (c.getNameCard().equals("TAGBACK GRENADE") && b) {
+                
+                    functionModel.getGameModel().getPlayerDamagedWithGrenade().add(a);
+                }
+            }
+        }
+    }
+    
+    public  void deadPlayerGestor(){
+    
+    
     }
     
     //scoring

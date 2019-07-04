@@ -4,6 +4,8 @@ import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -589,9 +591,11 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case SCORINGPLAYERBOARD:
                 break;
-            case RESPWANPLAYERSELECTION:
-                System.out.print("respan other player");
+            case GRENADESELECTION:
+                viewGrenadeSelection();
                 break;
+            case GRENADE:
+                viewGrenade();
             case ENDTURN:
                 break;
             case FINALSCORING:
@@ -1199,4 +1203,33 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
+    
+    //grenade
+    public void viewGrenadeSelection() throws RemoteException {
+        
+        if(gameModel.getUserGrenade().getName().equals(user)){
+    
+            System.out.print("DO YOU WANT TO USE TAG BACK GRENADE ON CURRENT PLAYER?");
+            setYesNoBooleanChoise(1);
+            notifyController();
+            
+        } else {
+            
+            System.out.print("WAINTING FOR THE PLAYER THAT USING TAG BACK GRENADE");
+        }
+        
+    }
+    
+    public void viewGrenade() throws RemoteException {
+    
+        if(gameModel.getUserGrenade().getName().equals(user)){
+            
+            //view grenade
+            printMessageAll();
+            notifyController();
+        } else {
+    
+           printMessageAll();
+        }
+    }
 }

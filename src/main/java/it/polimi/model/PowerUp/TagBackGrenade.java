@@ -31,7 +31,6 @@ public class TagBackGrenade extends PowerUpCard {
         if (map.isVisible(currentPlayer, targetPlayer)) {
 
             currentPlayer.singleMark(targetPlayer.getColor());
-            System.out.println("danneggio adnre con mrchio di ");
             currentPlayer.stampa();
         } else {
 
