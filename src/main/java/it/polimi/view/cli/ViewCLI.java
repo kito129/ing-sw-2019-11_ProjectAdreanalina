@@ -756,6 +756,8 @@ public class ViewCLI implements RemoteView, Serializable {
     public int getUserInput (int min, int max){
         
         int i;
+        System.out.println();
+        System.out.println("CHOICE: ");
         Scanner input = new Scanner(System.in);
         
         do {
