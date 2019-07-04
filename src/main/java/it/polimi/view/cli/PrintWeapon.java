@@ -58,8 +58,8 @@ public class PrintWeapon implements Serializable {
             }
         } else {
 
+            System.out.println("\t WEAPON LIST EMPTY");
             System.out.println();
-            System.out.println("\tWEAPON LIST EMPTY");
         }
     }
     

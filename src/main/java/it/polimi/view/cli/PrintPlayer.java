@@ -13,6 +13,10 @@ public class PrintPlayer implements Serializable {
      */
     public static void print(Player player){
 
+        System.out.println();
+        System.out.println();
+        System.out.println("********************************");
+        System.out.println();
         PrintPlayerInfo.print(player);
         PrintScore.print(player);
         System.out.println("ALIVE: " +player.isAlive());
@@ -23,6 +27,8 @@ public class PrintPlayer implements Serializable {
         System.out.println();
         System.out.println("WEAPONS: ");
         PrintWeapon.printList(player.getPlayerBoard().getPlayerWeapons(),false);
+        System.out.println();
+        System.out.println("********************************");
     }
 
     /**
