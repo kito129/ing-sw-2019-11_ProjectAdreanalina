@@ -185,8 +185,6 @@ public class GameModel implements Serializable {
         this.weaponSelected = weaponSelected;
     }
     
-
-
     /**
      * Gets actual player.
      *
@@ -238,6 +236,12 @@ public class GameModel implements Serializable {
      * @return the players
      */
 
+    public void setPlayers(Player player){
+
+        this.players.add(player);
+    }
+
+
     public ArrayList<Player> getPlayers(boolean wantCurrent) {
         
         if (wantCurrent) {
@@ -250,6 +254,11 @@ public class GameModel implements Serializable {
             return temp;
         }
 
+    }
+
+    public void setActualPlayer(Player actualPlayer) {
+
+        this.actualPlayer = actualPlayer;
     }
 
     
@@ -309,11 +318,7 @@ public class GameModel implements Serializable {
     }
     
     
-    public void setPlayers(Player player){
-       
-        this.players.add(player);
-    }
-    
+
 
     public void setState (State state)  {
         
@@ -339,16 +344,7 @@ public class GameModel implements Serializable {
         this.errorMessage = errorMessage;
     }
 
-    /**
-     * Sets actual player.
-     *
-     * @param actualPlayer the actual playerf
-     */
-    public void setActualPlayer(Player actualPlayer) {
-        
-        this.actualPlayer = actualPlayer;
-    }
-    
+
     public void setDeadPlayer () {
     
         ArrayList<Player> tempPLayers = new ArrayList<>();

@@ -481,7 +481,9 @@ public class MapCLI implements Serializable {
         System.out.println();
         System.out.println("YOU CAN ONLY MOVE THROUGH THE DOORS!!!");
         System.out.println();
-        System.out.println("ON A NORMAL SQUARE YOU CAN GRAB AN AMMO CARD WHILE ON A GENERATIONS SQUARE YOU CAN GRAB A WEAPON CARD");
+        System.out.println("YOU ARE REPRESENTED ON THE MAP BY THE INITIAL LETTER OF YOUR COLOR");
+        System.out.println();
+        System.out.println("ON A NORMAL SQUARE YOU CAN GRAB AN AMMO CARD WHILE ON A GENERATIONS SQUARE YOU CAN GRAB A WEAPON CARD, IF IT'S POSSIBLE");
         System.out.println();
         System.out.println("- BETWEEN TWO SQUARES MEANS THAT THERE IS A HORIZONTAL DOOR");
         System.out.println("| BETWEEN TWO SQUARES MEANS THAT THERE IS A VERTICAL DOOR");
