@@ -759,8 +759,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public int getUserInput (int min, int max){
         
         int i;
-        System.out.println();
-        System.out.println("CHOICE: ");
+        System.out.print("CHOICE: ");
         Scanner input = new Scanner(System.in);
         
         do {
@@ -876,7 +875,8 @@ public class ViewCLI implements RemoteView, Serializable {
             PrintPowerUp.print(player.getPowerUpCardsSpawn(), false);
     
             System.out.println();
-            System.out.println("MAKE YOUR CHOICE!");
+            System.out.println("MAKE YOUR CHOICE!!!");
+            System.out.println();
     
             setIndex(getUserInput(0, 1));
             notifyController();
