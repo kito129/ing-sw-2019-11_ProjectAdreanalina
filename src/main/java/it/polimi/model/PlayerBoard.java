@@ -16,6 +16,7 @@ public class PlayerBoard implements Serializable {
     private ArrayList<EnumColorPlayer> marks;
     private ArrayList<WeaponCard> playerWeapons;
     private ArrayList<PowerUpCard> playerPowerUps;
+    private Boolean finalFrenzy;
     
     /**
      * Instantiates a new Player board, setting ammo, board value to the start value.
@@ -33,6 +34,7 @@ public class PlayerBoard implements Serializable {
         marks = new ArrayList<EnumColorPlayer>();
         playerWeapons = new ArrayList<WeaponCard>();
         playerPowerUps = new ArrayList<PowerUpCard>();
+        finalFrenzy=false;
         
     }
     
@@ -248,12 +250,21 @@ public class PlayerBoard implements Serializable {
      */
     public void decreaseBoardValue() {
 
-        if (boardValue == 2) {
+        if(!finalFrenzy) {
 
-            boardValue = 1;
-        } else if (boardValue != 1) {
+            if (boardValue == 2) {
 
-            boardValue -= 2;
+                boardValue = 1;
+            } else if (boardValue != 1) {
+
+                boardValue -= 2;
+            }
+        }else{
+
+            if(boardValue==2){
+
+                boardValue=1;
+            }
         }
     }
 
@@ -457,6 +468,13 @@ public class PlayerBoard implements Serializable {
         return damages.indexOf(color);
     }
 
+    public void startFinalFrenzy(){
+
+        finalFrenzy=true;
+        this.boardValue=2;
+
+
+    }
 
 
 /*

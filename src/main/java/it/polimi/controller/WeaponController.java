@@ -15,7 +15,7 @@ public class WeaponController {
     
     private FunctionController functionController;
     private FunctionModel functionModel;
-    
+
     /**
      * Instantiates a new Weapon controller.
      *
@@ -1501,167 +1501,166 @@ public class WeaponController {
      */
     //TODO andre
     public void MachineGun(GameModel gameModel, MachineGun weapon, RemoteView view) throws RemoteException{
-        
-        //necessary from model
+
         Player currentPlayer = gameModel.getActualPlayer();
         Map map = gameModel.getMap();
-        //necessary input
         Player target1Base;
-        Player target2Base; // se l'utente per l'effetto base non vuole colpire due target, questo viene messo a null.
-        Player targetFocusShot;
+        Player target2Base;
+        Player targetFocusShot;//da usare solo se ha scelto due barsagli inizialmente
         Player targetTurretTripod;
-        //necessary input
-        WeaponsEffect effect = view.getWeaponsEffect();
-        
-        boolean choice1;
-        boolean choice2;
-        choice1 = view.isUseSecondEffect();
-        choice2 = view.isUseThirdEffect();
-        /*
-        //array for target
+        int choise=-1; //chiedere questo intero;
         ArrayList<Player> targetBase = new ArrayList<>();
-        
-        switch (gameModel.getActualWeaponEffect()) {
-            
+
+        switch (gameModel.getActualWeaponEffect()){
+
             case BaseEffect:
                 //base mode
                 try {
-                    
-                    //get the target
-                    target1Base = gameModel.getPlayerById(view.getTarget1());
-                    target2Base = gameModel.getPlayerById(view.getTarget2()); //possible null
-                    
-                    if (target2Base == null) {
-                        
+
+                    if (view.getTarget2()==-1) {
+
+                        target1Base = gameModel.getPlayerById(view.getTarget1());
                         targetBase.add(target1Base);
                         weapon.baseEffect(map, currentPlayer, targetBase);
-                        
-                        gameModel.setPlayerDamagedIndex(1);
-                        
-                    } else if (target1Base != target2Base) {
-                        
-                        targetBase.add(target1Base);
-                        targetBase.add(target2Base);
-                        weapon.baseEffect(map, currentPlayer, targetBase);
-                        
-                        gameModel.setPlayerDamagedIndex(2);
-                        
-                    } else {
-                        
-                        throw new NotValidInput();
+                    }else {
+
+                        target1Base = gameModel.getPlayerById(view.getTarget1());
+                        target2Base = gameModel.getPlayerById(view.getTarget2());
+                        if(target1Base!=target2Base) {
+
+                            targetBase.add(target1Base);
+                            targetBase.add(target2Base);
+                            weapon.baseEffect(map, currentPlayer, targetBase);
+                        }else {
+
+                            throw new NotValidInput();
+                        }
                     }
-                    
-                    gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    
                 } catch (NotVisibleTarget notVisibleTarget) {
-                    
+
                     //gestione target 1 o 2 effetto base non visibili con il curretnPLayer
                 } catch (NotValidInput notValidInput) {
-                    
+
                     //gestione target 1==target 2 effetto base
                 } catch (MapException e) {
-                    
+
                     gameModel.setErrorMessage("ERROR: MAP ERROR");
                 }
                 break;
-            
-            
+
             case FocusShotEffect:
-                
-                if(gameModel.getBeforeEffect()== WeaponsEffect.BaseEffect) {
-                    
-                    try {
-                        
-                        //get the target
+
+                try {
+
+                    if (view.getTarget2() == -1) {
+
                         target1Base = gameModel.getPlayerById(view.getTarget1());
-                        target2Base = gameModel.getPlayerById(view.getTarget2()); // possible null
-                        targetFocusShot = gameModel.getPlayerById(view.getTarget3());
-                        
-                        if (targetFocusShot == target1Base) {
-                            
-                            weapon.focusShotEffect(currentPlayer, targetFocusShot);
-                            
-                            gameModel.getPlayerDamaged().add(target1Base);
-                            
-                            if(targetFocusShot == target2Base) {
-                                
-                                weapon.focusShotEffect(currentPlayer, targetFocusShot);
-                                
-                                gameModel.getPlayerDamaged().add(target2Base);
-                                
-                                
-                            } else {
-                                
-                                throw new NotValidInput();
-                            }
-                            
-                        } else {
-                            
+                        weapon.focusShotEffect(currentPlayer,target1Base);
+                    }else{
+
+                        target1Base = gameModel.getPlayerById(view.getTarget1());
+                        target2Base = gameModel.getPlayerById(view.getTarget2());
+                        targetFocusShot=gameModel.getPlayerById(view.getTarget3());
+                        if(targetFocusShot==target1Base||targetFocusShot==target2Base){
+
+                            weapon.focusShotEffect(currentPlayer,targetFocusShot);
+                        }
+
+                        else{
+
                             throw new NotValidInput();
                         }
-                    } catch (NotValidInput notValidInput) {
-                        
-                        //gestione se target focus shot dovesse essere diverso sia da target 1 sia target 2 effetto base
-                    } catch (MapException e) {
-                        
-                        gameModel.setErrorMessage("ERROR: MAP ERROR");
+
+
+
+
                     }
-                } else {
-                    
-                    gameModel.setErrorMessage("ERROR!");
+                }catch (MapException e) {
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                } catch (NotValidInput notValidInput) {
+
+                    //target selezionato non è uguale ad uno dell effetto base
                 }
-                
                 break;
-            
+
             case TurretTripodEffect:
-                
-                if(gameModel.getBeforeEffect() == WeaponsEffect.BaseEffect) {
-                    
-                    if (gameModel.getPlayerDamagedIndex() == 1) {
-                        if(choice1) {
-                            
-                            //get the target
-                            try {
-                                
-                                //TODO andre
-                                target1Base = gameModel.getPlayerById(view.getTarget1());
-                                target2Base = gameModel.getPlayerById(view.getTarget2());
-                                targetFocusShot = gameModel.getPlayerById(view.getTarget3());
-                                targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
-                                
-                            } catch (MapException e) {
-                                
-                                gameModel.setErrorMessage("ERROR: MAP ERROR");
+
+                try {
+                    if (view.getTarget2() == -1) {
+
+                        //prendo la choise int.
+                        if (choise == 0) {
+
+                            target1Base = gameModel.getPlayerById(view.getTarget1());
+                            weapon.focusShotEffect(currentPlayer, target1Base);
+
+                        } else if (choise == 1) {
+
+                            target1Base = gameModel.getPlayerById(view.getTarget1());
+                            targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
+                            if(targetTurretTripod!=target1Base) {
+                                weapon.turretTripodEffect(currentPlayer, target1Base);
+                                weapon.turretTripodEffect(map, currentPlayer, targetTurretTripod);
+                            }else{
+
+                                throw new NotValidInput();
                             }
+                        }else if(choise==2){
+
+                            targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
+                            weapon.turretTripodEffect(map,currentPlayer,targetTurretTripod);
                         }
-                        
-                        
-                        
-                    } else if (gameModel.getPlayerDamagedIndex() == 2) {
-                        
-                        //get the target
-                        try {
-                            //TODO andre
+                    }else{
+
+                        if (choise == 0) {
+
                             target1Base = gameModel.getPlayerById(view.getTarget1());
                             target2Base = gameModel.getPlayerById(view.getTarget2());
-                            targetFocusShot = gameModel.getPlayerById(view.getTarget3());
+                            targetFocusShot=gameModel.getPlayerById(view.getTarget3());
+                            if(targetFocusShot==target1Base) {
+                                weapon.focusShotEffect(currentPlayer,target2Base);
+                            }else if(targetFocusShot==target2Base){
+                                weapon.focusShotEffect(currentPlayer,target1Base);
+                            }
+                        } else if (choise == 1) {
+
+                            target1Base = gameModel.getPlayerById(view.getTarget1());
+                            target2Base = gameModel.getPlayerById(view.getTarget2());
+                            targetFocusShot=gameModel.getPlayerById(view.getTarget3());
                             targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
-                        } catch (MapException e) {
-                            
-                            gameModel.setErrorMessage("ERROR: MAP ERROR");
+                            if(targetTurretTripod!=target1Base) {
+
+                                if(targetFocusShot==target1Base) {
+                                    weapon.focusShotEffect(currentPlayer,target2Base);
+                                }else if(targetFocusShot==target2Base){
+                                    weapon.focusShotEffect(currentPlayer,target1Base);
+                                }
+                                weapon.turretTripodEffect(currentPlayer, target1Base);
+                                weapon.turretTripodEffect(map, currentPlayer, targetTurretTripod);
+                            }else{
+
+                                throw new NotValidInput();
+                            }
+                        }else if(choise==2){
+
+                            targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
+                            weapon.turretTripodEffect(map,currentPlayer,targetTurretTripod);
                         }
-                        
+
+
                     }
-                } else {
-                    
-                    gameModel.setErrorMessage("ERROR!");
+                }catch (MapException e) {
+
+                    gameModel.setErrorMessage("ERROR: MAP ERROR");
+                } catch (NotVisibleTarget notVisibleTarget){
+
+                    //terzo target non visibile
+                } catch (NotValidInput notValidInput) {
+
+                    //terzo target scelto non è diverso da uno dei due target dell'effetto base.
                 }
-                break;
-                
-         
         }
-        
-         */
     }
 
 

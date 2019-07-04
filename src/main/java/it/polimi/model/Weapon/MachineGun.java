@@ -79,14 +79,14 @@ public class MachineGun extends WeaponCard {
         target1or2.singleDamage(currentPlayer.getColor());
     }
 
-    // todo danno aggiuntivo del tripod all'altro dei due bersagli ( quello su cui non hai usato focus).assicurarsi che siano quindi diversi
+
+
 
     public void turretTripodEffect(Player currentPlayer, Player target1or2) {
 
         target1or2.singleDamage(currentPlayer.getColor());
     }
 
-    //todo target 3 deve essere diverso da 1 e 2
     public void turretTripodEffect(Map map, Player currentPlayer, Player target3) throws NotVisibleTarget {
 
         if (map.isVisible(currentPlayer, target3)) {
