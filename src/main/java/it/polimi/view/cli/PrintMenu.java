@@ -23,7 +23,7 @@ public class PrintMenu implements Serializable {
         System.out.println("8)  VIEW OTHERS PLAYERS' PLAYERBOARDS"); //damages, marks and ammo (printPlayerBoard)
         System.out.println("9)  VIEW OTHER WEAPONS ON THE MAP"); //take weapons from generation square (printWeapon)
         System.out.println("10) VIEW KILL SHOT TRACK");
-        System.out.println("11) VIEW THE MAP ");
+        System.out.println("11) VIEW THE MAP");
         System.out.println("--------------------------------------------------------");
         System.out.println();
     }
