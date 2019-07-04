@@ -81,7 +81,7 @@ public class ViewWeapon {
             }
         }
     
-        //viewCLI.CLIViewMap();
+        //viewCLI.printMap();
     
         viewCLI.notifyController();
         
@@ -850,26 +850,15 @@ public class ViewWeapon {
                         //I effect
                         case BaseEffect :
                             
-                            PrintEffectWeapon.printGrenadeLauncherBasicEffect(gameModel);
-                            viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
-                            viewCLI.notifyController();
+                           viewGrenadeLauncherBasicEffect(gameModel);
                             
                             break;
                         //II effect
                         case ExtraGrenadeEffect :
         
-                            PrintEffectWeapon.printGrenadeLauncherExtraGrenade(gameModel);
-                            viewCLI.setSquareInput(2);
-                            viewCLI.notifyController();
+                            viewGrenadeLauncherExtraGrenade(gameModel);
                             break;
                             
-                        case MoveTarget:
-                            
-                            System.out.println("Move player");
-                            viewCLI.setSquareInput(1);
-                            viewCLI.notifyController();
-                            break;
-        
                     }
                     break;
                 
@@ -1143,7 +1132,7 @@ public class ViewWeapon {
         viewCLI.setYesNoBooleanChoise(1);
         //get the player target
         System.out.println("Target: ");
-        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        viewCLI.setTarget1(viewCLI.getPlayerInput());
         //notify controller with new input
         viewCLI.notifyController();
     }
@@ -1191,7 +1180,7 @@ public class ViewWeapon {
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
-            viewCLI.setTarget3(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+            viewCLI.setTarget3(viewCLI.getPlayerInput());
         } else {
         
             viewCLI.setTarget3(-1);
@@ -1264,13 +1253,13 @@ public class ViewWeapon {
     
         PrintEffectWeapon.printZX2ScannerMode(gameModel);
         System.out.println("Target 1: ");
-        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        viewCLI.setTarget1(viewCLI.getPlayerInput());
         System.out.println("Do you want to choose another target?");
         viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
-            viewCLI.setTarget2(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+            viewCLI.setTarget2(viewCLI.getPlayerInput());
         } else {
         
             viewCLI.setTarget2(-1);
@@ -1280,7 +1269,7 @@ public class ViewWeapon {
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 3: ");
-            viewCLI.setTarget3(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+            viewCLI.setTarget3(viewCLI.getPlayerInput());
         } else {
         
             viewCLI.setTarget3(-1);
@@ -1296,7 +1285,6 @@ public class ViewWeapon {
         PrintEffectWeapon.printGrenadeLauncherBasicEffect(gameModel);
         //get the player target
         viewCLI.setTarget1(viewCLI.getPlayerInput());
-        
         PrintTarget.printYesNo();
         //get the square target
         viewCLI.setSquareInput(1);
@@ -1397,7 +1385,7 @@ public class ViewWeapon {
     public void viewRocketLauncherBaseEffectPlusFragmentingWarheadEffect (GameModel gameModel) throws RemoteException {
     
         PrintEffectWeapon.printRocketLauncherBasicEffect(gameModel);
-        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        viewCLI.setTarget1(viewCLI.getPlayerInput());
         System.out.println("Do you want to move the target in another square?");
         viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
@@ -1442,13 +1430,13 @@ public class ViewWeapon {
     
         PrintEffectWeapon.printPowerGloveRocketFirstMode(gameModel);
         System.out.println("Target 1: ");
-        viewCLI.setTarget2(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        viewCLI.setTarget2(viewCLI.getPlayerInput());
         System.out.println("Do you want to choose another target?");
         viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
-            viewCLI.setTarget3(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+            viewCLI.setTarget3(viewCLI.getPlayerInput());
         } else {
         
             viewCLI.setTarget3(-1);
@@ -1462,13 +1450,13 @@ public class ViewWeapon {
         
         PrintEffectWeapon.printShockwaveBasicMode(gameModel);
         System.out.println("Target 1: ");
-        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        viewCLI.setTarget1(viewCLI.getPlayerInput());
         System.out.println("Do you want to choose another target?");
         viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
-            viewCLI.setTarget2(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+            viewCLI.setTarget2(viewCLI.getPlayerInput());
         } else {
         
             viewCLI.setTarget2(-1);
@@ -1478,7 +1466,7 @@ public class ViewWeapon {
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 3: ");
-            viewCLI.setTarget3(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+            viewCLI.setTarget3(viewCLI.getPlayerInput());
         } else {
         
             viewCLI.setTarget3(-1);
@@ -1547,13 +1535,13 @@ public class ViewWeapon {
         }
         
         System.out.println("Target 1: ");
-        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        viewCLI.setTarget1(viewCLI.getPlayerInput());
         System.out.println("Do you want to choose another target?");
         viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
-            viewCLI.setTarget2(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+            viewCLI.setTarget2(viewCLI.getPlayerInput());
         } else {
         
             viewCLI.setTarget2(-1);
@@ -1568,13 +1556,13 @@ public class ViewWeapon {
     
         PrintEffectWeapon.printFlamethrowerBasicMode(gameModel);
         System.out.println("Target 1: ");
-        viewCLI.setTarget1(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+        viewCLI.setTarget1(viewCLI.getPlayerInput());
         System.out.println("Do you want to choose another target?");
         viewCLI.setYesNoBooleanChoise(1);
         if(viewCLI.isBooleanChose()){
         
             System.out.println("Target 2: ");
-            viewCLI.setTarget2(viewCLI.getUserInput(-1,gameModel.getPlayers(false).size()));
+            viewCLI.setTarget2(viewCLI.getPlayerInput());
         } else {
         
             viewCLI.setTarget2(-1);

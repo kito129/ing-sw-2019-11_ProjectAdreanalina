@@ -1,6 +1,5 @@
 package it.polimi.view.cli;
 
-import it.polimi.controller.GameController;
 import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
@@ -59,7 +58,7 @@ public class ViewCLI implements RemoteView, Serializable {
     //attribute for direction
     private EnumCardinalDirection cardinalDirection;
     private ViewWeapon viewWeapon;
-    private CLIPrintMap CLIPrintMap;
+    private MapCLI mapCLI;
 
 
     public ViewCLI(){
@@ -69,8 +68,10 @@ public class ViewCLI implements RemoteView, Serializable {
         Game.print();
         
         try {
+            //get game model reference and create map and wepaon class
             this.gameModel = gameController.getGameModel();
-            this.CLIPrintMap = new CLIPrintMap(this.gameModel);
+            this.mapCLI = new MapCLI(this.gameModel);
+            viewWeapon = new ViewWeapon(this);
             if(!gameController.isGameStarted()) {  //todo partita inizia solo quando si sono connessi tutti.se entri qui siamo sicuro in lobby.partita parte dopo la lobby
 
                 do {
@@ -86,7 +87,7 @@ public class ViewCLI implements RemoteView, Serializable {
                     do{
 
                         setUser();
-                    }while(!tryToReadd(user));
+                    }while(!tryToReAdd(user));
 
                     gameController.reAddObserver(this);
                     //todo manca da settare il player online
@@ -161,8 +162,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void pingToClient() throws RemoteException {
 
     }
-
-
+    
 
     //potrebbe essere sync
     /*public void setOnline (boolean online){
@@ -187,7 +187,7 @@ public class ViewCLI implements RemoteView, Serializable {
         return false;
     }
 
-    public boolean tryToReadd(String user){
+    public boolean tryToReAdd (String user){
 
         for(Player player:gameModel.getPlayers(true)){
 
@@ -205,7 +205,7 @@ public class ViewCLI implements RemoteView, Serializable {
         return false;
     }
 
-    public void print(String s) {
+    public void printString (String s) {
 
         System.out.println(s);
     }
@@ -220,9 +220,9 @@ public class ViewCLI implements RemoteView, Serializable {
         System.out.println(gameModel.getMessageToAllView());
     }
     
-    public it.polimi.view.cli.CLIPrintMap getCLIPrintMap () {
+    public MapCLI getMapCLI () {
         
-        return CLIPrintMap;
+        return mapCLI;
     }
     
     @Override
@@ -410,8 +410,6 @@ public class ViewCLI implements RemoteView, Serializable {
         this.index5 = index5;
     }
     
-    
-    
     public void setRow (int row) {
         
         this.row = row;
@@ -499,34 +497,7 @@ public class ViewCLI implements RemoteView, Serializable {
         this.choicePlayer3 = choicePlayer3;
     }
     
-    @Override
-    public void resetInput(){
-        //reset square
-        setColumn(-1);
-        setRow(-1);
-        setColumn2(-1);
-        setRow2(-1);
-        //reset index
-        setIndex(-2);
-        setIndex2(-2);
-        setIndex3(-2);
-        setIndex4(-2);
-        setIndex5(-2);
-        //reset Target
-        setTarget1(-1);
-        setTarget2(-1);
-        setTarget3(-1);
-        setTarget4(-1);
-        //reset choise
-        setBooleanChose(false);
-        setUseSecondEffect(false);
-        setUseThirdEffect(false);
-        setCardinalDirection(null);
-        setOptionWeapon(false);
-        setWeaponsEffect(null);
-        
-    }
-    
+   
     /**
      * modifies the view based on the current state
      * @param gameModel the gamemodel of the match
@@ -535,24 +506,12 @@ public class ViewCLI implements RemoteView, Serializable {
     public void update(GameModel gameModel) throws RemoteException {
         
         this.gameModel = gameModel;
-        this.getCLIPrintMap().gameModel=gameModel;
+        this.getMapCLI().gameModel=gameModel;
         this.run();
     }
     
-    public void CLIViewMap(){
-
-        CLIPrintMap.viewMapNew();
-    }
-    public void callRun() throws RemoteException {
-        if (gameModel.getActualPlayer().getName().equals(user)){
-            notifyController();
-        } else {
-            System.out.println("Waiting for current player Move");
-        }
-    }
     
     public void run() throws RemoteException {
-    
         
         switch (gameModel.getState()) {
     
@@ -617,8 +576,10 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case RECHARGE:
                 break;
-            case ENDACTION:
+            case ENDACTIONSELECTION:
                 viewEndAction();
+                break;
+            case ENDACTION:
                 break;
             case PASSTURN:
                 break;
@@ -626,7 +587,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case SCORINGPLAYERBOARD:
                 break;
-            case RESPWANPLAYER:
+            case RESPWANPLAYERSELECTION:
                 break;
             case ENDTURN:
                 break;
@@ -643,15 +604,64 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
+    //metodi di rete e observer
+    protected void notifyController() throws RemoteException {
+        
+        gameController.update(this);
+    }
+    
+    @Override
+    public void resetInput(){
+        //reset square
+        setColumn(-1);
+        setRow(-1);
+        setColumn2(-1);
+        setRow2(-1);
+        //reset index
+        setIndex(-2);
+        setIndex2(-2);
+        setIndex3(-2);
+        setIndex4(-2);
+        setIndex5(-2);
+        //reset Target
+        setTarget1(-1);
+        setTarget2(-1);
+        setTarget3(-1);
+        setTarget4(-1);
+        //reset choise
+        setBooleanChose(false);
+        setUseSecondEffect(false);
+        setUseThirdEffect(false);
+        setCardinalDirection(null);
+        setOptionWeapon(false);
+        setWeaponsEffect(null);
+        
+    }
+    
+    public void printMap (){
+        
+        mapCLI.viewMapCLI();
+    }
+    
+    public void callRun() throws RemoteException {
+        
+        if (gameModel.getActualPlayer().getName().equals(user)){
+            notifyController();
+        } else {
+            System.out.println("Waiting..");
+        }
+    }
+    
+    
     public void viewError() throws RemoteException {
         
-        print(gameModel.getErrorMessage());
-        print(gameModel.getMessageToCurrentView() + "\n");
+        printString(gameModel.getErrorMessage());
+        printString(gameModel.getMessageToCurrentView() + "\n");
         notifyController();
         
     }
     
-    //metodi di input e controllo
+    //input method
     public int getPlayerInput(){
     
         PrintTarget.print();
@@ -735,15 +745,12 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    
     public EnumColorSquare setRoomColorInput (GameModel gameModel){
         
         PrintTarget.printColor(gameModel);
         
         return gameModel.getMap().getRoomColor().get(getUserInput(0,gameModel.getMap().getRoomColor().size()));
     }
-    
-    
     
     
     public int getUserInput (int min, int max){
@@ -773,12 +780,6 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    //metodi di rete e observer
-    protected void notifyController() throws RemoteException {
-
-        gameController.update(this);
-    }
-
     
     //metodi di case
     public void viewLobby() throws RemoteException{
@@ -791,7 +792,8 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     public void viewMenu() throws RemoteException {
-        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+        
+        if(checkCurrent()) {
             
             PrintMenu.print();
             int choise = getUserInput(0,10);
@@ -839,7 +841,7 @@ public class ViewCLI implements RemoteView, Serializable {
                     }
                     break;
                 case 10:
-                    getCLIPrintMap().viewMapNew();
+                    printMap();
                     break;
             }
             notifyController();
@@ -851,7 +853,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public  void viewSpawnPowerUp () throws RemoteException {
         
-        if (user.equals(gameModel.getSpawnPlayer().getName())) {
+        if (checkCurrent()) {
             
             System.out.println();
             System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
@@ -881,12 +883,9 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewStartTurn() throws RemoteException {
         
-        //create weapon view controller
-        viewWeapon = new ViewWeapon(this);
-        
-        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+        if(checkCurrent()) {
             
-            //CLIViewMap();
+            printMap();
             PrintPlayer.print(gameModel.getActualPlayer());
             notifyController();
         } else {
@@ -897,7 +896,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewChoiseAction() throws RemoteException {
     
-        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+        if(checkCurrent()) {
             
             System.out.println("\nYOUR INFO:\n");
             PrintPlayer.print(gameModel.getActualPlayer());
@@ -915,11 +914,10 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     
-    
     //RUN action method
     public void viewRunSelection() throws RemoteException {
     
-        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+        if(checkCurrent()) {
             
             PrintRunAction.print();
             setSquareInput(1);
@@ -933,25 +931,30 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     public void viewRun() throws RemoteException {
-        
-        printMessageAll();
-        
-        if(checkCurrent()){
-            
-            printMessageCurrent();
-        }
-        
-        CLIViewMap();
     
-        notifyController();
+        if(checkCurrent()) {
+            
+            printMessageAll();
+            
+            if(checkCurrent()){
+                
+                printMessageCurrent();
+            }
+            
+            printMap();
+        
+            notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
+        }
         
     }
     
     //GRAB action method
-
     public void  viewGrabSelection() throws RemoteException {
     
-        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+        if(checkCurrent()) {
             
             PrintGrabAction.printGrabStuff();
             setSquareInput(1);
@@ -984,23 +987,29 @@ public class ViewCLI implements RemoteView, Serializable {
 
     public void viewGrab() throws RemoteException {
     
-        printMessageAll();
-    
-        if(checkCurrent()){
+        if(checkCurrent()) {
+            
+            printMessageAll();
         
-            printMessageCurrent();
+            if(checkCurrent()){
+            
+                printMessageCurrent();
+            }
+        
+            printMap();
+        
+            notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
         }
-    
-        CLIViewMap();
-    
-        notifyController();
     }
     
     
     //powerUP method
     public void viewSelectPowerUp(){
     
-        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+        if(checkCurrent()) {
             
             ArrayList<PowerUpCard> powerUp = gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps();
             PrintPowerUp.print(powerUp,false);
@@ -1022,7 +1031,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewSelectPowerUpInput() throws RemoteException {
         
-        if(gameModel.getActualPlayer().getName().equals(this.user)) {
+        if(checkCurrent()) {
             
             switch (gameModel.getPowerUpSelected().getNameCard()){
                 case "NEWTON":
@@ -1052,96 +1061,115 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     public void viewUsePowerUp() throws RemoteException {
-        
-        printMessageAll();
     
-        if(checkCurrent()){
+        if(checkCurrent()) {
+            
+            printMessageAll();
         
-            printMessageCurrent();
+            if(checkCurrent()){
+            
+                printMessageCurrent();
+            }
+        
+            //printMap();
+        
+            notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
         }
-    
-        //CLIViewMap();
-    
-        notifyController();
         
     }
     
+    //REACHERGE METOD
     public void viewSelectRecharge() throws RemoteException {
     
-        int i3;
-        int i4;
-        
-        if (booleanChose) {
+        if(checkCurrent()) {
             
-            System.out.println("HERE IS THE UNLOADED WEAPON, SELECT WEAPON TO RECHARGE");
-            PrintWeapon.printList(gameModel.getWeaponToCharge(), false);
-            setIndex(getUserInput(-1, gameModel.getWeaponToCharge().size()));
-    
-            System.out.println("Want to pay with ammo (NO) or also power up (YES)?");
-            setYesNoBooleanChoise(1);
-    
+            int i3;
+            int i4;
+            
             if (booleanChose) {
+                
+                System.out.println("HERE IS THE UNLOADED WEAPON, SELECT WEAPON TO RECHARGE");
+                PrintWeapon.printList(gameModel.getWeaponToCharge(), false);
+                setIndex(getUserInput(-1, gameModel.getWeaponToCharge().size()));
         
-                System.out.println("Select what power up want to use to pay");
-                PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
-                System.out.println("How Much power up wan to use?");
-                int number = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                switch (number) {
-                    case 1:
-                        System.out.println("First:");
-                        setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                        break;
-                    case 2:
-                        System.out.println("First:");
-                        setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                        System.out.println("Second:");
-                        do {
+                System.out.println("Want to pay with ammo (NO) or also power up (YES)?");
+                setYesNoBooleanChoise(1);
+        
+                if (booleanChose) {
+            
+                    System.out.println("Select what power up want to use to pay");
+                    PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
+                    System.out.println("How Much power up wan to use?");
+                    int number = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                    switch (number) {
+                        case 1:
+                            System.out.println("First:");
+                            setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                            break;
+                        case 2:
+                            System.out.println("First:");
+                            setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                            System.out.println("Second:");
+                            do {
+                        
+                                i3 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                            } while (i3 != getIndex2());
+                            setIndex3(i3);
                     
-                            i3 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                        } while (i3 != getIndex2());
-                        setIndex3(i3);
-                
-                
-                        break;
-                    case 3:
-                        System.out.println("First:");
-                        setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
-                        System.out.println("Second:");
-                        do {
                     
-                            i3 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                        } while (i3 != getIndex2());
-                        setIndex3(i3);
-                        System.out.println("Third:");
-                        do {
+                            break;
+                        case 3:
+                            System.out.println("First:");
+                            setIndex2(getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()));
+                            System.out.println("Second:");
+                            do {
+                        
+                                i3 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                            } while (i3 != getIndex2());
+                            setIndex3(i3);
+                            System.out.println("Third:");
+                            do {
+                        
+                                i4 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
+                            } while (i4 != getIndex2() && i4 != getIndex3());
+                            setIndex4(i3);
+                            break;
+                    }
+                } else {
                     
-                            i4 = getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
-                        } while (i4 != getIndex2() && i4 != getIndex3());
-                        setIndex4(i3);
-                        break;
+                    System.out.println("YOUR TURN IS END");
                 }
-            } else {
-                
-                System.out.println("YOUR TURN IS END");
+                notifyController();
             }
-            notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
         }
     }
     
     public void viewEndAction() throws RemoteException {
     
-        if (gameModel.getWeaponToCharge().size()>0) {
+        if(checkCurrent()) {
             
-            System.out.println("DO YOU WANT TO RECHARGE YOUR UNLOADED WEAPON?");
-            setYesNoBooleanChoise(1);
-          
+            if (gameModel.getWeaponToCharge().size()>0) {
+                
+                System.out.println("DO YOU WANT TO RECHARGE YOUR UNLOADED WEAPON?");
+                setYesNoBooleanChoise(1);
+              
+            } else {
+                
+                setBooleanChose(false);
+                System.out.println("YOUR TURN IS ENDED");
+                
+            }
+            notifyController();
         } else {
-            
-            setBooleanChose(false);
-            System.out.println("YOUR TURN IS ENDED");
-            
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
         }
-        notifyController();
     }
     
 }
