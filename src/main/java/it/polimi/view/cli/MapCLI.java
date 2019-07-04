@@ -104,16 +104,16 @@ public class MapCLI implements Serializable {
         String black = ANSI_BLACK_BACKGROUND + " ";
         String hDoors= "-";
         String vDoors= "|";
+        GenerationSquare gen;
+        NormalSquare nor;
         //for ammo and gen
         boolean checkWeapon=false;
         boolean checkAmmo=false;
         if (s.getClass().equals(GenerationSquare.class)) {
-            
-            GenerationSquare gen = (GenerationSquare) s;
+            gen=(GenerationSquare)s;
              checkWeapon = gen.getWeaponList().size()>0;
         } else if (s.getClass().equals(NormalSquare.class)) {
-            
-            NormalSquare nor = (NormalSquare) s;
+            nor= (NormalSquare)s;
              checkAmmo = nor.containAmmoCard();
         }
        
@@ -468,10 +468,7 @@ public class MapCLI implements Serializable {
         }
         return blackSquares;
     }
-
-   
-
-   
+    
 
     /**
      * printString legend for the map

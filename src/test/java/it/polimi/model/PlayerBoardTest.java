@@ -99,6 +99,16 @@ public class PlayerBoardTest {
         assertEquals(1,playerBoard.getBoardValue());
         playerBoard.decreaseBoardValue();
         assertEquals(1,playerBoard.getBoardValue());
+        playerBoard.startFinalFrenzy();
+        assertEquals(2,playerBoard.getBoardValue());
+        playerBoard.decreaseBoardValue();
+        assertEquals(1,playerBoard.getBoardValue());
+        playerBoard.decreaseBoardValue();
+        playerBoard.decreaseBoardValue();
+        playerBoard.decreaseBoardValue();
+        assertEquals(1,playerBoard.getBoardValue());
+
+
     }
 
     @Test

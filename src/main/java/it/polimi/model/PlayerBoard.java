@@ -250,7 +250,11 @@ public class PlayerBoard implements Serializable {
      */
     public void decreaseBoardValue() {
 
-        if(!finalFrenzy) {
+        if(finalFrenzy) {
+
+            boardValue=1;
+
+        }else{
 
             if (boardValue == 2) {
 
@@ -258,12 +262,6 @@ public class PlayerBoard implements Serializable {
             } else if (boardValue != 1) {
 
                 boardValue -= 2;
-            }
-        }else{
-
-            if(boardValue==2){
-
-                boardValue=1;
             }
         }
     }

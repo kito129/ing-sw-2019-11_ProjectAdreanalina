@@ -258,7 +258,7 @@ public class FunctionController {
     public void drawnPowerUp () throws RemoteException {
         
         GameModel gameModel = this.functionModel.getGameModel();
-        
+        refreshMapEndTurn();
         for(Player a :gameModel.getPlayers(true)){
             ArrayList<PowerUpCard> tempPowerUp = new ArrayList<>();
             tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
@@ -445,7 +445,7 @@ public class FunctionController {
     public void grab(RemoteView view) throws RemoteException {
     
         view.resetInput();
-        functionModel.getGameModel().incrementActionCount();
+        //functionModel.getGameModel().incrementActionCount();
         this.functionModel.getGameModel().setState(State.MENU);
         
     }
@@ -563,7 +563,7 @@ public class FunctionController {
     public void usePowerUp(RemoteView view) throws RemoteException {
     
         view.resetInput();
-        functionModel.getGameModel().incrementActionCount();
+        //functionModel.getGameModel().incrementActionCount();
         this.functionModel.getGameModel().setState(State.MENU);
     }
     
