@@ -21,10 +21,14 @@ public class Map implements Serializable {
         return this.name;
     }
 
+    /*
+
     public void setName(String name) {
 
         this.name = name;
     }
+
+     */
 
     /**
      * Instantiates a new Map.
@@ -334,7 +338,7 @@ public class Map implements Serializable {
      * @return true if A(c0,r0) see B(c1,r1)
      */
     
-    //TODO FIX
+
     public boolean isVisible(int r0, int c0,int r1, int c1) {
         
         try {
@@ -628,12 +632,14 @@ public class Map implements Serializable {
         }
     }
     
-    public void print(){
+   /* public void print(){
         
         for (Square a: squares){
             System.out.println(a.toString());
         }
     }
+
+    */
 
     public ArrayList<EnumColorSquare> getRoomColor (){
         

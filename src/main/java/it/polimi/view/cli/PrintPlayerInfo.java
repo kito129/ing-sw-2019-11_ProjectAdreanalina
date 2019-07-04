@@ -37,19 +37,19 @@ public class PrintPlayerInfo implements Serializable {
         switch (player.getColor()){
 
             case BLU:
-                System.out.println("COLOR:  " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + "(B)");
+                System.out.println("COLOR:  " + ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " (B)");
                 break;
             case GREEN:
-                System.out.println("COLOR:  " + ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + "(G)");
+                System.out.println("COLOR:  " + ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " (G)");
                 break;
             case GREY:
-                System.out.println("COLOR:  " + ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + "(W)");
+                System.out.println("COLOR:  " + ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " (W)");
                 break;
             case PINK:
-                System.out.println("COLOR:  " + ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + "(P)");
+                System.out.println("COLOR:  " + ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " (P)");
                 break;
             case YELLOW:
-                System.out.println("COLOR:  " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + "(Y)");
+                System.out.println("COLOR:  " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " (Y)");
                 break;
         }
     }

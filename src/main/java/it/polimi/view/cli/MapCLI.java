@@ -441,8 +441,8 @@ public class MapCLI implements Serializable {
                     check = false;
                     if (row == 1 && column == 5){
 
-                        Integer rr = rowSquare;
-                        blackSquares.get(row).add(rr.toString());
+                        Integer cc = colSquare;
+                        blackSquares.get(row).add(cc.toString());
                         check = true;
                     }
                 }
