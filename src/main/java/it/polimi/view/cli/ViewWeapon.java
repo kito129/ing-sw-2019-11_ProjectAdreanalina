@@ -92,11 +92,13 @@ public class ViewWeapon {
     
         int i3;
         int i4;
-        
-        System.out.println("\nDo you want to use your power up to pay this effect?");
+
+        System.out.println();
+        System.out.println("Do you want to use your power up to pay this effect?");
         viewCLI.setYesNoBooleanChoise(2);
         if (viewCLI.isBooleanChose2()) {
-        
+
+            System.out.println();
             System.out.println("Select the power up you want to use to pay");
             System.out.println();
             PrintPowerUp.print(gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps(), false);
