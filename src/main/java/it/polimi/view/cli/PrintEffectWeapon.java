@@ -96,7 +96,8 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED BASIC MODE");
-        System.out.print("Who is your target? In which square do you want to move it? (enter players' ID and then row and column for the square)");
+        System.out.print("Who is your target? In which square do you want to move it?" +
+                "(it must be moved in a visible square and you can't make him do more two movements) (enter players' ID and then row and column for the square)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -107,7 +108,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED PUNISHER MODE");
-        System.out.print("Who is your target? (enter players' ID)");
+        System.out.print("Who is your target? (it must be in a square distant zero, one or two movements form you)(enter players' ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -120,7 +121,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("BASIC EFFECT");
-        System.out.println("Who is your target? (enter player's ID)");
+        System.out.println("Who is your target? (it must be visible) (enter player's ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }
 
@@ -178,7 +179,7 @@ public class PrintEffectWeapon implements Serializable {
     public static void printPlasmaGunChargedShot(){
 
         System.out.println();
-        System.out.println("Do you want to use also Charged Shoot");
+        System.out.println("Do you want to use also CHARGED SHOT?");
     }
 
     //WHISPER
@@ -530,7 +531,7 @@ public class PrintEffectWeapon implements Serializable {
 
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE PIERCING MODE");
-        System.out.println("Who is/are your target/s? (1 or 2 targets) (you can choose who you want but they must be in the chosen direction");
+        System.out.println("Who is/are your target/s? (1 or 2; you can choose who you want but they must be in the chosen direction");
         System.out.println("(first enter the cardinal direction, then 0 to say YES or 1 to say NO to choose if you want to shoot another target, and finally the players' ID)");
         PrintPlayer.print(gameModel.getPlayers(false));
     }

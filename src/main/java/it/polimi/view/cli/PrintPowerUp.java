@@ -27,10 +27,6 @@ public class PrintPowerUp implements Serializable {
         
             System.out.println("\n" + i +"): ");
             System.out.println("POWER UP:\t    " + puc.getNameCard());
-            if(wantDescription) {
-                System.out.println("DESCRIPTION:");
-                System.out.println("\t" + puc.getDescription());
-            }
         
             if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.BLU)) {
             
@@ -45,6 +41,10 @@ public class PrintPowerUp implements Serializable {
             if (puc.getColorPowerUpCard().equals(EnumColorCardAndAmmo.YELLOW)) {
             
                 System.out.println("COLOR:\t\t    " + ANSI_YELLOW + "YELLOW" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
+            }
+            if(wantDescription) {
+                System.out.println("DESCRIPTION:");
+                System.out.println(puc.getDescription());
             }
         }
     }

@@ -12,6 +12,9 @@ public class PrintPlayerBoard implements Serializable {
     public static void print(Player player){
 
         System.out.println();
+        System.out.print("PLAYER BOARD: ");
+        PrintPlayerInfo.printColorPlayer(player);
+        System.out.println();
         System.out.println("PLAYER NAME : " +player.getName());
         System.out.println("ID : " +player.getId());
         System.out.println("BOARD VALUE: " +player.getPlayerBoard().getBoardValue());

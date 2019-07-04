@@ -20,7 +20,18 @@ public class PrintPlayerInfo implements Serializable {
      */
     public static void print(Player player){
 
-        System.out.println();
+        printColorPlayer(player);
+        System.out.println("ID: " +player.getId());
+        System.out.println("NAME: " +player.getName());
+        System.out.println("ROW: " +player.getRow());
+        System.out.println("COLUMN: " +player.getColumn());
+    }
+
+    /**
+     * Print Player's info.
+     * @param player   the player to printList
+     */
+    public static void printColorPlayer(Player player){
 
         switch (player.getColor()){
 
@@ -40,10 +51,5 @@ public class PrintPlayerInfo implements Serializable {
                 System.out.println("COLOR: " + ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND);
                 break;
         }
-
-        System.out.println("ID: " +player.getId());
-        System.out.println("NAME: " +player.getName());
-        System.out.println("ROW: " +player.getRow());
-        System.out.println("COLUMN: " +player.getColumn());
     }
 }
