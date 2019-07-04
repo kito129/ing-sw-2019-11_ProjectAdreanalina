@@ -1570,10 +1570,6 @@ public class WeaponController {
 
                             throw new NotValidInput();
                         }
-
-
-
-
                     }
                 }catch (MapException e) {
 
@@ -1647,8 +1643,6 @@ public class WeaponController {
                             targetTurretTripod = gameModel.getPlayerById(view.getTarget4());
                             weapon.turretTripodEffect(map,currentPlayer,targetTurretTripod);
                         }
-
-
                     }
                 }catch (MapException e) {
 
