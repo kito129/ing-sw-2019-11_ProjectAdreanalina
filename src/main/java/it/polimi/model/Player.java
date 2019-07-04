@@ -12,6 +12,7 @@ public class Player implements Serializable {
     private String name;
     private EnumColorPlayer color;
     private PlayerBoard playerBoard;
+
     private int row;
     private int column;
     private int score;
