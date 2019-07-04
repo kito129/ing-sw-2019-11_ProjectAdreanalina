@@ -93,7 +93,7 @@ public class MapCLI implements Serializable {
     }
     /**
      * Create the map for the view like an array of array of array of array: set in right position
-     * the color background, the players (initial letter), the doors, a sign corresponing to the generation
+     * the color background, the players (initial letter), the doors, a sign corresponding to the generation
      * square and the string ammo
      * @param s     a square of the map
      */
@@ -138,6 +138,13 @@ public class MapCLI implements Serializable {
                 if(((column < 3) || (column > 7 )) || ((row < 3) || (row > 7))){
 
                     check1 = false;
+
+                    //put coordinates
+                    if(s.getRow()==0){
+
+                        //
+                    }
+
                     //put vertical door (top)
                     if(row == 1 && (column > 3 && column < 7)){
 
