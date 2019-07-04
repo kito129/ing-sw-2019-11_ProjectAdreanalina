@@ -1,15 +1,11 @@
 package it.polimi.model;
 
 import it.polimi.model.Exception.MapException;
-import it.polimi.model.Exception.NoTargetInSquare;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.Weapon.LockRifle;
-import it.polimi.view.RemoteView;
-import it.polimi.view.cli.ViewCLI;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -124,7 +120,7 @@ public class GameModelTest {
     public void spawnedPlayerTest(){
 
         assertEquals(0,gameModel.getSpawnedPlayer());
-        gameModel.incrementgetSpawnedPlayer();
+        gameModel.incrementSpawnedPlayer();
         assertEquals(1,gameModel.getSpawnedPlayer());
     }
 

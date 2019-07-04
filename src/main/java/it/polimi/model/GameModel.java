@@ -28,7 +28,7 @@ public class GameModel implements Serializable {
     int actionCount;
     //first spawn
     Player spawnPlayer;
-    int spawnedPlayer;
+    private int spawnedPlayer;
     //deck
     private AmmoDeck ammoDeck = new AmmoDeck();
     private PowerUpDeck powerUpDeck = new PowerUpDeck();
@@ -46,6 +46,7 @@ public class GameModel implements Serializable {
     private ArrayList<Player> playerMarked = new ArrayList<>();
     //end turn
     private ArrayList<Player> deadPlayer= new ArrayList<>();
+    private Player actualDeadPLayer;
     private boolean endTurn;
     //weapon to charge
     private ArrayList<WeaponCard> weaponToCharge = new ArrayList<>();
@@ -55,6 +56,7 @@ public class GameModel implements Serializable {
     private ArrayList<Boolean> playerDamagedWithGrenadeVisibility = new ArrayList<>();
     private int userGrenadeCount;
     private  ArrayList<Player> usedGrenade = new ArrayList<>();
+    //respawn
     
     //powerup
     private PowerUpCard powerUpSelected; //current weapon effect for current Player
@@ -88,6 +90,16 @@ public class GameModel implements Serializable {
     public ArrayList<Player> getUsedGrenade () {
         
         return usedGrenade;
+    }
+    
+    public Player getActualDeadPLayer () {
+        
+        return actualDeadPLayer;
+    }
+    
+    public void setActualDeadPLayer (Player actualDeadPLayer) {
+        
+        this.actualDeadPLayer = actualDeadPLayer;
     }
     
     public ArrayList<Boolean> getPlayerDamagedWithGrenadeVisibility () {
@@ -171,9 +183,14 @@ public class GameModel implements Serializable {
         return spawnedPlayer;
     }
     
-   public void incrementgetSpawnedPlayer(){
+   public void incrementSpawnedPlayer (){
         
         spawnedPlayer++;
+   }
+   
+   public void resetSpawnedPLayer(){
+        
+        spawnedPlayer=0;
    }
     
     public PowerUpCard getPowerUpSelected () {

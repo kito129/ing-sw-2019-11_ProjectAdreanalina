@@ -1,10 +1,10 @@
 package it.polimi.view.cli;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
 import it.polimi.view.RemoteView;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.io.Serializable;
 import java.rmi.NotBoundException;
@@ -535,7 +535,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 viewMenu();
                 break;
             case SELECTSPAWN:
-                viewSpawnPowerUp();
+                viewSpawnPowerUp(1);
                 break;
             case STARTTURN:
                 viewStartTurn();
@@ -593,9 +593,11 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case PASSTURN:
                 break;
-            case DEADPLAYER:
+            case DEADPLAYERSELECT:
+                deadPlayerSelect();
                 break;
             case SCORINGPLAYERBOARD:
+                callRun();
                 break;
             case GRENADESELECTION:
                 viewGrenadeSelection();
@@ -603,7 +605,7 @@ public class ViewCLI implements RemoteView, Serializable {
             case GRENADE:
                 viewGrenade();
             case ENDTURN:
-                break;
+                callRun();
             case FINALSCORING:
                 break;
             case CHECKILLSHOOT:
@@ -871,12 +873,18 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    public  void viewSpawnPowerUp () throws RemoteException {
+    public  void viewSpawnPowerUp (int i) throws RemoteException {
         
         if (gameModel.getSpawnPlayer().getName().equals(user)) {
-            
+    
             System.out.println();
-            System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
+            if (i==1) {
+                
+                System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
+            } else if (i==2){
+                
+                System.out.println("CHOOSE A POWER UP TO WHERE RESPAWN AFTER DEAD");
+            }
             System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP NOT CHOSEN");
             System.out.println();
             Player player = gameModel.getSpawnPlayer();
@@ -895,11 +903,15 @@ public class ViewCLI implements RemoteView, Serializable {
             setIndex(getUserInput(0, 1));
             notifyController();
         } else {
-            
-            System.out.println("WAITING FOR SPAWNING OTHER PLAYER IN MAP");
-        }
-
     
+            if (i==1) {
+                
+                System.out.println("WAITING FOR SPAWNING OTHER PLAYER IN MAP");
+            } else if(i==2) {
+    
+                System.out.println("WAITING FOR DEAD PLAYER RESPAWNING");
+            }
+        }
     }
     
     public void viewStartTurn() throws RemoteException {
@@ -989,9 +1001,11 @@ public class ViewCLI implements RemoteView, Serializable {
             try {
                 
                 target = gameModel.getMap().getSquare(row,column);
-                GenerationSquare gen = (GenerationSquare) target;
+                
                 
                 if(gameModel.getMap().isGenerationSquare(target) ) {
+    
+                    GenerationSquare gen = (GenerationSquare) target;
     
                     if (gen.getWeaponList().size() > 0) {
                         PrintGrabAction.printGrabWeapon();
@@ -1254,5 +1268,17 @@ public class ViewCLI implements RemoteView, Serializable {
     
            printMessageAll();
         }
+    }
+    
+    public void deadPlayerSelect() throws RemoteException {
+        
+        if (gameModel.getActualDeadPLayer().getName().equals(user)){
+            
+            viewSpawnPowerUp(2);
+            
+        } else {}
+        
+        System.out.println("WAINTING FOR DEAD PLAYERS RESPAWNING");
+        
     }
 }
