@@ -1,5 +1,7 @@
 package it.polimi.model;
 
+import it.polimi.model.Exception.MapException;
+import it.polimi.model.Exception.NoTargetInSquare;
 import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.Weapon.LockRifle;
 import it.polimi.view.RemoteView;
@@ -11,6 +13,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GameModelTest {
 
@@ -232,6 +235,68 @@ public class GameModelTest {
         assertEquals(3,gameModel.getPlayers(true).size());
 
 
+    }
+
+    @Test
+
+    public void getPlayerColorTest(){
+
+        assertEquals(0,gameModel.getPlayerColor().size());
+        Player player=new Player(1,"ANDREA",EnumColorPlayer.BLU,gameModel);
+        Player player1=new Player(2,"MARCO",EnumColorPlayer.YELLOW,gameModel);
+        Player player2=new Player(3,"SIMO",EnumColorPlayer.GREEN,gameModel);
+        gameModel.setPlayers(player);
+        gameModel.setPlayers(player1);
+        gameModel.setPlayers(player2);
+        assertTrue(gameModel.getPlayerColor().size()==3&&gameModel.getPlayerColor().contains(EnumColorPlayer.BLU)&&
+                gameModel.getPlayerColor().contains(EnumColorPlayer.YELLOW)&&gameModel.getPlayerColor().contains(EnumColorPlayer.GREEN));
+
+    }
+
+    @Test
+
+    public void getPlayerByColorTest(){
+
+        Player player=new Player(1,"ANDREA",EnumColorPlayer.BLU,gameModel);
+        Player player1=new Player(2,"MARCO",EnumColorPlayer.YELLOW,gameModel);
+        gameModel.setPlayers(player);
+        gameModel.setPlayers(player1);
+        assertEquals(player,gameModel.getPlayerByColor(EnumColorPlayer.BLU));
+        assertEquals(player1,gameModel.getPlayerByColor(EnumColorPlayer.YELLOW));
+        assertNull(gameModel.getPlayerByColor(EnumColorPlayer.GREEN));
+
+    }
+
+    @Test
+
+    public void setGetActualWeaponEffectTest(){
+
+        gameModel.setActualWeaponEffect(WeaponsEffect.BaseEffect);
+        assertEquals(WeaponsEffect.BaseEffect,gameModel.getActualWeaponEffect());
+    }
+
+    @Test
+
+    public void setGetWeaponStateTest(){
+
+        gameModel.setWeaponState(WeaponState.LockRifle);
+        assertEquals(WeaponState.LockRifle,gameModel.getWeaponState());
+    }
+
+    @Test
+
+   public void getPlayerByIdTest() throws MapException {
+
+        Player player=new Player(1,"ANDREA",EnumColorPlayer.BLU,gameModel);
+        Player player1=new Player(2,"MARCO",EnumColorPlayer.YELLOW,gameModel);
+        gameModel.setPlayers(player);
+        gameModel.setPlayers(player1);
+        assertEquals(player,gameModel.getPlayerById(1));
+        assertEquals(player1,gameModel.getPlayerById(2));
+        assertThrows(MapException.class, () -> {
+
+            gameModel.getPlayerById(4);
+        });
 
 
     }

@@ -59,6 +59,7 @@ public class ViewCLI implements RemoteView, Serializable {
     private EnumCardinalDirection cardinalDirection;
     private ViewWeapon viewWeapon;
     private MapCLI mapCLI;
+    private Scanner inputForConnection;
 
 
     public ViewCLI(){
@@ -108,9 +109,13 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void connection()  {
 
+        System.out.println("PLEASE INSERT THE IP ADDRESS OF SERVER: ");
+        inputForConnection = new Scanner(System.in);
+        String ipAddressOfServer = inputForConnection.next();
+
         try {
 
-            Registry registry = LocateRegistry.getRegistry("localhost");
+            Registry registry = LocateRegistry.getRegistry(ipAddressOfServer);
             this.gameController = (RemoteGameController) registry.lookup("gameController");
             UnicastRemoteObject.exportObject(this, 0);
             

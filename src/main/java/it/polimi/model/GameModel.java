@@ -338,6 +338,16 @@ public class GameModel implements Serializable {
         
         return actualWeaponEffect;
     }
+
+    public void setWeaponState (WeaponState weaponState) {
+
+        this.weaponState = weaponState;
+    }
+
+    public void setActualWeaponEffect (WeaponsEffect actualWeaponEffect) {
+
+        this.actualWeaponEffect = actualWeaponEffect;
+    }
     
     public void setErrorMessage(String errorMessage) {
 
@@ -371,15 +381,7 @@ public class GameModel implements Serializable {
         this.messageToAllView = messageToAllView;
     }
     
-    public void setWeaponState (WeaponState weaponState) {
-        
-        this.weaponState = weaponState;
-    }
-    
-    public void setActualWeaponEffect (WeaponsEffect actualWeaponEffect) {
-        
-        this.actualWeaponEffect = actualWeaponEffect;
-    }
+
     
     public ArrayList<EnumColorPlayer> getPlayerColor(){
         
