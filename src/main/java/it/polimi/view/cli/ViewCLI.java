@@ -575,11 +575,13 @@ public class ViewCLI implements RemoteView, Serializable {
                 viewSelectRecharge();
                 break;
             case RECHARGE:
+                viewRecharge();
                 break;
             case ENDACTIONSELECTION:
-                viewEndAction();
+                viewEndActionSelect();
                 break;
             case ENDACTION:
+                viewEndActionSelect();
                 break;
             case PASSTURN:
                 break;
@@ -588,7 +590,7 @@ public class ViewCLI implements RemoteView, Serializable {
             case SCORINGPLAYERBOARD:
                 break;
             case RESPWANPLAYERSELECTION:
-                //TODO
+                System.out.print("respan other player");
                 break;
             case ENDTURN:
                 break;
@@ -1155,7 +1157,22 @@ public class ViewCLI implements RemoteView, Serializable {
         }
     }
     
-    public void viewEndAction() throws RemoteException {
+    public void viewRecharge() throws RemoteException {
+        
+        if(checkCurrent()) {
+    
+            System.out.println("CORRECTLI RECHARGED");
+            notifyController();
+            
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
+        }
+        
+        
+    }
+    
+    public void viewEndActionSelect () throws RemoteException {
     
         if(checkCurrent()) {
             
@@ -1167,6 +1184,7 @@ public class ViewCLI implements RemoteView, Serializable {
             } else {
                 
                 setBooleanChose(false);
+                resetInput();
                 System.out.println("YOUR TURN IS ENDED");
                 
             }

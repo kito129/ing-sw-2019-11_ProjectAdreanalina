@@ -306,7 +306,7 @@ public class WeaponController {
             }
             view.resetInput();
             functionController.resetParameterWeapon();
-            gameModel.setState(State.CHOSEACTION);
+            gameModel.setState(State.MENU);
             
         } else {
             
@@ -394,7 +394,7 @@ public class WeaponController {
             //there are no more effect avaible
             functionController.resetParameterWeapon();
             view.resetInput();
-            functionModel.getGameModel().setState(State.CHOSEACTION);
+            functionModel.getGameModel().setState(State.MENU);
         } else {
             
             functionModel.getGameModel().setState(State.SELECTEFFECT);
