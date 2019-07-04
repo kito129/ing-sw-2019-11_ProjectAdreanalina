@@ -31,66 +31,62 @@ public class PrintKillShotTrack implements Serializable {
             i++;
 
             System.out.println();
-            System.out.println("KST POINT " + i + ":");
+            System.out.print("KST POINT " + i + ": ");
 
             if(k.isSkull()){
 
-                System.out.print(ANSI_RED + "SKULL" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
+                System.out.println(ANSI_RED + "SKULL" + ANSI_RESET + ANSI_BLACK_BACKGROUND + " ");
             }
 
-            //killShotTrackPoint Blu
-            if (k.getMark1().equals(EnumColorPlayer.BLU)) {
+            switch (k.getMark1()){
 
-                System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                if (k.getMark2().equals(EnumColorPlayer.BLU)){
-
+                case BLU:
                     System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
-            }
 
-            //killShotTrackPoint Green
-            if (k.getMark1().equals(EnumColorPlayer.GREEN)) {
+                    if (k.getMark2().equals(EnumColorPlayer.BLU)){
 
-                System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                if (k.getMark2().equals(EnumColorPlayer.GREEN)) {
-
+                        System.out.print(ANSI_BLUE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    }
+                    System.out.println();
+                    break;
+                case GREEN:
                     System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
-            }
 
-            //killShotTrackPoint Grey
-            if (k.getMark1().equals(EnumColorPlayer.GREY)) {
+                    if (k.getMark2().equals(EnumColorPlayer.GREEN)) {
 
-                System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                if (k.getMark2().equals(EnumColorPlayer.GREY)) {
-
+                        System.out.print(ANSI_GREEN_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    }
+                    System.out.println();
+                    break;
+                case GREY:
                     System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
-            }
 
-            //killShotTrackPoint Pink
-            if (k.getMark1().equals(EnumColorPlayer.PINK)) {
+                    if (k.getMark2().equals(EnumColorPlayer.GREY)) {
 
-                System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                if (k.getMark2().equals(EnumColorPlayer.PINK)) {
-
+                        System.out.print(ANSI_WHITE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    }
+                    System.out.println();
+                    break;
+                case PINK:
                     System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
-            }
 
-            //killShotTrackPoint Yellow
-            if (k.getMark1().equals(EnumColorPlayer.YELLOW)) {
+                    if (k.getMark2().equals(EnumColorPlayer.PINK)) {
 
-                System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-
-                if (k.getMark2().equals(EnumColorPlayer.YELLOW)) {
-
+                        System.out.print(ANSI_PURPLE_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    }
+                    System.out.println();
+                    break;
+                case YELLOW:
                     System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
-                }
+
+                    if (k.getMark2().equals(EnumColorPlayer.YELLOW)) {
+
+                        System.out.print(ANSI_YELLOW_BACKGROUND + "  " + ANSI_BLACK_BACKGROUND + " ");
+                    }
+                    System.out.println();
+                    break;
+                default:
+                    break;
             }
         }
     }
