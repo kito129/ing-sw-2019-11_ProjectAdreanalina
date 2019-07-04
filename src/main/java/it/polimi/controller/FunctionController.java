@@ -9,6 +9,7 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
+import it.polimi.model.Weapon.Electroscythe;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
@@ -124,7 +125,7 @@ public class FunctionController {
     
         //TEST ARMY
         gameModel.getActualPlayer().getPlayerBoard().addWeapon(new LockRifle());
-        gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Electroscythe());
+        
         gameModel.getActualPlayer().getPlayerBoard().addWeapon(new TractorBeam());
         gameModel.getActualPlayer().getPlayerBoard().addWeapon(new Thor());
         gameModel.getActualPlayer().getPlayerBoard().addWeapon(new VortexCannon());
@@ -256,6 +257,13 @@ public class FunctionController {
             case SHOOT:
                 this.functionModel.getGameModel().setState(State.SELECTEFFECT);
                 break;
+            case SELECTRECHARGE:
+                if (functionModel.getGameModel().isEndTurn()){
+                    
+                    //if recharge don't go and player want to end turn go to respawn player
+                    this.functionModel.getGameModel().setState(State.RESPWANPLAYERSELECTION);
+                    
+                }
                 
             default:
                 this.functionModel.getGameModel().setState(State.CHOSEACTION);
@@ -272,6 +280,7 @@ public class FunctionController {
     
         //put ammo and weapon card
         refreshMapEndTurn();
+        functionModel.getGameModel().getActualPlayer().getPlayerBoard().addWeapon(new Electroscythe());
         
         //now game can start
         this.functionModel.getGameModel().setState(State.CHOSEACTION);
