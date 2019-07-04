@@ -409,21 +409,19 @@ public class CLIPrintMap implements Serializable {
     public void printLegendMap(ArrayList<Player> players){
 
         System.out.println();
-        System.out.println("LEGEND");
         System.out.println("--------------------------------------------------------");
+        System.out.println("LEGEND");
         System.out.println();
-        System.out.println("ON A NORMAL SQUARE YOU CAN GRAB AN AMMO CARD:");
+        System.out.println("YOU CAN ONLY MOVE THROUGH THE DOORS!!!");
+        System.out.println("ON A NORMAL SQUARE YOU CAN GRAB AN AMMO CARD");
         System.out.println("ON A GENERATIONS SQUARE YOU CAN GRAB A WEAPON CARD");
+        System.out.println("'ammo' MEANS THAT THERE IS AN AMMO CARD ON THAT SQUARE");
+        System.out.println("BETWEEN TWO SQUARES MEANS THAT THERE IS A HORIZONTAL DOOR");
+        System.out.println("| BETWEEN TWO SQUARES MEANS THAT THERE IS A VERTICAL DOOR");
+        System.out.println("| ON A SQUARE MEANS THAT THERE IS A GENERATIONS SQUARE");
         System.out.println("PLAYERS:");
         printLegendPlayers(players);
-        System.out.println();
-        System.out.println("'ammo' MEANS THAT THERE IS AN AMMO CARD ON THAT SQUARE");
-        System.out.println("- BETWEEN TWO SQUARES MEANS THAT THERE IS A DOOR");
-        System.out.println("| BETWEEN TWO SQUARES MEANS THAT THERE IS A DOOR");
-        System.out.println("| ON A SQUARE MEANS THAT THAT IS A GENERATIONS SQUARE");
-        System.out.println();
         System.out.println("--------------------------------------------------------");
-        System.out.println();
     }
 
     /**
