@@ -118,7 +118,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.endActionSelect(view);
                     break;
                 case ENDACTION:
-                    //here check for dead player
+                    //sono qui per respawn iocatori
                     break;
                 case SELECTRECHARGE:
                     functionController.selectRechargeGestor(view);

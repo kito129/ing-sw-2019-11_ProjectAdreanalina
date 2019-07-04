@@ -581,7 +581,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 viewEndActionSelect();
                 break;
             case ENDACTION:
-                viewEndActionSelect();
+                callRun();
                 break;
             case PASSTURN:
                 break;
@@ -1144,10 +1144,14 @@ public class ViewCLI implements RemoteView, Serializable {
                             } while (i4 != getIndex2() && i4 != getIndex3());
                             setIndex4(i3);
                             break;
-                    }
-                } else {
+                        }
+                        
+                    } else {
                     
-                    System.out.println("YOUR TURN IS END");
+                    setIndex2(-1);
+                    setIndex3(-1);
+                    setIndex4(-1);
+                    setIndex5(-1);
                 }
                 notifyController();
             }

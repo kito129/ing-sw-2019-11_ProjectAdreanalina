@@ -568,7 +568,6 @@ public class FunctionController {
     }
     
     
-    
     //recharge
     public void setWeaponToCharge(){
         
@@ -579,54 +578,63 @@ public class FunctionController {
                 functionModel.getGameModel().getWeaponToCharge().add(a);
             }
         }
-        
     }
     
     public void selectRechargeGestor(RemoteView view) throws RemoteException {
         
-        if (functionModel.getGameModel().isEndTurn()){
-            
-            //Cosa fare se arrivo in select e ho l'end turn attivo
-            
-        }  else {
+        if (functionModel.getGameModel().getWeaponToCharge().size()>0) {
             
             selectRecharge(view,1,null);
             functionModel.getGameModel().setState(State.RECHARGE);
-        }
+        } else  if (functionModel.getGameModel().isEndTurn()) {
     
+            //setta chi deve respawnare e parti con la routine di respawn
+            functionModel.getGameModel().setState(State.SELECTRESPAWNPLAYER);
+        }
     }
     
     public void selectRecharge (RemoteView view,int i,ArrayList<EnumColorCardAndAmmo> payExtra ) throws RemoteException {
         
         ArrayList<PowerUpCard> powerUpToPay = new ArrayList<>();
+        WeaponCard weaponToCharge = functionModel.getGameModel().getWeaponToCharge().get(view.getIndex());
         
         if (i==1) {
-            if (view.getIndex2() != -1) {
+            if (view.isBooleanChose()) {
                 
-                powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
+                if (view.getIndex2() != -1) {
+        
+                    powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
+        
+                    if (view.getIndex3() != -1) {
+            
+                        powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex3()));
+            
+                        if (view.getIndex4() != -1) {
                 
-                if (view.getIndex3() != -1) {
+                            powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex4()));
+                
+                            if (view.getIndex5() != -1) {
                     
-                    powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex3()));
+                                powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
                     
-                    if (view.getIndex4() != -1) {
-                        
-                        powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex4()));
-                        
-                        if (view.getIndex5() != -1) {
-                            
-                            powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
-                            
+                            }
                         }
                     }
                 }
             }
             try {
-                WeaponCard weaponToCharge = functionModel.getGameModel().getWeaponToCharge().get(view.getIndex());
-                ArrayList<EnumColorCardAndAmmo> totalCost = new ArrayList<>();
-                totalCost.addAll(weaponToCharge.getRechargeCost());
-                totalCost.add(weaponToCharge.getColorWeaponCard());
+                
                 payAmmoController(weaponToCharge.getRechargeCost(), powerUpToPay);
+                weaponToCharge.setCharge(true);
+                functionModel.getGameModel().getWeaponToCharge().remove(weaponToCharge);
+                
+                if (functionModel.getGameModel().getWeaponToCharge().size()>0){
+                    
+                    functionModel.getGameModel().setState(State.ENDACTIONSELECTION);
+                } else {
+                    
+                    functionModel.getGameModel().setState(State.RESPWANPLAYERSELECTION);
+                }
             } catch (NotValidAmmoException e) {
                 
                 setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
@@ -636,9 +644,10 @@ public class FunctionController {
             
             try {
                 payAmmoController(payExtra, powerUpToPay);
+                
             } catch (NotValidAmmoException e) {
                 
-                setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
+                setErrorState("YOU HAVE NOT AMMO TO PAY EXTRA COST FOR EFFECT, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
             }
         }
     }
@@ -740,7 +749,7 @@ public class FunctionController {
     //end action
     public void endActionSelect(RemoteView view) throws RemoteException {
         
-        if (view.isBooleanChose()){
+        if (view.isBooleanChose() && functionModel.getGameModel().getWeaponToCharge().size()>0){
             
             functionModel.getGameModel().setEndTurn(true);
             functionModel.getGameModel().setState(State.SELECTRECHARGE);
