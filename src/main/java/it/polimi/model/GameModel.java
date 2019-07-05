@@ -9,6 +9,7 @@ import java.lang.management.PlatformLoggingMXBean;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * The type GameModel model.
@@ -66,11 +67,31 @@ public class GameModel implements Serializable {
     private String messageToCurrentView;
     private String messageToAllView;
     
+    
     public GameModel() {
         
         state=State.LOBBY;
+        Random rand = null;
+        int randomNum = rand.nextInt((1 - 4) + 1) + 1;
         //create map
-        this.map = new Map(MapCreator.createB(),"MAPB");
+        switch (randomNum){
+            case 1:
+                this.map = new Map(MapCreator.createA(),"MAPA");
+                break;
+            case 2:
+                this.map = new Map(MapCreator.createB(),"MAPB");
+                break;
+            case 3:
+                this.map = new Map(MapCreator.createC(),"MAPC");
+                break;
+            case 4:
+                this.map = new Map(MapCreator.createD(),"MAPD");
+                break;
+            default:this.map = new Map(MapCreator.createD(),"MAPD");
+                break;
+                
+        }
+        
         //populate list of color for the player
         populateColor();
         

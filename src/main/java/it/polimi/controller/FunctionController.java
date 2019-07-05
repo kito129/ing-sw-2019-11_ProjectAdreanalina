@@ -143,8 +143,7 @@ public class FunctionController {
                     }
                     break;
                 case 4:
-    
-                    checkActionCount();
+                    
                     if(this.functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()>0){
             
                         this.functionModel.getGameModel().setState(State.SELECTPOWERUP);
@@ -224,16 +223,7 @@ public class FunctionController {
     
         functionModel.getGameModel().setSpawnPlayer(null);
         functionModel.getGameModel().resetSpawnedPLayer();
-       functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().add(new Electroscythe());
-       
-       ArrayList<EnumColorPlayer> dam = new ArrayList<>();
-       for (int i =0; i<12;i++){
-           
-           dam.add(EnumColorPlayer.PINK);
-           
-       }
-       functionModel.getGameModel().getPlayers(true,true).get(4).multipleDamages(dam);
-       functionModel.getGameModel().getPlayers(true,true).get(3).multipleDamages(dam);
+        
        
         //put ammo and weapon card
         refreshMapEndTurn();
@@ -410,7 +400,7 @@ public class FunctionController {
     public void run(RemoteView view) throws RemoteException {
         
         view.resetInput();
-        functionModel.getGameModel().incrementSpawnedPlayer();
+        functionModel.getGameModel().incrementActionCount();
         this.functionModel.getGameModel().setState(State.MENU);
        
     }
@@ -492,7 +482,7 @@ public class FunctionController {
     public void grab(RemoteView view) throws RemoteException {
     
         view.resetInput();
-        //functionModel.getGameModel().incrementActionCount();
+        functionModel.getGameModel().incrementActionCount();
         this.functionModel.getGameModel().setState(State.MENU);
         
     }
@@ -578,7 +568,7 @@ public class FunctionController {
     public void usePowerUp(RemoteView view) throws RemoteException {
     
         view.resetInput();
-        //functionModel.getGameModel().incrementActionCount();
+        functionModel.getGameModel().incrementActionCount();
         this.functionModel.getGameModel().setState(State.MENU);
     }
     
@@ -895,8 +885,6 @@ public class FunctionController {
     //dead player
     public void deadPlayerGestor() throws RemoteException {
         
-       
-        
         if (functionModel.getGameModel().getDeadPlayers().size()>0) {
             
             scoringPlayerBoardController();
@@ -923,7 +911,6 @@ public class FunctionController {
         functionModel.getGameModel().getActualDeadPLayer().setAlive(true);
         functionModel.getGameModel().getActualDeadPLayer().setOverKill(false);
         functionModel.getGameModel().getActualDeadPLayer().setMarkToDead(false);
-        functionModel.getGameModel().getActualDeadPLayer().getPlayerBoard().resetDamage();
         functionModel.getGameModel().getDeadPlayers().remove(functionModel.getGameModel().getActualDeadPLayer());
         
         
@@ -941,18 +928,27 @@ public class FunctionController {
         
     }
     
-    public void passTurn(){
+    public void passTurn() {
+    
+        KillShotTrack killShotTrack = functionModel.getGameModel().getKillShotTrack();
+    
+        if (killShotTrack.skullNumber() == 0) {
         
-    refreshMapEndTurn();
-    int act = functionModel.getGameModel().getActualPlayer().getId()-1;
-    do {
-       
-        act++;
-        if (act == functionModel.getGameModel().getPlayers(true,true).size()) {
-            act = 0;
+        
+        
+        } else {
+        
+            refreshMapEndTurn();
+            int act = functionModel.getGameModel().getActualPlayer().getId() - 1;
+            do {
+            
+                act++;
+                if (act == functionModel.getGameModel().getPlayers(true, true).size()) {
+                    act = 0;
+                }
+            } while (functionModel.getGameModel().getRemoteViews().get(act) == null);
+            functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getPlayers(true, true).get(act));
         }
-    }while (functionModel.getGameModel().getRemoteViews().get(act)==null);
-    functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getPlayers(true, true).get(act));
     }
     
     //scoring
@@ -962,6 +958,82 @@ public class FunctionController {
         for (Player a:this.functionModel.getGameModel().getDeadPlayers()){
             //incasso una plancia alla volta e gestisco le mort
             this.functionModel.scoringPlayerBoard(a);
+        }
+    }
+    
+    //scoring
+    public void finalScoring(){
+        
+        KillShotTrack killShotTrack= functionModel.getGameModel().getKillShotTrack();
+        
+        Integer pointToPink;
+        Integer pointToBlu;
+        Integer pointToGreen;
+        Integer pointToGrey;
+        Integer pointToYellow;
+        ArrayList<Integer> point = new ArrayList<>();
+        ArrayList<EnumColorPlayer> colorPoint = new ArrayList<>();
+        
+        
+        for (Player a :functionModel.getGameModel().getPlayers(true,true)){
+            
+            switch (a.getColor()){
+                case YELLOW:
+                    pointToYellow=killShotTrack.getColorOccurence(EnumColorPlayer.YELLOW);
+                    point.add(pointToYellow);
+                    colorPoint.add(EnumColorPlayer.YELLOW);
+                    break;
+                case BLU:
+                    pointToBlu=killShotTrack.getColorOccurence(EnumColorPlayer.BLU);
+                    point.add(pointToBlu);
+                    colorPoint.add(EnumColorPlayer.BLU);
+                    break;
+                case PINK:
+                    pointToPink=killShotTrack.getColorOccurence(EnumColorPlayer.PINK);
+                    point.add(pointToPink);
+                    colorPoint.add(EnumColorPlayer.PINK);
+                    break;
+                case GREEN:
+                    pointToGreen=killShotTrack.getColorOccurence(EnumColorPlayer.GREEN);
+                    point.add(pointToGreen);
+                    colorPoint.add(EnumColorPlayer.GREEN);
+                    break;
+                case GREY:
+                    pointToGrey=killShotTrack.getColorOccurence(EnumColorPlayer.GREY);
+                    point.add(pointToGrey);
+                    colorPoint.add(EnumColorPlayer.GREY);
+                    break;
+            }
+        }
+        
+        int first=0;
+        int second =0;
+        int third=0;
+        int fouth=0;
+        int fifth=0;
+        
+        ArrayList<EnumColorPlayer>  toPoint = new ArrayList<>();
+        
+        for (int i=0 ;i<point.size();i++){
+            Integer val = point.get(i);
+            EnumColorPlayer col = colorPoint.get(i);
+            
+            if (val> first){
+                
+                first=val;
+            } else if(val>second){
+                
+                second=val;
+            } else if (val>third){
+                
+                third=val;
+            } else if (val>fouth){
+                
+                fouth=val;
+            } else if (val>fifth){
+                
+                fifth=val;
+            }
         }
     }
 }

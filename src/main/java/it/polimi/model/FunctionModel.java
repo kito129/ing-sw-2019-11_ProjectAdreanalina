@@ -20,7 +20,6 @@ public class FunctionModel implements Serializable {
     private Map map;
 
     public FunctionModel (){
-    
         
         this.gameModel = new GameModel();
       
@@ -203,21 +202,6 @@ public class FunctionModel implements Serializable {
         tagBackGrenade.effect(gameModel.getMap(), gameModel.getActualPlayer(), targetPlayer);
     }
     
-    /**
-     * Respawn player.
-     *
-     * @param player           the player to respawn
-     * @param generationSquare the generation square
-     * @param powerUpCard      the power up card to add to player
-     */
-    public void respawnPlayer(Player player, Square generationSquare, PowerUpCard powerUpCard) throws  MapException {
-
-        player.getPlayerBoard().resetDamage();
-        player.setAlive(true);
-        gameModel.getMap().addPlayerOnSquare(generationSquare, player);
-        player.getPlayerBoard().addPowerUp(powerUpCard);
-    }
-    
   
     
     /**
@@ -340,128 +324,127 @@ public class FunctionModel implements Serializable {
      *
      * @param player the player that have PlayerBoard to Score.
      */
-    public void scoringPlayerBoard(Player player){
-        
+    public void scoringPlayerBoard(Player player) {
+    
         PlayerBoard playerBoard = player.getPlayerBoard();
-        
-        //player color in order by occurrence (tie calculated)
-        ArrayList<EnumColorPlayer> playerOrderDamage = new ArrayList<>(damagesOrderColor(player));
-        //fist blood
-        EnumColorPlayer firstBlood=playerBoard.getDamages().get(0);
-        //death
-        EnumColorPlayer death = playerBoard.getDamages().get(10);
-        //overkill
-        EnumColorPlayer overkill = null;
-        if(playerBoard.getDamages().size()==12) {
-            overkill = playerBoard.getDamages().get(11);
-        }
-        //TODO double kill
-        
-        //player point
-        ArrayList<PlayerScore> playerPoint = new ArrayList<PlayerScore>();
-        
-        System.out.println(playerPoint);
-        
-        int temp=0;
-        int pointTo=0;
-        //create danno
-        switch (playerBoard.getBoardValue()){
-        case 8:
-           pointTo =10;
-           temp=pointTo;
-            for (EnumColorPlayer a : playerOrderDamage) {
-        
-                //decrement point to ad to the a player
-                temp-=2;
-                if (temp < 2) {
+        if (playerBoard.getDamages().size() == 11 || playerBoard.getDamages().size() == 12) {
+            //player color in order by occurrence (tie calculated)
+            ArrayList<EnumColorPlayer> playerOrderDamage = new ArrayList<>(damagesOrderColor(player));
+            //fist blood
+            EnumColorPlayer firstBlood = playerBoard.getDamages().get(0);
+            //death
+            EnumColorPlayer death = playerBoard.getDamages().get(10);
+            //overkill
+            EnumColorPlayer overkill = null;
+            if (playerBoard.getDamages().size() == 12) {
+                overkill = playerBoard.getDamages().get(11);
+            }
+            //TODO double kill
     
-                    temp = 1;
-                }
-                //add point if first blood
-                if (a == firstBlood) {
-                    
-                    temp++;
-                }
-                playerPoint.add(new PlayerScore(a, temp));
-            }
-           
-           break;
-        case 6:
-            pointTo =8;
-            for (EnumColorPlayer a : playerOrderDamage) {
+            //player point
+            ArrayList<PlayerScore> playerPoint = new ArrayList<PlayerScore>();
     
-                temp-=2;
-                if (temp < 2) {
-            
-                    pointTo = 1;
-                    playerPoint.add(new PlayerScore(a, pointTo));
-                }
-            }
-            break;
-        case 4:
-            pointTo =6;
-            for (EnumColorPlayer a : playerOrderDamage) {
+            int temp = 0;
+            int pointTo = 0;
+            //create danno
+            switch (playerBoard.getBoardValue()) {
+                case 8:
+                    pointTo = 10;
+                    temp = pointTo;
+                    for (EnumColorPlayer a : playerOrderDamage) {
     
-                temp-=2;
-                if (temp < 2) {
-            
-                    pointTo = 1;
-                    playerPoint.add(new PlayerScore(a, pointTo));
-                }
-            }
-            break;
-        case 2:
-            pointTo =4;
-            for (EnumColorPlayer a : playerOrderDamage) {
+                        //decrement point to ad to the a player
+                        temp -= 2;
+                        if (temp < 2) {
     
-                temp-=2;
-                if (temp < 2) {
-            
-                    pointTo = 1;
-                    playerPoint.add(new PlayerScore(a, pointTo));
+                            temp = 1;
+                        }
+                        //add point if first blood
+                        if (a == firstBlood) {
+    
+                            temp++;
+                        }
+                        playerPoint.add(new PlayerScore(a, temp));
+                    }
+    
+                    break;
+                case 6:
+                    pointTo = 8;
+                    for (EnumColorPlayer a : playerOrderDamage) {
+    
+                        temp -= 2;
+                        if (temp < 2) {
+    
+                            pointTo = 1;
+                            playerPoint.add(new PlayerScore(a, pointTo));
+                        }
+                    }
+                    break;
+                case 4:
+                    pointTo = 6;
+                    for (EnumColorPlayer a : playerOrderDamage) {
+    
+                        temp -= 2;
+                        if (temp < 2) {
+    
+                            pointTo = 1;
+                            playerPoint.add(new PlayerScore(a, pointTo));
+                        }
+                    }
+                    break;
+                case 2:
+                    pointTo = 4;
+                    for (EnumColorPlayer a : playerOrderDamage) {
+    
+                        temp -= 2;
+                        if (temp < 2) {
+    
+                            pointTo = 1;
+                            playerPoint.add(new PlayerScore(a, pointTo));
+                        }
+                    }
+                    break;
+                case 1:
+                    pointTo = 2;
+                    for (EnumColorPlayer a : playerOrderDamage) {
+    
+                        temp -= 2;
+                        if (temp < 2) {
+    
+                            pointTo = 1;
+                            playerPoint.add(new PlayerScore(a, pointTo));
+                        }
+                    }
+                    break;
+            }
+    
+            //share point to player in player point
+            for (PlayerScore a : playerPoint) {
+    
+                gameModel.getPlayerByColor(a.getColor()).increaseScore(a.value);
+            }
+    
+            //put color in killshot track
+            if (gameModel.getKillShotTrack().skullNumber() > 1) {
+    
+                ArrayList<EnumColorPlayer> toKillShot = new ArrayList<>();
+    
+                if (overkill != null) {
+        
+                    toKillShot.add(death);
+                    toKillShot.add(overkill);
+                    gameModel.getPlayerByColor(overkill).singleMark(player.getColor());
+                } else {
+        
+                    toKillShot.add(death);
                 }
+    
+                //update the killshot track point
+                gameModel.getKillShotTrack().updateTrack(toKillShot);
+                playerBoard.resetDamage();
+                playerBoard.decreaseBoardValue();
+    
             }
-           break;
-        case 1:
-            pointTo =2;
-            for (EnumColorPlayer a : playerOrderDamage) {
-        
-                temp-=2;
-                if (temp < 2) {
-            
-                    pointTo = 1;
-                    playerPoint.add(new PlayerScore(a, pointTo));
-                }
-            }
-            break;
-        }
-        
-        //share point to player in player point
-        for (PlayerScore a:playerPoint){
-            
-            gameModel.getPlayerByColor(a.getColor()).increaseScore(a.value);
-        }
-        
-        //put color in killshot track
-        if(gameModel.getKillShotTrack().skullNumber()>1){
-            
-            ArrayList<EnumColorPlayer> toKillShot = new ArrayList<>();
-            
-            if(overkill!=null){
-                
-                toKillShot.add(death);
-                toKillShot.add(overkill);
-                gameModel.getPlayerByColor(overkill).singleMark(player.getColor());
-            } else {
-                
-                toKillShot.add(death);
-            }
-            
-            //update the killshot track point
-            gameModel.getKillShotTrack().updateTrack(toKillShot);
-            playerBoard.resetDamage();
-            playerBoard.decreaseBoardValue();
-            
         }
     }
     

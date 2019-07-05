@@ -437,6 +437,7 @@ public class WeaponController {
                 //there are no more effect avaible
                 functionController.resetParameterWeapon();
                 view.resetInput();
+                functionModel.getGameModel().incrementActionCount();
                 functionModel.getGameModel().setState(State.MENU);
             } else {
         

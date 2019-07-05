@@ -12,12 +12,14 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     private FunctionModel functionModel;
     private GameModel gameModel;
     private boolean gameStarted;
+    private int delay;
 
-    public GameController() throws RemoteException {
+    public GameController(String delay) throws RemoteException {
         
         this.functionModel = new FunctionModel();
         this.gameModel=functionModel.getGameModel();
         this.functionController= new FunctionController(functionModel);
+        this.delay = Integer.parseInt(delay);
         
     }
 
