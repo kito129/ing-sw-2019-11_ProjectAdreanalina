@@ -659,7 +659,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void callRun() throws RemoteException {
         
-        if (gameModel.getActualPlayer().getName().equals(user)){
+        if (checkCurrent()){
             notifyController();
         } else {
             System.out.println("Waiting..");
@@ -669,9 +669,16 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void viewError() throws RemoteException {
         
-        printString(gameModel.getErrorMessage());
-        printString(gameModel.getMessageToCurrentView() + "\n");
-        notifyController();
+        if (checkCurrent()) {
+            
+            printString(gameModel.getErrorMessage());
+            printMessageAll();
+            printMessageAll();
+            notifyController();
+        } else {
+    
+            PrintNotActualMenu.printMenu(gameModel,this);
+        }
         
     }
     
@@ -910,7 +917,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 System.out.println("CHOOSE A POWER UP TO WHERE RESPAWN AFTER DEAD");
                 System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP CHOSEN");
                 System.out.println();
-                Player player = gameModel.getSpawnPlayer();
+                Player player = gameModel.getActualDeadPLayer();
         
                 System.out.println(player.toString());
         
