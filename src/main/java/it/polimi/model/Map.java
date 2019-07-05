@@ -473,7 +473,7 @@ public class Map implements Serializable {
         ArrayList<Player> tempPlayer =new ArrayList<>();
         for (Square a: this.squares){
 
-            if(a.getColumn()==player.getColumn() && a.getRow()<player.getRow()){
+            if(a.getColumn()==player.getColumn() && a.getRow()<=player.getRow()){
 
                 tempPlayer.addAll(a.getPlayers());
             }
@@ -492,7 +492,7 @@ public class Map implements Serializable {
         ArrayList<Player> tempPlayer =new ArrayList<>();
         for (Square a: this.squares){
     
-            if(a.getRow()==player.getRow() && a.getColumn()>player.getColumn()){
+            if(a.getRow()==player.getRow() && a.getColumn()>=player.getColumn()){
                 
                 tempPlayer.addAll(a.getPlayers());
             }
@@ -511,7 +511,7 @@ public class Map implements Serializable {
         ArrayList<Player> tempPlayer =new ArrayList<>();
         for (Square a: this.squares){
     
-            if(a.getRow()==player.getRow() && a.getColumn()<player.getColumn()){
+            if(a.getRow()==player.getRow() && a.getColumn()<=player.getColumn()){
                 
                 tempPlayer.addAll(a.getPlayers());
             }
@@ -530,7 +530,7 @@ public class Map implements Serializable {
         ArrayList<Player> tempPlayer =new ArrayList<>();
         for (Square a: this.squares){
     
-            if(a.getColumn()==player.getColumn() && a.getRow()>player.getRow()){
+            if(a.getColumn()==player.getColumn() && a.getRow()>=player.getRow()){
                 
                 tempPlayer.addAll(a.getPlayers());
             }
