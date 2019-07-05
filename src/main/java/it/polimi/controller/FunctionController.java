@@ -11,6 +11,7 @@ import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.Electroscythe;
 import it.polimi.model.Weapon.GrenadeLauncher;
+import it.polimi.model.Weapon.Whisper;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
@@ -218,7 +219,7 @@ public class FunctionController {
         //set the lowest id to the current player
         this.functionModel.getGameModel().setActualPlayer(this.functionModel.getGameModel().getPlayers(true,true).get(0));
     
-       functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().add(new Electroscythe());
+       functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().add(new Whisper());
        
        ArrayList<EnumColorPlayer> dam = new ArrayList<>();
        for (int i =0; i<12;i++){
@@ -902,12 +903,20 @@ public class FunctionController {
     
     public void deadPlayerSelect (RemoteView view) throws RemoteException {
     
+        try {
+            functionModel.getGameModel().getMap().removePlayerFromSquare(functionModel.getGameModel().getActualDeadPLayer());
+        } catch (MapException e) {
+            e.printStackTrace();
+        }
         respawnPlayerController(functionModel.getGameModel().getActualDeadPLayer(), view);
         functionModel.getGameModel().getActualDeadPLayer().setAlive(true);
         functionModel.getGameModel().getActualDeadPLayer().setOverKill(false);
         functionModel.getGameModel().getActualDeadPLayer().setMarkToDead(false);
         functionModel.getGameModel().getActualDeadPLayer().getPlayerBoard().resetDamage();
         functionModel.getGameModel().getDeadPlayers().remove(functionModel.getGameModel().getActualDeadPLayer());
+        
+        
+
         functionModel.getGameModel().setState(State.ENDACTION);
         
     }
