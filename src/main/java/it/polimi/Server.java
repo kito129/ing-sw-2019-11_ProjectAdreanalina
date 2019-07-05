@@ -12,7 +12,7 @@ public class Server {
     public static void main(String args[]) throws RemoteException, AlreadyBoundException {
 
         
-        GameController gameController=new GameController(args[0]);
+        GameController gameController=new GameController();
         Registry registry=LocateRegistry.createRegistry(1099);
         registry.bind("gameController",gameController);
         System.out.println("ready to start, waiting for players");

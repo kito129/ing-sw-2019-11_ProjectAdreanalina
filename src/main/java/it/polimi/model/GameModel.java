@@ -71,8 +71,13 @@ public class GameModel implements Serializable {
     public GameModel() {
         
         state=State.LOBBY;
-        Random rand = null;
-        int randomNum = rand.nextInt((1 - 4) + 1) + 1;
+        ArrayList<Integer>rand = new ArrayList<>();
+        rand.add(1);
+        rand.add(2);
+        rand.add(3);
+        rand.add(4);
+        Collections.shuffle(rand);
+        int randomNum = rand.get(0);
         //create map
         switch (randomNum){
             case 1:
@@ -89,7 +94,6 @@ public class GameModel implements Serializable {
                 break;
             default:this.map = new Map(MapCreator.createD(),"MAPD");
                 break;
-                
         }
         
         //populate list of color for the player
