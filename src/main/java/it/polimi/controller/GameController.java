@@ -160,7 +160,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     }
 
     @Override
-    public synchronized void addObserver (RemoteView view)throws RemoteException  {
+    public void addObserver (RemoteView view)throws RemoteException  {
 
         gameModel.addObserver(view);
 
@@ -168,7 +168,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     }
 
     @Override
-    public synchronized void reAddObserver(RemoteView view) throws RemoteException {
+    public void reAddObserver(RemoteView view) throws RemoteException {
 
         gameModel.reAddObserver(view);
     }
