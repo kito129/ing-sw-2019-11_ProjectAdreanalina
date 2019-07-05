@@ -13,6 +13,10 @@ public class WeaponDeck implements Serializable {
 
     private ArrayList<WeaponCard> weaponCards;
 
+    /**
+     * Instantiates the weapon deck.
+     */
+
     public WeaponDeck(){
 
         WeaponCard lockRifle= new LockRifle();
@@ -39,7 +43,6 @@ public class WeaponDeck implements Serializable {
         weaponCards = new ArrayList<>();
         weaponCards.add(lockRifle);
         weaponCards.add(electroscythe);
-        weaponCards.add(machineGun);
         weaponCards.add(tractorBeam);
         weaponCards.add(thor);
         weaponCards.add(plasmaGun);
@@ -61,6 +64,12 @@ public class WeaponDeck implements Serializable {
         Collections.shuffle(weaponCards);
 
     }
+
+    /**
+     * Catches the first card of the deck.
+     *
+     * @return the weaponCard Drawn.
+     */
 
 
     public WeaponCard drawWeaponCard(){

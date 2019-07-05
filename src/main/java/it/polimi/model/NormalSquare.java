@@ -11,11 +11,11 @@ public class NormalSquare extends Square implements Serializable {
     private AmmoCard ammoCard;
     
     /**
-     * Instantiates a new Normal Square.
+     * Instantiates Normal Square.
      *
-     * @param r          the row
-     * @param c          the ccolumn
-     * @param color      the color
+     * @param r the row
+     * @param c the column
+     * @param color the color
      */
     public NormalSquare(int r, int c, EnumColorSquare color) {
 
@@ -23,6 +23,12 @@ public class NormalSquare extends Square implements Serializable {
        this.ammoCard= null;
 
     }
+
+    /**
+     * Checks if the square contains an ammo Card.
+     *
+     * @return true if the ammo card is on Square.
+     */
     
     public boolean containAmmoCard(){
     
@@ -30,9 +36,9 @@ public class NormalSquare extends Square implements Serializable {
     }
     
     /**
-     * Get ammo card ammo card.
+     * Get ammo card.
      *
-     * @return the ammo card
+     * @return the ammo card in the square.
      */
     public AmmoCard getAmmoCard(){
 
@@ -42,7 +48,7 @@ public class NormalSquare extends Square implements Serializable {
     /**
      * Sets ammo card.
      *
-     * @param ammoCard the ammo card
+     * @param ammoCard the ammo card.
      */
     public void setAmmoCard(AmmoCard ammoCard) {
 
@@ -52,7 +58,7 @@ public class NormalSquare extends Square implements Serializable {
     /**
      * Get ammo card ammo card and remove from the square.
      *
-     * @return the ammo card on this square
+     * @return the ammo card on this square.
      */
     public AmmoCard catchAmmoCard(){
         

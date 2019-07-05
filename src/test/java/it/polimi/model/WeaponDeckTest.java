@@ -21,7 +21,7 @@ public class WeaponDeckTest {
 
     public void testDrawnWeaponCard(){
 
-        for(int i=0;i<21;i++){
+        for(int i=0;i<20;i++){
 
             assertNotNull(weaponDeck.drawWeaponCard());
         }

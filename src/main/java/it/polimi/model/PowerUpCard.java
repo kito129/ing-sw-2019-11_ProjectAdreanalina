@@ -66,6 +66,12 @@ public class PowerUpCard implements Serializable {
 
         return colorPowerUpCard;
     }
+
+    /**
+     * Gets the color associate to spawn of the player.
+     *
+     * @return the color of Square where the player must be spawn.
+     */
     
     public EnumColorSquare getColorRespawn () {
         

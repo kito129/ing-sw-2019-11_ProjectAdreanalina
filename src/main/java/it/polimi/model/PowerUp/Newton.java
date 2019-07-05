@@ -16,7 +16,8 @@ public class Newton extends PowerUpCard {
     public Newton(EnumColorCardAndAmmo colorCard){
 
         super("NEWTON", colorCard);
-        setDescription("You may play this card on your turn before or after any action. Choose any other player's figure and move it 1 or 2 squares in one direction. (You can't use this to move a figure after it respawns at the end of your turn. That would be too late.)");
+        setDescription("You may play this card on your turn before or after any action. Choose any other player's figure and move it 1 or 2 squares in one direction." +
+                " (You can't use this to move a figure after it respawns at the end of your turn. That would be too late.)");
 
     }
 

@@ -10,8 +10,10 @@ public class KillShotTrackPoint implements Serializable {
     private boolean skull;
     private EnumColorPlayer mark1;
     private EnumColorPlayer mark2;
-    
 
+    /**
+     * Istantiates KillShotTrackPoint
+     */
 
     public KillShotTrackPoint() {
 
@@ -54,7 +56,7 @@ public class KillShotTrackPoint implements Serializable {
     /**
      * Sets mark 1.
      *
-     * @param mark1 the mark 1
+     * @param mark1 the color of mark 1
      */
     public void setMark1(EnumColorPlayer mark1) {
 
@@ -64,7 +66,7 @@ public class KillShotTrackPoint implements Serializable {
     /**
      * Sets mark 2.
      *
-     * @param mark2 the mark 2
+     * @param mark2 the color of the mark 2
      */
     public void setMark2(EnumColorPlayer mark2) {
 
@@ -74,7 +76,7 @@ public class KillShotTrackPoint implements Serializable {
     /**
      * Sets skull.
      *
-     * @param skull the skull
+     * @param skull true if you want to set the field skull true
      */
     public void setSkull(boolean skull) {
 

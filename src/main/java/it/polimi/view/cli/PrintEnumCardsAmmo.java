@@ -33,5 +33,6 @@ public class PrintEnumCardsAmmo implements Serializable {
                     break;
             }
         }
+        System.out.println();
     }
 }

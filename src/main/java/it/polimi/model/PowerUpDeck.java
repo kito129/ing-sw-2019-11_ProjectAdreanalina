@@ -17,6 +17,10 @@ public class PowerUpDeck implements Serializable {
     private ArrayList<PowerUpCard> powerUpCards;
     private ArrayList<PowerUpCard> discardedCards;
 
+    /**
+     * Istantiates the powerUp deck.
+     */
+
     public PowerUpDeck() {
 
         PowerUpCard newtonY = new Newton(EnumColorCardAndAmmo.YELLOW);
@@ -59,6 +63,12 @@ public class PowerUpDeck implements Serializable {
         this.powerUpCards.add(teleporterR);
         Collections.shuffle(this.powerUpCards);
     }
+
+    /**
+     * Catches the first card of the deck.
+     *
+     * @return the powerUp drawn.
+     */
 
     public PowerUpCard drawnPowerUpCard() {
 

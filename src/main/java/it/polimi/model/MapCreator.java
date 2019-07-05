@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class MapCreator {
 
     /**
-     * Create a array list.
+     * Creates the map a.
      *
-     * @return the array list
+     * @return arrayList of square of the map A.
      */
     public static ArrayList<Square> createA() {
     
@@ -91,11 +91,11 @@ public class MapCreator {
         temMap.add(s11);
        return temMap;
     }
-    
+
     /**
-     * Create b array list.
+     * Creates the map b.
      *
-     * @return the array list
+     * @return arrayList of square of the map B.
      */
     public static ArrayList<Square> createB() {
     
@@ -176,11 +176,11 @@ public class MapCreator {
         temMap.add(s11);
         return temMap;
     }
-    
+
     /**
-     * Create c array list.
+     * Creates the map C.
      *
-     * @return the array list
+     * @return arrayList of square of the map C.
      */
     public static ArrayList<Square> createC() {
         
@@ -254,12 +254,14 @@ public class MapCreator {
         temMap.add(s10);
         return temMap;
     }
-    
+
     /**
-     * Create d array list.
+     * Creates the map D.
      *
-     * @return the array list
+     * @return arrayList of square of the map D.
      */
+    
+
     public static ArrayList<Square> createD() {
         
         NormalSquare s1 = new NormalSquare(0, 0, EnumColorSquare.RED);

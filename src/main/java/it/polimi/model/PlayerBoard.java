@@ -246,8 +246,10 @@ public class PlayerBoard implements Serializable {
     }
 
     /**
-     * Decreases the value of board depending of the number of deaths of the player.
+     * Decreases the value of board depending, of the number of deaths of the player, and
+     * if the final frenzy is starts.
      */
+
     public void decreaseBoardValue() {
 
         if(finalFrenzy) {
@@ -465,6 +467,10 @@ public class PlayerBoard implements Serializable {
 
         return damages.indexOf(color);
     }
+
+    /**
+     * Sets this playerboard ready for final frenzy.
+     */
 
     public void startFinalFrenzy(){
 
