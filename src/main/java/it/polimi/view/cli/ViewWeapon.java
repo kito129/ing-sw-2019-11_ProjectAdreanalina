@@ -20,7 +20,7 @@ public class ViewWeapon {
     
     public void viewSelectWeapon() throws RemoteException {
     
-        if(viewCLI.gameModel.getActualPlayer().getName().equals(viewCLI.user)) {
+        if(viewCLI.checkCurrent()) {
             
             ArrayList<WeaponCard> weapons = viewCLI.gameModel.getActualPlayer().getPlayerBoard().getPlayerWeapons();
             PrintEffectWeapon.printSelectWeapon();
@@ -37,7 +37,7 @@ public class ViewWeapon {
     
     public void viewSelectWeaponEffect() throws RemoteException {
     
-        if(viewCLI.gameModel.getActualPlayer().getName().equals(viewCLI.user)) {
+        if(viewCLI.checkCurrent()) {
         
             PrintEffectWeapon.printSelectWeaponEffect();
             PrintWeapon.printEffectName(viewCLI.gameModel.getAvailableEffect());
@@ -54,38 +54,41 @@ public class ViewWeapon {
     
     public void viewShoot() throws RemoteException {
     
-        
-        System.out.println("\n\n\n\n");
-        
-        System.out.println(viewCLI.gameModel.getState().toString());
-        
-        viewCLI.printMessageAll();
-    
-        if (viewCLI.gameModel.getPlayerDamaged().size()>0) {
-        
-            System.out.println("\n DAMAGED PLAYER IN THIS SHOOT:\n");
-        
-            for (Player a : viewCLI.gameModel.getPlayerDamaged()) {
+        if(viewCLI.checkCurrent()) {
             
-                PrintPlayerBoard.print(a);
-            }
-        }
+            System.out.println("\n\n\n\n");
+    
+            System.out.println(viewCLI.gameModel.getState().toString());
+    
+            viewCLI.printMessageAll();
+    
+            if (viewCLI.gameModel.getPlayerDamaged().size() > 0) {
         
-        if (viewCLI.gameModel.getPlayerMarked().size()>0) {
+                System.out.println("\n DAMAGED PLAYER IN THIS SHOOT:\n");
+        
+                for (Player a : viewCLI.gameModel.getPlayerDamaged()) {
             
-            System.out.println("\n MARKED PLAYER IN THIS SHOOT:\n");
-    
-            for (Player a : viewCLI.gameModel.getPlayerMarked()) {
-        
-                PrintPlayerBoard.print(a);
+                    PrintPlayerBoard.print(a);
+                }
             }
+    
+            if (viewCLI.gameModel.getPlayerMarked().size() > 0) {
+        
+                System.out.println("\n MARKED PLAYER IN THIS SHOOT:\n");
+        
+                for (Player a : viewCLI.gameModel.getPlayerMarked()) {
+            
+                    PrintPlayerBoard.print(a);
+                }
+            }
+    
+            //viewCLI.printMap();
+    
+            viewCLI.notifyController();
+        }  else {
+        
+            PrintNotActualMenu.printMenu(viewCLI.gameModel,viewCLI);
         }
-    
-        //viewCLI.printMap();
-    
-        viewCLI.notifyController();
-        
-        
     }
     
     public void payExtraEffect(GameModel gameModel) throws RemoteException {
@@ -120,8 +123,6 @@ public class ViewWeapon {
                             i3 = viewCLI.getUserInput(-1, gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size());
                         } while (i3 != viewCLI.getIndex2());
                         viewCLI.setIndex3(i3);
-                
-                
                         break;
                     case 3:
                         System.out.println("First:");
@@ -141,7 +142,6 @@ public class ViewWeapon {
                         break;
                 }
             }
-            viewCLI.notifyController();
         } else {
     
             PrintNotActualMenu.printMenu(viewCLI.gameModel,viewCLI);

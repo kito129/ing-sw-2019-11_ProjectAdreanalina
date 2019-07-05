@@ -58,11 +58,11 @@ public class FunctionController {
                     @Override
                     public void run() {
                        //here go the verify observer
-                        if (functionModel.getGameModel().getPlayers(true).size() == 3)
+                        if (functionModel.getGameModel().getPlayers(true,true).size() == 3)
                             timer.cancel();
                         else
                             startTimerCheckLobby();
-                        if ( functionModel.getGameModel().getPlayers(true).size() ==5)
+                        if ( functionModel.getGameModel().getPlayers(true,true).size() ==5)
                             functionModel.getGameModel().setState(State.PUTSPAWN);
                     }
                 }, 2000
@@ -79,12 +79,12 @@ public class FunctionController {
               //  startTimerCheckLobby();
             
             //}else
-                if(gameModel.getPlayers(true).size() == 5){
+                if(gameModel.getPlayers(true,true).size() == 5){
             
                 //timer.cancel();
                 //timerLobby.cancel();
                 //now game can start
-                gameModel.setActualPlayer(gameModel.getPlayers(true).get(0));
+                gameModel.setActualPlayer(gameModel.getPlayers(true,true).get(0));
                 gameModel.setState(State.PUTSPAWN);
             
             } else {
@@ -213,8 +213,10 @@ public class FunctionController {
     public void startTurn() throws RemoteException {
         
         //set the lowest id to the current player
-        this.functionModel.getGameModel().setActualPlayer(this.functionModel.getGameModel().getPlayers(true).get(0));
+        this.functionModel.getGameModel().setActualPlayer(this.functionModel.getGameModel().getPlayers(true,true).get(0));
     
+        //game started
+        
         //put ammo and weapon card
         refreshMapEndTurn();
         
@@ -262,7 +264,7 @@ public class FunctionController {
         if (i==1) {
             
     
-            for (Player a : gameModel.getPlayers(true)) {
+            for (Player a : gameModel.getPlayers(true,true)) {
                 ArrayList<PowerUpCard> tempPowerUp = new ArrayList<>();
                 tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
                 tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
@@ -285,13 +287,13 @@ public class FunctionController {
         
         //put 2 power up for all palyer in game
         
-        if (functionModel.getGameModel().getSpawnedPlayer()==functionModel.getGameModel().getPlayers(true).size()){
+        if (functionModel.getGameModel().getSpawnedPlayer()==functionModel.getGameModel().getPlayers(true,true).size()){
             
             //all player are spawned correctly. Now can start the turn.
             functionModel.getGameModel().setState(State.STARTTURN);
         } else {
             
-            for (Player a : functionModel.getGameModel().getPlayers(true)) {
+            for (Player a : functionModel.getGameModel().getPlayers(true,true)) {
                 
                 if (a.getRow() == -1 && a.getColumn() == -1) {
                     
@@ -304,16 +306,9 @@ public class FunctionController {
     
     public void selectSpawn(RemoteView view) throws RemoteException {
         
-        if(view.getUser().equals(functionModel.getGameModel().getSpawnPlayer().getName())){
-            
-            respawnPlayerController(functionModel.getGameModel().getSpawnPlayer(),view);
-            functionModel.getGameModel().incrementSpawnedPlayer();
-            functionModel.getGameModel().setState(State.FIRSTSPAWN);
-            
-        } else {
-            //vedere cosa gare
-        }
-        
+        respawnPlayerController(functionModel.getGameModel().getSpawnPlayer(),view);
+        functionModel.getGameModel().incrementSpawnedPlayer();
+        functionModel.getGameModel().setState(State.FIRSTSPAWN);
     }
     
     public void respawnPlayerController (Player player, RemoteView view) throws RemoteException {
@@ -602,33 +597,42 @@ public class FunctionController {
         
         ArrayList<PowerUpCard> powerUpToPay = new ArrayList<>();
         WeaponCard weaponToCharge = functionModel.getGameModel().getWeaponToCharge().get(view.getIndex());
-        
-        if (i==1) {
-            if (view.isBooleanChose()) {
-                
-                if (view.getIndex2() != -1) {
-        
-                    powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
-        
-                    if (view.getIndex3() != -1) {
+        try {
             
-                        powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex3()));
-            
-                        if (view.getIndex4() != -1) {
+            if (i==1) {
                 
-                            powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex4()));
+                if (view.isBooleanChose()) {
+        
+                    if (view.getIndex2() != -1 && functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size() <= view.getIndex2()) {
+                        
+                        powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
+                   
+                        if (view.getIndex3() != -1 && functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size() <= view.getIndex3()) {
+                            
+                            powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex3()));
                 
-                            if (view.getIndex5() != -1) {
+                            if (view.getIndex4() != -1 && functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size() <= view.getIndex4()) {
                     
-                                powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
+                                powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex4()));
                     
+                                if (view.getIndex5() != -1 && functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size() <= view.getIndex5()) {
+                        
+                                    powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex5()));
+                        
+                                }  else {
+                                    throw new NotValidAmmoException();
+                                }
+                            }  else {
+                                throw new NotValidAmmoException();
                             }
+                        }  else {
+                            throw new NotValidAmmoException();
                         }
+                    }  else {
+                        throw new NotValidAmmoException();
                     }
                 }
-            }
-            try {
-                
+            
                 payAmmoController(weaponToCharge.getRechargeCost(), powerUpToPay);
                 weaponToCharge.setCharge(true);
                 functionModel.getGameModel().getWeaponToCharge().remove(weaponToCharge);
@@ -640,20 +644,15 @@ public class FunctionController {
                     
                     functionModel.getGameModel().setState(State.RESPWANPLAYERSELECTION);
                 }
-            } catch (NotValidAmmoException e) {
                 
-                setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
-            }
-            
-        } else  if(i==2){
-            
-            try {
+            } else  if(i==2){
+                
                 payAmmoController(payExtra, powerUpToPay);
-                
-            } catch (NotValidAmmoException e) {
-                
-                setErrorState("YOU HAVE NOT AMMO TO PAY EXTRA COST FOR EFFECT, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
+    
             }
+        } catch (NotValidAmmoException e) {
+            
+            setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
         }
     }
     
@@ -813,10 +812,6 @@ public class FunctionController {
         } else {
             //Scroring dead playerboard
             
-            functionModel.getGameModel().setState(State.SCORINGPLAYERBOARD);
-            
-            
-            
             //finish to use grenade now can respawn dead player
             //clear original spawn
             functionModel.getGameModel().resetSpawnedPLayer();
@@ -824,7 +819,6 @@ public class FunctionController {
             deadPlayerGestor();
             functionModel.getGameModel().setState(State.SCORINGPLAYERBOARD);
         }
-        
     }
     
     public void grenadeGestor(){
@@ -851,7 +845,7 @@ public class FunctionController {
         
         if (functionModel.getGameModel().getDeadPlayers().size()>0) {
             
-            functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getDeadPlayers().get(0));
+            functionModel.getGameModel().setActualDeadPLayer(functionModel.getGameModel().getDeadPlayers().get(0));
             functionModel.getGameModel().setState(State.DEADPLAYERSELECT);
         } else {
             
@@ -873,6 +867,7 @@ public class FunctionController {
     public void  endTurn(){
         
         //now pass the turn
+        
     }
     
     //scoring

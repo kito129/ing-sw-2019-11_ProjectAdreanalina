@@ -153,10 +153,10 @@ public class GameModelTest {
         gameModel.setPlayers(player1);
         gameModel.setPlayers(player2);
         gameModel.setActualPlayer(player);
-        assertTrue(gameModel.getPlayers(false).size()==2&&
-                !gameModel.getPlayers(false).contains(player));
-        assertTrue(gameModel.getPlayers(true).size()==3&&
-                gameModel.getPlayers(true).contains(player));
+        assertTrue(gameModel.getPlayers(false,false).size()==2&&
+                !gameModel.getPlayers(false,false).contains(player));
+        assertTrue(gameModel.getPlayers(true,false).size()==3&&
+                gameModel.getPlayers(true,false).contains(player));
 
     }
 
@@ -220,7 +220,7 @@ public class GameModelTest {
         gameModel.setPlayers(player);
         gameModel.setPlayers(player1);
         gameModel.setPlayers(player2);
-        assertEquals(3,gameModel.getPlayers(true).size());
+        assertEquals(3,gameModel.getPlayers(true,true).size());
         gameModel.setDeadPlayer();
         assertEquals(0,gameModel.getDeadPlayers().size());
         player.setAlive(false);
@@ -228,7 +228,7 @@ public class GameModelTest {
         assertEquals(1,gameModel.getDeadPlayers().size());
         assertTrue(gameModel.getDeadPlayers().contains(player)&&!gameModel.getDeadPlayers().contains(player1)&&
                 !gameModel.getDeadPlayers().contains(player2));
-        assertEquals(3,gameModel.getPlayers(true).size());
+        assertEquals(3,gameModel.getPlayers(true,true).size());
 
 
     }

@@ -29,7 +29,7 @@ public class PrintEffectPowerUp implements Serializable {
         System.out.println();
         System.out.println("YOU HAVE SELECTED THE NEWTON");
         System.out.println("Which player do you want to move and in which square do you want to put him? (enter players' ID and row and column for the square)");
-        PrintPlayer.print(gameModel.getPlayers(false));
+        PrintPlayer.print(gameModel.getPlayers(false,false));
     }
 
     //TAGBACK GRENADE
