@@ -278,7 +278,7 @@ public class MatchController {
 
         ImageView OthersPlayerboardImage = new ImageView();
 
-        ArrayList<Player> players = gameModel.getPlayers(false);
+        ArrayList<Player> players = gameModel.getPlayers(false,false);
 
         for (int i = 0; i < players.size(); i++) {
 

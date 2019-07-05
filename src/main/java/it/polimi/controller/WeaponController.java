@@ -375,6 +375,23 @@ public class WeaponController {
     }
     
     
+    public  void removeDeadPlayerFromMap(){
+        
+        for (Player a: functionModel.getGameModel().getPlayers(false,true)){
+            
+            if (!a.isAlive()){
+    
+                try {
+                    functionModel.getGameModel().getMap().removePlayerFromSquare(a);
+                    
+                } catch (MapException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    
     /**
      * After shoot.
      *
@@ -382,6 +399,8 @@ public class WeaponController {
      * @throws RemoteException the remote exception
      */
     public void afterShoot(RemoteView view) throws RemoteException {
+    
+        removeDeadPlayerFromMap();
         
         if(functionModel.getGameModel().getAvailableEffect().size()==0){
             
@@ -2959,7 +2978,7 @@ public class WeaponController {
                 
                 try{
                     
-                    ArrayList<Player> allPlayerInGame=new ArrayList<>(gameModel.getPlayers(false));
+                    ArrayList<Player> allPlayerInGame=new ArrayList<>(gameModel.getPlayers(false,false));
                     weapon.tsunamiMode(map,currentPlayer,allPlayerInGame);
                     for (Player a: allPlayerInGame){
                         

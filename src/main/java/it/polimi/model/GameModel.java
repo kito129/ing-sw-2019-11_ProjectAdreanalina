@@ -24,6 +24,7 @@ public class GameModel implements Serializable {
     private Player actualPlayer;
     private KillShotTrack killShotTrack= new KillShotTrack();
     private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> alivePlayer = new ArrayList<>();
     //action count
     int actionCount;
     //first spawn
@@ -203,6 +204,7 @@ public class GameModel implements Serializable {
         return weaponName;
     }
     
+    
     public void setWeaponName (String weaponName) {
         
         this.weaponName = weaponName;
@@ -306,18 +308,38 @@ public class GameModel implements Serializable {
     }
 
 
-    public ArrayList<Player> getPlayers(boolean wantCurrent) {
+    public ArrayList<Player> getPlayers(boolean wantCurrent, boolean wantDead) {
+       
+        ArrayList<Player> temp = new ArrayList<Player>(players);
+        if (wantDead) {
+            
+            if (wantCurrent) {
         
-        if (wantCurrent) {
-
-            return players;        
-        } else
-        {
-            ArrayList<Player> temp =new ArrayList<Player>(players);
-            temp.remove(getActualPlayer());
-            return temp;
+                return players;
+            } else {
+               
+                temp.remove(getActualPlayer());
+                return temp;
+            }
+        } else {
+            
+            for (int i1 = 0; i1 < temp.size(); i1++) {
+                Player a = temp.get(i1);
+                
+                if (!a.isAlive()) {
+                    temp.remove(a);
+                    i1--;
+                }
+            }
+            if (wantCurrent) {
+                
+                return temp;
+            } else {
+                
+                temp.remove(getActualPlayer());
+                return temp;
+            }
         }
-
     }
 
     public void setActualPlayer(Player actualPlayer) {
@@ -418,9 +440,17 @@ public class GameModel implements Serializable {
         this.errorMessage = errorMessage;
     }
 
+    public void checkOverElvenDamage(){
+        for (Player a:players){
+            if (a.isMarkToDead()){
+                a.setAlive(false);
+            }
+        }
+    }
 
     public void setDeadPlayer () {
-    
+        
+        checkOverElvenDamage();
         ArrayList<Player> tempPLayers = new ArrayList<>();
         for (Player a:players){
             if(!a.isAlive()){
@@ -451,7 +481,7 @@ public class GameModel implements Serializable {
         
         ArrayList<EnumColorPlayer> playerColor = new ArrayList<>();
         
-        for (Player a: getPlayers(true)){
+        for (Player a: getPlayers(true,true)){
             playerColor.add(a.getColor());
         }
         return playerColor;
@@ -474,7 +504,7 @@ public class GameModel implements Serializable {
 
     public void addObserver(RemoteView observer) throws RemoteException{
 
-        setPlayers(new Player(getPlayers(true).size()+1, observer.getUser(), getRandomColor(),this));
+        setPlayers(new Player(getPlayers(true,true).size()+1, observer.getUser(), getRandomColor(),this));
         remoteViews.add(observer);
     }
     
@@ -521,11 +551,11 @@ public class GameModel implements Serializable {
 
                 if(observer!=null) {
 
-                    if((getPlayers(true).indexOf(actualPlayer)!=getRemoteViews().indexOf(observer))){
+                    if((getPlayers(true,true).indexOf(actualPlayer)!=getRemoteViews().indexOf(observer))){
 
                         int count=getRemoteViews().indexOf(observer);
 
-                        if(getPlayers(true).get(count).getOnline()) {
+                        if(getPlayers(true,true).get(count).getOnline()) {
 
                             observer.update(this);
                         }

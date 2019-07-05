@@ -31,7 +31,6 @@ public class TagBackGrenade extends PowerUpCard {
         if (map.isVisible(currentPlayer, targetPlayer)) {
 
             currentPlayer.singleMark(targetPlayer.getColor());
-            currentPlayer.stampa();
         } else {
 
             throw new NotVisibleTarget();

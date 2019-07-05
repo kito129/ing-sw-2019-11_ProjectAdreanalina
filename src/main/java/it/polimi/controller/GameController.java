@@ -73,6 +73,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.selectSpawn(view);
                     break;
                 case STARTTURN:
+                    this.gameStarted=true;
                     functionController.startTurn();
                     break;
                 case CHOSEACTION:
@@ -189,14 +190,14 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 if((gameModel.getState()!=State.LOBBY)) {
 
                     int indexOfObserver = gameModel.getRemoteViews().indexOf(remoteView);
-                    gameModel.getPlayers(true).get(indexOfObserver).setOnlineModel(false);
+                    gameModel.getPlayers(true,true).get(indexOfObserver).setOnlineModel(false);
                     gameModel.removeObserver(remoteView);
                 }else{
 
                     int indexOfObserver = gameModel.getRemoteViews().indexOf(remoteView);
                     if(indexOfObserver!=-1) {
-                        gameModel.getPlayers(true).get(indexOfObserver).setOnlineModel(false);
-                        gameModel.getPlayers(true).remove(indexOfObserver);
+                        gameModel.getPlayers(true,true).get(indexOfObserver).setOnlineModel(false);
+                        gameModel.getPlayers(true,true).remove(indexOfObserver);
                     }
                     gameModel.getRemoteViews().remove(indexOfObserver);
                 }

@@ -131,9 +131,9 @@ public class ViewCLI implements RemoteView, Serializable {
 
     private boolean verifyName(String name){
         
-        if (this.gameModel.getPlayers(true)!=null){
+        if (this.gameModel.getPlayers(true,true)!=null){
 
-        for(Player player:gameModel.getPlayers(true)) {
+        for(Player player:gameModel.getPlayers(true,true)) {
     
             if (name.equals(player.getName())) {
                 System.out.println("THIS USERNAME ALREADY EXIST");
@@ -196,7 +196,7 @@ public class ViewCLI implements RemoteView, Serializable {
 
     public boolean tryToReAdd (String user){
 
-        for(Player player:gameModel.getPlayers(true)){
+        for(Player player:gameModel.getPlayers(true,true)){
 
             if(user.equals(player.getName())){
 
@@ -690,7 +690,7 @@ public class ViewCLI implements RemoteView, Serializable {
                 input = new Scanner(System.in);
             i=input.nextInt();
         
-        } while (i<0 || i>gameModel.getPlayers(true).size() || i==gameModel.getActualPlayer().getId());
+        } while (i<0 || i>gameModel.getPlayers(true,false).size() || i==gameModel.getActualPlayer().getId());
     
         return i;
     }
@@ -801,7 +801,7 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewLobby() throws RemoteException{
     
         System.out.println("GAMERS WAITING IN THE LOBBY:");
-        for(Player a: gameModel.getPlayers(true)){
+        for(Player a: gameModel.getPlayers(true,true)){
             System.out.println("- " + a.getId() +": "+ a.getName());
         }
        
@@ -834,13 +834,13 @@ public class ViewCLI implements RemoteView, Serializable {
                     PrintAmmo.print(gameModel.getActualPlayer().getPlayerBoard().getAmmo(),1);
                     break;
                 case 7:
-                    for (Player a: gameModel.getPlayers(false)){
+                    for (Player a: gameModel.getPlayers(false,false)){
                         
                         PrintPlayer.print(a);
                     }
                     break;
                 case 8:
-                    for (Player a: gameModel.getPlayers(false)){
+                    for (Player a: gameModel.getPlayers(false,false)){
         
                         PrintPlayerBoard.print(a);
                     }
@@ -875,44 +875,64 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public  void viewSpawnPowerUp (int i) throws RemoteException {
         
-        if (gameModel.getSpawnPlayer().getName().equals(user)) {
-    
-            System.out.println();
-            if (i==1) {
-                
+        if (i==1){
+            
+            if (gameModel.getSpawnPlayer().getName().equals(user)) {
+            
+                System.out.println();
                 System.out.println("CHOOSE A POWER UP TO DISCARD BETWEEN THESE TWO! THE OTHER ONE WILL BE YOURS");
-            } else if (i==2){
-                
-                System.out.println("CHOOSE A POWER UP TO WHERE RESPAWN AFTER DEAD");
-            }
-            System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP NOT CHOSEN");
-            System.out.println();
-            Player player = gameModel.getSpawnPlayer();
-    
-            System.out.println(player.toString());
-    
-            System.out.println();
-            System.out.println("POWER UP TO CHOOSE:");
-    
-            PrintPowerUp.print(player.getPowerUpCardsSpawn(), false);
-    
-            System.out.println();
-            System.out.println("MAKE YOUR CHOICE!!!");
-            System.out.println();
-    
-            setIndex(getUserInput(0, 1));
-            notifyController();
-        } else {
-    
-            if (i==1) {
-                
+                System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP CHOSEN");
+                System.out.println();
+                Player player = gameModel.getSpawnPlayer();
+        
+                System.out.println(player.toString());
+        
+                System.out.println();
+                System.out.println("POWER UP TO CHOOSE:");
+        
+                PrintPowerUp.print(player.getPowerUpCardsSpawn(), false);
+        
+                System.out.println();
+                System.out.println("MAKE YOUR CHOICE!!!");
+                System.out.println();
+        
+                setIndex(getUserInput(0, 1));
+                notifyController();
+            } else {
+        
                 System.out.println("WAITING FOR SPAWNING OTHER PLAYER IN MAP");
-            } else if(i==2) {
-    
-                System.out.println("WAITING FOR DEAD PLAYER RESPAWNING");
+         
+            }
+        }else {
+            
+            if (gameModel.getActualDeadPLayer().getName().equals(user)) {
+                
+                System.out.println();
+                System.out.println("CHOOSE A POWER UP TO WHERE RESPAWN AFTER DEAD");
+                System.out.println("YOU WILL APPEAR ON THE MAP ON THE GENERATION SQUARE OF THE COLOR CORRESPONDING TO THE POWER UP CHOSEN");
+                System.out.println();
+                Player player = gameModel.getSpawnPlayer();
+        
+                System.out.println(player.toString());
+        
+                System.out.println();
+                System.out.println("POWER UP TO CHOOSE:");
+        
+                PrintPowerUp.print(player.getPowerUpCardsSpawn(), false);
+        
+                System.out.println();
+                System.out.println("MAKE YOUR CHOICE!!!");
+                System.out.println();
+        
+                setIndex(getUserInput(0, 1));
+                notifyController();
+            } else {
+        
+                  System.out.println("WAITING FOR DEAD PLAYER RESPAWNING");
+                }
             }
         }
-    }
+    
     
     public void viewStartTurn() throws RemoteException {
         
@@ -1083,21 +1103,13 @@ public class ViewCLI implements RemoteView, Serializable {
             switch (gameModel.getPowerUpSelected().getNameCard()){
                 case "NEWTON":
                     PrintEffectPowerUp.printNewton(gameModel);
-                    setTarget1(getUserInput(0,gameModel.getPlayers(true).size()));
+                    setTarget1(getUserInput(0,gameModel.getPlayers(true,false).size()));
                     System.out.println("Insert the Square");
                     setSquareInput(1);
-                    break;
-                case "TARGETING SCOPE":
-                    PrintEffectPowerUp.printTargetingScope(gameModel);
-                    setTarget1(getUserInput(0,gameModel.getPlayerDamaged().size()));
                     break;
                 case "TELEPORTER":
                     PrintEffectPowerUp.printTeleporter(gameModel);
                     setSquareInput(1);
-                    break;
-                case "TAGBACK GRENADE":
-                    PrintEffectPowerUp.printTagbackGrenade();
-                    setTarget1(getUserInput(0,gameModel.getPlayers(true).size()));
                     break;
             }
             notifyController();
