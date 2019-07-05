@@ -75,7 +75,7 @@ public class MapCLI implements Serializable {
      */
     public void printGrid() {
         
-        printLegendMap(gameModel.getPlayers(true));
+        printLegendMap(gameModel.getPlayers(true,false));
         
         for (int sqRow = 0; sqRow < 3; sqRow++){
             

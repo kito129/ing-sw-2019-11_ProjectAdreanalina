@@ -17,7 +17,8 @@ public class Player implements Serializable {
     private int column;
     private int score;
     private boolean alive;
-    private boolean damaged;
+    private boolean overKill;
+    private boolean markToDead;
     private boolean online;
     private ArrayList<PowerUpCard> powerUpCardsSpawn = new ArrayList<>();
     private ArrayList<Player> damagedGameModel;
@@ -39,19 +40,15 @@ public class Player implements Serializable {
         this.color = color;
         score = 0;
         alive = true;
-        damaged = false;
         playerBoard = new PlayerBoard();
         this.row = -1;
         this.column = -1;
         setOnlineModel(true);
         this.damagedGameModel = gameModel.getPlayerDamaged();
         this.markedGameModel = gameModel.getPlayerMarked();
-
-
+        
     }
-
-
-
+    
     /**
      * Gets id.
      *
@@ -135,6 +132,26 @@ public class Player implements Serializable {
     public boolean getOnline(){
         
         return online;
+    }
+    
+    public boolean isMarkToDead () {
+        
+        return markToDead;
+    }
+    
+    public void setMarkToDead (boolean markToDead) {
+        
+        this.markToDead = markToDead;
+    }
+    
+    public boolean isOverKill () {
+        
+        return overKill;
+    }
+    
+    public void setOverKill (boolean overKill) {
+        
+        this.overKill = overKill;
     }
     
     public ArrayList<PowerUpCard> getPowerUpCardsSpawn () {
@@ -237,6 +254,7 @@ public class Player implements Serializable {
 
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);
+        checkAlive();
         this.damagedGameModel.add(this);
     }
 
@@ -244,6 +262,7 @@ public class Player implements Serializable {
 
         this.playerBoard.increaseDamages(damages);
         this.playerBoard.shiftMarks(damages.get(0));
+        checkAlive();
         this.damagedGameModel.add(this);
     }
 
@@ -252,6 +271,7 @@ public class Player implements Serializable {
         this.playerBoard.increaseDamages(damages);
         this.playerBoard.shiftMarks(mark);
         this.playerBoard.increaseMarks(mark);
+        checkAlive();
         this.damagedGameModel.add(this);
         this.markedGameModel.add(this);
     }
@@ -261,6 +281,7 @@ public class Player implements Serializable {
         this.playerBoard.increaseDamages(damage);
         this.playerBoard.shiftMarks(damage);
         this.playerBoard.increaseMarks(marks);
+        checkAlive();
         this.damagedGameModel.add(this);
         this.markedGameModel.add(this);
     }
@@ -270,30 +291,16 @@ public class Player implements Serializable {
 
         return "\nPlayer:\t" + this.id + "\nname:\t" + this.name + "\nr:\t" + this.row + "\nc:\t" + this.column + "\n" + this.getPowerUpCardsSpawn().toString();
     }
-
-    public void stampa(){
-
-        System.out.print("id: "+this.id+"              ");
-        System.out.print("name: "+this.name+"              ");
-        System.out.print("color: "+this.color+"             ");
-        //System.out.println("playboard: "+this.playerBoard);
-        System.out.print("row :"+this.row+"            ");
-        System.out.print("column: "+this.column+"            ");
-        System.out.print("score: "+this.score+"           ");
-        System.out.print("alive: "+this.alive+"            ");
-        System.out.print("damaged: "+this.damaged+"           ");
-        System.out.print("ammo: "+playerBoard.getAmmo()+"           ");
-        //System.out.println("ammoY: "+playerBoard.getAmmoY());
-        //System.out.println("ammoR: "+playerBoard.getAmmoR());
-        //System.out.println("ammoB: "+playerBoard.getAmmoB());
-        System.out.print("boardvalue: "+playerBoard.getBoardValue()+"            ");
-        System.out.print("damages: "+playerBoard.getDamages()+"            ");
-        System.out.print("marks: "+playerBoard.getMarks()+"             ");
-        System.out.print("weapons: "+playerBoard.getPlayerWeapons()+"              ");
-        System.out.print("powerup :"+playerBoard.getPlayerPowerUps()+"            ");
-        System.out.println();
-        System.out.println();
-    }
     
-   
+    public void checkAlive(){
+        
+        if (this.getPlayerBoard().getDamages().size()==11){
+            
+            setMarkToDead(true);
+        } else if (this.getPlayerBoard().getDamages().size()==12){
+            
+            setOverKill(true);
+            setAlive(false);
+        }
+    }
 }

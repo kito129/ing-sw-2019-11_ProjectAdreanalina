@@ -12,7 +12,7 @@ public class PrintNotActualMenu {
         view.printMessageAll();
         System.out.println("YOUR INFO: ");
         Player viewPlayer=null;
-        for (Player a: view.gameModel.getPlayers(false)){
+        for (Player a: view.gameModel.getPlayers(false,true)){
             
             if (a.getName().equals(view.user)){
                 viewPlayer = a;

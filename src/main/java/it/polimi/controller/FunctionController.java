@@ -9,6 +9,9 @@ import it.polimi.model.PowerUp.Newton;
 import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
+import it.polimi.model.Weapon.Electroscythe;
+import it.polimi.model.Weapon.GrenadeLauncher;
+import it.polimi.model.Weapon.Whisper;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
@@ -58,11 +61,11 @@ public class FunctionController {
                     @Override
                     public void run() {
                        //here go the verify observer
-                        if (functionModel.getGameModel().getPlayers(true).size() == 3)
+                        if (functionModel.getGameModel().getPlayers(true,true).size() == 3)
                             timer.cancel();
                         else
                             startTimerCheckLobby();
-                        if ( functionModel.getGameModel().getPlayers(true).size() ==5)
+                        if ( functionModel.getGameModel().getPlayers(true,true).size() ==5)
                             functionModel.getGameModel().setState(State.PUTSPAWN);
                     }
                 }, 2000
@@ -79,12 +82,12 @@ public class FunctionController {
               //  startTimerCheckLobby();
             
             //}else
-                if(gameModel.getPlayers(true).size() == 5){
+                if(gameModel.getPlayers(true,true).size() == 5){
             
                 //timer.cancel();
                 //timerLobby.cancel();
                 //now game can start
-                gameModel.setActualPlayer(gameModel.getPlayers(true).get(0));
+                gameModel.setActualPlayer(gameModel.getPlayers(true,true).get(0));
                 gameModel.setState(State.PUTSPAWN);
             
             } else {
@@ -198,6 +201,7 @@ public class FunctionController {
             functionModel.getGameModel().getAvailableEffect().removeAll(functionModel.getGameModel().getAvailableEffect());
         }
         this.functionModel.getGameModel().setErrorMessage(string);
+        this.functionModel.getGameModel().setMessageToCurrentView(string);
         this.functionModel.getGameModel().setBeforeError(this.functionModel.getGameModel().getState());
         this.functionModel.getGameModel().setState(State.ERROR);
     }
@@ -213,8 +217,19 @@ public class FunctionController {
     public void startTurn() throws RemoteException {
         
         //set the lowest id to the current player
-        this.functionModel.getGameModel().setActualPlayer(this.functionModel.getGameModel().getPlayers(true).get(0));
+        this.functionModel.getGameModel().setActualPlayer(this.functionModel.getGameModel().getPlayers(true,true).get(0));
     
+       functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().add(new Whisper());
+       
+       ArrayList<EnumColorPlayer> dam = new ArrayList<>();
+       for (int i =0; i<12;i++){
+           
+           dam.add(EnumColorPlayer.PINK);
+           
+       }
+       functionModel.getGameModel().getPlayers(true,true).get(4).multipleDamages(dam);
+        functionModel.getGameModel().getPlayers(true,true).get(3).multipleDamages(dam);
+       
         //put ammo and weapon card
         refreshMapEndTurn();
         
@@ -262,7 +277,7 @@ public class FunctionController {
         if (i==1) {
             
     
-            for (Player a : gameModel.getPlayers(true)) {
+            for (Player a : gameModel.getPlayers(true,true)) {
                 ArrayList<PowerUpCard> tempPowerUp = new ArrayList<>();
                 tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
                 tempPowerUp.add(gameModel.getPowerUpDeck().drawnPowerUpCard());
@@ -285,13 +300,13 @@ public class FunctionController {
         
         //put 2 power up for all palyer in game
         
-        if (functionModel.getGameModel().getSpawnedPlayer()==functionModel.getGameModel().getPlayers(true).size()){
+        if (functionModel.getGameModel().getSpawnedPlayer()==functionModel.getGameModel().getPlayers(true,true).size()){
             
             //all player are spawned correctly. Now can start the turn.
             functionModel.getGameModel().setState(State.STARTTURN);
         } else {
             
-            for (Player a : functionModel.getGameModel().getPlayers(true)) {
+            for (Player a : functionModel.getGameModel().getPlayers(true,true)) {
                 
                 if (a.getRow() == -1 && a.getColumn() == -1) {
                     
@@ -304,15 +319,9 @@ public class FunctionController {
     
     public void selectSpawn(RemoteView view) throws RemoteException {
         
-        if(view.getUser().equals(functionModel.getGameModel().getSpawnPlayer().getName())){
-            
-            respawnPlayerController(functionModel.getGameModel().getSpawnPlayer(),view);
-            functionModel.getGameModel().incrementSpawnedPlayer();
-            functionModel.getGameModel().setState(State.FIRSTSPAWN);
-            
-        } else {
-            //vedere cosa gare
-        }
+        respawnPlayerController(functionModel.getGameModel().getSpawnPlayer(), view);
+        functionModel.getGameModel().incrementSpawnedPlayer();
+        functionModel.getGameModel().setState(State.FIRSTSPAWN);
         
     }
     
@@ -325,27 +334,34 @@ public class FunctionController {
         try {
             
             chosenPowerUp = view.getIndex();
-            
-            if(player.getPowerUpCardsSpawn().get(chosenPowerUp)!=null){
+            if (player.getPowerUpCardsSpawn().size()>0){
                 
-                //get the color to respawn
-                colorSquare = player.getPowerUpCardsSpawn().get(chosenPowerUp).getColorRespawn();
-                player.getPowerUpCardsSpawn().remove(chosenPowerUp);
-                //add player on generation square of the color chosed
-                this.functionModel.getGameModel().getMap().addPlayerOnSquare(this.functionModel.getGameModel().getMap().getGenerationSquare(colorSquare),player);
-                
-                //add the other power up to player list
-                if (player.getPowerUpCardsSpawn().size()>0) {
-                    
-                    powerUpCard = player.getPowerUpCardsSpawn().get(0);
-                    player.getPlayerBoard().getPlayerPowerUps().add(powerUpCard);
-                    player.getPowerUpCardsSpawn().remove(0);
-                }
-                
-            } else {
-                
+                if(player.getPowerUpCardsSpawn().get(chosenPowerUp)!=null) {
+        
+                    //get the color to respawn
+                    colorSquare = player.getPowerUpCardsSpawn().get(chosenPowerUp).getColorRespawn();
+                    player.getPowerUpCardsSpawn().remove(chosenPowerUp);
+                    //add player on generation square of the color chosed
+                    this.functionModel.getGameModel().getMap().addPlayerOnSquare(this.functionModel.getGameModel().getMap().getGenerationSquare(colorSquare), player);
+        
+                    //add the other power up to player list
+                    if (player.getPowerUpCardsSpawn().size() > 0) {
+        
+                        powerUpCard = player.getPowerUpCardsSpawn().get(0);
+                        player.getPlayerBoard().getPlayerPowerUps().add(powerUpCard);
+                        player.getPowerUpCardsSpawn().clear();
+                    }
+                    player.getPowerUpCardsSpawn().clear();
+        
+                } else {
+    
                 setErrorState("INPUT FOR SPAWN NOT CORRECT");
             }
+            } else {
+    
+                setErrorState("INPUT FOR SPAWN NOT CORRECT");
+            }
+            
             
         } catch (MapException e) {
             
@@ -601,34 +617,43 @@ public class FunctionController {
     public void selectRecharge (RemoteView view,int i,ArrayList<EnumColorCardAndAmmo> payExtra ) throws RemoteException {
         
         ArrayList<PowerUpCard> powerUpToPay = new ArrayList<>();
-        WeaponCard weaponToCharge = functionModel.getGameModel().getWeaponToCharge().get(view.getIndex());
-        
-        if (i==1) {
-            if (view.isBooleanChose()) {
-                
-                if (view.getIndex2() != -1) {
-        
-                    powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
-        
-                    if (view.getIndex3() != -1) {
+       
+        try {
             
-                        powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex3()));
-            
-                        if (view.getIndex4() != -1) {
+            if (i==1) {
+                WeaponCard weaponToCharge = functionModel.getGameModel().getWeaponToCharge().get(view.getIndex());
+                if (view.isBooleanChose()) {
+        
+                    if (view.getIndex2() != -1 && functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size() <= view.getIndex2()) {
+                        
+                        powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
+                   
+                        if (view.getIndex3() != -1 && functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size() <= view.getIndex3()) {
+                            
+                            powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex3()));
                 
-                            powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex4()));
-                
-                            if (view.getIndex5() != -1) {
+                            if (view.getIndex4() != -1 && functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size() <= view.getIndex4()) {
                     
-                                powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex2()));
+                                powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex4()));
                     
+                                if (view.getIndex5() != -1 && functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().size() <= view.getIndex5()) {
+                        
+                                    powerUpToPay.add(functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().get(view.getIndex5()));
+                        
+                                }  else {
+                                    throw new NotValidAmmoException();
+                                }
+                            }  else {
+                                throw new NotValidAmmoException();
                             }
+                        }  else {
+                            throw new NotValidAmmoException();
                         }
+                    }  else {
+                        throw new NotValidAmmoException();
                     }
                 }
-            }
-            try {
-                
+            
                 payAmmoController(weaponToCharge.getRechargeCost(), powerUpToPay);
                 weaponToCharge.setCharge(true);
                 functionModel.getGameModel().getWeaponToCharge().remove(weaponToCharge);
@@ -640,20 +665,16 @@ public class FunctionController {
                     
                     functionModel.getGameModel().setState(State.RESPWANPLAYERSELECTION);
                 }
-            } catch (NotValidAmmoException e) {
                 
-                setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
-            }
-            
-        } else  if(i==2){
-            
-            try {
+            } else  if(i==2){
+                
                 payAmmoController(payExtra, powerUpToPay);
-                
-            } catch (NotValidAmmoException e) {
-                
-                setErrorState("YOU HAVE NOT AMMO TO PAY EXTRA COST FOR EFFECT, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
+                functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
+    
             }
+        } catch (NotValidAmmoException e) {
+            
+            setErrorState("YOU HAVE NOT AMMO TO PAY, OR YOUR INPUT ABOUT POWER UP IS NOT CORRECT");
         }
     }
     
@@ -781,17 +802,34 @@ public class FunctionController {
         
     }
     
+    public TagBackGrenade getCorrectGrenade(){
+        TagBackGrenade tagBack;
+        
+        for (PowerUpCard a: functionModel.getGameModel().getUserGrenade().getPlayerBoard().getPlayerPowerUps()){
+            
+            if (a.getNameCard().equals("TAGBACK GRENADE")){
+                
+                return (TagBackGrenade) a;
+            }
+        }
+        return null;
+    }
+    
     public void grendadeSelection (RemoteView view) throws RemoteException {
     
         if (view.isBooleanChose()) {
         
             Player targetPlayer = functionModel.getGameModel().getActualPlayer();
             try {
-    
-                //effect
-                this.functionModel.usePowerUpTagBackGrenade((TagBackGrenade) this.functionModel.getGameModel().getPowerUpSelected(), targetPlayer);
-                functionModel.getGameModel().setMessageToAllView("PLAYER " + functionModel.getGameModel().getUserGrenade() + " USE POWER UP TAGBACK GRENADE ON CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName());
-                functionModel.getGameModel().setState(State.GRENADE);
+               if (getCorrectGrenade()!=null) {
+                   //effect
+                   this.functionModel.usePowerUpTagBackGrenade(getCorrectGrenade(), targetPlayer);
+                   functionModel.getGameModel().setMessageToAllView("PLAYER " + functionModel.getGameModel().getUserGrenade() + " USE POWER UP TAGBACK GRENADE ON CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName());
+                   functionModel.getGameModel().setState(State.GRENADE);
+               } else {
+                   
+                   //non ho la granata ma non deve mai essere lanciata
+               }
               
             } catch (NotVisibleTarget notVisibleTarget) {
     
@@ -799,6 +837,9 @@ public class FunctionController {
     
             }
         
+        } else {
+            
+            //non vuole usare la granata, vai anvanti a chiedere agli altri
         }
     }
     
@@ -813,10 +854,6 @@ public class FunctionController {
         } else {
             //Scroring dead playerboard
             
-            functionModel.getGameModel().setState(State.SCORINGPLAYERBOARD);
-            
-            
-            
             //finish to use grenade now can respawn dead player
             //clear original spawn
             functionModel.getGameModel().resetSpawnedPLayer();
@@ -824,7 +861,6 @@ public class FunctionController {
             deadPlayerGestor();
             functionModel.getGameModel().setState(State.SCORINGPLAYERBOARD);
         }
-        
     }
     
     public void grenadeGestor(){
@@ -832,15 +868,17 @@ public class FunctionController {
         ArrayList<Player> playerDamaged = functionModel.getGameModel().getPlayerDamaged();
         ArrayList<Boolean> playerDamagedVisibility = functionModel.getGameModel().getPlayerDamagedWithGrenadeVisibility();
         
-        for (int i = 0; i < playerDamaged.size(); i++) {
-            Player a = playerDamaged.get(i);
-            Boolean b =  playerDamagedVisibility.get(i);
+        if (playerDamaged.size()>0 && playerDamagedVisibility.size()>0) {
+            for (int i = 0; i < playerDamaged.size(); i++) {
+                Player a = playerDamaged.get(i);
+                Boolean b = playerDamagedVisibility.get(i);
         
-            for (PowerUpCard c : a.getPlayerBoard().getPlayerPowerUps()) {
+                for (PowerUpCard c : a.getPlayerBoard().getPlayerPowerUps()) {
             
-                if (c.getNameCard().equals("TAGBACK GRENADE") && b) {
+                    if (c.getNameCard().equals("TAGBACK GRENADE") && b) {
                 
-                    functionModel.getGameModel().getPlayerDamagedWithGrenade().add(a);
+                        functionModel.getGameModel().getPlayerDamagedWithGrenade().add(a);
+                    }
                 }
             }
         }
@@ -851,21 +889,35 @@ public class FunctionController {
         
         if (functionModel.getGameModel().getDeadPlayers().size()>0) {
             
-            functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getDeadPlayers().get(0));
+            functionModel.getGameModel().setActualDeadPLayer(functionModel.getGameModel().getDeadPlayers().get(0));
+            functionModel.getGameModel().getActualDeadPLayer().getPowerUpCardsSpawn().clear();
+            functionModel.getGameModel().getActualDeadPLayer().getPowerUpCardsSpawn().add(functionModel.getGameModel().getPowerUpDeck().drawnPowerUpCard());
             functionModel.getGameModel().setState(State.DEADPLAYERSELECT);
         } else {
             
             //finito di rianimare giocatori morti
-            System.out.println("PASS TURN NOW");
             functionModel.getGameModel().setState(State.ENDTURN);
             
         }
     }
     
-    public void deadPLayerSelect(RemoteView view) throws RemoteException {
+    public void deadPlayerSelect (RemoteView view) throws RemoteException {
+    
+        try {
+            functionModel.getGameModel().getMap().removePlayerFromSquare(functionModel.getGameModel().getActualDeadPLayer());
+        } catch (MapException e) {
+            e.printStackTrace();
+        }
+        respawnPlayerController(functionModel.getGameModel().getActualDeadPLayer(), view);
+        functionModel.getGameModel().getActualDeadPLayer().setAlive(true);
+        functionModel.getGameModel().getActualDeadPLayer().setOverKill(false);
+        functionModel.getGameModel().getActualDeadPLayer().setMarkToDead(false);
+        functionModel.getGameModel().getActualDeadPLayer().getPlayerBoard().resetDamage();
+        functionModel.getGameModel().getDeadPlayers().remove(functionModel.getGameModel().getActualDeadPLayer());
         
-        selectSpawn(view);
         
+
+        functionModel.getGameModel().setState(State.ENDACTION);
         
     }
     
@@ -873,6 +925,20 @@ public class FunctionController {
     public void  endTurn(){
         
         //now pass the turn
+        passTurn();
+        functionModel.getGameModel().setState(State.MENU);
+        
+    }
+    
+    public void passTurn(){
+        
+        int act = functionModel.getGameModel().getActualPlayer().getId();
+        if (act ==5){
+            act=0;
+        }
+        functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getPlayers(true,true).get(act));
+        
+        
     }
     
     //scoring

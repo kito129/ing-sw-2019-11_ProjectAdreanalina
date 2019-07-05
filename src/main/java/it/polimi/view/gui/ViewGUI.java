@@ -146,7 +146,7 @@ public class ViewGUI extends Application implements Serializable{
         Platform.runLater(()->{
 
             startController.printLobby();
-            for (Player p : gameModel.getPlayers(true)){
+            for (Player p : gameModel.getPlayers(true,true)){
 
                 startController.addPrint("- " + p.getName());
             }
@@ -318,9 +318,9 @@ public class ViewGUI extends Application implements Serializable{
      */
     boolean verifyUsername(String s) throws RemoteException{
 
-        for(int i=0; i<gameModel.getPlayers(true).size(); i++){
+        for(int i=0; i<gameModel.getPlayers(true,true).size(); i++){
 
-            if(s.equals(gameModel.getPlayers(true).get(i).getName()))
+            if(s.equals(gameModel.getPlayers(true,true).get(i).getName()))
                 return false;
         }
         return true;
@@ -470,7 +470,7 @@ public class ViewGUI extends Application implements Serializable{
      */
     boolean verifyUserCrashed(String s) throws RemoteException {
 
-        for (Player x : gameModel.getPlayers(true)) {
+        for (Player x : gameModel.getPlayers(true,true)) {
 
             if (x.getName().equals(s)) {
 
@@ -530,15 +530,15 @@ public class ViewGUI extends Application implements Serializable{
      */
     public Player searchPlayer(String s) throws RemoteException {
 
-        for(int i=0; i<gameModel.getPlayers(true).size(); i++) {
+        for(int i=0; i<gameModel.getPlayers(true,true).size(); i++) {
 
-            Player p = gameModel.getPlayers(true).get(i);
+            Player p = gameModel.getPlayers(true,true).get(i);
             if(p.getName().equals(s)) {
 
                 return p;
             }
         }
-        return gameModel.getPlayers(true).get(0);
+        return gameModel.getPlayers(true,true).get(0);
     }
 
     /**
@@ -549,10 +549,10 @@ public class ViewGUI extends Application implements Serializable{
      */
     String getPlayerUsername(int i) throws RemoteException {
 
-        if(gameModel.getPlayers(true).get(i).getName().equals(user))
+        if(gameModel.getPlayers(true,true).get(i).getName().equals(user))
             return "next";
         else
-            return gameModel.getPlayers(true).get(i).getName();
+            return gameModel.getPlayers(true,true).get(i).getName();
     }
 
     /**
