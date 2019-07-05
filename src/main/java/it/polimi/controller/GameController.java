@@ -137,7 +137,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     //TODO
                     break;
                 case DEADPLAYERSELECT:
-                    functionController.deadPLayerSelect(view);
+                    functionController.deadPlayerSelect(view);
                     break;
                 case SCORINGPLAYERBOARD:
                     functionController.scoringPlayerBoardController();
