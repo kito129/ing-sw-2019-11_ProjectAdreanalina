@@ -69,7 +69,7 @@ public class Square implements Serializable {
     /**
      * Get link of the square in array list.
      *
-     * @return the array list contain linked square
+     * @return the array list contain the link.
      */
     public ArrayList<Square> getLink(){
 
@@ -77,9 +77,10 @@ public class Square implements Serializable {
     }
     
     /**
-     * Gets players on this sqaure.
      *
-     * @return the players
+     * Gets players on this square.
+     *
+     * @return the players on this square.
      */
     public ArrayList<Player> getPlayers() {
         
@@ -87,7 +88,7 @@ public class Square implements Serializable {
     }
     
     /**
-     * Is visited for distance mehtod .
+     * Is visited use for distance method.
      *
      * @return return true if visited
      */
@@ -99,7 +100,7 @@ public class Square implements Serializable {
     /**
      * Sets link of the square.
      *
-     * @param link link of th square in ArrayList
+     * @param link link of the square.
      */
     public void setLink(ArrayList<Square>link) {
 
@@ -117,7 +118,7 @@ public class Square implements Serializable {
     /**
      * Sets visited for distance method.
      *
-     * @param visited  visited param
+     * @param visited true if is visited.
      */
     public void setVisited(boolean visited) {
         
@@ -127,7 +128,7 @@ public class Square implements Serializable {
     /**
      * Add player on the square
      *
-     * @param player the player to add
+     * @param player the player to add on square.
      */
     public void addPlayer(Player player) {
         
@@ -138,14 +139,13 @@ public class Square implements Serializable {
     /**
      * Remove player from the square.
      *
-     * @param player the player to remove
+     * @param player the player to remove.
      */
     public void removePlayer (Player player) {
         
         player.setPosition(-1,-1);
         this.players.remove(player);
     }
-    
 
     @Override
     public boolean equals(Object o) {

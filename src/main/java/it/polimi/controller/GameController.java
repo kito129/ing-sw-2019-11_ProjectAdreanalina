@@ -200,6 +200,7 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                         gameModel.getPlayers(true,true).remove(indexOfObserver);
                     }
                     gameModel.getRemoteViews().remove(indexOfObserver);
+
                 }
 
             }

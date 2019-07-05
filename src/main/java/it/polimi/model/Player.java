@@ -129,10 +129,21 @@ public class Player implements Serializable {
         return alive;
     }
 
+    /**
+     * Gets the field online.
+     *
+     * @return true if the client associated with this player is online.
+     */
+
     public boolean getOnline(){
         
         return online;
     }
+
+    /**
+     *
+     * @return
+     */
     
     public boolean isMarkToDead () {
         
@@ -231,11 +242,21 @@ public class Player implements Serializable {
         this.score += scoreToAdd;
     }
 
-
+    /**
+     * Manages the grab of a ammoCard.
+     *
+     * @param ammoCard the ammo card to manage.
+     */
     public void catchAmmoCard(AmmoCard ammoCard){
 
         this.playerBoard.manageAmmoCard(ammoCard);
     }
+
+    /**
+     * Adds a single mark.
+     *
+     * @param mark the color of mark.
+     */
 
     public void singleMark(EnumColorPlayer mark){
 
@@ -244,11 +265,23 @@ public class Player implements Serializable {
 
     }
 
+    /**
+     * Adds a multiple marks.
+     *
+     * @param marks the color of marks.
+     */
+
     public void multipleMarks(ArrayList<EnumColorPlayer> marks){
 
         this.playerBoard.increaseMarks(marks);
         this.markedGameModel.add(this);
     }
+
+    /**
+     * Adds a single damage.
+     *
+     * @param damage the color of damage.
+     */
 
     public void singleDamage(EnumColorPlayer damage){
 
@@ -258,6 +291,12 @@ public class Player implements Serializable {
         this.damagedGameModel.add(this);
     }
 
+    /**
+     * Adds a multiple damages.
+     *
+     * @param damages the color of damages.
+     */
+
     public void multipleDamages(ArrayList<EnumColorPlayer> damages){
 
         this.playerBoard.increaseDamages(damages);
@@ -265,6 +304,13 @@ public class Player implements Serializable {
         checkAlive();
         this.damagedGameModel.add(this);
     }
+
+    /**
+     * Adds multiple damages and single mark.
+     *
+     * @param damages the color of damages.
+     * @param mark the color of mark.
+     */
 
     public void multipleDamagesSingleMark(ArrayList<EnumColorPlayer> damages, EnumColorPlayer mark){
 
@@ -275,6 +321,13 @@ public class Player implements Serializable {
         this.damagedGameModel.add(this);
         this.markedGameModel.add(this);
     }
+
+    /**
+     * Adds multiple marks and single damage.
+     *
+     * @param damage the color of damage.
+     * @param marks the color of marks.
+     */
 
     public void singleDamageMultipleMarks(EnumColorPlayer damage, ArrayList<EnumColorPlayer> marks) {
 

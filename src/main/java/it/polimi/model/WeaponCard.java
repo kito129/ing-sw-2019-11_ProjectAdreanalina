@@ -18,10 +18,9 @@ public class WeaponCard implements Serializable {
     
     /**
      * Instantiates a new weapon card.
-     * Sets the field is charge true.
      *
      * @param nameCard the name of card.
-     * @param colorCard the color of card
+     * @param colorCard the color of card.
      */
     public WeaponCard(String nameCard, EnumColorCardAndAmmo colorCard){
 
@@ -71,15 +70,33 @@ public class WeaponCard implements Serializable {
         return weaponEffects;
     }
 
+    /**
+     * Gets description
+     *
+     * @return the description of card.
+     */
+
     public String getDescription() {
 
         return description;
     }
+
+    /**
+     * Gets the field is optional.
+     *
+     * @return true if is a optional weapon.
+     */
     
     public boolean isOptional () {
         
         return isOptional;
     }
+
+    /**
+     * Sets the field is optional.
+     *
+     * @param optional true if is a optional weapon
+     */
     
     protected void setOptional (boolean optional) {
         
@@ -117,6 +134,12 @@ public class WeaponCard implements Serializable {
 
         return isCharge;
     }
+
+    /**
+     * Sets the field description
+     *
+     * @param description the description of the card.
+     */
 
     protected void setDescription(String description) {
 
