@@ -109,6 +109,9 @@ public class FunctionController {
     public void choseAction(RemoteView view){
     
         int choice;
+        functionModel.getGameModel().setMessageToCurrentView("");
+        functionModel.getGameModel().setMessageToAllView("");
+        functionModel.getGameModel().setErrorMessage("");
         
         try {
             
@@ -219,7 +222,9 @@ public class FunctionController {
         //set the lowest id to the current player
         this.functionModel.getGameModel().setActualPlayer(this.functionModel.getGameModel().getPlayers(true,true).get(0));
     
-       functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().add(new Whisper());
+        functionModel.getGameModel().setSpawnPlayer(null);
+        functionModel.getGameModel().resetSpawnedPLayer();
+       functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().add(new Electroscythe());
        
        ArrayList<EnumColorPlayer> dam = new ArrayList<>();
        for (int i =0; i<12;i++){
@@ -228,7 +233,7 @@ public class FunctionController {
            
        }
        functionModel.getGameModel().getPlayers(true,true).get(4).multipleDamages(dam);
-        functionModel.getGameModel().getPlayers(true,true).get(3).multipleDamages(dam);
+       functionModel.getGameModel().getPlayers(true,true).get(3).multipleDamages(dam);
        
         //put ammo and weapon card
         refreshMapEndTurn();
@@ -434,6 +439,10 @@ public class FunctionController {
                     
                     GenerationSquare gen = (GenerationSquare) inputSquare;
                     if (gen.getWeaponList().size()>0) {
+                        
+                        if (view.getIndex2()!=-1){
+                            functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerWeapons().remove(view.getIndex2());
+                        }
     
                         //effective catch gia con l'index giusto se è una Generation Square
                         indexWeapon = view.getIndex();
@@ -508,6 +517,10 @@ public class FunctionController {
             } else {
                 
                 setErrorState("YOU CAN'T USE TAGBACK GRENADE IN YOUR TURN");
+                
+            } if (powerUpCard.getNameCard().equals("TARGETING SCOPE")){
+        
+                setErrorState("YOU CAN'T USE TARGETING SCOPE IN THIS MOMENT, ONLY AFTER SHOOT");
             }
         } else {
             
@@ -551,31 +564,12 @@ public class FunctionController {
                 targetSquare = this.functionModel.getGameModel().getMap().getSquare(view.getRow(), view.getColumn());
                 //effect
                 this.functionModel.usePowerUpTeleporter((Teleporter) this.functionModel.getGameModel().getPowerUpSelected(), targetSquare);
-                functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() +" USE POWER UP TELEPORTER");
+                functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() + " USE POWER UP TELEPORTER");
                 functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().remove(this.functionModel.getGameModel().getPowerUpSelected());
                 functionModel.getGameModel().setState(State.USEPOWERUP);
-            
-            }catch (MapException e) {
-                
-                mapErrorGestor();
-            }
     
-            //TARGETING SCOPE
-        } else if (this.functionModel.getGameModel().getPowerUpSelected().getClass().equals(TargetingScope.class)) {
-    
-            Player targetPlayer;
-            
-            try {
-                
-                //get input
-                targetPlayer = this.functionModel.getGameModel().getPlayerById(view.getTarget1());
-                //effect
-                this.functionModel.usePowerUpTargetingScope((TargetingScope) this.functionModel.getGameModel().getPowerUpSelected(), targetPlayer);
-                functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() +" USE POWER UP TARGETING SCOPE");
-                functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().remove(this.functionModel.getGameModel().getPowerUpSelected());
-                functionModel.getGameModel().setState(State.USEPOWERUP);
             } catch (MapException e) {
-                
+    
                 mapErrorGestor();
             }
         }
@@ -815,6 +809,20 @@ public class FunctionController {
         return null;
     }
     
+    public TargetingScope getCorrectTargeting(){
+       
+        TargetingScope targetingScope;
+        
+        for (PowerUpCard a: functionModel.getGameModel().getUserGrenade().getPlayerBoard().getPlayerPowerUps()){
+            
+            if (a.getNameCard().equals("TARGETING SCOPE")){
+                
+                return (TargetingScope) a;
+            }
+        }
+        return null;
+    }
+    
     public void grendadeSelection (RemoteView view) throws RemoteException {
     
         if (view.isBooleanChose()) {
@@ -868,7 +876,7 @@ public class FunctionController {
         ArrayList<Player> playerDamaged = functionModel.getGameModel().getPlayerDamaged();
         ArrayList<Boolean> playerDamagedVisibility = functionModel.getGameModel().getPlayerDamagedWithGrenadeVisibility();
         
-        if (playerDamaged.size()>0 && playerDamagedVisibility.size()>0) {
+        if (playerDamaged.size()>0 && playerDamagedVisibility.size()>0 && playerDamaged.size()==playerDamagedVisibility.size()) {
             for (int i = 0; i < playerDamaged.size(); i++) {
                 Player a = playerDamaged.get(i);
                 Boolean b = playerDamagedVisibility.get(i);
@@ -887,8 +895,11 @@ public class FunctionController {
     //dead player
     public void deadPlayerGestor() throws RemoteException {
         
+       
+        
         if (functionModel.getGameModel().getDeadPlayers().size()>0) {
             
+            scoringPlayerBoardController();
             functionModel.getGameModel().setActualDeadPLayer(functionModel.getGameModel().getDeadPlayers().get(0));
             functionModel.getGameModel().getActualDeadPLayer().getPowerUpCardsSpawn().clear();
             functionModel.getGameModel().getActualDeadPLayer().getPowerUpCardsSpawn().add(functionModel.getGameModel().getPowerUpDeck().drawnPowerUpCard());
@@ -932,13 +943,16 @@ public class FunctionController {
     
     public void passTurn(){
         
-        int act = functionModel.getGameModel().getActualPlayer().getId();
-        if (act ==5){
-            act=0;
+    refreshMapEndTurn();
+    int act = functionModel.getGameModel().getActualPlayer().getId()-1;
+    do {
+       
+        act++;
+        if (act == functionModel.getGameModel().getPlayers(true,true).size()) {
+            act = 0;
         }
-        functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getPlayers(true,true).get(act));
-        
-        
+    }while (functionModel.getGameModel().getRemoteViews().get(act)==null);
+    functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getPlayers(true, true).get(act));
     }
     
     //scoring
@@ -949,10 +963,7 @@ public class FunctionController {
             //incasso una plancia alla volta e gestisco le mort
             this.functionModel.scoringPlayerBoard(a);
         }
-        functionModel.getGameModel().setState(State.ENDTURN);
     }
-    
-    
 }
 
 

@@ -2,9 +2,13 @@ package it.polimi.controller;
 
 import it.polimi.model.*;
 import it.polimi.model.Exception.*;
+import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.Weapon.*;
 import it.polimi.view.RemoteView;
+import javafx.print.PageLayout;
 
+import java.lang.annotation.Target;
+import java.lang.management.PlatformLoggingMXBean;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -400,26 +404,46 @@ public class WeaponController {
      */
     public void afterShoot(RemoteView view) throws RemoteException {
     
-        removeDeadPlayerFromMap();
-        
-        if(functionModel.getGameModel().getAvailableEffect().size()==0){
-            
+        if (view.isBooleanChose() && view.getTarget1() != -1) {
+    
             try {
-                getCorrectWeapon(functionModel.getGameModel().getWeaponName()).setCharge(false);
         
-            } catch (NotValidInput notValidInput) {
         
-                functionController.setErrorState("UNABLE TO SET ARMY TO UN-CHARGE");
+                Player targetPlayer;
+                //get input
+        
+                targetPlayer = this.functionModel.getGameModel().getPlayerById(view.getTarget1());
+                TargetingScope targetingScope = functionController.getCorrectTargeting();
+                //effect
+                this.functionModel.usePowerUpTargetingScope(targetingScope, targetPlayer);
+                functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() + " USE POWER UP TARGETING SCOPE");
+                functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().remove(this.functionModel.getGameModel().getPowerUpSelected());
+        
+            } catch (MapException e) {
+                e.printStackTrace();
             }
-            //there are no more effect avaible
-            functionController.resetParameterWeapon();
-            view.resetInput();
-            functionModel.getGameModel().setState(State.MENU);
-        } else {
-            
-            functionModel.getGameModel().setState(State.SELECTEFFECT);
-        }
+    
+            removeDeadPlayerFromMap();
+    
+            if (functionModel.getGameModel().getAvailableEffect().size() == 0) {
         
+                try {
+                    getCorrectWeapon(functionModel.getGameModel().getWeaponName()).setCharge(false);
+            
+                } catch (NotValidInput notValidInput) {
+            
+                    functionController.setErrorState("UNABLE TO SET ARMY TO UN-CHARGE");
+                }
+                //there are no more effect avaible
+                functionController.resetParameterWeapon();
+                view.resetInput();
+                functionModel.getGameModel().setState(State.MENU);
+            } else {
+        
+                functionModel.getGameModel().setState(State.SELECTEFFECT);
+            }
+    
+        }
     }
     
     /**
@@ -924,6 +948,7 @@ public class WeaponController {
     public void selectShootInput(RemoteView view) throws RemoteException {
         
         GameModel gameModel = this.functionModel.getGameModel();
+        ArrayList<Player> preDamaged = new ArrayList<>(functionModel.getGameModel().getPlayerDamaged());
         
         try {
             switch (this.functionModel.getGameModel().getWeaponState()){
@@ -1378,6 +1403,25 @@ public class WeaponController {
         } catch (NotValidInput notValidInput) {
             notValidInput.printStackTrace();
         }
+    
+        //routine for grenade
+        ArrayList<Player> postDamaged = new ArrayList<>(functionModel.getGameModel().getPlayerDamaged());
+        if (preDamaged.size()<postDamaged.size()){
+            
+            postDamaged.removeAll(preDamaged);
+            for (Player a: postDamaged){
+                
+                checkForGrenade(functionModel.getGameModel().getMap(),a,functionModel.getGameModel().getActualPlayer());
+            }
+        }
+        
+        if (gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().contains(TargetingScope.class) && gameModel.getActualPlayer().getPlayerBoard().getAmmo().size()>0){
+            
+            gameModel.setWantToUseTargeting(true);
+        } else {
+    
+            gameModel.setWantToUseTargeting(false);
+        }
         
         this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED: " + gameModel.getWeaponName() +" CORRECTLY");
         this.functionModel.getGameModel().setState(State.SHOOT);
@@ -1385,7 +1429,7 @@ public class WeaponController {
     }
     
     public void checkForGrenade(Map map,Player damaged,Player current){
-    
+        
         
         if (map.isVisible(damaged, current)) {
     
@@ -1394,6 +1438,7 @@ public class WeaponController {
     
             functionModel.getGameModel().getPlayerDamagedWithGrenadeVisibility().add(false);
         }
+    
         
     }
 
@@ -1427,9 +1472,6 @@ public class WeaponController {
                     gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
                     //add next effect
                     gameModel.getAvailableEffect().add(WeaponsEffect.SecondLockEffect);
-                    //grenade
-                    checkForGrenade(map,targetBase,currentPlayer);
-                    
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
@@ -1498,11 +1540,6 @@ public class WeaponController {
                 try {
                     
                     weapon.baseMode(map,currentPlayer);
-                    //grenade
-                    for (Player a :map.playersOnSquare(map.findPlayer(currentPlayer))) {
-                        
-                        checkForGrenade(map, a, currentPlayer);
-                    }
                 } catch (NoTargetInSquare noTargetInSquare) {
                     
                     functionController.setErrorState("ERROR: NO TARGET IN YOUR SQUARE!!!");
@@ -1516,11 +1553,7 @@ public class WeaponController {
                 try {
                     
                     weapon.reaperMode(map, currentPlayer);
-                    //grenade
-                    for (Player a :map.playersOnSquare(map.findPlayer(currentPlayer))) {
-        
-                        checkForGrenade(map, a, currentPlayer);
-                    }
+                    
                 } catch (NoTargetInSquare noTargetInSquare) {
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getReaperModeCost());
@@ -1568,8 +1601,7 @@ public class WeaponController {
                         target1Base = gameModel.getPlayerById(view.getTarget1());
                         targetBase.add(target1Base);
                         weapon.baseEffect(map, currentPlayer, targetBase);
-                        //grenade
-                        checkForGrenade(map, target1Base, currentPlayer);
+                      
                     }else {
 
                         target1Base = gameModel.getPlayerById(view.getTarget1());
@@ -1579,9 +1611,7 @@ public class WeaponController {
                             targetBase.add(target1Base);
                             targetBase.add(target2Base);
                             weapon.baseEffect(map, currentPlayer, targetBase);
-                            //grenade
-                            checkForGrenade(map, target1Base, currentPlayer);
-                            checkForGrenade(map, target2Base, currentPlayer);
+                           
                         }else {
 
                             throw new NotValidInput();
@@ -1615,8 +1645,7 @@ public class WeaponController {
                         if(targetFocusShot==target1Base||targetFocusShot==target2Base){
 
                             weapon.focusShotEffect(currentPlayer,targetFocusShot);
-                            //grenade
-                            checkForGrenade(map, targetFocusShot, currentPlayer);
+                           
                         }
 
                         else{
@@ -1651,8 +1680,7 @@ public class WeaponController {
                             if(targetTurretTripod!=target1Base) {
                                 weapon.turretTripodEffect(currentPlayer, target1Base);
                                 weapon.turretTripodEffect(map, currentPlayer, targetTurretTripod);
-                                //grenade
-                                checkForGrenade(map, targetTurretTripod, currentPlayer);
+                               
                             }else{
 
                                 throw new NotValidInput();
@@ -1663,8 +1691,7 @@ public class WeaponController {
                             weapon.turretTripodEffect(map,currentPlayer,targetTurretTripod);
                         }
                     }else{
-
-                        //TODO RIVEDERE GRANATA
+                        
                         if (choise == 0) {
 
                             target1Base = gameModel.getPlayerById(view.getTarget1());
@@ -1672,12 +1699,10 @@ public class WeaponController {
                             targetFocusShot=gameModel.getPlayerById(view.getTarget3());
                             if(targetFocusShot==target1Base) {
                                 weapon.focusShotEffect(currentPlayer,target2Base);
-                                //grenade
-                                checkForGrenade(map, target2Base, currentPlayer);
+                               
                             }else if(targetFocusShot==target2Base){
                                 weapon.focusShotEffect(currentPlayer,target1Base);
-                                //grenade
-                                checkForGrenade(map, target2Base, currentPlayer);
+                               
                             }
                         } else if (choise == 1) {
 
@@ -1742,8 +1767,7 @@ public class WeaponController {
                     destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     targetBaseOrPunisher = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseMode(map, destSquareBase, currentPlayer, targetBaseOrPunisher);
-                    //grenade
-                    checkForGrenade(map, targetBaseOrPunisher, currentPlayer);
+                    
                     
                 }catch (NotVisibleTarget notVisibleTarget) {
                     
@@ -1763,8 +1787,7 @@ public class WeaponController {
                     
                     targetBaseOrPunisher = gameModel.getPlayerById(view.getTarget1());
                     weapon.punisherMode(map, currentPlayer, targetBaseOrPunisher);
-                    //grenade
-                    checkForGrenade(map, targetBaseOrPunisher, currentPlayer);
+                   
                 } catch (NotValidDistance notValidDistance) {
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPunisherModeCost());
@@ -1805,8 +1828,7 @@ public class WeaponController {
                     weapon.baseEffect(map, currentPlayer, targetBase);
                     //set before effect as base and remove
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
+                    
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
@@ -1831,8 +1853,7 @@ public class WeaponController {
                             
                             weapon.chainReactionEffect(currentPlayer, targetChainReaction);
                             gameModel.setBeforeEffect(WeaponsEffect.ChainReactionEffect);
-                            //grenade
-                            checkForGrenade(map, targetChainReaction, currentPlayer);
+                           
                             
                         } else {
                             
@@ -1875,8 +1896,7 @@ public class WeaponController {
                             weapon.highVoltageEffect(currentPlayer, targetHighVoltage);
                             //empty list
                             gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
-                            //grenade
-                            checkForGrenade(map, targetHighVoltage, currentPlayer);
+                            
                         } else {
                             
                             functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getHighVoltageCost());
@@ -1930,8 +1950,7 @@ public class WeaponController {
                     vortexSquare = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.baseEffect(map, vortexSquare, currentPlayer, targetBase);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
+                   
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
@@ -1966,8 +1985,7 @@ public class WeaponController {
                                 targetsBlackHole=new ArrayList<>();
                                 targetsBlackHole.add(target1BlackHole);
                                 weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
-                                //grenade
-                                checkForGrenade(map, target1BlackHole, currentPlayer);
+                                
     
     
                             } else {
@@ -1986,8 +2004,7 @@ public class WeaponController {
                                 weapon.blackHoleEffect(map, vortexSquare, currentPlayer, targetsBlackHole);
                                 //empty list
                                 gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
-                                //grenade
-                                checkForGrenade(map, target2BlackHole, currentPlayer);
+                               
                             } else {
                                 
                                 functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBlackHoleCost());
@@ -2045,11 +2062,6 @@ public class WeaponController {
                     
                     roomTarget = view.getColorRoom();
                     weapon.baseMode(map, currentPlayer, roomTarget);
-                    //grenade
-                    for (Player a:map.playerInRoom(roomTarget)) {
-                        
-                        checkForGrenade(map, a, currentPlayer);
-                    }
                 } catch (NotValidDistance notValidDistance) {
                     
                     functionController.setErrorState("ERROR: YOU CAN'T CHOOSE YOUR ROOM!!!");
@@ -2071,11 +2083,6 @@ public class WeaponController {
                     
                     targetSquareCozy = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.cozyFireMode(map, currentPlayer, targetSquareCozy);
-                    //grenade
-                    for (Player a : targetSquareCozy.getPlayers()){
-    
-                        checkForGrenade(map, a, currentPlayer);
-                    }
                 } catch (NotValidDistance notValidDistance) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN SQUARE IN NOT EXACTLY ONE MOVEMENT FROM YOU!!!");
@@ -2121,8 +2128,7 @@ public class WeaponController {
                         weapon.chargedShotEffect(currentPlayer, targetBase);
                     }
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffectPlusChargedShotEffect);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
+                  
                     
                 } catch (NotVisibleTarget notVisibleTarget) {
                     if(view.isBooleanChose()) {
@@ -2146,12 +2152,7 @@ public class WeaponController {
                     
                     destSquarePhaseGlide = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                     weapon.phaseGlideEffect(map, destSquarePhaseGlide, currentPlayer);
-                    //grenade
-                    for (Player a : destSquarePhaseGlide.getPlayers()){
-        
-                        checkForGrenade(map, a, currentPlayer);
-                    }
-                    
+                   
                 } catch (MapException e) {
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPhaseGlideCost());
@@ -2189,8 +2190,7 @@ public class WeaponController {
                     
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.BaseEffect(map, currentPlayer, targetBase);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
+                   
                 } catch (VisibleTarget visibleTarget) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
@@ -2225,8 +2225,7 @@ public class WeaponController {
                     
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, currentPlayer, targetBase);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
+                    
                 } catch (NotValidDistance notValidDistance) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT AT LEAST TWO MOVEMENTS FROM YOUR POSITION!!!");
@@ -2239,6 +2238,8 @@ public class WeaponController {
                 }
                 break;
         }
+        //empty list
+        gameModel.getAvailableEffect().removeAll(gameModel.getAvailableEffect());
     }
 
     /**
@@ -2263,8 +2264,7 @@ public class WeaponController {
                     
                     targetBaseOrTracer = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseMode(map, currentPlayer, targetBaseOrTracer);
-                    //grenade
-                    checkForGrenade(map, targetBaseOrTracer, currentPlayer);
+                    
                 } catch (NotValidDistance notValidDistance) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IN NOT AT LEAST ONE MOVEMENT FROM YOUR POSITION!!!" );
@@ -2283,8 +2283,7 @@ public class WeaponController {
                     
                     targetBaseOrTracer = gameModel.getPlayerById(view.getTarget1());
                     weapon.nanoTracerMode(map, currentPlayer, targetBaseOrTracer);
-                    //grenade
-                    checkForGrenade(map, targetBaseOrTracer, currentPlayer);
+                   
                 } catch (NotValidDistance notValidDistance) {
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getNanoTracerModeCost());
@@ -2331,16 +2330,12 @@ public class WeaponController {
                     if(view.getTarget2()==-1){
                         
                         weapon.baseMode(map,currentPlayer,targetBase);
-                        //grenade
-                        checkForGrenade(map, targetBase, currentPlayer);
+                       
                     }else{
                         
                         target2 = gameModel.getPlayerById(view.getTarget2());
                         weapon.baseMode(map,currentPlayer,targetBase,target2);
-                        //grenade
-                        checkForGrenade(map, targetBase, currentPlayer);
-                        //grenade
-                        checkForGrenade(map, target2, currentPlayer);
+                       
                     }
                     
                 }catch (MapException mapException){
@@ -2364,16 +2359,7 @@ public class WeaponController {
                     targetSquare1 = map.getSquare(view.getRow(),view.getColumn());
                     targetSquare2 = map.getSquare(view.getRow2(),view.getColumn2());
                     weapon.barbecueMode(map,currentPlayer,targetSquare1,targetSquare2);
-                    //grenade
-                    for (Player a : targetSquare1.getPlayers()){
-        
-                        checkForGrenade(map, a, currentPlayer);
-                    }
-                    //grenade
-                    for (Player a : targetSquare2.getPlayers()){
-        
-                        checkForGrenade(map, a, currentPlayer);
-                    }
+                   
                 }catch(MapException mapExcpetion){
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getBarbecueModeCost());
@@ -2423,8 +2409,7 @@ public class WeaponController {
                     
                     target1 = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseMode(map, currentPlayer, target1);
-                    //grenade
-                    checkForGrenade(map, target1, currentPlayer);
+                   
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
@@ -2444,8 +2429,7 @@ public class WeaponController {
                         
                         scannerModeTargets.add(target1);
                         weapon.scannerMode(map, currentPlayer, scannerModeTargets);
-                        //grenade
-                        checkForGrenade(map, target1, currentPlayer);
+                       
                     } else if (view.getTarget3() == -1) {
                         
                         target2 = gameModel.getPlayerById(view.getTarget2());
@@ -2454,10 +2438,7 @@ public class WeaponController {
                             scannerModeTargets.add(target1);
                             scannerModeTargets.add(target2);
                             weapon.scannerMode(map, currentPlayer, scannerModeTargets);
-                            //grenade
-                            checkForGrenade(map, target1, currentPlayer);
-                            //grenade
-                            checkForGrenade(map, target2, currentPlayer);
+                           
                         } else {
                             
                             throw new NotValidInput();
@@ -2473,12 +2454,7 @@ public class WeaponController {
                             scannerModeTargets.add(target2);
                             scannerModeTargets.add(target3);
                             weapon.scannerMode(map, currentPlayer, scannerModeTargets);
-                            //grenade
-                            checkForGrenade(map, target1, currentPlayer);
-                            //grenade
-                            checkForGrenade(map, target2, currentPlayer);
-                            //grenade
-                            checkForGrenade(map, target3, currentPlayer);
+                           
                         } else {
                             
                             throw new NotValidInput();
@@ -2526,9 +2502,7 @@ public class WeaponController {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseEffect(map, targetBase, currentPlayer);
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
-                    
+                   
                 } catch (NotVisibleTarget notVisibleTarget) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN TARGET IS NOT VISIBLE FROM YOUR POSITION!!!");
@@ -2551,8 +2525,7 @@ public class WeaponController {
                         targetBase = gameModel.getPlayerById(view.getTarget1());
                         weapon.moveTarget(map, targetBase, destSquareBase);
                         gameModel.getAvailableEffect().remove(WeaponsEffect.MoveTarget);
-                        //grenade
-                        checkForGrenade(map, targetBase, currentPlayer);
+                       
                     } catch (NotValidDistance notValidDistance) {
                         
                         functionController.setErrorState("ERROR: YOU CAN MOVE THE CHOSEN TARGET ONLY ONE MOVEMENT!!!");
@@ -2575,11 +2548,7 @@ public class WeaponController {
                         targetSquareExtra = gameModel.getMap().getSquare(view.getRow2(), view.getColumn2());
                         weapon.extraGrenadeEffect(map, currentPlayer, targetSquareExtra);
                         gameModel.getAvailableEffect().remove(WeaponsEffect.ExtraGrenadeEffect);
-                        //grenade
-                        for (Player a : targetSquareExtra.getPlayers()){
-        
-                            checkForGrenade(map, a, currentPlayer);
-                        }
+                       
                     } catch (NotVisibleTarget notVisibleTarget) {
                         
                         functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getExtraGrenadeCost());
@@ -2627,14 +2596,12 @@ public class WeaponController {
                         
                         destSquareBase = null;
                         weapon.baseMode(map, currentPlayer,targetBase,destSquareBase);
-                        //grenade
-                        checkForGrenade(map, targetBase, currentPlayer);
+                       
                     }else{
                         
                         destSquareBase = map.getSquare(view.getRow(),view.getColumn());
                         weapon.baseMode(map, currentPlayer,targetBase,destSquareBase);
-                        //grenade
-                        checkForGrenade(map, targetBase, currentPlayer);
+                      
                     }
                     
                 }catch (MapException mapExcpetion){
@@ -2695,8 +2662,7 @@ public class WeaponController {
                         
                         destSquareBase = null;
                         weapon.baseEffect(map, targetBase, currentPlayer, destSquareBase);
-                        //grenade
-                        checkForGrenade(map, targetBase, currentPlayer);
+                        
                         
                     }else{
                         
@@ -2704,8 +2670,7 @@ public class WeaponController {
                             
                             destSquareBase = gameModel.getMap().getSquare(view.getRow(), view.getColumn());
                             weapon.baseEffectWithFragmenting(map, targetBase, currentPlayer, destSquareBase);
-                            //grenade
-                            checkForGrenade(map, targetBase, currentPlayer);
+                           
                         } else {
                             
                             functionController.mapErrorGestor();
@@ -2789,8 +2754,7 @@ public class WeaponController {
                 try {
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseMode(map,currentPlayer,targetBase);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
+                   
                     
                 } catch (MapException mapExcpetion) {
                     
@@ -2809,14 +2773,12 @@ public class WeaponController {
                     if(view.getTarget3()==-1){
                         
                         weapon.rocketFistMode(map,currentPlayer,targetRocket1);
-                        //grenade
-                        checkForGrenade(map, targetRocket1, currentPlayer);
+                       
                     }else{
                         
                         targetRocket2 = gameModel.getPlayerById(view.getTarget3());
                         weapon.rocketFistMode(map,currentPlayer,targetRocket1,targetRocket2);
-                        //grenade
-                        checkForGrenade(map, targetRocket2, currentPlayer);
+                      
                     }
                 }catch (MapException mapException){
                     
@@ -2864,8 +2826,7 @@ public class WeaponController {
                     target1 = gameModel.getPlayerById(view.getTarget1());
                     direction = view.getCardinalDirection();
                     weapon.baseMode(map, currentPlayer, target1, direction);
-                    //grenade
-                    checkForGrenade(map, target1, currentPlayer);
+                   
                 } catch (NotValidCardinalDirection notValidCardinalDirection) {
                     
                     functionController.setErrorState("ERROR: THE CHOSEN DIRECTION DOES NOT EXIST!!!");
@@ -2891,17 +2852,13 @@ public class WeaponController {
                         piercingTargets.add(target1);
                         piercingTargets.add(target2);
                         weapon.piercingMode(map, currentPlayer, piercingTargets, direction);
-                        //grenade
-                        checkForGrenade(map, target1, currentPlayer);
-                        //grenade
-                        checkForGrenade(map, target2, currentPlayer);
+                       
                         
                     } else {
                         
                         piercingTargets.add(target1);
                         weapon.piercingMode(map, currentPlayer, piercingTargets, direction);
-                        //grenade
-                        checkForGrenade(map, target1, currentPlayer);
+                        
                     }
                 } catch (NotValidCardinalDirection notValidCardinalDirection) {
                     
@@ -2945,24 +2902,19 @@ public class WeaponController {
                     if ((view.getTarget3() == -1) && (view.getTarget2() == -1)) {
                         
                         weapon.baseMode(map, currentPlayer, target1Base);
-                        //grenade
-                        checkForGrenade(map, target1Base, currentPlayer);
+                      
                         
                     } else if ((view.getTarget3() == -1) && (view.getTarget2() != -1)) {
                         
                         target2Base = gameModel.getPlayerById(view.getTarget2());
                         weapon.baseMode(map, currentPlayer, target1Base, target2Base);
-                        //grenade
-                        checkForGrenade(map, target2Base, currentPlayer);
+                       
                     } else {
                         
                         target2Base = gameModel.getPlayerById(view.getTarget2());
                         target3Base = gameModel.getPlayerById(view.getTarget3());
                         weapon.baseMode(map, currentPlayer, target1Base, target2Base, target3Base);
-                        //grenade
-                        checkForGrenade(map, target2Base, currentPlayer);
-                        //grenade
-                        checkForGrenade(map, target3Base, currentPlayer);
+                       
                     }
                 } catch (NotValidDistance notValidDistance) {
                     
@@ -2980,14 +2932,7 @@ public class WeaponController {
                     
                     ArrayList<Player> allPlayerInGame=new ArrayList<>(gameModel.getPlayers(false,false));
                     weapon.tsunamiMode(map,currentPlayer,allPlayerInGame);
-                    for (Player a: allPlayerInGame){
-                        
-                        if (map.distance(a,currentPlayer)==1){
-    
-                            //grenade
-                            checkForGrenade(map, a, currentPlayer);
-                        }
-                    }
+                   
                 }catch (NotValidDistance notValidDistance){
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getTsunamiModeCost());
@@ -3026,8 +2971,7 @@ public class WeaponController {
                     gameModel.setBeforeEffect(WeaponsEffect.BaseEffect);
                     gameModel.getAvailableEffect().remove(WeaponsEffect.BaseEffect);
                     gameModel.getAvailableEffect().add(WeaponsEffect.SliceAndDiceEffect);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
+                   
                     
                     
                 } catch (NotValidDistance notValidDistance) {
@@ -3066,8 +3010,7 @@ public class WeaponController {
                             
                             weapon.sliceAndDiceEffect(map, currentPlayer, targetSliceAndDice);
                             gameModel.getAvailableEffect().remove(WeaponsEffect.SliceAndDiceEffect);
-                            //grenade
-                            checkForGrenade(map, targetSliceAndDice, currentPlayer);
+                           
                             
                         } else {
                             
@@ -3122,8 +3065,7 @@ public class WeaponController {
                     
                     targetBase = gameModel.getPlayerById(view.getTarget1());
                     weapon.baseMode(map,currentPlayer,targetBase);
-                    //grenade
-                    checkForGrenade(map, targetBase, currentPlayer);
+                   
                 } catch (MapException e) {
                     
                     functionController.mapErrorGestor();
@@ -3142,8 +3084,7 @@ public class WeaponController {
                     destSquare = map.getSquare(view.getRow(),view.getColumn());
                     targetPulverize=gameModel.getPlayerById(view.getTarget2());
                     weapon.pulverizeMode(map,currentPlayer,targetPulverize,destSquare);
-                    //grenade
-                    checkForGrenade(map, targetPulverize, currentPlayer);
+                   
                 } catch (NotInSameDirection notInSameDirection) {
                     
                     functionModel.getGameModel().getActualPlayer().getPlayerBoard().getAmmo().addAll(weapon.getPulverizeModeCost());

@@ -39,12 +39,12 @@ public class PowerUpDeck implements Serializable {
         this.powerUpCards.add(newtonB);
         this.powerUpCards.add(newtonR);
         this.powerUpCards.add(newtonR);
-        //this.powerUpCards.add(grenadeY);
-        //this.powerUpCards.add(grenadeY);
-        //this.powerUpCards.add(grenadeB);
-        //this.powerUpCards.add(grenadeB);
-        //this.powerUpCards.add(grenadeR);
-        //this.powerUpCards.add(grenadeR);
+        this.powerUpCards.add(grenadeY);
+        this.powerUpCards.add(grenadeY);
+        this.powerUpCards.add(grenadeB);
+        this.powerUpCards.add(grenadeB);
+        this.powerUpCards.add(grenadeR);
+        this.powerUpCards.add(grenadeR);
         this.powerUpCards.add(targetingY);
         this.powerUpCards.add(targetingY);
         this.powerUpCards.add(targetingB);

@@ -118,9 +118,6 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case ENDACTIONSELECTION:
                     functionController.endActionSelect(view);
                     break;
-                case ENDACTION:
-                    functionController.deadPlayerGestor();
-                    break;
                 case SELECTRECHARGE:
                     functionController.selectRechargeGestor(view);
                     break;
@@ -133,24 +130,16 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                 case GRENADE:
                     functionController.grenade();
                     break;
-                case PASSTURN:
-                    //TODO
-                    break;
                 case DEADPLAYERSELECT:
                     functionController.deadPlayerSelect(view);
                     break;
-                case SCORINGPLAYERBOARD:
-                    functionController.scoringPlayerBoardController();
-                    break;
-                case RESPWANPLAYERSELECTION:
-                    //
-                    break;
+                 case ENDACTION:
+                     functionController.deadPlayerGestor();
+                     break;
                 case ENDTURN:
                     functionController.endTurn();
                     break;
                 case FINALSCORING:
-                    break;
-                case CHECKILLSHOOT:
                     break;
                 case ERROR:
                     functionController.errorState(view);

@@ -107,11 +107,11 @@ public class FunctionModel implements Serializable {
 
             map.movePlayer(actual, targetSquare);
             
-            if (!map.isGenerationSquare(targetSquare) && actual.getPlayerBoard().getPlayerPowerUps().size() <=3) {
+            if (!map.isGenerationSquare(targetSquare) && actual.getPlayerBoard().getPlayerPowerUps().size() <3) {
     
                 actual.catchAmmoCard(((NormalSquare) map.findPlayer(actual)).catchAmmoCard());
     
-            } else if ((map.isGenerationSquare(targetSquare)) && (actual.getPlayerBoard().getPlayerWeapons().size() <=3 )&& (weaponIndex<(((GenerationSquare) map.findPlayer(actual)).getWeaponList().size()) )){
+            } else if ((map.isGenerationSquare(targetSquare)) && (actual.getPlayerBoard().getPlayerWeapons().size() <3 )&& (weaponIndex<(((GenerationSquare) map.findPlayer(actual)).getWeaponList().size()) )){
     
                 actual.getPlayerBoard().addWeapon(((GenerationSquare) map.findPlayer(actual)).catchWeapon(weaponIndex));
             
@@ -342,14 +342,7 @@ public class FunctionModel implements Serializable {
      */
     public void scoringPlayerBoard(Player player){
         
-        /*
-        if(player.isAlive()){
-            return;
-        }
-        
-         */
         PlayerBoard playerBoard = player.getPlayerBoard();
-        
         
         //player color in order by occurrence (tie calculated)
         ArrayList<EnumColorPlayer> playerOrderDamage = new ArrayList<>(damagesOrderColor(player));
@@ -441,10 +434,6 @@ public class FunctionModel implements Serializable {
                 }
             }
             break;
-           
-        }
-        for (PlayerScore a:playerPoint){
-            a.toString();
         }
         
         //share point to player in player point
@@ -472,7 +461,6 @@ public class FunctionModel implements Serializable {
             gameModel.getKillShotTrack().updateTrack(toKillShot);
             playerBoard.resetDamage();
             playerBoard.decreaseBoardValue();
-            
             
         }
     }

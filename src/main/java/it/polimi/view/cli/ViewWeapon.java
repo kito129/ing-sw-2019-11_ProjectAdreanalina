@@ -1,6 +1,7 @@
 package it.polimi.view.cli;
 
 import it.polimi.model.*;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -82,7 +83,17 @@ public class ViewWeapon {
                 }
             }
     
-            //viewCLI.printMap();
+            if (viewCLI.gameModel.isWantToUseTargeting()){
+    
+                System.out.println("YOU HAVE DISPONIBLE TAGETING SCOPE\n DO YOU WAN TO USE IT");
+                viewCLI.setYesNoBooleanChoise(1);
+                if (viewCLI.isBooleanChose()){
+                    
+                    System.out.println("SELECT FROM ONE OF THE PLAYER YOU DAMAGED IN THIS SHOOT");
+                    PrintPlayer.print(viewCLI.gameModel.getPlayerDamaged());
+                    viewCLI.setTarget1(viewCLI.getUserInput(-1,viewCLI.gameModel.getPlayerDamaged().size()));
+                }
+            }
     
             viewCLI.notifyController();
         }  else {

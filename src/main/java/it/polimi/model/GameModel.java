@@ -58,9 +58,9 @@ public class GameModel implements Serializable {
     private int userGrenadeCount;
     private  ArrayList<Player> usedGrenade = new ArrayList<>();
     //respawn
-    
     //powerup
     private PowerUpCard powerUpSelected; //current weapon effect for current Player
+    private boolean wantToUseTargeting;
     //message
     private String errorMessage;
     private String messageToCurrentView;
@@ -193,6 +193,16 @@ public class GameModel implements Serializable {
         
         spawnedPlayer=0;
    }
+    
+    public boolean isWantToUseTargeting () {
+        
+        return wantToUseTargeting;
+    }
+    
+    public void setWantToUseTargeting (boolean wantToUseTargeting) {
+        
+        this.wantToUseTargeting = wantToUseTargeting;
+    }
     
     public PowerUpCard getPowerUpSelected () {
         
