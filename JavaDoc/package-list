@@ -1,0 +1,9 @@
+it.polimi
+it.polimi.controller
+it.polimi.model
+it.polimi.model.Exception
+it.polimi.model.PowerUp
+it.polimi.model.Weapon
+it.polimi.view
+it.polimi.view.cli
+it.polimi.view.gui
