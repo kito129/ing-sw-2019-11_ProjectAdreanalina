@@ -538,6 +538,7 @@ public class GameModel implements Serializable {
         }
         if(indexToReAdd!=-1) {
             remoteViews.set(indexToReAdd, observer);
+            players.get(indexToReAdd).setOnlineModel(true);
         }
     }
 

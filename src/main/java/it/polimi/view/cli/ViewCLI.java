@@ -93,7 +93,6 @@ public class ViewCLI implements RemoteView, Serializable {
                     }while(!tryToReAdd(user));
 
                     gameController.reAddObserver(this);
-                    //todo manca da settare il player online
                     System.out.println("AGAIN ONLINE");
                 }else {
 
@@ -111,7 +110,7 @@ public class ViewCLI implements RemoteView, Serializable {
     
     public void connection()  {
 
-        System.out.println("PLEASE INSERT THE IP ADDRESS OF SERVER: ");
+        System.out.println("PLEASE INSERT THE IP ADDRESS OF ADRENALINA SERVER: ");
         inputForConnection = new Scanner(System.in);
         String ipAddressOfServer = inputForConnection.next();
 
@@ -162,7 +161,7 @@ public class ViewCLI implements RemoteView, Serializable {
 
         Timer timer=new Timer();
         TaskPingServer taskPingServer=new TaskPingServer(gameController,timer);
-        timer.schedule(taskPingServer,0,2000);
+        timer.schedule(taskPingServer,0,10000);
     }
 
     @Override

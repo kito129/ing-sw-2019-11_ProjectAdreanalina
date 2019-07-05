@@ -489,7 +489,7 @@ public class MapCLI implements Serializable {
         System.out.println("- BETWEEN TWO SQUARES MEANS THAT THERE IS A HORIZONTAL DOOR");
         System.out.println("| BETWEEN TWO SQUARES MEANS THAT THERE IS A VERTICAL DOOR");
         System.out.println("| ON A SQUARE MEANS THAT THERE IS A GENERATIONS SQUARE");
-        System.out.println("'ammo' MEANS THAT THERE IS AN AMMO CARD ON THAT SQUARE");
+        System.out.println("ammo MEANS THAT THERE IS AN AMMO CARD ON THAT SQUARE");
         System.out.println();
         System.out.println("PLAYERS:");
         printLegendPlayers(players);
