@@ -43,7 +43,6 @@ public class WeaponDeck implements Serializable {
         weaponCards = new ArrayList<>();
         weaponCards.add(lockRifle);
         weaponCards.add(electroscythe);
-        weaponCards.add(machineGun);
         weaponCards.add(tractorBeam);
         weaponCards.add(thor);
         weaponCards.add(plasmaGun);

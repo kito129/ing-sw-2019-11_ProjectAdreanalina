@@ -478,7 +478,9 @@ public class Map implements Serializable {
 
                 tempPlayer.addAll(a.getPlayers());
             }
-        } return tempPlayer;
+        }
+
+        return tempPlayer;
     }
     
     /**
@@ -497,6 +499,7 @@ public class Map implements Serializable {
                 tempPlayer.addAll(a.getPlayers());
             }
         }
+        tempPlayer.remove(player);
         return tempPlayer;
     }
     
@@ -516,6 +519,7 @@ public class Map implements Serializable {
                 tempPlayer.addAll(a.getPlayers());
             }
         }
+        tempPlayer.remove(player);
         return tempPlayer;
     }
 
@@ -535,6 +539,7 @@ public class Map implements Serializable {
                 tempPlayer.addAll(a.getPlayers());
             }
         }
+        tempPlayer.remove(player);
         return tempPlayer;
     }
 
@@ -554,6 +559,7 @@ public class Map implements Serializable {
                 tempPlayer.addAll(a.getPlayers());
             }
         }
+        tempPlayer.remove(player);
         return tempPlayer;
     }
     

@@ -24,6 +24,12 @@ public class KillShotTrack implements Serializable {
         this.doubleKill=null;
     }
 
+    /**
+     * Gets the color of double kill.
+     *
+     * @return the color of double kill.
+     */
+
     public EnumColorPlayer getDoubleKill() {
 
         return doubleKill;
