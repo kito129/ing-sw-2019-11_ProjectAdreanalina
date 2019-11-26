@@ -1,6 +1,7 @@
 package it.polimi.controller;
 
 
+import com.sun.xml.internal.bind.v2.model.core.EnumConstant;
 import it.polimi.model.*;
 //chiedere perche devo importare tutto
 import it.polimi.model.Exception.*;
@@ -10,8 +11,6 @@ import it.polimi.model.PowerUp.TagBackGrenade;
 import it.polimi.model.PowerUp.TargetingScope;
 import it.polimi.model.PowerUp.Teleporter;
 import it.polimi.model.Weapon.Electroscythe;
-import it.polimi.model.Weapon.GrenadeLauncher;
-import it.polimi.model.Weapon.Whisper;
 import it.polimi.view.RemoteView;
 
 import java.rmi.RemoteException;
@@ -23,14 +22,14 @@ public class FunctionController {
     WeaponController weaponController;
     FunctionModel functionModel;
     private transient Timer timer;
-    private transient Timer timerLobby;
+    private transient Timer timerCurrentPlayer;
     private int delay;
     
-    public FunctionController(FunctionModel functionModel){
+    public FunctionController(FunctionModel functionModel,int delay){
         
         this.functionModel=functionModel;
         this.weaponController = new WeaponController(this);
-        this.delay=100;
+        this.delay=delay;
         
     }
     
@@ -44,50 +43,53 @@ public class FunctionController {
                 new TimerTask() {
                     @Override
                     public void run() {
-                        timerLobby.cancel();
+                   
+                        functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getPlayers(true,true).get(0));
                         functionModel.getGameModel().setState(State.PUTSPAWN);
                     }
                 }, delay
         );
     }
     
-    /**
-     * starts a timer to check if someone has been disconnected in the LOBBY
-     */
-    private void startTimerCheckLobby(){
-        timerLobby = new Timer();
-        timerLobby.schedule(
+    private void startTimerCurrentPlayer(){
+        timerCurrentPlayer = new Timer();
+        timerCurrentPlayer.schedule(
                 new TimerTask() {
                     @Override
                     public void run() {
-                       //here go the verify observer
-                        if (functionModel.getGameModel().getPlayers(true,true).size() == 3)
-                            timer.cancel();
-                        else
-                            startTimerCheckLobby();
-                        if ( functionModel.getGameModel().getPlayers(true,true).size() ==5)
-                            functionModel.getGameModel().setState(State.PUTSPAWN);
+                        
+                        Player actual =functionModel.getGameModel().getActualPlayer();
+                        int indexOfActual = functionModel.getGameModel().getPlayers(true,true).indexOf(actual);
+                        try {
+                            functionModel.getGameModel().getRemoteViews().get(indexOfActual).quitClient();
+                        } catch (RemoteException e) {
+                            //nothing to do
+                        }
+                        functionModel.getGameModel().getPlayers(true,true).get(indexOfActual).setOnlineModel(false);
+                        functionModel.getGameModel().getRemoteViews().set(indexOfActual, null);
+                        endTurn();
                     }
-                }, 2000
+                }, 150000
         );
     }
+    
     
     public void lobby() throws RemoteException {
     
         GameModel gameModel = this.functionModel.getGameModel();
         
-          //if (gameModel.getPlayers(true).size() == 3) {
-    
-            //    startTimerLobby();
-              //  startTimerCheckLobby();
+        
+        if (gameModel.getPlayers(true,true).size() == 3) {
             
-            //}else
+            startTimerLobby();
+            
+            }else
                 if(gameModel.getPlayers(true,true).size() == 5){
             
-                //timer.cancel();
-                //timerLobby.cancel();
+                timer.cancel();
                 //now game can start
                 gameModel.setActualPlayer(gameModel.getPlayers(true,true).get(0));
+                
                 gameModel.setState(State.PUTSPAWN);
             
             } else {
@@ -99,21 +101,21 @@ public class FunctionController {
     
     public void checkActionCount(){
         
-        if (functionModel.getGameModel().getActionCount()==3){
+        if (functionModel.getGameModel().getActionCount()==2){
            
-           setErrorState("YOU ALREADY USE 3 ACTION. YOU CAN ONLY GO ON MENU OR PASS TURN (HERE YOU CAN RECHARGE YOUR WEAPON)");
+           setErrorState("YOU ALREADY USE 2 ACTION. YOU CAN ONLY GO ON MENU OR PASS TURN (HERE YOU CAN RECHARGE YOUR WEAPON)");
         }
         
     }
     
-    public void choseAction(RemoteView view){
+    public void choseAction(RemoteView view) throws RemoteException {
     
         int choice;
         functionModel.getGameModel().setMessageToCurrentView("");
         functionModel.getGameModel().setMessageToAllView("");
         functionModel.getGameModel().setErrorMessage("");
         
-        try {
+      
             
             choice = view.getIndex();
             
@@ -158,9 +160,7 @@ public class FunctionController {
                     this.functionModel.getGameModel().setState(State.ENDACTIONSELECTION);
                     
             }
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+   
     
     }
     
@@ -169,6 +169,7 @@ public class FunctionController {
         
         System.out.println("ERROR STATE-->\n"+"ERROR MESSAGE: "+ functionModel.getGameModel().getErrorMessage() +"\nRESTART IN STATE CHOICE STATE-->");
         view.resetInput();
+        functionModel.getGameModel().resetGameModelParameter();
         resetParameterWeapon();
         switch (this.functionModel.getGameModel().getBeforeError()){
             
@@ -185,8 +186,8 @@ public class FunctionController {
                     this.functionModel.getGameModel().setState(State.RESPWANPLAYERSELECTION);
                     
                 }
-            case GRENADESELECTION:
-                this.functionModel.getGameModel().setState(State.GRENADESELECTION);
+            //case GRENADESELECTION:
+                //this.functionModel.getGameModel().setState(State.GRENADESELECTION);
                 
             default:
                 this.functionModel.getGameModel().setState(State.MENU);
@@ -216,7 +217,7 @@ public class FunctionController {
     }
     
     //start turn
-    public void startTurn() throws RemoteException {
+    public void startTurn(RemoteView view) throws RemoteException {
         
         //set the lowest id to the current player
         this.functionModel.getGameModel().setActualPlayer(this.functionModel.getGameModel().getPlayers(true,true).get(0));
@@ -224,7 +225,8 @@ public class FunctionController {
         functionModel.getGameModel().setSpawnPlayer(null);
         functionModel.getGameModel().resetSpawnedPLayer();
         
-       
+        startTimerCurrentPlayer();
+        
         //put ammo and weapon card
         refreshMapEndTurn();
         
@@ -329,7 +331,7 @@ public class FunctionController {
         try {
             
             chosenPowerUp = view.getIndex();
-            if (player.getPowerUpCardsSpawn().size()>0){
+            if (player.getPowerUpCardsSpawn().size()>chosenPowerUp){
                 
                 if(player.getPowerUpCardsSpawn().get(chosenPowerUp)!=null) {
         
@@ -568,7 +570,6 @@ public class FunctionController {
     public void usePowerUp(RemoteView view) throws RemoteException {
     
         view.resetInput();
-        functionModel.getGameModel().incrementActionCount();
         this.functionModel.getGameModel().setState(State.MENU);
     }
     
@@ -764,17 +765,19 @@ public class FunctionController {
             functionModel.getGameModel().setEndTurn(true);
             functionModel.getGameModel().setState(State.SELECTRECHARGE);
         } else {
-            
+            /*
             //use grenade
             grenadeGestor();
             if (functionModel.getGameModel().getPlayerDamagedWithGrenade().size()>0){
                 
                 functionModel.getGameModel().setUserGrenade(functionModel.getGameModel().getPlayerDamagedWithGrenade().get(0));
                 functionModel.getGameModel().setState(State.GRENADESELECTION);
-            } else {
+                
+             */
+           // } else {
     
                 functionModel.getGameModel().setState(State.ENDACTION);
-            }
+         //   }
             
         }
     }
@@ -826,7 +829,7 @@ public class FunctionController {
                    functionModel.getGameModel().setState(State.GRENADE);
                } else {
                    
-                   //non ho la granata ma non deve mai essere lanciata
+                   setErrorState("INVALID GRENADE GESTOR");
                }
               
             } catch (NotVisibleTarget notVisibleTarget) {
@@ -836,30 +839,34 @@ public class FunctionController {
             }
         
         } else {
-            
-            //non vuole usare la granata, vai anvanti a chiedere agli altri
+    
+            grenadeGestor();
+            functionModel.getGameModel().setState(State.GRENADE);
         }
     }
     
     public void grenade() throws RemoteException {
     
+        /*
         if (functionModel.getGameModel().getUserGrenadeCount()<functionModel.getGameModel().getPlayerDamagedWithGrenade().size()) {
         
             functionModel.getGameModel().getPlayerDamagedWithGrenadeVisibility().remove(functionModel.getGameModel().getUsedGrenade().indexOf(functionModel.getGameModel().getUsedGrenade()));
             functionModel.getGameModel().getPlayerDamagedWithGrenade().remove(functionModel.getGameModel().getUserGrenade());
             functionModel.getGameModel().incremanetGrenade();
             functionModel.getGameModel().setUserGrenade(functionModel.getGameModel().getPlayerDamagedWithGrenade().get(functionModel.getGameModel().getUserGrenadeCount()));
+            functionModel.getGameModel().setState(State.GRENADESELECTION);
         } else {
             //Scroring dead playerboard
             
-            //finish to use grenade now can respawn dead player
+            
+         */
             //clear original spawn
             functionModel.getGameModel().resetSpawnedPLayer();
             drawnPowerUp(2);
             deadPlayerGestor();
             functionModel.getGameModel().setState(State.SCORINGPLAYERBOARD);
         }
-    }
+    //}
     
     public void grenadeGestor(){
     
@@ -898,31 +905,26 @@ public class FunctionController {
             functionModel.getGameModel().setState(State.ENDTURN);
             
         }
-    }
+     }
     
     public void deadPlayerSelect (RemoteView view) throws RemoteException {
-    
-        try {
-            functionModel.getGameModel().getMap().removePlayerFromSquare(functionModel.getGameModel().getActualDeadPLayer());
-        } catch (MapException e) {
-            e.printStackTrace();
-        }
+        
+        
         respawnPlayerController(functionModel.getGameModel().getActualDeadPLayer(), view);
         functionModel.getGameModel().getActualDeadPLayer().setAlive(true);
         functionModel.getGameModel().getActualDeadPLayer().setOverKill(false);
         functionModel.getGameModel().getActualDeadPLayer().setMarkToDead(false);
         functionModel.getGameModel().getDeadPlayers().remove(functionModel.getGameModel().getActualDeadPLayer());
         
-        
-
         functionModel.getGameModel().setState(State.ENDACTION);
         
     }
     
     //END TURN
-    public void  endTurn(){
+    public void  endTurn() {
         
         //now pass the turn
+        functionModel.getGameModel().resetGameModelParameter();
         passTurn();
         functionModel.getGameModel().setState(State.MENU);
         
@@ -930,14 +932,22 @@ public class FunctionController {
     
     public void passTurn() {
     
+        timerCurrentPlayer.cancel();
+        startTimerCurrentPlayer();
         KillShotTrack killShotTrack = functionModel.getGameModel().getKillShotTrack();
     
         if (killShotTrack.skullNumber() == 0) {
-        
-        
-        
+            
+            functionModel.finalScoring();
+            
         } else {
+            
+            if (killShotTrack.skullNumber()==1){
+                
+                functionModel.getGameModel().setFinalFrezyMessage("FINAL FREZY MODE ACTIVATED");
+            }
         
+            //pass turn to next player
             refreshMapEndTurn();
             int act = functionModel.getGameModel().getActualPlayer().getId() - 1;
             do {
@@ -947,6 +957,8 @@ public class FunctionController {
                     act = 0;
                 }
             } while (functionModel.getGameModel().getRemoteViews().get(act) == null);
+            functionModel.getGameModel().resetActionCount();
+            resetParameterWeapon();
             functionModel.getGameModel().setActualPlayer(functionModel.getGameModel().getPlayers(true, true).get(act));
         }
     }
@@ -961,81 +973,7 @@ public class FunctionController {
         }
     }
     
-    //scoring
-    public void finalScoring(){
-        
-        KillShotTrack killShotTrack= functionModel.getGameModel().getKillShotTrack();
-        
-        Integer pointToPink;
-        Integer pointToBlu;
-        Integer pointToGreen;
-        Integer pointToGrey;
-        Integer pointToYellow;
-        ArrayList<Integer> point = new ArrayList<>();
-        ArrayList<EnumColorPlayer> colorPoint = new ArrayList<>();
-        
-        
-        for (Player a :functionModel.getGameModel().getPlayers(true,true)){
-            
-            switch (a.getColor()){
-                case YELLOW:
-                    pointToYellow=killShotTrack.getColorOccurence(EnumColorPlayer.YELLOW);
-                    point.add(pointToYellow);
-                    colorPoint.add(EnumColorPlayer.YELLOW);
-                    break;
-                case BLU:
-                    pointToBlu=killShotTrack.getColorOccurence(EnumColorPlayer.BLU);
-                    point.add(pointToBlu);
-                    colorPoint.add(EnumColorPlayer.BLU);
-                    break;
-                case PINK:
-                    pointToPink=killShotTrack.getColorOccurence(EnumColorPlayer.PINK);
-                    point.add(pointToPink);
-                    colorPoint.add(EnumColorPlayer.PINK);
-                    break;
-                case GREEN:
-                    pointToGreen=killShotTrack.getColorOccurence(EnumColorPlayer.GREEN);
-                    point.add(pointToGreen);
-                    colorPoint.add(EnumColorPlayer.GREEN);
-                    break;
-                case GREY:
-                    pointToGrey=killShotTrack.getColorOccurence(EnumColorPlayer.GREY);
-                    point.add(pointToGrey);
-                    colorPoint.add(EnumColorPlayer.GREY);
-                    break;
-            }
-        }
-        
-        int first=0;
-        int second =0;
-        int third=0;
-        int fouth=0;
-        int fifth=0;
-        
-        ArrayList<EnumColorPlayer>  toPoint = new ArrayList<>();
-        
-        for (int i=0 ;i<point.size();i++){
-            Integer val = point.get(i);
-            EnumColorPlayer col = colorPoint.get(i);
-            
-            if (val> first){
-                
-                first=val;
-            } else if(val>second){
-                
-                second=val;
-            } else if (val>third){
-                
-                third=val;
-            } else if (val>fouth){
-                
-                fouth=val;
-            } else if (val>fifth){
-                
-                fifth=val;
-            }
-        }
-    }
+    
 }
 
 

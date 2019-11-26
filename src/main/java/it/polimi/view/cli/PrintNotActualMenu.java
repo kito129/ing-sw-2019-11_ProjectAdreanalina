@@ -8,6 +8,10 @@ public class PrintNotActualMenu {
     public static void printMenu(GameModel gameModel,ViewCLI view){
         
         System.out.println("YOU ARE NOT THE CURRENT PLAYER. WAIT FOR YOUR TURN");
+        if (gameModel.getFinalFrezyMessage()!=null){
+        
+            System.out.println(gameModel.getFinalFrezyMessage());
+        }
         System.out.print("MESSAGE FOR ALL PLAYER");
         view.printMessageAll();
         System.out.println("YOUR INFO: ");
@@ -20,7 +24,7 @@ public class PrintNotActualMenu {
         }
         
         PrintPlayerBoard.print(viewPlayer);
-        System.out.println("\nMESSAGE FOR SERVER: ");
+        System.out.println("\nMESSAGE FROM SERVER: ");
         view.printMessageAll();
         System.out.println("MAP :" +view.gameModel.getMap().getName() +"\n");
         view.printMap();

@@ -293,7 +293,6 @@ public class FunctionModel implements Serializable {
         //order in descending
         Collections.sort(playerScores);
         Collections.reverse(playerScores);
-        //System.out.println(playerScores);
         
         //calculate the tie
         for (int i = 0; i < playerScores.size(); i++) {
@@ -339,7 +338,6 @@ public class FunctionModel implements Serializable {
             if (playerBoard.getDamages().size() == 12) {
                 overkill = playerBoard.getDamages().get(11);
             }
-            //TODO double kill
     
             //player point
             ArrayList<PlayerScore> playerPoint = new ArrayList<PlayerScore>();
@@ -425,7 +423,7 @@ public class FunctionModel implements Serializable {
             }
     
             //put color in killshot track
-            if (gameModel.getKillShotTrack().skullNumber() > 1) {
+            if (gameModel.getKillShotTrack().skullNumber() >= 1) {
     
                 ArrayList<EnumColorPlayer> toKillShot = new ArrayList<>();
     
@@ -446,6 +444,108 @@ public class FunctionModel implements Serializable {
     
             }
         }
+    }
+    
+    
+    //scoring
+    public  ArrayList<EnumColorPlayer> killShotScoring (){
+        
+        KillShotTrack killShotTrack= gameModel.getKillShotTrack();
+        ArrayList<EnumColorPlayer> playerColor = new ArrayList<>(gameModel.getPlayerColor());
+        ArrayList<FunctionModel.PlayerScore> playerScores = new ArrayList<FunctionModel.PlayerScore>();
+        
+        //get color occurrence for all player in gameModel
+        for (EnumColorPlayer a : playerColor) {
+            
+            if(killShotTrack.colorOccurence(a)>0) {
+                playerScores.add(new FunctionModel.PlayerScore(a, killShotTrack.colorOccurence(a)));
+            }
+        }
+        
+        //order in descending
+        Collections.sort(playerScores);
+        Collections.reverse(playerScores);
+        
+    
+        //create array of color in order of occurrence
+        ArrayList<EnumColorPlayer> playerOrder = new ArrayList<>();
+    
+        for (PlayerScore a:playerScores){
+        
+            playerOrder.add(a.getColor());
+        }
+        return playerOrder;
+        
+    }
+    
+    
+    public void finalScoring (){
+        
+        ArrayList<Player> players = new ArrayList<>(gameModel.getPlayers(true,true));
+        for (int i = 0; i < players.size(); i++) {
+            Player a = players.get(i);
+        
+            if (gameModel.getRemoteViews().get(i)==null){
+                players.remove(a);
+                i--;
+            }
+        
+        }
+        ArrayList<EnumColorPlayer> killShotPoint = new ArrayList<>(killShotScoring());
+        
+        for (int i = 0; i < players.size(); i++) {
+            Player a = players.get(i);
+        
+            if(killShotPoint.contains(a.getColor()) && killShotPoint.indexOf(a.getColor())==0){
+        
+                a.increaseScore(8);
+            }
+            if(killShotPoint.contains(a.getColor()) && killShotPoint.indexOf(a.getColor())==1){
+        
+                a.increaseScore(6);
+            }
+            if(killShotPoint.contains(a.getColor()) && killShotPoint.indexOf(a.getColor())==2){
+        
+                a.increaseScore(4);
+            }
+            if(killShotPoint.contains(a.getColor()) && killShotPoint.indexOf(a.getColor())==3){
+        
+                a.increaseScore(2);
+            }
+            if(killShotPoint.contains(a.getColor()) && killShotPoint.indexOf(a.getColor())==4){
+        
+                a.increaseScore(1);
+            }
+        }
+        
+        ArrayList<PlayerScore> score = new ArrayList<>();
+        
+        for (Player a : players){
+            
+            score.add(new PlayerScore(a.getColor(),a.getScore()));
+        }
+        
+        Collections.sort(score);
+        Collections.reverse(score);
+        
+        ArrayList<Player> finalList = new ArrayList<>();
+        
+        for (PlayerScore a:score){
+            
+            finalList.add(gameModel.getPlayerByColor(a.color));
+            
+        }
+        
+        for (Player a : gameModel.getPlayers(true,true)){
+            
+            if (!finalList.contains(a)){
+                finalList.add(a);
+            }
+        }
+        
+        gameModel.setFinalPlayersScoring(finalList);
+        gameModel.setEndGame(true);
+        gameModel.setState(State.FINALSCORING);
     }
     
     public void refreshMapAmmoCard(){

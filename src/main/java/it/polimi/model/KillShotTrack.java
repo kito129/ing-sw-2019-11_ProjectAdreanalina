@@ -73,7 +73,7 @@ public class KillShotTrack implements Serializable {
                 
                 a.setSkull(false);
                 a.setMark1(color.get(0));
-                if(color.size()>1){
+                if(color.size()==2){
                     
                     a.setMark2((color.get(1)));
                 }
@@ -98,7 +98,7 @@ public class KillShotTrack implements Serializable {
      * @param colorPlayer the color player
      * @return the color occurance
      */
-    public int getColorOccurence (EnumColorPlayer colorPlayer) {
+    public int colorOccurence (EnumColorPlayer colorPlayer) {
     
         int i = 0;
         for (KillShotTrackPoint a : track) {
@@ -109,6 +109,17 @@ public class KillShotTrack implements Serializable {
                 i++;
         }
         return i;
+    }
+    
+    /**
+     * Get first occurrence in killshot integer.
+     *
+     * @param color the color of the player
+     * @return index of the first occurrence, null if not found
+     */
+    public Integer getFirstOccurrenceInKillShot (EnumColorPlayer color){
+        
+        return track.indexOf(color);
     }
     
 }

@@ -90,11 +90,11 @@ public class KillShotTrackTest {
 
     public void getColorOccurenceTest(){
 
-        assertEquals(0,killShotTrack.getColorOccurence(EnumColorPlayer.BLU));
-        assertEquals(0,killShotTrack.getColorOccurence(EnumColorPlayer.YELLOW));
-        assertEquals(0,killShotTrack.getColorOccurence(EnumColorPlayer.PINK));
-        assertEquals(0,killShotTrack.getColorOccurence(EnumColorPlayer.GREEN));
-        assertEquals(0,killShotTrack.getColorOccurence(EnumColorPlayer.GREY));
+        assertEquals(0,killShotTrack.colorOccurence(EnumColorPlayer.BLU));
+        assertEquals(0,killShotTrack.colorOccurence(EnumColorPlayer.YELLOW));
+        assertEquals(0,killShotTrack.colorOccurence(EnumColorPlayer.PINK));
+        assertEquals(0,killShotTrack.colorOccurence(EnumColorPlayer.GREEN));
+        assertEquals(0,killShotTrack.colorOccurence(EnumColorPlayer.GREY));
         ArrayList<EnumColorPlayer> k1=new ArrayList<>();
         k1.add(EnumColorPlayer.BLU);
         k1.add(EnumColorPlayer.BLU);
@@ -104,13 +104,13 @@ public class KillShotTrackTest {
         k3.add(EnumColorPlayer.YELLOW);
         k3.add(EnumColorPlayer.GREEN);
         killShotTrack.updateTrack(k1);
-        assertEquals(2,killShotTrack.getColorOccurence(EnumColorPlayer.BLU));
+        assertEquals(2,killShotTrack.colorOccurence(EnumColorPlayer.BLU));
         killShotTrack.updateTrack(k2);
-        assertEquals(3,killShotTrack.getColorOccurence(EnumColorPlayer.BLU));
+        assertEquals(3,killShotTrack.colorOccurence(EnumColorPlayer.BLU));
         killShotTrack.updateTrack(k3);
-        assertEquals(3,killShotTrack.getColorOccurence(EnumColorPlayer.BLU));
-        assertEquals(1,killShotTrack.getColorOccurence(EnumColorPlayer.YELLOW));
-        assertEquals(1,killShotTrack.getColorOccurence(EnumColorPlayer.GREEN));
+        assertEquals(3,killShotTrack.colorOccurence(EnumColorPlayer.BLU));
+        assertEquals(1,killShotTrack.colorOccurence(EnumColorPlayer.YELLOW));
+        assertEquals(1,killShotTrack.colorOccurence(EnumColorPlayer.GREEN));
 
     }
 }

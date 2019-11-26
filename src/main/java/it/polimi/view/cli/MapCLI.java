@@ -66,7 +66,7 @@ public class MapCLI implements Serializable {
             }
         } catch (MapException e) {
             
-            e.printStackTrace();
+           System.out.println("MAP ERROR");
         }
     }
     
@@ -75,22 +75,38 @@ public class MapCLI implements Serializable {
      */
     public void printGrid() {
         
+        
         printLegendMap(gameModel.getPlayers(true,false));
         
-        for (int sqRow = 0; sqRow < 3; sqRow++){
+        if (!(mappa.size()!=3 && mappa.get(0).size()!=4 && mappa.get(0).get(0).size()!=11 && mappa.get(0).get(0).get(0).size()!=11)) {
+    
+            System.out.println();
+            for (int sqRow = 0; sqRow < 3; sqRow++) {
+        
+                for (int intRow = 0; intRow < 11; intRow++) {
             
-            for (int intRow = 0; intRow < 11; intRow++) {
+                    for (int sqCol = 0; sqCol < 4; sqCol++) {
                 
-                for (int sqCol = 0; sqCol < 4; sqCol++) {
-                    
-                    for (int intCol = 0; intCol < 11; intCol++) {
-                        
-                        System.out.print(mappa.get(sqRow).get(sqCol).get(intRow).get(intCol));
+                        for (int intCol = 0; intCol < 11; intCol++) {
+    
+                            if (!(mappa.size()!=3 && mappa.get(sqCol).size()!=4 && mappa.get(sqCol).get(intRow).size()!=11 && mappa.get(sqCol).get(intRow).get(intCol).size()!=11)) {
+                            System.out.print(mappa.get(sqRow).get(sqCol).get(intRow).get(intCol));
+                            } else {
+    
+                                System.out.println("\n\nCANT PRINT MAP\n\n");
+                                
+                            }
+                        }
                     }
+                    System.out.println();
                 }
-                System.out.println();
             }
+        } else {
+            
+            System.out.println("\n\nCANT PRINT MAP\n\n");
         }
+        
+        
     }
     /**
      * Create the map for the view like an array of array of array of array: set in right position

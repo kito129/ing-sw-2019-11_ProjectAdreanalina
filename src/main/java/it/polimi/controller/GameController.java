@@ -12,14 +12,12 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     private FunctionModel functionModel;
     private GameModel gameModel;
     private boolean gameStarted;
-    private int delay;
 
-    public GameController() throws RemoteException {
+    public GameController(String delay) throws RemoteException {
         
         this.functionModel = new FunctionModel();
         this.gameModel=functionModel.getGameModel();
-        this.functionController= new FunctionController(functionModel);
-        //this.delay = Integer.parseInt(delay);
+        this.functionController= new FunctionController(functionModel,Integer.parseInt(delay));
         
     }
 
@@ -48,17 +46,47 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     public void pingToServer() throws RemoteException {
 
     }
+    
+    public boolean check2Player(){
+        
+        if (gameModel.isEndGame()){
+            
+            functionModel.finalScoring();
+        } else {
+            
+            if (gameModel.getState() == State.LOBBY) {
+                return true;
+            } else {
+        
+                int online = 0;
+                for (RemoteView a : gameModel.getRemoteViews()) {
+            
+                    if (a != null) {
+                
+                        online++;
+                    }
+                }
+                if (online < 3) {
+                    
+                    functionModel.finalScoring();
+                    return false;
+                } else {
+            
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
     public void update(RemoteView view) throws RemoteException {
-
+        
         pingClient();
-
-        //2 action and multiple power up use
-        int action = 0;
-        //while (action < 2) {
-
-         switch (gameModel.getState()) {
+        
+        if(check2Player()) {
+            
+            switch (gameModel.getState()) {
                 case LOBBY:
                     functionController.lobby();
                     break;
@@ -75,8 +103,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.selectSpawn(view);
                     break;
                 case STARTTURN:
-                    this.gameStarted=true;
-                    functionController.startTurn();
+                    this.gameStarted = true;
+                    functionController.startTurn(view);
                     break;
                 case CHOSEACTION:
                     functionController.choseAction(view);
@@ -127,28 +155,33 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
                     functionController.recharge(view);
                     break;
                 case GRENADESELECTION:
-                     functionController.grendadeSelection(view);
-                 break;
+                    functionController.grendadeSelection(view);
+                    break;
                 case GRENADE:
                     functionController.grenade();
                     break;
                 case DEADPLAYERSELECT:
                     functionController.deadPlayerSelect(view);
                     break;
-                 case ENDACTION:
-                     functionController.deadPlayerGestor();
-                     break;
+                case ENDACTION:
+                    functionController.deadPlayerGestor();
+                    break;
                 case ENDTURN:
                     functionController.endTurn();
                     break;
                 case FINALSCORING:
+                    functionModel.finalScoring();
                     break;
                 case ERROR:
                     functionController.errorState(view);
                 default:
                     break;
             }
-       // }
+        } else {
+            
+            functionModel.finalScoring();
+        }
+       
     }
 
     @Override
@@ -166,9 +199,8 @@ public class GameController extends UnicastRemoteObject implements RemoteGameCon
     }
 
     
-
     public void pingClient(){
-
+        
         for(RemoteView remoteView:gameModel.getRemoteViews()){
             try {
 

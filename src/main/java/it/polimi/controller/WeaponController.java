@@ -379,7 +379,7 @@ public class WeaponController {
     }
     
     
-    public  void removeDeadPlayerFromMap(){
+    public  void removeDeadPlayerFromMap() throws RemoteException {
         
         for (Player a: functionModel.getGameModel().getPlayers(false,true)){
             
@@ -389,7 +389,8 @@ public class WeaponController {
                     functionModel.getGameModel().getMap().removePlayerFromSquare(a);
                     
                 } catch (MapException e) {
-                    e.printStackTrace();
+                    
+                    functionController.mapErrorGestor();
                 }
             }
         }
@@ -403,27 +404,7 @@ public class WeaponController {
      * @throws RemoteException the remote exception
      */
     public void afterShoot(RemoteView view) throws RemoteException {
-    
-        if (view.isBooleanChose() && view.getTarget1() != -1) {
-    
-            try {
-        
-        
-                Player targetPlayer;
-                //get input
-        
-                targetPlayer = this.functionModel.getGameModel().getPlayerById(view.getTarget1());
-                TargetingScope targetingScope = functionController.getCorrectTargeting();
-                //effect
-                this.functionModel.usePowerUpTargetingScope(targetingScope, targetPlayer);
-                functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER " + functionModel.getGameModel().getActualPlayer().getName() + " USE POWER UP TARGETING SCOPE");
-                functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps().remove(this.functionModel.getGameModel().getPowerUpSelected());
-        
-            } catch (MapException e) {
-                e.printStackTrace();
-            }
-    
-            removeDeadPlayerFromMap();
+            
     
             if (functionModel.getGameModel().getAvailableEffect().size() == 0) {
         
@@ -437,14 +418,14 @@ public class WeaponController {
                 //there are no more effect avaible
                 functionController.resetParameterWeapon();
                 view.resetInput();
+                removeDeadPlayerFromMap();
                 functionModel.getGameModel().incrementActionCount();
                 functionModel.getGameModel().setState(State.MENU);
             } else {
         
                 functionModel.getGameModel().setState(State.SELECTEFFECT);
             }
-    
-        }
+            
     }
     
     /**
@@ -933,7 +914,8 @@ public class WeaponController {
                     break;
             }
         } catch (NotValidInput notValidInput) {
-            notValidInput.printStackTrace();
+            
+            functionController.setErrorState("NOT VALID SELECT EFFEcT INPUT");
         }
         this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER PAY EXTRA COST FOR : " + gameModel.getWeaponName() +" " +gameModel.getActualWeaponEffect() +" CORRECTLY");
         this.functionModel.getGameModel().setState(State.SELECTSHOOTINPUT);
@@ -1402,10 +1384,43 @@ public class WeaponController {
                     break;
             }
         } catch (NotValidInput notValidInput) {
-            notValidInput.printStackTrace();
+           
+            functionController.setErrorState("NOT VALID INPUT FOR SHOOT");
         }
     
+        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED: " + gameModel.getWeaponName() +" CORRECTLY");
+    
+        //targeting
+        boolean haveTarg=false;
+        int targIndex=-1;
+        ArrayList<PowerUpCard> playerPowerUps = functionModel.getGameModel().getActualPlayer().getPlayerBoard().getPlayerPowerUps();
+        for (int i = 0; i < playerPowerUps.size(); i++) {
+            PowerUpCard a = playerPowerUps.get(i);
+        
+            if (a.getNameCard().equals("TARGETING SCOPE")) {
+            
+                targIndex=i;
+                haveTarg = true;
+            }
+        }
+        
+        //tagergeting
+        if (view.isUseTargeting() && haveTarg && gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().size()>=targIndex && gameModel.getPlayerDamaged().size()>0){
+            
+            ArrayList<EnumColorPlayer> targDamege = new ArrayList<EnumColorPlayer>();
+            targDamege.add(gameModel.getActualPlayer().getColor());
+            gameModel.getPlayerDamaged().get(0).getPlayerBoard().increaseDamages(targDamege);
+            gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().remove(targIndex);
+            functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED: " + gameModel.getWeaponName() +" CORRECTLY" +"\n AND USED TARGETING SCOPE");
+        }
+        
+        
+        this.functionModel.getGameModel().setState(State.SHOOT);
+    
+    }
+    
         //routine for grenade
+        /*
         ArrayList<Player> postDamaged = new ArrayList<>(functionModel.getGameModel().getPlayerDamaged());
         if (preDamaged.size()<postDamaged.size()){
             
@@ -1414,8 +1429,11 @@ public class WeaponController {
                 
                 checkForGrenade(functionModel.getGameModel().getMap(),a,functionModel.getGameModel().getActualPlayer());
             }
+            
+         
         }
         
+        /*
         if (gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps().contains(TargetingScope.class) && gameModel.getActualPlayer().getPlayerBoard().getAmmo().size()>0){
             
             gameModel.setWantToUseTargeting(true);
@@ -1424,10 +1442,10 @@ public class WeaponController {
             gameModel.setWantToUseTargeting(false);
         }
         
-        this.functionModel.getGameModel().setMessageToAllView("CURRENT PLAYER USED: " + gameModel.getWeaponName() +" CORRECTLY");
-        this.functionModel.getGameModel().setState(State.SHOOT);
+         */
         
-    }
+        
+       
     
     public void checkForGrenade(Map map,Player damaged,Player current){
         

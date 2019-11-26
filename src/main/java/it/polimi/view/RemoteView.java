@@ -13,6 +13,8 @@ public interface RemoteView extends Remote {
     
     //void setOnline (boolean online) throws RemoteException;
     
+    void quitClient() throws RemoteException;
+    
     int getIndex () throws RemoteException;
     
     int getIndex3 ()throws RemoteException;;
@@ -45,7 +47,7 @@ public interface RemoteView extends Remote {
     
     boolean isUseSecondEffect () throws RemoteException;
     
-    boolean isUseThirdEffect () throws RemoteException;
+    boolean isUseTargeting () throws RemoteException;
     
     boolean isBooleanChose2 ()throws RemoteException;
     

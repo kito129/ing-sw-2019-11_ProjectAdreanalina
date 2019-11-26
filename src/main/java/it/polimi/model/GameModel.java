@@ -66,6 +66,12 @@ public class GameModel implements Serializable {
     private String errorMessage;
     private String messageToCurrentView;
     private String messageToAllView;
+    //final scoring
+    private ArrayList<Player> finalPlayerScoring = new ArrayList<>();
+    private Player finalScorer;
+    private int scored=0;
+    private boolean endGame;
+    private String finalFrezyMessage;
     
     
     public GameModel() {
@@ -622,4 +628,79 @@ public class GameModel implements Serializable {
     throw  new MapException();
     }
     
+    public void resetGameModelParameter(){
+        
+        this.setMessageToCurrentView(null);
+        this.setSpawnPlayer(null);
+        this.resetSpawnedPLayer();
+        this.setUserGrenade(null);
+        this.setBeforeEffect(null);
+        this.resetActionCount();
+        this.setPowerUpSelected(null);
+        this.getPlayerDamagedWithGrenadeVisibility().clear();
+        this.getPlayerDamagedWithGrenade().clear();
+        this.getPlayerDamaged().clear();
+        this.getDeadPlayers().clear();
+        this.setWeaponName(null);
+        this.getUsedGrenade().clear();
+        this.setActualDeadPLayer(null);
+        this.setActualWeaponEffect(null);
+        this.setWantToUseTargeting(false);
+        this.getWeaponToCharge().clear();
+        this.setErrorMessage(null);
+        this.getAvailableEffect().clear();
+        this.resetUserGrenadeCount();
+        this.setBeforeError(State.MENU);
+        
+    }
+    
+    public ArrayList<Player> getFinalPlayerScoring () {
+        
+        return finalPlayerScoring;
+    }
+    
+    public void setFinalPlayersScoring (ArrayList<Player> finalPlayerScoring) {
+        
+        this.finalPlayerScoring = finalPlayerScoring;
+    }
+    
+    public Player getFinalScorer () {
+        
+        return finalScorer;
+    }
+    
+    public void setFinalScorer (Player finalScorer) {
+        
+        this.finalScorer = finalScorer;
+    }
+    
+    public int getScored(){
+        
+        return this.scored;
+    }
+    
+    public void incrementScored(){
+        
+        this.scored++;
+    }
+    
+    public boolean isEndGame () {
+        
+        return endGame;
+    }
+    
+    public void setEndGame (boolean endGame) {
+        
+        this.endGame = endGame;
+    }
+    
+    public void setFinalFrezyMessage (String finalFrezyMessage) {
+        
+        this.finalFrezyMessage = finalFrezyMessage;
+    }
+    
+    public String getFinalFrezyMessage () {
+        
+        return finalFrezyMessage;
+    }
 }

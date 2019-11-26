@@ -1,6 +1,5 @@
 package it.polimi.view.cli;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import it.polimi.controller.RemoteGameController;
 import it.polimi.model.*;
 import it.polimi.model.Exception.MapException;
@@ -47,7 +46,7 @@ public class ViewCLI implements RemoteView, Serializable {
     private int choicePlayer2;
     private int choicePlayer3;
     private boolean useSecondEffect;
-    private boolean useThirdEffect;
+    private boolean useTargeting;
     private WeaponsEffect weaponsEffect;
     private boolean optionWeapon;
     //attribute for shoot
@@ -232,6 +231,13 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     @Override
+    public void quitClient () throws RemoteException {
+        
+        System.exit(0);
+        
+    }
+    
+    @Override
     public int getIndex () {
         
         return index;
@@ -327,9 +333,9 @@ public class ViewCLI implements RemoteView, Serializable {
     }
     
     @Override
-    public boolean isUseThirdEffect () {
+    public boolean isUseTargeting () {
         
-        return useThirdEffect;
+        return useTargeting;
     }
     
     @Override
@@ -466,9 +472,9 @@ public class ViewCLI implements RemoteView, Serializable {
         this.useSecondEffect = useSecondEffect;
     }
     
-    public void setUseThirdEffect (boolean useThirdEffect) {
+    public void setUseTargeting (boolean useTargeting) {
         
-        this.useThirdEffect = useThirdEffect;
+        this.useTargeting = useTargeting;
     }
     
     public void setOptionWeapon (boolean optionWeapon) {
@@ -513,6 +519,16 @@ public class ViewCLI implements RemoteView, Serializable {
         
         this.gameModel = gameModel;
         this.getMapCLI().gameModel=gameModel;
+        ArrayList<RemoteView> remoteViews = gameModel.getRemoteViews();
+        
+        for (int i = 0; i < remoteViews.size(); i++) {
+            RemoteView view = remoteViews.get(i);
+        
+            if (view == null) {
+                
+                System.out.println("\n PLAYER " + gameModel.getPlayers(true, true).get(i).getName() + " IS OFFLINE\n");
+            }
+        }
         this.run();
     }
     
@@ -590,8 +606,6 @@ public class ViewCLI implements RemoteView, Serializable {
             case ENDACTION:
                 callRun();
                 break;
-            case PASSTURN:
-                break;
             case DEADPLAYERSELECT:
                 deadPlayerSelect();
                 break;
@@ -603,11 +617,12 @@ public class ViewCLI implements RemoteView, Serializable {
                 break;
             case GRENADE:
                 viewGrenade();
+                break;
             case ENDTURN:
                 callRun();
-            case FINALSCORING:
                 break;
-            case CHECKILLSHOOT:
+            case FINALSCORING:
+                viewFinalScoring();
                 break;
             case ERROR:
                 viewError();
@@ -645,7 +660,7 @@ public class ViewCLI implements RemoteView, Serializable {
         //reset choise
         setBooleanChose(false);
         setUseSecondEffect(false);
-        setUseThirdEffect(false);
+        setUseTargeting(false);
         setCardinalDirection(null);
         setOptionWeapon(false);
         setWeaponsEffect(null);
@@ -816,6 +831,11 @@ public class ViewCLI implements RemoteView, Serializable {
     public void viewMenu() throws RemoteException {
         
         if(checkCurrent()) {
+            
+            if (gameModel.getFinalFrezyMessage()!=null){
+                
+                System.out.println(gameModel.getFinalFrezyMessage());
+            }
             
             PrintMenu.print();
             int choise = getUserInput(0,11);
@@ -1318,6 +1338,56 @@ public class ViewCLI implements RemoteView, Serializable {
         } else {}
         
         System.out.println("WAINTING FOR DEAD PLAYERS RESPAWNING");
+        
+    }
+    
+    public void viewFinalScoring() throws RemoteException {
+        
+    
+        System.out.println("GAME IS FINISH");
+        System.out.println("POSITION OF FINAL SCORING");
+
+        ArrayList<Player> finalPlayerScoring = gameModel.getFinalPlayerScoring();
+
+        for (int i = 0; i < finalPlayerScoring.size(); i++) {
+            Player a = finalPlayerScoring.get(i);
+    
+            System.out.println(i + ") " + a.getName());
+        }
+
+        for (int i = 0; i < finalPlayerScoring.size(); i++) {
+            Player a = finalPlayerScoring.get(i);
+    
+            if (i == 0 && a.getName().equals(user)) {
+        
+                System.out.println(a.getName() + " YOU ARE THE WINNER!!");
+            }
+            if (i == 1 && a.getName().equals(user)) {
+        
+                System.out.println(a.getName() + " YOU PLACED SECOND!!");
+            }
+            if (i == 2 && a.getName().equals(user)) {
+        
+                System.out.println(a.getName() + " YOU PLACED THIRD!!");
+            }
+            if (i == 3 && a.getName().equals(user)) {
+        
+                System.out.println(a.getName() + " YOU PLACED FOURTH!!");
+            }
+            if (i == 3 && a.getName().equals(user)) {
+        
+                System.out.println(a.getName() + " YOU PLACED FIFTH!!");
+            }
+    
+        }
+        
+        if (gameModel.getActualPlayer().getName().equals(user)){
+            notifyController();
+        } else {
+
+            System.out.println("PUT 0 FOR CLOSE THE GAME...");
+            System.exit(0);
+        }
         
     }
 }

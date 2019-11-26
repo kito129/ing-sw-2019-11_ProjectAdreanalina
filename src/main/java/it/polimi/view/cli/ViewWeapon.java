@@ -1,7 +1,6 @@
 package it.polimi.view.cli;
 
 import it.polimi.model.*;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -44,6 +43,40 @@ public class ViewWeapon {
             PrintWeapon.printEffectName(viewCLI.gameModel.getAvailableEffect());
         
             viewCLI.setIndex2(viewCLI.getUserInput(-2,viewCLI.gameModel.getAvailableEffect().size()));
+            
+            //targeting
+            boolean haveTarg=false;
+            for (PowerUpCard a : viewCLI.gameModel.getActualPlayer().getPlayerBoard().getPlayerPowerUps()){
+                
+                if(a.getNameCard().equals("TARGETING SCOPE")){
+                    
+                    haveTarg=true;
+                }
+            }
+            
+            if (haveTarg && !viewCLI.isUseTargeting()){
+                
+                Scanner input = new Scanner(System.in);
+                System.out.println("YOU HAVE TARGETIG SCOPE DISPONIBLE\n WANT TO USE IT?");
+    
+                System.out.println("0) YES\n1) NO");
+                int temp=-1;
+                do {
+                    while (!input.hasNextInt())
+                        input = new Scanner(System.in);
+                    temp=input.nextInt();
+                }while (temp<0 || temp>1);
+                
+                if (temp==0){
+                    
+                    viewCLI.setUseTargeting(true);
+                } else {
+                    
+                    viewCLI.setUseTargeting(false);
+                }
+                
+            }
+            
             viewCLI.notifyController();
         } else {
     
@@ -83,6 +116,7 @@ public class ViewWeapon {
                 }
             }
     
+            /*
             if (viewCLI.gameModel.isWantToUseTargeting()){
     
                 System.out.println("YOU HAVE DISPONIBLE TAGETING SCOPE\n DO YOU WAN TO USE IT");
@@ -94,6 +128,8 @@ public class ViewWeapon {
                     viewCLI.setTarget1(viewCLI.getUserInput(-1,viewCLI.gameModel.getPlayerDamaged().size()));
                 }
             }
+            
+             */
     
             viewCLI.notifyController();
         }  else {
